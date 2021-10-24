@@ -14,18 +14,20 @@
 #![Image]('img/2_data_science_process.png')
 
 
-# ## Import data
+# Import data
 # 
 # First you must **import** your data into Python. This typically means that you take data stored in a file, database,
 # or web API, and load it into a DataFrame in Python (using Pandas).
 # 
-# ## 2 Tidying data
+# 2 Tidying data
+# 
 # Once you’ve imported your data, it is a good idea to tidy it.
 # **Tidying** your data means storing it in a consistent form that matches the semantics of the dataset with
 # the way it is stored. In brief, when your data is tidy, each column is a variable, and each row is an observation.
 # Tidy data is important because the consistent structure lets you focus your struggle on questions about the data.
 # 
-# ## 3 Transform data
+# 3 Transform data
+# 
 # Once you have tidy data, a common first step is to transform it.
 # **Transformation** includes narrowing in on observations of interest
 # (like all people in one city, or all data from the last year), creating new variables that are functions of
@@ -33,7 +35,8 @@
 #  summary statistics (like counts or means). Together, tidying and transforming are called wrangling,
 #  because getting your data in a form that’s natural to work with often feels like a fight!
 # 
-# ## 4 Visualize data
+# 4 Visualize data
+# 
 # Once you have tidy data with the variables you need, there are two main engines of knowledge generation:
 # visualisation and modelling. These have complementary strengths and weaknesses so any real analysis
 # will iterate between them many times.
@@ -43,18 +46,19 @@
 # you’re asking the wrong question, or you need to collect different data.
 # Visualisations can surprise you, but don’t scale particularly well because they require a human to interpret them.
 # 
-# ## 5 Models
+# 5 Models
+# 
 # **Models** are complementary tools to visualisation. Once you have made your questions sufficiently precise,
 # you can use a model to answer them. Models are a fundamentally mathematical or computational tool,
 #  so they generally scale well. But every model makes assumptions, and by its very nature a model cannot
 #  question its own assumptions. That means a model cannot fundamentally surprise you.
 # 
-# ## 6 Communication
+# 6 Communication
+# 
 # The last step is **communication**, an absolutely critical part of any data analysis project.
 # It doesn't matter how well your models and visualisation have led you to understand the data unless
 # you can also communicate your results to others.
 # 
-# ---
 # 
 # ## Programming
 # 
@@ -94,7 +98,7 @@ get_ipython().run_line_magic('matplotlib', 'inline')
 
 # ## 1 Import data
 
-# In[41]:
+# In[3]:
 
 
 # Load csv data from GitHub into pandas dataframes
@@ -108,28 +112,28 @@ df = pd.read_csv(ROOT + DATA)
 
 # Let's take a look at the variables (also called columns or features) in the data set.
 
-# In[42]:
+# In[4]:
 
 
 # show the first rows (i.e. head of the DataFrame)
 df.head()
 
 
-# In[43]:
+# In[5]:
 
 
 # show the last rows (i.e. tail of the DataFrame)
 df.tail()
 
 
-# In[44]:
+# In[6]:
 
 
 # show all variables in the data set
 df.columns
 
 
-# In[45]:
+# In[7]:
 
 
 # data overview (with meta data)
@@ -141,7 +145,7 @@ df.info()
 # The variable "Unnamed: 0" seems to be some kind of identification number per employee. Let's rename the variable
 # and check if we have duplicates in our dataset.
 
-# In[46]:
+# In[8]:
 
 
 # rename variable "Unnamed: 0" to "id"
@@ -151,7 +155,7 @@ df = df.rename(index=str, columns={"Unnamed: 0": "id"})
 # In Jupyter, we have several options to present output. One way is to just run a cod block
 # which produces only one output:
 
-# In[47]:
+# In[9]:
 
 
 # show the length of the variable id (i.e. the number of observations)
@@ -162,7 +166,7 @@ len(df["id"])
 # function. See the [Python documentation](https://docs.python.org/3/tutorial/inputoutput.html) for the
 # different `print()` options.
 
-# In[48]:
+# In[10]:
 
 
 # check for duplicates and print results (if the two numbers match, we have no duplicates)
@@ -180,35 +184,35 @@ print("Unique IDs:", len(df["id"].value_counts()))
 # We also keep the `id`-Variable to identify the observations and to be able to merge
 # the data with one of the dropped variables if necessary.
 
-# In[49]:
+# In[11]:
 
 
 # select variables
 df = df[['id','year', 'age', 'education', 'wage']]
 
 
-# In[50]:
+# In[12]:
 
 
 # data overview (with meta data)
 df.info()
 
 
-# In[51]:
+# In[13]:
 
 
 # show the first 3 rows
 df.head(3)
 
 
-# In[52]:
+# In[14]:
 
 
 # rename variable "education" to "edu"
 df = df.rename(index=str, columns={"education": "edu"})
 
 
-# In[53]:
+# In[15]:
 
 
 # check levels and frequency of edu
@@ -224,7 +228,7 @@ df['edu'].value_counts()
 # 
 # `df['variable'] = pd.Categorical(df['variable'])`
 
-# In[54]:
+# In[16]:
 
 
 # convert to categorical (nominal)
@@ -234,7 +238,7 @@ df['year'] = pd.Categorical(df['year'])
 
 # If we need to convert to a ordinal variable with pandas [CategoricalDtype](https://pandas.pydata.org/pandas-docs/stable/categorical.html)
 
-# In[55]:
+# In[17]:
 
 
 # convert to ordinal
@@ -248,14 +252,14 @@ cat_edu = pd.CategoricalDtype(categories=['1. < HS Grad',
 df.edu = df.edu.astype(cat_edu)
 
 
-# In[56]:
+# In[18]:
 
 
 # show levels
 df['edu'].cat.categories
 
 
-# In[57]:
+# In[19]:
 
 
 # show datatype
@@ -287,7 +291,7 @@ df.dtypes
 # Having missing values in a dataset can cause errors with some algorithms.
 # Therefore, we need to take care of this issue (we cover the topic of missing values in one of the following applications in detail).
 
-# In[58]:
+# In[20]:
 
 
 # show missing values (missing values - if present - will be displayed in yellow )
@@ -296,7 +300,7 @@ sns.heatmap(df.isnull(), yticklabels=False, cbar=False, cmap='viridis');
 
 # We can also check the column-wise distribution of null values:
 
-# In[59]:
+# In[21]:
 
 
 print(df.isnull().sum())
@@ -321,14 +325,14 @@ print(df.isnull().sum())
 
 # First, we obtain some common statistics:
 
-# In[60]:
+# In[22]:
 
 
 # summary statistics for all numerical columns
 df.describe()
 
 
-# In[61]:
+# In[23]:
 
 
 # summary statistics for all categorical columns
@@ -337,7 +341,7 @@ df.describe(include=['category'])
 
 # Compare summary statistics for specific groups in the data:
 
-# In[62]:
+# In[24]:
 
 
 # summary statistics by groups
@@ -346,7 +350,7 @@ df['age'].groupby(df['edu']).describe()
 
 # Some examples of how to calculate simple statistics:
 
-# In[63]:
+# In[25]:
 
 
 # calculation of the mean (e.g. for age)
@@ -368,28 +372,28 @@ print('The rounded mean of age with two decimals is', round(age_mean, 2))
 print('The median of age is', df["age"].median())
 
 
-# In[64]:
+# In[26]:
 
 
 # calculation of the mode
 df['age'].mode()
 
 
-# In[65]:
+# In[27]:
 
 
 # quantiles
 df['age'].quantile([.25, .5, .75])
 
 
-# In[66]:
+# In[28]:
 
 
 # Range
 df['age'].max() - df['age'].min()
 
 
-# In[67]:
+# In[29]:
 
 
 # standard deviation
@@ -406,7 +410,7 @@ round(df['age'].std(),2)
 # 
 # For example, to examine the distribution of a categorical variable, we could use a bar or count plot.
 
-# In[68]:
+# In[30]:
 
 
 # horizontal count plot (show the counts of observations in each categorical bin)
@@ -417,7 +421,7 @@ sns.countplot(y='edu', data=df);
 # 
 # To examine the distribution of a continuous variable, we could use a **histogram**:
 
-# In[69]:
+# In[31]:
 
 
 # Pandas histogram of all numerical values
@@ -426,7 +430,7 @@ df.hist();
 
 # Seaborne shows a default plot with a kernel density estimate and a histogram:
 
-# In[70]:
+# In[32]:
 
 
 # histogram with seaborn 
@@ -444,14 +448,14 @@ sns.displot(x='age', data=df, kde=True);
 # - A line (or whisker) that extends from each end of the box and goes to the
 # farthest non-outlier point in the distribution.
 
-# In[71]:
+# In[33]:
 
 
 # boxplot 
 sns.boxplot(y='age', data=df);
 
 
-# In[72]:
+# In[34]:
 
 
 # boxplot for different groups
@@ -467,14 +471,14 @@ sns.boxplot(y='edu', x='age', data=df);
 # You can see covariation as a pattern in the points. We will cover more options to test for relationships in variables
 # (e.g., correlation) in the following applications.
 
-# In[73]:
+# In[35]:
 
 
 # simple scatterplot
 sns.scatterplot(x='age', y='wage', data=df);
 
 
-# In[74]:
+# In[36]:
 
 
 # plot all numeric variables in pairs

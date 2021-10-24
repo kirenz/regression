@@ -1,6 +1,7 @@
 #!/usr/bin/env python
 # coding: utf-8
 
+# (file-types:notebooks)=
 # # Regression with Simulated Data
 
 # In[1]:

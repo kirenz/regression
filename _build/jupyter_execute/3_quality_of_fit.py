@@ -21,7 +21,7 @@ custom_params = {"axes.spines.right": False, "axes.spines.top": False}
 sns.set_theme(style="ticks", rc=custom_params, palette='winter')
 
 
-# # Linear regression and the quality of fit
+# # Quality of fit
 # 
 # In this application we cover linear regression - the fundamental starting point for all regression methods - and how to evaluate the quality of fit of a regression model. Therefore, we quantify the extent to which the predicted outcome value for a given observation is close to the true outcome value for that observation. In the regression setting, the most commonly-used measure is the mean squared error (MSE), which we will cover in detail.
 # 
