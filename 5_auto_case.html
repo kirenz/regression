@@ -42,6 +42,7 @@
     <script src="_static/copybutton.js"></script>
     <script>var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
     <script src="_static/sphinx-book-theme.12a9622fbb08dcb3a2a40b2c02b83a57.js"></script>
+    <script src="_static/sphinx-book-theme.js"></script>
     <script async="async" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
     <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
     <script async="async" src="https://unpkg.com/thebe@0.5.1/lib/index.js"></script>
@@ -53,6 +54,8 @@
     <script async="async" src="_static/sphinx-thebe.js"></script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Bibliography" href="reference.html" />
+    <link rel="prev" title="Application 4: Linear regression diagnostics" href="4_diagnostics.html" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="docsearch:language" content="en" />
     
@@ -90,6 +93,54 @@
  <li class="toctree-l1">
   <a class="reference internal" href="intro.html">
    Welcome to your Jupyter Book
+  </a>
+ </li>
+</ul>
+<p class="caption" role="heading">
+ <span class="caption-text">
+  Introduction
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="1_process.html">
+   Programming Process
+  </a>
+ </li>
+</ul>
+<p class="caption" role="heading">
+ <span class="caption-text">
+  Simple Regression
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="2_simulated.html">
+   Regression with Simulated Data
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" type="checkbox"/>
+  <label for="toctree-checkbox-1">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="3_quality_of_fit.html">
+     Linear regression and the quality of fit
+    </a>
+   </li>
+  </ul>
+ </li>
+</ul>
+<p class="caption" role="heading">
+ <span class="caption-text">
+  Diagnostics
+ </span>
+</p>
+<ul class="current nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="4_diagnostics.html">
+   Application 4: Linear regression diagnostics
   </a>
  </li>
 </ul>
@@ -319,41 +370,33 @@
         
               <div>
                 
-  <p><strong>Applied Statistics</strong><br/>
-Prof. Dr. Jan Kirenz <br/>
-Hochschule der Medien Stuttgart</p>
-<h1>Table of Contents<span class="tocSkip"></span></h1>
-<div class="toc"><ul class="toc-item"><li><span><a href="#Import-data" data-toc-modified-id="Import-data-1"><span class="toc-item-num">1&nbsp;&nbsp;</span>Import data</a></span></li><li><span><a href="#Tidying-data" data-toc-modified-id="Tidying-data-2"><span class="toc-item-num">2&nbsp;&nbsp;</span>Tidying data</a></span><ul class="toc-item"><li><span><a href="#Data-inspection" data-toc-modified-id="Data-inspection-2.1"><span class="toc-item-num">2.1&nbsp;&nbsp;</span>Data inspection</a></span></li><li><span><a href="#Handle-missing-values" data-toc-modified-id="Handle-missing-values-2.2"><span class="toc-item-num">2.2&nbsp;&nbsp;</span>Handle missing values</a></span></li></ul></li><li><span><a href="#Transform-data" data-toc-modified-id="Transform-data-3"><span class="toc-item-num">3&nbsp;&nbsp;</span>Transform data</a></span></li><li><span><a href="#Visualize-data" data-toc-modified-id="Visualize-data-4"><span class="toc-item-num">4&nbsp;&nbsp;</span>Visualize data</a></span><ul class="toc-item"><li><span><a href="#Distibution-of-Variables" data-toc-modified-id="Distibution-of-Variables-4.1"><span class="toc-item-num">4.1&nbsp;&nbsp;</span>Distibution of Variables</a></span></li></ul></li><li><span><a href="#Regression-Models" data-toc-modified-id="Regression-Models-5"><span class="toc-item-num">5&nbsp;&nbsp;</span>Regression Models</a></span><ul class="toc-item"><li><span><a href="#Models" data-toc-modified-id="Models-5.1"><span class="toc-item-num">5.1&nbsp;&nbsp;</span>Models</a></span><ul class="toc-item"><li><span><a href="#Simple-Linear-Regression" data-toc-modified-id="Simple-Linear-Regression-5.1.1"><span class="toc-item-num">5.1.1&nbsp;&nbsp;</span>Simple Linear Regression</a></span></li><li><span><a href="#GLS-Regression" data-toc-modified-id="GLS-Regression-5.1.2"><span class="toc-item-num">5.1.2&nbsp;&nbsp;</span>GLS Regression</a></span></li><li><span><a href="#Mixed-Linear-Model" data-toc-modified-id="Mixed-Linear-Model-5.1.3"><span class="toc-item-num">5.1.3&nbsp;&nbsp;</span>Mixed Linear Model</a></span></li></ul></li><li><span><a href="#Interpretation-of-OLS-Model" data-toc-modified-id="Interpretation-of-OLS-Model-5.2"><span class="toc-item-num">5.2&nbsp;&nbsp;</span>Interpretation of OLS-Model</a></span></li><li><span><a href="#Regression-Diagnostics" data-toc-modified-id="Regression-Diagnostics-5.3"><span class="toc-item-num">5.3&nbsp;&nbsp;</span>Regression Diagnostics</a></span><ul class="toc-item"><li><span><a href="#Residuals-vs-fitted-plot" data-toc-modified-id="Residuals-vs-fitted-plot-5.3.1"><span class="toc-item-num">5.3.1&nbsp;&nbsp;</span>Residuals vs fitted plot</a></span></li><li><span><a href="#Normal-Q-Q" data-toc-modified-id="Normal-Q-Q-5.3.2"><span class="toc-item-num">5.3.2&nbsp;&nbsp;</span>Normal Q-Q</a></span></li><li><span><a href="#Scale-Location-plot" data-toc-modified-id="Scale-Location-plot-5.3.3"><span class="toc-item-num">5.3.3&nbsp;&nbsp;</span>Scale-Location plot</a></span></li><li><span><a href="#Residuals-vs-leverage-plot" data-toc-modified-id="Residuals-vs-leverage-plot-5.3.4"><span class="toc-item-num">5.3.4&nbsp;&nbsp;</span>Residuals vs leverage plot</a></span></li></ul></li></ul></li></ul></div><div class="cell docutils container">
+  <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Python set up (load modules) </span>
 <span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
 <span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
-<span class="kn">from</span> <span class="nn">pandas.api.types</span> <span class="kn">import</span> <span class="n">CategoricalDtype</span>
+
 <span class="kn">from</span> <span class="nn">scipy</span> <span class="kn">import</span> <span class="n">stats</span>
 <span class="kn">import</span> <span class="nn">statsmodels.api</span> <span class="k">as</span> <span class="nn">sm</span>
 <span class="kn">import</span> <span class="nn">statsmodels.formula.api</span> <span class="k">as</span> <span class="nn">smf</span>
-<span class="kn">from</span> <span class="nn">statsmodels.compat</span> <span class="kn">import</span> <span class="n">lzip</span>
-<span class="kn">from</span> <span class="nn">statsmodels.stats.outliers_influence</span> <span class="kn">import</span> <span class="n">summary_table</span>
-<span class="kn">from</span> <span class="nn">statsmodels.graphics.gofplots</span> <span class="kn">import</span> <span class="n">ProbPlot</span>
-<span class="kn">from</span> <span class="nn">statsmodels.stats.outliers_influence</span> <span class="kn">import</span> <span class="n">OLSInfluence</span>
+
 <span class="kn">from</span> <span class="nn">statsmodels.graphics.regressionplots</span> <span class="kn">import</span> <span class="n">plot_leverage_resid2</span>
 <span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
 <span class="o">%</span><span class="k">matplotlib</span> inline 
 <span class="n">plt</span><span class="o">.</span><span class="n">style</span><span class="o">.</span><span class="n">use</span><span class="p">(</span><span class="s1">&#39;ggplot&#39;</span><span class="p">)</span> 
 <span class="kn">import</span> <span class="nn">seaborn</span> <span class="k">as</span> <span class="nn">sns</span>  
 <span class="n">sns</span><span class="o">.</span><span class="n">set</span><span class="p">()</span> 
-<span class="kn">from</span> <span class="nn">IPython.display</span> <span class="kn">import</span> <span class="n">Image</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
 <div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
 <span class="ne">ModuleNotFoundError</span><span class="g g-Whitespace">                       </span>Traceback (most recent call last)
-<span class="o">/</span><span class="n">var</span><span class="o">/</span><span class="n">folders</span><span class="o">/</span><span class="mi">35</span><span class="o">/</span><span class="mi">43</span><span class="n">bdsj9j64j16410rds5g9vr0000gp</span><span class="o">/</span><span class="n">T</span><span class="o">/</span><span class="n">ipykernel_17643</span><span class="o">/</span><span class="mf">388971599.</span><span class="n">py</span> <span class="ow">in</span> <span class="o">&lt;</span><span class="n">module</span><span class="o">&gt;</span>
+<span class="o">/</span><span class="n">var</span><span class="o">/</span><span class="n">folders</span><span class="o">/</span><span class="mi">35</span><span class="o">/</span><span class="mi">43</span><span class="n">bdsj9j64j16410rds5g9vr0000gp</span><span class="o">/</span><span class="n">T</span><span class="o">/</span><span class="n">ipykernel_19123</span><span class="o">/</span><span class="mf">36924958.</span><span class="n">py</span> <span class="ow">in</span> <span class="o">&lt;</span><span class="n">module</span><span class="o">&gt;</span>
 <span class="g g-Whitespace">      </span><span class="mi">1</span> <span class="c1"># Python set up (load modules)</span>
 <span class="ne">----&gt; </span><span class="mi">2</span> <span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
 <span class="g g-Whitespace">      </span><span class="mi">3</span> <span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
-<span class="g g-Whitespace">      </span><span class="mi">4</span> <span class="kn">from</span> <span class="nn">pandas.api.types</span> <span class="kn">import</span> <span class="n">CategoricalDtype</span>
+<span class="g g-Whitespace">      </span><span class="mi">4</span> 
 <span class="g g-Whitespace">      </span><span class="mi">5</span> <span class="kn">from</span> <span class="nn">scipy</span> <span class="kn">import</span> <span class="n">stats</span>
 
 <span class="ne">ModuleNotFoundError</span>: No module named &#39;numpy&#39;
@@ -544,15 +587,17 @@ Hochschule der Medien Stuttgart</p>
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;class &#39;pandas.core.frame.DataFrame&#39;&gt;
 RangeIndex: 397 entries, 0 to 396
 Data columns (total 9 columns):
-mpg             397 non-null float64
-cylinders       397 non-null int64
-displacement    397 non-null float64
-horsepower      397 non-null object
-weight          397 non-null int64
-acceleration    397 non-null float64
-year            397 non-null int64
-origin          397 non-null int64
-name            397 non-null object
+ #   Column        Non-Null Count  Dtype  
+---  ------        --------------  -----  
+ 0   mpg           397 non-null    float64
+ 1   cylinders     397 non-null    int64  
+ 2   displacement  397 non-null    float64
+ 3   horsepower    397 non-null    object 
+ 4   weight        397 non-null    int64  
+ 5   acceleration  397 non-null    float64
+ 6   year          397 non-null    int64  
+ 7   origin        397 non-null    int64  
+ 8   name          397 non-null    object 
 dtypes: float64(3), int64(4), object(2)
 memory usage: 28.0+ KB
 </pre></div>
@@ -577,24 +622,24 @@ memory usage: 28.0+ KB
 <div class="cell_output docutils container">
 <div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
 <span class="ne">ValueError</span><span class="g g-Whitespace">                                </span>Traceback (most recent call last)
-<span class="nn">pandas/_libs/lib.pyx</span> in <span class="ni">pandas._libs.lib.maybe_convert_numeric</span><span class="nt">()</span>
+<span class="nn">~/opt/anaconda3/lib/python3.7/site-packages/pandas/_libs/lib.pyx</span> in <span class="ni">pandas._libs.lib.maybe_convert_numeric</span><span class="nt">()</span>
 
 <span class="ne">ValueError</span>: Unable to parse string &quot;?&quot;
 
 <span class="n">During</span> <span class="n">handling</span> <span class="n">of</span> <span class="n">the</span> <span class="n">above</span> <span class="n">exception</span><span class="p">,</span> <span class="n">another</span> <span class="n">exception</span> <span class="n">occurred</span><span class="p">:</span>
 
 <span class="ne">ValueError</span><span class="g g-Whitespace">                                </span>Traceback (most recent call last)
-<span class="o">&lt;</span><span class="n">ipython</span><span class="o">-</span><span class="nb">input</span><span class="o">-</span><span class="mi">17</span><span class="o">-</span><span class="mi">6</span><span class="n">b47ef2608e8</span><span class="o">&gt;</span> <span class="ow">in</span> <span class="o">&lt;</span><span class="n">module</span><span class="o">&gt;</span>
+<span class="o">/</span><span class="n">var</span><span class="o">/</span><span class="n">folders</span><span class="o">/</span><span class="mi">35</span><span class="o">/</span><span class="mi">43</span><span class="n">bdsj9j64j16410rds5g9vr0000gp</span><span class="o">/</span><span class="n">T</span><span class="o">/</span><span class="n">ipykernel_18558</span><span class="o">/</span><span class="mf">2192086555.</span><span class="n">py</span> <span class="ow">in</span> <span class="o">&lt;</span><span class="n">module</span><span class="o">&gt;</span>
 <span class="ne">----&gt; </span><span class="mi">1</span> <span class="n">df</span><span class="p">[</span><span class="s1">&#39;horsepower&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">to_numeric</span><span class="p">(</span><span class="n">df</span><span class="p">[</span><span class="s1">&#39;horsepower&#39;</span><span class="p">])</span> <span class="c1"># produces error</span>
 
-<span class="nn">~/anaconda3/lib/python3.6/site-packages/pandas/core/tools/numeric.py</span> in <span class="ni">to_numeric</span><span class="nt">(arg, errors, downcast)</span>
-<span class="g g-Whitespace">    </span><span class="mi">133</span>             <span class="n">coerce_numeric</span> <span class="o">=</span> <span class="kc">False</span> <span class="k">if</span> <span class="n">errors</span> <span class="ow">in</span> <span class="p">(</span><span class="s1">&#39;ignore&#39;</span><span class="p">,</span> <span class="s1">&#39;raise&#39;</span><span class="p">)</span> <span class="k">else</span> <span class="kc">True</span>
-<span class="g g-Whitespace">    </span><span class="mi">134</span>             <span class="n">values</span> <span class="o">=</span> <span class="n">lib</span><span class="o">.</span><span class="n">maybe_convert_numeric</span><span class="p">(</span><span class="n">values</span><span class="p">,</span> <span class="nb">set</span><span class="p">(),</span>
-<span class="ne">--&gt; </span><span class="mi">135</span>                                                <span class="n">coerce_numeric</span><span class="o">=</span><span class="n">coerce_numeric</span><span class="p">)</span>
-<span class="g g-Whitespace">    </span><span class="mi">136</span> 
-<span class="g g-Whitespace">    </span><span class="mi">137</span>     <span class="k">except</span> <span class="ne">Exception</span><span class="p">:</span>
+<span class="nn">~/opt/anaconda3/lib/python3.7/site-packages/pandas/core/tools/numeric.py</span> in <span class="ni">to_numeric</span><span class="nt">(arg, errors, downcast)</span>
+<span class="g g-Whitespace">    </span><span class="mi">182</span>         <span class="k">try</span><span class="p">:</span>
+<span class="g g-Whitespace">    </span><span class="mi">183</span>             <span class="n">values</span><span class="p">,</span> <span class="n">_</span> <span class="o">=</span> <span class="n">lib</span><span class="o">.</span><span class="n">maybe_convert_numeric</span><span class="p">(</span>
+<span class="ne">--&gt; </span><span class="mi">184</span>                 <span class="n">values</span><span class="p">,</span> <span class="nb">set</span><span class="p">(),</span> <span class="n">coerce_numeric</span><span class="o">=</span><span class="n">coerce_numeric</span>
+<span class="g g-Whitespace">    </span><span class="mi">185</span>             <span class="p">)</span>
+<span class="g g-Whitespace">    </span><span class="mi">186</span>         <span class="k">except</span> <span class="p">(</span><span class="ne">ValueError</span><span class="p">,</span> <span class="ne">TypeError</span><span class="p">):</span>
 
-<span class="nn">pandas/_libs/lib.pyx</span> in <span class="ni">pandas._libs.lib.maybe_convert_numeric</span><span class="nt">()</span>
+<span class="nn">~/opt/anaconda3/lib/python3.7/site-packages/pandas/_libs/lib.pyx</span> in <span class="ni">pandas._libs.lib.maybe_convert_numeric</span><span class="nt">()</span>
 
 <span class="ne">ValueError</span>: Unable to parse string &quot;?&quot; at position 32
 </pre></div>
@@ -620,7 +665,7 @@ memory usage: 28.0+ KB
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="_images/5_auto_case_19_0.png" src="_images/5_auto_case_19_0.png" />
+<img alt="_images/5_auto_case_17_0.png" src="_images/5_auto_case_17_0.png" />
 </div>
 </div>
 <p>We can also check the column-wise distribution of null values:</p>
@@ -864,7 +909,7 @@ dtype: int64
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="_images/5_auto_case_29_0.png" src="_images/5_auto_case_29_0.png" />
+<img alt="_images/5_auto_case_27_0.png" src="_images/5_auto_case_27_0.png" />
 </div>
 </div>
 <div class="cell docutils container">
@@ -875,7 +920,7 @@ dtype: int64
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="_images/5_auto_case_30_0.png" src="_images/5_auto_case_30_0.png" />
+<img alt="_images/5_auto_case_28_0.png" src="_images/5_auto_case_28_0.png" />
 </div>
 </div>
 <div class="cell docutils container">
@@ -886,7 +931,7 @@ dtype: int64
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="_images/5_auto_case_31_0.png" src="_images/5_auto_case_31_0.png" />
+<img alt="_images/5_auto_case_29_0.png" src="_images/5_auto_case_29_0.png" />
 </div>
 </div>
 <div class="cell docutils container">
@@ -899,7 +944,7 @@ dtype: int64
 <div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;seaborn.axisgrid.PairGrid at 0x1c27e63b00&gt;
 </pre></div>
 </div>
-<img alt="_images/5_auto_case_32_1.png" src="_images/5_auto_case_32_1.png" />
+<img alt="_images/5_auto_case_30_1.png" src="_images/5_auto_case_30_1.png" />
 </div>
 </div>
 </div>
@@ -984,7 +1029,7 @@ dtype: int64
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="_images/5_auto_case_38_0.png" src="_images/5_auto_case_38_0.png" />
+<img alt="_images/5_auto_case_36_0.png" src="_images/5_auto_case_36_0.png" />
 </div>
 </div>
 </div>
@@ -1247,7 +1292,7 @@ dtype: int64
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="_images/5_auto_case_55_0.png" src="_images/5_auto_case_55_0.png" />
+<img alt="_images/5_auto_case_53_0.png" src="_images/5_auto_case_53_0.png" />
 </div>
 </div>
 <p>The residuals are not equally spread around a horizontal line which is an indication for a non-linear relationship. This means there seems to be a non-linear relationship between the predictor and the response variable which the model doesn’t capture.</p>
@@ -1263,7 +1308,7 @@ dtype: int64
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="_images/5_auto_case_59_0.png" src="_images/5_auto_case_59_0.png" />
+<img alt="_images/5_auto_case_57_0.png" src="_images/5_auto_case_57_0.png" />
 </div>
 </div>
 <p>This plot shows if residuals are normally distributed. If a normal distribution is present, the residuals should (more or less) follow a straight line.
@@ -1283,7 +1328,7 @@ We can observe that only some residuals (in the lower left and the upper right c
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="_images/5_auto_case_62_0.png" src="_images/5_auto_case_62_0.png" />
+<img alt="_images/5_auto_case_60_0.png" src="_images/5_auto_case_60_0.png" />
 </div>
 </div>
 <p>This plot shows if residuals are spread equally along the ranges of predictors. This is how we can check the assumption of equal variance (homoscedasticity). It’s good if we observe a horizontal line with equally (randomly) spread points.</p>
@@ -1299,7 +1344,7 @@ We can observe that only some residuals (in the lower left and the upper right c
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="_images/5_auto_case_65_0.png" src="_images/5_auto_case_65_0.png" />
+<img alt="_images/5_auto_case_63_0.png" src="_images/5_auto_case_63_0.png" />
 </div>
 </div>
 <div class="cell docutils container">
@@ -1369,6 +1414,24 @@ We can observe that only some residuals (in the lower left and the upper right c
 
 <div class='prev-next-bottom'>
     
+    <div id="prev">
+        <a class="left-prev" href="4_diagnostics.html" title="previous page">
+            <i class="prevnext-label fas fa-angle-left"></i>
+            <div class="prevnext-info">
+                <p class="prevnext-label">previous</p>
+                <p class="prevnext-title">Application 4: Linear regression diagnostics</p>
+            </div>
+        </a>
+    </div>
+     <div id="next">
+        <a class="right-next" href="reference.html" title="next page">
+            <div class="prevnext-info">
+                <p class="prevnext-label">next</p>
+                <p class="prevnext-title">Bibliography</p>
+            </div>
+            <i class="prevnext-label fas fa-angle-right"></i>
+        </a>
+     </div>
 
 </div>
         

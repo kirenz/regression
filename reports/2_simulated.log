@@ -35,7 +35,7 @@ sns.set_theme(style="ticks", rc=custom_params, palette='winter')
 
 [0;31m---------------------------------------------------------------------------[0m
 [0;31mModuleNotFoundError[0m                       Traceback (most recent call last)
-[0;32m/var/folders/35/43bdsj9j64j16410rds5g9vr0000gp/T/ipykernel_17610/4124834383.py[0m in [0;36m<module>[0;34m[0m
+[0;32m/var/folders/35/43bdsj9j64j16410rds5g9vr0000gp/T/ipykernel_19090/4124834383.py[0m in [0;36m<module>[0;34m[0m
 [0;32m----> 1[0;31m [0mget_ipython[0m[0;34m([0m[0;34m)[0m[0;34m.[0m[0mrun_line_magic[0m[0;34m([0m[0;34m'matplotlib'[0m[0;34m,[0m [0;34m'inline'[0m[0;34m)[0m[0;34m[0m[0;34m[0m[0m
 [0m[1;32m      2[0m [0;34m[0m[0m
 [1;32m      3[0m [0;31m# Python set up (load modules)[0m[0;34m[0m[0;34m[0m[0;34m[0m[0m
