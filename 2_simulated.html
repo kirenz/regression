@@ -1,0 +1,979 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Application 2: Linear regression with simulated data &#8212; Linear Regression Models</title>
+    
+  <link href="_static/css/theme.css" rel="stylesheet" />
+  <link href="_static/css/index.c5995385ac14fb8791e8eb36b4908be2.css" rel="stylesheet" />
+
+    
+  <link rel="stylesheet"
+    href="_static/vendor/fontawesome/5.13.0/css/all.min.css">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="_static/vendor/fontawesome/5.13.0/webfonts/fa-solid-900.woff2">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2">
+
+    
+      
+
+    
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="_static/sphinx-book-theme.css?digest=c3fdc42140077d1ad13ad2f1588a4309" />
+    <link rel="stylesheet" type="text/css" href="_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="_static/mystnb.css" />
+    <link rel="stylesheet" type="text/css" href="_static/sphinx-thebe.css" />
+    <link rel="stylesheet" type="text/css" href="_static/panels-main.c949a650a448cc0ae9fd3441c0e17fb0.css" />
+    <link rel="stylesheet" type="text/css" href="_static/panels-variables.06eb56fa6e07937060861dad626602ad.css" />
+    
+  <link rel="preload" as="script" href="_static/js/index.1c5a1a01449ed65a7b51.js">
+
+    <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
+    <script src="_static/jquery.js"></script>
+    <script src="_static/underscore.js"></script>
+    <script src="_static/doctools.js"></script>
+    <script src="_static/togglebutton.js"></script>
+    <script src="_static/clipboard.min.js"></script>
+    <script src="_static/copybutton.js"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
+    <script src="_static/sphinx-book-theme.12a9622fbb08dcb3a2a40b2c02b83a57.js"></script>
+    <script async="async" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script async="async" src="https://unpkg.com/thebe@0.5.1/lib/index.js"></script>
+    <script>
+        const thebe_selector = ".thebe"
+        const thebe_selector_input = "pre"
+        const thebe_selector_output = ".output"
+    </script>
+    <script async="async" src="_static/sphinx-thebe.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="docsearch:language" content="en" />
+    
+  </head>
+  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="80">
+    
+    <div class="container-fluid" id="banner"></div>
+
+    
+
+    <div class="container-xl">
+      <div class="row">
+          
+<div class="col-12 col-md-3 bd-sidebar site-navigation show" id="site-navigation">
+    
+        <div class="navbar-brand-box">
+    <a class="navbar-brand text-wrap" href="index.html">
+      
+        <!-- `logo` is deprecated in Sphinx 4.0, so remove this when we stop supporting 3 -->
+        
+      
+      
+      <img src="_static/logo.png" class="logo" alt="logo">
+      
+      
+      <h1 class="site-logo" id="site-title">Linear Regression Models</h1>
+      
+    </a>
+</div><form class="bd-search d-flex align-items-center" action="search.html" method="get">
+  <i class="icon fas fa-search"></i>
+  <input type="search" class="form-control" name="q" id="search-input" placeholder="Dieses Buch durchsuchen ..." aria-label="Dieses Buch durchsuchen ..." autocomplete="off" >
+</form><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item active">
+        <ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="intro.html">
+   Welcome to your Jupyter Book
+  </a>
+ </li>
+</ul>
+<p class="caption" role="heading">
+ <span class="caption-text">
+  References
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="reference.html">
+   Bibliography
+  </a>
+ </li>
+</ul>
+
+    </div>
+</nav> <!-- To handle the deprecated key -->
+
+<div class="navbar_extra_footer">
+  Powered by <a href="https://jupyterbook.org">Jupyter Book</a>
+</div>
+
+</div>
+
+
+          
+
+
+          
+<main class="col py-md-3 pl-md-4 bd-content overflow-auto" role="main">
+    
+    <div class="topbar container-xl fixed-top">
+    <div class="topbar-contents row">
+        <div class="col-12 col-md-3 bd-topbar-whitespace site-navigation show"></div>
+        <div class="col pl-md-4 topbar-main">
+            
+            <button id="navbar-toggler" class="navbar-toggler ml-0" type="button" data-toggle="collapse"
+                data-toggle="tooltip" data-placement="bottom" data-target=".site-navigation" aria-controls="navbar-menu"
+                aria-expanded="true" aria-label="Navigation umschalten" aria-controls="site-navigation"
+                title="Navigation umschalten" data-toggle="tooltip" data-placement="left">
+                <i class="fas fa-bars"></i>
+                <i class="fas fa-arrow-left"></i>
+                <i class="fas fa-arrow-up"></i>
+            </button>
+            
+            
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn" aria-label="Laden Sie diese Seite herunter"><i
+            class="fas fa-download"></i></button>
+
+    <div class="dropdown-buttons">
+        <!-- ipynb file if we had a myst markdown file -->
+        
+        <!-- Download raw file -->
+        <a class="dropdown-buttons" href="_sources/2_simulated.ipynb"><button type="button"
+                class="btn btn-secondary topbarbtn" title="Quelldatei herunterladen" data-toggle="tooltip"
+                data-placement="left">.ipynb</button></a>
+        <!-- Download PDF via print -->
+        <button type="button" id="download-print" class="btn btn-secondary topbarbtn" title="In PDF drucken"
+            onClick="window.print()" data-toggle="tooltip" data-placement="left">.pdf</button>
+    </div>
+</div>
+
+            <!-- Source interaction buttons -->
+
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn"
+        aria-label="Connect with source repository"><i class="fab fa-github"></i></button>
+    <div class="dropdown-buttons sourcebuttons">
+        <a class="repository-button"
+            href="https://github.com/executablebooks/jupyter-book"><button type="button" class="btn btn-secondary topbarbtn"
+                data-toggle="tooltip" data-placement="left" title="Quell-Repository"><i
+                    class="fab fa-github"></i>Repository</button></a>
+        <a class="issues-button"
+            href="https://github.com/executablebooks/jupyter-book/issues/new?title=Issue%20on%20page%20%2F2_simulated.html&body=Your%20issue%20content%20here."><button
+                type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip" data-placement="left"
+                title="Öffnen Sie ein Problem"><i class="fas fa-lightbulb"></i>offenes Thema</button></a>
+        
+    </div>
+</div>
+
+            <!-- Full screen (wrap in <a> to have style consistency -->
+
+<a class="full-screen-button"><button type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip"
+        data-placement="bottom" onclick="toggleFullScreen()" aria-label="Vollbildmodus"
+        title="Vollbildmodus"><i
+            class="fas fa-expand"></i></button></a>
+
+            <!-- Launch buttons -->
+
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn"
+        aria-label="Launch interactive content"><i class="fas fa-rocket"></i></button>
+    <div class="dropdown-buttons">
+        
+        <a class="binder-button" href="https://mybinder.org/v2/gh/executablebooks/jupyter-book/master?urlpath=tree/docs/2_simulated.ipynb"><button type="button"
+                class="btn btn-secondary topbarbtn" title="Starten Binder" data-toggle="tooltip"
+                data-placement="left"><img class="binder-button-logo"
+                    src="_static/images/logo_binder.svg"
+                    alt="Interact on binder">Binder</button></a>
+        
+        
+        
+        
+    </div>
+</div>
+
+        </div>
+
+        <!-- Table of contents -->
+        <div class="d-none d-md-block col-md-2 bd-toc show">
+            
+            <div class="tocsection onthispage pt-5 pb-3">
+                <i class="fas fa-list"></i> Inhalt
+            </div>
+            <nav id="bd-toc-nav" aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#task-a">
+   Task a)
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#task-b">
+   Task b)
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#task-c">
+   Task c)
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#task-d">
+   Task d)
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#task-e">
+   Task e)
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#task-f">
+   Task f)
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#task-g">
+     Task g)
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#task-h">
+   Task h)
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#task-i">
+   Task i)
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#task-j">
+   Task j)
+  </a>
+ </li>
+</ul>
+
+            </nav>
+        </div>
+    </div>
+</div>
+    <div id="main-content" class="row">
+        <div class="col-12 col-md-9 pl-md-3 pr-md-0">
+        
+              <div>
+                
+  <p><strong>Regression with Simulated Data</strong><br/></p>
+<p>Prof. Dr. Jan Kirenz <br/>
+HdM Stuttgart</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">%</span><span class="k">matplotlib</span> inline
+
+<span class="c1"># Python set up (load modules) </span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+
+<span class="kn">import</span> <span class="nn">statsmodels.formula.api</span> <span class="k">as</span> <span class="nn">smf</span>
+
+<span class="kn">import</span> <span class="nn">plotly.express</span> <span class="k">as</span> <span class="nn">px</span>
+<span class="kn">import</span> <span class="nn">seaborn</span> <span class="k">as</span> <span class="nn">sns</span>
+
+<span class="c1"># seaborn settings</span>
+<span class="n">custom_params</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;axes.spines.right&quot;</span><span class="p">:</span> <span class="kc">False</span><span class="p">,</span> <span class="s2">&quot;axes.spines.top&quot;</span><span class="p">:</span> <span class="kc">False</span><span class="p">}</span>
+<span class="n">sns</span><span class="o">.</span><span class="n">set_theme</span><span class="p">(</span><span class="n">style</span><span class="o">=</span><span class="s2">&quot;ticks&quot;</span><span class="p">,</span> <span class="n">rc</span><span class="o">=</span><span class="n">custom_params</span><span class="p">,</span> <span class="n">palette</span><span class="o">=</span><span class="s1">&#39;winter&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
+<span class="ne">ModuleNotFoundError</span><span class="g g-Whitespace">                       </span>Traceback (most recent call last)
+<span class="o">/</span><span class="n">var</span><span class="o">/</span><span class="n">folders</span><span class="o">/</span><span class="mi">35</span><span class="o">/</span><span class="mi">43</span><span class="n">bdsj9j64j16410rds5g9vr0000gp</span><span class="o">/</span><span class="n">T</span><span class="o">/</span><span class="n">ipykernel_17610</span><span class="o">/</span><span class="mf">4124834383.</span><span class="n">py</span> <span class="ow">in</span> <span class="o">&lt;</span><span class="n">module</span><span class="o">&gt;</span>
+<span class="ne">----&gt; </span><span class="mi">1</span> <span class="n">get_ipython</span><span class="p">()</span><span class="o">.</span><span class="n">run_line_magic</span><span class="p">(</span><span class="s1">&#39;matplotlib&#39;</span><span class="p">,</span> <span class="s1">&#39;inline&#39;</span><span class="p">)</span>
+<span class="g g-Whitespace">      </span><span class="mi">2</span> 
+<span class="g g-Whitespace">      </span><span class="mi">3</span> <span class="c1"># Python set up (load modules)</span>
+<span class="g g-Whitespace">      </span><span class="mi">4</span> <span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="g g-Whitespace">      </span><span class="mi">5</span> <span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+
+<span class="nn">~/opt/anaconda3/envs/jbook/lib/python3.7/site-packages/IPython/core/interactiveshell.py</span> in <span class="ni">run_line_magic</span><span class="nt">(self, magic_name, line, _stack_depth)</span>
+<span class="g g-Whitespace">   </span><span class="mi">2349</span>                 <span class="n">kwargs</span><span class="p">[</span><span class="s1">&#39;local_ns&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_local_scope</span><span class="p">(</span><span class="n">stack_depth</span><span class="p">)</span>
+<span class="g g-Whitespace">   </span><span class="mi">2350</span>             <span class="k">with</span> <span class="bp">self</span><span class="o">.</span><span class="n">builtin_trap</span><span class="p">:</span>
+<span class="ne">-&gt; </span><span class="mi">2351</span>                 <span class="n">result</span> <span class="o">=</span> <span class="n">fn</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+<span class="g g-Whitespace">   </span><span class="mi">2352</span>             <span class="k">return</span> <span class="n">result</span>
+<span class="g g-Whitespace">   </span><span class="mi">2353</span> 
+
+<span class="nn">~/opt/anaconda3/envs/jbook/lib/python3.7/site-packages/decorator.py</span> in <span class="ni">fun</span><span class="nt">(*args, **kw)</span>
+<span class="g g-Whitespace">    </span><span class="mi">230</span>             <span class="k">if</span> <span class="ow">not</span> <span class="n">kwsyntax</span><span class="p">:</span>
+<span class="g g-Whitespace">    </span><span class="mi">231</span>                 <span class="n">args</span><span class="p">,</span> <span class="n">kw</span> <span class="o">=</span> <span class="n">fix</span><span class="p">(</span><span class="n">args</span><span class="p">,</span> <span class="n">kw</span><span class="p">,</span> <span class="n">sig</span><span class="p">)</span>
+<span class="ne">--&gt; </span><span class="mi">232</span>             <span class="k">return</span> <span class="n">caller</span><span class="p">(</span><span class="n">func</span><span class="p">,</span> <span class="o">*</span><span class="p">(</span><span class="n">extras</span> <span class="o">+</span> <span class="n">args</span><span class="p">),</span> <span class="o">**</span><span class="n">kw</span><span class="p">)</span>
+<span class="g g-Whitespace">    </span><span class="mi">233</span>     <span class="n">fun</span><span class="o">.</span><span class="vm">__name__</span> <span class="o">=</span> <span class="n">func</span><span class="o">.</span><span class="vm">__name__</span>
+<span class="g g-Whitespace">    </span><span class="mi">234</span>     <span class="n">fun</span><span class="o">.</span><span class="vm">__doc__</span> <span class="o">=</span> <span class="n">func</span><span class="o">.</span><span class="vm">__doc__</span>
+
+<span class="nn">~/opt/anaconda3/envs/jbook/lib/python3.7/site-packages/IPython/core/magic.py</span> in <span class="ni">&lt;lambda&gt;</span><span class="nt">(f, *a, **k)</span>
+<span class="g g-Whitespace">    </span><span class="mi">185</span>     <span class="c1"># but it&#39;s overkill for just that one bit of state.</span>
+<span class="g g-Whitespace">    </span><span class="mi">186</span>     <span class="k">def</span> <span class="nf">magic_deco</span><span class="p">(</span><span class="n">arg</span><span class="p">):</span>
+<span class="ne">--&gt; </span><span class="mi">187</span>         <span class="n">call</span> <span class="o">=</span> <span class="k">lambda</span> <span class="n">f</span><span class="p">,</span> <span class="o">*</span><span class="n">a</span><span class="p">,</span> <span class="o">**</span><span class="n">k</span><span class="p">:</span> <span class="n">f</span><span class="p">(</span><span class="o">*</span><span class="n">a</span><span class="p">,</span> <span class="o">**</span><span class="n">k</span><span class="p">)</span>
+<span class="g g-Whitespace">    </span><span class="mi">188</span> 
+<span class="g g-Whitespace">    </span><span class="mi">189</span>         <span class="k">if</span> <span class="n">callable</span><span class="p">(</span><span class="n">arg</span><span class="p">):</span>
+
+<span class="nn">~/opt/anaconda3/envs/jbook/lib/python3.7/site-packages/IPython/core/magics/pylab.py</span> in <span class="ni">matplotlib</span><span class="nt">(self, line)</span>
+<span class="g g-Whitespace">     </span><span class="mi">97</span>             <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Available matplotlib backends: </span><span class="si">%s</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="n">backends_list</span><span class="p">)</span>
+<span class="g g-Whitespace">     </span><span class="mi">98</span>         <span class="k">else</span><span class="p">:</span>
+<span class="ne">---&gt; </span><span class="mi">99</span>             <span class="n">gui</span><span class="p">,</span> <span class="n">backend</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">shell</span><span class="o">.</span><span class="n">enable_matplotlib</span><span class="p">(</span><span class="n">args</span><span class="o">.</span><span class="n">gui</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span> <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">args</span><span class="o">.</span><span class="n">gui</span><span class="p">,</span> <span class="nb">str</span><span class="p">)</span> <span class="k">else</span> <span class="n">args</span><span class="o">.</span><span class="n">gui</span><span class="p">)</span>
+<span class="g g-Whitespace">    </span><span class="mi">100</span>             <span class="bp">self</span><span class="o">.</span><span class="n">_show_matplotlib_backend</span><span class="p">(</span><span class="n">args</span><span class="o">.</span><span class="n">gui</span><span class="p">,</span> <span class="n">backend</span><span class="p">)</span>
+<span class="g g-Whitespace">    </span><span class="mi">101</span> 
+
+<span class="nn">~/opt/anaconda3/envs/jbook/lib/python3.7/site-packages/IPython/core/interactiveshell.py</span> in <span class="ni">enable_matplotlib</span><span class="nt">(self, gui)</span>
+<span class="g g-Whitespace">   </span><span class="mi">3518</span>         <span class="s2">&quot;&quot;&quot;</span>
+<span class="g g-Whitespace">   </span><span class="mi">3519</span><span class="s2">         from IPython.core import pylabtools as pt</span>
+<span class="ne">-&gt; </span><span class="mi">3520</span><span class="s2">         from matplotlib_inline.backend_inline import configure_inline_support</span>
+<span class="g g-Whitespace">   </span><span class="mi">3521</span><span class="s2">         gui, backend = pt.find_gui_and_backend(gui, self.pylab_gui_select)</span>
+<span class="g g-Whitespace">   </span><span class="mi">3522</span><span class="s2"> </span>
+
+<span class="s2">~/opt/anaconda3/envs/jbook/lib/python3.7/site-packages/matplotlib_inline/backend_inline.py in &lt;module&gt;</span>
+<span class="g g-Whitespace">      </span><span class="mi">4</span><span class="s2"> # Distributed under the terms of the BSD 3-Clause License.</span>
+<span class="g g-Whitespace">      </span><span class="mi">5</span><span class="s2"> </span>
+<span class="ne">----&gt; </span><span class="mi">6</span><span class="s2"> import matplotlib</span>
+<span class="g g-Whitespace">      </span><span class="mi">7</span><span class="s2"> from matplotlib.backends.backend_agg import (  # noqa</span>
+<span class="g g-Whitespace">      </span><span class="mi">8</span><span class="s2">     new_figure_manager,</span>
+
+<span class="ne">ModuleNotFoundError</span>: No module named &#39;matplotlib&#39;
+</pre></div>
+</div>
+</div>
+</div>
+<div class="tex2jax_ignore mathjax_ignore section" id="application-2-linear-regression-with-simulated-data">
+<h1>Application 2: Linear regression with simulated data<a class="headerlink" href="#application-2-linear-regression-with-simulated-data" title="Permalink to this headline">¶</a></h1>
+<p>In this application you will create some simulated data and fit simple linear regression models to it.</p>
+<p>IMPORTANT: Make sure to use <strong>set.seed(123)</strong> prior to starting part (a) to ensure consistent results.</p>
+<p>Task (a)</p>
+<ul class="simple">
+<li><p>Create a vector <code class="docutils literal notranslate"><span class="pre">X</span></code>, containing 100 observations drawn from a normal distribution with mean 0 and standard deviation 1. This represents our feature, X.</p></li>
+<li><p>Furthermore, create a dependent variable <code class="docutils literal notranslate"><span class="pre">Y_perfect</span></code> as follows: <code class="docutils literal notranslate"><span class="pre">Y_perfect</span> <span class="pre">=</span> <span class="pre">−1</span> <span class="pre">+</span> <span class="pre">0.5</span> <span class="pre">X</span></code>. This is also called a <strong>population model</strong> with known parameters since we “know” the true relationship between X and Y (which usually is not the case).</p></li>
+</ul>
+<p>Task (b)</p>
+<ul class="simple">
+<li><p>Create an error vector, <code class="docutils literal notranslate"><span class="pre">err</span></code> (error), containing 100 observations drawn from a N(0, 0.25) distribution i.e. a normal distribution with mean zero and standard deviation 0.25.</p></li>
+</ul>
+<p>Task (c)</p>
+<ul class="simple">
+<li><p>Using <code class="docutils literal notranslate"><span class="pre">X</span></code> and <code class="docutils literal notranslate"><span class="pre">err</span></code>, generate a new vector <code class="docutils literal notranslate"><span class="pre">Y</span></code> according to the relationship: <code class="docutils literal notranslate"><span class="pre">Y</span> <span class="pre">=</span> <span class="pre">−1</span> <span class="pre">+</span> <span class="pre">0.5</span> <span class="pre">X</span> <span class="pre">+</span> <span class="pre">err</span></code> (we call this model 1).</p></li>
+<li><p>Questions: what is the length of the vector Y? What are the values of <span class="math notranslate nohighlight">\(β_0\)</span> and <span class="math notranslate nohighlight">\(β_1\)</span> in this linear relationship between Y and X?</p></li>
+</ul>
+<p>Task (d)</p>
+<ul class="simple">
+<li><p>Use Pandas to create a DataFrame from <code class="docutils literal notranslate"><span class="pre">X</span></code>, <code class="docutils literal notranslate"><span class="pre">Y_perfect</span></code>, <code class="docutils literal notranslate"><span class="pre">err</span></code> and <code class="docutils literal notranslate"><span class="pre">Y</span></code> (call it <code class="docutils literal notranslate"><span class="pre">df</span></code>)</p></li>
+<li><p>Make a <strong>scatterplot</strong> displaying the relationship between X and Y (with Seaborn and Plotly Express).</p></li>
+<li><p>Comment on what you observe.</p></li>
+</ul>
+<p>Task (e)</p>
+<ul class="simple">
+<li><p>Fit a <strong>ordinary least squares linear model</strong> (this is our model 2) to predict <code class="docutils literal notranslate"><span class="pre">Y</span></code> using <code class="docutils literal notranslate"><span class="pre">X</span></code> (which will yield <span class="math notranslate nohighlight">\(\hat{Y}\)</span>).</p></li>
+<li><p>Comment on the model obtained (use <code class="docutils literal notranslate"><span class="pre">summary()</span></code> and the mean squared error (MSE) of the residuals).</p></li>
+<li><p>How do <span class="math notranslate nohighlight">\(\hat{β_0}\)</span> and <span class="math notranslate nohighlight">\(\hat{β_1}\)</span> of model 2 compare to <span class="math notranslate nohighlight">\(β_0\)</span> and <span class="math notranslate nohighlight">\(β_1\)</span> of model 1 in (c)?</p></li>
+</ul>
+<p>Task (f)</p>
+<ul class="simple">
+<li><p>Display the OLS regression for X and Y in a scatterplot with the color red (use Plotly Express).</p></li>
+</ul>
+<p>Task (g)</p>
+<ul class="simple">
+<li><p>Now fit a polynomial regression model that predicts Y using X and <span class="math notranslate nohighlight">\(X^2\)</span>.</p></li>
+<li><p>Is there evidence that the quadratic term improves the model fit?</p></li>
+<li><p>Explain your answer.</p></li>
+</ul>
+<p>Task (h)</p>
+<ul class="simple">
+<li><p>Repeat (a)–(f) after modifying the data generation process in such a way that there is <strong>less noise</strong> in the data (only use Seaborn for your plots):</p>
+<ul>
+<li><p>You can do this by decreasing the standard deviation of the normal distribution used to generate the <strong>err</strong> (error) term in (b)</p></li>
+<li><p>Use sd = 0.05.</p></li>
+</ul>
+</li>
+<li><p>Describe your results.</p></li>
+</ul>
+<p>Task (i)</p>
+<ul class="simple">
+<li><p>What are the confidence intervals for <span class="math notranslate nohighlight">\(β_0\)</span> and <span class="math notranslate nohighlight">\(β_1\)</span> based on</p>
+<ul>
+<li><p>the original data set (used in e) and</p></li>
+<li><p>the less noisy data set (created in h)?</p></li>
+</ul>
+</li>
+<li><p>Comment on your results.</p></li>
+</ul>
+<p>Task (j)</p>
+<ul class="simple">
+<li><p>What are the standard errors for <span class="math notranslate nohighlight">\(β_0\)</span> and <span class="math notranslate nohighlight">\(β_1\)</span> based on</p>
+<ul>
+<li><p>the original data set (used in e) and</p></li>
+<li><p>the less noisy data set (created in h)?</p></li>
+</ul>
+</li>
+<li><p>Comment on your results.</p></li>
+</ul>
+<p><em>Source</em></p>
+<p><em>James, G., Witten, D., Hastie, T., &amp; Tibshirani, R. (2021). An introduction to statistical learning. New York: Springer.</em></p>
+<p><strong>Set seed</strong></p>
+<p>We use <code class="docutils literal notranslate"><span class="pre">np.random.seed()</span></code> to generate a sequence of random numbers. The seed enables us to use the same random numbers multiple times.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">seed</span><span class="p">(</span><span class="mi">123</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="section" id="task-a">
+<h2>Task a)<a class="headerlink" href="#task-a" title="Permalink to this headline">¶</a></h2>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Normal distributed values, with mean = 0 and sd = 1 (using Numpy)</span>
+<span class="n">X</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">normal</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">100</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Generate Y_perfect</span>
+<span class="n">Y_perfect</span> <span class="o">=</span> <span class="o">-</span><span class="mi">1</span> <span class="o">+</span> <span class="mf">0.5</span> <span class="o">*</span> <span class="n">X</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="section" id="task-b">
+<h2>Task b)<a class="headerlink" href="#task-b" title="Permalink to this headline">¶</a></h2>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Normal distributed values, with mean = 0 and sd = 0.25</span>
+<span class="n">err</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">normal</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mf">0.25</span><span class="p">,</span> <span class="mi">100</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="section" id="task-c">
+<h2>Task c)<a class="headerlink" href="#task-c" title="Permalink to this headline">¶</a></h2>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Model 1</span>
+<span class="n">Y</span> <span class="o">=</span> <span class="o">-</span><span class="mi">1</span> <span class="o">+</span> <span class="mf">0.5</span> <span class="o">*</span> <span class="n">X</span> <span class="o">+</span> <span class="n">err</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># length of vector Y? </span>
+<span class="n">Y</span><span class="o">.</span><span class="n">size</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>100
+</pre></div>
+</div>
+</div>
+</div>
+<p>Values of our parameters <span class="math notranslate nohighlight">\(\beta_0\)</span> and <span class="math notranslate nohighlight">\(\beta_1\)</span> in the linear model:</p>
+<ul class="simple">
+<li><p><span class="math notranslate nohighlight">\(\beta_0 = -1\)</span> (intercept)</p></li>
+<li><p><span class="math notranslate nohighlight">\(\beta_1 = 0.5\)</span> (slope)</p></li>
+</ul>
+</div>
+<div class="section" id="task-d">
+<h2>Task d)<a class="headerlink" href="#task-d" title="Permalink to this headline">¶</a></h2>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">({</span><span class="s1">&#39;X&#39;</span><span class="p">:</span> <span class="n">X</span><span class="p">,</span> <span class="s1">&#39;Y&#39;</span><span class="p">:</span> <span class="n">Y</span><span class="p">,</span> <span class="s1">&#39;Y_perfect&#39;</span><span class="p">:</span> <span class="n">Y_perfect</span><span class="p">,</span> <span class="s1">&#39;err&#39;</span><span class="p">:</span> <span class="n">err</span><span class="p">})</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Seaborn</span>
+<span class="n">sns</span><span class="o">.</span><span class="n">scatterplot</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="s1">&#39;X&#39;</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="s1">&#39;Y&#39;</span><span class="p">,</span> <span class="n">data</span><span class="o">=</span><span class="n">df</span><span class="p">);</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="_images/2_simulated_16_0.png" src="_images/2_simulated_16_0.png" />
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Plotly Express</span>
+<span class="n">px</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">df</span><span class="p">,</span> <span class="n">x</span><span class="o">=</span><span class="s1">&#39;X&#39;</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="s1">&#39;Y&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+</div>
+</div>
+<p>Positive linear relationship between X and Y with some variance in the data (… as expected since we created this data with some noise (error)…)</p>
+</div>
+<div class="section" id="task-e">
+<h2>Task e)<a class="headerlink" href="#task-e" title="Permalink to this headline">¶</a></h2>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Fit Model</span>
+<span class="n">lm</span> <span class="o">=</span> <span class="n">smf</span><span class="o">.</span><span class="n">ols</span><span class="p">(</span><span class="n">formula</span><span class="o">=</span><span class="s1">&#39;Y ~ X&#39;</span><span class="p">,</span> <span class="n">data</span><span class="o">=</span><span class="n">df</span><span class="p">)</span><span class="o">.</span><span class="n">fit</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Print summary</span>
+<span class="n">lm</span><span class="o">.</span><span class="n">summary</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><table class="simpletable">
+<caption>OLS Regression Results</caption>
+<tr>
+  <th>Dep. Variable:</th>            <td>Y</td>        <th>  R-squared:         </th> <td>   0.842</td>
+</tr>
+<tr>
+  <th>Model:</th>                   <td>OLS</td>       <th>  Adj. R-squared:    </th> <td>   0.840</td>
+</tr>
+<tr>
+  <th>Method:</th>             <td>Least Squares</td>  <th>  F-statistic:       </th> <td>   521.7</td>
+</tr>
+<tr>
+  <th>Date:</th>             <td>Sun, 24 Oct 2021</td> <th>  Prob (F-statistic):</th> <td>4.95e-41</td>
+</tr>
+<tr>
+  <th>Time:</th>                 <td>18:33:25</td>     <th>  Log-Likelihood:    </th> <td>-0.20540</td>
+</tr>
+<tr>
+  <th>No. Observations:</th>      <td>   100</td>      <th>  AIC:               </th> <td>   4.411</td>
+</tr>
+<tr>
+  <th>Df Residuals:</th>          <td>    98</td>      <th>  BIC:               </th> <td>   9.621</td>
+</tr>
+<tr>
+  <th>Df Model:</th>              <td>     1</td>      <th>                     </th>     <td> </td>   
+</tr>
+<tr>
+  <th>Covariance Type:</th>      <td>nonrobust</td>    <th>                     </th>     <td> </td>   
+</tr>
+</table>
+<table class="simpletable">
+<tr>
+      <td></td>         <th>coef</th>     <th>std err</th>      <th>t</th>      <th>P>|t|</th>  <th>[0.025</th>    <th>0.975]</th>  
+</tr>
+<tr>
+  <th>Intercept</th> <td>   -1.0048</td> <td>    0.025</td> <td>  -41.011</td> <td> 0.000</td> <td>   -1.053</td> <td>   -0.956</td>
+</tr>
+<tr>
+  <th>X</th>         <td>    0.4959</td> <td>    0.022</td> <td>   22.841</td> <td> 0.000</td> <td>    0.453</td> <td>    0.539</td>
+</tr>
+</table>
+<table class="simpletable">
+<tr>
+  <th>Omnibus:</th>       <td> 5.027</td> <th>  Durbin-Watson:     </th> <td>   1.860</td>
+</tr>
+<tr>
+  <th>Prob(Omnibus):</th> <td> 0.081</td> <th>  Jarque-Bera (JB):  </th> <td>   5.131</td>
+</tr>
+<tr>
+  <th>Skew:</th>          <td>-0.308</td> <th>  Prob(JB):          </th> <td>  0.0769</td>
+</tr>
+<tr>
+  <th>Kurtosis:</th>      <td> 3.924</td> <th>  Cond. No.          </th> <td>    1.13</td>
+</tr>
+</table><br/><br/>Notes:<br/>[1] Standard Errors assume that the covariance matrix of the errors is correctly specified.</div></div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Mean squared error of residuals</span>
+<span class="n">lm</span><span class="o">.</span><span class="n">mse_resid</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>0.05999065764513778
+</pre></div>
+</div>
+</div>
+</div>
+<ul class="simple">
+<li><p>The linear regression fits a model which is almost true to the values of the coefficients of the population model
+(as we constructed it).</p></li>
+<li><p>The predictor x is highly statistically significant and we can observe a large F-statistic
+with a near-zero p-value so the null hypothesis can be rejected.</p></li>
+<li><p>Our model explains around 84% of the variation in the data (see Adjusted R-squared)</p></li>
+</ul>
+</div>
+<div class="section" id="task-f">
+<h2>Task f)<a class="headerlink" href="#task-f" title="Permalink to this headline">¶</a></h2>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># create a scatterplot with OLS trendline</span>
+<span class="n">fig</span> <span class="o">=</span> <span class="n">px</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">df</span><span class="p">,</span> <span class="n">x</span><span class="o">=</span><span class="s2">&quot;X&quot;</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="s2">&quot;Y&quot;</span><span class="p">,</span> <span class="n">trendline</span><span class="o">=</span><span class="s2">&quot;ols&quot;</span><span class="p">)</span>
+
+<span class="c1"># make trendline red</span>
+<span class="n">fig</span><span class="o">.</span><span class="n">data</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">line</span><span class="o">.</span><span class="n">color</span> <span class="o">=</span> <span class="s1">&#39;red&#39;</span>
+
+<span class="c1"># show figure</span>
+<span class="n">fig</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+</div>
+</div>
+<div class="section" id="task-g">
+<h3>Task g)<a class="headerlink" href="#task-g" title="Permalink to this headline">¶</a></h3>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Fit Model</span>
+<span class="n">lm_2</span> <span class="o">=</span> <span class="n">smf</span><span class="o">.</span><span class="n">ols</span><span class="p">(</span><span class="n">formula</span><span class="o">=</span><span class="s1">&#39;Y ~ X + I(X**2)&#39;</span><span class="p">,</span> <span class="n">data</span><span class="o">=</span><span class="n">df</span><span class="p">)</span><span class="o">.</span><span class="n">fit</span><span class="p">()</span>
+<span class="n">lm_2</span><span class="o">.</span><span class="n">summary</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><table class="simpletable">
+<caption>OLS Regression Results</caption>
+<tr>
+  <th>Dep. Variable:</th>            <td>Y</td>        <th>  R-squared:         </th> <td>   0.842</td>
+</tr>
+<tr>
+  <th>Model:</th>                   <td>OLS</td>       <th>  Adj. R-squared:    </th> <td>   0.839</td>
+</tr>
+<tr>
+  <th>Method:</th>             <td>Least Squares</td>  <th>  F-statistic:       </th> <td>   258.7</td>
+</tr>
+<tr>
+  <th>Date:</th>             <td>Sun, 24 Oct 2021</td> <th>  Prob (F-statistic):</th> <td>1.31e-39</td>
+</tr>
+<tr>
+  <th>Time:</th>                 <td>18:33:26</td>     <th>  Log-Likelihood:    </th> <td>-0.12169</td>
+</tr>
+<tr>
+  <th>No. Observations:</th>      <td>   100</td>      <th>  AIC:               </th> <td>   6.243</td>
+</tr>
+<tr>
+  <th>Df Residuals:</th>          <td>    97</td>      <th>  BIC:               </th> <td>   14.06</td>
+</tr>
+<tr>
+  <th>Df Model:</th>              <td>     2</td>      <th>                     </th>     <td> </td>   
+</tr>
+<tr>
+  <th>Covariance Type:</th>      <td>nonrobust</td>    <th>                     </th>     <td> </td>   
+</tr>
+</table>
+<table class="simpletable">
+<tr>
+      <td></td>         <th>coef</th>     <th>std err</th>      <th>t</th>      <th>P>|t|</th>  <th>[0.025</th>    <th>0.975]</th>  
+</tr>
+<tr>
+  <th>Intercept</th> <td>   -0.9963</td> <td>    0.032</td> <td>  -30.745</td> <td> 0.000</td> <td>   -1.061</td> <td>   -0.932</td>
+</tr>
+<tr>
+  <th>X</th>         <td>    0.4965</td> <td>    0.022</td> <td>   22.717</td> <td> 0.000</td> <td>    0.453</td> <td>    0.540</td>
+</tr>
+<tr>
+  <th>I(X ** 2)</th> <td>   -0.0067</td> <td>    0.017</td> <td>   -0.403</td> <td> 0.688</td> <td>   -0.040</td> <td>    0.026</td>
+</tr>
+</table>
+<table class="simpletable">
+<tr>
+  <th>Omnibus:</th>       <td> 5.312</td> <th>  Durbin-Watson:     </th> <td>   1.863</td>
+</tr>
+<tr>
+  <th>Prob(Omnibus):</th> <td> 0.070</td> <th>  Jarque-Bera (JB):  </th> <td>   5.551</td>
+</tr>
+<tr>
+  <th>Skew:</th>          <td>-0.317</td> <th>  Prob(JB):          </th> <td>  0.0623</td>
+</tr>
+<tr>
+  <th>Kurtosis:</th>      <td> 3.964</td> <th>  Cond. No.          </th> <td>    2.91</td>
+</tr>
+</table><br/><br/>Notes:<br/>[1] Standard Errors assume that the covariance matrix of the errors is correctly specified.</div></div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Mean squared error of residuals</span>
+<span class="n">lm_2</span><span class="o">.</span><span class="n">mse_resid</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>0.060507735253767535
+</pre></div>
+</div>
+</div>
+</div>
+<p>Arguments, that the polynomial provides a <strong>better</strong> fit:</p>
+<ul class="simple">
+<li><p><span class="math notranslate nohighlight">\(\beta_0\)</span> and <span class="math notranslate nohighlight">\(\beta_1\)</span> are slightly closer to <span class="math notranslate nohighlight">\(\hat{\beta_0}\)</span> and <span class="math notranslate nohighlight">\(\hat{\beta_1}\)</span></p></li>
+</ul>
+<p>Arguments, that the polynomial provides <strong>not a better</strong> fit:</p>
+<ul class="simple">
+<li><p>While <span class="math notranslate nohighlight">\(R^2\)</span> is same for both models, <span class="math notranslate nohighlight">\(Adj. R^2\)</span> (which takes model complexity into account) is slightly lower (worse)</p></li>
+<li><p><span class="math notranslate nohighlight">\(\beta_0\)</span> and <span class="math notranslate nohighlight">\(\beta_1\)</span> have slightly higher standard error</p></li>
+<li><p><span class="math notranslate nohighlight">\(\beta_2\)</span> with <span class="math notranslate nohighlight">\(p = 0.856\)</span> is not signifcant</p></li>
+<li><p>Scores for AIC and BIC are higher (worse)</p></li>
+<li><p>Most importantly, the p-value of the t-statistic suggests that there isn’t a significant relationship between Y
+and <span class="math notranslate nohighlight">\(X^2\)</span> why we should use the model in (e)</p>
+<ul>
+<li><p>this makes sense since we know the population model doesn’t contain a quadratic relationship.</p></li>
+</ul>
+</li>
+</ul>
+</div>
+</div>
+<div class="section" id="task-h">
+<h2>Task h)<a class="headerlink" href="#task-h" title="Permalink to this headline">¶</a></h2>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># a) Normal distributed values, with mean = 0 and sd = 1</span>
+<span class="n">X_h</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">normal</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">100</span><span class="p">)</span>
+<span class="c1"># b) with lower standard deviation </span>
+<span class="n">err_h</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">normal</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mf">0.05</span><span class="p">,</span> <span class="mi">100</span><span class="p">)</span>
+<span class="c1"># c) Model</span>
+<span class="n">Y_h</span> <span class="o">=</span> <span class="o">-</span><span class="mi">1</span> <span class="o">+</span> <span class="mf">0.5</span> <span class="o">*</span> <span class="n">X_h</span> <span class="o">+</span> <span class="n">err_h</span>
+<span class="c1"># d) Scatterplot</span>
+<span class="n">sns</span><span class="o">.</span><span class="n">scatterplot</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="n">X_h</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="n">Y_h</span><span class="p">);</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="_images/2_simulated_31_0.png" src="_images/2_simulated_31_0.png" />
+</div>
+</div>
+<p>Positive linear relationship between x2 and y2 with only little variance in the data (… as expected since we created this model…).</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># e)</span>
+<span class="n">df_h</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">({</span><span class="s1">&#39;X&#39;</span><span class="p">:</span> <span class="n">X_h</span><span class="p">,</span> <span class="s1">&#39;Y&#39;</span><span class="p">:</span> <span class="n">Y_h</span><span class="p">})</span>
+<span class="n">lm_h</span> <span class="o">=</span> <span class="n">smf</span><span class="o">.</span><span class="n">gls</span><span class="p">(</span><span class="n">formula</span><span class="o">=</span><span class="s1">&#39;Y ~ X&#39;</span><span class="p">,</span> <span class="n">data</span><span class="o">=</span><span class="n">df_h</span><span class="p">)</span><span class="o">.</span><span class="n">fit</span><span class="p">()</span>
+<span class="n">lm_h</span><span class="o">.</span><span class="n">summary</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><table class="simpletable">
+<caption>GLS Regression Results</caption>
+<tr>
+  <th>Dep. Variable:</th>            <td>Y</td>        <th>  R-squared:         </th> <td>   0.992</td> 
+</tr>
+<tr>
+  <th>Model:</th>                   <td>GLS</td>       <th>  Adj. R-squared:    </th> <td>   0.992</td> 
+</tr>
+<tr>
+  <th>Method:</th>             <td>Least Squares</td>  <th>  F-statistic:       </th> <td>1.276e+04</td>
+</tr>
+<tr>
+  <th>Date:</th>             <td>Sun, 24 Oct 2021</td> <th>  Prob (F-statistic):</th> <td>1.36e-105</td>
+</tr>
+<tr>
+  <th>Time:</th>                 <td>18:33:26</td>     <th>  Log-Likelihood:    </th> <td>  172.28</td> 
+</tr>
+<tr>
+  <th>No. Observations:</th>      <td>   100</td>      <th>  AIC:               </th> <td>  -340.6</td> 
+</tr>
+<tr>
+  <th>Df Residuals:</th>          <td>    98</td>      <th>  BIC:               </th> <td>  -335.4</td> 
+</tr>
+<tr>
+  <th>Df Model:</th>              <td>     1</td>      <th>                     </th>     <td> </td>    
+</tr>
+<tr>
+  <th>Covariance Type:</th>      <td>nonrobust</td>    <th>                     </th>     <td> </td>    
+</tr>
+</table>
+<table class="simpletable">
+<tr>
+      <td></td>         <th>coef</th>     <th>std err</th>      <th>t</th>      <th>P>|t|</th>  <th>[0.025</th>    <th>0.975]</th>  
+</tr>
+<tr>
+  <th>Intercept</th> <td>   -1.0059</td> <td>    0.004</td> <td> -229.365</td> <td> 0.000</td> <td>   -1.015</td> <td>   -0.997</td>
+</tr>
+<tr>
+  <th>X</th>         <td>    0.5085</td> <td>    0.005</td> <td>  112.948</td> <td> 0.000</td> <td>    0.500</td> <td>    0.517</td>
+</tr>
+</table>
+<table class="simpletable">
+<tr>
+  <th>Omnibus:</th>       <td> 0.496</td> <th>  Durbin-Watson:     </th> <td>   2.264</td>
+</tr>
+<tr>
+  <th>Prob(Omnibus):</th> <td> 0.780</td> <th>  Jarque-Bera (JB):  </th> <td>   0.648</td>
+</tr>
+<tr>
+  <th>Skew:</th>          <td> 0.123</td> <th>  Prob(JB):          </th> <td>   0.723</td>
+</tr>
+<tr>
+  <th>Kurtosis:</th>      <td> 2.692</td> <th>  Cond. No.          </th> <td>    1.11</td>
+</tr>
+</table><br/><br/>Notes:<br/>[1] Standard Errors assume that the covariance matrix of the errors is correctly specified.</div></div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Mean squared error of residuals</span>
+<span class="n">lm_h</span><span class="o">.</span><span class="n">mse_resid</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>0.0019048802091051866
+</pre></div>
+</div>
+</div>
+</div>
+<p>We can observe very good results … which is not surprising since we have an almost perfect linear relationship between <span class="math notranslate nohighlight">\(Y_h\)</span> and <span class="math notranslate nohighlight">\(X_h\)</span>.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># f)</span>
+<span class="c1"># Scatter Plot </span>
+<span class="n">sns</span><span class="o">.</span><span class="n">lmplot</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="s2">&quot;X&quot;</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="s2">&quot;Y&quot;</span><span class="p">,</span> <span class="n">data</span><span class="o">=</span><span class="n">df_h</span><span class="p">,</span> <span class="n">ci</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">line_kws</span><span class="o">=</span><span class="p">{</span><span class="s1">&#39;color&#39;</span><span class="p">:</span> <span class="s1">&#39;red&#39;</span><span class="p">});</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="_images/2_simulated_36_0.png" src="_images/2_simulated_36_0.png" />
+</div>
+</div>
+<p>Almost identical… (perfect fit)</p>
+</div>
+<div class="section" id="task-i">
+<h2>Task i)<a class="headerlink" href="#task-i" title="Permalink to this headline">¶</a></h2>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="s1">&#39;.&#39;</span><span class="o">*</span><span class="mi">35</span><span class="p">)</span>
+<span class="nb">print</span> <span class="p">(</span><span class="s1">&#39;95% CI noisier data (SD = 0.25):&#39;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">lm</span><span class="o">.</span><span class="n">conf_int</span><span class="p">())</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;.&#39;</span><span class="o">*</span><span class="mi">35</span><span class="p">)</span>
+<span class="nb">print</span> <span class="p">(</span><span class="s1">&#39;95% CI less noisy data (SD = 0.05):&#39;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">lm_h</span><span class="o">.</span><span class="n">conf_int</span><span class="p">())</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>...................................
+95% CI noisier data (SD = 0.25):
+                  0         1
+Intercept -1.053391 -0.956152
+X          0.452771  0.538933
+...................................
+95% CI less noisy data (SD = 0.05):
+                  0         1
+Intercept -1.014575 -0.997169
+X          0.499558  0.517426
+</pre></div>
+</div>
+</div>
+</div>
+<p>For the less noisy data set, the confidence intervals for both coefficients are more narrow.</p>
+</div>
+<div class="section" id="task-j">
+<h2>Task j)<a class="headerlink" href="#task-j" title="Permalink to this headline">¶</a></h2>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># standard error (se) of paramters (b)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;.&#39;</span><span class="o">*</span><span class="mi">35</span><span class="p">)</span>
+<span class="nb">print</span> <span class="p">(</span><span class="s1">&#39;SE for noisier data (SD = 0.25):&#39;</span><span class="p">)</span>
+<span class="n">display</span><span class="p">(</span><span class="n">lm</span><span class="o">.</span><span class="n">bse</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;.&#39;</span><span class="o">*</span><span class="mi">35</span><span class="p">)</span>
+<span class="nb">print</span> <span class="p">(</span><span class="s1">&#39;SE for less noisy data (SD = 0.05):&#39;</span><span class="p">)</span>
+<span class="n">lm_h</span><span class="o">.</span><span class="n">bse</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>...................................
+SE for noisier data (SD = 0.25):
+</pre></div>
+</div>
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Intercept    0.024500
+X            0.021709
+dtype: float64
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>...................................
+SE for less noisy data (SD = 0.05):
+</pre></div>
+</div>
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Intercept    0.004385
+X            0.004502
+dtype: float64
+</pre></div>
+</div>
+</div>
+</div>
+<p>The very small standard errors in the less noisy data set indicate that most sample means are similar to the population
+mean (i.e., our sample parameters accurately reflect the population mean).</p>
+</div>
+</div>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            kernelName: "python3",
+            path: "./."
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+              </div>
+              
+        
+            
+
+
+
+<div class='prev-next-bottom'>
+    
+
+</div>
+        
+        </div>
+    </div>
+    <footer class="footer">
+    <div class="container">
+      <p>
+        
+          Durch Jan Kirenz<br/>
+        
+            &copy; Urheberrechte © 2021.<br/>
+      </p>
+    </div>
+  </footer>
+</main>
+
+
+      </div>
+    </div>
+  
+  <script src="_static/js/index.1c5a1a01449ed65a7b51.js"></script>
+
+  
+  </body>
+</html>
