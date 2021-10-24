@@ -1,8 +1,21 @@
 # Table of contents
-# Learn more at https://jupyterbook.org/customize/toc.html
-
 format: jb-book
 root: intro
-chapters:
-- file: markdown
-- file: notebooks
+parts:
+  - caption: Introduction
+    chapters:
+    - file: 01_process.ipynb
+    - file: docs/getting_started
+  - caption: Simple Regression
+    chapters:
+    - file: 02_simulated.ipynb
+      sections:
+      - file: 03_quality_of_fit.ipynb
+  - caption: Diagnostics
+    chapters:
+    - file: 04_diagnostics.ipynb
+      sections:
+      - file: 05_auto_case.ipynb
+  - caption: References
+    chapters:
+    - file: reference.md
