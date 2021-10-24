@@ -1,13 +1,6 @@
 #!/usr/bin/env python
 # coding: utf-8
 
-# **Applied Statistics**<br/>
-# Prof. Dr. Jan Kirenz <br/>
-# Hochschule der Medien Stuttgart
-
-# <h1>Table of Contents<span class="tocSkip"></span></h1>
-# <div class="toc"><ul class="toc-item"><li><span><a href="#1-Import-data" data-toc-modified-id="1-Import-data-1"><span class="toc-item-num">1&nbsp;&nbsp;</span>1 Import data</a></span></li><li><span><a href="#Tidying-data" data-toc-modified-id="Tidying-data-2"><span class="toc-item-num">2&nbsp;&nbsp;</span>Tidying data</a></span><ul class="toc-item"><li><span><a href="#Handle-missing-values" data-toc-modified-id="Handle-missing-values-2.1"><span class="toc-item-num">2.1&nbsp;&nbsp;</span>Handle missing values</a></span></li></ul></li><li><span><a href="#Transform-data" data-toc-modified-id="Transform-data-3"><span class="toc-item-num">3&nbsp;&nbsp;</span>Transform data</a></span><ul class="toc-item"><li><span><a href="#Harvey-Collier-multiplier-test" data-toc-modified-id="Harvey-Collier-multiplier-test-3.1"><span class="toc-item-num">3.1&nbsp;&nbsp;</span>Harvey-Collier multiplier test</a></span></li><li><span><a href="#Residuals-vs-fitted-plot" data-toc-modified-id="Residuals-vs-fitted-plot-3.2"><span class="toc-item-num">3.2&nbsp;&nbsp;</span>Residuals vs fitted plot</a></span><ul class="toc-item"><li><span><a href="#POSSIBLE-SOLUTION-FOR-IDENTIFIED-NON-LINEARITY" data-toc-modified-id="POSSIBLE-SOLUTION-FOR-IDENTIFIED-NON-LINEARITY-3.2.1"><span class="toc-item-num">3.2.1&nbsp;&nbsp;</span>POSSIBLE SOLUTION FOR IDENTIFIED NON-LINEARITY</a></span></li></ul></li><li><span><a href="#Jarque-Bera-test" data-toc-modified-id="Jarque-Bera-test-3.3"><span class="toc-item-num">3.3&nbsp;&nbsp;</span>Jarque-Bera test</a></span></li><li><span><a href="#Omnibus-normtest" data-toc-modified-id="Omnibus-normtest-3.4"><span class="toc-item-num">3.4&nbsp;&nbsp;</span>Omnibus normtest</a></span></li></ul></li><li><span><a href="#Notes-on-outliers." data-toc-modified-id="Notes-on-outliers.-4"><span class="toc-item-num">4&nbsp;&nbsp;</span>Notes on outliers.</a></span><ul class="toc-item"><li><span><a href="#Normal-Q-Q-Plot" data-toc-modified-id="Normal-Q-Q-Plot-4.1"><span class="toc-item-num">4.1&nbsp;&nbsp;</span>Normal Q-Q-Plot</a></span></li><li><span><a href="#Breusch-Pagan-test:" data-toc-modified-id="Breusch-Pagan-test:-4.2"><span class="toc-item-num">4.2&nbsp;&nbsp;</span>Breusch-Pagan test:</a></span></li><li><span><a href="#Scale-Location-plot" data-toc-modified-id="Scale-Location-plot-4.3"><span class="toc-item-num">4.3&nbsp;&nbsp;</span>Scale-Location plot</a></span></li><li><span><a href="#Statsmodel-influence" data-toc-modified-id="Statsmodel-influence-4.4"><span class="toc-item-num">4.4&nbsp;&nbsp;</span>Statsmodel influence</a></span></li><li><span><a href="#Residuals-vs-leverage-plot" data-toc-modified-id="Residuals-vs-leverage-plot-4.5"><span class="toc-item-num">4.5&nbsp;&nbsp;</span>Residuals vs leverage plot</a></span></li></ul></li></ul></div>
-
 # In[1]:
 
 
@@ -60,7 +53,7 @@ from IPython.display import Image
 
 # ## 1 Import data
 
-# In[6]:
+# In[2]:
 
 
 # Load the csv data files into pandas dataframes
@@ -70,28 +63,28 @@ df = pd.read_csv(PATH + 'Auto.csv')
 
 # ## Tidying data
 
-# In[7]:
+# In[3]:
 
 
 # show all variables in the data set
 df.columns
 
 
-# In[8]:
+# In[4]:
 
 
 # show the first 5 rows (i.e. head of the DataFrame)
 df.head(5)
 
 
-# In[9]:
+# In[5]:
 
 
 # show the lenght of the variable id (i.e. the number of observations)
 len(df["name"])
 
 
-# In[10]:
+# In[6]:
 
 
 # check for duplicates and print results (if the two numbers match, we have no duplicates)
@@ -103,14 +96,14 @@ print(f'Unique IDs: {len(df["name"].value_counts())}')
 
 # It is not possible to easily check for duplicates since it is plausible that there are multiple car types of the same name...
 
-# In[11]:
+# In[7]:
 
 
 # data overview (with meta data)
 df.info()
 
 
-# In[12]:
+# In[8]:
 
 
 # change data type
@@ -122,26 +115,26 @@ df['horsepower'] = pd.to_numeric(df['horsepower'], errors='coerce') # solution
 
 # ### Handle missing values
 
-# In[13]:
+# In[9]:
 
 
 # show missing values (missing values - if present - will be displayed in yellow )
 sns.heatmap(df.isnull(),yticklabels=False,cbar=False,cmap='viridis');
 
 
-# In[14]:
+# In[10]:
 
 
 print(df.isnull().sum())
 
 
-# In[15]:
+# In[11]:
 
 
 df = df.dropna()
 
 
-# In[16]:
+# In[12]:
 
 
 print(df.isnull().sum())
@@ -149,14 +142,14 @@ print(df.isnull().sum())
 
 # ## Transform data
 
-# In[17]:
+# In[13]:
 
 
 # summary statistics for all numerical columns
 round(df.describe(),2)
 
 
-# In[18]:
+# In[14]:
 
 
 # summary statistics for all categorical columns
@@ -165,7 +158,7 @@ df.describe(include=['category'])
 
 # # Regression diagnostics
 
-# In[19]:
+# In[15]:
 
 
 # fit linear model with statsmodels.formula.api (with R-style formulas) 
@@ -180,7 +173,7 @@ lm = smf.ols(formula ='mpg ~ horsepower', data=df).fit()
 # 
 # A significant result (rejecting the null) occurs when the fit is better with a range restriction (which is what happens if the model is nonlinear).
 
-# In[20]:
+# In[16]:
 
 
 name = ['t value', 'p value']
@@ -193,7 +186,7 @@ lzip(name, test)
 
 # ###  Residuals vs fitted plot
 
-# In[21]:
+# In[17]:
 
 
 # fitted values
@@ -219,7 +212,7 @@ plot.set_ylabel('Residuals');
 
 # **Advanced Residuals vs fitted plot (not necessary)**
 
-# In[22]:
+# In[18]:
 
 
 # Necessary values for our advanced plots:
@@ -235,7 +228,7 @@ model_norm_residuals_abs_sqrt = np.sqrt(np.abs(model_norm_residuals))
 model_abs_resid = np.abs(model_residuals)
 
 
-# In[23]:
+# In[19]:
 
 
 # Advanced plot (1)
@@ -267,14 +260,14 @@ for i in abs_resid_top_3.index:
 
 # We can fit a non-linear function (polynomial regression)
 
-# In[24]:
+# In[20]:
 
 
 lm_2 = smf.ols(formula='mpg ~ horsepower + I(horsepower**2)', data=df).fit()
 #lm_2.summary()
 
 
-# In[25]:
+# In[21]:
 
 
 # fitted values
@@ -308,7 +301,7 @@ plot.set_ylabel('Residuals');
 # 
 # Samples from a normal distribution have an expected skewness of 0 and an expected excess kurtosis of 0 (which is the same as a kurtosis of 3). As the definition of JB shows, any deviation from this increases the JB statistic.
 
-# In[26]:
+# In[22]:
 
 
 name = ['Jarque-Bera', 'Chi^2 two-tail prob.', 'Skew', 'Kurtosis']
@@ -322,7 +315,7 @@ lzip(name, test)
 # 
 # Our null hypothesis is that the residuals are from a normal distribution.
 
-# In[27]:
+# In[23]:
 
 
 name = ['Chi^2', 'Two-tail probability']
@@ -344,7 +337,7 @@ lzip(name, test)
 # 
 # This plots the standardized (z-score) residuals against the theoretical normal quantiles. Anything quite off the diagonal lines may be a concern for further investigation.
 
-# In[28]:
+# In[24]:
 
 
 # Use standardized residuals
@@ -358,7 +351,7 @@ sm.qqplot(lm.get_influence().resid_studentized_internal);
 
 # **Advanced QQ-Plot**
 
-# In[29]:
+# In[25]:
 
 
 # Advanced plot (2)
@@ -398,7 +391,7 @@ for r, i in enumerate(abs_norm_resid_top_3):
 # 
 # As a rough rule of thumb, if Durbin–Watson is less than 1.0, there may be cause for alarm. Small values of d indicate successive error terms are positively correlated. If d > 2, successive error terms are negatively correlated.
 
-# In[30]:
+# In[26]:
 
 
 sm.stats.durbin_watson(lm.resid)
@@ -418,7 +411,7 @@ sm.stats.durbin_watson(lm.resid)
 # 
 # Test assumes homoskedasticity (null hypothesis). If one of the test statistics is significant, then you have evidence of heteroskedasticity. 
 
-# In[31]:
+# In[27]:
 
 
 name = ['Lagrange multiplier statistic', 'p-value', 
@@ -429,7 +422,7 @@ lzip(name, test)
 
 # ### Scale-Location plot
 
-# In[32]:
+# In[28]:
 
 
 # Scale Location plot
@@ -457,14 +450,14 @@ sns.regplot(model_fitted_y, model_norm_residuals_abs_sqrt,
 # 
 # Once created, an object of class OLSInfluence holds attributes and methods that allow users to assess the influence of each observation. 
 
-# In[33]:
+# In[29]:
 
 
 # obtain statistics
 infl = lm.get_influence()
 
 
-# In[35]:
+# In[30]:
 
 
 lm_cooksd = lm.get_influence().cooks_distance[0]
@@ -477,7 +470,7 @@ out_d = lm_cooksd > critical_d
 df.index[out_d],lm_cooksd[out_d]
 
 
-# In[36]:
+# In[31]:
 
 
 # Show summary frame of leverage statistics
@@ -488,7 +481,7 @@ print(infl.summary_frame().filter(["student_resid","dffits","cooks_d"]))
 
 # Plots leverage statistics vs. normalized residuals squared. See [statsmodel documentation](http://www.statsmodels.org/0.6.1/generated/statsmodels.graphics.regressionplots.plot_leverage_resid2.html)
 
-# In[37]:
+# In[32]:
 
 
 fig, ax = plt.subplots(figsize=(8,6))
@@ -506,14 +499,14 @@ fig = plot_leverage_resid2(lm, ax = ax)
 # 
 # In other words, since limit and rating tend to increase or decrease together, it can be difficult to determine how each one separately is associated with the response, balance.
 
-# In[38]:
+# In[33]:
 
 
 # plot all variables in a scatter matrix
 pd.plotting.scatter_matrix(df, alpha=0.8, figsize=(10, 10), diagonal='kde');
 
 
-# In[39]:
+# In[34]:
 
 
 # Inspect correlation
@@ -534,7 +527,7 @@ sns.heatmap(corr, mask=mask, cmap=cmap, annot=True,  square=True, annot_kws={"si
 # 
 # Instead of inspecting the correlation matrix, a better way to assess multicollinearity is to compute the condition number test. If the condition number is above 30, the regression may have significant multicollinearity.
 
-# In[43]:
+# In[35]:
 
 
 # makes here no sense since we only have one predictor...
@@ -543,7 +536,7 @@ np.linalg.cond(lm.model.exog)
 
 # Instead of inspecting the correlation matrix, a better way to assess multicollinearity is to compute the variance inflation factor (VIF). The smallest possible value for VIF is 1, which indicates the complete absence of collinearity. Typically in practice there is a small amount of collinearity among the predictors. As a rule of thumb, a VIF value that exceeds 5 or 10 indicates a problematic amount of collinearity.
 
-# In[42]:
+# In[36]:
 
 
 y, X = dmatrices('mpg ~ horsepower+ cylinders + displacement', df, return_type='dataframe')

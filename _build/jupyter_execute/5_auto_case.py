@@ -1,34 +1,23 @@
 #!/usr/bin/env python
 # coding: utf-8
 
-# **Applied Statistics**<br/>
-# Prof. Dr. Jan Kirenz <br/>
-# Hochschule der Medien Stuttgart
-
-# <h1>Table of Contents<span class="tocSkip"></span></h1>
-# <div class="toc"><ul class="toc-item"><li><span><a href="#Import-data" data-toc-modified-id="Import-data-1"><span class="toc-item-num">1&nbsp;&nbsp;</span>Import data</a></span></li><li><span><a href="#Tidying-data" data-toc-modified-id="Tidying-data-2"><span class="toc-item-num">2&nbsp;&nbsp;</span>Tidying data</a></span><ul class="toc-item"><li><span><a href="#Data-inspection" data-toc-modified-id="Data-inspection-2.1"><span class="toc-item-num">2.1&nbsp;&nbsp;</span>Data inspection</a></span></li><li><span><a href="#Handle-missing-values" data-toc-modified-id="Handle-missing-values-2.2"><span class="toc-item-num">2.2&nbsp;&nbsp;</span>Handle missing values</a></span></li></ul></li><li><span><a href="#Transform-data" data-toc-modified-id="Transform-data-3"><span class="toc-item-num">3&nbsp;&nbsp;</span>Transform data</a></span></li><li><span><a href="#Visualize-data" data-toc-modified-id="Visualize-data-4"><span class="toc-item-num">4&nbsp;&nbsp;</span>Visualize data</a></span><ul class="toc-item"><li><span><a href="#Distibution-of-Variables" data-toc-modified-id="Distibution-of-Variables-4.1"><span class="toc-item-num">4.1&nbsp;&nbsp;</span>Distibution of Variables</a></span></li></ul></li><li><span><a href="#Regression-Models" data-toc-modified-id="Regression-Models-5"><span class="toc-item-num">5&nbsp;&nbsp;</span>Regression Models</a></span><ul class="toc-item"><li><span><a href="#Models" data-toc-modified-id="Models-5.1"><span class="toc-item-num">5.1&nbsp;&nbsp;</span>Models</a></span><ul class="toc-item"><li><span><a href="#Simple-Linear-Regression" data-toc-modified-id="Simple-Linear-Regression-5.1.1"><span class="toc-item-num">5.1.1&nbsp;&nbsp;</span>Simple Linear Regression</a></span></li><li><span><a href="#GLS-Regression" data-toc-modified-id="GLS-Regression-5.1.2"><span class="toc-item-num">5.1.2&nbsp;&nbsp;</span>GLS Regression</a></span></li><li><span><a href="#Mixed-Linear-Model" data-toc-modified-id="Mixed-Linear-Model-5.1.3"><span class="toc-item-num">5.1.3&nbsp;&nbsp;</span>Mixed Linear Model</a></span></li></ul></li><li><span><a href="#Interpretation-of-OLS-Model" data-toc-modified-id="Interpretation-of-OLS-Model-5.2"><span class="toc-item-num">5.2&nbsp;&nbsp;</span>Interpretation of OLS-Model</a></span></li><li><span><a href="#Regression-Diagnostics" data-toc-modified-id="Regression-Diagnostics-5.3"><span class="toc-item-num">5.3&nbsp;&nbsp;</span>Regression Diagnostics</a></span><ul class="toc-item"><li><span><a href="#Residuals-vs-fitted-plot" data-toc-modified-id="Residuals-vs-fitted-plot-5.3.1"><span class="toc-item-num">5.3.1&nbsp;&nbsp;</span>Residuals vs fitted plot</a></span></li><li><span><a href="#Normal-Q-Q" data-toc-modified-id="Normal-Q-Q-5.3.2"><span class="toc-item-num">5.3.2&nbsp;&nbsp;</span>Normal Q-Q</a></span></li><li><span><a href="#Scale-Location-plot" data-toc-modified-id="Scale-Location-plot-5.3.3"><span class="toc-item-num">5.3.3&nbsp;&nbsp;</span>Scale-Location plot</a></span></li><li><span><a href="#Residuals-vs-leverage-plot" data-toc-modified-id="Residuals-vs-leverage-plot-5.3.4"><span class="toc-item-num">5.3.4&nbsp;&nbsp;</span>Residuals vs leverage plot</a></span></li></ul></li></ul></li></ul></div>
-
 # In[1]:
 
 
 # Python set up (load modules) 
 import numpy as np
 import pandas as pd
-from pandas.api.types import CategoricalDtype
+
 from scipy import stats
 import statsmodels.api as sm
 import statsmodels.formula.api as smf
-from statsmodels.compat import lzip
-from statsmodels.stats.outliers_influence import summary_table
-from statsmodels.graphics.gofplots import ProbPlot
-from statsmodels.stats.outliers_influence import OLSInfluence
+
 from statsmodels.graphics.regressionplots import plot_leverage_resid2
 import matplotlib.pyplot as plt
 get_ipython().run_line_magic('matplotlib', 'inline')
 plt.style.use('ggplot') 
 import seaborn as sns  
 sns.set() 
-from IPython.display import Image
 
 
 # # Linear regression tutorial 'Auto' 
@@ -47,7 +36,7 @@ from IPython.display import Image
 
 # ## Import data
 
-# In[11]:
+# In[2]:
 
 
 # Load the csv data files into pandas dataframes
@@ -60,28 +49,28 @@ df = pd.read_csv("https://raw.githubusercontent.com/kirenz/datasets/master/Auto.
 
 # First of all, let's take a look at the variables (columns) in the data set.
 
-# In[12]:
+# In[3]:
 
 
 # show all variables in the data set
 df.columns
 
 
-# In[13]:
+# In[4]:
 
 
 # show the first 5 rows (i.e. head of the DataFrame)
 df.head(5)
 
 
-# In[14]:
+# In[5]:
 
 
 # show the lenght of the variable name (i.e. the number of observations)
 len(df["name"])
 
 
-# In[15]:
+# In[6]:
 
 
 # unique names 
@@ -90,14 +79,14 @@ len(df['name'].unique())
 
 # It is not possible to easily check for duplicates since it is plausible that there are multiple car types of the same name...
 
-# In[16]:
+# In[7]:
 
 
 # data overview (with meta data)
 df.info()
 
 
-# In[19]:
+# In[8]:
 
 
 # change data type
@@ -105,7 +94,7 @@ df['origin'] = pd.Categorical(df['origin'])
 df['name'] = pd.Categorical(df['name'])
 
 
-# In[17]:
+# In[9]:
 
 
 df['horsepower'] = pd.to_numeric(df['horsepower']) # produces error
@@ -122,7 +111,7 @@ df['horsepower'] = pd.to_numeric(df['horsepower']) # produces error
 
 # ### Handle missing values
 
-# In[20]:
+# In[ ]:
 
 
 # show missing values (missing values - if present - will be displayed in yellow )
@@ -131,19 +120,19 @@ sns.heatmap(df.isnull(),yticklabels=False,cbar=False,cmap='viridis');
 
 # We can also check the column-wise distribution of null values:
 
-# In[21]:
+# In[ ]:
 
 
 print(df.isnull().sum())
 
 
-# In[22]:
+# In[ ]:
 
 
 df = df.dropna()
 
 
-# In[23]:
+# In[ ]:
 
 
 print(df.isnull().sum())
@@ -151,14 +140,14 @@ print(df.isnull().sum())
 
 # ## Transform data
 
-# In[24]:
+# In[ ]:
 
 
 # summary statistics for all numerical columns
 round(df.describe(),2)
 
 
-# In[25]:
+# In[ ]:
 
 
 # summary statistics for all categorical columns
@@ -169,27 +158,27 @@ df.describe(include=['category'])
 
 # ### Distibution of Variables
 
-# In[26]:
+# In[ ]:
 
 
 df.hist(figsize=(10,10), bins=20);
 
 
-# In[27]:
+# In[ ]:
 
 
 # boxplot 
 sns.boxplot(y='mpg', data=df, palette='winter');
 
 
-# In[28]:
+# In[ ]:
 
 
 # check relationship with a joint plot
 sns.jointplot(x="horsepower", y="mpg", data=df, stat_func=None);
 
 
-# In[29]:
+# In[ ]:
 
 
 sns.pairplot(df);
@@ -203,7 +192,7 @@ sns.pairplot(df);
 
 # #### Simple Linear Regression
 
-# In[37]:
+# In[ ]:
 
 
 ols = smf.ols(formula ='mpg ~  horsepower', data=df, groups=df["cylinders"]).fit()
@@ -212,7 +201,7 @@ ols.summary()
 
 # We use [Seaborne's lmplot](https://seaborn.pydata.org/generated/seaborn.lmplot.html) to plot the regression line:
 
-# In[42]:
+# In[ ]:
 
 
 # Plot regression line with 95% confidence intervall
@@ -221,7 +210,7 @@ sns.lmplot(x='horsepower', y='mpg', data=df, line_kws={'color':'red'}, height=5,
 
 # #### GLS Regression
 
-# In[36]:
+# In[ ]:
 
 
 gls = smf.gls(formula ='mpg ~  horsepower', data=df).fit()
@@ -232,7 +221,7 @@ gls.summary()
 
 # You find more information about mixed linear models in [Statsmodels documentation](https://www.statsmodels.org/stable/mixed_linear.html)
 
-# In[38]:
+# In[ ]:
 
 
 mlm = smf.mixedlm(formula ='mpg ~  horsepower', data=df, groups=df["cylinders"]).fit()
@@ -247,7 +236,7 @@ mlm.summary()
 
 # **2. How strong is the relationship between the predictor and the response?**
 
-# In[39]:
+# In[ ]:
 
 
 # Test relationship and strength with correlation
@@ -264,7 +253,7 @@ stats.pearsonr(df['mpg'], df['horsepower'])
 
 # **4. What is the predicted mpg associated with a horsepower of 98? What are the associted 95% confidence and prediction intervals?**
 
-# In[40]:
+# In[ ]:
 
 
 to_predict = pd.DataFrame({'horsepower':[98]})
@@ -276,7 +265,7 @@ results.summary_frame(alpha=0.05)
 # 
 # That means if we’d collected 100 samples, and for each sample calculated the regression coefficient for horsepower and a confidence interval for it, then for 95 of these samples, the confidence interval contains the value of the regression coefficient in the population, and in 5 of the samples the confidence interval does not contain the population paramater (i.e. the regrssion coefficient). 
 
-# In[41]:
+# In[ ]:
 
 
 # CI of the parameter (however, this was not the question...)
@@ -292,7 +281,7 @@ lm.conf_int(alpha=0.05)
 
 # #### Residuals vs fitted plot
 
-# In[44]:
+# In[ ]:
 
 
 # fitted values
@@ -314,7 +303,7 @@ plot.set_ylabel('Residuals');
 
 # This plots the standardized (z-score) residuals against the theoretical normal quantiles. Anything quite off the diagonal lines may be a concern for further investigation.
 
-# In[46]:
+# In[ ]:
 
 
 # Use standardized residuals
@@ -328,7 +317,7 @@ sm.qqplot(ols.get_influence().resid_studentized_internal);
 
 # #### Scale-Location plot
 
-# In[49]:
+# In[ ]:
 
 
 # Scale Location plot
@@ -344,14 +333,14 @@ sns.regplot(ols.fittedvalues, np.sqrt(np.abs(ols.get_influence().resid_studentiz
 
 # #### Residuals vs leverage plot
 
-# In[51]:
+# In[ ]:
 
 
 fig, ax = plt.subplots(figsize=(8,6))
 fig = plot_leverage_resid2(ols, ax = ax)
 
 
-# In[53]:
+# In[ ]:
 
 
 # Additionally, obtain critical Cook's d values

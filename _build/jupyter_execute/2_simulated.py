@@ -1,10 +1,7 @@
 #!/usr/bin/env python
 # coding: utf-8
 
-# **Regression with Simulated Data**<br/>
-# 
-# Prof. Dr. Jan Kirenz <br/>
-# HdM Stuttgart
+# # Regression with Simulated Data
 
 # In[1]:
 
@@ -25,9 +22,7 @@ custom_params = {"axes.spines.right": False, "axes.spines.top": False}
 sns.set_theme(style="ticks", rc=custom_params, palette='winter')
 
 
-# # Application 2: Linear regression with simulated data
-# 
-# In this application you will create some simulated data and fit simple linear regression models to it. 
+# In this section you will create some simulated data and fit simple linear regression models to it. 
 # 
 # IMPORTANT: Make sure to use **set.seed(123)** prior to starting part (a) to ensure consistent results.
 # 

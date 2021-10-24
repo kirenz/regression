@@ -1,9 +1,9 @@
 #!/usr/bin/env python
 # coding: utf-8
 
-# # Application 1: Programming Process
+# # Programming Process
 # 
-# The goal of this application is to give you a first impression of some important steps and tools in Python when
+# The goal of this section is to give you a first impression of some important steps and tools in Python when
 # doing data science projects.
 # 
 # A typical data science project looks something like this (Wickham & Grolemund, 2016):
@@ -11,11 +11,11 @@
 # In[1]:
 
 
-from IPython.display import Image
-Image(filename='img/2_data_science_process.png')
+#![Image]('img/2_data_science_process.png')
 
 
-# ## 1 Import data
+# ## Import data
+# 
 # First you must **import** your data into Python. This typically means that you take data stored in a file, database,
 # or web API, and load it into a DataFrame in Python (using Pandas).
 # 
@@ -56,7 +56,7 @@ Image(filename='img/2_data_science_process.png')
 # 
 # ---
 # 
-# # Programming
+# ## Programming
 # 
 # Surrounding all the data science steps covered above is **programming**. Programming is a cross-cutting tool that you use in every part
 # of the project. You don’t need to be an expert programmer to be a data scientist, but learning more about
@@ -77,7 +77,7 @@ Image(filename='img/2_data_science_process.png')
 # 
 #   * **Seaborn** is a Python data visualization library.
 
-# In[357]:
+# In[2]:
 
 
 # Customarily, we import as follows:
@@ -94,7 +94,7 @@ get_ipython().run_line_magic('matplotlib', 'inline')
 
 # ## 1 Import data
 
-# In[358]:
+# In[41]:
 
 
 # Load csv data from GitHub into pandas dataframes
@@ -108,28 +108,28 @@ df = pd.read_csv(ROOT + DATA)
 
 # Let's take a look at the variables (also called columns or features) in the data set.
 
-# In[359]:
+# In[42]:
 
 
 # show the first rows (i.e. head of the DataFrame)
 df.head()
 
 
-# In[360]:
+# In[43]:
 
 
 # show the last rows (i.e. tail of the DataFrame)
 df.tail()
 
 
-# In[361]:
+# In[44]:
 
 
 # show all variables in the data set
 df.columns
 
 
-# In[362]:
+# In[45]:
 
 
 # data overview (with meta data)
@@ -141,7 +141,7 @@ df.info()
 # The variable "Unnamed: 0" seems to be some kind of identification number per employee. Let's rename the variable
 # and check if we have duplicates in our dataset.
 
-# In[363]:
+# In[46]:
 
 
 # rename variable "Unnamed: 0" to "id"
@@ -151,7 +151,7 @@ df = df.rename(index=str, columns={"Unnamed: 0": "id"})
 # In Jupyter, we have several options to present output. One way is to just run a cod block
 # which produces only one output:
 
-# In[364]:
+# In[47]:
 
 
 # show the length of the variable id (i.e. the number of observations)
@@ -162,7 +162,7 @@ len(df["id"])
 # function. See the [Python documentation](https://docs.python.org/3/tutorial/inputoutput.html) for the
 # different `print()` options.
 
-# In[365]:
+# In[48]:
 
 
 # check for duplicates and print results (if the two numbers match, we have no duplicates)
@@ -180,35 +180,35 @@ print("Unique IDs:", len(df["id"].value_counts()))
 # We also keep the `id`-Variable to identify the observations and to be able to merge
 # the data with one of the dropped variables if necessary.
 
-# In[366]:
+# In[49]:
 
 
 # select variables
 df = df[['id','year', 'age', 'education', 'wage']]
 
 
-# In[367]:
+# In[50]:
 
 
 # data overview (with meta data)
 df.info()
 
 
-# In[368]:
+# In[51]:
 
 
 # show the first 3 rows
 df.head(3)
 
 
-# In[369]:
+# In[52]:
 
 
 # rename variable "education" to "edu"
 df = df.rename(index=str, columns={"education": "edu"})
 
 
-# In[370]:
+# In[53]:
 
 
 # check levels and frequency of edu
@@ -224,7 +224,7 @@ df['edu'].value_counts()
 # 
 # `df['variable'] = pd.Categorical(df['variable'])`
 
-# In[371]:
+# In[54]:
 
 
 # convert to categorical (nominal)
@@ -234,7 +234,7 @@ df['year'] = pd.Categorical(df['year'])
 
 # If we need to convert to a ordinal variable with pandas [CategoricalDtype](https://pandas.pydata.org/pandas-docs/stable/categorical.html)
 
-# In[372]:
+# In[55]:
 
 
 # convert to ordinal
@@ -248,14 +248,14 @@ cat_edu = pd.CategoricalDtype(categories=['1. < HS Grad',
 df.edu = df.edu.astype(cat_edu)
 
 
-# In[373]:
+# In[56]:
 
 
 # show levels
 df['edu'].cat.categories
 
 
-# In[374]:
+# In[57]:
 
 
 # show datatype
@@ -287,7 +287,7 @@ df.dtypes
 # Having missing values in a dataset can cause errors with some algorithms.
 # Therefore, we need to take care of this issue (we cover the topic of missing values in one of the following applications in detail).
 
-# In[375]:
+# In[58]:
 
 
 # show missing values (missing values - if present - will be displayed in yellow )
@@ -296,7 +296,7 @@ sns.heatmap(df.isnull(), yticklabels=False, cbar=False, cmap='viridis');
 
 # We can also check the column-wise distribution of null values:
 
-# In[376]:
+# In[59]:
 
 
 print(df.isnull().sum())
@@ -321,14 +321,14 @@ print(df.isnull().sum())
 
 # First, we obtain some common statistics:
 
-# In[377]:
+# In[60]:
 
 
 # summary statistics for all numerical columns
 df.describe()
 
 
-# In[378]:
+# In[61]:
 
 
 # summary statistics for all categorical columns
@@ -337,7 +337,7 @@ df.describe(include=['category'])
 
 # Compare summary statistics for specific groups in the data:
 
-# In[379]:
+# In[62]:
 
 
 # summary statistics by groups
@@ -346,7 +346,7 @@ df['age'].groupby(df['edu']).describe()
 
 # Some examples of how to calculate simple statistics:
 
-# In[380]:
+# In[63]:
 
 
 # calculation of the mean (e.g. for age)
@@ -368,28 +368,28 @@ print('The rounded mean of age with two decimals is', round(age_mean, 2))
 print('The median of age is', df["age"].median())
 
 
-# In[381]:
+# In[64]:
 
 
 # calculation of the mode
 df['age'].mode()
 
 
-# In[382]:
+# In[65]:
 
 
 # quantiles
 df['age'].quantile([.25, .5, .75])
 
 
-# In[383]:
+# In[66]:
 
 
 # Range
 df['age'].max() - df['age'].min()
 
 
-# In[384]:
+# In[67]:
 
 
 # standard deviation
@@ -406,7 +406,7 @@ round(df['age'].std(),2)
 # 
 # For example, to examine the distribution of a categorical variable, we could use a bar or count plot.
 
-# In[385]:
+# In[68]:
 
 
 # horizontal count plot (show the counts of observations in each categorical bin)
@@ -417,7 +417,7 @@ sns.countplot(y='edu', data=df);
 # 
 # To examine the distribution of a continuous variable, we could use a **histogram**:
 
-# In[386]:
+# In[69]:
 
 
 # Pandas histogram of all numerical values
@@ -426,7 +426,7 @@ df.hist();
 
 # Seaborne shows a default plot with a kernel density estimate and a histogram:
 
-# In[387]:
+# In[70]:
 
 
 # histogram with seaborn 
@@ -444,14 +444,14 @@ sns.displot(x='age', data=df, kde=True);
 # - A line (or whisker) that extends from each end of the box and goes to the
 # farthest non-outlier point in the distribution.
 
-# In[388]:
+# In[71]:
 
 
 # boxplot 
 sns.boxplot(y='age', data=df);
 
 
-# In[389]:
+# In[72]:
 
 
 # boxplot for different groups
@@ -467,14 +467,14 @@ sns.boxplot(y='edu', x='age', data=df);
 # You can see covariation as a pattern in the points. We will cover more options to test for relationships in variables
 # (e.g., correlation) in the following applications.
 
-# In[390]:
+# In[73]:
 
 
 # simple scatterplot
 sns.scatterplot(x='age', y='wage', data=df);
 
 
-# In[391]:
+# In[74]:
 
 
 # plot all numeric variables in pairs

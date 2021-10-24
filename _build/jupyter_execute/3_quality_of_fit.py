@@ -296,7 +296,7 @@ sns.jointplot(x="height_parents", y="height", data=df, stat_func=None);
 
 # ### Model 1: Mean
 
-# In[24]:
+# In[ ]:
 
 
 # calculate the mean 
@@ -307,14 +307,14 @@ x_bar = sum_x_i / n
 print(x_bar)
 
 
-# In[25]:
+# In[ ]:
 
 
 # calculate the mean
 df["height"].mean()
 
 
-# In[26]:
+# In[ ]:
 
 
 # add the mean (as "average") to our DataFrame
@@ -322,7 +322,7 @@ df = df.assign(average = df.height.mean())
 df.head(5)
 
 
-# In[27]:
+# In[ ]:
 
 
 # create a scatterplot (plt)
@@ -334,7 +334,7 @@ plt.text(1, 165.2,'mean = 165', rotation=0, color='r');
 
 # ### Model 2: Linear Regression
 
-# In[28]:
+# In[ ]:
 
 
 # fit linear model with statsmodels.formula.api (with R-style formulas) 
@@ -344,19 +344,19 @@ lm = smf.ols(formula ='height ~ height_parents', data=df).fit()
 df['pred'] = lm.predict()
 
 
-# In[29]:
+# In[ ]:
 
 
 df.head(5)
 
 
-# In[30]:
+# In[ ]:
 
 
 lm.summary()
 
 
-# In[76]:
+# In[ ]:
 
 
 # This is just a reminder of how the regression works. We make a prediction for X=200
@@ -367,7 +367,7 @@ Vorhersage = b_0 + b_1*(X)
 print(Vorhersage)
 
 
-# In[32]:
+# In[ ]:
 
 
 df.head(5)
@@ -375,14 +375,14 @@ df.head(5)
 
 # We use [Seaborne's lmplot](https://seaborn.pydata.org/generated/seaborn.lmplot.html) to plot the regression line:
 
-# In[33]:
+# In[ ]:
 
 
 # Plot regression line 
 sns.lmplot(x='height_parents', y='height', data=df, line_kws={'color':'red'}, height=5, ci=None, );
 
 
-# In[34]:
+# In[ ]:
 
 
 # Regression results overview
@@ -449,7 +449,7 @@ lm.summary()
 
 # #### Model 1: Mean
 
-# In[35]:
+# In[ ]:
 
 
 # calculate error (observation - average) and assign it to dataframe
@@ -463,14 +463,14 @@ df.head(5)
 # 
 # total error $= \sum_{i=1}^n (outcome_i - model_i)$ 
 
-# In[36]:
+# In[ ]:
 
 
 # calculate the sum of the errors 
 df.error.sum()
 
 
-# In[37]:
+# In[ ]:
 
 
 # create a scatterplot (plt)
@@ -480,14 +480,14 @@ plt.plot([0, 20], [165, 165], linewidth=2, color='r');
 plt.text(1, 165.2,'mean = 165', rotation=0, color='r');
 
 
-# In[38]:
+# In[ ]:
 
 
 # residual plot
 sns.residplot(x="average", y="height", data=df, scatter_kws={"s": 80});
 
 
-# In[39]:
+# In[ ]:
 
 
 # calculate squared error and assign it to dataframe
@@ -495,7 +495,7 @@ df = df.assign(error_sq = (df['height'] - df['average'])**2)
 df.head(5)
 
 
-# In[40]:
+# In[ ]:
 
 
 # calculate sum of squared error (which is in case of the mean the total error)
@@ -506,13 +506,13 @@ print('Sum of squared error (SS_T) of model 1:', SS_T)
 
 # #### Model 2: Linear Regression
 
-# In[41]:
+# In[ ]:
 
 
 lm.resid.sum()
 
 
-# In[42]:
+# In[ ]:
 
 
 # obtain the residuals from statsmodel (resid)
@@ -523,14 +523,14 @@ df['error_sq_2'] = df['error_2']**2
 df.head(5)
 
 
-# In[43]:
+# In[ ]:
 
 
 # Total sum of squares (SS_T: sum of squared errors of the base model, i.e. the mean)
 print(SS_T)
 
 
-# In[44]:
+# In[ ]:
 
 
 # Sum of squared residuals (SS_R)
@@ -540,20 +540,20 @@ print(SS_R)
 lm.ssr
 
 
-# In[45]:
+# In[ ]:
 
 
 # Plot regression line 
 sns.lmplot(x='height_parents', y='height', data=df, line_kws={'color':'red'}, height=5, ci=None);
 
 
-# In[46]:
+# In[ ]:
 
 
 sns.residplot(x="height_parents", y="height", data=df, scatter_kws={"s": 80});
 
 
-# In[47]:
+# In[ ]:
 
 
 # Explained sum of squares  (SS_M = SS_T - SS_R)
@@ -565,7 +565,7 @@ lm.ess
 
 # $R^2$ is the proportion of the variance in the dependent variable that is predictable from the independent variable
 
-# In[48]:
+# In[ ]:
 
 
 # R_Squared: explained sum of squared residuals
@@ -573,14 +573,14 @@ R_squared = SS_M / SS_T
 print(R_squared)
 
 
-# In[49]:
+# In[ ]:
 
 
 # R_Squared of statsmodel
 lm.rsquared
 
 
-# In[50]:
+# In[ ]:
 
 
 # Adjusted R_Squared: 
@@ -622,7 +622,7 @@ lm.rsquared_adj
 
 # #### Model 2: Linear Regression
 
-# In[51]:
+# In[ ]:
 
 
 # correlation coefficient r
@@ -630,7 +630,7 @@ r = np.sqrt(R_squared)
 print(r)
 
 
-# In[52]:
+# In[ ]:
 
 
 # correlation coefficient with p-value
@@ -665,7 +665,7 @@ stats.pearsonr(df['height'], df['height_parents'])
 
 # #### Model 1: Mean
 
-# In[53]:
+# In[ ]:
 
 
 # calculate mean squared error of the model 1 "the mean"
@@ -681,7 +681,7 @@ print('Mean squared error of the mean:', mse)
 # 
 # In our example, $n=20$, we have one parameter, p=1 (the mean), and therefore, the degrees of freedom are df = (p-1) = 20-1 = 19.
 
-# In[54]:
+# In[ ]:
 
 
 # generate a variable called variance (to illustrate relationship between variance and standard deviation)
@@ -698,7 +698,7 @@ print(f'Standard deviation (SD) of model 1 = {round(np.sqrt(variance),2)}')
 #   * mse_resid : Mean squared error of the residuals. The sum of squared residuals divided by the residual degrees of freedom.
 #   * mse_total : Total mean squared error. Defined as the uncentered total sum of squares divided by n the number of observations.
 
-# In[55]:
+# In[ ]:
 
 
 # Total MSE_T (this is the MSE of the basline mean model) from statsmodel
@@ -708,7 +708,7 @@ print('Total mean squared error (MSE_T):', MSE_T)
 # compare this result to mse... they are the same
 
 
-# In[56]:
+# In[ ]:
 
 
 # Mean squared error of residuals (MSE_R)
@@ -718,7 +718,7 @@ print('Mean squared error of residuals (MSE_R):', MSE_R)
 print(f'Mean squared error od residuals (MSE_R): {lm.mse_resid}')
 
 
-# In[57]:
+# In[ ]:
 
 
 # the standard deviation equals the root of the MSE_R
@@ -759,7 +759,7 @@ print(f'Standard deviation (SD) of model 2 = {round(np.sqrt(MSE_R),2)}')
 
 # #### Model 2: Linear Regression
 
-# In[58]:
+# In[ ]:
 
 
 # Mean squared error of the model (MSE_M)
@@ -770,7 +770,7 @@ print('MS_M =', MS_M)
 print(f'MS_M = {lm.mse_model}')
 
 
-# In[59]:
+# In[ ]:
 
 
 # Adjust notation and calculate F-value
@@ -780,7 +780,7 @@ F_value = (MS_M / MS_R)
 print(F_value)
 
 
-# In[60]:
+# In[ ]:
 
 
 # statsmodel
@@ -831,7 +831,7 @@ print(F_val)
 
 # #### Model 1: Mean
 
-# In[61]:
+# In[ ]:
 
 
 # calculate standard error (...we ignore the fact that our sample is small since n < 30) 
@@ -841,7 +841,7 @@ print(se)
 df = df.assign(se=se)
 
 
-# In[62]:
+# In[ ]:
 
 
 # alternative way to calculate standard error (se)
@@ -854,7 +854,7 @@ print(se)
 
 # #### Model 2: Linear Regression
 
-# In[63]:
+# In[ ]:
 
 
 # Get standard error of parameters
@@ -895,7 +895,7 @@ print('Standard error (SE) od model 2:', se_2)
 # 
 # $$z = \frac{X-\bar{X}}{s}$$
 
-# In[64]:
+# In[ ]:
 
 
 # calculate z-scores
@@ -905,7 +905,7 @@ print(z)
 df = df.assign(z = z)
 
 
-# In[65]:
+# In[ ]:
 
 
 plt = sns.distplot(df.z);
@@ -950,7 +950,7 @@ plt.text(-2.2, 0.3,'z = -1.96', rotation=90, color='r');
 # 
 # As such, the mean is always in the centre of the confidence interval. We know that 95% of confidence intervals contain the population mean, so we can assume this confidence interval contains the true mean; therefore, if the interval is small,the sample mean must be very close to the true man. Conversely, if the confidenve interval is very wide then the sample mean could be very different from the true mean, indicating that it is a bad representation of the population.
 
-# In[66]:
+# In[ ]:
 
 
 # lower boundary
@@ -961,7 +961,7 @@ print('Lower boundary of CI', lb)
 print('Upper boundary of CI', up)
 
 
-# In[67]:
+# In[ ]:
 
 
 # draw limits of confidence intervall
@@ -987,14 +987,14 @@ plt.text(165.8, 0.15,'Upper limit = 165.65', rotation=90, color='w');
 # 
 # **upper boundary of confidence intervall** = $b_1 + (1.96 \times SE(b_1))$
 
-# In[68]:
+# In[ ]:
 
 
 # Obtain confidence interval for fitted parameters 
 lm.conf_int(alpha=0.05)
 
 
-# In[69]:
+# In[ ]:
 
 
 # Make a prediction for height when parents average height is 168 cm
@@ -1010,7 +1010,7 @@ round(results.summary_frame(alpha=0.05),2)
 # 
 # We interpret this to mean that 95% of intervals of this form will contain the true value of Y for parents with this average height. Note that both intervals are centered at 167.4 cm, but that the **prediction interval** is substantially wider than the confidence interval, reflecting the increased uncertainty about the individual height for given parents height in comparison to the average height of many parents. 
 
-# In[70]:
+# In[ ]:
 
 
 # Plot regression line with CI 95%
@@ -1031,7 +1031,7 @@ sns.lmplot(x='height_parents', y='height', data=df, order=1, line_kws={'color':'
 # 
 # The (n − 1) in the equations is the degrees of freedom and tells us which of the t-distributions to use. For a 95% confidence interval, we can calculate the value of t for a two-tailed test with probability of 0.05, for the appropriate degrees of freedom.
 
-# In[71]:
+# In[ ]:
 
 
 # calculate t-statistic
@@ -1047,7 +1047,7 @@ print('Lower boundary of CI (t-statistics)', lb_t)
 print('Upper boundary of CI (t-statistics)', up_t)
 
 
-# In[72]:
+# In[ ]:
 
 
 # draw limits of confidence intervall for t-statistic
@@ -1065,7 +1065,7 @@ plt.axvline(165.695836, 0, 1, linewidth=3, color='r');
 plt.text(165.8, 0.15,'Upper limit = 165.69', rotation=90, color='r');
 
 
-# In[73]:
+# In[ ]:
 
 
 # compare CI z-statistic with t-statistic
@@ -1099,7 +1099,7 @@ plt.axvline(165.695836, 0, 1, linewidth=3, color='r');
 
 # ### Bayesian information criterion (BIC) 
 
-# In[74]:
+# In[ ]:
 
 
 # BIC
@@ -1108,7 +1108,7 @@ lm.bic
 
 # ### Akaike information criterion (AIC) 
 
-# In[75]:
+# In[ ]:
 
 
 # AIC

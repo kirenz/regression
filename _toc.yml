@@ -4,18 +4,17 @@ root: intro
 parts:
   - caption: Introduction
     chapters:
-    - file: 01_process.ipynb
-    - file: docs/getting_started
+    - file: 1_process.ipynb
   - caption: Simple Regression
     chapters:
-    - file: 02_simulated.ipynb
+    - file: 2_simulated.ipynb
       sections:
-      - file: 03_quality_of_fit.ipynb
+      - file: 3_quality_of_fit.ipynb
   - caption: Diagnostics
     chapters:
-    - file: 04_diagnostics.ipynb
+    - file: 4_diagnostics.ipynb
       sections:
-      - file: 05_auto_case.ipynb
+      - file: 5_auto_case.ipynb
   - caption: References
     chapters:
     - file: reference.md

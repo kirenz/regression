@@ -53,6 +53,8 @@
     <script async="async" src="_static/sphinx-thebe.js"></script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Linear regression tutorial ‘Auto’" href="5_auto_case.html" />
+    <link rel="prev" title="Linear regression and the quality of fit" href="3_quality_of_fit.html" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="docsearch:language" content="en" />
     
@@ -90,6 +92,54 @@
  <li class="toctree-l1">
   <a class="reference internal" href="intro.html">
    Welcome to your Jupyter Book
+  </a>
+ </li>
+</ul>
+<p class="caption" role="heading">
+ <span class="caption-text">
+  Introduction
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="1_process.html">
+   Programming Process
+  </a>
+ </li>
+</ul>
+<p class="caption" role="heading">
+ <span class="caption-text">
+  Simple Regression
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="2_simulated.html">
+   Regression with Simulated Data
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" type="checkbox"/>
+  <label for="toctree-checkbox-1">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="3_quality_of_fit.html">
+     Linear regression and the quality of fit
+    </a>
+   </li>
+  </ul>
+ </li>
+</ul>
+<p class="caption" role="heading">
+ <span class="caption-text">
+  Diagnostics
+ </span>
+</p>
+<ul class="current nav bd-sidenav">
+ <li class="toctree-l1 current active">
+  <a class="current reference internal" href="#">
+   Application 4: Linear regression diagnostics
   </a>
  </li>
 </ul>
@@ -350,11 +400,7 @@
         
               <div>
                 
-  <p><strong>Applied Statistics</strong><br/>
-Prof. Dr. Jan Kirenz <br/>
-Hochschule der Medien Stuttgart</p>
-<h1>Table of Contents<span class="tocSkip"></span></h1>
-<div class="toc"><ul class="toc-item"><li><span><a href="#1-Import-data" data-toc-modified-id="1-Import-data-1"><span class="toc-item-num">1&nbsp;&nbsp;</span>1 Import data</a></span></li><li><span><a href="#Tidying-data" data-toc-modified-id="Tidying-data-2"><span class="toc-item-num">2&nbsp;&nbsp;</span>Tidying data</a></span><ul class="toc-item"><li><span><a href="#Handle-missing-values" data-toc-modified-id="Handle-missing-values-2.1"><span class="toc-item-num">2.1&nbsp;&nbsp;</span>Handle missing values</a></span></li></ul></li><li><span><a href="#Transform-data" data-toc-modified-id="Transform-data-3"><span class="toc-item-num">3&nbsp;&nbsp;</span>Transform data</a></span><ul class="toc-item"><li><span><a href="#Harvey-Collier-multiplier-test" data-toc-modified-id="Harvey-Collier-multiplier-test-3.1"><span class="toc-item-num">3.1&nbsp;&nbsp;</span>Harvey-Collier multiplier test</a></span></li><li><span><a href="#Residuals-vs-fitted-plot" data-toc-modified-id="Residuals-vs-fitted-plot-3.2"><span class="toc-item-num">3.2&nbsp;&nbsp;</span>Residuals vs fitted plot</a></span><ul class="toc-item"><li><span><a href="#POSSIBLE-SOLUTION-FOR-IDENTIFIED-NON-LINEARITY" data-toc-modified-id="POSSIBLE-SOLUTION-FOR-IDENTIFIED-NON-LINEARITY-3.2.1"><span class="toc-item-num">3.2.1&nbsp;&nbsp;</span>POSSIBLE SOLUTION FOR IDENTIFIED NON-LINEARITY</a></span></li></ul></li><li><span><a href="#Jarque-Bera-test" data-toc-modified-id="Jarque-Bera-test-3.3"><span class="toc-item-num">3.3&nbsp;&nbsp;</span>Jarque-Bera test</a></span></li><li><span><a href="#Omnibus-normtest" data-toc-modified-id="Omnibus-normtest-3.4"><span class="toc-item-num">3.4&nbsp;&nbsp;</span>Omnibus normtest</a></span></li></ul></li><li><span><a href="#Notes-on-outliers." data-toc-modified-id="Notes-on-outliers.-4"><span class="toc-item-num">4&nbsp;&nbsp;</span>Notes on outliers.</a></span><ul class="toc-item"><li><span><a href="#Normal-Q-Q-Plot" data-toc-modified-id="Normal-Q-Q-Plot-4.1"><span class="toc-item-num">4.1&nbsp;&nbsp;</span>Normal Q-Q-Plot</a></span></li><li><span><a href="#Breusch-Pagan-test:" data-toc-modified-id="Breusch-Pagan-test:-4.2"><span class="toc-item-num">4.2&nbsp;&nbsp;</span>Breusch-Pagan test:</a></span></li><li><span><a href="#Scale-Location-plot" data-toc-modified-id="Scale-Location-plot-4.3"><span class="toc-item-num">4.3&nbsp;&nbsp;</span>Scale-Location plot</a></span></li><li><span><a href="#Statsmodel-influence" data-toc-modified-id="Statsmodel-influence-4.4"><span class="toc-item-num">4.4&nbsp;&nbsp;</span>Statsmodel influence</a></span></li><li><span><a href="#Residuals-vs-leverage-plot" data-toc-modified-id="Residuals-vs-leverage-plot-4.5"><span class="toc-item-num">4.5&nbsp;&nbsp;</span>Residuals vs leverage plot</a></span></li></ul></li></ul></div><div class="cell docutils container">
+  <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
 <span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
@@ -381,7 +427,7 @@ Hochschule der Medien Stuttgart</p>
 <div class="cell_output docutils container">
 <div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
 <span class="ne">ModuleNotFoundError</span><span class="g g-Whitespace">                       </span>Traceback (most recent call last)
-<span class="o">/</span><span class="n">var</span><span class="o">/</span><span class="n">folders</span><span class="o">/</span><span class="mi">35</span><span class="o">/</span><span class="mi">43</span><span class="n">bdsj9j64j16410rds5g9vr0000gp</span><span class="o">/</span><span class="n">T</span><span class="o">/</span><span class="n">ipykernel_17633</span><span class="o">/</span><span class="mf">4282349298.</span><span class="n">py</span> <span class="ow">in</span> <span class="o">&lt;</span><span class="n">module</span><span class="o">&gt;</span>
+<span class="o">/</span><span class="n">var</span><span class="o">/</span><span class="n">folders</span><span class="o">/</span><span class="mi">35</span><span class="o">/</span><span class="mi">43</span><span class="n">bdsj9j64j16410rds5g9vr0000gp</span><span class="o">/</span><span class="n">T</span><span class="o">/</span><span class="n">ipykernel_19114</span><span class="o">/</span><span class="mf">4282349298.</span><span class="n">py</span> <span class="ow">in</span> <span class="o">&lt;</span><span class="n">module</span><span class="o">&gt;</span>
 <span class="ne">----&gt; </span><span class="mi">1</span> <span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
 <span class="g g-Whitespace">      </span><span class="mi">2</span> <span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
 <span class="g g-Whitespace">      </span><span class="mi">3</span> <span class="kn">from</span> <span class="nn">pandas.api.types</span> <span class="kn">import</span> <span class="n">CategoricalDtype</span>
@@ -585,15 +631,17 @@ Unique IDs: 304
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;class &#39;pandas.core.frame.DataFrame&#39;&gt;
 RangeIndex: 397 entries, 0 to 396
 Data columns (total 9 columns):
-mpg             397 non-null float64
-cylinders       397 non-null int64
-displacement    397 non-null float64
-horsepower      397 non-null object
-weight          397 non-null int64
-acceleration    397 non-null float64
-year            397 non-null int64
-origin          397 non-null int64
-name            397 non-null object
+ #   Column        Non-Null Count  Dtype  
+---  ------        --------------  -----  
+ 0   mpg           397 non-null    float64
+ 1   cylinders     397 non-null    int64  
+ 2   displacement  397 non-null    float64
+ 3   horsepower    397 non-null    object 
+ 4   weight        397 non-null    int64  
+ 5   acceleration  397 non-null    float64
+ 6   year          397 non-null    int64  
+ 7   origin        397 non-null    int64  
+ 8   name          397 non-null    object 
 dtypes: float64(3), int64(4), object(2)
 memory usage: 28.0+ KB
 </pre></div>
@@ -621,7 +669,7 @@ memory usage: 28.0+ KB
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="_images/4_diagnostics_15_0.png" src="_images/4_diagnostics_15_0.png" />
+<img alt="_images/4_diagnostics_13_0.png" src="_images/4_diagnostics_13_0.png" />
 </div>
 </div>
 <div class="cell docutils container">
@@ -872,7 +920,7 @@ dtype: int64
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[(&#39;t value&#39;, 6.927584605189203), (&#39;p value&#39;, 1.7883534662326914e-11)]
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[(&#39;t value&#39;, 6.9275846051892005), (&#39;p value&#39;, 1.788353466232718e-11)]
 </pre></div>
 </div>
 </div>
@@ -899,7 +947,11 @@ dtype: int64
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="_images/4_diagnostics_29_0.png" src="_images/4_diagnostics_29_0.png" />
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/Users/jankirenz/opt/anaconda3/lib/python3.7/site-packages/seaborn/_decorators.py:43: FutureWarning: Pass the following variables as keyword args: x, y. From version 0.12, the only valid positional argument will be `data`, and passing other arguments without an explicit keyword will result in an error or misinterpretation.
+  FutureWarning
+</pre></div>
+</div>
+<img alt="_images/4_diagnostics_27_1.png" src="_images/4_diagnostics_27_1.png" />
 </div>
 </div>
 <p>The residuals are not equally spread around a horizontal line which is an indication for a non-linear relationship. This means there seems to be a non-linear relationship between the predictor and the response variable which the model doesn’t capture.</p>
@@ -953,7 +1005,11 @@ dtype: int64
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="_images/4_diagnostics_34_0.png" src="_images/4_diagnostics_34_0.png" />
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/Users/jankirenz/opt/anaconda3/lib/python3.7/site-packages/seaborn/_decorators.py:43: FutureWarning: Pass the following variables as keyword args: x, y. From version 0.12, the only valid positional argument will be `data`, and passing other arguments without an explicit keyword will result in an error or misinterpretation.
+  FutureWarning
+</pre></div>
+</div>
+<img alt="_images/4_diagnostics_32_1.png" src="_images/4_diagnostics_32_1.png" />
 </div>
 </div>
 <div class="section" id="possible-solution-for-identified-non-linearity">
@@ -984,7 +1040,11 @@ dtype: int64
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="_images/4_diagnostics_38_0.png" src="_images/4_diagnostics_38_0.png" />
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/Users/jankirenz/opt/anaconda3/lib/python3.7/site-packages/seaborn/_decorators.py:43: FutureWarning: Pass the following variables as keyword args: x, y. From version 0.12, the only valid positional argument will be `data`, and passing other arguments without an explicit keyword will result in an error or misinterpretation.
+  FutureWarning
+</pre></div>
+</div>
+<img alt="_images/4_diagnostics_36_1.png" src="_images/4_diagnostics_36_1.png" />
 </div>
 </div>
 </div>
@@ -1056,7 +1116,11 @@ dtype: int64
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="_images/4_diagnostics_46_0.png" src="_images/4_diagnostics_46_0.png" />
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/Users/jankirenz/opt/anaconda3/lib/python3.7/site-packages/statsmodels/graphics/gofplots.py:993: UserWarning: marker is redundantly defined by the &#39;marker&#39; keyword argument and the fmt string &quot;bo&quot; (-&gt; marker=&#39;o&#39;). The keyword argument will take precedence.
+  ax.plot(x, y, fmt, **plot_style)
+</pre></div>
+</div>
+<img alt="_images/4_diagnostics_44_1.png" src="_images/4_diagnostics_44_1.png" />
 </div>
 </div>
 <p>This plot shows if residuals are normally distributed. If a normal distribution is present, the residuals should (more or less) follow a straight line.
@@ -1088,7 +1152,13 @@ We can observe that only some residuals (in the lower left and the upper right c
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="_images/4_diagnostics_49_0.png" src="_images/4_diagnostics_49_0.png" />
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/Users/jankirenz/opt/anaconda3/lib/python3.7/site-packages/statsmodels/graphics/gofplots.py:993: UserWarning: marker is redundantly defined by the &#39;marker&#39; keyword argument and the fmt string &quot;bo&quot; (-&gt; marker=&#39;o&#39;). The keyword argument will take precedence.
+  ax.plot(x, y, fmt, **plot_style)
+/Users/jankirenz/opt/anaconda3/lib/python3.7/site-packages/statsmodels/graphics/gofplots.py:993: UserWarning: color is redundantly defined by the &#39;color&#39; keyword argument and the fmt string &quot;bo&quot; (-&gt; color=&#39;b&#39;). The keyword argument will take precedence.
+  ax.plot(x, y, fmt, **plot_style)
+</pre></div>
+</div>
+<img alt="_images/4_diagnostics_47_1.png" src="_images/4_diagnostics_47_1.png" />
 </div>
 </div>
 </div>
@@ -1159,7 +1229,11 @@ the errors, or <strong>heteroscedasticity</strong>, from the presence of a funne
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="_images/4_diagnostics_57_0.png" src="_images/4_diagnostics_57_0.png" />
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/Users/jankirenz/opt/anaconda3/lib/python3.7/site-packages/seaborn/_decorators.py:43: FutureWarning: Pass the following variables as keyword args: x, y. From version 0.12, the only valid positional argument will be `data`, and passing other arguments without an explicit keyword will result in an error or misinterpretation.
+  FutureWarning
+</pre></div>
+</div>
+<img alt="_images/4_diagnostics_55_1.png" src="_images/4_diagnostics_55_1.png" />
 </div>
 </div>
 <p>This plot shows if residuals are spread equally along the ranges of predictors. This is how we can check the assumption of equal variance (<strong>homoscedasticity</strong>). It’s good if we observe a horizontal line with equally (randomly) spread points.</p>
@@ -1178,68 +1252,6 @@ the errors, or <strong>heteroscedasticity</strong>, from the presence of a funne
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># obtain statistics</span>
 <span class="n">infl</span> <span class="o">=</span> <span class="n">lm</span><span class="o">.</span><span class="n">get_influence</span><span class="p">()</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[&#39;__class__&#39;,
- &#39;__delattr__&#39;,
- &#39;__dict__&#39;,
- &#39;__dir__&#39;,
- &#39;__doc__&#39;,
- &#39;__eq__&#39;,
- &#39;__format__&#39;,
- &#39;__ge__&#39;,
- &#39;__getattribute__&#39;,
- &#39;__gt__&#39;,
- &#39;__hash__&#39;,
- &#39;__init__&#39;,
- &#39;__init_subclass__&#39;,
- &#39;__le__&#39;,
- &#39;__lt__&#39;,
- &#39;__module__&#39;,
- &#39;__ne__&#39;,
- &#39;__new__&#39;,
- &#39;__reduce__&#39;,
- &#39;__reduce_ex__&#39;,
- &#39;__repr__&#39;,
- &#39;__setattr__&#39;,
- &#39;__sizeof__&#39;,
- &#39;__str__&#39;,
- &#39;__subclasshook__&#39;,
- &#39;__weakref__&#39;,
- &#39;_get_drop_vari&#39;,
- &#39;_ols_xnoti&#39;,
- &#39;_res_looo&#39;,
- &#39;aux_regression_endog&#39;,
- &#39;aux_regression_exog&#39;,
- &#39;cooks_distance&#39;,
- &#39;cov_ratio&#39;,
- &#39;det_cov_params_not_obsi&#39;,
- &#39;dfbetas&#39;,
- &#39;dffits&#39;,
- &#39;dffits_internal&#39;,
- &#39;endog&#39;,
- &#39;ess_press&#39;,
- &#39;exog&#39;,
- &#39;get_resid_studentized_external&#39;,
- &#39;hat_diag_factor&#39;,
- &#39;hat_matrix_diag&#39;,
- &#39;influence&#39;,
- &#39;k_vars&#39;,
- &#39;model_class&#39;,
- &#39;nobs&#39;,
- &#39;params_not_obsi&#39;,
- &#39;resid_press&#39;,
- &#39;resid_std&#39;,
- &#39;resid_studentized_external&#39;,
- &#39;resid_studentized_internal&#39;,
- &#39;resid_var&#39;,
- &#39;results&#39;,
- &#39;sigma2_not_obsi&#39;,
- &#39;sigma_est&#39;,
- &#39;summary_frame&#39;,
- &#39;summary_table&#39;]
 </pre></div>
 </div>
 </div>
@@ -1281,68 +1293,18 @@ the errors, or <strong>heteroscedasticity</strong>, from the presence of a funne
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>     student_resid    dffits       cooks_d
-0        -0.288842 -0.017545  1.542805e-04
-1         0.226696  0.021453  2.306751e-04
-2         0.355552  0.027922  3.907071e-04
-3        -0.052921 -0.004156  8.658347e-06
-4        -0.170930 -0.011784  6.960393e-05
-5         1.300421  0.174321  1.516703e-02
-6         1.820523  0.295036  4.326643e-02
-7         1.654188  0.257400  3.298054e-02
-8         1.987670  0.335052  5.570847e-02
-9         1.038363  0.128913  8.307603e-03
-10        0.388358  0.038960  7.606107e-04
-11       -0.139130 -0.012395  7.700940e-05
-12       -0.257150 -0.020195  2.044018e-04
-13        1.987670  0.335052  5.570847e-02
-14       -0.191759 -0.009988  5.000683e-05
-15       -0.599740 -0.031239  4.887470e-04
-16       -1.353672 -0.069742  2.426778e-03
-17       -1.127215 -0.063921  2.041521e-03
-18        0.194616  0.010710  5.749269e-05
-19       -1.367960 -0.126301  7.958244e-03
-20       -0.245380 -0.013634  9.317049e-05
-21       -0.352731 -0.019064  1.821195e-04
-22        0.012107  0.000631  1.993498e-07
-23        0.795797  0.041227  8.506239e-04
-24       -0.965463 -0.052179  1.361567e-03
-25        0.824999  0.128374  8.246694e-03
-26        0.335598  0.045826  1.052420e-03
-27        0.867715  0.129462  8.385573e-03
-28       -0.096838 -0.012380  7.682649e-05
-29        0.194616  0.010710  5.749269e-05
-..             ...       ...           ...
-367       0.398577  0.021934  2.410702e-04
-368       0.194616  0.010710  5.749269e-05
-369       1.627339  0.089554  3.993063e-03
-370       0.914680  0.051869  1.345744e-03
-371       0.473850  0.027159  3.695394e-04
-372       0.258981  0.013997  9.819002e-05
-373      -0.288330 -0.015331  1.178038e-04
-374       1.585039  0.102367  5.219212e-03
-375       1.596502  0.111419  6.182531e-03
-376       0.366906  0.025606  3.285666e-04
-377       1.640510  0.122218  7.436425e-03
-378       1.455414  0.098961  4.882619e-03
-379       2.040437  0.112287  6.253452e-03
-380       1.617475  0.103147  5.297660e-03
-381       1.044829  0.071043  2.522968e-03
-382       1.770363  0.125177  7.791971e-03
-383       0.538942  0.038107  7.273901e-04
-384       1.770363  0.125177  7.791971e-03
-385       0.494903  0.025287  3.203279e-04
-386       2.357720  0.133699  8.834438e-03
-387       0.119439  0.006351  2.021857e-05
-388      -0.052441 -0.002703  3.661371e-06
-389       1.475369  0.076407  2.910211e-03
-390       1.910011  0.109473  5.951775e-03
-391       0.258981  0.013997  9.819002e-05
-392       0.130252  0.007310  2.678628e-05
-393       2.528043  0.216840  2.318925e-02
-394       1.087106  0.062308  1.940237e-03
-395       0.108888  0.006609  2.189730e-05
-396       0.817933  0.047933  1.149775e-03
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>     student_resid    dffits   cooks_d
+0        -0.288842 -0.017545  0.000154
+1         0.226696  0.021453  0.000231
+2         0.355552  0.027922  0.000391
+3        -0.052921 -0.004156  0.000009
+4        -0.170930 -0.011784  0.000070
+..             ...       ...       ...
+392       0.130252  0.007310  0.000027
+393       2.528043  0.216840  0.023189
+394       1.087106  0.062308  0.001940
+395       0.108888  0.006609  0.000022
+396       0.817933  0.047933  0.001150
 
 [392 rows x 3 columns]
 </pre></div>
@@ -1361,7 +1323,7 @@ the errors, or <strong>heteroscedasticity</strong>, from the presence of a funne
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="_images/4_diagnostics_66_0.png" src="_images/4_diagnostics_66_0.png" />
+<img alt="_images/4_diagnostics_64_0.png" src="_images/4_diagnostics_64_0.png" />
 </div>
 </div>
 <hr class="docutils" />
@@ -1381,7 +1343,7 @@ the errors, or <strong>heteroscedasticity</strong>, from the presence of a funne
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="_images/4_diagnostics_69_0.png" src="_images/4_diagnostics_69_0.png" />
+<img alt="_images/4_diagnostics_67_0.png" src="_images/4_diagnostics_67_0.png" />
 </div>
 </div>
 <div class="cell docutils container">
@@ -1400,7 +1362,12 @@ the errors, or <strong>heteroscedasticity</strong>, from the presence of a funne
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="_images/4_diagnostics_70_0.png" src="_images/4_diagnostics_70_0.png" />
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/Users/jankirenz/opt/anaconda3/lib/python3.7/site-packages/ipykernel_launcher.py:5: DeprecationWarning: `np.bool` is a deprecated alias for the builtin `bool`. To silence this warning, use `bool` by itself. Doing this will not modify any behavior and is safe. If you specifically wanted the numpy scalar type, use `np.bool_` here.
+Deprecated in NumPy 1.20; for more details and guidance: https://numpy.org/devdocs/release/1.20.0-notes.html#deprecations
+  &quot;&quot;&quot;
+</pre></div>
+</div>
+<img alt="_images/4_diagnostics_68_1.png" src="_images/4_diagnostics_68_1.png" />
 </div>
 </div>
 <p>A simple way to detect collinearity is to look at the <strong>correlation matrix</strong> of the predictors. An element of this matrix that is large in absolute value indicates a pair of highly correlated variables, and therefore a collinearity problem in the data.</p>
@@ -1484,6 +1451,8 @@ the errors, or <strong>heteroscedasticity</strong>, from the presence of a funne
 <p>When faced with the problem of collinearity, there are two simple solutions:</p>
 <p>The first is to drop one of the problematic variables from the regression. This can usually be done without much compromise to the regression fit, since the presence of collinearity implies that the information that this variable provides about the response is redundant in the presence of the other variables.</p>
 <p>The second solution is to combine the collinear variables together into a single predictor. For instance, we might take the average of standardized versions of limit and rating in order to create a new variable that measures credit worthiness.</p>
+<div class="toctree-wrapper compound">
+</div>
 </div>
 
     <script type="text/x-thebe-config">
@@ -1515,6 +1484,24 @@ the errors, or <strong>heteroscedasticity</strong>, from the presence of a funne
 
 <div class='prev-next-bottom'>
     
+    <div id="prev">
+        <a class="left-prev" href="3_quality_of_fit.html" title="previous page">
+            <i class="prevnext-label fas fa-angle-left"></i>
+            <div class="prevnext-info">
+                <p class="prevnext-label">previous</p>
+                <p class="prevnext-title">Linear regression and the quality of fit</p>
+            </div>
+        </a>
+    </div>
+     <div id="next">
+        <a class="right-next" href="5_auto_case.html" title="next page">
+            <div class="prevnext-info">
+                <p class="prevnext-label">next</p>
+                <p class="prevnext-title">Linear regression tutorial ‘Auto’</p>
+            </div>
+            <i class="prevnext-label fas fa-angle-right"></i>
+        </a>
+     </div>
 
 </div>
         
