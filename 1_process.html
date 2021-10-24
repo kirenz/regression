@@ -124,7 +124,7 @@
   <ul>
    <li class="toctree-l2">
     <a class="reference internal" href="3_quality_of_fit.html">
-     Linear regression and the quality of fit
+     Quality of fit
     </a>
    </li>
   </ul>
@@ -258,42 +258,12 @@
             <nav id="bd-toc-nav" aria-label="Page">
                 <ul class="visible nav section-nav flex-column">
  <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#import-data">
-   Import data
-  </a>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#tidying-data">
-   2 Tidying data
-  </a>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#transform-data">
-   3 Transform data
-  </a>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#visualize-data">
-   4 Visualize data
-  </a>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#models">
-   5 Models
-  </a>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#communication">
-   6 Communication
-  </a>
- </li>
- <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#programming">
    Programming
   </a>
  </li>
  <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#id1">
+  <a class="reference internal nav-link" href="#import-data">
    1 Import data
   </a>
   <ul class="nav section-nav flex-column">
@@ -305,7 +275,7 @@
   </ul>
  </li>
  <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#id2">
+  <a class="reference internal nav-link" href="#tidying-data">
    2 Tidying data
   </a>
  </li>
@@ -322,7 +292,7 @@
   </ul>
  </li>
  <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#id3">
+  <a class="reference internal nav-link" href="#transform-data">
    3 Transform data
   </a>
   <ul class="nav section-nav flex-column">
@@ -334,7 +304,7 @@
   </ul>
  </li>
  <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#id4">
+  <a class="reference internal nav-link" href="#visualize-data">
    4. Visualize data
   </a>
   <ul class="nav section-nav flex-column">
@@ -385,29 +355,22 @@ doing data science projects.</p>
 </div>
 </div>
 </div>
-<div class="section" id="import-data">
-<h2>Import data<a class="headerlink" href="#import-data" title="Permalink to this headline">¶</a></h2>
+<p>Import data</p>
 <p>First you must <strong>import</strong> your data into Python. This typically means that you take data stored in a file, database,
 or web API, and load it into a DataFrame in Python (using Pandas).</p>
-</div>
-<div class="section" id="tidying-data">
-<h2>2 Tidying data<a class="headerlink" href="#tidying-data" title="Permalink to this headline">¶</a></h2>
+<p>2 Tidying data</p>
 <p>Once you’ve imported your data, it is a good idea to tidy it.
 <strong>Tidying</strong> your data means storing it in a consistent form that matches the semantics of the dataset with
 the way it is stored. In brief, when your data is tidy, each column is a variable, and each row is an observation.
 Tidy data is important because the consistent structure lets you focus your struggle on questions about the data.</p>
-</div>
-<div class="section" id="transform-data">
-<h2>3 Transform data<a class="headerlink" href="#transform-data" title="Permalink to this headline">¶</a></h2>
+<p>3 Transform data</p>
 <p>Once you have tidy data, a common first step is to transform it.
 <strong>Transformation</strong> includes narrowing in on observations of interest
 (like all people in one city, or all data from the last year), creating new variables that are functions of
 existing variables (like computing velocity from speed and time), and calculating a set of
 summary statistics (like counts or means). Together, tidying and transforming are called wrangling,
 because getting your data in a form that’s natural to work with often feels like a fight!</p>
-</div>
-<div class="section" id="visualize-data">
-<h2>4 Visualize data<a class="headerlink" href="#visualize-data" title="Permalink to this headline">¶</a></h2>
+<p>4 Visualize data</p>
 <p>Once you have tidy data with the variables you need, there are two main engines of knowledge generation:
 visualisation and modelling. These have complementary strengths and weaknesses so any real analysis
 will iterate between them many times.</p>
@@ -415,21 +378,15 @@ will iterate between them many times.</p>
 you did not expect, or raise new questions about the data. A good visualisation might also hint that
 you’re asking the wrong question, or you need to collect different data.
 Visualisations can surprise you, but don’t scale particularly well because they require a human to interpret them.</p>
-</div>
-<div class="section" id="models">
-<h2>5 Models<a class="headerlink" href="#models" title="Permalink to this headline">¶</a></h2>
+<p>5 Models</p>
 <p><strong>Models</strong> are complementary tools to visualisation. Once you have made your questions sufficiently precise,
 you can use a model to answer them. Models are a fundamentally mathematical or computational tool,
 so they generally scale well. But every model makes assumptions, and by its very nature a model cannot
 question its own assumptions. That means a model cannot fundamentally surprise you.</p>
-</div>
-<div class="section" id="communication">
-<h2>6 Communication<a class="headerlink" href="#communication" title="Permalink to this headline">¶</a></h2>
+<p>6 Communication</p>
 <p>The last step is <strong>communication</strong>, an absolutely critical part of any data analysis project.
 It doesn’t matter how well your models and visualisation have led you to understand the data unless
 you can also communicate your results to others.</p>
-</div>
-<hr class="docutils" />
 <div class="section" id="programming">
 <h2>Programming<a class="headerlink" href="#programming" title="Permalink to this headline">¶</a></h2>
 <p>Surrounding all the data science steps covered above is <strong>programming</strong>. Programming is a cross-cutting tool that you use in every part
@@ -462,24 +419,10 @@ transform data. To learn more about pandas, review this <a class="reference exte
 </pre></div>
 </div>
 </div>
-<div class="cell_output docutils container">
-<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
-<span class="ne">ModuleNotFoundError</span><span class="g g-Whitespace">                       </span>Traceback (most recent call last)
-<span class="o">/</span><span class="n">var</span><span class="o">/</span><span class="n">folders</span><span class="o">/</span><span class="mi">35</span><span class="o">/</span><span class="mi">43</span><span class="n">bdsj9j64j16410rds5g9vr0000gp</span><span class="o">/</span><span class="n">T</span><span class="o">/</span><span class="n">ipykernel_19084</span><span class="o">/</span><span class="mf">2860410050.</span><span class="n">py</span> <span class="ow">in</span> <span class="o">&lt;</span><span class="n">module</span><span class="o">&gt;</span>
-<span class="g g-Whitespace">      </span><span class="mi">1</span> <span class="c1"># Customarily, we import as follows:</span>
-<span class="ne">----&gt; </span><span class="mi">2</span> <span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
-<span class="g g-Whitespace">      </span><span class="mi">3</span> <span class="kn">import</span> <span class="nn">seaborn</span> <span class="k">as</span> <span class="nn">sns</span>
-<span class="g g-Whitespace">      </span><span class="mi">4</span> 
-<span class="g g-Whitespace">      </span><span class="mi">5</span> <span class="c1"># seaborn settings</span>
-
-<span class="ne">ModuleNotFoundError</span>: No module named &#39;pandas&#39;
-</pre></div>
 </div>
 </div>
-</div>
-</div>
-<div class="section" id="id1">
-<h2>1 Import data<a class="headerlink" href="#id1" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="import-data">
+<h2>1 Import data<a class="headerlink" href="#import-data" title="Permalink to this headline">¶</a></h2>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Load csv data from GitHub into pandas dataframes</span>
@@ -782,8 +725,8 @@ memory usage: 281.4+ KB
 </div>
 </div>
 </div>
-<div class="section" id="id2">
-<h2>2 Tidying data<a class="headerlink" href="#id2" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="tidying-data">
+<h2>2 Tidying data<a class="headerlink" href="#tidying-data" title="Permalink to this headline">¶</a></h2>
 <p>The variable “Unnamed: 0” seems to be some kind of identification number per employee. Let’s rename the variable
 and check if we have duplicates in our dataset.</p>
 <div class="cell docutils container">
@@ -1080,8 +1023,8 @@ missing values. In that case, it could be reasonable to only drop the variable:<
 <p>However, we will usually use other methods to fill in missing values (e.g. imputate using the mean)</p>
 </div>
 </div>
-<div class="section" id="id3">
-<h2>3 Transform data<a class="headerlink" href="#id3" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="transform-data">
+<h2>3 Transform data<a class="headerlink" href="#transform-data" title="Permalink to this headline">¶</a></h2>
 <div class="section" id="descriptive-statistics">
 <h3>3.1 Descriptive statistics<a class="headerlink" href="#descriptive-statistics" title="Permalink to this headline">¶</a></h3>
 <p>First, we obtain some common statistics:</p>
@@ -1206,7 +1149,7 @@ missing values. In that case, it could be reasonable to only drop the variable:<
     </tr>
     <tr>
       <th>top</th>
-      <td>7373</td>
+      <td>453870</td>
       <td>2003</td>
       <td>2. HS Grad</td>
     </tr>
@@ -1418,8 +1361,8 @@ Name: age, dtype: float64
 </div>
 </div>
 </div>
-<div class="section" id="id4">
-<h2>4. Visualize data<a class="headerlink" href="#id4" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="visualize-data">
+<h2>4. Visualize data<a class="headerlink" href="#visualize-data" title="Permalink to this headline">¶</a></h2>
 <div class="section" id="distribution-of-variables">
 <h3>4.1 Distribution of Variables<a class="headerlink" href="#distribution-of-variables" title="Permalink to this headline">¶</a></h3>
 <p>How you visualize the distribution of a variable will depend on whether the variable is categorical or continuous.
@@ -1447,7 +1390,12 @@ data. It also links to the code to build it and lists common caveats you should 
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="_images/1_process_54_0.png" src="_images/1_process_54_0.png" />
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/Users/jankirenz/opt/anaconda3/lib/python3.7/site-packages/pandas/plotting/_matplotlib/tools.py:331: MatplotlibDeprecationWarning: 
+The is_first_col function was deprecated in Matplotlib 3.4 and will be removed two minor releases later. Use ax.get_subplotspec().is_first_col() instead.
+  if ax.is_first_col():
+</pre></div>
+</div>
+<img alt="_images/1_process_54_1.png" src="_images/1_process_54_1.png" />
 </div>
 </div>
 <p>Seaborne shows a default plot with a kernel density estimate and a histogram:</p>
