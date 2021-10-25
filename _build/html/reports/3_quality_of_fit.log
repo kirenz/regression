@@ -1,19 +1,19 @@
 Traceback (most recent call last):
-  File "/Users/jankirenz/opt/anaconda3/lib/python3.7/site-packages/jupyter_cache/executors/utils.py", line 56, in single_nb_execution
-    record_timing=False,
-  File "/Users/jankirenz/opt/anaconda3/lib/python3.7/site-packages/nbclient/client.py", line 1112, in execute
+  File "/Users/jankirenz/opt/anaconda3/lib/python3.8/site-packages/jupyter_cache/executors/utils.py", line 51, in single_nb_execution
+    executenb(
+  File "/Users/jankirenz/opt/anaconda3/lib/python3.8/site-packages/nbclient/client.py", line 1112, in execute
     return NotebookClient(nb=nb, resources=resources, km=km, **kwargs).execute()
-  File "/Users/jankirenz/opt/anaconda3/lib/python3.7/site-packages/nbclient/util.py", line 74, in wrapped
+  File "/Users/jankirenz/opt/anaconda3/lib/python3.8/site-packages/nbclient/util.py", line 74, in wrapped
     return just_run(coro(*args, **kwargs))
-  File "/Users/jankirenz/opt/anaconda3/lib/python3.7/site-packages/nbclient/util.py", line 53, in just_run
+  File "/Users/jankirenz/opt/anaconda3/lib/python3.8/site-packages/nbclient/util.py", line 53, in just_run
     return loop.run_until_complete(coro)
-  File "/Users/jankirenz/opt/anaconda3/lib/python3.7/asyncio/base_events.py", line 587, in run_until_complete
+  File "/Users/jankirenz/opt/anaconda3/lib/python3.8/asyncio/base_events.py", line 616, in run_until_complete
     return future.result()
-  File "/Users/jankirenz/opt/anaconda3/lib/python3.7/site-packages/nbclient/client.py", line 554, in async_execute
-    cell, index, execution_count=self.code_cells_executed + 1
-  File "/Users/jankirenz/opt/anaconda3/lib/python3.7/site-packages/nbclient/client.py", line 857, in async_execute_cell
+  File "/Users/jankirenz/opt/anaconda3/lib/python3.8/site-packages/nbclient/client.py", line 553, in async_execute
+    await self.async_execute_cell(
+  File "/Users/jankirenz/opt/anaconda3/lib/python3.8/site-packages/nbclient/client.py", line 857, in async_execute_cell
     self._check_raise_for_error(cell, exec_reply)
-  File "/Users/jankirenz/opt/anaconda3/lib/python3.7/site-packages/nbclient/client.py", line 760, in _check_raise_for_error
+  File "/Users/jankirenz/opt/anaconda3/lib/python3.8/site-packages/nbclient/client.py", line 760, in _check_raise_for_error
     raise CellExecutionError.from_cell_and_msg(cell, exec_reply_content)
 nbclient.exceptions.CellExecutionError: An error occurred while executing the following cell:
 ------------------
@@ -23,67 +23,67 @@ sns.jointplot(x="height_parents", y="height", data=df, stat_func=None);
 
 [0;31m---------------------------------------------------------------------------[0m
 [0;31mAttributeError[0m                            Traceback (most recent call last)
-[0;32m/var/folders/35/43bdsj9j64j16410rds5g9vr0000gp/T/ipykernel_21075/1274572888.py[0m in [0;36m<module>[0;34m[0m
+[0;32m/var/folders/9c/_3s5jt3n60j__flsgl0t72340000gn/T/ipykernel_7116/1274572888.py[0m in [0;36m<module>[0;34m[0m
 [1;32m      1[0m [0;31m# check relationship with a joint plot[0m[0;34m[0m[0;34m[0m[0;34m[0m[0m
 [0;32m----> 2[0;31m [0msns[0m[0;34m.[0m[0mjointplot[0m[0;34m([0m[0mx[0m[0;34m=[0m[0;34m"height_parents"[0m[0;34m,[0m [0my[0m[0;34m=[0m[0;34m"height"[0m[0;34m,[0m [0mdata[0m[0;34m=[0m[0mdf[0m[0;34m,[0m [0mstat_func[0m[0;34m=[0m[0;32mNone[0m[0;34m)[0m[0;34m;[0m[0;34m[0m[0;34m[0m[0m
 [0m
-[0;32m~/opt/anaconda3/lib/python3.7/site-packages/seaborn/_decorators.py[0m in [0;36minner_f[0;34m(*args, **kwargs)[0m
+[0;32m~/opt/anaconda3/lib/python3.8/site-packages/seaborn/_decorators.py[0m in [0;36minner_f[0;34m(*args, **kwargs)[0m
 [1;32m     44[0m             )
 [1;32m     45[0m         [0mkwargs[0m[0;34m.[0m[0mupdate[0m[0;34m([0m[0;34m{[0m[0mk[0m[0;34m:[0m [0marg[0m [0;32mfor[0m [0mk[0m[0;34m,[0m [0marg[0m [0;32min[0m [0mzip[0m[0;34m([0m[0msig[0m[0;34m.[0m[0mparameters[0m[0;34m,[0m [0margs[0m[0;34m)[0m[0;34m}[0m[0;34m)[0m[0;34m[0m[0;34m[0m[0m
 [0;32m---> 46[0;31m         [0;32mreturn[0m [0mf[0m[0;34m([0m[0;34m**[0m[0mkwargs[0m[0;34m)[0m[0;34m[0m[0;34m[0m[0m
 [0m[1;32m     47[0m     [0;32mreturn[0m [0minner_f[0m[0;34m[0m[0;34m[0m[0m
 [1;32m     48[0m [0;34m[0m[0m
 
-[0;32m~/opt/anaconda3/lib/python3.7/site-packages/seaborn/axisgrid.py[0m in [0;36mjointplot[0;34m(x, y, data, kind, color, height, ratio, space, dropna, xlim, ylim, marginal_ticks, joint_kws, marginal_kws, hue, palette, hue_order, hue_norm, **kwargs)[0m
+[0;32m~/opt/anaconda3/lib/python3.8/site-packages/seaborn/axisgrid.py[0m in [0;36mjointplot[0;34m(x, y, data, kind, color, height, ratio, space, dropna, xlim, ylim, marginal_ticks, joint_kws, marginal_kws, hue, palette, hue_order, hue_norm, **kwargs)[0m
 [1;32m   2242[0m [0;34m[0m[0m
 [1;32m   2243[0m         [0mjoint_kws[0m[0;34m.[0m[0msetdefault[0m[0;34m([0m[0;34m"color"[0m[0;34m,[0m [0mcolor[0m[0;34m)[0m[0;34m[0m[0;34m[0m[0m
 [0;32m-> 2244[0;31m         [0mgrid[0m[0;34m.[0m[0mplot_joint[0m[0;34m([0m[0mscatterplot[0m[0;34m,[0m [0;34m**[0m[0mjoint_kws[0m[0;34m)[0m[0;34m[0m[0;34m[0m[0m
 [0m[1;32m   2245[0m [0;34m[0m[0m
 [1;32m   2246[0m         [0;32mif[0m [0mgrid[0m[0;34m.[0m[0mhue[0m [0;32mis[0m [0;32mNone[0m[0;34m:[0m[0;34m[0m[0;34m[0m[0m
 
-[0;32m~/opt/anaconda3/lib/python3.7/site-packages/seaborn/axisgrid.py[0m in [0;36mplot_joint[0;34m(self, func, **kwargs)[0m
+[0;32m~/opt/anaconda3/lib/python3.8/site-packages/seaborn/axisgrid.py[0m in [0;36mplot_joint[0;34m(self, func, **kwargs)[0m
 [1;32m   1804[0m [0;34m[0m[0m
 [1;32m   1805[0m         [0;32mif[0m [0mstr[0m[0;34m([0m[0mfunc[0m[0;34m.[0m[0m__module__[0m[0;34m)[0m[0;34m.[0m[0mstartswith[0m[0;34m([0m[0;34m"seaborn"[0m[0;34m)[0m[0;34m:[0m[0;34m[0m[0;34m[0m[0m
 [0;32m-> 1806[0;31m             [0mfunc[0m[0;34m([0m[0mx[0m[0;34m=[0m[0mself[0m[0;34m.[0m[0mx[0m[0;34m,[0m [0my[0m[0;34m=[0m[0mself[0m[0;34m.[0m[0my[0m[0;34m,[0m [0;34m**[0m[0mkwargs[0m[0;34m)[0m[0;34m[0m[0;34m[0m[0m
 [0m[1;32m   1807[0m         [0;32melse[0m[0;34m:[0m[0;34m[0m[0;34m[0m[0m
 [1;32m   1808[0m             [0mfunc[0m[0;34m([0m[0mself[0m[0;34m.[0m[0mx[0m[0;34m,[0m [0mself[0m[0;34m.[0m[0my[0m[0;34m,[0m [0;34m**[0m[0mkwargs[0m[0;34m)[0m[0;34m[0m[0;34m[0m[0m
 
-[0;32m~/opt/anaconda3/lib/python3.7/site-packages/seaborn/_decorators.py[0m in [0;36minner_f[0;34m(*args, **kwargs)[0m
+[0;32m~/opt/anaconda3/lib/python3.8/site-packages/seaborn/_decorators.py[0m in [0;36minner_f[0;34m(*args, **kwargs)[0m
 [1;32m     44[0m             )
 [1;32m     45[0m         [0mkwargs[0m[0;34m.[0m[0mupdate[0m[0;34m([0m[0;34m{[0m[0mk[0m[0;34m:[0m [0marg[0m [0;32mfor[0m [0mk[0m[0;34m,[0m [0marg[0m [0;32min[0m [0mzip[0m[0;34m([0m[0msig[0m[0;34m.[0m[0mparameters[0m[0;34m,[0m [0margs[0m[0;34m)[0m[0;34m}[0m[0;34m)[0m[0;34m[0m[0;34m[0m[0m
 [0;32m---> 46[0;31m         [0;32mreturn[0m [0mf[0m[0;34m([0m[0;34m**[0m[0mkwargs[0m[0;34m)[0m[0;34m[0m[0;34m[0m[0m
 [0m[1;32m     47[0m     [0;32mreturn[0m [0minner_f[0m[0;34m[0m[0;34m[0m[0m
 [1;32m     48[0m [0;34m[0m[0m
 
-[0;32m~/opt/anaconda3/lib/python3.7/site-packages/seaborn/relational.py[0m in [0;36mscatterplot[0;34m(x, y, hue, style, size, data, palette, hue_order, hue_norm, sizes, size_order, size_norm, markers, style_order, x_bins, y_bins, units, estimator, ci, n_boot, alpha, x_jitter, y_jitter, legend, ax, **kwargs)[0m
+[0;32m~/opt/anaconda3/lib/python3.8/site-packages/seaborn/relational.py[0m in [0;36mscatterplot[0;34m(x, y, hue, style, size, data, palette, hue_order, hue_norm, sizes, size_order, size_norm, markers, style_order, x_bins, y_bins, units, estimator, ci, n_boot, alpha, x_jitter, y_jitter, legend, ax, **kwargs)[0m
 [1;32m    825[0m     [0mp[0m[0;34m.[0m[0m_attach[0m[0;34m([0m[0max[0m[0;34m)[0m[0;34m[0m[0;34m[0m[0m
 [1;32m    826[0m [0;34m[0m[0m
 [0;32m--> 827[0;31m     [0mp[0m[0;34m.[0m[0mplot[0m[0;34m([0m[0max[0m[0;34m,[0m [0mkwargs[0m[0;34m)[0m[0;34m[0m[0;34m[0m[0m
 [0m[1;32m    828[0m [0;34m[0m[0m
 [1;32m    829[0m     [0;32mreturn[0m [0max[0m[0;34m[0m[0;34m[0m[0m
 
-[0;32m~/opt/anaconda3/lib/python3.7/site-packages/seaborn/relational.py[0m in [0;36mplot[0;34m(self, ax, kws)[0m
+[0;32m~/opt/anaconda3/lib/python3.8/site-packages/seaborn/relational.py[0m in [0;36mplot[0;34m(self, ax, kws)[0m
 [1;32m    606[0m         )
 [1;32m    607[0m         [0mscout_x[0m [0;34m=[0m [0mscout_y[0m [0;34m=[0m [0mnp[0m[0;34m.[0m[0mfull[0m[0;34m([0m[0mscout_size[0m[0;34m,[0m [0mnp[0m[0;34m.[0m[0mnan[0m[0;34m)[0m[0;34m[0m[0;34m[0m[0m
 [0;32m--> 608[0;31m         [0mscout[0m [0;34m=[0m [0max[0m[0;34m.[0m[0mscatter[0m[0;34m([0m[0mscout_x[0m[0;34m,[0m [0mscout_y[0m[0;34m,[0m [0;34m**[0m[0mkws[0m[0;34m)[0m[0;34m[0m[0;34m[0m[0m
 [0m[1;32m    609[0m         [0ms[0m [0;34m=[0m [0mkws[0m[0;34m.[0m[0mpop[0m[0;34m([0m[0;34m"s"[0m[0;34m,[0m [0mscout[0m[0;34m.[0m[0mget_sizes[0m[0;34m([0m[0;34m)[0m[0;34m)[0m[0;34m[0m[0;34m[0m[0m
 [1;32m    610[0m         [0mc[0m [0;34m=[0m [0mkws[0m[0;34m.[0m[0mpop[0m[0;34m([0m[0;34m"c"[0m[0;34m,[0m [0mscout[0m[0;34m.[0m[0mget_facecolors[0m[0;34m([0m[0;34m)[0m[0;34m)[0m[0;34m[0m[0;34m[0m[0m
 
-[0;32m~/opt/anaconda3/lib/python3.7/site-packages/matplotlib/__init__.py[0m in [0;36minner[0;34m(ax, data, *args, **kwargs)[0m
+[0;32m~/opt/anaconda3/lib/python3.8/site-packages/matplotlib/__init__.py[0m in [0;36minner[0;34m(ax, data, *args, **kwargs)[0m
 [1;32m   1359[0m     [0;32mdef[0m [0minner[0m[0;34m([0m[0max[0m[0;34m,[0m [0;34m*[0m[0margs[0m[0;34m,[0m [0mdata[0m[0;34m=[0m[0;32mNone[0m[0;34m,[0m [0;34m**[0m[0mkwargs[0m[0;34m)[0m[0;34m:[0m[0;34m[0m[0;34m[0m[0m
 [1;32m   1360[0m         [0;32mif[0m [0mdata[0m [0;32mis[0m [0;32mNone[0m[0;34m:[0m[0;34m[0m[0;34m[0m[0m
 [0;32m-> 1361[0;31m             [0;32mreturn[0m [0mfunc[0m[0;34m([0m[0max[0m[0;34m,[0m [0;34m*[0m[0mmap[0m[0;34m([0m[0msanitize_sequence[0m[0;34m,[0m [0margs[0m[0;34m)[0m[0;34m,[0m [0;34m**[0m[0mkwargs[0m[0;34m)[0m[0;34m[0m[0;34m[0m[0m
 [0m[1;32m   1362[0m [0;34m[0m[0m
 [1;32m   1363[0m         [0mbound[0m [0;34m=[0m [0mnew_sig[0m[0;34m.[0m[0mbind[0m[0;34m([0m[0max[0m[0;34m,[0m [0;34m*[0m[0margs[0m[0;34m,[0m [0;34m**[0m[0mkwargs[0m[0;34m)[0m[0;34m[0m[0;34m[0m[0m
 
-[0;32m~/opt/anaconda3/lib/python3.7/site-packages/matplotlib/axes/_axes.py[0m in [0;36mscatter[0;34m(self, x, y, s, c, marker, cmap, norm, vmin, vmax, alpha, linewidths, edgecolors, plotnonfinite, **kwargs)[0m
+[0;32m~/opt/anaconda3/lib/python3.8/site-packages/matplotlib/axes/_axes.py[0m in [0;36mscatter[0;34m(self, x, y, s, c, marker, cmap, norm, vmin, vmax, alpha, linewidths, edgecolors, plotnonfinite, **kwargs)[0m
 [1;32m   4595[0m                 )
 [1;32m   4596[0m         [0mcollection[0m[0;34m.[0m[0mset_transform[0m[0;34m([0m[0mmtransforms[0m[0;34m.[0m[0mIdentityTransform[0m[0;34m([0m[0;34m)[0m[0;34m)[0m[0;34m[0m[0;34m[0m[0m
 [0;32m-> 4597[0;31m         [0mcollection[0m[0;34m.[0m[0mupdate[0m[0;34m([0m[0mkwargs[0m[0;34m)[0m[0;34m[0m[0;34m[0m[0m
 [0m[1;32m   4598[0m [0;34m[0m[0m
 [1;32m   4599[0m         [0;32mif[0m [0mcolors[0m [0;32mis[0m [0;32mNone[0m[0;34m:[0m[0;34m[0m[0;34m[0m[0m
 
-[0;32m~/opt/anaconda3/lib/python3.7/site-packages/matplotlib/artist.py[0m in [0;36mupdate[0;34m(self, props)[0m
+[0;32m~/opt/anaconda3/lib/python3.8/site-packages/matplotlib/artist.py[0m in [0;36mupdate[0;34m(self, props)[0m
 [1;32m   1060[0m                     [0mfunc[0m [0;34m=[0m [0mgetattr[0m[0;34m([0m[0mself[0m[0;34m,[0m [0;34mf"set_{k}"[0m[0;34m,[0m [0;32mNone[0m[0;34m)[0m[0;34m[0m[0;34m[0m[0m
 [1;32m   1061[0m                     [0;32mif[0m [0;32mnot[0m [0mcallable[0m[0;34m([0m[0mfunc[0m[0;34m)[0m[0;34m:[0m[0;34m[0m[0;34m[0m[0m
 [0;32m-> 1062[0;31m                         raise AttributeError(f"{type(self).__name__!r} object "

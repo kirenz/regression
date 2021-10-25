@@ -7,9 +7,9 @@ parts:
     - file: 1_process.ipynb
   - caption: Simple Regression
     chapters:
-    - file: 2_simulated.ipynb
+    - file: 3_quality_of_fit.ipynb
       sections:
-      - file: 3_quality_of_fit.ipynb
+      - file: 2_simulated.ipynb
   - caption: Diagnostics
     chapters:
     - file: 4_diagnostics.ipynb

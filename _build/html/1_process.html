@@ -263,59 +263,52 @@
   </a>
  </li>
  <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#import-data">
-   1 Import data
+  <a class="reference internal nav-link" href="#import-and-inspect-data">
+   Import and inspect data
   </a>
-  <ul class="nav section-nav flex-column">
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#data-inspection">
-     1.1 Data inspection
-    </a>
-   </li>
-  </ul>
  </li>
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#tidying-data">
-   2 Tidying data
-  </a>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#data-types">
-   2.1 Data types
+   Tidying data
   </a>
   <ul class="nav section-nav flex-column">
    <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#data-types">
+     Data types
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
     <a class="reference internal nav-link" href="#handle-missing-values">
-     2.2 Handle missing values
+     Handle missing values
     </a>
    </li>
   </ul>
  </li>
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#transform-data">
-   3 Transform data
+   Transform data
   </a>
   <ul class="nav section-nav flex-column">
    <li class="toc-h3 nav-item toc-entry">
     <a class="reference internal nav-link" href="#descriptive-statistics">
-     3.1 Descriptive statistics
+     Descriptive statistics
     </a>
    </li>
   </ul>
  </li>
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#visualize-data">
-   4. Visualize data
+   Visualize data
   </a>
   <ul class="nav section-nav flex-column">
    <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#distribution-of-variables">
-     4.1 Distribution of Variables
+    <a class="reference internal nav-link" href="#distribution">
+     Distribution
     </a>
    </li>
    <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#relationship-between-variables">
-     4.2 Relationship between variables
+    <a class="reference internal nav-link" href="#relationship">
+     Relationship
     </a>
    </li>
   </ul>
@@ -324,13 +317,6 @@
   <a class="reference internal nav-link" href="#model">
    5 Model
   </a>
-  <ul class="nav section-nav flex-column">
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#sources">
-     Sources
-    </a>
-   </li>
-  </ul>
  </li>
 </ul>
 
@@ -344,33 +330,19 @@
               <div>
                 
   <div class="tex2jax_ignore mathjax_ignore section" id="programming-process">
-<h1>Programming Process<a class="headerlink" href="#programming-process" title="Permalink to this headline">¶</a></h1>
+<span id="file-types-notebooks"></span><h1>Programming Process<a class="headerlink" href="#programming-process" title="Permalink to this headline">¶</a></h1>
 <p>The goal of this section is to give you a first impression of some important steps and tools in Python when
-doing data science projects.</p>
-<p>A typical data science project looks something like this (Wickham &amp; Grolemund, 2016):</p>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="ch">#![Image](&#39;img/2_data_science_process.png&#39;)</span>
-</pre></div>
-</div>
-</div>
-</div>
-<p>Import data</p>
-<p>First you must <strong>import</strong> your data into Python. This typically means that you take data stored in a file, database,
-or web API, and load it into a DataFrame in Python (using Pandas).</p>
-<p>2 Tidying data</p>
+doing data science projects. A typical data science project looks something like this (Wickham &amp; Grolemund, 2016):</p>
+<a class="bg-primary mb-1 reference internal image-reference" href="../img/2_data_science_process.png"><img alt="process" class="bg-primary mb-1 align-center" src="../img/2_data_science_process.png" style="width: 200px;" /></a>
+<p><strong>Import data</strong></p>
+<p>First you must <strong>import</strong> your data into Python. This typically means that you take data stored in a file, database, or web API, and load it into a DataFrame in Python (using Pandas).</p>
+<p><strong>2 Tidying data</strong></p>
 <p>Once you’ve imported your data, it is a good idea to tidy it.
 <strong>Tidying</strong> your data means storing it in a consistent form that matches the semantics of the dataset with
-the way it is stored. In brief, when your data is tidy, each column is a variable, and each row is an observation.
-Tidy data is important because the consistent structure lets you focus your struggle on questions about the data.</p>
-<p>3 Transform data</p>
-<p>Once you have tidy data, a common first step is to transform it.
-<strong>Transformation</strong> includes narrowing in on observations of interest
-(like all people in one city, or all data from the last year), creating new variables that are functions of
-existing variables (like computing velocity from speed and time), and calculating a set of
-summary statistics (like counts or means). Together, tidying and transforming are called wrangling,
-because getting your data in a form that’s natural to work with often feels like a fight!</p>
-<p>4 Visualize data</p>
+the way it is stored. In brief, when your data is tidy, each column is a variable, and each row is an observation. Tidy data is important because the consistent structure lets you focus your struggle on questions about the data.</p>
+<p><strong>3 Transform data</strong></p>
+<p>Once you have tidy data, a common first step is to transform it. <strong>Transformation</strong> includes narrowing in on observations of interest (like all people in one city, or all data from the last year), creating new variables that are functions of existing variables (like computing velocity from speed and time), and calculating a set of summary statistics (like counts or means). Together, tidying and transforming are called wrangling, because getting your data in a form that’s natural to work with often feels like a fight!</p>
+<p><strong>4 Visualize data</strong></p>
 <p>Once you have tidy data with the variables you need, there are two main engines of knowledge generation:
 visualisation and modelling. These have complementary strengths and weaknesses so any real analysis
 will iterate between them many times.</p>
@@ -378,25 +350,19 @@ will iterate between them many times.</p>
 you did not expect, or raise new questions about the data. A good visualisation might also hint that
 you’re asking the wrong question, or you need to collect different data.
 Visualisations can surprise you, but don’t scale particularly well because they require a human to interpret them.</p>
-<p>5 Models</p>
+<p><strong>5 Models</strong></p>
 <p><strong>Models</strong> are complementary tools to visualisation. Once you have made your questions sufficiently precise,
 you can use a model to answer them. Models are a fundamentally mathematical or computational tool,
-so they generally scale well. But every model makes assumptions, and by its very nature a model cannot
-question its own assumptions. That means a model cannot fundamentally surprise you.</p>
-<p>6 Communication</p>
+so they generally scale well.</p>
+<p><strong>6 Communication</strong></p>
 <p>The last step is <strong>communication</strong>, an absolutely critical part of any data analysis project.
 It doesn’t matter how well your models and visualisation have led you to understand the data unless
 you can also communicate your results to others.</p>
 <div class="section" id="programming">
 <h2>Programming<a class="headerlink" href="#programming" title="Permalink to this headline">¶</a></h2>
-<p>Surrounding all the data science steps covered above is <strong>programming</strong>. Programming is a cross-cutting tool that you use in every part
-of the project. You don’t need to be an expert programmer to be a data scientist, but learning more about
-programming pays off because becoming a better programmer allows you to automate
+<p>Surrounding all the data science steps covered above is <strong>programming</strong>. Programming is a cross-cutting tool that you use in every part of the project. You don’t need to be an expert programmer to be a data scientist, but learning more about programming pays off because becoming a better programmer allows you to automate
 common tasks, and solve new problems with greater ease.</p>
-<p>To demonstrate the programming process, we examine a dataset which contains variables that could relate to <strong>wages</strong>
-for a group of males. The data is obtained from James et al. (2021)
-and consists of 12 variables for 3,000 people, so we have n = 3,000 observations and
-p = 12 variables (such as year, age, and more).</p>
+<p>To demonstrate the programming process, we examine a dataset which contains variables that could relate to <strong>wages</strong> for a group of males. The data is obtained from James et al. (2021) and consists of 12 variables for 3,000 people, so we have n = 3,000 observations and p = 12 variables (such as year, age, and more).</p>
 <p>First, we take a look at some important Python modules and functions.</p>
 <p><strong>Module overview:</strong></p>
 <ul class="simple">
@@ -421,8 +387,8 @@ transform data. To learn more about pandas, review this <a class="reference exte
 </div>
 </div>
 </div>
-<div class="section" id="import-data">
-<h2>1 Import data<a class="headerlink" href="#import-data" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="import-and-inspect-data">
+<h2>Import and inspect data<a class="headerlink" href="#import-and-inspect-data" title="Permalink to this headline">¶</a></h2>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Load csv data from GitHub into pandas dataframes</span>
@@ -434,8 +400,6 @@ transform data. To learn more about pandas, review this <a class="reference exte
 </div>
 </div>
 </div>
-<div class="section" id="data-inspection">
-<h3>1.1 Data inspection<a class="headerlink" href="#data-inspection" title="Permalink to this headline">¶</a></h3>
 <p>Let’s take a look at the variables (also called columns or features) in the data set.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -724,11 +688,9 @@ memory usage: 281.4+ KB
 </div>
 </div>
 </div>
-</div>
 <div class="section" id="tidying-data">
-<h2>2 Tidying data<a class="headerlink" href="#tidying-data" title="Permalink to this headline">¶</a></h2>
-<p>The variable “Unnamed: 0” seems to be some kind of identification number per employee. Let’s rename the variable
-and check if we have duplicates in our dataset.</p>
+<h2>Tidying data<a class="headerlink" href="#tidying-data" title="Permalink to this headline">¶</a></h2>
+<p>The variable “Unnamed: 0” seems to be some kind of identification number per employee. Let’s rename the variable and check if we have duplicates in our dataset.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># rename variable &quot;Unnamed: 0&quot; to &quot;id&quot;</span>
@@ -898,9 +860,8 @@ Name: edu, dtype: int64
 </div>
 </div>
 </div>
-</div>
 <div class="section" id="data-types">
-<h2>2.1 Data types<a class="headerlink" href="#data-types" title="Permalink to this headline">¶</a></h2>
+<h3>Data types<a class="headerlink" href="#data-types" title="Permalink to this headline">¶</a></h3>
 <p>Pandas offers different options to change the data type of a variable.</p>
 <p>To change data into a categorical format, you can use the following code (see this
 <a class="reference external" href="https://pandas.pydata.org/docs/user_guide/categorical.html">pandas tutorial to learn more about categorical data</a>):</p>
@@ -978,13 +939,12 @@ Otherwise, we get an error message. Therefore, use errors=’coerce’ …</p>
 </ul>
 </li>
 </ul>
+</div>
 <div class="section" id="handle-missing-values">
-<h3>2.2 Handle missing values<a class="headerlink" href="#handle-missing-values" title="Permalink to this headline">¶</a></h3>
-<p>Next, we need to check if there are missing cases in the data set.
-By “missing” we simply mean NA (“not available”).</p>
-<p>Many datasets arrive with missing data, either because it exists and was not collected or it never existed.
-Having missing values in a dataset can cause errors with some algorithms.
-Therefore, we need to take care of this issue (we cover the topic of missing values in one of the following applications in detail).</p>
+<h3>Handle missing values<a class="headerlink" href="#handle-missing-values" title="Permalink to this headline">¶</a></h3>
+<p>Next, we need to check if there are missing cases in the data set. By “missing” we simply mean NA (“not available”).</p>
+<p>Many datasets arrive with missing data, either because it exists but was not collected or it never existed.
+Having missing values in a dataset can cause errors with some algorithms. Therefore, we need to take care of this issue (we cover the topic of missing values in one of the following applications in detail).</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># show missing values (missing values - if present - will be displayed in yellow )</span>
@@ -993,7 +953,7 @@ Therefore, we need to take care of this issue (we cover the topic of missing val
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="_images/1_process_32_0.png" src="_images/1_process_32_0.png" />
+<img alt="_images/1_process_30_0.png" src="_images/1_process_30_0.png" />
 </div>
 </div>
 <p>We can also check the column-wise distribution of null values:</p>
@@ -1020,13 +980,13 @@ dtype: int64
 <p>However, be careful not to drop many observations if just one variable is the cause for the
 missing values. In that case, it could be reasonable to only drop the variable:</p>
 <p><code class="docutils literal notranslate"><span class="pre">df</span> <span class="pre">=</span> <span class="pre">df.drop('variable',</span> <span class="pre">axis=1)</span></code></p>
-<p>However, we will usually use other methods to fill in missing values (e.g. imputate using the mean)</p>
+<p>Usually, we will use other methods to fill in missing values (e.g. imputate missing values by using the mean)</p>
 </div>
 </div>
 <div class="section" id="transform-data">
-<h2>3 Transform data<a class="headerlink" href="#transform-data" title="Permalink to this headline">¶</a></h2>
+<h2>Transform data<a class="headerlink" href="#transform-data" title="Permalink to this headline">¶</a></h2>
 <div class="section" id="descriptive-statistics">
-<h3>3.1 Descriptive statistics<a class="headerlink" href="#descriptive-statistics" title="Permalink to this headline">¶</a></h3>
+<h3>Descriptive statistics<a class="headerlink" href="#descriptive-statistics" title="Permalink to this headline">¶</a></h3>
 <p>First, we obtain some common statistics:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -1149,7 +1109,7 @@ missing values. In that case, it could be reasonable to only drop the variable:<
     </tr>
     <tr>
       <th>top</th>
-      <td>453870</td>
+      <td>7373</td>
       <td>2003</td>
       <td>2. HS Grad</td>
     </tr>
@@ -1362,12 +1322,10 @@ Name: age, dtype: float64
 </div>
 </div>
 <div class="section" id="visualize-data">
-<h2>4. Visualize data<a class="headerlink" href="#visualize-data" title="Permalink to this headline">¶</a></h2>
-<div class="section" id="distribution-of-variables">
-<h3>4.1 Distribution of Variables<a class="headerlink" href="#distribution-of-variables" title="Permalink to this headline">¶</a></h3>
-<p>How you visualize the distribution of a variable will depend on whether the variable is categorical or continuous.
-The excellent site <a class="reference external" href="https://www.data-to-viz.com/">From Data to Viz</a> leads you to the most appropriate graph for your
-data. It also links to the code to build it and lists common caveats you should avoid.</p>
+<h2>Visualize data<a class="headerlink" href="#visualize-data" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="distribution">
+<h3>Distribution<a class="headerlink" href="#distribution" title="Permalink to this headline">¶</a></h3>
+<p>How you visualize the distribution of a variable will depend on whether the variable is categorical or continuous.The excellent site <a class="reference external" href="https://www.data-to-viz.com/">From Data to Viz</a> leads you to the most appropriate graph for your data. It also links to the code to build it and lists common caveats you should avoid.</p>
 <p>For example, to examine the distribution of a categorical variable, we could use a bar or count plot.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -1377,11 +1335,10 @@ data. It also links to the code to build it and lists common caveats you should 
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="_images/1_process_52_0.png" src="_images/1_process_52_0.png" />
+<img alt="_images/1_process_50_0.png" src="_images/1_process_50_0.png" />
 </div>
 </div>
-<p>A variable is <strong>continuous</strong> if it can take any of an infinite set of ordered values.</p>
-<p>To examine the distribution of a continuous variable, we could use a <strong>histogram</strong>:</p>
+<p>A variable is <strong>continuous</strong> if it can take any of an infinite set of ordered values. To examine the distribution of a continuous variable, we could use a <strong>histogram</strong>:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Pandas histogram of all numerical values</span>
@@ -1390,15 +1347,10 @@ data. It also links to the code to build it and lists common caveats you should 
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/Users/jankirenz/opt/anaconda3/lib/python3.7/site-packages/pandas/plotting/_matplotlib/tools.py:331: MatplotlibDeprecationWarning: 
-The is_first_col function was deprecated in Matplotlib 3.4 and will be removed two minor releases later. Use ax.get_subplotspec().is_first_col() instead.
-  if ax.is_first_col():
-</pre></div>
-</div>
-<img alt="_images/1_process_54_1.png" src="_images/1_process_54_1.png" />
+<img alt="_images/1_process_52_0.png" src="_images/1_process_52_0.png" />
 </div>
 </div>
-<p>Seaborne shows a default plot with a kernel density estimate and a histogram:</p>
+<p>We can also use Seaborne to plot a histogram with a kernel density estimate:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># histogram with seaborn </span>
@@ -1407,12 +1359,11 @@ The is_first_col function was deprecated in Matplotlib 3.4 and will be removed t
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="_images/1_process_56_0.png" src="_images/1_process_56_0.png" />
+<img alt="_images/1_process_54_0.png" src="_images/1_process_54_0.png" />
 </div>
 </div>
-<p>Another alternative to display the distribution of a continuous variable broken down by a categorical variable is
-the <strong>boxplot</strong>. A boxplot is a type of visual shorthand for a distribution
-of values that is popular among statisticians. Each boxplot consists of:</p>
+<p>Another alternative to display the distribution of a continuous variable broken down by a categorical variable is the <strong>boxplot</strong>.</p>
+<p>Each boxplot consists of:</p>
 <ul class="simple">
 <li><p>A box that stretches from the 25th percentile of the distribution to the 75th percentile, a distance known as the interquartile range (IQR).</p></li>
 <li><p>In the middle of the box is a line that displays the median, i.e. 50th percentile, of the distribution.</p></li>
@@ -1429,7 +1380,7 @@ farthest non-outlier point in the distribution.</p></li>
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="_images/1_process_58_0.png" src="_images/1_process_58_0.png" />
+<img alt="_images/1_process_56_0.png" src="_images/1_process_56_0.png" />
 </div>
 </div>
 <div class="cell docutils container">
@@ -1440,14 +1391,12 @@ farthest non-outlier point in the distribution.</p></li>
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="_images/1_process_59_0.png" src="_images/1_process_59_0.png" />
+<img alt="_images/1_process_57_0.png" src="_images/1_process_57_0.png" />
 </div>
 </div>
-<p>We see much less information about the distribution, but the boxplots are much more compact,
-so we can more easily compare them (and fit more on one plot).</p>
 </div>
-<div class="section" id="relationship-between-variables">
-<h3>4.2 Relationship between variables<a class="headerlink" href="#relationship-between-variables" title="Permalink to this headline">¶</a></h3>
+<div class="section" id="relationship">
+<h3>Relationship<a class="headerlink" href="#relationship" title="Permalink to this headline">¶</a></h3>
 <p>A great way to visualise the covariation between two continuous variables is to draw a scatterplot.
 You can see covariation as a pattern in the points. We will cover more options to test for relationships in variables
 (e.g., correlation) in the following applications.</p>
@@ -1459,7 +1408,7 @@ You can see covariation as a pattern in the points. We will cover more options t
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="_images/1_process_63_0.png" src="_images/1_process_63_0.png" />
+<img alt="_images/1_process_60_0.png" src="_images/1_process_60_0.png" />
 </div>
 </div>
 <div class="cell docutils container">
@@ -1470,19 +1419,14 @@ You can see covariation as a pattern in the points. We will cover more options t
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="_images/1_process_64_0.png" src="_images/1_process_64_0.png" />
+<img alt="_images/1_process_61_0.png" src="_images/1_process_61_0.png" />
 </div>
 </div>
 </div>
 </div>
 <div class="section" id="model">
 <h2>5 Model<a class="headerlink" href="#model" title="Permalink to this headline">¶</a></h2>
-<p>We cover the modelling process in our next applications.</p>
-<div class="section" id="sources">
-<h3>Sources<a class="headerlink" href="#sources" title="Permalink to this headline">¶</a></h3>
-<p><a class="reference external" href="https://www.statlearning.com/">James, G., Witten, D., Hastie, T., &amp; Tibshirani, R. (2021). An introduction to statistical learning. New York: Springer.</a></p>
-<p><a class="reference external" href="https://r4ds.had.co.nz/">Wickham, H., &amp; Grolemund, G. (2016). R for data science: import, tidy, transform, visualize, and model data. O’Reilly Media, Inc.</a></p>
-</div>
+<p>We will cover the modelling process in one of the next sections.</p>
 </div>
 </div>
 

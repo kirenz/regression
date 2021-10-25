@@ -1,6 +1,27 @@
 #!/usr/bin/env python
 # coding: utf-8
 
+# (file-types:notebooks)=
+# # Quality of fit
+# 
+# In this section we cover linear regression - the fundamental starting point for all regression methods - and how to evaluate the quality of fit of a regression model. Therefore, we quantify the extent to which the predicted outcome value for a given observation is close to the true outcome value for that observation. In the regression setting, the most commonly-used measure is the mean squared error (MSE), which we will cover in detail.
+# 
+# One of the simplest models we use in statistics is the **mean**. It is a (simple) model because it represents a summary of data. Therefore, we use the mean as a baseline model and compare the quality of fit between the mean and a simple linear regression model with only one predictor. In our application, we use a sample of 20 adult german women from whom we obtained their height and the average height of their parents (height_parents).
+# 
+# Data description (n = 20, p = 5); Variables: name, unique identification number (id), height, average height of parents (height_parents), gender.
+# 
+# ---
+# 
+# *Source*
+# 
+# *The statistical explanations in this tutorial are mainly based on Field (2018).*
+# 
+# Field, A. (2018). Discovering statistics using IBM SPSS statistics. Thousand Oaks, CA.
+# 
+# ---
+# 
+# 
+
 # In[1]:
 
 
@@ -21,23 +42,7 @@ custom_params = {"axes.spines.right": False, "axes.spines.top": False}
 sns.set_theme(style="ticks", rc=custom_params, palette='winter')
 
 
-# # Quality of fit
 # 
-# In this application we cover linear regression - the fundamental starting point for all regression methods - and how to evaluate the quality of fit of a regression model. Therefore, we quantify the extent to which the predicted outcome value for a given observation is close to the true outcome value for that observation. In the regression setting, the most commonly-used measure is the mean squared error (MSE), which we will cover in detail.
-# 
-# One of the simplest models we use in statistics is the **mean**. It is a (simple) model because it represents a summary of data. Therefore, we use the mean as a baseline model and compare the quality of fit between the mean and a simple linear regression model with only one predictor. In our application, we use a sample of 20 adult german women from whom we obtained their height and the average height of their parents (height_parents).
-# 
-# Data description (n = 20, p = 5); Variables: name, unique identification number (id), height, average height of parents (height_parents), gender.
-# 
-# ---
-# 
-# *Source*
-# 
-# *The statistical explanations in this tutorial are mainly based on Field (2018).*
-# 
-# Field, A. (2018). Discovering statistics using IBM SPSS statistics. Thousand Oaks, CA.
-# 
-# ---
 
 # ## Import data
 
