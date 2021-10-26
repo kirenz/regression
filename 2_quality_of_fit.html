@@ -371,7 +371,7 @@
    </li>
    <li class="toc-h3 nav-item toc-entry">
     <a class="reference internal nav-link" href="#standard-error">
-     5.2.5 Standard error
+     Standard error
     </a>
     <ul class="nav section-nav flex-column">
      <li class="toc-h4 nav-item toc-entry">
@@ -1191,7 +1191,7 @@ dtype: int64
   <th>Date:</th>             <td>Tue, 26 Oct 2021</td> <th>  Prob (F-statistic):</th> <td>2.21e-08</td>
 </tr>
 <tr>
-  <th>Time:</th>                 <td>22:07:24</td>     <th>  Log-Likelihood:    </th> <td> -17.995</td>
+  <th>Time:</th>                 <td>22:20:07</td>     <th>  Log-Likelihood:    </th> <td> -17.995</td>
 </tr>
 <tr>
   <th>No. Observations:</th>      <td>    20</td>      <th>  AIC:               </th> <td>   39.99</td>
@@ -1746,24 +1746,18 @@ the true response value for that observation.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Explained sum of squares  (SS_M = TSS - SS_R)</span>
-<span class="n">SS_M</span> <span class="o">=</span> <span class="n">TSS</span> <span class="o">-</span> <span class="n">SS_R</span>
-<span class="nb">print</span><span class="p">(</span><span class="n">SS_M</span><span class="p">)</span>
+<span class="n">SSM</span> <span class="o">=</span> <span class="n">TSS</span> <span class="o">-</span> <span class="n">SSR</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">SSM</span><span class="p">)</span>
 <span class="c1"># Explained sum of squres (SS_M) from statsmodel function</span>
 <span class="n">lm</span><span class="o">.</span><span class="n">ess</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
-<span class="ne">NameError</span><span class="g g-Whitespace">                                 </span>Traceback (most recent call last)
-<span class="o">/</span><span class="n">var</span><span class="o">/</span><span class="n">folders</span><span class="o">/</span><span class="mi">35</span><span class="o">/</span><span class="mi">43</span><span class="n">bdsj9j64j16410rds5g9vr0000gp</span><span class="o">/</span><span class="n">T</span><span class="o">/</span><span class="n">ipykernel_19589</span><span class="o">/</span><span class="mf">1162982135.</span><span class="n">py</span> <span class="ow">in</span> <span class="o">&lt;</span><span class="n">module</span><span class="o">&gt;</span>
-<span class="g g-Whitespace">      </span><span class="mi">1</span> <span class="c1"># Explained sum of squares  (SS_M = TSS - SS_R)</span>
-<span class="ne">----&gt; </span><span class="mi">2</span> <span class="n">SS_M</span> <span class="o">=</span> <span class="n">TSS</span> <span class="o">-</span> <span class="n">SS_R</span>
-<span class="g g-Whitespace">      </span><span class="mi">3</span> <span class="nb">print</span><span class="p">(</span><span class="n">SS_M</span><span class="p">)</span>
-<span class="g g-Whitespace">      </span><span class="mi">4</span> <span class="c1"># Explained sum of squres (SS_M) from statsmodel function</span>
-<span class="g g-Whitespace">      </span><span class="mi">5</span> <span class="n">lm</span><span class="o">.</span><span class="n">ess</span>
-
-<span class="ne">NameError</span>: name &#39;SS_R&#39; is not defined
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>34.919735599622285
+</pre></div>
+</div>
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>34.919735599622285
 </pre></div>
 </div>
 </div>
@@ -1772,7 +1766,7 @@ the true response value for that observation.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># R_Squared: explained sum of squared residuals</span>
-<span class="n">R_squared</span> <span class="o">=</span> <span class="n">SS_M</span> <span class="o">/</span> <span class="n">TSS</span>
+<span class="n">R_squared</span> <span class="o">=</span> <span class="n">SSM</span> <span class="o">/</span> <span class="n">TSS</span>
 <span class="nb">print</span><span class="p">(</span><span class="n">R_squared</span><span class="p">)</span>
 </pre></div>
 </div>
@@ -1855,7 +1849,7 @@ the true response value for that observation.</p>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(0.9118235992676891, 2.214412891654905e-08)
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(0.9118235992676889, 2.2144128916549524e-08)
 </pre></div>
 </div>
 </div>
@@ -1944,7 +1938,7 @@ the true response value for that observation.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Mean squared error of residuals (MSE_R)</span>
-<span class="n">MSE_R</span> <span class="o">=</span> <span class="n">SS_R</span> <span class="o">/</span> <span class="p">(</span><span class="mi">20</span><span class="o">-</span><span class="mi">2</span><span class="p">)</span>
+<span class="n">MSE_R</span> <span class="o">=</span> <span class="n">SSR</span> <span class="o">/</span> <span class="p">(</span><span class="mi">20</span><span class="o">-</span><span class="mi">2</span><span class="p">)</span>
 <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Mean squared error of residuals (MSE_R):&#39;</span><span class="p">,</span> <span class="n">MSE_R</span><span class="p">)</span>
 <span class="c1"># MSE of residuals from statsmodel (preferred)</span>
 <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;Mean squared error od residuals (MSE_R): </span><span class="si">{</span><span class="n">lm</span><span class="o">.</span><span class="n">mse_resid</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
@@ -1997,15 +1991,15 @@ Mean squared error od residuals (MSE_R): 0.39334802224320636
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Mean squared error of the model (MSE_M)</span>
 <span class="n">p</span> <span class="o">=</span> <span class="mi">1</span> <span class="c1"># we only have one predictor (height_parents)</span>
-<span class="n">MS_M</span> <span class="o">=</span> <span class="p">(</span><span class="n">SS_M</span> <span class="o">/</span> <span class="n">p</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;MS_M =&#39;</span><span class="p">,</span> <span class="n">MS_M</span><span class="p">)</span>
+<span class="n">MSM</span> <span class="o">=</span> <span class="p">(</span><span class="n">SSM</span> <span class="o">/</span> <span class="n">p</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;MSM =&#39;</span><span class="p">,</span> <span class="n">MSM</span><span class="p">)</span>
 <span class="c1"># MSE_M of residuals from statsmodel</span>
 <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;MS_M = </span><span class="si">{</span><span class="n">lm</span><span class="o">.</span><span class="n">mse_model</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>MS_M = 34.919735599622285
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>MSM = 34.919735599622285
 MS_M = 34.919735599622285
 </pre></div>
 </div>
@@ -2014,9 +2008,9 @@ MS_M = 34.919735599622285
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Adjust notation and calculate F-value</span>
-<span class="n">MS_R</span> <span class="o">=</span> <span class="n">MSE_R</span>
+<span class="n">MSR</span> <span class="o">=</span> <span class="n">MSE_R</span>
 <span class="c1"># F-value</span>
-<span class="n">F_value</span> <span class="o">=</span> <span class="p">(</span><span class="n">MS_M</span> <span class="o">/</span> <span class="n">MS_R</span><span class="p">)</span>
+<span class="n">F_value</span> <span class="o">=</span> <span class="p">(</span><span class="n">MSM</span> <span class="o">/</span> <span class="n">MSR</span><span class="p">)</span>
 <span class="nb">print</span><span class="p">(</span><span class="n">F_value</span><span class="p">)</span>
 </pre></div>
 </div>
@@ -2048,7 +2042,7 @@ MS_M = 34.919735599622285
 </div>
 </div>
 <div class="section" id="standard-error">
-<h3>5.2.5 Standard error<a class="headerlink" href="#standard-error" title="Permalink to this headline">¶</a></h3>
+<h3>Standard error<a class="headerlink" href="#standard-error" title="Permalink to this headline">¶</a></h3>
 <p>We just learned that the <strong>standard deviation</strong> tells us about how well the mean represents the sample data. However, if we’re using the <strong>sample mean</strong> to estimate this parameter in the <strong>population</strong> (like we did), then we need to know how well it represents the value in the population, especially because samples from a population differ.</p>
 <p>Imagine that we were interested in the height of <em>all</em> adult women in germany (so adult women in germany are the <strong>population</strong>). We could take a <strong>sample</strong> from this population (like we did with our 20 women), and when we do we are taking one of many possible samples. If we were to take several samples from the same population, then each sample would have its own mean, and some of these sample means will be different.</p>
 <p>Imagine we could obtain the height of all adult women in germany and could compute the mean of their height (which would equal <span class="math notranslate nohighlight">\(\mu\)</span> = 168 cm). Then we would know, as an absolute fact, that the mean of the height is 168 cm (this is the population mean, <strong>µ</strong>, the parameter that we’re trying to estimate).</p>
@@ -2162,10 +2156,27 @@ dtype: float64
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[-2.07019668 -1.38013112 -1.38013112 -0.69006556 -0.69006556 -0.69006556
- -0.69006556  0.          0.          0.          0.          0.
-  0.          0.69006556  0.69006556  0.69006556  0.69006556  1.38013112
-  1.38013112  2.07019668]
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>0    -2.070197
+1    -1.380131
+2    -1.380131
+3    -0.690066
+4    -0.690066
+5    -0.690066
+6    -0.690066
+7     0.000000
+8     0.000000
+9     0.000000
+10    0.000000
+11    0.000000
+12    0.000000
+13    0.690066
+14    0.690066
+15    0.690066
+16    0.690066
+17    1.380131
+18    1.380131
+19    2.070197
+Name: height, dtype: float64
 </pre></div>
 </div>
 </div>
@@ -2183,7 +2194,11 @@ dtype: float64
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="_images/2_quality_of_fit_86_0.png" src="_images/2_quality_of_fit_86_0.png" />
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/Users/jankirenz/opt/anaconda3/lib/python3.7/site-packages/seaborn/distributions.py:2619: FutureWarning: `distplot` is a deprecated function and will be removed in a future version. Please adapt your code to use either `displot` (a figure-level function with similar flexibility) or `histplot` (an axes-level function for histograms).
+  warnings.warn(msg, FutureWarning)
+</pre></div>
+</div>
+<img alt="_images/2_quality_of_fit_86_1.png" src="_images/2_quality_of_fit_86_1.png" />
 </div>
 </div>
 <p>If we know that our limits are −1.96 and 1.96 as z-scores, then to find out the corresponding scores in our raw data we can replace z in the equation (because there are two values, we get two equations):</p>
@@ -2245,7 +2260,11 @@ Upper boundary of CI 165.65161176688028
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="_images/2_quality_of_fit_89_0.png" src="_images/2_quality_of_fit_89_0.png" />
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/Users/jankirenz/opt/anaconda3/lib/python3.7/site-packages/seaborn/distributions.py:2619: FutureWarning: `distplot` is a deprecated function and will be removed in a future version. Please adapt your code to use either `displot` (a figure-level function with similar flexibility) or `histplot` (an axes-level function for histograms).
+  warnings.warn(msg, FutureWarning)
+</pre></div>
+</div>
+<img alt="_images/2_quality_of_fit_89_1.png" src="_images/2_quality_of_fit_89_1.png" />
 </div>
 </div>
 </div>
@@ -2363,7 +2382,7 @@ Upper boundary of CI 165.65161176688028
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/Users/jankirenz/anaconda3/lib/python3.6/site-packages/seaborn/regression.py:546: UserWarning: The `size` paramter has been renamed to `height`; please update your code.
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/Users/jankirenz/opt/anaconda3/lib/python3.7/site-packages/seaborn/regression.py:581: UserWarning: The `size` parameter has been renamed to `height`; please update your code.
   warnings.warn(msg, UserWarning)
 </pre></div>
 </div>
@@ -2423,7 +2442,11 @@ Upper boundary of CI (t-statistics) 165.69583627664076
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="_images/2_quality_of_fit_100_0.png" src="_images/2_quality_of_fit_100_0.png" />
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/Users/jankirenz/opt/anaconda3/lib/python3.7/site-packages/seaborn/distributions.py:2619: FutureWarning: `distplot` is a deprecated function and will be removed in a future version. Please adapt your code to use either `displot` (a figure-level function with similar flexibility) or `histplot` (an axes-level function for histograms).
+  warnings.warn(msg, FutureWarning)
+</pre></div>
+</div>
+<img alt="_images/2_quality_of_fit_100_1.png" src="_images/2_quality_of_fit_100_1.png" />
 </div>
 </div>
 <div class="cell docutils container">
@@ -2444,7 +2467,11 @@ Upper boundary of CI (t-statistics) 165.69583627664076
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="_images/2_quality_of_fit_101_0.png" src="_images/2_quality_of_fit_101_0.png" />
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/Users/jankirenz/opt/anaconda3/lib/python3.7/site-packages/seaborn/distributions.py:2619: FutureWarning: `distplot` is a deprecated function and will be removed in a future version. Please adapt your code to use either `displot` (a figure-level function with similar flexibility) or `histplot` (an axes-level function for histograms).
+  warnings.warn(msg, FutureWarning)
+</pre></div>
+</div>
+<img alt="_images/2_quality_of_fit_101_1.png" src="_images/2_quality_of_fit_101_1.png" />
 </div>
 </div>
 <hr class="docutils" />
