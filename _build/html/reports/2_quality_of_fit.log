@@ -26,7 +26,7 @@ lm.ess
 
 [0;31m---------------------------------------------------------------------------[0m
 [0;31mNameError[0m                                 Traceback (most recent call last)
-[0;32m/var/folders/35/43bdsj9j64j16410rds5g9vr0000gp/T/ipykernel_17547/1162982135.py[0m in [0;36m<module>[0;34m[0m
+[0;32m/var/folders/35/43bdsj9j64j16410rds5g9vr0000gp/T/ipykernel_19589/1162982135.py[0m in [0;36m<module>[0;34m[0m
 [1;32m      1[0m [0;31m# Explained sum of squares  (SS_M = TSS - SS_R)[0m[0;34m[0m[0;34m[0m[0;34m[0m[0m
 [0;32m----> 2[0;31m [0mSS_M[0m [0;34m=[0m [0mTSS[0m [0;34m-[0m [0mSS_R[0m[0;34m[0m[0;34m[0m[0m
 [0m[1;32m      3[0m [0mprint[0m[0;34m([0m[0mSS_M[0m[0;34m)[0m[0;34m[0m[0;34m[0m[0m
