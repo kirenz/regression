@@ -52,7 +52,7 @@
     <script async="async" src="_static/sphinx-thebe.js"></script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
-    <link rel="next" title="Regression with Simulated Data" href="2_simulated.html" />
+    <link rel="next" title="Regression diagnostics" href="4_diagnostics.html" />
     <link rel="prev" title="Welcome to your Jupyter Book" href="intro.html" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="docsearch:language" content="en" />
@@ -84,7 +84,7 @@
     </a>
 </div><form class="bd-search d-flex align-items-center" action="search.html" method="get">
   <i class="icon fas fa-search"></i>
-  <input type="search" class="form-control" name="q" id="search-input" placeholder="Dieses Buch durchsuchen ..." aria-label="Dieses Buch durchsuchen ..." autocomplete="off" >
+  <input type="search" class="form-control" name="q" id="search-input" placeholder="Search this book..." aria-label="Search this book..." autocomplete="off" >
 </form><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
     <div class="bd-toc-item active">
         <ul class="nav bd-sidenav">
@@ -108,37 +108,13 @@
 </ul>
 <p class="caption" role="heading">
  <span class="caption-text">
-  Simple Regression
- </span>
-</p>
-<ul class="nav bd-sidenav">
- <li class="toctree-l1 has-children">
-  <a class="reference internal" href="2_simulated.html">
-   Regression with Simulated Data
-  </a>
-  <input class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" type="checkbox"/>
-  <label for="toctree-checkbox-1">
-   <i class="fas fa-chevron-down">
-   </i>
-  </label>
-  <ul>
-   <li class="toctree-l2">
-    <a class="reference internal" href="3_quality_of_fit.html">
-     Quality of fit
-    </a>
-   </li>
-  </ul>
- </li>
-</ul>
-<p class="caption" role="heading">
- <span class="caption-text">
   Diagnostics
  </span>
 </p>
 <ul class="nav bd-sidenav">
  <li class="toctree-l1">
   <a class="reference internal" href="4_diagnostics.html">
-   Application 4: Linear regression diagnostics
+   Regression diagnostics
   </a>
  </li>
 </ul>
@@ -178,8 +154,8 @@
             
             <button id="navbar-toggler" class="navbar-toggler ml-0" type="button" data-toggle="collapse"
                 data-toggle="tooltip" data-placement="bottom" data-target=".site-navigation" aria-controls="navbar-menu"
-                aria-expanded="true" aria-label="Navigation umschalten" aria-controls="site-navigation"
-                title="Navigation umschalten" data-toggle="tooltip" data-placement="left">
+                aria-expanded="true" aria-label="Toggle navigation" aria-controls="site-navigation"
+                title="Toggle navigation" data-toggle="tooltip" data-placement="left">
                 <i class="fas fa-bars"></i>
                 <i class="fas fa-arrow-left"></i>
                 <i class="fas fa-arrow-up"></i>
@@ -187,7 +163,7 @@
             
             
 <div class="dropdown-buttons-trigger">
-    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn" aria-label="Laden Sie diese Seite herunter"><i
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn" aria-label="Download this page"><i
             class="fas fa-download"></i></button>
 
     <div class="dropdown-buttons">
@@ -195,10 +171,10 @@
         
         <!-- Download raw file -->
         <a class="dropdown-buttons" href="_sources/1_process.ipynb"><button type="button"
-                class="btn btn-secondary topbarbtn" title="Quelldatei herunterladen" data-toggle="tooltip"
+                class="btn btn-secondary topbarbtn" title="Download source file" data-toggle="tooltip"
                 data-placement="left">.ipynb</button></a>
         <!-- Download PDF via print -->
-        <button type="button" id="download-print" class="btn btn-secondary topbarbtn" title="In PDF drucken"
+        <button type="button" id="download-print" class="btn btn-secondary topbarbtn" title="Print to PDF"
             onClick="window.print()" data-toggle="tooltip" data-placement="left">.pdf</button>
     </div>
 </div>
@@ -211,12 +187,12 @@
     <div class="dropdown-buttons sourcebuttons">
         <a class="repository-button"
             href="https://github.com/executablebooks/jupyter-book"><button type="button" class="btn btn-secondary topbarbtn"
-                data-toggle="tooltip" data-placement="left" title="Quell-Repository"><i
-                    class="fab fa-github"></i>Repository</button></a>
+                data-toggle="tooltip" data-placement="left" title="Source repository"><i
+                    class="fab fa-github"></i>repository</button></a>
         <a class="issues-button"
             href="https://github.com/executablebooks/jupyter-book/issues/new?title=Issue%20on%20page%20%2F1_process.html&body=Your%20issue%20content%20here."><button
                 type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip" data-placement="left"
-                title="Öffnen Sie ein Problem"><i class="fas fa-lightbulb"></i>offenes Thema</button></a>
+                title="Open an issue"><i class="fas fa-lightbulb"></i>open issue</button></a>
         
     </div>
 </div>
@@ -224,8 +200,8 @@
             <!-- Full screen (wrap in <a> to have style consistency -->
 
 <a class="full-screen-button"><button type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip"
-        data-placement="bottom" onclick="toggleFullScreen()" aria-label="Vollbildmodus"
-        title="Vollbildmodus"><i
+        data-placement="bottom" onclick="toggleFullScreen()" aria-label="Fullscreen mode"
+        title="Fullscreen mode"><i
             class="fas fa-expand"></i></button></a>
 
             <!-- Launch buttons -->
@@ -236,7 +212,7 @@
     <div class="dropdown-buttons">
         
         <a class="binder-button" href="https://mybinder.org/v2/gh/executablebooks/jupyter-book/master?urlpath=tree/docs/1_process.ipynb"><button type="button"
-                class="btn btn-secondary topbarbtn" title="Starten Binder" data-toggle="tooltip"
+                class="btn btn-secondary topbarbtn" title="Launch Binder" data-toggle="tooltip"
                 data-placement="left"><img class="binder-button-logo"
                     src="_static/images/logo_binder.svg"
                     alt="Interact on binder">Binder</button></a>
@@ -253,7 +229,7 @@
         <div class="d-none d-md-block col-md-2 bd-toc show">
             
             <div class="tocsection onthispage pt-5 pb-3">
-                <i class="fas fa-list"></i> Inhalt
+                <i class="fas fa-list"></i> Contents
             </div>
             <nav id="bd-toc-nav" aria-label="Page">
                 <ul class="visible nav section-nav flex-column">
@@ -330,19 +306,19 @@
               <div>
                 
   <div class="tex2jax_ignore mathjax_ignore section" id="programming-process">
-<span id="file-types-notebooks"></span><h1>Programming Process<a class="headerlink" href="#programming-process" title="Permalink to this headline">¶</a></h1>
+<h1>Programming Process<a class="headerlink" href="#programming-process" title="Permalink to this headline">¶</a></h1>
 <p>The goal of this section is to give you a first impression of some important steps and tools in Python when
 doing data science projects. A typical data science project looks something like this (Wickham &amp; Grolemund, 2016):</p>
 <a class="bg-primary mb-1 reference internal image-reference" href="../img/2_data_science_process.png"><img alt="process" class="bg-primary mb-1 align-center" src="../img/2_data_science_process.png" style="width: 200px;" /></a>
 <p><strong>Import data</strong></p>
 <p>First you must <strong>import</strong> your data into Python. This typically means that you take data stored in a file, database, or web API, and load it into a DataFrame in Python (using Pandas).</p>
-<p><strong>2 Tidying data</strong></p>
+<p><strong>Tidying data</strong></p>
 <p>Once you’ve imported your data, it is a good idea to tidy it.
 <strong>Tidying</strong> your data means storing it in a consistent form that matches the semantics of the dataset with
 the way it is stored. In brief, when your data is tidy, each column is a variable, and each row is an observation. Tidy data is important because the consistent structure lets you focus your struggle on questions about the data.</p>
-<p><strong>3 Transform data</strong></p>
+<p><strong>Transform data</strong></p>
 <p>Once you have tidy data, a common first step is to transform it. <strong>Transformation</strong> includes narrowing in on observations of interest (like all people in one city, or all data from the last year), creating new variables that are functions of existing variables (like computing velocity from speed and time), and calculating a set of summary statistics (like counts or means). Together, tidying and transforming are called wrangling, because getting your data in a form that’s natural to work with often feels like a fight!</p>
-<p><strong>4 Visualize data</strong></p>
+<p><strong>Visualize data</strong></p>
 <p>Once you have tidy data with the variables you need, there are two main engines of knowledge generation:
 visualisation and modelling. These have complementary strengths and weaknesses so any real analysis
 will iterate between them many times.</p>
@@ -350,11 +326,11 @@ will iterate between them many times.</p>
 you did not expect, or raise new questions about the data. A good visualisation might also hint that
 you’re asking the wrong question, or you need to collect different data.
 Visualisations can surprise you, but don’t scale particularly well because they require a human to interpret them.</p>
-<p><strong>5 Models</strong></p>
+<p><strong>Models</strong></p>
 <p><strong>Models</strong> are complementary tools to visualisation. Once you have made your questions sufficiently precise,
 you can use a model to answer them. Models are a fundamentally mathematical or computational tool,
 so they generally scale well.</p>
-<p><strong>6 Communication</strong></p>
+<p><strong>Communication</strong></p>
 <p>The last step is <strong>communication</strong>, an absolutely critical part of any data analysis project.
 It doesn’t matter how well your models and visualisation have led you to understand the data unless
 you can also communicate your results to others.</p>
@@ -1109,7 +1085,7 @@ missing values. In that case, it could be reasonable to only drop the variable:<
     </tr>
     <tr>
       <th>top</th>
-      <td>7373</td>
+      <td>453870</td>
       <td>2003</td>
       <td>2. HS Grad</td>
     </tr>
@@ -1347,7 +1323,12 @@ Name: age, dtype: float64
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="_images/1_process_52_0.png" src="_images/1_process_52_0.png" />
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/Users/jankirenz/opt/anaconda3/lib/python3.7/site-packages/pandas/plotting/_matplotlib/tools.py:331: MatplotlibDeprecationWarning: 
+The is_first_col function was deprecated in Matplotlib 3.4 and will be removed two minor releases later. Use ax.get_subplotspec().is_first_col() instead.
+  if ax.is_first_col():
+</pre></div>
+</div>
+<img alt="_images/1_process_52_1.png" src="_images/1_process_52_1.png" />
 </div>
 </div>
 <p>We can also use Seaborne to plot a histogram with a kernel density estimate:</p>
@@ -1469,10 +1450,10 @@ You can see covariation as a pattern in the points. We will cover more options t
         </a>
     </div>
      <div id="next">
-        <a class="right-next" href="2_simulated.html" title="next page">
+        <a class="right-next" href="4_diagnostics.html" title="next page">
             <div class="prevnext-info">
                 <p class="prevnext-label">next</p>
-                <p class="prevnext-title">Regression with Simulated Data</p>
+                <p class="prevnext-title">Regression diagnostics</p>
             </div>
             <i class="prevnext-label fas fa-angle-right"></i>
         </a>
@@ -1486,9 +1467,9 @@ You can see covariation as a pattern in the points. We will cover more options t
     <div class="container">
       <p>
         
-          Durch Jan Kirenz<br/>
+          By Jan Kirenz<br/>
         
-            &copy; Urheberrechte © 2021.<br/>
+            &copy; Copyright 2021.<br/>
       </p>
     </div>
   </footer>

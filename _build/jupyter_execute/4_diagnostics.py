@@ -6,14 +6,12 @@
 
 import numpy as np
 import pandas as pd
-from pandas.api.types import CategoricalDtype
-from scipy import stats
+
 import statsmodels.api as sm
 import statsmodels.formula.api as smf
 from statsmodels.compat import lzip
-from statsmodels.stats.outliers_influence import summary_table
 from statsmodels.graphics.gofplots import ProbPlot
-from statsmodels.stats.outliers_influence import OLSInfluence
+
 from statsmodels.graphics.regressionplots import plot_leverage_resid2
 from statsmodels.stats.outliers_influence import variance_inflation_factor
 from patsy import dmatrices
@@ -25,7 +23,7 @@ sns.set()
 from IPython.display import Image
 
 
-# # Application 4: Linear regression diagnostics
+# # Regression diagnostics
 # 
 # When we fit a linear regression model to a particular data set, many problems may occur. Most common among these are the following:
 # 
@@ -36,105 +34,87 @@ from IPython.display import Image
 # 5. High-leverage points.
 # 6. Multicollinearity.
 # 
-# In many cases of statistical analysis, we are not sure whether our statistical model is correctly specified. For example when using ols, then linearity and homoscedasticity are assumed, some test statistics additionally assume that the errors are normally distributed or that we have a large sample. Since our results depend on these statistical assumptions, the results are only correct of our assumptions hold (at least approximately).
+# In many cases of statistical analysis, we are not sure whether our statistical model is correctly specified. For example when using OLS, then linearity and homoscedasticity are assumed, some test statistics additionally assume that the errors are normally distributed or that we have a large sample. Since our results depend on these statistical assumptions, the results are only correct of our assumptions hold (at least approximately).
 # 
-# One solution to the problem of uncertainty about the correct specification is to use robust methods, for example robust regression or robust covariance (sandwich) estimators. 
+# One solution to the problem of uncertainty about the correct specification is to use robust methods, for example robust regression or robust covariance estimators. The second approach is to test whether our sample is consistent with these assumptions, which we cover in this application.
 # 
-# The second approach is to test whether our sample is consistent with these assumptions, which we cover in this application.
-# 
-# Source: [Statsmodel](https://www.statsmodels.org/stable/diagnostic.html)
-# 
-# For presentation purposes, we use the zip(name,test) construct to pretty-print short descriptions in the codes below.
-# 
-# ---
 # Sources
 # 
-# See Statsmodels [regression diagnostic page](https://www.statsmodels.org/stable/diagnostic.html) and [Statsmodel examples with code](https://www.statsmodels.org/dev/examples/notebooks/generated/regression_diagnostics.html)
+# - Statsmodels [regression diagnostic page](https://www.statsmodels.org/stable/diagnostic.html) 
+# - [Statsmodel examples with code](https://www.statsmodels.org/dev/examples/notebooks/generated/regression_diagnostics.html)
 
-# ## 1 Import data
+# ## Import and inspect data
 
 # In[2]:
 
 
 # Load the csv data files into pandas dataframes
-PATH = '/Users/jankirenz/Dropbox/Data/' 
-df = pd.read_csv(PATH + 'Auto.csv')
+ROOT = "https://raw.githubusercontent.com/kirenz/datasets/master/"
+DATA = "Auto.csv"
 
+df = pd.read_csv(ROOT + DATA)
 
-# ## Tidying data
 
 # In[3]:
+
+
+# show the first rows (i.e. head of the DataFrame)
+df.head()
+
+
+# In[4]:
+
+
+df.tail()
+
+
+# In[5]:
+
+
+df.info()
+
+
+# In[6]:
 
 
 # show all variables in the data set
 df.columns
 
 
-# In[4]:
-
-
-# show the first 5 rows (i.e. head of the DataFrame)
-df.head(5)
-
-
-# In[5]:
-
-
-# show the lenght of the variable id (i.e. the number of observations)
-len(df["name"])
-
-
-# In[6]:
-
-
-# check for duplicates and print results (if the two numbers match, we have no duplicates)
-# show the lenght of the variable id (i.e. the number of observations)
-print(f'IDs: {len(df["name"])}')
-# count the number of individual id's
-print(f'Unique IDs: {len(df["name"].value_counts())}')
-
-
-# It is not possible to easily check for duplicates since it is plausible that there are multiple car types of the same name...
+# ## Tidying data
 
 # In[7]:
-
-
-# data overview (with meta data)
-df.info()
-
-
-# In[8]:
 
 
 # change data type
 df['origin'] = pd.Categorical(df['origin'])
 df['year'] = pd.Categorical(df['year'], ordered=True)
-#df['horsepower'] = pd.to_numeric(df['horsepower']) # produces error
-df['horsepower'] = pd.to_numeric(df['horsepower'], errors='coerce') # solution
+df['horsepower'] = pd.to_numeric(df['horsepower'], errors='coerce') 
 
 
 # ### Handle missing values
 
-# In[9]:
+# In[8]:
 
 
 # show missing values (missing values - if present - will be displayed in yellow )
 sns.heatmap(df.isnull(),yticklabels=False,cbar=False,cmap='viridis');
 
 
-# In[10]:
+# In[9]:
 
 
 print(df.isnull().sum())
 
 
-# In[11]:
+# In[10]:
 
 
+# there are only 5 missing values therefore we delete the rows
 df = df.dropna()
 
 
-# In[12]:
+# In[11]:
 
 
 print(df.isnull().sum())
@@ -142,14 +122,14 @@ print(df.isnull().sum())
 
 # ## Transform data
 
-# In[13]:
+# In[12]:
 
 
 # summary statistics for all numerical columns
 round(df.describe(),2)
 
 
-# In[14]:
+# In[13]:
 
 
 # summary statistics for all categorical columns
@@ -158,51 +138,56 @@ df.describe(include=['category'])
 
 # # Regression diagnostics
 
-# In[15]:
+# In[14]:
 
 
 # fit linear model with statsmodels.formula.api (with R-style formulas) 
 lm = smf.ols(formula ='mpg ~ horsepower', data=df).fit()
-#lm.summary()
+lm.summary()
 
 
-# # 1. Non-linearity of the response-predictor relationships
+# ## Non-linearity
 
 # ###  Harvey-Collier multiplier test
+# 
 # Harvey-Collier multiplier test for Null hypothesis that the linear specification is correct. This test is a t-test that the mean of the recursive ols residuals is zero. 
 # 
 # A significant result (rejecting the null) occurs when the fit is better with a range restriction (which is what happens if the model is nonlinear).
 
-# In[16]:
+# In[15]:
 
 
 name = ['t value', 'p value']
 test = sm.stats.linear_harvey_collier(lm)
+
+# show result
 lzip(name, test)
 
 
-# ---
+# ###  Residuals vs fitted plot
+# 
 # Residual plots are also a very useful graphical tool for identifying non-linearity:
 
-# ###  Residuals vs fitted plot
-
-# In[17]:
+# In[16]:
 
 
 # fitted values
-model_fitted_y = lm.fittedvalues;
-# Basic plot
-plot = sns.residplot(model_fitted_y, 'mpg', data=df, lowess=True, 
-                     scatter_kws={'alpha': 0.5}, 
-                     line_kws={'color': 'red', 
-                               'lw': 1, 'alpha': 0.8});
+model_fitted_y = lm.fittedvalues
 
-plot.set_title('Residuals vs Fitted');
-plot.set_xlabel('Fitted values');
+#  Plot
+plot = sns.residplot(x=model_fitted_y, y='mpg', data=df, lowess=True, 
+                     scatter_kws={'alpha': 0.5}, 
+                     line_kws={'color': 'red', 'lw': 1, 'alpha': 0.8})
+
+# Titel and labels
+plot.set_title('Residuals vs Fitted')
+plot.set_xlabel('Fitted values')
 plot.set_ylabel('Residuals');
 
 
-# The residuals are not equally spread around a horizontal line which is an indication for a non-linear relationship. This means there seems to be a non-linear relationship between the predictor and the response variable which the model doesn’t capture.
+# The residuals are not equally spread around a horizontal line which is an indication for a **non-linear** relationship. 
+# 
+# This means there seems to be a non-linear relationship between the predictor and the response variable which the model doesn’t capture.
 
 # **Advanced Plots:**
 # 
@@ -210,12 +195,13 @@ plot.set_ylabel('Residuals');
 # 
 # The code for the advanced plots was obtained from [here](https://medium.com/@emredjan/emulating-r-regression-plots-in-python-43741952c034) 
 
-# **Advanced Residuals vs fitted plot (not necessary)**
+# Advanced Residuals vs fitted plot
 
-# In[18]:
+# In[17]:
 
 
 # Necessary values for our advanced plots:
+
 # fitted values
 model_fitted_y = lm.fittedvalues;
 # model residuals
@@ -228,7 +214,7 @@ model_norm_residuals_abs_sqrt = np.sqrt(np.abs(model_norm_residuals))
 model_abs_resid = np.abs(model_residuals)
 
 
-# In[19]:
+# In[18]:
 
 
 # Advanced plot (1)
@@ -237,9 +223,8 @@ plot = plt.figure(1)
 plot.set_figheight(8)
 plot.set_figwidth(12)
 # generate figure with sns.residplot 
-plot.axes[0] = sns.residplot(model_fitted_y, 'mpg', data=df, 
-                          lowess=True, 
-                          scatter_kws={'alpha': 0.5}, 
+plot.axes[0] = sns.residplot(x=model_fitted_y, y='mpg', data=df, 
+                          lowess=True, scatter_kws={'alpha': 0.5}, 
                           line_kws={'color': 'red', 'lw': 1, 'alpha': 0.8})
 # label axes
 plot.axes[0].set_title('Residuals vs Fitted')
@@ -251,39 +236,37 @@ abs_resid = model_abs_resid.sort_values(ascending=False)
 abs_resid_top_3 = abs_resid[:3]
 
 for i in abs_resid_top_3.index:
-    plot.axes[0].annotate(i, 
-                        xy=(model_fitted_y[i], 
-                        model_residuals[i]));
+    plot.axes[0].annotate(i, xy=(model_fitted_y[i], model_residuals[i]));
 
 
-# #### POSSIBLE SOLUTION FOR IDENTIFIED NON-LINEARITY
+# ### Deal with non-linearity 
 
 # We can fit a non-linear function (polynomial regression)
 
-# In[20]:
+# In[19]:
+
 
 
 lm_2 = smf.ols(formula='mpg ~ horsepower + I(horsepower**2)', data=df).fit()
-#lm_2.summary()
+lm_2.summary()
 
 
-# In[21]:
+# In[20]:
 
 
 # fitted values
 model_fitted_y_2 = lm_2.fittedvalues;
 # Basic plot
-plot = sns.residplot(model_fitted_y_2, 'mpg', data=df, lowess=True, 
+plot = sns.residplot(x=model_fitted_y_2, y='mpg', data=df, lowess=True, 
                      scatter_kws={'alpha': 0.5}, 
-                     line_kws={'color': 'red', 
-                               'lw': 1, 'alpha': 0.8});
+                     line_kws={'color': 'red', 'lw': 1, 'alpha': 0.8});
 
 plot.set_title('Residuals vs Fitted');
 plot.set_xlabel('Fitted values');
 plot.set_ylabel('Residuals');
 
 
-# # 2. Normality of the residuals
+# ## Normality of the residuals
 # 
 # It can be helpful if the residuals in the model are random, normally distributed variables with a mean of 0. 
 # 
@@ -301,11 +284,12 @@ plot.set_ylabel('Residuals');
 # 
 # Samples from a normal distribution have an expected skewness of 0 and an expected excess kurtosis of 0 (which is the same as a kurtosis of 3). As the definition of JB shows, any deviation from this increases the JB statistic.
 
-# In[22]:
+# In[21]:
 
 
 name = ['Jarque-Bera', 'Chi^2 two-tail prob.', 'Skew', 'Kurtosis']
 test = sm.stats.jarque_bera(lm.resid)
+
 lzip(name, test)
 
 
@@ -315,7 +299,7 @@ lzip(name, test)
 # 
 # Our null hypothesis is that the residuals are from a normal distribution.
 
-# In[23]:
+# In[22]:
 
 
 name = ['Chi^2', 'Two-tail probability']
@@ -323,7 +307,7 @@ test = sm.stats.omni_normtest(lm.resid)
 lzip(name, test)
 
 
-# ## Notes on outliers.
+# ## Outliers
 # 
 # An outlier is a point for which $y_i$ is far from the value predicted by the model. Outliers can arise for a variety of reasons, such as incorrect recording of an observation during data collection.
 # 
@@ -337,7 +321,7 @@ lzip(name, test)
 # 
 # This plots the standardized (z-score) residuals against the theoretical normal quantiles. Anything quite off the diagonal lines may be a concern for further investigation.
 
-# In[24]:
+# In[23]:
 
 
 # Use standardized residuals
@@ -351,7 +335,7 @@ sm.qqplot(lm.get_influence().resid_studentized_internal);
 
 # **Advanced QQ-Plot**
 
-# In[25]:
+# In[24]:
 
 
 # Advanced plot (2)
@@ -391,7 +375,7 @@ for r, i in enumerate(abs_norm_resid_top_3):
 # 
 # As a rough rule of thumb, if Durbin–Watson is less than 1.0, there may be cause for alarm. Small values of d indicate successive error terms are positively correlated. If d > 2, successive error terms are negatively correlated.
 
-# In[26]:
+# In[25]:
 
 
 sm.stats.durbin_watson(lm.resid)
@@ -411,7 +395,7 @@ sm.stats.durbin_watson(lm.resid)
 # 
 # Test assumes homoskedasticity (null hypothesis). If one of the test statistics is significant, then you have evidence of heteroskedasticity. 
 
-# In[27]:
+# In[26]:
 
 
 name = ['Lagrange multiplier statistic', 'p-value', 
@@ -422,12 +406,12 @@ lzip(name, test)
 
 # ### Scale-Location plot
 
-# In[28]:
+# In[27]:
 
 
 # Scale Location plot
-plt.scatter(model_fitted_y, model_norm_residuals_abs_sqrt, alpha=0.5)
-sns.regplot(model_fitted_y, model_norm_residuals_abs_sqrt, 
+plt.scatter(x=model_fitted_y, y=model_norm_residuals_abs_sqrt, alpha=0.5)
+sns.regplot(x=model_fitted_y, y=model_norm_residuals_abs_sqrt, 
             scatter=False, 
             ci=False, 
             lowess=True,
@@ -450,14 +434,14 @@ sns.regplot(model_fitted_y, model_norm_residuals_abs_sqrt,
 # 
 # Once created, an object of class OLSInfluence holds attributes and methods that allow users to assess the influence of each observation. 
 
-# In[29]:
+# In[28]:
 
 
 # obtain statistics
 infl = lm.get_influence()
 
 
-# In[30]:
+# In[29]:
 
 
 lm_cooksd = lm.get_influence().cooks_distance[0]
@@ -470,7 +454,7 @@ out_d = lm_cooksd > critical_d
 df.index[out_d],lm_cooksd[out_d]
 
 
-# In[31]:
+# In[30]:
 
 
 # Show summary frame of leverage statistics
@@ -481,17 +465,14 @@ print(infl.summary_frame().filter(["student_resid","dffits","cooks_d"]))
 
 # Plots leverage statistics vs. normalized residuals squared. See [statsmodel documentation](http://www.statsmodels.org/0.6.1/generated/statsmodels.graphics.regressionplots.plot_leverage_resid2.html)
 
-# In[32]:
+# In[31]:
 
 
 fig, ax = plt.subplots(figsize=(8,6))
 fig = plot_leverage_resid2(lm, ax = ax)
 
 
-# ---
-# ---
-
-# # 6. Multicollinearity.
+# # Multicollinearity
 # 
 # Collinearity refers to the situation in which two or more predictor variables collinearity are closely related to one another.
 # 
@@ -499,21 +480,21 @@ fig = plot_leverage_resid2(lm, ax = ax)
 # 
 # In other words, since limit and rating tend to increase or decrease together, it can be difficult to determine how each one separately is associated with the response, balance.
 
-# In[33]:
+# In[32]:
 
 
 # plot all variables in a scatter matrix
 pd.plotting.scatter_matrix(df, alpha=0.8, figsize=(10, 10), diagonal='kde');
 
 
-# In[34]:
+# In[33]:
 
 
 # Inspect correlation
 # Calculate correlation using the default method ( "pearson")
 corr = df.corr()
 # optimize aesthetics: generate mask for removing duplicate / unnecessary info
-mask = np.zeros_like(corr, dtype=np.bool)
+mask = np.zeros_like(corr, dtype=bool)
 mask[np.triu_indices_from(mask)] = True
 # Generate a custom diverging colormap as indicator for correlations:
 cmap = sns.diverging_palette(220, 10, as_cmap=True)
@@ -527,7 +508,7 @@ sns.heatmap(corr, mask=mask, cmap=cmap, annot=True,  square=True, annot_kws={"si
 # 
 # Instead of inspecting the correlation matrix, a better way to assess multicollinearity is to compute the condition number test. If the condition number is above 30, the regression may have significant multicollinearity.
 
-# In[35]:
+# In[34]:
 
 
 # makes here no sense since we only have one predictor...
@@ -536,7 +517,7 @@ np.linalg.cond(lm.model.exog)
 
 # Instead of inspecting the correlation matrix, a better way to assess multicollinearity is to compute the variance inflation factor (VIF). The smallest possible value for VIF is 1, which indicates the complete absence of collinearity. Typically in practice there is a small amount of collinearity among the predictors. As a rule of thumb, a VIF value that exceeds 5 or 10 indicates a problematic amount of collinearity.
 
-# In[36]:
+# In[35]:
 
 
 y, X = dmatrices('mpg ~ horsepower+ cylinders + displacement', df, return_type='dataframe')

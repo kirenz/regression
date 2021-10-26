@@ -1,8 +1,6 @@
 #!/usr/bin/env python
 # coding: utf-8
 
-# (file-types:notebooks)=
-# 
 # # Programming Process
 # 
 # The goal of this section is to give you a first impression of some important steps and tools in Python when
@@ -20,17 +18,17 @@
 # 
 # First you must **import** your data into Python. This typically means that you take data stored in a file, database, or web API, and load it into a DataFrame in Python (using Pandas).
 # 
-# **2 Tidying data**
+# **Tidying data**
 # 
 # Once you’ve imported your data, it is a good idea to tidy it.
 # **Tidying** your data means storing it in a consistent form that matches the semantics of the dataset with
 # the way it is stored. In brief, when your data is tidy, each column is a variable, and each row is an observation. Tidy data is important because the consistent structure lets you focus your struggle on questions about the data.
 # 
-# **3 Transform data**
+# **Transform data**
 # 
 # Once you have tidy data, a common first step is to transform it. **Transformation** includes narrowing in on observations of interest (like all people in one city, or all data from the last year), creating new variables that are functions of existing variables (like computing velocity from speed and time), and calculating a set of summary statistics (like counts or means). Together, tidying and transforming are called wrangling, because getting your data in a form that’s natural to work with often feels like a fight!
 # 
-# **4 Visualize data**
+# **Visualize data**
 # 
 # Once you have tidy data with the variables you need, there are two main engines of knowledge generation:
 # visualisation and modelling. These have complementary strengths and weaknesses so any real analysis
@@ -41,13 +39,13 @@
 # you’re asking the wrong question, or you need to collect different data.
 # Visualisations can surprise you, but don’t scale particularly well because they require a human to interpret them.
 # 
-# **5 Models**
+# **Models**
 # 
 # **Models** are complementary tools to visualisation. Once you have made your questions sufficiently precise,
 # you can use a model to answer them. Models are a fundamentally mathematical or computational tool,
 #  so they generally scale well. 
 # 
-# **6 Communication**
+# **Communication**
 # 
 # The last step is **communication**, an absolutely critical part of any data analysis project.
 # It doesn't matter how well your models and visualisation have led you to understand the data unless
