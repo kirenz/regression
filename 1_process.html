@@ -52,7 +52,7 @@
     <script async="async" src="_static/sphinx-thebe.js"></script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
-    <link rel="next" title="Regression with Simulated Data" href="2_simulated.html" />
+    <link rel="next" title="Regression diagnostics" href="4_diagnostics.html" />
     <link rel="prev" title="Welcome to your Jupyter Book" href="intro.html" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="docsearch:language" content="en" />
@@ -84,7 +84,7 @@
     </a>
 </div><form class="bd-search d-flex align-items-center" action="search.html" method="get">
   <i class="icon fas fa-search"></i>
-  <input type="search" class="form-control" name="q" id="search-input" placeholder="Dieses Buch durchsuchen ..." aria-label="Dieses Buch durchsuchen ..." autocomplete="off" >
+  <input type="search" class="form-control" name="q" id="search-input" placeholder="Search this book..." aria-label="Search this book..." autocomplete="off" >
 </form><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
     <div class="bd-toc-item active">
         <ul class="nav bd-sidenav">
@@ -108,37 +108,13 @@
 </ul>
 <p class="caption" role="heading">
  <span class="caption-text">
-  Simple Regression
- </span>
-</p>
-<ul class="nav bd-sidenav">
- <li class="toctree-l1 has-children">
-  <a class="reference internal" href="2_simulated.html">
-   Regression with Simulated Data
-  </a>
-  <input class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" type="checkbox"/>
-  <label for="toctree-checkbox-1">
-   <i class="fas fa-chevron-down">
-   </i>
-  </label>
-  <ul>
-   <li class="toctree-l2">
-    <a class="reference internal" href="3_quality_of_fit.html">
-     Quality of fit
-    </a>
-   </li>
-  </ul>
- </li>
-</ul>
-<p class="caption" role="heading">
- <span class="caption-text">
   Diagnostics
  </span>
 </p>
 <ul class="nav bd-sidenav">
  <li class="toctree-l1">
   <a class="reference internal" href="4_diagnostics.html">
-   Application 4: Linear regression diagnostics
+   Regression diagnostics
   </a>
  </li>
 </ul>
@@ -178,8 +154,8 @@
             
             <button id="navbar-toggler" class="navbar-toggler ml-0" type="button" data-toggle="collapse"
                 data-toggle="tooltip" data-placement="bottom" data-target=".site-navigation" aria-controls="navbar-menu"
-                aria-expanded="true" aria-label="Navigation umschalten" aria-controls="site-navigation"
-                title="Navigation umschalten" data-toggle="tooltip" data-placement="left">
+                aria-expanded="true" aria-label="Toggle navigation" aria-controls="site-navigation"
+                title="Toggle navigation" data-toggle="tooltip" data-placement="left">
                 <i class="fas fa-bars"></i>
                 <i class="fas fa-arrow-left"></i>
                 <i class="fas fa-arrow-up"></i>
@@ -187,7 +163,7 @@
             
             
 <div class="dropdown-buttons-trigger">
-    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn" aria-label="Laden Sie diese Seite herunter"><i
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn" aria-label="Download this page"><i
             class="fas fa-download"></i></button>
 
     <div class="dropdown-buttons">
@@ -195,10 +171,10 @@
         
         <!-- Download raw file -->
         <a class="dropdown-buttons" href="_sources/1_process.ipynb"><button type="button"
-                class="btn btn-secondary topbarbtn" title="Quelldatei herunterladen" data-toggle="tooltip"
+                class="btn btn-secondary topbarbtn" title="Download source file" data-toggle="tooltip"
                 data-placement="left">.ipynb</button></a>
         <!-- Download PDF via print -->
-        <button type="button" id="download-print" class="btn btn-secondary topbarbtn" title="In PDF drucken"
+        <button type="button" id="download-print" class="btn btn-secondary topbarbtn" title="Print to PDF"
             onClick="window.print()" data-toggle="tooltip" data-placement="left">.pdf</button>
     </div>
 </div>
@@ -211,12 +187,12 @@
     <div class="dropdown-buttons sourcebuttons">
         <a class="repository-button"
             href="https://github.com/executablebooks/jupyter-book"><button type="button" class="btn btn-secondary topbarbtn"
-                data-toggle="tooltip" data-placement="left" title="Quell-Repository"><i
-                    class="fab fa-github"></i>Repository</button></a>
+                data-toggle="tooltip" data-placement="left" title="Source repository"><i
+                    class="fab fa-github"></i>repository</button></a>
         <a class="issues-button"
             href="https://github.com/executablebooks/jupyter-book/issues/new?title=Issue%20on%20page%20%2F1_process.html&body=Your%20issue%20content%20here."><button
                 type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip" data-placement="left"
-                title="Öffnen Sie ein Problem"><i class="fas fa-lightbulb"></i>offenes Thema</button></a>
+                title="Open an issue"><i class="fas fa-lightbulb"></i>open issue</button></a>
         
     </div>
 </div>
@@ -224,8 +200,8 @@
             <!-- Full screen (wrap in <a> to have style consistency -->
 
 <a class="full-screen-button"><button type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip"
-        data-placement="bottom" onclick="toggleFullScreen()" aria-label="Vollbildmodus"
-        title="Vollbildmodus"><i
+        data-placement="bottom" onclick="toggleFullScreen()" aria-label="Fullscreen mode"
+        title="Fullscreen mode"><i
             class="fas fa-expand"></i></button></a>
 
             <!-- Launch buttons -->
@@ -236,7 +212,7 @@
     <div class="dropdown-buttons">
         
         <a class="binder-button" href="https://mybinder.org/v2/gh/executablebooks/jupyter-book/master?urlpath=tree/docs/1_process.ipynb"><button type="button"
-                class="btn btn-secondary topbarbtn" title="Starten Binder" data-toggle="tooltip"
+                class="btn btn-secondary topbarbtn" title="Launch Binder" data-toggle="tooltip"
                 data-placement="left"><img class="binder-button-logo"
                     src="_static/images/logo_binder.svg"
                     alt="Interact on binder">Binder</button></a>
@@ -253,7 +229,7 @@
         <div class="d-none d-md-block col-md-2 bd-toc show">
             
             <div class="tocsection onthispage pt-5 pb-3">
-                <i class="fas fa-list"></i> Inhalt
+                <i class="fas fa-list"></i> Contents
             </div>
             <nav id="bd-toc-nav" aria-label="Page">
                 <ul class="visible nav section-nav flex-column">
@@ -263,59 +239,52 @@
   </a>
  </li>
  <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#import-data">
-   1 Import data
+  <a class="reference internal nav-link" href="#import-and-inspect-data">
+   Import and inspect data
   </a>
-  <ul class="nav section-nav flex-column">
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#data-inspection">
-     1.1 Data inspection
-    </a>
-   </li>
-  </ul>
  </li>
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#tidying-data">
-   2 Tidying data
-  </a>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#data-types">
-   2.1 Data types
+   Tidying data
   </a>
   <ul class="nav section-nav flex-column">
    <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#data-types">
+     Data types
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
     <a class="reference internal nav-link" href="#handle-missing-values">
-     2.2 Handle missing values
+     Handle missing values
     </a>
    </li>
   </ul>
  </li>
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#transform-data">
-   3 Transform data
+   Transform data
   </a>
   <ul class="nav section-nav flex-column">
    <li class="toc-h3 nav-item toc-entry">
     <a class="reference internal nav-link" href="#descriptive-statistics">
-     3.1 Descriptive statistics
+     Descriptive statistics
     </a>
    </li>
   </ul>
  </li>
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#visualize-data">
-   4. Visualize data
+   Visualize data
   </a>
   <ul class="nav section-nav flex-column">
    <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#distribution-of-variables">
-     4.1 Distribution of Variables
+    <a class="reference internal nav-link" href="#distribution">
+     Distribution
     </a>
    </li>
    <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#relationship-between-variables">
-     4.2 Relationship between variables
+    <a class="reference internal nav-link" href="#relationship">
+     Relationship
     </a>
    </li>
   </ul>
@@ -324,13 +293,6 @@
   <a class="reference internal nav-link" href="#model">
    5 Model
   </a>
-  <ul class="nav section-nav flex-column">
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#sources">
-     Sources
-    </a>
-   </li>
-  </ul>
  </li>
 </ul>
 
@@ -346,31 +308,17 @@
   <div class="tex2jax_ignore mathjax_ignore section" id="programming-process">
 <h1>Programming Process<a class="headerlink" href="#programming-process" title="Permalink to this headline">¶</a></h1>
 <p>The goal of this section is to give you a first impression of some important steps and tools in Python when
-doing data science projects.</p>
-<p>A typical data science project looks something like this (Wickham &amp; Grolemund, 2016):</p>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="ch">#![Image](&#39;img/2_data_science_process.png&#39;)</span>
-</pre></div>
-</div>
-</div>
-</div>
-<p>Import data</p>
-<p>First you must <strong>import</strong> your data into Python. This typically means that you take data stored in a file, database,
-or web API, and load it into a DataFrame in Python (using Pandas).</p>
-<p>2 Tidying data</p>
+doing data science projects. A typical data science project looks something like this (Wickham &amp; Grolemund, 2016):</p>
+<a class="bg-primary mb-1 reference internal image-reference" href="../img/2_data_science_process.png"><img alt="process" class="bg-primary mb-1 align-center" src="../img/2_data_science_process.png" style="width: 200px;" /></a>
+<p><strong>Import data</strong></p>
+<p>First you must <strong>import</strong> your data into Python. This typically means that you take data stored in a file, database, or web API, and load it into a DataFrame in Python (using Pandas).</p>
+<p><strong>Tidying data</strong></p>
 <p>Once you’ve imported your data, it is a good idea to tidy it.
 <strong>Tidying</strong> your data means storing it in a consistent form that matches the semantics of the dataset with
-the way it is stored. In brief, when your data is tidy, each column is a variable, and each row is an observation.
-Tidy data is important because the consistent structure lets you focus your struggle on questions about the data.</p>
-<p>3 Transform data</p>
-<p>Once you have tidy data, a common first step is to transform it.
-<strong>Transformation</strong> includes narrowing in on observations of interest
-(like all people in one city, or all data from the last year), creating new variables that are functions of
-existing variables (like computing velocity from speed and time), and calculating a set of
-summary statistics (like counts or means). Together, tidying and transforming are called wrangling,
-because getting your data in a form that’s natural to work with often feels like a fight!</p>
-<p>4 Visualize data</p>
+the way it is stored. In brief, when your data is tidy, each column is a variable, and each row is an observation. Tidy data is important because the consistent structure lets you focus your struggle on questions about the data.</p>
+<p><strong>Transform data</strong></p>
+<p>Once you have tidy data, a common first step is to transform it. <strong>Transformation</strong> includes narrowing in on observations of interest (like all people in one city, or all data from the last year), creating new variables that are functions of existing variables (like computing velocity from speed and time), and calculating a set of summary statistics (like counts or means). Together, tidying and transforming are called wrangling, because getting your data in a form that’s natural to work with often feels like a fight!</p>
+<p><strong>Visualize data</strong></p>
 <p>Once you have tidy data with the variables you need, there are two main engines of knowledge generation:
 visualisation and modelling. These have complementary strengths and weaknesses so any real analysis
 will iterate between them many times.</p>
@@ -378,25 +326,19 @@ will iterate between them many times.</p>
 you did not expect, or raise new questions about the data. A good visualisation might also hint that
 you’re asking the wrong question, or you need to collect different data.
 Visualisations can surprise you, but don’t scale particularly well because they require a human to interpret them.</p>
-<p>5 Models</p>
+<p><strong>Models</strong></p>
 <p><strong>Models</strong> are complementary tools to visualisation. Once you have made your questions sufficiently precise,
 you can use a model to answer them. Models are a fundamentally mathematical or computational tool,
-so they generally scale well. But every model makes assumptions, and by its very nature a model cannot
-question its own assumptions. That means a model cannot fundamentally surprise you.</p>
-<p>6 Communication</p>
+so they generally scale well.</p>
+<p><strong>Communication</strong></p>
 <p>The last step is <strong>communication</strong>, an absolutely critical part of any data analysis project.
 It doesn’t matter how well your models and visualisation have led you to understand the data unless
 you can also communicate your results to others.</p>
 <div class="section" id="programming">
 <h2>Programming<a class="headerlink" href="#programming" title="Permalink to this headline">¶</a></h2>
-<p>Surrounding all the data science steps covered above is <strong>programming</strong>. Programming is a cross-cutting tool that you use in every part
-of the project. You don’t need to be an expert programmer to be a data scientist, but learning more about
-programming pays off because becoming a better programmer allows you to automate
+<p>Surrounding all the data science steps covered above is <strong>programming</strong>. Programming is a cross-cutting tool that you use in every part of the project. You don’t need to be an expert programmer to be a data scientist, but learning more about programming pays off because becoming a better programmer allows you to automate
 common tasks, and solve new problems with greater ease.</p>
-<p>To demonstrate the programming process, we examine a dataset which contains variables that could relate to <strong>wages</strong>
-for a group of males. The data is obtained from James et al. (2021)
-and consists of 12 variables for 3,000 people, so we have n = 3,000 observations and
-p = 12 variables (such as year, age, and more).</p>
+<p>To demonstrate the programming process, we examine a dataset which contains variables that could relate to <strong>wages</strong> for a group of males. The data is obtained from James et al. (2021) and consists of 12 variables for 3,000 people, so we have n = 3,000 observations and p = 12 variables (such as year, age, and more).</p>
 <p>First, we take a look at some important Python modules and functions.</p>
 <p><strong>Module overview:</strong></p>
 <ul class="simple">
@@ -421,8 +363,8 @@ transform data. To learn more about pandas, review this <a class="reference exte
 </div>
 </div>
 </div>
-<div class="section" id="import-data">
-<h2>1 Import data<a class="headerlink" href="#import-data" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="import-and-inspect-data">
+<h2>Import and inspect data<a class="headerlink" href="#import-and-inspect-data" title="Permalink to this headline">¶</a></h2>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Load csv data from GitHub into pandas dataframes</span>
@@ -434,8 +376,6 @@ transform data. To learn more about pandas, review this <a class="reference exte
 </div>
 </div>
 </div>
-<div class="section" id="data-inspection">
-<h3>1.1 Data inspection<a class="headerlink" href="#data-inspection" title="Permalink to this headline">¶</a></h3>
 <p>Let’s take a look at the variables (also called columns or features) in the data set.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -724,11 +664,9 @@ memory usage: 281.4+ KB
 </div>
 </div>
 </div>
-</div>
 <div class="section" id="tidying-data">
-<h2>2 Tidying data<a class="headerlink" href="#tidying-data" title="Permalink to this headline">¶</a></h2>
-<p>The variable “Unnamed: 0” seems to be some kind of identification number per employee. Let’s rename the variable
-and check if we have duplicates in our dataset.</p>
+<h2>Tidying data<a class="headerlink" href="#tidying-data" title="Permalink to this headline">¶</a></h2>
+<p>The variable “Unnamed: 0” seems to be some kind of identification number per employee. Let’s rename the variable and check if we have duplicates in our dataset.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># rename variable &quot;Unnamed: 0&quot; to &quot;id&quot;</span>
@@ -898,9 +836,8 @@ Name: edu, dtype: int64
 </div>
 </div>
 </div>
-</div>
 <div class="section" id="data-types">
-<h2>2.1 Data types<a class="headerlink" href="#data-types" title="Permalink to this headline">¶</a></h2>
+<h3>Data types<a class="headerlink" href="#data-types" title="Permalink to this headline">¶</a></h3>
 <p>Pandas offers different options to change the data type of a variable.</p>
 <p>To change data into a categorical format, you can use the following code (see this
 <a class="reference external" href="https://pandas.pydata.org/docs/user_guide/categorical.html">pandas tutorial to learn more about categorical data</a>):</p>
@@ -978,13 +915,12 @@ Otherwise, we get an error message. Therefore, use errors=’coerce’ …</p>
 </ul>
 </li>
 </ul>
+</div>
 <div class="section" id="handle-missing-values">
-<h3>2.2 Handle missing values<a class="headerlink" href="#handle-missing-values" title="Permalink to this headline">¶</a></h3>
-<p>Next, we need to check if there are missing cases in the data set.
-By “missing” we simply mean NA (“not available”).</p>
-<p>Many datasets arrive with missing data, either because it exists and was not collected or it never existed.
-Having missing values in a dataset can cause errors with some algorithms.
-Therefore, we need to take care of this issue (we cover the topic of missing values in one of the following applications in detail).</p>
+<h3>Handle missing values<a class="headerlink" href="#handle-missing-values" title="Permalink to this headline">¶</a></h3>
+<p>Next, we need to check if there are missing cases in the data set. By “missing” we simply mean NA (“not available”).</p>
+<p>Many datasets arrive with missing data, either because it exists but was not collected or it never existed.
+Having missing values in a dataset can cause errors with some algorithms. Therefore, we need to take care of this issue (we cover the topic of missing values in one of the following applications in detail).</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># show missing values (missing values - if present - will be displayed in yellow )</span>
@@ -993,7 +929,7 @@ Therefore, we need to take care of this issue (we cover the topic of missing val
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="_images/1_process_32_0.png" src="_images/1_process_32_0.png" />
+<img alt="_images/1_process_30_0.png" src="_images/1_process_30_0.png" />
 </div>
 </div>
 <p>We can also check the column-wise distribution of null values:</p>
@@ -1020,13 +956,13 @@ dtype: int64
 <p>However, be careful not to drop many observations if just one variable is the cause for the
 missing values. In that case, it could be reasonable to only drop the variable:</p>
 <p><code class="docutils literal notranslate"><span class="pre">df</span> <span class="pre">=</span> <span class="pre">df.drop('variable',</span> <span class="pre">axis=1)</span></code></p>
-<p>However, we will usually use other methods to fill in missing values (e.g. imputate using the mean)</p>
+<p>Usually, we will use other methods to fill in missing values (e.g. imputate missing values by using the mean)</p>
 </div>
 </div>
 <div class="section" id="transform-data">
-<h2>3 Transform data<a class="headerlink" href="#transform-data" title="Permalink to this headline">¶</a></h2>
+<h2>Transform data<a class="headerlink" href="#transform-data" title="Permalink to this headline">¶</a></h2>
 <div class="section" id="descriptive-statistics">
-<h3>3.1 Descriptive statistics<a class="headerlink" href="#descriptive-statistics" title="Permalink to this headline">¶</a></h3>
+<h3>Descriptive statistics<a class="headerlink" href="#descriptive-statistics" title="Permalink to this headline">¶</a></h3>
 <p>First, we obtain some common statistics:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -1362,12 +1298,10 @@ Name: age, dtype: float64
 </div>
 </div>
 <div class="section" id="visualize-data">
-<h2>4. Visualize data<a class="headerlink" href="#visualize-data" title="Permalink to this headline">¶</a></h2>
-<div class="section" id="distribution-of-variables">
-<h3>4.1 Distribution of Variables<a class="headerlink" href="#distribution-of-variables" title="Permalink to this headline">¶</a></h3>
-<p>How you visualize the distribution of a variable will depend on whether the variable is categorical or continuous.
-The excellent site <a class="reference external" href="https://www.data-to-viz.com/">From Data to Viz</a> leads you to the most appropriate graph for your
-data. It also links to the code to build it and lists common caveats you should avoid.</p>
+<h2>Visualize data<a class="headerlink" href="#visualize-data" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="distribution">
+<h3>Distribution<a class="headerlink" href="#distribution" title="Permalink to this headline">¶</a></h3>
+<p>How you visualize the distribution of a variable will depend on whether the variable is categorical or continuous.The excellent site <a class="reference external" href="https://www.data-to-viz.com/">From Data to Viz</a> leads you to the most appropriate graph for your data. It also links to the code to build it and lists common caveats you should avoid.</p>
 <p>For example, to examine the distribution of a categorical variable, we could use a bar or count plot.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -1377,11 +1311,10 @@ data. It also links to the code to build it and lists common caveats you should 
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="_images/1_process_52_0.png" src="_images/1_process_52_0.png" />
+<img alt="_images/1_process_50_0.png" src="_images/1_process_50_0.png" />
 </div>
 </div>
-<p>A variable is <strong>continuous</strong> if it can take any of an infinite set of ordered values.</p>
-<p>To examine the distribution of a continuous variable, we could use a <strong>histogram</strong>:</p>
+<p>A variable is <strong>continuous</strong> if it can take any of an infinite set of ordered values. To examine the distribution of a continuous variable, we could use a <strong>histogram</strong>:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Pandas histogram of all numerical values</span>
@@ -1395,10 +1328,10 @@ The is_first_col function was deprecated in Matplotlib 3.4 and will be removed t
   if ax.is_first_col():
 </pre></div>
 </div>
-<img alt="_images/1_process_54_1.png" src="_images/1_process_54_1.png" />
+<img alt="_images/1_process_52_1.png" src="_images/1_process_52_1.png" />
 </div>
 </div>
-<p>Seaborne shows a default plot with a kernel density estimate and a histogram:</p>
+<p>We can also use Seaborne to plot a histogram with a kernel density estimate:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># histogram with seaborn </span>
@@ -1407,12 +1340,11 @@ The is_first_col function was deprecated in Matplotlib 3.4 and will be removed t
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="_images/1_process_56_0.png" src="_images/1_process_56_0.png" />
+<img alt="_images/1_process_54_0.png" src="_images/1_process_54_0.png" />
 </div>
 </div>
-<p>Another alternative to display the distribution of a continuous variable broken down by a categorical variable is
-the <strong>boxplot</strong>. A boxplot is a type of visual shorthand for a distribution
-of values that is popular among statisticians. Each boxplot consists of:</p>
+<p>Another alternative to display the distribution of a continuous variable broken down by a categorical variable is the <strong>boxplot</strong>.</p>
+<p>Each boxplot consists of:</p>
 <ul class="simple">
 <li><p>A box that stretches from the 25th percentile of the distribution to the 75th percentile, a distance known as the interquartile range (IQR).</p></li>
 <li><p>In the middle of the box is a line that displays the median, i.e. 50th percentile, of the distribution.</p></li>
@@ -1429,7 +1361,7 @@ farthest non-outlier point in the distribution.</p></li>
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="_images/1_process_58_0.png" src="_images/1_process_58_0.png" />
+<img alt="_images/1_process_56_0.png" src="_images/1_process_56_0.png" />
 </div>
 </div>
 <div class="cell docutils container">
@@ -1440,14 +1372,12 @@ farthest non-outlier point in the distribution.</p></li>
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="_images/1_process_59_0.png" src="_images/1_process_59_0.png" />
+<img alt="_images/1_process_57_0.png" src="_images/1_process_57_0.png" />
 </div>
 </div>
-<p>We see much less information about the distribution, but the boxplots are much more compact,
-so we can more easily compare them (and fit more on one plot).</p>
 </div>
-<div class="section" id="relationship-between-variables">
-<h3>4.2 Relationship between variables<a class="headerlink" href="#relationship-between-variables" title="Permalink to this headline">¶</a></h3>
+<div class="section" id="relationship">
+<h3>Relationship<a class="headerlink" href="#relationship" title="Permalink to this headline">¶</a></h3>
 <p>A great way to visualise the covariation between two continuous variables is to draw a scatterplot.
 You can see covariation as a pattern in the points. We will cover more options to test for relationships in variables
 (e.g., correlation) in the following applications.</p>
@@ -1459,7 +1389,7 @@ You can see covariation as a pattern in the points. We will cover more options t
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="_images/1_process_63_0.png" src="_images/1_process_63_0.png" />
+<img alt="_images/1_process_60_0.png" src="_images/1_process_60_0.png" />
 </div>
 </div>
 <div class="cell docutils container">
@@ -1470,19 +1400,14 @@ You can see covariation as a pattern in the points. We will cover more options t
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="_images/1_process_64_0.png" src="_images/1_process_64_0.png" />
+<img alt="_images/1_process_61_0.png" src="_images/1_process_61_0.png" />
 </div>
 </div>
 </div>
 </div>
 <div class="section" id="model">
 <h2>5 Model<a class="headerlink" href="#model" title="Permalink to this headline">¶</a></h2>
-<p>We cover the modelling process in our next applications.</p>
-<div class="section" id="sources">
-<h3>Sources<a class="headerlink" href="#sources" title="Permalink to this headline">¶</a></h3>
-<p><a class="reference external" href="https://www.statlearning.com/">James, G., Witten, D., Hastie, T., &amp; Tibshirani, R. (2021). An introduction to statistical learning. New York: Springer.</a></p>
-<p><a class="reference external" href="https://r4ds.had.co.nz/">Wickham, H., &amp; Grolemund, G. (2016). R for data science: import, tidy, transform, visualize, and model data. O’Reilly Media, Inc.</a></p>
-</div>
+<p>We will cover the modelling process in one of the next sections.</p>
 </div>
 </div>
 
@@ -1525,10 +1450,10 @@ You can see covariation as a pattern in the points. We will cover more options t
         </a>
     </div>
      <div id="next">
-        <a class="right-next" href="2_simulated.html" title="next page">
+        <a class="right-next" href="4_diagnostics.html" title="next page">
             <div class="prevnext-info">
                 <p class="prevnext-label">next</p>
-                <p class="prevnext-title">Regression with Simulated Data</p>
+                <p class="prevnext-title">Regression diagnostics</p>
             </div>
             <i class="prevnext-label fas fa-angle-right"></i>
         </a>
@@ -1542,9 +1467,9 @@ You can see covariation as a pattern in the points. We will cover more options t
     <div class="container">
       <p>
         
-          Durch Jan Kirenz<br/>
+          By Jan Kirenz<br/>
         
-            &copy; Urheberrechte © 2021.<br/>
+            &copy; Copyright 2021.<br/>
       </p>
     </div>
   </footer>
