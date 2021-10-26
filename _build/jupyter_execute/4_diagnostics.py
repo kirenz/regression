@@ -136,7 +136,7 @@ round(df.describe(),2)
 df.describe(include=['category'])
 
 
-# # Regression diagnostics
+# ## Regression model
 
 # In[14]:
 
@@ -146,9 +146,9 @@ lm = smf.ols(formula ='mpg ~ horsepower', data=df).fit()
 lm.summary()
 
 
-# ## Non-linearity
+# # Non-linearity
 
-# ###  Harvey-Collier multiplier test
+# ##  Harvey-Collier multiplier test
 # 
 # Harvey-Collier multiplier test for Null hypothesis that the linear specification is correct. This test is a t-test that the mean of the recursive ols residuals is zero. 
 # 
@@ -164,7 +164,7 @@ test = sm.stats.linear_harvey_collier(lm)
 lzip(name, test)
 
 
-# ###  Residuals vs fitted plot
+# ##  Residuals vs fitted plot
 # 
 # Residual plots are also a very useful graphical tool for identifying non-linearity:
 
@@ -239,7 +239,7 @@ for i in abs_resid_top_3.index:
     plot.axes[0].annotate(i, xy=(model_fitted_y[i], model_residuals[i]));
 
 
-# ### Deal with non-linearity 
+# ## Deal with non-linearity 
 
 # We can fit a non-linear function (polynomial regression)
 
@@ -266,7 +266,7 @@ plot.set_xlabel('Fitted values');
 plot.set_ylabel('Residuals');
 
 
-# ## Normality of the residuals
+# # Normality of the residuals
 # 
 # It can be helpful if the residuals in the model are random, normally distributed variables with a mean of 0. 
 # 
@@ -276,7 +276,7 @@ plot.set_ylabel('Residuals');
 # 
 # If you are concerned only with estimating the model parameters (and not significance tests and confidence intervals) then this assumption barely matters. If you bootstrap confidence intervals then you can ignore this assumption.
 
-# ### Jarque-Bera test
+# ## Jarque-Bera test
 # 
 # The Jarque–Bera test is a goodness-of-fit test of whether sample data have the skewness and kurtosis matching a normal distribution. 
 # 
@@ -293,7 +293,7 @@ test = sm.stats.jarque_bera(lm.resid)
 lzip(name, test)
 
 
-# ### Omnibus normtest
+# ## Omnibus normtest
 # 
 # Test for normal distribution of residuals. In this case, we use the $Chi^2$-Test. The Chi-Square Test for normality allows us to check whether or not the model residuals follow an approximately normal distribution.
 # 
@@ -307,7 +307,7 @@ test = sm.stats.omni_normtest(lm.resid)
 lzip(name, test)
 
 
-# ## Outliers
+# # Outliers
 # 
 # An outlier is a point for which $y_i$ is far from the value predicted by the model. Outliers can arise for a variety of reasons, such as incorrect recording of an observation during data collection.
 # 
@@ -317,7 +317,7 @@ lzip(name, test)
 # 
 # If we believe that an outlier has occurred due to an error in data collection or recording, then one solution is to simply remove the observation. However, care should be taken, since an outlier may instead indicate a deficiency with the model, such as a missing predictor.
 
-# ### Normal Q-Q-Plot
+# ## Normal Q-Q-Plot
 # 
 # This plots the standardized (z-score) residuals against the theoretical normal quantiles. Anything quite off the diagonal lines may be a concern for further investigation.
 
@@ -359,7 +359,7 @@ for r, i in enumerate(abs_norm_resid_top_3):
                                    model_norm_residuals[i]));
 
 
-# # 3. Correlation of error terms.
+# # Correlation of error terms
 # 
 # An important assumption of the linear regression model is that the error terms are uncorrelated.
 # 
@@ -381,7 +381,7 @@ for r, i in enumerate(abs_norm_resid_top_3):
 sm.stats.durbin_watson(lm.resid)
 
 
-# # 4. Non-constant Variance of Error Terms
+# # Variance of error terms
 # 
 
 # Another important assumption of the linear regression model is that the error terms have a constant variance. 
@@ -391,7 +391,7 @@ sm.stats.durbin_watson(lm.resid)
 # 
 # When faced with this problem, one possible solution is to transform the response Y using a concave function such as log Y or √Y . Such a transformation results in a greater amount of shrinkage of the larger responses, leading to a reduction in heteroscedasticity.
 
-# ### Breusch-Pagan test:
+# ## Breusch-Pagan test:
 # 
 # Test assumes homoskedasticity (null hypothesis). If one of the test statistics is significant, then you have evidence of heteroskedasticity. 
 
@@ -404,7 +404,7 @@ test = sm.stats.het_breuschpagan(lm.resid, lm.model.exog)
 lzip(name, test)
 
 
-# ### Scale-Location plot
+# ## Scale-Location plot
 
 # In[27]:
 
@@ -422,7 +422,7 @@ sns.regplot(x=model_fitted_y, y=model_norm_residuals_abs_sqrt,
 # 
 # In our model the residuals begin to spread wider along the y-axis as it passes the x value of around 18. Because the residuals spread wider and wider with an increase of x, the red smooth line is not horizontal and shows a positive angle. This is an indication of **heteroskedasticity**.
 
-# # 5. High-leverage points.
+# # High-leverage points.
 # 
 # We just saw that outliers are observations for which the response $y_i$ is unusual given the predictor $x_i$. In contrast, observations with high leverage have an unusual value for $x_i$. 
 # 
@@ -430,7 +430,7 @@ sns.regplot(x=model_fitted_y, y=model_norm_residuals_abs_sqrt,
 # 
 # A general rule of thumb is that observations with a **Cook’s D** over 4/n, where n is the number of observations, is a possible outlier. 
 
-# ### Statsmodel influence
+# ## Statsmodel influence
 # 
 # Once created, an object of class OLSInfluence holds attributes and methods that allow users to assess the influence of each observation. 
 
@@ -461,7 +461,7 @@ df.index[out_d],lm_cooksd[out_d]
 print(infl.summary_frame().filter(["student_resid","dffits","cooks_d"]))
 
 
-# ### Residuals vs leverage plot
+# ## Residuals vs leverage plot
 
 # Plots leverage statistics vs. normalized residuals squared. See [statsmodel documentation](http://www.statsmodels.org/0.6.1/generated/statsmodels.graphics.regressionplots.plot_leverage_resid2.html)
 

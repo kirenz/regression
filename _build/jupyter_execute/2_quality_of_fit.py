@@ -476,30 +476,30 @@ sns.residplot(x="height_parents", y="height", data=df, scatter_kws={"s": 80});
 
 
 # Explained sum of squares  (SS_M = TSS - SS_R)
-SS_M = TSS - SS_R
-print(SS_M)
+SSM = TSS - SSR
+print(SSM)
 # Explained sum of squres (SS_M) from statsmodel function
 lm.ess
 
 
 # $R^2$ is the proportion of the variance in the dependent variable that is predictable from the independent variable
 
-# In[ ]:
+# In[38]:
 
 
 # R_Squared: explained sum of squared residuals
-R_squared = SS_M / TSS
+R_squared = SSM / TSS
 print(R_squared)
 
 
-# In[ ]:
+# In[39]:
 
 
 # R_Squared of statsmodel
 lm.rsquared
 
 
-# In[ ]:
+# In[40]:
 
 
 # Adjusted R_Squared: 
@@ -541,7 +541,7 @@ lm.rsquared_adj
 
 # #### Model 2: Linear Regression
 
-# In[ ]:
+# In[41]:
 
 
 # correlation coefficient r
@@ -549,7 +549,7 @@ r = np.sqrt(R_squared)
 print(r)
 
 
-# In[ ]:
+# In[42]:
 
 
 # correlation coefficient with p-value
@@ -584,7 +584,7 @@ stats.pearsonr(df['height'], df['height_parents'])
 
 # #### Model 1: Mean
 
-# In[ ]:
+# In[43]:
 
 
 # calculate mean squared error of the model 1 "the mean"
@@ -600,7 +600,7 @@ print('Mean squared error of the mean:', mse)
 # 
 # In our example, $n=20$, we have one parameter, p=1 (the mean), and therefore, the degrees of freedom are df = (p-1) = 20-1 = 19.
 
-# In[ ]:
+# In[44]:
 
 
 # generate a variable called variance (to illustrate relationship between variance and standard deviation)
@@ -617,7 +617,7 @@ print(f'Standard deviation (SD) of model 1 = {round(np.sqrt(variance),2)}')
 #   * mse_resid : Mean squared error of the residuals. The sum of squared residuals divided by the residual degrees of freedom.
 #   * mse_total : Total mean squared error. Defined as the uncentered total sum of squares divided by n the number of observations.
 
-# In[ ]:
+# In[45]:
 
 
 # Total MSE_T (this is the MSE of the basline mean model) from statsmodel
@@ -627,17 +627,17 @@ print('Total mean squared error (MSE_T):', MSE_T)
 # compare this result to mse... they are the same
 
 
-# In[ ]:
+# In[46]:
 
 
 # Mean squared error of residuals (MSE_R)
-MSE_R = SS_R / (20-2)
+MSE_R = SSR / (20-2)
 print('Mean squared error of residuals (MSE_R):', MSE_R)
 # MSE of residuals from statsmodel (preferred)
 print(f'Mean squared error od residuals (MSE_R): {lm.mse_resid}')
 
 
-# In[ ]:
+# In[47]:
 
 
 # the standard deviation equals the root of the MSE_R
@@ -678,28 +678,28 @@ print(f'Standard deviation (SD) of model 2 = {round(np.sqrt(MSE_R),2)}')
 
 # #### Model 2: Linear Regression
 
-# In[ ]:
+# In[48]:
 
 
 # Mean squared error of the model (MSE_M)
 p = 1 # we only have one predictor (height_parents)
-MS_M = (SS_M / p)
-print('MS_M =', MS_M)
+MSM = (SSM / p)
+print('MSM =', MSM)
 # MSE_M of residuals from statsmodel
 print(f'MS_M = {lm.mse_model}')
 
 
-# In[ ]:
+# In[49]:
 
 
 # Adjust notation and calculate F-value
-MS_R = MSE_R
+MSR = MSE_R
 # F-value
-F_value = (MS_M / MS_R)
+F_value = (MSM / MSR)
 print(F_value)
 
 
-# In[ ]:
+# In[50]:
 
 
 # statsmodel
@@ -710,7 +710,7 @@ F_val = (lm.mse_model / lm.mse_resid)
 print(F_val)
 
 
-# ### 5.2.5 Standard error
+# ### Standard error
 # 
 # We just learned that the **standard deviation** tells us about how well the mean represents the sample data. However, if we’re using the **sample mean** to estimate this parameter in the **population** (like we did), then we need to know how well it represents the value in the population, especially because samples from a population differ. 
 # 
@@ -750,7 +750,7 @@ print(F_val)
 
 # #### Model 1: Mean
 
-# In[ ]:
+# In[51]:
 
 
 # calculate standard error (...we ignore the fact that our sample is small since n < 30) 
@@ -760,7 +760,7 @@ print(se)
 df = df.assign(se=se)
 
 
-# In[ ]:
+# In[52]:
 
 
 # alternative way to calculate standard error (se)
@@ -773,7 +773,7 @@ print(se)
 
 # #### Model 2: Linear Regression
 
-# In[ ]:
+# In[53]:
 
 
 # Get standard error of parameters
@@ -814,7 +814,7 @@ print('Standard error (SE) od model 2:', se_2)
 # 
 # $$z = \frac{X-\bar{X}}{s}$$
 
-# In[ ]:
+# In[54]:
 
 
 # calculate z-scores
@@ -824,7 +824,7 @@ print(z)
 df = df.assign(z = z)
 
 
-# In[ ]:
+# In[55]:
 
 
 plt = sns.distplot(df.z);
@@ -869,7 +869,7 @@ plt.text(-2.2, 0.3,'z = -1.96', rotation=90, color='r');
 # 
 # As such, the mean is always in the centre of the confidence interval. We know that 95% of confidence intervals contain the population mean, so we can assume this confidence interval contains the true mean; therefore, if the interval is small,the sample mean must be very close to the true man. Conversely, if the confidenve interval is very wide then the sample mean could be very different from the true mean, indicating that it is a bad representation of the population.
 
-# In[ ]:
+# In[56]:
 
 
 # lower boundary
@@ -880,7 +880,7 @@ print('Lower boundary of CI', lb)
 print('Upper boundary of CI', up)
 
 
-# In[ ]:
+# In[57]:
 
 
 # draw limits of confidence intervall
@@ -906,14 +906,14 @@ plt.text(165.8, 0.15,'Upper limit = 165.65', rotation=90, color='w');
 # 
 # **upper boundary of confidence intervall** = $b_1 + (1.96 \times SE(b_1))$
 
-# In[ ]:
+# In[58]:
 
 
 # Obtain confidence interval for fitted parameters 
 lm.conf_int(alpha=0.05)
 
 
-# In[ ]:
+# In[59]:
 
 
 # Make a prediction for height when parents average height is 168 cm
@@ -929,7 +929,7 @@ round(results.summary_frame(alpha=0.05),2)
 # 
 # We interpret this to mean that 95% of intervals of this form will contain the true value of Y for parents with this average height. Note that both intervals are centered at 167.4 cm, but that the **prediction interval** is substantially wider than the confidence interval, reflecting the increased uncertainty about the individual height for given parents height in comparison to the average height of many parents. 
 
-# In[ ]:
+# In[60]:
 
 
 # Plot regression line with CI 95%
@@ -950,7 +950,7 @@ sns.lmplot(x='height_parents', y='height', data=df, order=1, line_kws={'color':'
 # 
 # The (n − 1) in the equations is the degrees of freedom and tells us which of the t-distributions to use. For a 95% confidence interval, we can calculate the value of t for a two-tailed test with probability of 0.05, for the appropriate degrees of freedom.
 
-# In[ ]:
+# In[61]:
 
 
 # calculate t-statistic
@@ -966,7 +966,7 @@ print('Lower boundary of CI (t-statistics)', lb_t)
 print('Upper boundary of CI (t-statistics)', up_t)
 
 
-# In[ ]:
+# In[62]:
 
 
 # draw limits of confidence intervall for t-statistic
@@ -984,7 +984,7 @@ plt.axvline(165.695836, 0, 1, linewidth=3, color='r');
 plt.text(165.8, 0.15,'Upper limit = 165.69', rotation=90, color='r');
 
 
-# In[ ]:
+# In[63]:
 
 
 # compare CI z-statistic with t-statistic
@@ -1018,7 +1018,7 @@ plt.axvline(165.695836, 0, 1, linewidth=3, color='r');
 
 # ### Bayesian information criterion (BIC) 
 
-# In[ ]:
+# In[64]:
 
 
 # BIC
@@ -1027,7 +1027,7 @@ lm.bic
 
 # ### Akaike information criterion (AIC) 
 
-# In[ ]:
+# In[65]:
 
 
 # AIC

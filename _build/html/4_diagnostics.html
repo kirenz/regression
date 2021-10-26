@@ -55,7 +55,7 @@
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
     <link rel="next" title="Linear regression tutorial ‘Auto’" href="5_auto_case.html" />
-    <link rel="prev" title="Programming Process" href="1_process.html" />
+    <link rel="prev" title="Regression with Simulated Data" href="3_simulated.html" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="docsearch:language" content="en" />
     
@@ -106,6 +106,30 @@
   <a class="reference internal" href="1_process.html">
    Programming Process
   </a>
+ </li>
+</ul>
+<p class="caption" role="heading">
+ <span class="caption-text">
+  Simple Regression
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="2_quality_of_fit.html">
+   Regression basics
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" type="checkbox"/>
+  <label for="toctree-checkbox-1">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="3_simulated.html">
+     Regression with Simulated Data
+    </a>
+   </li>
+  </ul>
  </li>
 </ul>
 <p class="caption" role="heading">
@@ -262,74 +286,72 @@
      Transform data
     </a>
    </li>
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#regression-model">
+     Regression model
+    </a>
+   </li>
   </ul>
  </li>
  <li class="toc-h1 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#id1">
-   Regression diagnostics
+  <a class="reference internal nav-link" href="#non-linearity">
+   Non-linearity
   </a>
   <ul class="visible nav section-nav flex-column">
    <li class="toc-h2 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#non-linearity">
-     Non-linearity
+    <a class="reference internal nav-link" href="#harvey-collier-multiplier-test">
+     Harvey-Collier multiplier test
     </a>
-    <ul class="nav section-nav flex-column">
-     <li class="toc-h3 nav-item toc-entry">
-      <a class="reference internal nav-link" href="#harvey-collier-multiplier-test">
-       Harvey-Collier multiplier test
-      </a>
-     </li>
-     <li class="toc-h3 nav-item toc-entry">
-      <a class="reference internal nav-link" href="#residuals-vs-fitted-plot">
-       Residuals vs fitted plot
-      </a>
-     </li>
-     <li class="toc-h3 nav-item toc-entry">
-      <a class="reference internal nav-link" href="#deal-with-non-linearity">
-       Deal with non-linearity
-      </a>
-     </li>
-    </ul>
    </li>
    <li class="toc-h2 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#normality-of-the-residuals">
-     Normality of the residuals
+    <a class="reference internal nav-link" href="#residuals-vs-fitted-plot">
+     Residuals vs fitted plot
     </a>
-    <ul class="nav section-nav flex-column">
-     <li class="toc-h3 nav-item toc-entry">
-      <a class="reference internal nav-link" href="#jarque-bera-test">
-       Jarque-Bera test
-      </a>
-     </li>
-     <li class="toc-h3 nav-item toc-entry">
-      <a class="reference internal nav-link" href="#omnibus-normtest">
-       Omnibus normtest
-      </a>
-     </li>
-    </ul>
    </li>
    <li class="toc-h2 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#outliers">
-     Outliers
+    <a class="reference internal nav-link" href="#deal-with-non-linearity">
+     Deal with non-linearity
     </a>
-    <ul class="nav section-nav flex-column">
-     <li class="toc-h3 nav-item toc-entry">
-      <a class="reference internal nav-link" href="#normal-q-q-plot">
-       Normal Q-Q-Plot
-      </a>
-     </li>
-    </ul>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#normality-of-the-residuals">
+   Normality of the residuals
+  </a>
+  <ul class="visible nav section-nav flex-column">
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#jarque-bera-test">
+     Jarque-Bera test
+    </a>
+   </li>
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#omnibus-normtest">
+     Omnibus normtest
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#outliers">
+   Outliers
+  </a>
+  <ul class="visible nav section-nav flex-column">
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#normal-q-q-plot">
+     Normal Q-Q-Plot
+    </a>
    </li>
   </ul>
  </li>
  <li class="toc-h1 nav-item toc-entry">
   <a class="reference internal nav-link" href="#correlation-of-error-terms">
-   3. Correlation of error terms.
+   Correlation of error terms
   </a>
  </li>
  <li class="toc-h1 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#non-constant-variance-of-error-terms">
-   4. Non-constant Variance of Error Terms
+  <a class="reference internal nav-link" href="#variance-of-error-terms">
+   Variance of error terms
   </a>
   <ul class="visible nav section-nav flex-column">
    <li class="toc-h2 nav-item toc-entry">
@@ -346,7 +368,7 @@
  </li>
  <li class="toc-h1 nav-item toc-entry">
   <a class="reference internal nav-link" href="#high-leverage-points">
-   5. High-leverage points.
+   High-leverage points.
   </a>
   <ul class="visible nav section-nav flex-column">
    <li class="toc-h2 nav-item toc-entry">
@@ -923,9 +945,8 @@ dtype: int64
 </div></div></div>
 </div>
 </div>
-</div>
-<div class="tex2jax_ignore mathjax_ignore section" id="id1">
-<h1>Regression diagnostics<a class="headerlink" href="#id1" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="regression-model">
+<h2>Regression model<a class="headerlink" href="#regression-model" title="Permalink to this headline">¶</a></h2>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># fit linear model with statsmodels.formula.api (with R-style formulas) </span>
@@ -950,7 +971,7 @@ dtype: int64
   <th>Date:</th>             <td>Tue, 26 Oct 2021</td> <th>  Prob (F-statistic):</th> <td>7.03e-81</td>
 </tr>
 <tr>
-  <th>Time:</th>                 <td>21:27:05</td>     <th>  Log-Likelihood:    </th> <td> -1178.7</td>
+  <th>Time:</th>                 <td>22:20:16</td>     <th>  Log-Likelihood:    </th> <td> -1178.7</td>
 </tr>
 <tr>
   <th>No. Observations:</th>      <td>   392</td>      <th>  AIC:               </th> <td>   2361.</td>
@@ -991,10 +1012,12 @@ dtype: int64
 </tr>
 </table><br/><br/>Notes:<br/>[1] Standard Errors assume that the covariance matrix of the errors is correctly specified.</div></div>
 </div>
-<div class="section" id="non-linearity">
-<h2>Non-linearity<a class="headerlink" href="#non-linearity" title="Permalink to this headline">¶</a></h2>
+</div>
+</div>
+<div class="tex2jax_ignore mathjax_ignore section" id="non-linearity">
+<h1>Non-linearity<a class="headerlink" href="#non-linearity" title="Permalink to this headline">¶</a></h1>
 <div class="section" id="harvey-collier-multiplier-test">
-<h3>Harvey-Collier multiplier test<a class="headerlink" href="#harvey-collier-multiplier-test" title="Permalink to this headline">¶</a></h3>
+<h2>Harvey-Collier multiplier test<a class="headerlink" href="#harvey-collier-multiplier-test" title="Permalink to this headline">¶</a></h2>
 <p>Harvey-Collier multiplier test for Null hypothesis that the linear specification is correct. This test is a t-test that the mean of the recursive ols residuals is zero.</p>
 <p>A significant result (rejecting the null) occurs when the fit is better with a range restriction (which is what happens if the model is nonlinear).</p>
 <div class="cell docutils container">
@@ -1015,7 +1038,7 @@ dtype: int64
 </div>
 </div>
 <div class="section" id="residuals-vs-fitted-plot">
-<h3>Residuals vs fitted plot<a class="headerlink" href="#residuals-vs-fitted-plot" title="Permalink to this headline">¶</a></h3>
+<h2>Residuals vs fitted plot<a class="headerlink" href="#residuals-vs-fitted-plot" title="Permalink to this headline">¶</a></h2>
 <p>Residual plots are also a very useful graphical tool for identifying non-linearity:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -1093,7 +1116,7 @@ dtype: int64
 </div>
 </div>
 <div class="section" id="deal-with-non-linearity">
-<h3>Deal with non-linearity<a class="headerlink" href="#deal-with-non-linearity" title="Permalink to this headline">¶</a></h3>
+<h2>Deal with non-linearity<a class="headerlink" href="#deal-with-non-linearity" title="Permalink to this headline">¶</a></h2>
 <p>We can fit a non-linear function (polynomial regression)</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -1118,7 +1141,7 @@ dtype: int64
   <th>Date:</th>             <td>Tue, 26 Oct 2021</td> <th>  Prob (F-statistic):</th> <td>5.40e-99</td>
 </tr>
 <tr>
-  <th>Time:</th>                 <td>21:27:06</td>     <th>  Log-Likelihood:    </th> <td> -1133.2</td>
+  <th>Time:</th>                 <td>22:20:17</td>     <th>  Log-Likelihood:    </th> <td> -1133.2</td>
 </tr>
 <tr>
   <th>No. Observations:</th>      <td>   392</td>      <th>  AIC:               </th> <td>   2272.</td>
@@ -1183,14 +1206,14 @@ dtype: int64
 </div>
 </div>
 </div>
-<div class="section" id="normality-of-the-residuals">
-<h2>Normality of the residuals<a class="headerlink" href="#normality-of-the-residuals" title="Permalink to this headline">¶</a></h2>
+<div class="tex2jax_ignore mathjax_ignore section" id="normality-of-the-residuals">
+<h1>Normality of the residuals<a class="headerlink" href="#normality-of-the-residuals" title="Permalink to this headline">¶</a></h1>
 <p>It can be helpful if the residuals in the model are random, normally distributed variables with a mean of 0.</p>
 <p>This assumption means that the differences between the predicted and observed data are most frequently zero or very close to zero, and that differences much greater than zero happen only occasionally.</p>
 <p>Some people confuse this assumption with the idea that predictors have to be normally distributed, which they don’t. In small samples a lack of normality invalidates confidence intervals and significance tests, whereas in large samples it will not because of the <strong>central limit theorem</strong>.</p>
 <p>If you are concerned only with estimating the model parameters (and not significance tests and confidence intervals) then this assumption barely matters. If you bootstrap confidence intervals then you can ignore this assumption.</p>
 <div class="section" id="jarque-bera-test">
-<h3>Jarque-Bera test<a class="headerlink" href="#jarque-bera-test" title="Permalink to this headline">¶</a></h3>
+<h2>Jarque-Bera test<a class="headerlink" href="#jarque-bera-test" title="Permalink to this headline">¶</a></h2>
 <p>The Jarque–Bera test is a goodness-of-fit test of whether sample data have the skewness and kurtosis matching a normal distribution.</p>
 <p>The null hypothesis is a joint hypothesis of the skewness being zero and the excess kurtosis being zero.</p>
 <p>Samples from a normal distribution have an expected skewness of 0 and an expected excess kurtosis of 0 (which is the same as a kurtosis of 3). As the definition of JB shows, any deviation from this increases the JB statistic.</p>
@@ -1214,7 +1237,7 @@ dtype: int64
 </div>
 </div>
 <div class="section" id="omnibus-normtest">
-<h3>Omnibus normtest<a class="headerlink" href="#omnibus-normtest" title="Permalink to this headline">¶</a></h3>
+<h2>Omnibus normtest<a class="headerlink" href="#omnibus-normtest" title="Permalink to this headline">¶</a></h2>
 <p>Test for normal distribution of residuals. In this case, we use the <span class="math notranslate nohighlight">\(Chi^2\)</span>-Test. The Chi-Square Test for normality allows us to check whether or not the model residuals follow an approximately normal distribution.</p>
 <p>Our null hypothesis is that the residuals are from a normal distribution.</p>
 <div class="cell docutils container">
@@ -1234,14 +1257,14 @@ dtype: int64
 </div>
 </div>
 </div>
-<div class="section" id="outliers">
-<h2>Outliers<a class="headerlink" href="#outliers" title="Permalink to this headline">¶</a></h2>
+<div class="tex2jax_ignore mathjax_ignore section" id="outliers">
+<h1>Outliers<a class="headerlink" href="#outliers" title="Permalink to this headline">¶</a></h1>
 <p>An outlier is a point for which <span class="math notranslate nohighlight">\(y_i\)</span> is far from the value predicted by the model. Outliers can arise for a variety of reasons, such as incorrect recording of an observation during data collection.</p>
 <p>In practice, it can be difficult to decide how large a residual needs to be before we consider the point to be an outlier. To address this problem, instead of plotting the residuals, we can plot the studentized residuals, computed by dividing each residual by its estimated standard error.</p>
 <p>Observations whose studentized residuals are greater than 3 in absolute value are possible outliers.</p>
 <p>If we believe that an outlier has occurred due to an error in data collection or recording, then one solution is to simply remove the observation. However, care should be taken, since an outlier may instead indicate a deficiency with the model, such as a missing predictor.</p>
 <div class="section" id="normal-q-q-plot">
-<h3>Normal Q-Q-Plot<a class="headerlink" href="#normal-q-q-plot" title="Permalink to this headline">¶</a></h3>
+<h2>Normal Q-Q-Plot<a class="headerlink" href="#normal-q-q-plot" title="Permalink to this headline">¶</a></h2>
 <p>This plots the standardized (z-score) residuals against the theoretical normal quantiles. Anything quite off the diagonal lines may be a concern for further investigation.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -1298,9 +1321,8 @@ We can observe that only some residuals (in the lower left and the upper right c
 </div>
 </div>
 </div>
-</div>
 <div class="tex2jax_ignore mathjax_ignore section" id="correlation-of-error-terms">
-<h1>3. Correlation of error terms.<a class="headerlink" href="#correlation-of-error-terms" title="Permalink to this headline">¶</a></h1>
+<h1>Correlation of error terms<a class="headerlink" href="#correlation-of-error-terms" title="Permalink to this headline">¶</a></h1>
 <p>An important assumption of the linear regression model is that the error terms are uncorrelated.</p>
 <p>Such correlations frequently occur in the context of time series data, which consists of observations for which measurements are obtained at discrete points in time. In many cases, observations that are obtained at adjacent time points will have positively correlated errors. In order to determine if this is the case for a given data set, we can plot the residuals from our model as a function of time. If the errors are uncorrelated, then there should be no discernible pattern.</p>
 <p>Correlation among the error terms can also occur outside of time series data. For instance, consider a study in which individuals’ heights are predicted from their weights. The assumption of uncorrelated errors could be violated if some of the individuals in the study are members of the same family, or eat the same diet, or have been exposed to the same environmental factors.</p>
@@ -1321,8 +1343,8 @@ We can observe that only some residuals (in the lower left and the upper right c
 </div>
 </div>
 </div>
-<div class="tex2jax_ignore mathjax_ignore section" id="non-constant-variance-of-error-terms">
-<h1>4. Non-constant Variance of Error Terms<a class="headerlink" href="#non-constant-variance-of-error-terms" title="Permalink to this headline">¶</a></h1>
+<div class="tex2jax_ignore mathjax_ignore section" id="variance-of-error-terms">
+<h1>Variance of error terms<a class="headerlink" href="#variance-of-error-terms" title="Permalink to this headline">¶</a></h1>
 <p>Another important assumption of the linear regression model is that the error terms have a constant variance.</p>
 <p>For instance, the variances of the error terms may increase with the value of the response. One can identify non-constant variances in
 the errors, or <strong>heteroscedasticity</strong>, from the presence of a funnel shape in the residual plot.</p>
@@ -1372,7 +1394,7 @@ the errors, or <strong>heteroscedasticity</strong>, from the presence of a funne
 </div>
 </div>
 <div class="tex2jax_ignore mathjax_ignore section" id="high-leverage-points">
-<h1>5. High-leverage points.<a class="headerlink" href="#high-leverage-points" title="Permalink to this headline">¶</a></h1>
+<h1>High-leverage points.<a class="headerlink" href="#high-leverage-points" title="Permalink to this headline">¶</a></h1>
 <p>We just saw that outliers are observations for which the response <span class="math notranslate nohighlight">\(y_i\)</span> is unusual given the predictor <span class="math notranslate nohighlight">\(x_i\)</span>. In contrast, observations with high leverage have an unusual value for <span class="math notranslate nohighlight">\(x_i\)</span>.</p>
 <p>In a simple linear regression, high leverage observations are fairly easy to identify, since we can simply look for observations for which the predictor value is outside of the normal range of the observations. But in a multiple linear regression with many predictors, it is possible to have an observation that is well within the range of each individual predictor’s values, but that is unusual in terms of the full set of predictors.</p>
 <p>A general rule of thumb is that observations with a <strong>Cook’s D</strong> over 4/n, where n is the number of observations, is a possible outlier.</p>
@@ -1614,11 +1636,11 @@ The is_first_col function was deprecated in Matplotlib 3.4 and will be removed t
 <div class='prev-next-bottom'>
     
     <div id="prev">
-        <a class="left-prev" href="1_process.html" title="previous page">
+        <a class="left-prev" href="3_simulated.html" title="previous page">
             <i class="prevnext-label fas fa-angle-left"></i>
             <div class="prevnext-info">
                 <p class="prevnext-label">previous</p>
-                <p class="prevnext-title">Programming Process</p>
+                <p class="prevnext-title">Regression with Simulated Data</p>
             </div>
         </a>
     </div>
