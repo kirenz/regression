@@ -5,7 +5,7 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Programming Process &#8212; Linear Regression Models</title>
+    <title>Programming Process &#8212; Introduction to Linear Regression Models</title>
     
   <link href="_static/css/theme.css" rel="stylesheet" />
   <link href="_static/css/index.c5995385ac14fb8791e8eb36b4908be2.css" rel="stylesheet" />
@@ -42,7 +42,6 @@
     <script src="_static/copybutton.js"></script>
     <script>var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
     <script src="_static/sphinx-book-theme.12a9622fbb08dcb3a2a40b2c02b83a57.js"></script>
-    <script src="_static/sphinx-book-theme.js"></script>
     <script async="async" src="https://unpkg.com/thebe@0.5.1/lib/index.js"></script>
     <script>
         const thebe_selector = ".thebe"
@@ -79,7 +78,7 @@
       <img src="_static/logo.png" class="logo" alt="logo">
       
       
-      <h1 class="site-logo" id="site-title">Linear Regression Models</h1>
+      <h1 class="site-logo" id="site-title">Introduction to Linear Regression Models</h1>
       
     </a>
 </div><form class="bd-search d-flex align-items-center" action="search.html" method="get">
@@ -385,6 +384,20 @@ transform data. To learn more about pandas, review this <a class="reference exte
 </pre></div>
 </div>
 </div>
+<div class="cell_output docutils container">
+<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
+<span class="ne">ModuleNotFoundError</span><span class="g g-Whitespace">                       </span>Traceback (most recent call last)
+<span class="o">/</span><span class="n">var</span><span class="o">/</span><span class="n">folders</span><span class="o">/</span><span class="mi">35</span><span class="o">/</span><span class="mi">43</span><span class="n">bdsj9j64j16410rds5g9vr0000gp</span><span class="o">/</span><span class="n">T</span><span class="o">/</span><span class="n">ipykernel_10738</span><span class="o">/</span><span class="mf">2860410050.</span><span class="n">py</span> <span class="ow">in</span> <span class="o">&lt;</span><span class="n">module</span><span class="o">&gt;</span>
+<span class="g g-Whitespace">      </span><span class="mi">1</span> <span class="c1"># Customarily, we import as follows:</span>
+<span class="ne">----&gt; </span><span class="mi">2</span> <span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+<span class="g g-Whitespace">      </span><span class="mi">3</span> <span class="kn">import</span> <span class="nn">seaborn</span> <span class="k">as</span> <span class="nn">sns</span>
+<span class="g g-Whitespace">      </span><span class="mi">4</span> 
+<span class="g g-Whitespace">      </span><span class="mi">5</span> <span class="c1"># seaborn settings</span>
+
+<span class="ne">ModuleNotFoundError</span>: No module named &#39;pandas&#39;
+</pre></div>
+</div>
+</div>
 </div>
 </div>
 <div class="section" id="import-and-inspect-data">
@@ -547,17 +560,10 @@ transform data. To learn more about pandas, review this <a class="reference exte
   <thead>
     <tr style="text-align: right;">
       <th></th>
-      <th>Unnamed: 0</th>
+      <th>id</th>
       <th>year</th>
       <th>age</th>
-      <th>maritl</th>
-      <th>race</th>
-      <th>education</th>
-      <th>region</th>
-      <th>jobclass</th>
-      <th>health</th>
-      <th>health_ins</th>
-      <th>logwage</th>
+      <th>edu</th>
       <th>wage</th>
     </tr>
   </thead>
@@ -567,14 +573,7 @@ transform data. To learn more about pandas, review this <a class="reference exte
       <td>376816</td>
       <td>2008</td>
       <td>44</td>
-      <td>2. Married</td>
-      <td>1. White</td>
       <td>3. Some College</td>
-      <td>2. Middle Atlantic</td>
-      <td>1. Industrial</td>
-      <td>2. &gt;=Very Good</td>
-      <td>1. Yes</td>
-      <td>5.041393</td>
       <td>154.685293</td>
     </tr>
     <tr>
@@ -582,14 +581,7 @@ transform data. To learn more about pandas, review this <a class="reference exte
       <td>302281</td>
       <td>2007</td>
       <td>30</td>
-      <td>2. Married</td>
-      <td>1. White</td>
       <td>2. HS Grad</td>
-      <td>2. Middle Atlantic</td>
-      <td>1. Industrial</td>
-      <td>2. &gt;=Very Good</td>
-      <td>2. No</td>
-      <td>4.602060</td>
       <td>99.689464</td>
     </tr>
     <tr>
@@ -597,14 +589,7 @@ transform data. To learn more about pandas, review this <a class="reference exte
       <td>10033</td>
       <td>2005</td>
       <td>27</td>
-      <td>2. Married</td>
-      <td>2. Black</td>
       <td>1. &lt; HS Grad</td>
-      <td>2. Middle Atlantic</td>
-      <td>1. Industrial</td>
-      <td>1. &lt;=Good</td>
-      <td>2. No</td>
-      <td>4.193125</td>
       <td>66.229408</td>
     </tr>
     <tr>
@@ -612,14 +597,7 @@ transform data. To learn more about pandas, review this <a class="reference exte
       <td>14375</td>
       <td>2005</td>
       <td>27</td>
-      <td>1. Never Married</td>
-      <td>1. White</td>
       <td>3. Some College</td>
-      <td>2. Middle Atlantic</td>
-      <td>1. Industrial</td>
-      <td>2. &gt;=Very Good</td>
-      <td>1. Yes</td>
-      <td>4.477121</td>
       <td>87.981033</td>
     </tr>
     <tr>
@@ -627,14 +605,7 @@ transform data. To learn more about pandas, review this <a class="reference exte
       <td>453557</td>
       <td>2009</td>
       <td>55</td>
-      <td>5. Separated</td>
-      <td>1. White</td>
       <td>2. HS Grad</td>
-      <td>2. Middle Atlantic</td>
-      <td>1. Industrial</td>
-      <td>1. &lt;=Good</td>
-      <td>1. Yes</td>
-      <td>4.505150</td>
       <td>90.481913</td>
     </tr>
   </tbody>
@@ -1109,7 +1080,7 @@ missing values. In that case, it could be reasonable to only drop the variable:<
     </tr>
     <tr>
       <th>top</th>
-      <td>453870</td>
+      <td>7373</td>
       <td>2003</td>
       <td>2. HS Grad</td>
     </tr>
@@ -1347,12 +1318,7 @@ Name: age, dtype: float64
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/Users/jankirenz/opt/anaconda3/lib/python3.7/site-packages/pandas/plotting/_matplotlib/tools.py:331: MatplotlibDeprecationWarning: 
-The is_first_col function was deprecated in Matplotlib 3.4 and will be removed two minor releases later. Use ax.get_subplotspec().is_first_col() instead.
-  if ax.is_first_col():
-</pre></div>
-</div>
-<img alt="_images/1_process_52_1.png" src="_images/1_process_52_1.png" />
+<img alt="_images/1_process_52_0.png" src="_images/1_process_52_0.png" />
 </div>
 </div>
 <p>We can also use Seaborne to plot a histogram with a kernel density estimate:</p>
