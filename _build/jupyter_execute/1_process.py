@@ -104,7 +104,7 @@ df = pd.read_csv(ROOT + DATA)
 df.head()
 
 
-# In[4]:
+# In[36]:
 
 
 # show the last rows (i.e. tail of the DataFrame)
