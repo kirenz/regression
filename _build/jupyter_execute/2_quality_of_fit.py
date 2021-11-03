@@ -3,11 +3,9 @@
 
 # # Regression basics
 # 
+# One of the simplest models we use in statistics is the **mean**. It is a (simple) model because it represents a summary of data. Therefore, let's use the mean as a baseline model and compare the quality of fit between the mean and a simple linear regression model with only one predictor. 
 # 
-# 
-# Therefore, we quantify the extent to which the predicted outcome value for a given observation is close to the true outcome value for that observation. In the regression setting, the most commonly-used measure is the mean squared error (MSE), which we will cover in detail.
-# 
-# One of the simplest models we use in statistics is the **mean**. It is a (simple) model because it represents a summary of data. Therefore, let's use the mean as a baseline model and compare the quality of fit between the mean and a simple linear regression model with only one predictor. We use a small sample of 20 adult german women from whom we obtained their height (this is our outcome variable) and the average height of their parents (this is our feature).
+# We use a small sample of 20 women from whom we obtained their height (this is our outcome variable) and the average height of their parents (this is our feature).
 
 # In[1]:
 
@@ -21,7 +19,6 @@ import statsmodels.formula.api as smf
 
 import matplotlib.pyplot as plt
 get_ipython().run_line_magic('matplotlib', 'inline')
-plt.style.use('ggplot') 
 import seaborn as sns  
 
 # seaborn settings
@@ -781,6 +778,59 @@ se_2 = lm.bse
 print('Standard error (SE) od model 2:', se_2)
 
 
+# ### Significance testing
+# 
+# Next, we perform a statistical hypothesis test in the form of:
+# 
+# -   $H_0$: $\beta_1 = 0$. The true linear model has slope zero.
+# -   $H_A$: $\beta_1 \neq 0$. The true linear model has a slope different than zero. The height of the parents is predictive for the height of their daughter.
+# 
+# We would reject $H_0$ in favor of $H_A$ if the data provide strong evidence that the true slope parameter ($\beta_{expected}$) is different than zero. To assess the hypotheses, we identify a standard error for the estimate ($SE_\beta$), compute an appropriate test statistic, and identify the p-value.
+# 
+# 
+# The **p-value** is the probability of seeing an coefficient at least as extreme as our result (0.8121), had there truly been no difference between our cofficient and the expected coefficient with a vlaue of 0. In other words: the p-value is the probability of obtaining a coefficient at least as extreme as the result actually observed, under the assumption that the null hypothesis is correct. Therefore, the lower p the better since a small p-value means that such an extreme observed outcome would be very unlikely under the null hypothesis. 
+# 
+# In particular, the null hypothesis is rejected if the p-value is less than a pre-defined threshold value $\alpha$, which is referred to as the alpha level or significance level. By convention, we use an \alpha level of 0.05. This means we reject $H_0$ if the p-value is equal or below 5%.
+# 
+# 
+# To obtain the p-value, we use the parameter estimates and their standard errors to compute a *t statistic* to tell us the likelihood of the observed parameter estimates compared to some expected value under the null hypothesis. In this case we will test against the null hypothesis of no effect (i.e. $β_1$ = 0)
+# 
+# $$
+# \begin{array}{c}
+# t_{N - p} = \frac{{\beta_1} - \beta_{expected}}{SE_{\hat{\beta}}}\\
+# t_{N - p} = \frac{{\beta_1} - 0}{SE_{\hat{\beta}}}\\
+# t_{N - p} = \frac{{\beta_1} }{SE_{\hat{\beta}}}
+# \end{array}
+# $$
+# 
+# *Review [this notebook](https://kirenz.github.io/inference/t_test.html) to learn more about the t-statistic.*
+
+# In[54]:
+
+
+lm.summary().tables[1]
+
+
+# In[55]:
+
+
+model_result = pd.read_html(lm.summary().tables[1].as_html(),header=0,index_col=0)[0]
+
+t_statistic = model_result['coef'].values[1] / model_result['std err'].values[1]
+
+print("t-statistic:", t_statistic)
+
+
+# We see that the intercept is significantly different from zero (which is not of importance) and that the effect of `height_parents` on `height` is  significant (p = .000). 
+
+# Now let’s review how to compute the p-value for our example using the t distribution. First we compute the t statistic using the coefficient and  standard error and found that t = 9.422. 
+# 
+# The question that we now want to ask is: What is the likelihood that we would find a t statistic of this size, if the true coefficent value is zero (i.e. the null hypothesis)? We can use the t distribution to determine this probability. The result P>|t| = 0.000 is the probability of finding a value of the t statistic greater than or equal to our observed value. We find that p(t > 9.422) = 0.000, which tells us that our observed t statistic value of 9.422 is relatively unlikely if the null hypothesis really is true.
+# 
+# To learn more about the concept of p-values, review this excellent post series ["Decision Making at Netflix"](https://netflixtechblog.com/decision-making-at-netflix-33065fa06481) provided by Netflix Tech Blog.
+
+# 
+
 # ### Confidence interval
 # 
 # As a brief recap, we usually use a **sample value** as an estimate of a **parameter** (e.g., the mean or any other parameter b) in the **population**. We’ve just seen that the **estimate of a parameter** (e.g., the mean) will differ across samples, and we can use the **standard error** to get some idea of the extent to which these estimates differ across samples. We can also use this information to calculate boundaries within which we believe the population value will fall. Such boundaries are called **confidence intervals**. 
@@ -814,7 +864,7 @@ print('Standard error (SE) od model 2:', se_2)
 # 
 # $$z = \frac{X-\bar{X}}{s}$$
 
-# In[54]:
+# In[56]:
 
 
 # calculate z-scores
@@ -824,7 +874,7 @@ print(z)
 df = df.assign(z = z)
 
 
-# In[55]:
+# In[57]:
 
 
 plt = sns.distplot(df.z);
@@ -869,7 +919,7 @@ plt.text(-2.2, 0.3,'z = -1.96', rotation=90, color='r');
 # 
 # As such, the mean is always in the centre of the confidence interval. We know that 95% of confidence intervals contain the population mean, so we can assume this confidence interval contains the true mean; therefore, if the interval is small,the sample mean must be very close to the true man. Conversely, if the confidenve interval is very wide then the sample mean could be very different from the true mean, indicating that it is a bad representation of the population.
 
-# In[56]:
+# In[58]:
 
 
 # lower boundary
@@ -880,7 +930,7 @@ print('Lower boundary of CI', lb)
 print('Upper boundary of CI', up)
 
 
-# In[57]:
+# In[59]:
 
 
 # draw limits of confidence intervall
@@ -906,14 +956,14 @@ plt.text(165.8, 0.15,'Upper limit = 165.65', rotation=90, color='w');
 # 
 # **upper boundary of confidence intervall** = $b_1 + (1.96 \times SE(b_1))$
 
-# In[58]:
+# In[60]:
 
 
 # Obtain confidence interval for fitted parameters 
 lm.conf_int(alpha=0.05)
 
 
-# In[59]:
+# In[61]:
 
 
 # Make a prediction for height when parents average height is 168 cm
@@ -929,7 +979,7 @@ round(results.summary_frame(alpha=0.05),2)
 # 
 # We interpret this to mean that 95% of intervals of this form will contain the true value of Y for parents with this average height. Note that both intervals are centered at 167.4 cm, but that the **prediction interval** is substantially wider than the confidence interval, reflecting the increased uncertainty about the individual height for given parents height in comparison to the average height of many parents. 
 
-# In[60]:
+# In[62]:
 
 
 # Plot regression line with CI 95%
@@ -950,7 +1000,7 @@ sns.lmplot(x='height_parents', y='height', data=df, order=1, line_kws={'color':'
 # 
 # The (n − 1) in the equations is the degrees of freedom and tells us which of the t-distributions to use. For a 95% confidence interval, we can calculate the value of t for a two-tailed test with probability of 0.05, for the appropriate degrees of freedom.
 
-# In[61]:
+# In[63]:
 
 
 # calculate t-statistic
@@ -966,7 +1016,7 @@ print('Lower boundary of CI (t-statistics)', lb_t)
 print('Upper boundary of CI (t-statistics)', up_t)
 
 
-# In[62]:
+# In[64]:
 
 
 # draw limits of confidence intervall for t-statistic
@@ -984,7 +1034,7 @@ plt.axvline(165.695836, 0, 1, linewidth=3, color='r');
 plt.text(165.8, 0.15,'Upper limit = 165.69', rotation=90, color='r');
 
 
-# In[63]:
+# In[65]:
 
 
 # compare CI z-statistic with t-statistic
@@ -1018,7 +1068,7 @@ plt.axvline(165.695836, 0, 1, linewidth=3, color='r');
 
 # ### Bayesian information criterion (BIC) 
 
-# In[64]:
+# In[66]:
 
 
 # BIC
@@ -1027,7 +1077,7 @@ lm.bic
 
 # ### Akaike information criterion (AIC) 
 
-# In[65]:
+# In[67]:
 
 
 # AIC
