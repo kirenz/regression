@@ -780,20 +780,18 @@ print('Standard error (SE) od model 2:', se_2)
 
 # ### Significance testing
 # 
-# Next, we perform a statistical hypothesis test in the form of:
+# Next, we perform a statistical hypothesis test to asssess the slope of the model: 
 # 
 # -   $H_0$: $\beta_1 = 0$. The true linear model has slope zero.
 # -   $H_A$: $\beta_1 \neq 0$. The true linear model has a slope different than zero. The height of the parents is predictive for the height of their daughter.
 # 
-# We would reject $H_0$ in favor of $H_A$ if the data provide strong evidence that the true slope parameter ($\beta_{expected}$) is different than zero. To assess the hypotheses, we identify a standard error for the estimate ($SE_\beta$), compute an appropriate test statistic, and identify the p-value.
+# We would reject $H_0$ in favor of $H_A$ if the data provide strong evidence that the true slope parameter ($\beta_{expected}$) is different than zero. To assess the hypothesis, we use the standard error for the estimate ($SE_\beta$), compute a test statistic, and identify the p-value.
 # 
-# 
-# The **p-value** is the probability of seeing an coefficient at least as extreme as our result (0.8121), had there truly been no difference between our cofficient and the expected coefficient with a vlaue of 0. In other words: the p-value is the probability of obtaining a coefficient at least as extreme as the result actually observed, under the assumption that the null hypothesis is correct. Therefore, the lower p the better since a small p-value means that such an extreme observed outcome would be very unlikely under the null hypothesis. 
+# The **p-value** is the probability of seeing an coefficient at least as extreme as our result (0.8121), had there truly been no difference between our cofficient and the expected coefficient (with a vlaue of 0.0). In other words: the p-value is the probability of obtaining a coefficient at least as extreme as the result actually observed, under the assumption that the null hypothesis is correct. Therefore, the lower p the better since a small p-value means that such an extreme observed outcome would be very unlikely under the null hypothesis. 
 # 
 # In particular, the null hypothesis is rejected if the p-value is less than a pre-defined threshold value $\alpha$, which is referred to as the alpha level or significance level. By convention, we use an \alpha level of 0.05. This means we reject $H_0$ if the p-value is equal or below 5%.
 # 
-# 
-# To obtain the p-value, we use the parameter estimates and their standard errors to compute a *t statistic* to tell us the likelihood of the observed parameter estimates compared to some expected value under the null hypothesis. In this case we will test against the null hypothesis of no effect (i.e. $β_1$ = 0)
+# To obtain the p-value for our coefficient, we use the parameter estimate and the respective standard error to compute a *t statistic* to tell us the likelihood of the observed parameter estimates compared to some expected value under the null hypothesis:
 # 
 # $$
 # \begin{array}{c}
@@ -823,19 +821,21 @@ print("t-statistic:", t_statistic)
 
 # We see that the intercept is significantly different from zero (which is not of importance) and that the effect of `height_parents` on `height` is  significant (p = .000). 
 
-# Now let’s review how to compute the p-value for our example using the t distribution. First we compute the t statistic using the coefficient and  standard error and found that t = 9.422. 
+# To obtain this result, we first computed the t statistic by deviding the coefficient with the standard error and found that t = 9.422. The question that we want to ask next is: What is the likelihood that we would find a t statistic of this size, if the true coefficent value is zero (i.e. the null hypothesis)? 
 # 
-# The question that we now want to ask is: What is the likelihood that we would find a t statistic of this size, if the true coefficent value is zero (i.e. the null hypothesis)? We can use the t distribution to determine this probability. The result P>|t| = 0.000 is the probability of finding a value of the t statistic greater than or equal to our observed value. We find that p(t > 9.422) = 0.000, which tells us that our observed t statistic value of 9.422 is relatively unlikely if the null hypothesis really is true.
+# We can use the t distribution to determine this probability. The result P>|t| = 0.000 is the probability of finding a value of the t statistic greater than or equal to our observed value under the assumption of $H_0$. We find that p(t > 9.422) = 0.000, which tells us that our observed t statistic value of 9.422 is relatively unlikely if the null hypothesis really is true.
+# 
+# Since the p-value is below our significance level of 5%, we reject $H_0$.
 # 
 # To learn more about the concept of p-values, review this excellent post series ["Decision Making at Netflix"](https://netflixtechblog.com/decision-making-at-netflix-33065fa06481) provided by Netflix Tech Blog.
 
-# 
-
 # ### Confidence interval
 # 
-# As a brief recap, we usually use a **sample value** as an estimate of a **parameter** (e.g., the mean or any other parameter b) in the **population**. We’ve just seen that the **estimate of a parameter** (e.g., the mean) will differ across samples, and we can use the **standard error** to get some idea of the extent to which these estimates differ across samples. We can also use this information to calculate boundaries within which we believe the population value will fall. Such boundaries are called **confidence intervals**. 
+# Now let's cover confidence intervalls. As a brief recap, we usually use a **sample value** as an estimate of a **parameter** (e.g., the mean or any other parameter b) in the **population**. We’ve just seen that the **estimate of a parameter** (e.g., the mean) will differ across samples, and we can use the **standard error** to get some idea of the extent to which these estimates differ across samples. We can also use this information to calculate boundaries within which we believe the population value will fall. Such boundaries are called **confidence intervals**. 
 # 
-# For example, perhaps we might want to know how often, *in the long run*, an interval contains the true value of the parameter we’re trying to estimate (in the case of model 1, the mean). This is what a **confidence interval** does. Typically, we look at 95% confidence intervals, and sometimes 99% confidence intervals, but they all have a similar interpretation: they are limits constructed such that, for a certain percentage of samples (be that 95% or 99%), the true value of the population parameter falls within the limits. So, when you see a 95% confidence interval for a mean, think of it like this: 
+# For example, perhaps we might want to know how often, *in the long run*, an interval contains the true value of the parameter we’re trying to estimate (in the case of model 1, the mean). This is what a **confidence interval** does. T
+# 
+# Typically, we look at 95% confidence intervals, and sometimes 99% confidence intervals, but they all have a similar interpretation: they are limits constructed such that, for a certain percentage of samples (be that 95% or 99%), the true value of the population parameter falls within the limits. So, when you see a 95% confidence interval for a mean, think of it like this: 
 # 
 #   * if we’d collected 100 samples, and for each sample calculated the parameter (e.g. the mean) and a confidence interval for it, then for 95 of these samples, the confidence interval contains the value of the parameter (e.g. the mean) in the population, and in 5 of the samples the confidence interval does not contain the population paramater (e.g. the mean). 
 #   
