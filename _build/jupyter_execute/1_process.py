@@ -6,13 +6,8 @@
 # The goal of this section is to give you a first impression of some important steps and tools in Python when
 # doing data science projects. A typical data science project looks something like this (Wickham & Grolemund, 2016):
 # 
+# <img src="img/2_data_science_process.png" alt="process" class="bg-primary mb-1" width="600px">
 # 
-# ```{image} ../img/2_data_science_process.png
-# :alt: process
-# :class: bg-primary mb-1
-# :width: 200px
-# :align: center
-# ```
 
 # **Import data**
 # 
@@ -466,7 +461,7 @@ sns.scatterplot(x='age', y='wage', data=df);
 sns.pairplot(df);
 
 
-# ## 5 Model
+# ## Model
 
 # We will cover the modelling process in one of the next sections.
 # 
