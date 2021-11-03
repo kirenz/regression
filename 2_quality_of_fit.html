@@ -387,6 +387,11 @@
     </ul>
    </li>
    <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#significance-testing">
+     Significance testing
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
     <a class="reference internal nav-link" href="#confidence-interval">
      Confidence interval
     </a>
@@ -440,8 +445,8 @@
                 
   <div class="tex2jax_ignore mathjax_ignore section" id="regression-basics">
 <h1>Regression basics<a class="headerlink" href="#regression-basics" title="Permalink to this headline">¶</a></h1>
-<p>Therefore, we quantify the extent to which the predicted outcome value for a given observation is close to the true outcome value for that observation. In the regression setting, the most commonly-used measure is the mean squared error (MSE), which we will cover in detail.</p>
-<p>One of the simplest models we use in statistics is the <strong>mean</strong>. It is a (simple) model because it represents a summary of data. Therefore, let’s use the mean as a baseline model and compare the quality of fit between the mean and a simple linear regression model with only one predictor. We use a small sample of 20 adult german women from whom we obtained their height (this is our outcome variable) and the average height of their parents (this is our feature).</p>
+<p>One of the simplest models we use in statistics is the <strong>mean</strong>. It is a (simple) model because it represents a summary of data. Therefore, let’s use the mean as a baseline model and compare the quality of fit between the mean and a simple linear regression model with only one predictor.</p>
+<p>We use a small sample of 20 women from whom we obtained their height (this is our outcome variable) and the average height of their parents (this is our feature).</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Python setup</span>
@@ -453,7 +458,6 @@
 
 <span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
 <span class="o">%</span><span class="k">matplotlib</span> inline 
-<span class="n">plt</span><span class="o">.</span><span class="n">style</span><span class="o">.</span><span class="n">use</span><span class="p">(</span><span class="s1">&#39;ggplot&#39;</span><span class="p">)</span> 
 <span class="kn">import</span> <span class="nn">seaborn</span> <span class="k">as</span> <span class="nn">sns</span>  
 
 <span class="c1"># seaborn settings</span>
@@ -1190,7 +1194,7 @@ dtype: int64
   <th>Date:</th>             <td>Wed, 03 Nov 2021</td> <th>  Prob (F-statistic):</th> <td>2.21e-08</td>
 </tr>
 <tr>
-  <th>Time:</th>                 <td>16:43:53</td>     <th>  Log-Likelihood:    </th> <td> -17.995</td>
+  <th>Time:</th>                 <td>18:47:20</td>     <th>  Log-Likelihood:    </th> <td> -17.995</td>
 </tr>
 <tr>
   <th>No. Observations:</th>      <td>    20</td>      <th>  AIC:               </th> <td>   39.99</td>
@@ -2121,6 +2125,66 @@ dtype: float64
 </div>
 </div>
 </div>
+<div class="section" id="significance-testing">
+<h3>Significance testing<a class="headerlink" href="#significance-testing" title="Permalink to this headline">¶</a></h3>
+<p>Next, we perform a statistical hypothesis test in the form of:</p>
+<ul class="simple">
+<li><p><span class="math notranslate nohighlight">\(H_0\)</span>: <span class="math notranslate nohighlight">\(\beta_1 = 0\)</span>. The true linear model has slope zero.</p></li>
+<li><p><span class="math notranslate nohighlight">\(H_A\)</span>: <span class="math notranslate nohighlight">\(\beta_1 \neq 0\)</span>. The true linear model has a slope different than zero. The height of the parents is predictive for the height of their daughter.</p></li>
+</ul>
+<p>We would reject <span class="math notranslate nohighlight">\(H_0\)</span> in favor of <span class="math notranslate nohighlight">\(H_A\)</span> if the data provide strong evidence that the true slope parameter (<span class="math notranslate nohighlight">\(\beta_{expected}\)</span>) is different than zero. To assess the hypotheses, we identify a standard error for the estimate (<span class="math notranslate nohighlight">\(SE_\beta\)</span>), compute an appropriate test statistic, and identify the p-value.</p>
+<p>The <strong>p-value</strong> is the probability of seeing an coefficient at least as extreme as our result (0.8121), had there truly been no difference between our cofficient and the expected coefficient with a vlaue of 0. In other words: the p-value is the probability of obtaining a coefficient at least as extreme as the result actually observed, under the assumption that the null hypothesis is correct. Therefore, the lower p the better since a small p-value means that such an extreme observed outcome would be very unlikely under the null hypothesis.</p>
+<p>In particular, the null hypothesis is rejected if the p-value is less than a pre-defined threshold value <span class="math notranslate nohighlight">\(\alpha\)</span>, which is referred to as the alpha level or significance level. By convention, we use an \alpha level of 0.05. This means we reject <span class="math notranslate nohighlight">\(H_0\)</span> if the p-value is equal or below 5%.</p>
+<p>To obtain the p-value, we use the parameter estimates and their standard errors to compute a <em>t statistic</em> to tell us the likelihood of the observed parameter estimates compared to some expected value under the null hypothesis. In this case we will test against the null hypothesis of no effect (i.e. <span class="math notranslate nohighlight">\(β_1\)</span> = 0)</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+\begin{array}{c}
+t_{N - p} = \frac{{\beta_1} - \beta_{expected}}{SE_{\hat{\beta}}}\\
+t_{N - p} = \frac{{\beta_1} - 0}{SE_{\hat{\beta}}}\\
+t_{N - p} = \frac{{\beta_1} }{SE_{\hat{\beta}}}
+\end{array}
+\end{split}\]</div>
+<p><em>Review <a class="reference external" href="https://kirenz.github.io/inference/t_test.html">this notebook</a> to learn more about the t-statistic.</em></p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">lm</span><span class="o">.</span><span class="n">summary</span><span class="p">()</span><span class="o">.</span><span class="n">tables</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><table class="simpletable">
+<tr>
+         <td></td>           <th>coef</th>     <th>std err</th>      <th>t</th>      <th>P>|t|</th>  <th>[0.025</th>    <th>0.975]</th>  
+</tr>
+<tr>
+  <th>Intercept</th>      <td>   30.9651</td> <td>   14.226</td> <td>    2.177</td> <td> 0.043</td> <td>    1.077</td> <td>   60.853</td>
+</tr>
+<tr>
+  <th>height_parents</th> <td>    0.8121</td> <td>    0.086</td> <td>    9.422</td> <td> 0.000</td> <td>    0.631</td> <td>    0.993</td>
+</tr>
+</table></div></div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">model_result</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_html</span><span class="p">(</span><span class="n">lm</span><span class="o">.</span><span class="n">summary</span><span class="p">()</span><span class="o">.</span><span class="n">tables</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">as_html</span><span class="p">(),</span><span class="n">header</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span><span class="n">index_col</span><span class="o">=</span><span class="mi">0</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span>
+
+<span class="n">t_statistic</span> <span class="o">=</span> <span class="n">model_result</span><span class="p">[</span><span class="s1">&#39;coef&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">values</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">/</span> <span class="n">model_result</span><span class="p">[</span><span class="s1">&#39;std err&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">values</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;t-statistic:&quot;</span><span class="p">,</span> <span class="n">t_statistic</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>t-statistic: 9.443023255813955
+</pre></div>
+</div>
+</div>
+</div>
+<p>We see that the intercept is significantly different from zero (which is not of importance) and that the effect of <code class="docutils literal notranslate"><span class="pre">height_parents</span></code> on <code class="docutils literal notranslate"><span class="pre">height</span></code> is  significant (p = .000).</p>
+<p>Now let’s review how to compute the p-value for our example using the t distribution. First we compute the t statistic using the coefficient and  standard error and found that t = 9.422.</p>
+<p>The question that we now want to ask is: What is the likelihood that we would find a t statistic of this size, if the true coefficent value is zero (i.e. the null hypothesis)? We can use the t distribution to determine this probability. The result P&gt;|t| = 0.000 is the probability of finding a value of the t statistic greater than or equal to our observed value. We find that p(t &gt; 9.422) = 0.000, which tells us that our observed t statistic value of 9.422 is relatively unlikely if the null hypothesis really is true.</p>
+<p>To learn more about the concept of p-values, review this excellent post series <a class="reference external" href="https://netflixtechblog.com/decision-making-at-netflix-33065fa06481">“Decision Making at Netflix”</a> provided by Netflix Tech Blog.</p>
+</div>
 <div class="section" id="confidence-interval">
 <h3>Confidence interval<a class="headerlink" href="#confidence-interval" title="Permalink to this headline">¶</a></h3>
 <p>As a brief recap, we usually use a <strong>sample value</strong> as an estimate of a <strong>parameter</strong> (e.g., the mean or any other parameter b) in the <strong>population</strong>. We’ve just seen that the <strong>estimate of a parameter</strong> (e.g., the mean) will differ across samples, and we can use the <strong>standard error</strong> to get some idea of the extent to which these estimates differ across samples. We can also use this information to calculate boundaries within which we believe the population value will fall. Such boundaries are called <strong>confidence intervals</strong>.</p>
@@ -2197,7 +2261,7 @@ Name: height, dtype: float64
   warnings.warn(msg, FutureWarning)
 </pre></div>
 </div>
-<img alt="_images/2_quality_of_fit_86_1.png" src="_images/2_quality_of_fit_86_1.png" />
+<img alt="_images/2_quality_of_fit_92_1.png" src="_images/2_quality_of_fit_92_1.png" />
 </div>
 </div>
 <p>If we know that our limits are −1.96 and 1.96 as z-scores, then to find out the corresponding scores in our raw data we can replace z in the equation (because there are two values, we get two equations):</p>
@@ -2263,7 +2327,7 @@ Upper boundary of CI 165.65161176688028
   warnings.warn(msg, FutureWarning)
 </pre></div>
 </div>
-<img alt="_images/2_quality_of_fit_89_1.png" src="_images/2_quality_of_fit_89_1.png" />
+<img alt="_images/2_quality_of_fit_95_1.png" src="_images/2_quality_of_fit_95_1.png" />
 </div>
 </div>
 </div>
@@ -2385,7 +2449,7 @@ Upper boundary of CI 165.65161176688028
   warnings.warn(msg, UserWarning)
 </pre></div>
 </div>
-<img alt="_images/2_quality_of_fit_96_1.png" src="_images/2_quality_of_fit_96_1.png" />
+<img alt="_images/2_quality_of_fit_102_1.png" src="_images/2_quality_of_fit_102_1.png" />
 </div>
 </div>
 </div>
@@ -2445,7 +2509,7 @@ Upper boundary of CI (t-statistics) 165.69583627664076
   warnings.warn(msg, FutureWarning)
 </pre></div>
 </div>
-<img alt="_images/2_quality_of_fit_100_1.png" src="_images/2_quality_of_fit_100_1.png" />
+<img alt="_images/2_quality_of_fit_106_1.png" src="_images/2_quality_of_fit_106_1.png" />
 </div>
 </div>
 <div class="cell docutils container">
@@ -2470,7 +2534,7 @@ Upper boundary of CI (t-statistics) 165.69583627664076
   warnings.warn(msg, FutureWarning)
 </pre></div>
 </div>
-<img alt="_images/2_quality_of_fit_101_1.png" src="_images/2_quality_of_fit_101_1.png" />
+<img alt="_images/2_quality_of_fit_107_1.png" src="_images/2_quality_of_fit_107_1.png" />
 </div>
 </div>
 <hr class="docutils" />
