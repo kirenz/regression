@@ -13,8 +13,8 @@ parts:
   - caption: Diagnostics
     chapters:
     - file: 4_diagnostics.ipynb
-      sections:
-      - file: 5_auto_case.ipynb
-  - caption: References
-    chapters:
-    - file: reference.md
+ #     sections:
+ #     - file: 5_auto_case.ipynb
+ # - caption: References
+ #   chapters:
+ #   - file: reference.md
