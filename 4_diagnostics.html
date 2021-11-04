@@ -285,6 +285,11 @@
   <a class="reference internal nav-link" href="#regression-model">
    Regression model
   </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#id1">
+   Diagnostics
+  </a>
   <ul class="nav section-nav flex-column">
    <li class="toc-h3 nav-item toc-entry">
     <a class="reference internal nav-link" href="#non-linearity">
@@ -962,7 +967,7 @@ dtype: int64
   <th>Date:</th>             <td>Thu, 04 Nov 2021</td> <th>  Prob (F-statistic):</th> <td>7.03e-81</td>
 </tr>
 <tr>
-  <th>Time:</th>                 <td>22:09:50</td>     <th>  Log-Likelihood:    </th> <td> -1178.7</td>
+  <th>Time:</th>                 <td>22:20:42</td>     <th>  Log-Likelihood:    </th> <td> -1178.7</td>
 </tr>
 <tr>
   <th>No. Observations:</th>      <td>   392</td>      <th>  AIC:               </th> <td>   2361.</td>
@@ -1003,13 +1008,9 @@ dtype: int64
 </tr>
 </table><br/><br/>Notes:<br/>[1] Standard Errors assume that the covariance matrix of the errors is correctly specified.</div></div>
 </div>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1">## Diagnostics</span>
-</pre></div>
 </div>
-</div>
-</div>
+<div class="section" id="id1">
+<h2>Diagnostics<a class="headerlink" href="#id1" title="Permalink to this headline">¶</a></h2>
 <div class="section" id="non-linearity">
 <h3>Non-linearity<a class="headerlink" href="#non-linearity" title="Permalink to this headline">¶</a></h3>
 <div class="section" id="harvey-collier-multiplier-test">
@@ -1055,7 +1056,7 @@ dtype: int64
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="_images/4_diagnostics_25_0.png" src="_images/4_diagnostics_25_0.png" />
+<img alt="_images/4_diagnostics_24_0.png" src="_images/4_diagnostics_24_0.png" />
 </div>
 </div>
 <p>The residuals are not equally spread around a horizontal line which is an indication for a <strong>non-linear</strong> relationship.</p>
@@ -1108,7 +1109,7 @@ dtype: int64
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="_images/4_diagnostics_30_0.png" src="_images/4_diagnostics_30_0.png" />
+<img alt="_images/4_diagnostics_29_0.png" src="_images/4_diagnostics_29_0.png" />
 </div>
 </div>
 <p>Deal with non-linearity</p>
@@ -1136,7 +1137,7 @@ dtype: int64
   <th>Date:</th>             <td>Thu, 04 Nov 2021</td> <th>  Prob (F-statistic):</th> <td>5.40e-99</td>
 </tr>
 <tr>
-  <th>Time:</th>                 <td>22:09:51</td>     <th>  Log-Likelihood:    </th> <td> -1133.2</td>
+  <th>Time:</th>                 <td>22:20:43</td>     <th>  Log-Likelihood:    </th> <td> -1133.2</td>
 </tr>
 <tr>
   <th>No. Observations:</th>      <td>   392</td>      <th>  AIC:               </th> <td>   2272.</td>
@@ -1196,7 +1197,7 @@ dtype: int64
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="_images/4_diagnostics_34_0.png" src="_images/4_diagnostics_34_0.png" />
+<img alt="_images/4_diagnostics_33_0.png" src="_images/4_diagnostics_33_0.png" />
 </div>
 </div>
 </div>
@@ -1268,7 +1269,7 @@ dtype: int64
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="_images/4_diagnostics_42_0.png" src="_images/4_diagnostics_42_0.png" />
+<img alt="_images/4_diagnostics_41_0.png" src="_images/4_diagnostics_41_0.png" />
 </div>
 </div>
 <p>This plot shows if residuals are normally distributed. If a normal distribution is present, the residuals should (more or less) follow a straight line.
@@ -1304,7 +1305,7 @@ We can observe that only some residuals (in the lower left and the upper right c
   ax.plot(x, y, fmt, **plot_style)
 </pre></div>
 </div>
-<img alt="_images/4_diagnostics_45_1.png" src="_images/4_diagnostics_45_1.png" />
+<img alt="_images/4_diagnostics_44_1.png" src="_images/4_diagnostics_44_1.png" />
 </div>
 </div>
 </div>
@@ -1374,7 +1375,7 @@ the errors, or <strong>heteroscedasticity</strong>, from the presence of a funne
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="_images/4_diagnostics_53_0.png" src="_images/4_diagnostics_53_0.png" />
+<img alt="_images/4_diagnostics_52_0.png" src="_images/4_diagnostics_52_0.png" />
 </div>
 </div>
 <p>This plot shows if residuals are spread equally along the ranges of predictors. This is how we can check the assumption of equal variance (<strong>homoscedasticity</strong>). It’s good if we observe a horizontal line with equally (randomly) spread points.</p>
@@ -1464,7 +1465,7 @@ the errors, or <strong>heteroscedasticity</strong>, from the presence of a funne
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="_images/4_diagnostics_62_0.png" src="_images/4_diagnostics_62_0.png" />
+<img alt="_images/4_diagnostics_61_0.png" src="_images/4_diagnostics_61_0.png" />
 </div>
 </div>
 </div>
@@ -1487,7 +1488,7 @@ The is_first_col function was deprecated in Matplotlib 3.4 and will be removed t
   if ax.is_first_col():
 </pre></div>
 </div>
-<img alt="_images/4_diagnostics_64_1.png" src="_images/4_diagnostics_64_1.png" />
+<img alt="_images/4_diagnostics_63_1.png" src="_images/4_diagnostics_63_1.png" />
 </div>
 </div>
 <div class="cell docutils container">
@@ -1506,7 +1507,7 @@ The is_first_col function was deprecated in Matplotlib 3.4 and will be removed t
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="_images/4_diagnostics_65_0.png" src="_images/4_diagnostics_65_0.png" />
+<img alt="_images/4_diagnostics_64_0.png" src="_images/4_diagnostics_64_0.png" />
 </div>
 </div>
 <p>A simple way to detect collinearity is to look at the <strong>correlation matrix</strong> of the predictors. An element of this matrix that is large in absolute value indicates a pair of highly correlated variables, and therefore a collinearity problem in the data.</p>
