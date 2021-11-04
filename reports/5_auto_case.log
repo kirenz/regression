@@ -29,7 +29,7 @@ df['horsepower'] = pd.to_numeric(df['horsepower']) # produces error
 During handling of the above exception, another exception occurred:
 
 [0;31mValueError[0m                                Traceback (most recent call last)
-[0;32m/var/folders/35/43bdsj9j64j16410rds5g9vr0000gp/T/ipykernel_1658/2192086555.py[0m in [0;36m<module>[0;34m[0m
+[0;32m/var/folders/35/43bdsj9j64j16410rds5g9vr0000gp/T/ipykernel_3375/2192086555.py[0m in [0;36m<module>[0;34m[0m
 [0;32m----> 1[0;31m [0mdf[0m[0;34m[[0m[0;34m'horsepower'[0m[0;34m][0m [0;34m=[0m [0mpd[0m[0;34m.[0m[0mto_numeric[0m[0;34m([0m[0mdf[0m[0;34m[[0m[0;34m'horsepower'[0m[0;34m][0m[0;34m)[0m [0;31m# produces error[0m[0;34m[0m[0;34m[0m[0m
 [0m
 [0;32m~/opt/anaconda3/lib/python3.7/site-packages/pandas/core/tools/numeric.py[0m in [0;36mto_numeric[0;34m(arg, errors, downcast)[0m
