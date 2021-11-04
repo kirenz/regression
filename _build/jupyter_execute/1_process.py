@@ -7,8 +7,8 @@
 # doing data science projects. A typical data science project looks something like this (Wickham & Grolemund, 2016):
 # 
 # 
-# ```{image} ../img/data_science_process.png
-# :alt: fisdsphy
+# ```{image} ../_static/img/2_data_science_process.png
+# :alt: datascience
 # :class: bg-primary mb-1
 # :width: 200px
 # :align: center
