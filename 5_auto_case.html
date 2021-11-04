@@ -54,8 +54,6 @@
     <script async="async" src="_static/sphinx-thebe.js"></script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
-    <link rel="next" title="Bibliography" href="reference.html" />
-    <link rel="prev" title="Regression diagnostics" href="4_diagnostics.html" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="docsearch:language" content="en" />
     
@@ -86,13 +84,13 @@
     </a>
 </div><form class="bd-search d-flex align-items-center" action="search.html" method="get">
   <i class="icon fas fa-search"></i>
-  <input type="search" class="form-control" name="q" id="search-input" placeholder="Dieses Buch durchsuchen ..." aria-label="Dieses Buch durchsuchen ..." autocomplete="off" >
+  <input type="search" class="form-control" name="q" id="search-input" placeholder="Search this book..." aria-label="Search this book..." autocomplete="off" >
 </form><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
     <div class="bd-toc-item active">
         <ul class="nav bd-sidenav">
  <li class="toctree-l1">
   <a class="reference internal" href="intro.html">
-   Welcome to Linear Regression Models
+   Welcome
   </a>
  </li>
 </ul>
@@ -137,7 +135,7 @@
   Diagnostics
  </span>
 </p>
-<ul class="current nav bd-sidenav">
+<ul class="nav bd-sidenav">
  <li class="toctree-l1">
   <a class="reference internal" href="4_diagnostics.html">
    Regression diagnostics
@@ -180,8 +178,8 @@
             
             <button id="navbar-toggler" class="navbar-toggler ml-0" type="button" data-toggle="collapse"
                 data-toggle="tooltip" data-placement="bottom" data-target=".site-navigation" aria-controls="navbar-menu"
-                aria-expanded="true" aria-label="Navigation umschalten" aria-controls="site-navigation"
-                title="Navigation umschalten" data-toggle="tooltip" data-placement="left">
+                aria-expanded="true" aria-label="Toggle navigation" aria-controls="site-navigation"
+                title="Toggle navigation" data-toggle="tooltip" data-placement="left">
                 <i class="fas fa-bars"></i>
                 <i class="fas fa-arrow-left"></i>
                 <i class="fas fa-arrow-up"></i>
@@ -189,7 +187,7 @@
             
             
 <div class="dropdown-buttons-trigger">
-    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn" aria-label="Laden Sie diese Seite herunter"><i
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn" aria-label="Download this page"><i
             class="fas fa-download"></i></button>
 
     <div class="dropdown-buttons">
@@ -197,10 +195,10 @@
         
         <!-- Download raw file -->
         <a class="dropdown-buttons" href="_sources/5_auto_case.ipynb"><button type="button"
-                class="btn btn-secondary topbarbtn" title="Quelldatei herunterladen" data-toggle="tooltip"
+                class="btn btn-secondary topbarbtn" title="Download source file" data-toggle="tooltip"
                 data-placement="left">.ipynb</button></a>
         <!-- Download PDF via print -->
-        <button type="button" id="download-print" class="btn btn-secondary topbarbtn" title="In PDF drucken"
+        <button type="button" id="download-print" class="btn btn-secondary topbarbtn" title="Print to PDF"
             onClick="window.print()" data-toggle="tooltip" data-placement="left">.pdf</button>
     </div>
 </div>
@@ -213,12 +211,12 @@
     <div class="dropdown-buttons sourcebuttons">
         <a class="repository-button"
             href="https://github.com/executablebooks/jupyter-book"><button type="button" class="btn btn-secondary topbarbtn"
-                data-toggle="tooltip" data-placement="left" title="Quell-Repository"><i
-                    class="fab fa-github"></i>Repository</button></a>
+                data-toggle="tooltip" data-placement="left" title="Source repository"><i
+                    class="fab fa-github"></i>repository</button></a>
         <a class="issues-button"
             href="https://github.com/executablebooks/jupyter-book/issues/new?title=Issue%20on%20page%20%2F5_auto_case.html&body=Your%20issue%20content%20here."><button
                 type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip" data-placement="left"
-                title="Öffnen Sie ein Problem"><i class="fas fa-lightbulb"></i>offenes Thema</button></a>
+                title="Open an issue"><i class="fas fa-lightbulb"></i>open issue</button></a>
         
     </div>
 </div>
@@ -226,8 +224,8 @@
             <!-- Full screen (wrap in <a> to have style consistency -->
 
 <a class="full-screen-button"><button type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip"
-        data-placement="bottom" onclick="toggleFullScreen()" aria-label="Vollbildmodus"
-        title="Vollbildmodus"><i
+        data-placement="bottom" onclick="toggleFullScreen()" aria-label="Fullscreen mode"
+        title="Fullscreen mode"><i
             class="fas fa-expand"></i></button></a>
 
             <!-- Launch buttons -->
@@ -238,7 +236,7 @@
     <div class="dropdown-buttons">
         
         <a class="binder-button" href="https://mybinder.org/v2/gh/executablebooks/jupyter-book/master?urlpath=tree/docs/5_auto_case.ipynb"><button type="button"
-                class="btn btn-secondary topbarbtn" title="Starten Binder" data-toggle="tooltip"
+                class="btn btn-secondary topbarbtn" title="Launch Binder" data-toggle="tooltip"
                 data-placement="left"><img class="binder-button-logo"
                     src="_static/images/logo_binder.svg"
                     alt="Interact on binder">Binder</button></a>
@@ -255,7 +253,7 @@
         <div class="d-none d-md-block col-md-2 bd-toc show">
             
             <div class="tocsection onthispage pt-5 pb-3">
-                <i class="fas fa-list"></i> Inhalt
+                <i class="fas fa-list"></i> Contents
             </div>
             <nav id="bd-toc-nav" aria-label="Page">
                 <ul class="visible nav section-nav flex-column">
@@ -608,24 +606,24 @@ memory usage: 28.0+ KB
 <div class="cell_output docutils container">
 <div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
 <span class="ne">ValueError</span><span class="g g-Whitespace">                                </span>Traceback (most recent call last)
-<span class="nn">~/opt/anaconda3/lib/python3.8/site-packages/pandas/_libs/lib.pyx</span> in <span class="ni">pandas._libs.lib.maybe_convert_numeric</span><span class="nt">()</span>
+<span class="nn">pandas/_libs/lib.pyx</span> in <span class="ni">pandas._libs.lib.maybe_convert_numeric</span><span class="nt">()</span>
 
 <span class="ne">ValueError</span>: Unable to parse string &quot;?&quot;
 
 <span class="n">During</span> <span class="n">handling</span> <span class="n">of</span> <span class="n">the</span> <span class="n">above</span> <span class="n">exception</span><span class="p">,</span> <span class="n">another</span> <span class="n">exception</span> <span class="n">occurred</span><span class="p">:</span>
 
 <span class="ne">ValueError</span><span class="g g-Whitespace">                                </span>Traceback (most recent call last)
-<span class="o">/</span><span class="n">var</span><span class="o">/</span><span class="n">folders</span><span class="o">/</span><span class="mi">9</span><span class="n">c</span><span class="o">/</span><span class="n">_3s5jt3n60j__flsgl0t72340000gn</span><span class="o">/</span><span class="n">T</span><span class="o">/</span><span class="n">ipykernel_4249</span><span class="o">/</span><span class="mf">2192086555.</span><span class="n">py</span> <span class="ow">in</span> <span class="o">&lt;</span><span class="n">module</span><span class="o">&gt;</span>
+<span class="o">/</span><span class="n">var</span><span class="o">/</span><span class="n">folders</span><span class="o">/</span><span class="mi">35</span><span class="o">/</span><span class="mi">43</span><span class="n">bdsj9j64j16410rds5g9vr0000gp</span><span class="o">/</span><span class="n">T</span><span class="o">/</span><span class="n">ipykernel_1658</span><span class="o">/</span><span class="mf">2192086555.</span><span class="n">py</span> <span class="ow">in</span> <span class="o">&lt;</span><span class="n">module</span><span class="o">&gt;</span>
 <span class="ne">----&gt; </span><span class="mi">1</span> <span class="n">df</span><span class="p">[</span><span class="s1">&#39;horsepower&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">to_numeric</span><span class="p">(</span><span class="n">df</span><span class="p">[</span><span class="s1">&#39;horsepower&#39;</span><span class="p">])</span> <span class="c1"># produces error</span>
 
-<span class="nn">~/opt/anaconda3/lib/python3.8/site-packages/pandas/core/tools/numeric.py</span> in <span class="ni">to_numeric</span><span class="nt">(arg, errors, downcast)</span>
-<span class="nn">    181         coerce_numeric = errors not</span> in <span class="nt">(&quot;ignore&quot;, &quot;raise&quot;)</span>
-<span class="g g-Whitespace">    </span><span class="mi">182</span>         <span class="k">try</span><span class="p">:</span>
-<span class="ne">--&gt; </span><span class="mi">183</span>             <span class="n">values</span><span class="p">,</span> <span class="n">_</span> <span class="o">=</span> <span class="n">lib</span><span class="o">.</span><span class="n">maybe_convert_numeric</span><span class="p">(</span>
-<span class="g g-Whitespace">    </span><span class="mi">184</span>                 <span class="n">values</span><span class="p">,</span> <span class="nb">set</span><span class="p">(),</span> <span class="n">coerce_numeric</span><span class="o">=</span><span class="n">coerce_numeric</span>
-<span class="g g-Whitespace">    </span><span class="mi">185</span>             <span class="p">)</span>
+<span class="nn">~/opt/anaconda3/lib/python3.7/site-packages/pandas/core/tools/numeric.py</span> in <span class="ni">to_numeric</span><span class="nt">(arg, errors, downcast)</span>
+<span class="g g-Whitespace">    </span><span class="mi">151</span>         <span class="k">try</span><span class="p">:</span>
+<span class="g g-Whitespace">    </span><span class="mi">152</span>             <span class="n">values</span> <span class="o">=</span> <span class="n">lib</span><span class="o">.</span><span class="n">maybe_convert_numeric</span><span class="p">(</span>
+<span class="ne">--&gt; </span><span class="mi">153</span>                 <span class="n">values</span><span class="p">,</span> <span class="nb">set</span><span class="p">(),</span> <span class="n">coerce_numeric</span><span class="o">=</span><span class="n">coerce_numeric</span>
+<span class="g g-Whitespace">    </span><span class="mi">154</span>             <span class="p">)</span>
+<span class="g g-Whitespace">    </span><span class="mi">155</span>         <span class="k">except</span> <span class="p">(</span><span class="ne">ValueError</span><span class="p">,</span> <span class="ne">TypeError</span><span class="p">):</span>
 
-<span class="nn">~/opt/anaconda3/lib/python3.8/site-packages/pandas/_libs/lib.pyx</span> in <span class="ni">pandas._libs.lib.maybe_convert_numeric</span><span class="nt">()</span>
+<span class="nn">pandas/_libs/lib.pyx</span> in <span class="ni">pandas._libs.lib.maybe_convert_numeric</span><span class="nt">()</span>
 
 <span class="ne">ValueError</span>: Unable to parse string &quot;?&quot; at position 32
 </pre></div>
@@ -1400,24 +1398,6 @@ We can observe that only some residuals (in the lower left and the upper right c
 
 <div class='prev-next-bottom'>
     
-    <div id="prev">
-        <a class="left-prev" href="4_diagnostics.html" title="previous page">
-            <i class="prevnext-label fas fa-angle-left"></i>
-            <div class="prevnext-info">
-                <p class="prevnext-label">previous</p>
-                <p class="prevnext-title">Regression diagnostics</p>
-            </div>
-        </a>
-    </div>
-     <div id="next">
-        <a class="right-next" href="reference.html" title="next page">
-            <div class="prevnext-info">
-                <p class="prevnext-label">next</p>
-                <p class="prevnext-title">Bibliography</p>
-            </div>
-            <i class="prevnext-label fas fa-angle-right"></i>
-        </a>
-     </div>
 
 </div>
         
@@ -1427,9 +1407,9 @@ We can observe that only some residuals (in the lower left and the upper right c
     <div class="container">
       <p>
         
-          Durch Jan Kirenz<br/>
+          By Jan Kirenz<br/>
         
-            &copy; Urheberrechte © 2021.<br/>
+            &copy; Copyright 2021.<br/>
       </p>
     </div>
   </footer>

@@ -54,6 +54,7 @@
     <script async="async" src="_static/sphinx-thebe.js"></script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Bibliography" href="reference.html" />
     <link rel="prev" title="Regression with Simulated Data" href="3_simulated.html" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="docsearch:language" content="en" />
@@ -85,13 +86,13 @@
     </a>
 </div><form class="bd-search d-flex align-items-center" action="search.html" method="get">
   <i class="icon fas fa-search"></i>
-  <input type="search" class="form-control" name="q" id="search-input" placeholder="Dieses Buch durchsuchen ..." aria-label="Dieses Buch durchsuchen ..." autocomplete="off" >
+  <input type="search" class="form-control" name="q" id="search-input" placeholder="Search this book..." aria-label="Search this book..." autocomplete="off" >
 </form><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
     <div class="bd-toc-item active">
         <ul class="nav bd-sidenav">
  <li class="toctree-l1">
   <a class="reference internal" href="intro.html">
-   Welcome to Linear Regression Models
+   Welcome
   </a>
  </li>
 </ul>
@@ -143,6 +144,18 @@
   </a>
  </li>
 </ul>
+<p class="caption" role="heading">
+ <span class="caption-text">
+  References
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="reference.html">
+   Bibliography
+  </a>
+ </li>
+</ul>
 
     </div>
 </nav> <!-- To handle the deprecated key -->
@@ -167,8 +180,8 @@
             
             <button id="navbar-toggler" class="navbar-toggler ml-0" type="button" data-toggle="collapse"
                 data-toggle="tooltip" data-placement="bottom" data-target=".site-navigation" aria-controls="navbar-menu"
-                aria-expanded="true" aria-label="Navigation umschalten" aria-controls="site-navigation"
-                title="Navigation umschalten" data-toggle="tooltip" data-placement="left">
+                aria-expanded="true" aria-label="Toggle navigation" aria-controls="site-navigation"
+                title="Toggle navigation" data-toggle="tooltip" data-placement="left">
                 <i class="fas fa-bars"></i>
                 <i class="fas fa-arrow-left"></i>
                 <i class="fas fa-arrow-up"></i>
@@ -176,7 +189,7 @@
             
             
 <div class="dropdown-buttons-trigger">
-    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn" aria-label="Laden Sie diese Seite herunter"><i
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn" aria-label="Download this page"><i
             class="fas fa-download"></i></button>
 
     <div class="dropdown-buttons">
@@ -184,10 +197,10 @@
         
         <!-- Download raw file -->
         <a class="dropdown-buttons" href="_sources/4_diagnostics.ipynb"><button type="button"
-                class="btn btn-secondary topbarbtn" title="Quelldatei herunterladen" data-toggle="tooltip"
+                class="btn btn-secondary topbarbtn" title="Download source file" data-toggle="tooltip"
                 data-placement="left">.ipynb</button></a>
         <!-- Download PDF via print -->
-        <button type="button" id="download-print" class="btn btn-secondary topbarbtn" title="In PDF drucken"
+        <button type="button" id="download-print" class="btn btn-secondary topbarbtn" title="Print to PDF"
             onClick="window.print()" data-toggle="tooltip" data-placement="left">.pdf</button>
     </div>
 </div>
@@ -200,12 +213,12 @@
     <div class="dropdown-buttons sourcebuttons">
         <a class="repository-button"
             href="https://github.com/executablebooks/jupyter-book"><button type="button" class="btn btn-secondary topbarbtn"
-                data-toggle="tooltip" data-placement="left" title="Quell-Repository"><i
-                    class="fab fa-github"></i>Repository</button></a>
+                data-toggle="tooltip" data-placement="left" title="Source repository"><i
+                    class="fab fa-github"></i>repository</button></a>
         <a class="issues-button"
             href="https://github.com/executablebooks/jupyter-book/issues/new?title=Issue%20on%20page%20%2F4_diagnostics.html&body=Your%20issue%20content%20here."><button
                 type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip" data-placement="left"
-                title="Öffnen Sie ein Problem"><i class="fas fa-lightbulb"></i>offenes Thema</button></a>
+                title="Open an issue"><i class="fas fa-lightbulb"></i>open issue</button></a>
         
     </div>
 </div>
@@ -213,8 +226,8 @@
             <!-- Full screen (wrap in <a> to have style consistency -->
 
 <a class="full-screen-button"><button type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip"
-        data-placement="bottom" onclick="toggleFullScreen()" aria-label="Vollbildmodus"
-        title="Vollbildmodus"><i
+        data-placement="bottom" onclick="toggleFullScreen()" aria-label="Fullscreen mode"
+        title="Fullscreen mode"><i
             class="fas fa-expand"></i></button></a>
 
             <!-- Launch buttons -->
@@ -225,7 +238,7 @@
     <div class="dropdown-buttons">
         
         <a class="binder-button" href="https://mybinder.org/v2/gh/executablebooks/jupyter-book/master?urlpath=tree/docs/4_diagnostics.ipynb"><button type="button"
-                class="btn btn-secondary topbarbtn" title="Starten Binder" data-toggle="tooltip"
+                class="btn btn-secondary topbarbtn" title="Launch Binder" data-toggle="tooltip"
                 data-placement="left"><img class="binder-button-logo"
                     src="_static/images/logo_binder.svg"
                     alt="Interact on binder">Binder</button></a>
@@ -242,7 +255,7 @@
         <div class="d-none d-md-block col-md-2 bd-toc show">
             
             <div class="tocsection onthispage pt-5 pb-3">
-                <i class="fas fa-list"></i> Inhalt
+                <i class="fas fa-list"></i> Contents
             </div>
             <nav id="bd-toc-nav" aria-label="Page">
                 <ul class="visible nav section-nav flex-column">
@@ -955,10 +968,10 @@ dtype: int64
   <th>Method:</th>             <td>Least Squares</td>  <th>  F-statistic:       </th> <td>   599.7</td>
 </tr>
 <tr>
-  <th>Date:</th>             <td>Wed, 03 Nov 2021</td> <th>  Prob (F-statistic):</th> <td>7.03e-81</td>
+  <th>Date:</th>             <td>Thu, 04 Nov 2021</td> <th>  Prob (F-statistic):</th> <td>7.03e-81</td>
 </tr>
 <tr>
-  <th>Time:</th>                 <td>18:58:48</td>     <th>  Log-Likelihood:    </th> <td> -1178.7</td>
+  <th>Time:</th>                 <td>19:52:01</td>     <th>  Log-Likelihood:    </th> <td> -1178.7</td>
 </tr>
 <tr>
   <th>No. Observations:</th>      <td>   392</td>      <th>  AIC:               </th> <td>   2361.</td>
@@ -1125,10 +1138,10 @@ dtype: int64
   <th>Method:</th>             <td>Least Squares</td>  <th>  F-statistic:       </th> <td>   428.0</td>
 </tr>
 <tr>
-  <th>Date:</th>             <td>Wed, 03 Nov 2021</td> <th>  Prob (F-statistic):</th> <td>5.40e-99</td>
+  <th>Date:</th>             <td>Thu, 04 Nov 2021</td> <th>  Prob (F-statistic):</th> <td>5.40e-99</td>
 </tr>
 <tr>
-  <th>Time:</th>                 <td>18:58:49</td>     <th>  Log-Likelihood:    </th> <td> -1133.2</td>
+  <th>Time:</th>                 <td>19:52:01</td>     <th>  Log-Likelihood:    </th> <td> -1133.2</td>
 </tr>
 <tr>
   <th>No. Observations:</th>      <td>   392</td>      <th>  AIC:               </th> <td>   2272.</td>
@@ -1261,11 +1274,7 @@ dtype: int64
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/Users/jankirenz/opt/anaconda3/lib/python3.8/site-packages/statsmodels/graphics/gofplots.py:993: UserWarning: marker is redundantly defined by the &#39;marker&#39; keyword argument and the fmt string &quot;bo&quot; (-&gt; marker=&#39;o&#39;). The keyword argument will take precedence.
-  ax.plot(x, y, fmt, **plot_style)
-</pre></div>
-</div>
-<img alt="_images/4_diagnostics_41_1.png" src="_images/4_diagnostics_41_1.png" />
+<img alt="_images/4_diagnostics_41_0.png" src="_images/4_diagnostics_41_0.png" />
 </div>
 </div>
 <p>This plot shows if residuals are normally distributed. If a normal distribution is present, the residuals should (more or less) follow a straight line.
@@ -1297,9 +1306,7 @@ We can observe that only some residuals (in the lower left and the upper right c
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/Users/jankirenz/opt/anaconda3/lib/python3.8/site-packages/statsmodels/graphics/gofplots.py:993: UserWarning: marker is redundantly defined by the &#39;marker&#39; keyword argument and the fmt string &quot;bo&quot; (-&gt; marker=&#39;o&#39;). The keyword argument will take precedence.
-  ax.plot(x, y, fmt, **plot_style)
-/Users/jankirenz/opt/anaconda3/lib/python3.8/site-packages/statsmodels/graphics/gofplots.py:993: UserWarning: color is redundantly defined by the &#39;color&#39; keyword argument and the fmt string &quot;bo&quot; (-&gt; color=&#39;b&#39;). The keyword argument will take precedence.
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/Users/jankirenz/opt/anaconda3/lib/python3.7/site-packages/statsmodels/graphics/gofplots.py:1045: UserWarning: color is redundantly defined by the &#39;color&#39; keyword argument and the fmt string &quot;b&quot; (-&gt; color=(0.2980392156862745, 0.4470588235294118, 0.6901960784313725, 1)). The keyword argument will take precedence.
   ax.plot(x, y, fmt, **plot_style)
 </pre></div>
 </div>
@@ -1481,7 +1488,12 @@ the errors, or <strong>heteroscedasticity</strong>, from the presence of a funne
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="_images/4_diagnostics_63_0.png" src="_images/4_diagnostics_63_0.png" />
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/Users/jankirenz/opt/anaconda3/lib/python3.7/site-packages/pandas/plotting/_matplotlib/tools.py:331: MatplotlibDeprecationWarning: 
+The is_first_col function was deprecated in Matplotlib 3.4 and will be removed two minor releases later. Use ax.get_subplotspec().is_first_col() instead.
+  if ax.is_first_col():
+</pre></div>
+</div>
+<img alt="_images/4_diagnostics_63_1.png" src="_images/4_diagnostics_63_1.png" />
 </div>
 </div>
 <div class="cell docutils container">
@@ -1624,6 +1636,15 @@ the errors, or <strong>heteroscedasticity</strong>, from the presence of a funne
             </div>
         </a>
     </div>
+     <div id="next">
+        <a class="right-next" href="reference.html" title="next page">
+            <div class="prevnext-info">
+                <p class="prevnext-label">next</p>
+                <p class="prevnext-title">Bibliography</p>
+            </div>
+            <i class="prevnext-label fas fa-angle-right"></i>
+        </a>
+     </div>
 
 </div>
         
@@ -1633,9 +1654,9 @@ the errors, or <strong>heteroscedasticity</strong>, from the presence of a funne
     <div class="container">
       <p>
         
-          Durch Jan Kirenz<br/>
+          By Jan Kirenz<br/>
         
-            &copy; Urheberrechte © 2021.<br/>
+            &copy; Copyright 2021.<br/>
       </p>
     </div>
   </footer>
