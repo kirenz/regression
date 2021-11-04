@@ -20,19 +20,18 @@ import seaborn as sns
 sns.set() 
 
 
-# # Linear regression tutorial 'Auto' 
+# # Tutorial auto data 
 # 
 # This tutorial involves the use of simple linear regression on the **Auto data set** (see data description). 
 # 
 # We use the lm() function to perform linear regressions with **mpg** as the response and **horsepower** as the predictor. Furthermore, we use the summary() function to print the results and comment on the output. For example:
+# 
 #    1. Is there a relationship between the predictor and the response?
 #    2. How strong is the relationship between the predictor and the response?
 #    3. Is the relationship between the predictor and the response positive or negative?
 #    4. What is the predicted mpg associated with a horsepower of 98? What are the associted 95% confidence and prediction intervals?
 # 
 # Finally, we plot the response and the predictor and produce some **diagnostic plots** (1. Residuals vs fitted plot, 2. Normal Q-Q plot, 3. Scale-location plot, 4. Residuals vs leverage plot) to describe the linear regression fit. We comment on any problems we see with the fit. 
-# 
-# ---
 
 # ## Import data
 
@@ -43,75 +42,36 @@ sns.set()
 df = pd.read_csv("https://raw.githubusercontent.com/kirenz/datasets/master/Auto.csv")
 
 
-# ## Tidying data
-
-# ### Data inspection
-
 # First of all, let's take a look at the variables (columns) in the data set.
 
 # In[3]:
 
 
-# show all variables in the data set
-df.columns
+df
 
 
 # In[4]:
 
 
-# show the first 5 rows (i.e. head of the DataFrame)
-df.head(5)
-
-
-# In[5]:
-
-
-# show the lenght of the variable name (i.e. the number of observations)
-len(df["name"])
-
-
-# In[6]:
-
-
-# unique names 
-len(df['name'].unique())
-
-
-# It is not possible to easily check for duplicates since it is plausible that there are multiple car types of the same name...
-
-# In[7]:
-
-
-# data overview (with meta data)
 df.info()
 
 
-# In[8]:
+# ## Tidying data
+
+# In[5]:
 
 
 # change data type
 df['origin'] = pd.Categorical(df['origin'])
 df['name'] = pd.Categorical(df['name'])
+df['horsepower'] = pd.to_numeric(df['horsepower'], errors='coerce')
 
 
-# In[9]:
-
-
-df['horsepower'] = pd.to_numeric(df['horsepower']) # produces error
-
-
-# We have an issue with the horsepower variable. It seems that there is an string present, were only integers should be allowed. We transfrom the data with pd.to_numeric and replace the string with a NAN ... [see Pandas documenation](https://pandas.pydata.org/pandas-docs/stable/generated/pandas.to_numeric.html):
-# 
-#   * pandas.to_numeric(arg, errors='raise', downcast=None)[source]
-# 
-#   * errors : {‘ignore’, ‘raise’, ‘coerce’}, default ‘raise’
-#   * If ‘raise’, then invalid parsing will raise an exception
-#   * If ‘coerce’, then invalid parsing will be set as NaN
-#   * If ‘ignore’, then invalid parsing will return the input
+# Note that we have an issue with the horsepower variable. It seems that there is an string present, were only integers should be allowed. We transfrom the data with `pd.to_numeric` and use `errors='coerce'` to replace the string with a NAN [(see Pandas documenation)](https://pandas.pydata.org/pandas-docs/stable/generated/pandas.to_numeric.html)
 
 # ### Handle missing values
 
-# In[ ]:
+# In[6]:
 
 
 # show missing values (missing values - if present - will be displayed in yellow )
@@ -120,19 +80,20 @@ sns.heatmap(df.isnull(),yticklabels=False,cbar=False,cmap='viridis');
 
 # We can also check the column-wise distribution of null values:
 
-# In[ ]:
+# In[7]:
 
 
 print(df.isnull().sum())
 
 
-# In[ ]:
+# In[8]:
 
 
+# We simply drop the missing lines
 df = df.dropna()
 
 
-# In[ ]:
+# In[9]:
 
 
 print(df.isnull().sum())
@@ -140,14 +101,14 @@ print(df.isnull().sum())
 
 # ## Transform data
 
-# In[ ]:
+# In[10]:
 
 
 # summary statistics for all numerical columns
 round(df.describe(),2)
 
 
-# In[ ]:
+# In[11]:
 
 
 # summary statistics for all categorical columns
@@ -158,30 +119,24 @@ df.describe(include=['category'])
 
 # ### Distibution of Variables
 
-# In[ ]:
+# In[12]:
 
 
-df.hist(figsize=(10,10), bins=20);
-
-
-# In[ ]:
-
-
-# boxplot 
+# boxplot of dependent variable
 sns.boxplot(y='mpg', data=df, palette='winter');
 
 
-# In[ ]:
-
-
-# check relationship with a joint plot
-sns.jointplot(x="horsepower", y="mpg", data=df, stat_func=None);
-
-
-# In[ ]:
+# In[13]:
 
 
 sns.pairplot(df);
+
+
+# In[14]:
+
+
+# check relationship with a joint plot
+sns.jointplot(x="horsepower", y="mpg", data=df);
 
 
 # ## Regression Models
@@ -190,45 +145,28 @@ sns.pairplot(df);
 # 
 # (a) Use the lm() function to perform a simple linear regression with **mpg** as the response and **horsepower** as the predictor. Use the summary() function to print the results. 
 
-# #### Simple Linear Regression
-
-# In[ ]:
+# In[15]:
 
 
-ols = smf.ols(formula ='mpg ~  horsepower', data=df, groups=df["cylinders"]).fit()
+ols = smf.ols(formula ='mpg ~  horsepower', data=df).fit()
+
+
+# In[16]:
+
+
 ols.summary()
 
 
 # We use [Seaborne's lmplot](https://seaborn.pydata.org/generated/seaborn.lmplot.html) to plot the regression line:
 
-# In[ ]:
+# In[17]:
 
 
 # Plot regression line with 95% confidence intervall
 sns.lmplot(x='horsepower', y='mpg', data=df, line_kws={'color':'red'}, height=5, ci=95, );
 
 
-# #### GLS Regression
-
-# In[ ]:
-
-
-gls = smf.gls(formula ='mpg ~  horsepower', data=df).fit()
-gls.summary()
-
-
-# #### Mixed Linear Model
-
-# You find more information about mixed linear models in [Statsmodels documentation](https://www.statsmodels.org/stable/mixed_linear.html)
-
-# In[ ]:
-
-
-mlm = smf.mixedlm(formula ='mpg ~  horsepower', data=df, groups=df["cylinders"]).fit()
-mlm.summary()
-
-
-# ### Interpretation of OLS-Model
+# ### Interpretation
 # 
 # **1. Is there a relationship between the predictor and the response?**
 # 
@@ -236,7 +174,7 @@ mlm.summary()
 
 # **2. How strong is the relationship between the predictor and the response?**
 
-# In[ ]:
+# In[18]:
 
 
 # Test relationship and strength with correlation
@@ -253,7 +191,7 @@ stats.pearsonr(df['mpg'], df['horsepower'])
 
 # **4. What is the predicted mpg associated with a horsepower of 98? What are the associted 95% confidence and prediction intervals?**
 
-# In[ ]:
+# In[19]:
 
 
 to_predict = pd.DataFrame({'horsepower':[98]})
@@ -265,23 +203,20 @@ results.summary_frame(alpha=0.05)
 # 
 # That means if we’d collected 100 samples, and for each sample calculated the regression coefficient for horsepower and a confidence interval for it, then for 95 of these samples, the confidence interval contains the value of the regression coefficient in the population, and in 5 of the samples the confidence interval does not contain the population paramater (i.e. the regrssion coefficient). 
 
-# In[ ]:
+# In[20]:
 
 
 # CI of the parameter (however, this was not the question...)
-lm.conf_int(alpha=0.05)
+ols.conf_int(alpha=0.05)
 
 
-# ---
-# ---
-# 
-# ### Regression Diagnostics
+# ## Regression Diagnostics
 # 
 # (c) Produce diagnostic plots of the least squares regression fit. Comment on any problems you see with the fit.
 
-# #### Residuals vs fitted plot
+# ### Residuals vs fitted plot
 
-# In[ ]:
+# In[21]:
 
 
 # fitted values
@@ -299,11 +234,11 @@ plot.set_ylabel('Residuals');
 
 # The residuals are not equally spread around a horizontal line which is an indication for a non-linear relationship. This means there seems to be a non-linear relationship between the predictor and the response variable which the model doesn’t capture.
 
-# #### Normal Q-Q
+# ### Normal Q-Q
 
 # This plots the standardized (z-score) residuals against the theoretical normal quantiles. Anything quite off the diagonal lines may be a concern for further investigation.
 
-# In[ ]:
+# In[22]:
 
 
 # Use standardized residuals
@@ -315,9 +250,9 @@ sm.qqplot(ols.get_influence().resid_studentized_internal);
 # 
 # We could obtain the 3 observations with the largest deviations from our advanced plot below (observations 330, 327 and 320). 
 
-# #### Scale-Location plot
+# ### Scale-Location plot
 
-# In[ ]:
+# In[23]:
 
 
 # Scale Location plot
@@ -331,16 +266,16 @@ sns.regplot(ols.fittedvalues, np.sqrt(np.abs(ols.get_influence().resid_studentiz
 # 
 # In our model the residuals begin to spread wider along the y-axis as it passes the x value of around 18. Because the residuals spread wider and wider with an increase of x, the red smooth line is not horizontal and shows a positive angle. This is an indication of heteroskedasticity.
 
-# #### Residuals vs leverage plot
+# ### Residuals vs leverage plot
 
-# In[ ]:
+# In[24]:
 
 
 fig, ax = plt.subplots(figsize=(8,6))
 fig = plot_leverage_resid2(ols, ax = ax)
 
 
-# In[ ]:
+# In[25]:
 
 
 # Additionally, obtain critical Cook's d values
@@ -355,4 +290,26 @@ out_d = ols_cooksd > critical_d
 
 # Output potential outliers
 df.index[out_d],ols_cooksd[out_d]
+
+
+# ## Alternative models
+# 
+# ## GLS regression
+
+# In[26]:
+
+
+gls = smf.gls(formula ='mpg ~  horsepower', data=df).fit()
+gls.summary()
+
+
+# ## Mixed Linear Model
+# 
+# You find more information about mixed linear models in [Statsmodels documentation](https://www.statsmodels.org/stable/mixed_linear.html)
+
+# In[27]:
+
+
+mlm = smf.mixedlm(formula ='mpg ~  horsepower', data=df, groups=df["cylinders"]).fit()
+mlm.summary()
 
