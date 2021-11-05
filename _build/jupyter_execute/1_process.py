@@ -13,7 +13,7 @@
 # ```{image} _static/img/data-science.png
 # :alt: datascience
 # :class: bg-primary mb-1
-# :width: 200px
+# :width: 600px
 # :align: center
 # ```
 
