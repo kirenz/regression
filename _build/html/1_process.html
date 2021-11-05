@@ -84,7 +84,7 @@
     </a>
 </div><form class="bd-search d-flex align-items-center" action="search.html" method="get">
   <i class="icon fas fa-search"></i>
-  <input type="search" class="form-control" name="q" id="search-input" placeholder="Dieses Buch durchsuchen ..." aria-label="Dieses Buch durchsuchen ..." autocomplete="off" >
+  <input type="search" class="form-control" name="q" id="search-input" placeholder="Search this book..." aria-label="Search this book..." autocomplete="off" >
 </form><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
     <div class="bd-toc-item active">
         <ul class="nav bd-sidenav">
@@ -178,8 +178,8 @@
             
             <button id="navbar-toggler" class="navbar-toggler ml-0" type="button" data-toggle="collapse"
                 data-toggle="tooltip" data-placement="bottom" data-target=".site-navigation" aria-controls="navbar-menu"
-                aria-expanded="true" aria-label="Navigation umschalten" aria-controls="site-navigation"
-                title="Navigation umschalten" data-toggle="tooltip" data-placement="left">
+                aria-expanded="true" aria-label="Toggle navigation" aria-controls="site-navigation"
+                title="Toggle navigation" data-toggle="tooltip" data-placement="left">
                 <i class="fas fa-bars"></i>
                 <i class="fas fa-arrow-left"></i>
                 <i class="fas fa-arrow-up"></i>
@@ -187,7 +187,7 @@
             
             
 <div class="dropdown-buttons-trigger">
-    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn" aria-label="Laden Sie diese Seite herunter"><i
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn" aria-label="Download this page"><i
             class="fas fa-download"></i></button>
 
     <div class="dropdown-buttons">
@@ -195,10 +195,10 @@
         
         <!-- Download raw file -->
         <a class="dropdown-buttons" href="_sources/1_process.ipynb"><button type="button"
-                class="btn btn-secondary topbarbtn" title="Quelldatei herunterladen" data-toggle="tooltip"
+                class="btn btn-secondary topbarbtn" title="Download source file" data-toggle="tooltip"
                 data-placement="left">.ipynb</button></a>
         <!-- Download PDF via print -->
-        <button type="button" id="download-print" class="btn btn-secondary topbarbtn" title="In PDF drucken"
+        <button type="button" id="download-print" class="btn btn-secondary topbarbtn" title="Print to PDF"
             onClick="window.print()" data-toggle="tooltip" data-placement="left">.pdf</button>
     </div>
 </div>
@@ -211,12 +211,12 @@
     <div class="dropdown-buttons sourcebuttons">
         <a class="repository-button"
             href="https://github.com/kirenz/linear_regression"><button type="button" class="btn btn-secondary topbarbtn"
-                data-toggle="tooltip" data-placement="left" title="Quell-Repository"><i
-                    class="fab fa-github"></i>Repository</button></a>
+                data-toggle="tooltip" data-placement="left" title="Source repository"><i
+                    class="fab fa-github"></i>repository</button></a>
         <a class="issues-button"
             href="https://github.com/kirenz/linear_regression/issues/new?title=Issue%20on%20page%20%2F1_process.html&body=Your%20issue%20content%20here."><button
                 type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip" data-placement="left"
-                title="Öffnen Sie ein Problem"><i class="fas fa-lightbulb"></i>offenes Thema</button></a>
+                title="Open an issue"><i class="fas fa-lightbulb"></i>open issue</button></a>
         
     </div>
 </div>
@@ -224,8 +224,8 @@
             <!-- Full screen (wrap in <a> to have style consistency -->
 
 <a class="full-screen-button"><button type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip"
-        data-placement="bottom" onclick="toggleFullScreen()" aria-label="Vollbildmodus"
-        title="Vollbildmodus"><i
+        data-placement="bottom" onclick="toggleFullScreen()" aria-label="Fullscreen mode"
+        title="Fullscreen mode"><i
             class="fas fa-expand"></i></button></a>
 
             <!-- Launch buttons -->
@@ -236,7 +236,7 @@
     <div class="dropdown-buttons">
         
         <a class="binder-button" href="https://mybinder.org/v2/gh/kirenz/linear_regression/main?urlpath=tree/1_process.ipynb"><button type="button"
-                class="btn btn-secondary topbarbtn" title="Starten Binder" data-toggle="tooltip"
+                class="btn btn-secondary topbarbtn" title="Launch Binder" data-toggle="tooltip"
                 data-placement="left"><img class="binder-button-logo"
                     src="_static/images/logo_binder.svg"
                     alt="Interact on binder">Binder</button></a>
@@ -253,7 +253,7 @@
         <div class="d-none d-md-block col-md-2 bd-toc show">
             
             <div class="tocsection onthispage pt-5 pb-3">
-                <i class="fas fa-list"></i> Inhalt
+                <i class="fas fa-list"></i> Contents
             </div>
             <nav id="bd-toc-nav" aria-label="Page">
                 <ul class="visible nav section-nav flex-column">
@@ -326,7 +326,7 @@
                 
   <div class="tex2jax_ignore mathjax_ignore section" id="programming-process">
 <h1>Programming Process<a class="headerlink" href="#programming-process" title="Permalink to this headline">¶</a></h1>
-<p>The goal of this section is to give you a first impression of some important steps and tools in Python when using linear regression models. A typical project looks something like this <span id="id1">Wickham and Grolemund [<a class="reference internal" href="reference.html#id6">2016</a>]</span>:</p>
+<p>The goal of this section is to give you a first impression of some important steps and tools in Python when using linear regression models. A typical project looks something like this <span id="id1">[<a class="reference internal" href="reference.html#id6">Wickham and Grolemund, 2016</a>]</span>:</p>
 <a class="bg-primary mb-1 reference internal image-reference" href="_images/data-science.png"><img alt="datascience" class="bg-primary mb-1 align-center" src="_images/data-science.png" style="width: 600px;" /></a>
 <p>First you must <strong>import</strong> your data into Python. This typically means that you take data stored in a file, database, or web API, and load it into a DataFrame in Python (using Pandas).</p>
 <p>Once you’ve imported your data, it is a good idea to tidy it.
@@ -932,7 +932,7 @@ Having missing values in a dataset can cause errors with some algorithms. Theref
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="_images/1_process_32_0.png" src="_images/1_process_32_0.png" />
+<img alt="_images/1_process_31_0.png" src="_images/1_process_31_0.png" />
 </div>
 </div>
 <p>We can also check the column-wise distribution of null values:</p>
@@ -1314,7 +1314,7 @@ Name: age, dtype: float64
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="_images/1_process_52_0.png" src="_images/1_process_52_0.png" />
+<img alt="_images/1_process_51_0.png" src="_images/1_process_51_0.png" />
 </div>
 </div>
 <p>A variable is <strong>continuous</strong> if it can take any of an infinite set of ordered values. To examine the distribution of a continuous variable, we could use a <strong>histogram</strong>:</p>
@@ -1326,7 +1326,7 @@ Name: age, dtype: float64
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="_images/1_process_54_0.png" src="_images/1_process_54_0.png" />
+<img alt="_images/1_process_53_0.png" src="_images/1_process_53_0.png" />
 </div>
 </div>
 <p>We can also use Seaborne to plot a histogram with a kernel density estimate:</p>
@@ -1338,7 +1338,7 @@ Name: age, dtype: float64
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="_images/1_process_56_0.png" src="_images/1_process_56_0.png" />
+<img alt="_images/1_process_55_0.png" src="_images/1_process_55_0.png" />
 </div>
 </div>
 <p>Another alternative to display the distribution of a continuous variable broken down by a categorical variable is the <strong>boxplot</strong>.</p>
@@ -1359,7 +1359,7 @@ farthest non-outlier point in the distribution.</p></li>
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="_images/1_process_58_0.png" src="_images/1_process_58_0.png" />
+<img alt="_images/1_process_57_0.png" src="_images/1_process_57_0.png" />
 </div>
 </div>
 <div class="cell docutils container">
@@ -1370,7 +1370,7 @@ farthest non-outlier point in the distribution.</p></li>
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="_images/1_process_59_0.png" src="_images/1_process_59_0.png" />
+<img alt="_images/1_process_58_0.png" src="_images/1_process_58_0.png" />
 </div>
 </div>
 </div>
@@ -1387,7 +1387,7 @@ You can see covariation as a pattern in the points. We will cover more options t
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="_images/1_process_62_0.png" src="_images/1_process_62_0.png" />
+<img alt="_images/1_process_61_0.png" src="_images/1_process_61_0.png" />
 </div>
 </div>
 <div class="cell docutils container">
@@ -1398,7 +1398,7 @@ You can see covariation as a pattern in the points. We will cover more options t
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="_images/1_process_63_0.png" src="_images/1_process_63_0.png" />
+<img alt="_images/1_process_62_0.png" src="_images/1_process_62_0.png" />
 </div>
 </div>
 </div>
@@ -1465,9 +1465,9 @@ You can see covariation as a pattern in the points. We will cover more options t
     <div class="container">
       <p>
         
-          Durch Jan Kirenz<br/>
+          By Jan Kirenz<br/>
         
-            &copy; Urheberrechte © 2021.<br/>
+            &copy; Copyright 2021.<br/>
       </p>
     </div>
   </footer>
