@@ -5,9 +5,14 @@
 # 
 # The goal of this section is to give you a first impression of some important steps and tools in Python when using linear regression models. A typical project looks something like this {cite:t}`Wickham2016`:
 # 
+
 # 
-# ```{image} ../_static/img/data-science.png
+
+# 
+# 
+# ```{image} _static/img/data-science.png
 # :alt: datascience
+# :class: bg-primary mb-1
 # :width: 200px
 # :align: center
 # ```
