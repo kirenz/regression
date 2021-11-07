@@ -54,7 +54,7 @@
     <script async="async" src="_static/sphinx-thebe.js"></script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
-    <link rel="next" title="Regression with Simulated Data" href="case_simulated.html" />
+    <link rel="next" title="Model with simulated data" href="case_simulated.html" />
     <link rel="prev" title="Regression basics" href="basics.html" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="docsearch:language" content="en" />
@@ -140,7 +140,7 @@
 <ul class="nav bd-sidenav">
  <li class="toctree-l1">
   <a class="reference internal" href="case_simulated.html">
-   Regression with Simulated Data
+   Model with simulated data
   </a>
  </li>
  <li class="toctree-l1">
@@ -972,7 +972,7 @@ dtype: int64
   <th>Date:</th>             <td>Sun, 07 Nov 2021</td> <th>  Prob (F-statistic):</th> <td>7.03e-81</td>
 </tr>
 <tr>
-  <th>Time:</th>                 <td>20:01:39</td>     <th>  Log-Likelihood:    </th> <td> -1178.7</td>
+  <th>Time:</th>                 <td>21:45:18</td>     <th>  Log-Likelihood:    </th> <td> -1178.7</td>
 </tr>
 <tr>
   <th>No. Observations:</th>      <td>   392</td>      <th>  AIC:               </th> <td>   2361.</td>
@@ -1016,6 +1016,40 @@ dtype: int64
 </div>
 <div class="section" id="id1">
 <h2>Diagnostics<a class="headerlink" href="#id1" title="Permalink to this headline">¶</a></h2>
+<p>The <code class="docutils literal notranslate"><span class="pre">plot_regress_exog</span></code> function is a convenience function that gives a 2x2 plot containing</p>
+<ol class="simple">
+<li><p>the dependent variable and fitted values with confidence intervals vs. the independent variable chosen,</p></li>
+<li><p>the residuals of the model vs. the chosen independent variable,</p></li>
+<li><p>a partial regression plot,</p></li>
+<li><p>and a CCPR plot.</p></li>
+</ol>
+<p>This function can be used for quickly checking modeling assumptions with respect to a single regressor (<a class="reference external" href="https://www.statsmodels.org/dev/examples/notebooks/generated/regression_plots.html">see statsmodels documentation</a>)</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">fig</span> <span class="o">=</span> <span class="n">sm</span><span class="o">.</span><span class="n">graphics</span><span class="o">.</span><span class="n">plot_regress_exog</span><span class="p">(</span><span class="n">lm</span><span class="p">,</span> <span class="s2">&quot;horsepower&quot;</span><span class="p">)</span>
+<span class="n">fig</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">(</span><span class="n">pad</span><span class="o">=</span><span class="mf">1.0</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>eval_env: 1
+</pre></div>
+</div>
+<img alt="_images/diagnostics_21_1.png" src="_images/diagnostics_21_1.png" />
+</div>
+</div>
+<p>The plot_fit function plots the fitted values versus a chosen independent variable. It includes prediction confidence intervals and optionally plots the true dependent variable.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">fig</span> <span class="o">=</span> <span class="n">sm</span><span class="o">.</span><span class="n">graphics</span><span class="o">.</span><span class="n">plot_fit</span><span class="p">(</span><span class="n">lm</span><span class="p">,</span> <span class="s2">&quot;horsepower&quot;</span><span class="p">)</span>
+<span class="n">fig</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">(</span><span class="n">pad</span><span class="o">=</span><span class="mf">1.0</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="_images/diagnostics_23_0.png" src="_images/diagnostics_23_0.png" />
+</div>
+</div>
 <div class="section" id="non-linearity">
 <h3>Non-linearity<a class="headerlink" href="#non-linearity" title="Permalink to this headline">¶</a></h3>
 <div class="section" id="harvey-collier-multiplier-test">
@@ -1061,7 +1095,7 @@ dtype: int64
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="_images/diagnostics_24_0.png" src="_images/diagnostics_24_0.png" />
+<img alt="_images/diagnostics_28_0.png" src="_images/diagnostics_28_0.png" />
 </div>
 </div>
 <p>The residuals are not equally spread around a horizontal line which is an indication for a <strong>non-linear</strong> relationship.</p>
@@ -1114,7 +1148,7 @@ dtype: int64
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="_images/diagnostics_29_0.png" src="_images/diagnostics_29_0.png" />
+<img alt="_images/diagnostics_33_0.png" src="_images/diagnostics_33_0.png" />
 </div>
 </div>
 <p>Deal with non-linearity</p>
@@ -1142,7 +1176,7 @@ dtype: int64
   <th>Date:</th>             <td>Sun, 07 Nov 2021</td> <th>  Prob (F-statistic):</th> <td>5.40e-99</td>
 </tr>
 <tr>
-  <th>Time:</th>                 <td>20:01:40</td>     <th>  Log-Likelihood:    </th> <td> -1133.2</td>
+  <th>Time:</th>                 <td>21:45:19</td>     <th>  Log-Likelihood:    </th> <td> -1133.2</td>
 </tr>
 <tr>
   <th>No. Observations:</th>      <td>   392</td>      <th>  AIC:               </th> <td>   2272.</td>
@@ -1202,7 +1236,7 @@ dtype: int64
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="_images/diagnostics_33_0.png" src="_images/diagnostics_33_0.png" />
+<img alt="_images/diagnostics_37_0.png" src="_images/diagnostics_37_0.png" />
 </div>
 </div>
 </div>
@@ -1274,11 +1308,7 @@ dtype: int64
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/Users/jankirenz/opt/anaconda3/lib/python3.8/site-packages/statsmodels/graphics/gofplots.py:993: UserWarning: marker is redundantly defined by the &#39;marker&#39; keyword argument and the fmt string &quot;bo&quot; (-&gt; marker=&#39;o&#39;). The keyword argument will take precedence.
-  ax.plot(x, y, fmt, **plot_style)
-</pre></div>
-</div>
-<img alt="_images/diagnostics_41_1.png" src="_images/diagnostics_41_1.png" />
+<img alt="_images/diagnostics_45_0.png" src="_images/diagnostics_45_0.png" />
 </div>
 </div>
 <p>This plot shows if residuals are normally distributed. If a normal distribution is present, the residuals should (more or less) follow a straight line.
@@ -1310,13 +1340,11 @@ We can observe that only some residuals (in the lower left and the upper right c
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/Users/jankirenz/opt/anaconda3/lib/python3.8/site-packages/statsmodels/graphics/gofplots.py:993: UserWarning: marker is redundantly defined by the &#39;marker&#39; keyword argument and the fmt string &quot;bo&quot; (-&gt; marker=&#39;o&#39;). The keyword argument will take precedence.
-  ax.plot(x, y, fmt, **plot_style)
-/Users/jankirenz/opt/anaconda3/lib/python3.8/site-packages/statsmodels/graphics/gofplots.py:993: UserWarning: color is redundantly defined by the &#39;color&#39; keyword argument and the fmt string &quot;bo&quot; (-&gt; color=&#39;b&#39;). The keyword argument will take precedence.
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/Users/jankirenz/opt/anaconda3/lib/python3.7/site-packages/statsmodels/graphics/gofplots.py:1045: UserWarning: color is redundantly defined by the &#39;color&#39; keyword argument and the fmt string &quot;b&quot; (-&gt; color=(0.2980392156862745, 0.4470588235294118, 0.6901960784313725, 1)). The keyword argument will take precedence.
   ax.plot(x, y, fmt, **plot_style)
 </pre></div>
 </div>
-<img alt="_images/diagnostics_44_1.png" src="_images/diagnostics_44_1.png" />
+<img alt="_images/diagnostics_48_1.png" src="_images/diagnostics_48_1.png" />
 </div>
 </div>
 </div>
@@ -1386,7 +1414,7 @@ the errors, or <strong>heteroscedasticity</strong>, from the presence of a funne
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="_images/diagnostics_52_0.png" src="_images/diagnostics_52_0.png" />
+<img alt="_images/diagnostics_56_0.png" src="_images/diagnostics_56_0.png" />
 </div>
 </div>
 <p>This plot shows if residuals are spread equally along the ranges of predictors. This is how we can check the assumption of equal variance (<strong>homoscedasticity</strong>). It’s good if we observe a horizontal line with equally (randomly) spread points.</p>
@@ -1476,7 +1504,7 @@ the errors, or <strong>heteroscedasticity</strong>, from the presence of a funne
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="_images/diagnostics_61_0.png" src="_images/diagnostics_61_0.png" />
+<img alt="_images/diagnostics_65_0.png" src="_images/diagnostics_65_0.png" />
 </div>
 </div>
 </div>
@@ -1494,7 +1522,12 @@ the errors, or <strong>heteroscedasticity</strong>, from the presence of a funne
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="_images/diagnostics_63_0.png" src="_images/diagnostics_63_0.png" />
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/Users/jankirenz/opt/anaconda3/lib/python3.7/site-packages/pandas/plotting/_matplotlib/tools.py:331: MatplotlibDeprecationWarning: 
+The is_first_col function was deprecated in Matplotlib 3.4 and will be removed two minor releases later. Use ax.get_subplotspec().is_first_col() instead.
+  if ax.is_first_col():
+</pre></div>
+</div>
+<img alt="_images/diagnostics_67_1.png" src="_images/diagnostics_67_1.png" />
 </div>
 </div>
 <div class="cell docutils container">
@@ -1513,7 +1546,7 @@ the errors, or <strong>heteroscedasticity</strong>, from the presence of a funne
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="_images/diagnostics_64_0.png" src="_images/diagnostics_64_0.png" />
+<img alt="_images/diagnostics_68_0.png" src="_images/diagnostics_68_0.png" />
 </div>
 </div>
 <p>A simple way to detect collinearity is to look at the <strong>correlation matrix</strong> of the predictors. An element of this matrix that is large in absolute value indicates a pair of highly correlated variables, and therefore a collinearity problem in the data.</p>
@@ -1643,7 +1676,7 @@ the errors, or <strong>heteroscedasticity</strong>, from the presence of a funne
         <a class="right-next" href="case_simulated.html" title="next page">
             <div class="prevnext-info">
                 <p class="prevnext-label">next</p>
-                <p class="prevnext-title">Regression with Simulated Data</p>
+                <p class="prevnext-title">Model with simulated data</p>
             </div>
             <i class="prevnext-label fas fa-angle-right"></i>
         </a>
