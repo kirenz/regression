@@ -232,12 +232,6 @@ lm.conf_int(alpha=0.05)
 # 
 # This function can be used for quickly checking modeling assumptions with respect to a single regressor ([see statsmodels documentation](https://www.statsmodels.org/dev/examples/notebooks/generated/regression_plots.html))
 
-# In[ ]:
-
-
-
-
-
 # In[21]:
 
 
