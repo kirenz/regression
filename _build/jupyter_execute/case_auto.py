@@ -14,24 +14,31 @@ import statsmodels.formula.api as smf
 
 from statsmodels.graphics.regressionplots import plot_leverage_resid2
 import matplotlib.pyplot as plt
+
 get_ipython().run_line_magic('matplotlib', 'inline')
-plt.style.use('ggplot') 
 import seaborn as sns  
 sns.set() 
 
 
 # # Tutorial auto data 
 # 
-# This tutorial involves the use of simple linear regression on the **Auto data set** (see data description). 
+# *The followig examples are based on {cite:t}`James2021`.* 
 # 
-# We use the lm() function to perform linear regressions with **mpg** as the response and **horsepower** as the predictor. Furthermore, we use the summary() function to print the results and comment on the output. For example:
+# This tutorial involves the use of simple linear regression models on the [auto data set](https://rdrr.io/cran/ISLR/man/Auto.html). 
 # 
-#    1. Is there a relationship between the predictor and the response?
-#    2. How strong is the relationship between the predictor and the response?
-#    3. Is the relationship between the predictor and the response positive or negative?
-#    4. What is the predicted mpg associated with a horsepower of 98? What are the associted 95% confidence and prediction intervals?
+# We use `mpg` as the response and `horsepower` as the predictor. We want to answer questions like: 
 # 
-# Finally, we plot the response and the predictor and produce some **diagnostic plots** (1. Residuals vs fitted plot, 2. Normal Q-Q plot, 3. Scale-location plot, 4. Residuals vs leverage plot) to describe the linear regression fit. We comment on any problems we see with the fit. 
+# 1. Is there a relationship between the predictor and the response?
+# 2. How strong is the relationship between the predictor and the response?
+# 3. Is the relationship between the predictor and the response positive or negative?
+# 4. What is the predicted mpg associated with a horsepower of 98? What are the associted 95% confidence and prediction intervals?
+# 
+# To describe the linear regression fit, we plot the response and the predictor and produce some diagnostic plots. We comment on any problems we see with the fit: 
+# 
+# 1. Residuals vs fitted plot
+# 2. Normal Q-Q plot
+# 3. Scale-location plot
+# 4. Residuals vs leverage plot
 
 # ## Import data
 
@@ -141,20 +148,18 @@ sns.jointplot(x="horsepower", y="mpg", data=df);
 
 # ## Regression Models
 
-# ### Models
-# 
-# (a) Use the lm() function to perform a simple linear regression with **mpg** as the response and **horsepower** as the predictor. Use the summary() function to print the results. 
+# - (a) Perform a simple linear regression with `mpg` as the response and `horsepower` as the predictor. Use the `.summary()` function to print the results. 
 
 # In[15]:
 
 
-ols = smf.ols(formula ='mpg ~  horsepower', data=df).fit()
+lm = smf.ols(formula ='mpg ~  horsepower', data=df).fit()
 
 
 # In[16]:
 
 
-ols.summary()
+lm.summary()
 
 
 # We use [Seaborne's lmplot](https://seaborn.pydata.org/generated/seaborn.lmplot.html) to plot the regression line:
@@ -170,7 +175,9 @@ sns.lmplot(x='horsepower', y='mpg', data=df, line_kws={'color':'red'}, height=5,
 # 
 # **1. Is there a relationship between the predictor and the response?**
 # 
-# Yes, according to our linear model there is a statistically significant relationship between horsepower and mpg. The model coefficients are all significant on the 0.001 level and the F-statistic is far larger than 1 with a p-value close to zero. Therefore we can reject the null hypothesis and state that there is a statistically significant relationship between horsepower and mpg.
+# Yes, according to our linear model there is a statistically significant relationship between horsepower and mpg. The model coefficients are all significant on the 0.001 level and the F-statistic is far larger than 1 with a p-value close to zero. 
+# 
+# Therefore, we can reject the null hypothesis and state that there is a statistically significant relationship between horsepower and mpg.
 
 # **2. How strong is the relationship between the predictor and the response?**
 
@@ -181,13 +188,15 @@ sns.lmplot(x='horsepower', y='mpg', data=df, line_kws={'color':'red'}, height=5,
 stats.pearsonr(df['mpg'], df['horsepower'])
 
 
-# The $R^2$ of our model indicates a moderate to strong relationship (around 61% of variation in the data can be explained with our model) between the predictor and the response. Furthermore, we used Pearson's product-moment correlation to test the relationship between the predictor and the response (see code above). The results of the correlation indicate a strong, statistically significant negative relationship.
+# The $R^2$ of our model indicates a moderate to strong relationship (around 61% of variation in the data can be explained with our model) between the predictor and the response. 
+# 
+# Furthermore, we used Pearson's product-moment correlation to test the relationship between the predictor and the response (see code above). The results of the correlation indicate a strong, statistically significant relationship.
 
 # **3. Is the relationship between the predictor and the response positive or negative?**
 # 
-# The relationship between mpg and horsepower is negative (see regression coefficient of horsepower (-0.1578). That means the more horsepower an automobile has the less mpg fuel efficiency the automobile will have according to our model. 
+# The relationship between mpg and horsepower is negative (see regression coefficient of horsepower (-0.1578). That means the more horsepower an automobile has, the less mpg fuel efficiency the automobile will have according to our model. 
 # 
-# In particular, all other things being equal, an increase of 1 horsepower leads to an 0.1578 decrease in mpg on average. 
+# In particular, all other things being equal, an increase of 1 horsepower leads to an 0.1578 decrease in mpg, on average. 
 
 # **4. What is the predicted mpg associated with a horsepower of 98? What are the associted 95% confidence and prediction intervals?**
 
@@ -195,7 +204,7 @@ stats.pearsonr(df['mpg'], df['horsepower'])
 
 
 to_predict = pd.DataFrame({'horsepower':[98]})
-results = ols.get_prediction(to_predict)
+results = lm.get_prediction(to_predict)
 results.summary_frame(alpha=0.05)
 
 
@@ -207,22 +216,44 @@ results.summary_frame(alpha=0.05)
 
 
 # CI of the parameter (however, this was not the question...)
-ols.conf_int(alpha=0.05)
+lm.conf_int(alpha=0.05)
 
 
 # ## Regression Diagnostics
 # 
 # (c) Produce diagnostic plots of the least squares regression fit. Comment on any problems you see with the fit.
 
-# ### Residuals vs fitted plot
+# The `plot_regress_exog` function is a convenience function that gives a 2x2 plot containing 
+# 
+# - the dependent variable and fitted values with confidence intervals vs. the independent variable chosen, 
+# - the residuals of the model vs. the chosen independent variable, 
+# - a partial regression plot, 
+# - and a CCPR plot. 
+# 
+# This function can be used for quickly checking modeling assumptions with respect to a single regressor ([see statsmodels documentation](https://www.statsmodels.org/dev/examples/notebooks/generated/regression_plots.html))
+
+# In[ ]:
+
+
+
+
 
 # In[21]:
 
 
+fig = sm.graphics.plot_regress_exog(lm, "horsepower")
+fig.tight_layout(pad=1.0)
+
+
+# ### Residuals vs fitted plot
+
+# In[22]:
+
+
 # fitted values
-model_fitted_y = ols.fittedvalues;
+model_fitted_y = lm.fittedvalues;
 # Basic plot
-plot = sns.residplot(model_fitted_y, 'mpg', data=df, lowess=True, 
+plot = sns.residplot(x=model_fitted_y, y='mpg', data=df, lowess=True, 
                      scatter_kws={'alpha': 0.5}, 
                      line_kws={'color': 'red', 
                                'lw': 1, 'alpha': 0.8});
@@ -232,32 +263,33 @@ plot.set_xlabel('Fitted values');
 plot.set_ylabel('Residuals');
 
 
-# The residuals are not equally spread around a horizontal line which is an indication for a non-linear relationship. This means there seems to be a non-linear relationship between the predictor and the response variable which the model doesn’t capture.
+# The residuals are not equally spread around a horizontal line which is an indication for a non-linear relationship. 
+# 
+# This means there seems to be a non-linear relationship between the predictor and the response variable which the model doesn’t capture.
 
 # ### Normal Q-Q
 
 # This plots the standardized (z-score) residuals against the theoretical normal quantiles. Anything quite off the diagonal lines may be a concern for further investigation.
 
-# In[22]:
-
-
-# Use standardized residuals
-sm.qqplot(ols.get_influence().resid_studentized_internal);
-
-
-# This plot shows if residuals are normally distributed. If a normal distribution is present, the residuals should (more or less) follow a straight line. 
-# We can observe that only some residuals (in the lower left and the upper right corner) deviate from the straight line. 
-# 
-# We could obtain the 3 observations with the largest deviations from our advanced plot below (observations 330, 327 and 320). 
-
-# ### Scale-Location plot
-
 # In[23]:
 
 
+# Use standardized residuals
+sm.qqplot(lm.get_influence().resid_studentized_internal);
+
+
+# This plot shows if residuals are normally distributed. If a normal distribution is present, the residuals should (more or less) follow a straight line. 
+# 
+# We can observe that only some residuals (in the lower left and the upper right corner) deviate from the straight line. 
+
+# ### Scale-Location plot
+
+# In[24]:
+
+
 # Scale Location plot
-plt.scatter(ols.fittedvalues, np.sqrt(np.abs(ols.get_influence().resid_studentized_internal)), alpha=0.5)
-sns.regplot(ols.fittedvalues, np.sqrt(np.abs(ols.get_influence().resid_studentized_internal)), 
+plt.scatter(x=lm.fittedvalues, y=np.sqrt(np.abs(lm.get_influence().resid_studentized_internal)), alpha=0.5)
+sns.regplot(x=lm.fittedvalues, y=np.sqrt(np.abs(lm.get_influence().resid_studentized_internal)), 
             scatter=False, ci=False, lowess=True,
             line_kws={'color': 'red', 'lw': 1, 'alpha': 0.8});
 
@@ -268,35 +300,42 @@ sns.regplot(ols.fittedvalues, np.sqrt(np.abs(ols.get_influence().resid_studentiz
 
 # ### Residuals vs leverage plot
 
-# In[24]:
-
-
-fig, ax = plt.subplots(figsize=(8,6))
-fig = plot_leverage_resid2(ols, ax = ax)
-
-
 # In[25]:
 
 
+fig = sm.graphics.influence_plot(lm, criterion="cooks")
+fig.tight_layout(pad=1.0)
+
+
+# In[26]:
+
+
+fig, ax = plt.subplots(figsize=(8,6))
+fig = plot_leverage_resid2(lm, ax = ax)
+
+
+# In[27]:
+
+
 # Additionally, obtain critical Cook's d values
-ols_cooksd = ols.get_influence().cooks_distance[0]
+lm_cooksd = lm.get_influence().cooks_distance[0]
 n = len(df["name"])
 
 critical_d = 4/n
 print('Critical Cooks d:', critical_d)
 
 #identification of potential outliers
-out_d = ols_cooksd > critical_d
+out_d = lm_cooksd > critical_d
 
 # Output potential outliers
-df.index[out_d],ols_cooksd[out_d]
+df.index[out_d],lm_cooksd[out_d]
 
 
 # ## Alternative models
 # 
 # ## GLS regression
 
-# In[26]:
+# In[28]:
 
 
 gls = smf.gls(formula ='mpg ~  horsepower', data=df).fit()
@@ -307,7 +346,7 @@ gls.summary()
 # 
 # You find more information about mixed linear models in [Statsmodels documentation](https://www.statsmodels.org/stable/mixed_linear.html)
 
-# In[27]:
+# In[29]:
 
 
 mlm = smf.mixedlm(formula ='mpg ~  horsepower', data=df, groups=df["cylinders"]).fit()

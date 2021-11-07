@@ -1,13 +1,10 @@
 #!/usr/bin/env python
 # coding: utf-8
 
-# (file-types:notebooks)=
-# # Regression with Simulated Data
+# # Model with simulated data
 
 # In[1]:
 
-
-get_ipython().run_line_magic('matplotlib', 'inline')
 
 # Python set up (load modules) 
 import numpy as np
@@ -18,19 +15,20 @@ import statsmodels.formula.api as smf
 import plotly.express as px
 import seaborn as sns
 
+get_ipython().run_line_magic('matplotlib', 'inline')
 # seaborn settings
 custom_params = {"axes.spines.right": False, "axes.spines.top": False}
 sns.set_theme(style="ticks", rc=custom_params, palette='winter')
 
 
-# In this section you will create some simulated data and fit simple linear regression models to it. 
+# In this section you will create some simulated data and fit simple linear regression models to it {cite:p}`James2021`. 
 # 
-# IMPORTANT: Make sure to use **set.seed(123)** prior to starting part (a) to ensure consistent results.
-# 
+# Make sure to use `np.random.seed(123)` prior to starting part (a) to ensure consistent results.
 # 
 # Task (a) 
 # 
 # - Create a vector `X`, containing 100 observations drawn from a normal distribution with mean 0 and standard deviation 1. This represents our feature, X. 
+# 
 # - Furthermore, create a dependent variable `Y_perfect` as follows: `Y_perfect = −1 + 0.5 X`. This is also called a **population model** with known parameters since we "know" the true relationship between X and Y (which usually is not the case).  
 # 
 # 
@@ -68,14 +66,12 @@ sns.set_theme(style="ticks", rc=custom_params, palette='winter')
 # 
 # Task (h)
 # 
-# 
 # - Repeat (a)–(f) after modifying the data generation process in such a way that there is **less noise** in the data (only use Seaborn for your plots):
 #     - You can do this by decreasing the standard deviation of the normal distribution used to generate the **err** (error) term in (b) 
 #     - Use sd = 0.05. 
 # - Describe your results.
 # 
 # Task (i)
-# 
 # 
 # -  What are the confidence intervals for $β_0$ and $β_1$ based on 
 #     - the original data set (used in e) and 
@@ -88,14 +84,8 @@ sns.set_theme(style="ticks", rc=custom_params, palette='winter')
 #     - the original data set (used in e) and 
 #     - the less noisy data set (created in h)? 
 # - Comment on your results.
-# 
-# 
-# *Source*
-# 
-# *James, G., Witten, D., Hastie, T., & Tibshirani, R. (2021). An introduction to statistical learning. New York: Springer.*
-# 
-# 
 
+# # Solution
 # 
 # **Set seed**
 # 
@@ -107,7 +97,7 @@ sns.set_theme(style="ticks", rc=custom_params, palette='winter')
 np.random.seed(123)
 
 
-# ## Task a)
+# ## a)
 
 # In[3]:
 
@@ -123,7 +113,7 @@ X = np.random.normal(0, 1, 100)
 Y_perfect = -1 + 0.5 * X
 
 
-# ## Task b)
+# ## b)
 
 # In[5]:
 
@@ -132,7 +122,7 @@ Y_perfect = -1 + 0.5 * X
 err = np.random.normal(0, 0.25, 100)
 
 
-# ## Task c)
+# ## c)
 
 # In[6]:
 
@@ -153,7 +143,7 @@ Y.size
 # - $\beta_0 = -1$ (intercept)
 # - $\beta_1 = 0.5$ (slope)
 
-# ## Task d)
+# ## d)
 
 # In[8]:
 
@@ -177,7 +167,7 @@ px.scatter(df, x='X', y='Y')
 
 # Positive linear relationship between X and Y with some variance in the data (... as expected since we created this data with some noise (error)...)
 
-# ## Task e)
+# ## e)
 
 # In[11]:
 
@@ -208,7 +198,7 @@ lm.mse_resid
 # 
 # - Our model explains around 84% of the variation in the data (see Adjusted R-squared)
 
-# ## Task f)
+# ## f)
 
 # In[14]:
 
@@ -223,7 +213,7 @@ fig.data[1].line.color = 'red'
 fig.show()
 
 
-# ### Task g) 
+# ## g) 
 
 # In[15]:
 
@@ -254,7 +244,7 @@ lm_2.mse_resid
 # and $X^2$ why we should use the model in (e) 
 #     - this makes sense since we know the population model doesn't contain a quadratic relationship.
 
-# ## Task h)
+# ## h)
 # 
 
 # In[17]:
@@ -300,7 +290,7 @@ sns.lmplot(x="X", y="Y", data=df_h, ci=None, line_kws={'color': 'red'});
 
 # Almost identical... (perfect fit)
 
-# ## Task i)
+# ## i)
 
 # In[21]:
 
@@ -316,7 +306,7 @@ print(lm_h.conf_int())
 
 # For the less noisy data set, the confidence intervals for both coefficients are more narrow.
 
-# ## Task j)
+# ## j)
 
 # In[22]:
 

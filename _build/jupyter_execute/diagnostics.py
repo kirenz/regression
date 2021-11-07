@@ -149,6 +149,31 @@ lm.summary()
 
 # ## Diagnostics
 # 
+# The `plot_regress_exog` function is a convenience function that gives a 2x2 plot containing 
+# 
+# 1. the dependent variable and fitted values with confidence intervals vs. the independent variable chosen, 
+# 2. the residuals of the model vs. the chosen independent variable, 
+# 3. a partial regression plot, 
+# 4. and a CCPR plot. 
+# 
+# This function can be used for quickly checking modeling assumptions with respect to a single regressor ([see statsmodels documentation](https://www.statsmodels.org/dev/examples/notebooks/generated/regression_plots.html))
+
+# In[15]:
+
+
+fig = sm.graphics.plot_regress_exog(lm, "horsepower")
+fig.tight_layout(pad=1.0)
+
+
+# The plot_fit function plots the fitted values versus a chosen independent variable. It includes prediction confidence intervals and optionally plots the true dependent variable.
+
+# In[16]:
+
+
+fig = sm.graphics.plot_fit(lm, "horsepower")
+fig.tight_layout(pad=1.0)
+
+
 # ### Non-linearity
 
 # ####  Harvey-Collier multiplier test
@@ -157,7 +182,7 @@ lm.summary()
 # 
 # A significant result (rejecting the null) occurs when the fit is better with a range restriction (which is what happens if the model is nonlinear).
 
-# In[15]:
+# In[17]:
 
 
 name = ['t value', 'p value']
@@ -171,7 +196,7 @@ lzip(name, test)
 # 
 # Residual plots are also a very useful graphical tool for identifying non-linearity:
 
-# In[16]:
+# In[18]:
 
 
 # fitted values
@@ -200,7 +225,7 @@ plot.set_ylabel('Residuals');
 
 # Advanced Residuals vs fitted plot
 
-# In[17]:
+# In[19]:
 
 
 # Necessary values for our advanced plots:
@@ -217,7 +242,7 @@ model_norm_residuals_abs_sqrt = np.sqrt(np.abs(model_norm_residuals))
 model_abs_resid = np.abs(model_residuals)
 
 
-# In[18]:
+# In[20]:
 
 
 # Advanced plot (1)
@@ -246,7 +271,7 @@ for i in abs_resid_top_3.index:
 
 # We can fit a non-linear function (polynomial regression)
 
-# In[19]:
+# In[21]:
 
 
 
@@ -254,7 +279,7 @@ lm_2 = smf.ols(formula='mpg ~ horsepower + I(horsepower**2)', data=df).fit()
 lm_2.summary()
 
 
-# In[20]:
+# In[22]:
 
 
 # fitted values
@@ -287,7 +312,7 @@ plot.set_ylabel('Residuals');
 # 
 # Samples from a normal distribution have an expected skewness of 0 and an expected excess kurtosis of 0 (which is the same as a kurtosis of 3). As the definition of JB shows, any deviation from this increases the JB statistic.
 
-# In[21]:
+# In[23]:
 
 
 name = ['Jarque-Bera', 'Chi^2 two-tail prob.', 'Skew', 'Kurtosis']
@@ -302,7 +327,7 @@ lzip(name, test)
 # 
 # Our null hypothesis is that the residuals are from a normal distribution.
 
-# In[22]:
+# In[24]:
 
 
 name = ['Chi^2', 'Two-tail probability']
@@ -324,7 +349,7 @@ lzip(name, test)
 # 
 # This plots the standardized (z-score) residuals against the theoretical normal quantiles. Anything quite off the diagonal lines may be a concern for further investigation.
 
-# In[23]:
+# In[25]:
 
 
 # Use standardized residuals
@@ -338,7 +363,7 @@ sm.qqplot(lm.get_influence().resid_studentized_internal);
 
 # **Advanced QQ-Plot**
 
-# In[24]:
+# In[26]:
 
 
 # Advanced plot (2)
@@ -378,7 +403,7 @@ for r, i in enumerate(abs_norm_resid_top_3):
 # 
 # As a rough rule of thumb, if Durbin–Watson is less than 1.0, there may be cause for alarm. Small values of d indicate successive error terms are positively correlated. If d > 2, successive error terms are negatively correlated.
 
-# In[25]:
+# In[27]:
 
 
 sm.stats.durbin_watson(lm.resid)
@@ -398,7 +423,7 @@ sm.stats.durbin_watson(lm.resid)
 # 
 # Test assumes homoskedasticity (null hypothesis). If one of the test statistics is significant, then you have evidence of heteroskedasticity. 
 
-# In[26]:
+# In[28]:
 
 
 name = ['Lagrange multiplier statistic', 'p-value', 
@@ -409,7 +434,7 @@ lzip(name, test)
 
 # #### Scale-Location plot
 
-# In[27]:
+# In[29]:
 
 
 # Scale Location plot
@@ -437,14 +462,14 @@ sns.regplot(x=model_fitted_y, y=model_norm_residuals_abs_sqrt,
 # 
 # Once created, an object of class OLSInfluence holds attributes and methods that allow users to assess the influence of each observation. 
 
-# In[28]:
+# In[30]:
 
 
 # obtain statistics
 infl = lm.get_influence()
 
 
-# In[29]:
+# In[31]:
 
 
 lm_cooksd = lm.get_influence().cooks_distance[0]
@@ -457,7 +482,7 @@ out_d = lm_cooksd > critical_d
 df.index[out_d],lm_cooksd[out_d]
 
 
-# In[30]:
+# In[32]:
 
 
 # Show summary frame of leverage statistics
@@ -468,7 +493,7 @@ print(infl.summary_frame().filter(["student_resid","dffits","cooks_d"]))
 
 # Plots leverage statistics vs. normalized residuals squared. See [statsmodel documentation](http://www.statsmodels.org/0.6.1/generated/statsmodels.graphics.regressionplots.plot_leverage_resid2.html)
 
-# In[31]:
+# In[33]:
 
 
 fig, ax = plt.subplots(figsize=(8,6))
@@ -483,14 +508,14 @@ fig = plot_leverage_resid2(lm, ax = ax)
 # 
 # In other words, since limit and rating tend to increase or decrease together, it can be difficult to determine how each one separately is associated with the response, balance.
 
-# In[32]:
+# In[34]:
 
 
 # plot all variables in a scatter matrix
 pd.plotting.scatter_matrix(df, alpha=0.8, figsize=(10, 10), diagonal='kde');
 
 
-# In[33]:
+# In[35]:
 
 
 # Inspect correlation
@@ -511,7 +536,7 @@ sns.heatmap(corr, mask=mask, cmap=cmap, annot=True,  square=True, annot_kws={"si
 # 
 # Instead of inspecting the correlation matrix, a better way to assess multicollinearity is to compute the condition number test. If the condition number is above 30, the regression may have significant multicollinearity.
 
-# In[34]:
+# In[36]:
 
 
 # makes here no sense since we only have one predictor...
@@ -520,7 +545,7 @@ np.linalg.cond(lm.model.exog)
 
 # Instead of inspecting the correlation matrix, a better way to assess multicollinearity is to compute the variance inflation factor (VIF). The smallest possible value for VIF is 1, which indicates the complete absence of collinearity. Typically in practice there is a small amount of collinearity among the predictors. As a rule of thumb, a VIF value that exceeds 5 or 10 indicates a problematic amount of collinearity.
 
-# In[35]:
+# In[37]:
 
 
 y, X = dmatrices('mpg ~ horsepower+ cylinders + displacement', df, return_type='dataframe')
