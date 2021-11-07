@@ -7,7 +7,6 @@
 # 
 
 # 
-# 
 # ```{image} _static/img/data-science.png
 # :alt: datascience
 # :class: bg-primary mb-1

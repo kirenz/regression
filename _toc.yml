@@ -2,19 +2,19 @@
 format: jb-book
 root: intro
 parts:
-  - caption: Introduction
+  - caption: Programming
     chapters:
-    - file: 1_process.ipynb
-  - caption: Simple Regression
+    - file: process.ipynb
+  - caption: Basics
     chapters:
-    - file: 2_quality_of_fit.ipynb
-      sections:
-      - file: 3_simulated.ipynb
+    - file: basics.ipynb
   - caption: Diagnostics
     chapters:
-    - file: 4_diagnostics.ipynb
- #     sections:
- #     - file: 5_auto_case.ipynb
+    - file: diagnostics.ipynb
+  - caption: Applications
+    chapters:
+    - file: case_simulated.ipynb
+    - file: case_auto.ipynb
   - caption: References
     chapters:
     - file: reference.md
