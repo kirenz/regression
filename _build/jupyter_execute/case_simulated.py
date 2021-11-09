@@ -3,24 +3,14 @@
 
 # # Model with simulated data
 
-# In[1]:
+# In[23]:
 
 
-# Python set up (load modules) 
-import numpy as np
-import pandas as pd
-
-import statsmodels.formula.api as smf
-
-import plotly.express as px
-import seaborn as sns
-
-get_ipython().run_line_magic('matplotlib', 'inline')
-# seaborn settings
-custom_params = {"axes.spines.right": False, "axes.spines.top": False}
-sns.set_theme(style="ticks", rc=custom_params, palette='winter')
 
 
+
+# ## Tasks
+# 
 # In this section you will create some simulated data and fit simple linear regression models to it {cite:p}`James2021`. 
 # 
 # Make sure to use `np.random.seed(123)` prior to starting part (a) to ensure consistent results.
@@ -85,8 +75,26 @@ sns.set_theme(style="ticks", rc=custom_params, palette='winter')
 #     - the less noisy data set (created in h)? 
 # - Comment on your results.
 
-# # Solution
-# 
+# ## Solution
+
+# In[1]:
+
+
+# Python set up (load modules) 
+import numpy as np
+import pandas as pd
+
+import statsmodels.formula.api as smf
+
+import plotly.express as px
+import seaborn as sns
+
+get_ipython().run_line_magic('matplotlib', 'inline')
+# seaborn settings
+custom_params = {"axes.spines.right": False, "axes.spines.top": False}
+sns.set_theme(style="ticks", rc=custom_params, palette='winter')
+
+
 # **Set seed**
 # 
 # We use `np.random.seed()` to generate a sequence of random numbers. The seed enables us to use the same random numbers multiple times.
@@ -97,7 +105,7 @@ sns.set_theme(style="ticks", rc=custom_params, palette='winter')
 np.random.seed(123)
 
 
-# ## a)
+# ### a)
 
 # In[3]:
 
@@ -113,7 +121,7 @@ X = np.random.normal(0, 1, 100)
 Y_perfect = -1 + 0.5 * X
 
 
-# ## b)
+# ### b)
 
 # In[5]:
 
@@ -122,7 +130,7 @@ Y_perfect = -1 + 0.5 * X
 err = np.random.normal(0, 0.25, 100)
 
 
-# ## c)
+# ### c)
 
 # In[6]:
 
@@ -143,7 +151,7 @@ Y.size
 # - $\beta_0 = -1$ (intercept)
 # - $\beta_1 = 0.5$ (slope)
 
-# ## d)
+# ### d)
 
 # In[8]:
 
@@ -167,7 +175,7 @@ px.scatter(df, x='X', y='Y')
 
 # Positive linear relationship between X and Y with some variance in the data (... as expected since we created this data with some noise (error)...)
 
-# ## e)
+# ### e)
 
 # In[11]:
 
@@ -198,7 +206,7 @@ lm.mse_resid
 # 
 # - Our model explains around 84% of the variation in the data (see Adjusted R-squared)
 
-# ## f)
+# ### f)
 
 # In[14]:
 
@@ -213,7 +221,7 @@ fig.data[1].line.color = 'red'
 fig.show()
 
 
-# ## g) 
+# ### g) 
 
 # In[15]:
 
@@ -244,7 +252,7 @@ lm_2.mse_resid
 # and $X^2$ why we should use the model in (e) 
 #     - this makes sense since we know the population model doesn't contain a quadratic relationship.
 
-# ## h)
+# ### h)
 # 
 
 # In[17]:
@@ -290,7 +298,7 @@ sns.lmplot(x="X", y="Y", data=df_h, ci=None, line_kws={'color': 'red'});
 
 # Almost identical... (perfect fit)
 
-# ## i)
+# ### i)
 
 # In[21]:
 
@@ -306,7 +314,7 @@ print(lm_h.conf_int())
 
 # For the less noisy data set, the confidence intervals for both coefficients are more narrow.
 
-# ## j)
+# ### j)
 
 # In[22]:
 
