@@ -5,7 +5,7 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Tutorial auto data &#8212; Introduction to Linear Regression Models</title>
+    <title>Diagnostics tutorial &#8212; Introduction to Linear Regression Models</title>
     
   <link href="_static/css/theme.css" rel="stylesheet" />
   <link href="_static/css/index.c5995385ac14fb8791e8eb36b4908be2.css" rel="stylesheet" />
@@ -145,7 +145,7 @@
  </li>
  <li class="toctree-l1 current active">
   <a class="current reference internal" href="#">
-   Tutorial auto data
+   Diagnostics tutorial
   </a>
  </li>
 </ul>
@@ -265,92 +265,80 @@
             <nav id="bd-toc-nav" aria-label="Page">
                 <ul class="visible nav section-nav flex-column">
  <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#import-data">
-   Import data
+  <a class="reference internal nav-link" href="#tasks">
+   Tasks
   </a>
  </li>
  <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#tidying-data">
-   Tidying data
+  <a class="reference internal nav-link" href="#solution">
+   Solution
   </a>
   <ul class="nav section-nav flex-column">
    <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#handle-missing-values">
-     Handle missing values
+    <a class="reference internal nav-link" href="#a">
+     (a)
     </a>
+    <ul class="nav section-nav flex-column">
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#tidying-data">
+       Tidying data
+      </a>
+     </li>
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#handle-missing-values">
+       Handle missing values
+      </a>
+     </li>
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#transform-data">
+       Transform data
+      </a>
+     </li>
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#visualize-data">
+       Visualize data
+      </a>
+     </li>
+    </ul>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#b">
+     (b)
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#c">
+     (c)
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#d">
+     (d)
+    </a>
+    <ul class="nav section-nav flex-column">
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#residuals-vs-fitted-plot">
+       Residuals vs fitted plot
+      </a>
+     </li>
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#normal-q-q">
+       Normal Q-Q
+      </a>
+     </li>
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#scale-location-plot">
+       Scale-Location plot
+      </a>
+     </li>
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#residuals-vs-leverage-plot">
+       Residuals vs leverage plot
+      </a>
+     </li>
+    </ul>
    </li>
   </ul>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#transform-data">
-   Transform data
-  </a>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#visualize-data">
-   Visualize data
-  </a>
-  <ul class="nav section-nav flex-column">
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#distibution-of-variables">
-     Distibution of Variables
-    </a>
-   </li>
-  </ul>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#regression-models">
-   Regression Models
-  </a>
-  <ul class="nav section-nav flex-column">
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#interpretation">
-     Interpretation
-    </a>
-   </li>
-  </ul>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#regression-diagnostics">
-   Regression Diagnostics
-  </a>
-  <ul class="nav section-nav flex-column">
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#residuals-vs-fitted-plot">
-     Residuals vs fitted plot
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#normal-q-q">
-     Normal Q-Q
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#scale-location-plot">
-     Scale-Location plot
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#residuals-vs-leverage-plot">
-     Residuals vs leverage plot
-    </a>
-   </li>
-  </ul>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#alternative-models">
-   Alternative models
-  </a>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#gls-regression">
-   GLS regression
-  </a>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#mixed-linear-model">
-   Mixed Linear Model
-  </a>
  </li>
 </ul>
 
@@ -363,46 +351,57 @@
         
               <div>
                 
-  <div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Python set up (load modules) </span>
-<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
-<span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
-
-<span class="kn">from</span> <span class="nn">scipy</span> <span class="kn">import</span> <span class="n">stats</span>
-<span class="kn">import</span> <span class="nn">statsmodels.api</span> <span class="k">as</span> <span class="nn">sm</span>
-<span class="kn">import</span> <span class="nn">statsmodels.formula.api</span> <span class="k">as</span> <span class="nn">smf</span>
-
-<span class="kn">from</span> <span class="nn">statsmodels.graphics.regressionplots</span> <span class="kn">import</span> <span class="n">plot_leverage_resid2</span>
-<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
-
-<span class="o">%</span><span class="k">matplotlib</span> inline 
-<span class="kn">import</span> <span class="nn">seaborn</span> <span class="k">as</span> <span class="nn">sns</span>  
-<span class="n">sns</span><span class="o">.</span><span class="n">set</span><span class="p">()</span> 
-</pre></div>
-</div>
-</div>
-</div>
-<div class="tex2jax_ignore mathjax_ignore section" id="tutorial-auto-data">
-<h1>Tutorial auto data<a class="headerlink" href="#tutorial-auto-data" title="Permalink to this headline">¶</a></h1>
-<p><em>The followig examples are based on <span id="id1">James <em>et al.</em> [<a class="reference internal" href="reference.html#id4">2021</a>]</span>.</em></p>
-<p>This tutorial involves the use of simple linear regression models on the <a class="reference external" href="https://rdrr.io/cran/ISLR/man/Auto.html">auto data set</a>.</p>
-<p>We use <code class="docutils literal notranslate"><span class="pre">mpg</span></code> as the response and <code class="docutils literal notranslate"><span class="pre">horsepower</span></code> as the predictor. We want to answer questions like:</p>
+  <div class="tex2jax_ignore mathjax_ignore section" id="diagnostics-tutorial">
+<h1>Diagnostics tutorial<a class="headerlink" href="#diagnostics-tutorial" title="Permalink to this headline">¶</a></h1>
+<p>The followig tutorial is based on <span id="id1">James <em>et al.</em> [<a class="reference internal" href="reference.html#id4">2021</a>]</span> and involves the use of regression diagnostics for a simple linear regression model on an <a class="reference external" href="https://rdrr.io/cran/ISLR/man/Auto.html">auto data set</a>.</p>
+<div class="section" id="tasks">
+<h2>Tasks<a class="headerlink" href="#tasks" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li><p>(a) Prepare the <a class="reference external" href="https://raw.githubusercontent.com/kirenz/datasets/master/Auto.csv">data</a> and perfom exploratory data analysis.</p></li>
+<li><p>(b) Perform a simple linear regression with <code class="docutils literal notranslate"><span class="pre">mpg</span></code> as the response and <code class="docutils literal notranslate"><span class="pre">horsepower</span></code> as the predictor. Use the <code class="docutils literal notranslate"><span class="pre">.summary()</span></code> function to print the results. Plot the regression line.</p></li>
+<li><p>(c) Answer the following questions:</p>
 <ol class="simple">
 <li><p>Is there a relationship between the predictor and the response?</p></li>
 <li><p>How strong is the relationship between the predictor and the response?</p></li>
 <li><p>Is the relationship between the predictor and the response positive or negative?</p></li>
 <li><p>What is the predicted mpg associated with a horsepower of 98? What are the associted 95% confidence and prediction intervals?</p></li>
 </ol>
-<p>To describe the linear regression fit, we plot the response and the predictor and produce some diagnostic plots. We comment on any problems we see with the fit:</p>
+</li>
+<li><p>(d) To describe the linear regression fit, produce some diagnostic plots. Comment on any problems you see with the fit:</p>
 <ol class="simple">
 <li><p>Residuals vs fitted plot</p></li>
 <li><p>Normal Q-Q plot</p></li>
 <li><p>Scale-location plot</p></li>
 <li><p>Residuals vs leverage plot</p></li>
 </ol>
-<div class="section" id="import-data">
-<h2>Import data<a class="headerlink" href="#import-data" title="Permalink to this headline">¶</a></h2>
+</li>
+</ul>
+</div>
+<div class="section" id="solution">
+<h2>Solution<a class="headerlink" href="#solution" title="Permalink to this headline">¶</a></h2>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Python set up (load modules) </span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+<span class="kn">from</span> <span class="nn">scipy</span> <span class="kn">import</span> <span class="n">stats</span>
+
+<span class="kn">import</span> <span class="nn">statsmodels.api</span> <span class="k">as</span> <span class="nn">sm</span>
+<span class="kn">import</span> <span class="nn">statsmodels.formula.api</span> <span class="k">as</span> <span class="nn">smf</span>
+<span class="kn">from</span> <span class="nn">statsmodels.graphics.regressionplots</span> <span class="kn">import</span> <span class="n">plot_leverage_resid2</span>
+
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+<span class="kn">import</span> <span class="nn">seaborn</span> <span class="k">as</span> <span class="nn">sns</span>  
+
+<span class="o">%</span><span class="k">matplotlib</span> inline 
+<span class="n">sns</span><span class="o">.</span><span class="n">set</span><span class="p">()</span> 
+</pre></div>
+</div>
+</div>
+</div>
+<div class="section" id="a">
+<h3>(a)<a class="headerlink" href="#a" title="Permalink to this headline">¶</a></h3>
+<p>Import data</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Load the csv data files into pandas dataframes</span>
@@ -613,9 +612,8 @@ memory usage: 28.0+ KB
 </div>
 </div>
 </div>
-</div>
 <div class="section" id="tidying-data">
-<h2>Tidying data<a class="headerlink" href="#tidying-data" title="Permalink to this headline">¶</a></h2>
+<h4>Tidying data<a class="headerlink" href="#tidying-data" title="Permalink to this headline">¶</a></h4>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># change data type</span>
@@ -627,8 +625,9 @@ memory usage: 28.0+ KB
 </div>
 </div>
 <p>Note that we have an issue with the horsepower variable. It seems that there is an string present, were only integers should be allowed. We transfrom the data with <code class="docutils literal notranslate"><span class="pre">pd.to_numeric</span></code> and use <code class="docutils literal notranslate"><span class="pre">errors='coerce'</span></code> to replace the string with a NAN <a class="reference external" href="https://pandas.pydata.org/pandas-docs/stable/generated/pandas.to_numeric.html">(see Pandas documenation)</a></p>
+</div>
 <div class="section" id="handle-missing-values">
-<h3>Handle missing values<a class="headerlink" href="#handle-missing-values" title="Permalink to this headline">¶</a></h3>
+<h4>Handle missing values<a class="headerlink" href="#handle-missing-values" title="Permalink to this headline">¶</a></h4>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># show missing values (missing values - if present - will be displayed in yellow )</span>
@@ -637,7 +636,7 @@ memory usage: 28.0+ KB
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="_images/case_auto_11_0.png" src="_images/case_auto_11_0.png" />
+<img alt="_images/case_auto_12_0.png" src="_images/case_auto_12_0.png" />
 </div>
 </div>
 <p>We can also check the column-wise distribution of null values:</p>
@@ -692,9 +691,8 @@ dtype: int64
 </div>
 </div>
 </div>
-</div>
 <div class="section" id="transform-data">
-<h2>Transform data<a class="headerlink" href="#transform-data" title="Permalink to this headline">¶</a></h2>
+<h4>Transform data<a class="headerlink" href="#transform-data" title="Permalink to this headline">¶</a></h4>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># summary statistics for all numerical columns</span>
@@ -872,9 +870,7 @@ dtype: int64
 </div>
 </div>
 <div class="section" id="visualize-data">
-<h2>Visualize data<a class="headerlink" href="#visualize-data" title="Permalink to this headline">¶</a></h2>
-<div class="section" id="distibution-of-variables">
-<h3>Distibution of Variables<a class="headerlink" href="#distibution-of-variables" title="Permalink to this headline">¶</a></h3>
+<h4>Visualize data<a class="headerlink" href="#visualize-data" title="Permalink to this headline">¶</a></h4>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># boxplot of dependent variable</span>
@@ -909,11 +905,8 @@ dtype: int64
 </div>
 </div>
 </div>
-<div class="section" id="regression-models">
-<h2>Regression Models<a class="headerlink" href="#regression-models" title="Permalink to this headline">¶</a></h2>
-<ul class="simple">
-<li><p>(a) Perform a simple linear regression with <code class="docutils literal notranslate"><span class="pre">mpg</span></code> as the response and <code class="docutils literal notranslate"><span class="pre">horsepower</span></code> as the predictor. Use the <code class="docutils literal notranslate"><span class="pre">.summary()</span></code> function to print the results.</p></li>
-</ul>
+<div class="section" id="b">
+<h3>(b)<a class="headerlink" href="#b" title="Permalink to this headline">¶</a></h3>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">lm</span> <span class="o">=</span> <span class="n">smf</span><span class="o">.</span><span class="n">ols</span><span class="p">(</span><span class="n">formula</span> <span class="o">=</span><span class="s1">&#39;mpg ~  horsepower&#39;</span><span class="p">,</span> <span class="n">data</span><span class="o">=</span><span class="n">df</span><span class="p">)</span><span class="o">.</span><span class="n">fit</span><span class="p">()</span>
@@ -940,10 +933,10 @@ dtype: int64
   <th>Method:</th>             <td>Least Squares</td>  <th>  F-statistic:       </th> <td>   599.7</td>
 </tr>
 <tr>
-  <th>Date:</th>             <td>Sun, 07 Nov 2021</td> <th>  Prob (F-statistic):</th> <td>7.03e-81</td>
+  <th>Date:</th>             <td>Tue, 09 Nov 2021</td> <th>  Prob (F-statistic):</th> <td>7.03e-81</td>
 </tr>
 <tr>
-  <th>Time:</th>                 <td>21:47:09</td>     <th>  Log-Likelihood:    </th> <td> -1178.7</td>
+  <th>Time:</th>                 <td>21:54:22</td>     <th>  Log-Likelihood:    </th> <td> -1178.7</td>
 </tr>
 <tr>
   <th>No. Observations:</th>      <td>   392</td>      <th>  AIC:               </th> <td>   2361.</td>
@@ -993,11 +986,13 @@ dtype: int64
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="_images/case_auto_29_0.png" src="_images/case_auto_29_0.png" />
+<img alt="_images/case_auto_28_0.png" src="_images/case_auto_28_0.png" />
 </div>
 </div>
-<div class="section" id="interpretation">
-<h3>Interpretation<a class="headerlink" href="#interpretation" title="Permalink to this headline">¶</a></h3>
+</div>
+<div class="section" id="c">
+<h3>(c)<a class="headerlink" href="#c" title="Permalink to this headline">¶</a></h3>
+<p>Interpretation</p>
 <p><strong>1. Is there a relationship between the predictor and the response?</strong></p>
 <p>Yes, according to our linear model there is a statistically significant relationship between horsepower and mpg. The model coefficients are all significant on the 0.001 level and the F-statistic is far larger than 1 with a p-value close to zero.</p>
 <p>Therefore, we can reject the null hypothesis and state that there is a statistically significant relationship between horsepower and mpg.</p>
@@ -1118,10 +1113,9 @@ dtype: int64
 </div></div></div>
 </div>
 </div>
-</div>
-<div class="section" id="regression-diagnostics">
-<h2>Regression Diagnostics<a class="headerlink" href="#regression-diagnostics" title="Permalink to this headline">¶</a></h2>
-<p>(c) Produce diagnostic plots of the least squares regression fit. Comment on any problems you see with the fit.</p>
+<div class="section" id="d">
+<h3>(d)<a class="headerlink" href="#d" title="Permalink to this headline">¶</a></h3>
+<p>Regression Diagnostics</p>
 <p>The <code class="docutils literal notranslate"><span class="pre">plot_regress_exog</span></code> function is a convenience function that gives a 2x2 plot containing</p>
 <ul class="simple">
 <li><p>the dependent variable and fitted values with confidence intervals vs. the independent variable chosen,</p></li>
@@ -1141,11 +1135,11 @@ dtype: int64
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>eval_env: 1
 </pre></div>
 </div>
-<img alt="_images/case_auto_41_1.png" src="_images/case_auto_41_1.png" />
+<img alt="_images/case_auto_40_1.png" src="_images/case_auto_40_1.png" />
 </div>
 </div>
 <div class="section" id="residuals-vs-fitted-plot">
-<h3>Residuals vs fitted plot<a class="headerlink" href="#residuals-vs-fitted-plot" title="Permalink to this headline">¶</a></h3>
+<h4>Residuals vs fitted plot<a class="headerlink" href="#residuals-vs-fitted-plot" title="Permalink to this headline">¶</a></h4>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># fitted values</span>
@@ -1163,14 +1157,14 @@ dtype: int64
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="_images/case_auto_43_0.png" src="_images/case_auto_43_0.png" />
+<img alt="_images/case_auto_42_0.png" src="_images/case_auto_42_0.png" />
 </div>
 </div>
 <p>The residuals are not equally spread around a horizontal line which is an indication for a non-linear relationship.</p>
 <p>This means there seems to be a non-linear relationship between the predictor and the response variable which the model doesn’t capture.</p>
 </div>
 <div class="section" id="normal-q-q">
-<h3>Normal Q-Q<a class="headerlink" href="#normal-q-q" title="Permalink to this headline">¶</a></h3>
+<h4>Normal Q-Q<a class="headerlink" href="#normal-q-q" title="Permalink to this headline">¶</a></h4>
 <p>This plots the standardized (z-score) residuals against the theoretical normal quantiles. Anything quite off the diagonal lines may be a concern for further investigation.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -1180,14 +1174,14 @@ dtype: int64
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="_images/case_auto_47_0.png" src="_images/case_auto_47_0.png" />
+<img alt="_images/case_auto_46_0.png" src="_images/case_auto_46_0.png" />
 </div>
 </div>
 <p>This plot shows if residuals are normally distributed. If a normal distribution is present, the residuals should (more or less) follow a straight line.</p>
 <p>We can observe that only some residuals (in the lower left and the upper right corner) deviate from the straight line.</p>
 </div>
 <div class="section" id="scale-location-plot">
-<h3>Scale-Location plot<a class="headerlink" href="#scale-location-plot" title="Permalink to this headline">¶</a></h3>
+<h4>Scale-Location plot<a class="headerlink" href="#scale-location-plot" title="Permalink to this headline">¶</a></h4>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Scale Location plot</span>
@@ -1199,14 +1193,14 @@ dtype: int64
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="_images/case_auto_50_0.png" src="_images/case_auto_50_0.png" />
+<img alt="_images/case_auto_49_0.png" src="_images/case_auto_49_0.png" />
 </div>
 </div>
 <p>This plot shows if residuals are spread equally along the ranges of predictors. This is how we can check the assumption of equal variance (homoscedasticity). It’s good if we observe a horizontal line with equally (randomly) spread points.</p>
 <p>In our model the residuals begin to spread wider along the y-axis as it passes the x value of around 18. Because the residuals spread wider and wider with an increase of x, the red smooth line is not horizontal and shows a positive angle. This is an indication of heteroskedasticity.</p>
 </div>
 <div class="section" id="residuals-vs-leverage-plot">
-<h3>Residuals vs leverage plot<a class="headerlink" href="#residuals-vs-leverage-plot" title="Permalink to this headline">¶</a></h3>
+<h4>Residuals vs leverage plot<a class="headerlink" href="#residuals-vs-leverage-plot" title="Permalink to this headline">¶</a></h4>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">fig</span> <span class="o">=</span> <span class="n">sm</span><span class="o">.</span><span class="n">graphics</span><span class="o">.</span><span class="n">influence_plot</span><span class="p">(</span><span class="n">lm</span><span class="p">,</span> <span class="n">criterion</span><span class="o">=</span><span class="s2">&quot;cooks&quot;</span><span class="p">)</span>
@@ -1215,7 +1209,7 @@ dtype: int64
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="_images/case_auto_53_0.png" src="_images/case_auto_53_0.png" />
+<img alt="_images/case_auto_52_0.png" src="_images/case_auto_52_0.png" />
 </div>
 </div>
 <div class="cell docutils container">
@@ -1226,7 +1220,7 @@ dtype: int64
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="_images/case_auto_54_0.png" src="_images/case_auto_54_0.png" />
+<img alt="_images/case_auto_53_0.png" src="_images/case_auto_53_0.png" />
 </div>
 </div>
 <div class="cell docutils container">
@@ -1263,122 +1257,6 @@ dtype: int64
 </div>
 </div>
 </div>
-</div>
-<div class="section" id="alternative-models">
-<h2>Alternative models<a class="headerlink" href="#alternative-models" title="Permalink to this headline">¶</a></h2>
-</div>
-<div class="section" id="gls-regression">
-<h2>GLS regression<a class="headerlink" href="#gls-regression" title="Permalink to this headline">¶</a></h2>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">gls</span> <span class="o">=</span> <span class="n">smf</span><span class="o">.</span><span class="n">gls</span><span class="p">(</span><span class="n">formula</span> <span class="o">=</span><span class="s1">&#39;mpg ~  horsepower&#39;</span><span class="p">,</span> <span class="n">data</span><span class="o">=</span><span class="n">df</span><span class="p">)</span><span class="o">.</span><span class="n">fit</span><span class="p">()</span>
-<span class="n">gls</span><span class="o">.</span><span class="n">summary</span><span class="p">()</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output text_html"><table class="simpletable">
-<caption>GLS Regression Results</caption>
-<tr>
-  <th>Dep. Variable:</th>           <td>mpg</td>       <th>  R-squared:         </th> <td>   0.606</td>
-</tr>
-<tr>
-  <th>Model:</th>                   <td>GLS</td>       <th>  Adj. R-squared:    </th> <td>   0.605</td>
-</tr>
-<tr>
-  <th>Method:</th>             <td>Least Squares</td>  <th>  F-statistic:       </th> <td>   599.7</td>
-</tr>
-<tr>
-  <th>Date:</th>             <td>Sun, 07 Nov 2021</td> <th>  Prob (F-statistic):</th> <td>7.03e-81</td>
-</tr>
-<tr>
-  <th>Time:</th>                 <td>21:47:12</td>     <th>  Log-Likelihood:    </th> <td> -1178.7</td>
-</tr>
-<tr>
-  <th>No. Observations:</th>      <td>   392</td>      <th>  AIC:               </th> <td>   2361.</td>
-</tr>
-<tr>
-  <th>Df Residuals:</th>          <td>   390</td>      <th>  BIC:               </th> <td>   2369.</td>
-</tr>
-<tr>
-  <th>Df Model:</th>              <td>     1</td>      <th>                     </th>     <td> </td>   
-</tr>
-<tr>
-  <th>Covariance Type:</th>      <td>nonrobust</td>    <th>                     </th>     <td> </td>   
-</tr>
-</table>
-<table class="simpletable">
-<tr>
-       <td></td>         <th>coef</th>     <th>std err</th>      <th>t</th>      <th>P>|t|</th>  <th>[0.025</th>    <th>0.975]</th>  
-</tr>
-<tr>
-  <th>Intercept</th>  <td>   39.9359</td> <td>    0.717</td> <td>   55.660</td> <td> 0.000</td> <td>   38.525</td> <td>   41.347</td>
-</tr>
-<tr>
-  <th>horsepower</th> <td>   -0.1578</td> <td>    0.006</td> <td>  -24.489</td> <td> 0.000</td> <td>   -0.171</td> <td>   -0.145</td>
-</tr>
-</table>
-<table class="simpletable">
-<tr>
-  <th>Omnibus:</th>       <td>16.432</td> <th>  Durbin-Watson:     </th> <td>   0.920</td>
-</tr>
-<tr>
-  <th>Prob(Omnibus):</th> <td> 0.000</td> <th>  Jarque-Bera (JB):  </th> <td>  17.305</td>
-</tr>
-<tr>
-  <th>Skew:</th>          <td> 0.492</td> <th>  Prob(JB):          </th> <td>0.000175</td>
-</tr>
-<tr>
-  <th>Kurtosis:</th>      <td> 3.299</td> <th>  Cond. No.          </th> <td>    322.</td>
-</tr>
-</table><br/><br/>Notes:<br/>[1] Standard Errors assume that the covariance matrix of the errors is correctly specified.</div></div>
-</div>
-</div>
-<div class="section" id="mixed-linear-model">
-<h2>Mixed Linear Model<a class="headerlink" href="#mixed-linear-model" title="Permalink to this headline">¶</a></h2>
-<p>You find more information about mixed linear models in <a class="reference external" href="https://www.statsmodels.org/stable/mixed_linear.html">Statsmodels documentation</a></p>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">mlm</span> <span class="o">=</span> <span class="n">smf</span><span class="o">.</span><span class="n">mixedlm</span><span class="p">(</span><span class="n">formula</span> <span class="o">=</span><span class="s1">&#39;mpg ~  horsepower&#39;</span><span class="p">,</span> <span class="n">data</span><span class="o">=</span><span class="n">df</span><span class="p">,</span> <span class="n">groups</span><span class="o">=</span><span class="n">df</span><span class="p">[</span><span class="s2">&quot;cylinders&quot;</span><span class="p">])</span><span class="o">.</span><span class="n">fit</span><span class="p">()</span>
-<span class="n">mlm</span><span class="o">.</span><span class="n">summary</span><span class="p">()</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output text_html"><table class="simpletable">
-<tr>
-       <td>Model:</td>       <td>MixedLM</td> <td>Dependent Variable:</td>     <td>mpg</td>   
-</tr>
-<tr>
-  <td>No. Observations:</td>   <td>392</td>         <td>Method:</td>          <td>REML</td>   
-</tr>
-<tr>
-     <td>No. Groups:</td>       <td>5</td>          <td>Scale:</td>          <td>18.2164</td> 
-</tr>
-<tr>
-  <td>Min. group size:</td>     <td>3</td>      <td>Log-Likelihood:</td>   <td>-1133.6206</td>
-</tr>
-<tr>
-  <td>Max. group size:</td>    <td>199</td>       <td>Converged:</td>          <td>Yes</td>   
-</tr>
-<tr>
-  <td>Mean group size:</td>   <td>78.4</td>            <td></td>                <td></td>     
-</tr>
-</table>
-<table class="simpletable">
-<tr>
-       <td></td>       <th>Coef.</th> <th>Std.Err.</th>    <th>z</th>   <th>P>|z|</th> <th>[0.025</th> <th>0.975]</th>
-</tr>
-<tr>
-  <th>Intercept</th>  <td>33.387</td>   <td>1.919</td>  <td>17.402</td> <td>0.000</td> <td>29.627</td> <td>37.147</td>
-</tr>
-<tr>
-  <th>horsepower</th> <td>-0.106</td>   <td>0.011</td>  <td>-9.431</td> <td>0.000</td> <td>-0.128</td> <td>-0.084</td>
-</tr>
-<tr>
-  <th>Group Var</th>   <td>9.620</td>   <td>1.782</td>     <td></td>      <td></td>       <td></td>       <td></td>   
-</tr>
-</table></div></div>
 </div>
 </div>
 </div>

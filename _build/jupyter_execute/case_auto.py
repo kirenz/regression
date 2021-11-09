@@ -1,46 +1,55 @@
 #!/usr/bin/env python
 # coding: utf-8
 
+# # Diagnostics tutorial
+# 
+# The followig tutorial is based on {cite:t}`James2021` and involves the use of regression diagnostics for a simple linear regression model on an [auto data set](https://rdrr.io/cran/ISLR/man/Auto.html). 
+# 
+# 
+# ## Tasks
+# 
+# - (a) Prepare the [data](https://raw.githubusercontent.com/kirenz/datasets/master/Auto.csv) and perfom exploratory data analysis.  
+# 
+# - (b) Perform a simple linear regression with `mpg` as the response and `horsepower` as the predictor. Use the `.summary()` function to print the results. Plot the regression line.
+# 
+# - (c) Answer the following questions:
+# 
+#     1. Is there a relationship between the predictor and the response?
+#     2. How strong is the relationship between the predictor and the response?
+#     3. Is the relationship between the predictor and the response positive or negative?
+#     4. What is the predicted mpg associated with a horsepower of 98? What are the associted 95% confidence and prediction intervals?
+# 
+# - (d) To describe the linear regression fit, produce some diagnostic plots. Comment on any problems you see with the fit: 
+# 
+#     1. Residuals vs fitted plot
+#     2. Normal Q-Q plot
+#     3. Scale-location plot
+#     4. Residuals vs leverage plot
+
+# ## Solution
+
 # In[1]:
 
 
 # Python set up (load modules) 
 import numpy as np
 import pandas as pd
-
 from scipy import stats
+
 import statsmodels.api as sm
 import statsmodels.formula.api as smf
-
 from statsmodels.graphics.regressionplots import plot_leverage_resid2
+
 import matplotlib.pyplot as plt
+import seaborn as sns  
 
 get_ipython().run_line_magic('matplotlib', 'inline')
-import seaborn as sns  
 sns.set() 
 
 
-# # Tutorial auto data 
+# ### (a) 
 # 
-# *The followig examples are based on {cite:t}`James2021`.* 
-# 
-# This tutorial involves the use of simple linear regression models on the [auto data set](https://rdrr.io/cran/ISLR/man/Auto.html). 
-# 
-# We use `mpg` as the response and `horsepower` as the predictor. We want to answer questions like: 
-# 
-# 1. Is there a relationship between the predictor and the response?
-# 2. How strong is the relationship between the predictor and the response?
-# 3. Is the relationship between the predictor and the response positive or negative?
-# 4. What is the predicted mpg associated with a horsepower of 98? What are the associted 95% confidence and prediction intervals?
-# 
-# To describe the linear regression fit, we plot the response and the predictor and produce some diagnostic plots. We comment on any problems we see with the fit: 
-# 
-# 1. Residuals vs fitted plot
-# 2. Normal Q-Q plot
-# 3. Scale-location plot
-# 4. Residuals vs leverage plot
-
-# ## Import data
+# Import data
 
 # In[2]:
 
@@ -63,7 +72,7 @@ df
 df.info()
 
 
-# ## Tidying data
+# #### Tidying data
 
 # In[5]:
 
@@ -76,7 +85,7 @@ df['horsepower'] = pd.to_numeric(df['horsepower'], errors='coerce')
 
 # Note that we have an issue with the horsepower variable. It seems that there is an string present, were only integers should be allowed. We transfrom the data with `pd.to_numeric` and use `errors='coerce'` to replace the string with a NAN [(see Pandas documenation)](https://pandas.pydata.org/pandas-docs/stable/generated/pandas.to_numeric.html)
 
-# ### Handle missing values
+# #### Handle missing values
 
 # In[6]:
 
@@ -106,7 +115,7 @@ df = df.dropna()
 print(df.isnull().sum())
 
 
-# ## Transform data
+# #### Transform data
 
 # In[10]:
 
@@ -122,9 +131,7 @@ round(df.describe(),2)
 df.describe(include=['category'])
 
 
-# ## Visualize data
-
-# ### Distibution of Variables
+# #### Visualize data
 
 # In[12]:
 
@@ -146,9 +153,7 @@ sns.pairplot(df);
 sns.jointplot(x="horsepower", y="mpg", data=df);
 
 
-# ## Regression Models
-
-# - (a) Perform a simple linear regression with `mpg` as the response and `horsepower` as the predictor. Use the `.summary()` function to print the results. 
+# ### (b) 
 
 # In[15]:
 
@@ -171,7 +176,9 @@ lm.summary()
 sns.lmplot(x='horsepower', y='mpg', data=df, line_kws={'color':'red'}, height=5, ci=95, );
 
 
-# ### Interpretation
+# ### (c)
+# 
+# Interpretation
 # 
 # **1. Is there a relationship between the predictor and the response?**
 # 
@@ -219,9 +226,9 @@ results.summary_frame(alpha=0.05)
 lm.conf_int(alpha=0.05)
 
 
-# ## Regression Diagnostics
+# ### (d)
 # 
-# (c) Produce diagnostic plots of the least squares regression fit. Comment on any problems you see with the fit.
+# Regression Diagnostics
 
 # The `plot_regress_exog` function is a convenience function that gives a 2x2 plot containing 
 # 
@@ -239,7 +246,7 @@ fig = sm.graphics.plot_regress_exog(lm, "horsepower")
 fig.tight_layout(pad=1.0)
 
 
-# ### Residuals vs fitted plot
+# #### Residuals vs fitted plot
 
 # In[22]:
 
@@ -261,7 +268,7 @@ plot.set_ylabel('Residuals');
 # 
 # This means there seems to be a non-linear relationship between the predictor and the response variable which the model doesn’t capture.
 
-# ### Normal Q-Q
+# #### Normal Q-Q
 
 # This plots the standardized (z-score) residuals against the theoretical normal quantiles. Anything quite off the diagonal lines may be a concern for further investigation.
 
@@ -276,7 +283,7 @@ sm.qqplot(lm.get_influence().resid_studentized_internal);
 # 
 # We can observe that only some residuals (in the lower left and the upper right corner) deviate from the straight line. 
 
-# ### Scale-Location plot
+# #### Scale-Location plot
 
 # In[24]:
 
@@ -292,7 +299,7 @@ sns.regplot(x=lm.fittedvalues, y=np.sqrt(np.abs(lm.get_influence().resid_student
 # 
 # In our model the residuals begin to spread wider along the y-axis as it passes the x value of around 18. Because the residuals spread wider and wider with an increase of x, the red smooth line is not horizontal and shows a positive angle. This is an indication of heteroskedasticity.
 
-# ### Residuals vs leverage plot
+# #### Residuals vs leverage plot
 
 # In[25]:
 
@@ -323,26 +330,4 @@ out_d = lm_cooksd > critical_d
 
 # Output potential outliers
 df.index[out_d],lm_cooksd[out_d]
-
-
-# ## Alternative models
-# 
-# ## GLS regression
-
-# In[28]:
-
-
-gls = smf.gls(formula ='mpg ~  horsepower', data=df).fit()
-gls.summary()
-
-
-# ## Mixed Linear Model
-# 
-# You find more information about mixed linear models in [Statsmodels documentation](https://www.statsmodels.org/stable/mixed_linear.html)
-
-# In[29]:
-
-
-mlm = smf.mixedlm(formula ='mpg ~  horsepower', data=df, groups=df["cylinders"]).fit()
-mlm.summary()
 
