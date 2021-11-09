@@ -267,60 +267,29 @@
   </a>
  </li>
  <li class="toc-h1 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#application-wages">
-   Application wages
+  <a class="reference internal nav-link" href="#application">
+   Application
   </a>
   <ul class="visible nav section-nav flex-column">
    <li class="toc-h2 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#import-and-inspect-data">
-     Import and inspect data
+    <a class="reference internal nav-link" href="#import-data">
+     Import data
     </a>
    </li>
    <li class="toc-h2 nav-item toc-entry">
     <a class="reference internal nav-link" href="#tidying-data">
      Tidying data
     </a>
-    <ul class="nav section-nav flex-column">
-     <li class="toc-h3 nav-item toc-entry">
-      <a class="reference internal nav-link" href="#data-types">
-       Data types
-      </a>
-     </li>
-     <li class="toc-h3 nav-item toc-entry">
-      <a class="reference internal nav-link" href="#handle-missing-values">
-       Handle missing values
-      </a>
-     </li>
-    </ul>
    </li>
    <li class="toc-h2 nav-item toc-entry">
     <a class="reference internal nav-link" href="#transform-data">
      Transform data
     </a>
-    <ul class="nav section-nav flex-column">
-     <li class="toc-h3 nav-item toc-entry">
-      <a class="reference internal nav-link" href="#descriptive-statistics">
-       Descriptive statistics
-      </a>
-     </li>
-    </ul>
    </li>
    <li class="toc-h2 nav-item toc-entry">
     <a class="reference internal nav-link" href="#visualize-data">
      Visualize data
     </a>
-    <ul class="nav section-nav flex-column">
-     <li class="toc-h3 nav-item toc-entry">
-      <a class="reference internal nav-link" href="#distribution">
-       Distribution
-      </a>
-     </li>
-     <li class="toc-h3 nav-item toc-entry">
-      <a class="reference internal nav-link" href="#relationship">
-       Relationship
-      </a>
-     </li>
-    </ul>
    </li>
    <li class="toc-h2 nav-item toc-entry">
     <a class="reference internal nav-link" href="#model">
@@ -359,8 +328,8 @@ you can also communicate your results to others.</p>
 <p>Surrounding all the data science steps covered above is <strong>programming</strong>. Programming is a cross-cutting tool that you use in every part of the project. You don’t need to be an expert programmer to be a data scientist, but learning more about programming pays off because becoming a better programmer allows you to automate
 common tasks, and solve new problems with greater ease.</p>
 </div>
-<div class="tex2jax_ignore mathjax_ignore section" id="application-wages">
-<h1>Application wages<a class="headerlink" href="#application-wages" title="Permalink to this headline">¶</a></h1>
+<div class="tex2jax_ignore mathjax_ignore section" id="application">
+<h1>Application<a class="headerlink" href="#application" title="Permalink to this headline">¶</a></h1>
 <p>To demonstrate the programming process, we examine a dataset which contains variables that could relate to <strong>wages</strong> for a group of males. The data is obtained from James et al. (2021) and consists of 12 variables for 3,000 people, so we have n = 3,000 observations and p = 12 variables (such as year, age, and more).</p>
 <p>First, we take a look at some important Python modules and functions.</p>
 <p><strong>Module overview:</strong></p>
@@ -385,8 +354,8 @@ transform data. To learn more about pandas, review this <a class="reference exte
 </div>
 </div>
 </div>
-<div class="section" id="import-and-inspect-data">
-<h2>Import and inspect data<a class="headerlink" href="#import-and-inspect-data" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="import-data">
+<h2>Import data<a class="headerlink" href="#import-data" title="Permalink to this headline">¶</a></h2>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Load csv data from GitHub into pandas dataframes</span>
@@ -859,8 +828,7 @@ Name: edu, dtype: int64
 </div>
 </div>
 </div>
-<div class="section" id="data-types">
-<h3>Data types<a class="headerlink" href="#data-types" title="Permalink to this headline">¶</a></h3>
+<p><strong>Data types</strong></p>
 <p>Pandas offers different options to change the data type of a variable.</p>
 <p>To change data into a categorical format, you can use the following code (see this
 <a class="reference external" href="https://pandas.pydata.org/docs/user_guide/categorical.html">pandas tutorial to learn more about categorical data</a>):</p>
@@ -938,9 +906,7 @@ Otherwise, we get an error message. Therefore, use errors=’coerce’ …</p>
 </ul>
 </li>
 </ul>
-</div>
-<div class="section" id="handle-missing-values">
-<h3>Handle missing values<a class="headerlink" href="#handle-missing-values" title="Permalink to this headline">¶</a></h3>
+<p><strong>Handle missing values</strong></p>
 <p>Next, we need to check if there are missing cases in the data set. By “missing” we simply mean NA (“not available”).</p>
 <p>Many datasets arrive with missing data, either because it exists but was not collected or it never existed.
 Having missing values in a dataset can cause errors with some algorithms. Therefore, we need to take care of this issue (we cover the topic of missing values in one of the following applications in detail).</p>
@@ -981,11 +947,8 @@ missing values. In that case, it could be reasonable to only drop the variable (
 <p><code class="docutils literal notranslate"><span class="pre">df</span> <span class="pre">=</span> <span class="pre">df.drop('variable',</span> <span class="pre">axis=1)</span></code></p>
 <p>Usually, we will use other methods to fill in missing values (e.g. imputate missing values by using the mean) instead of dropping them.</p>
 </div>
-</div>
 <div class="section" id="transform-data">
 <h2>Transform data<a class="headerlink" href="#transform-data" title="Permalink to this headline">¶</a></h2>
-<div class="section" id="descriptive-statistics">
-<h3>Descriptive statistics<a class="headerlink" href="#descriptive-statistics" title="Permalink to this headline">¶</a></h3>
 <p>First, we obtain some common statistics:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -1230,100 +1193,9 @@ missing values. In that case, it could be reasonable to only drop the variable (
 </table>
 </div></div></div>
 </div>
-<p>Some examples of how to calculate simple statistics:</p>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># calculation of the mean (e.g. for age)</span>
-<span class="n">age_mean</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="s2">&quot;age&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span>
-
-<span class="c1"># calculation of the median (e.g. for age)</span>
-<span class="n">age_median</span> <span class="o">=</span>  <span class="n">df</span><span class="p">[</span><span class="s2">&quot;age&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">median</span><span class="p">()</span>
-
-<span class="c1"># print the result (e.g., age_mean)</span>
-<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;The precise mean of age is&#39;</span><span class="p">,</span> <span class="n">age_mean</span><span class="p">)</span>
-
-<span class="c1"># print the rounded result</span>
-<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;The rounded mean of age is&#39;</span><span class="p">,</span> <span class="nb">round</span><span class="p">(</span><span class="n">age_mean</span><span class="p">))</span>
-
-<span class="c1"># print the round result (to two decimals) (this is the preferred option)</span>
-<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;The rounded mean of age with two decimals is&#39;</span><span class="p">,</span> <span class="nb">round</span><span class="p">(</span><span class="n">age_mean</span><span class="p">,</span> <span class="mi">2</span><span class="p">))</span>
-
-<span class="c1"># use a function inside print()</span>
-<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;The median of age is&#39;</span><span class="p">,</span> <span class="n">df</span><span class="p">[</span><span class="s2">&quot;age&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">median</span><span class="p">())</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>The precise mean of age is 42.41466666666667
-The rounded mean of age is 42
-The rounded mean of age with two decimals is 42.41
-The median of age is 42.0
-</pre></div>
-</div>
-</div>
-</div>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># calculation of the mode</span>
-<span class="n">df</span><span class="p">[</span><span class="s1">&#39;age&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">mode</span><span class="p">()</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>0    40
-dtype: int64
-</pre></div>
-</div>
-</div>
-</div>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># quantiles</span>
-<span class="n">df</span><span class="p">[</span><span class="s1">&#39;age&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">quantile</span><span class="p">([</span><span class="mf">.25</span><span class="p">,</span> <span class="mf">.5</span><span class="p">,</span> <span class="mf">.75</span><span class="p">])</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>0.25    33.75
-0.50    42.00
-0.75    51.00
-Name: age, dtype: float64
-</pre></div>
-</div>
-</div>
-</div>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Range</span>
-<span class="n">df</span><span class="p">[</span><span class="s1">&#39;age&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">max</span><span class="p">()</span> <span class="o">-</span> <span class="n">df</span><span class="p">[</span><span class="s1">&#39;age&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">min</span><span class="p">()</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>62
-</pre></div>
-</div>
-</div>
-</div>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># standard deviation</span>
-<span class="nb">round</span><span class="p">(</span><span class="n">df</span><span class="p">[</span><span class="s1">&#39;age&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">std</span><span class="p">(),</span><span class="mi">2</span><span class="p">)</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>11.54
-</pre></div>
-</div>
-</div>
-</div>
-</div>
 </div>
 <div class="section" id="visualize-data">
 <h2>Visualize data<a class="headerlink" href="#visualize-data" title="Permalink to this headline">¶</a></h2>
-<div class="section" id="distribution">
-<h3>Distribution<a class="headerlink" href="#distribution" title="Permalink to this headline">¶</a></h3>
 <p>How you visualize the distribution of a variable will depend on whether the variable is categorical or continuous.The excellent site <a class="reference external" href="https://www.data-to-viz.com/">From Data to Viz</a> leads you to the most appropriate graph for your data. It also links to the code to build it and lists common caveats you should avoid.</p>
 <p>For example, to examine the distribution of a categorical variable, we could use a bar or count plot.</p>
 <div class="cell docutils container">
@@ -1334,7 +1206,7 @@ Name: age, dtype: float64
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="_images/process_52_0.png" src="_images/process_52_0.png" />
+<img alt="_images/process_44_0.png" src="_images/process_44_0.png" />
 </div>
 </div>
 <p>A variable is <strong>continuous</strong> if it can take any of an infinite set of ordered values. To examine the distribution of a continuous variable, we could use a <strong>histogram</strong>:</p>
@@ -1351,7 +1223,7 @@ The is_first_col function was deprecated in Matplotlib 3.4 and will be removed t
   if ax.is_first_col():
 </pre></div>
 </div>
-<img alt="_images/process_54_1.png" src="_images/process_54_1.png" />
+<img alt="_images/process_46_1.png" src="_images/process_46_1.png" />
 </div>
 </div>
 <p>We can also use Seaborne to plot a histogram with a kernel density estimate:</p>
@@ -1363,7 +1235,7 @@ The is_first_col function was deprecated in Matplotlib 3.4 and will be removed t
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="_images/process_56_0.png" src="_images/process_56_0.png" />
+<img alt="_images/process_48_0.png" src="_images/process_48_0.png" />
 </div>
 </div>
 <p>Another alternative to display the distribution of a continuous variable broken down by a categorical variable is the <strong>boxplot</strong>.</p>
@@ -1384,7 +1256,7 @@ farthest non-outlier point in the distribution.</p></li>
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="_images/process_58_0.png" src="_images/process_58_0.png" />
+<img alt="_images/process_50_0.png" src="_images/process_50_0.png" />
 </div>
 </div>
 <div class="cell docutils container">
@@ -1395,12 +1267,9 @@ farthest non-outlier point in the distribution.</p></li>
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="_images/process_59_0.png" src="_images/process_59_0.png" />
+<img alt="_images/process_51_0.png" src="_images/process_51_0.png" />
 </div>
 </div>
-</div>
-<div class="section" id="relationship">
-<h3>Relationship<a class="headerlink" href="#relationship" title="Permalink to this headline">¶</a></h3>
 <p>A great way to visualise the covariation between two continuous variables is to draw a scatterplot.
 You can see covariation as a pattern in the points. We will cover more options to test for relationships in variables
 (e.g., correlation) in the following applications.</p>
@@ -1412,7 +1281,7 @@ You can see covariation as a pattern in the points. We will cover more options t
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="_images/process_62_0.png" src="_images/process_62_0.png" />
+<img alt="_images/process_53_0.png" src="_images/process_53_0.png" />
 </div>
 </div>
 <div class="cell docutils container">
@@ -1423,8 +1292,7 @@ You can see covariation as a pattern in the points. We will cover more options t
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="_images/process_63_0.png" src="_images/process_63_0.png" />
-</div>
+<img alt="_images/process_54_0.png" src="_images/process_54_0.png" />
 </div>
 </div>
 </div>

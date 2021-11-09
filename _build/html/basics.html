@@ -264,8 +264,8 @@
             <nav id="bd-toc-nav" aria-label="Page">
                 <ul class="visible nav section-nav flex-column">
  <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#import-and-inspect-data">
-   Import and inspect data
+  <a class="reference internal nav-link" href="#import-data">
+   Import data
   </a>
  </li>
  <li class="toc-h2 nav-item toc-entry">
@@ -287,25 +287,38 @@
   <a class="reference internal nav-link" href="#model">
    Model
   </a>
-  <ul class="nav section-nav flex-column">
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#parameters">
-     Parameters
-    </a>
-   </li>
-  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#mean">
+   Mean
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#regression-model">
+   Regression model
+  </a>
  </li>
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#quality-of-fit">
    Quality of fit
   </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#residuals-and-r-2">
+   Residuals and
+   <span class="math notranslate nohighlight">
+    \(R^2\)
+   </span>
+  </a>
   <ul class="nav section-nav flex-column">
    <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#residuals-and-r-2">
-     Residuals and
-     <span class="math notranslate nohighlight">
-      \(R^2\)
-     </span>
+    <a class="reference internal nav-link" href="#id1">
+     Mean
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#regression">
+     Regression
     </a>
    </li>
    <li class="toc-h3 nav-item toc-entry">
@@ -351,8 +364,8 @@
   </ul>
  </li>
  <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#further-measures-for-model-selection">
-   Further measures for model selection
+  <a class="reference internal nav-link" href="#further-measures">
+   Further measures
   </a>
   <ul class="nav section-nav flex-column">
    <li class="toc-h3 nav-item toc-entry">
@@ -402,8 +415,8 @@
 </div>
 </div>
 </div>
-<div class="section" id="import-and-inspect-data">
-<h2>Import and inspect data<a class="headerlink" href="#import-and-inspect-data" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="import-data">
+<h2>Import data<a class="headerlink" href="#import-data" title="Permalink to this headline">¶</a></h2>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Instead of importing data, we will create our own data</span>
@@ -622,36 +635,6 @@ memory usage: 2.0+ KB
 </div>
 </div>
 </div>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># show the lenght of the variable id (i.e. the number of observations)</span>
-<span class="nb">len</span><span class="p">(</span><span class="n">df</span><span class="p">[</span><span class="s2">&quot;id&quot;</span><span class="p">])</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>20
-</pre></div>
-</div>
-</div>
-</div>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># check for duplicates and print results (if the two numbers match, we have no duplicates)</span>
-<span class="c1"># show the lenght of the variable id (i.e. the number of observations)</span>
-<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;IDs:&#39;</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">df</span><span class="p">[</span><span class="s2">&quot;id&quot;</span><span class="p">]))</span>
-<span class="c1"># count the number of individual id&#39;s</span>
-<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Unique IDs:&#39;</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">df</span><span class="p">[</span><span class="s2">&quot;id&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">value_counts</span><span class="p">()))</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>IDs: 20
-Unique IDs: 20
-</pre></div>
-</div>
-</div>
-</div>
 </div>
 <div class="section" id="tidying-data">
 <h2>Tidying data<a class="headerlink" href="#tidying-data" title="Permalink to this headline">¶</a></h2>
@@ -671,7 +654,7 @@ Unique IDs: 20
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="_images/basics_12_0.png" src="_images/basics_12_0.png" />
+<img alt="_images/basics_10_0.png" src="_images/basics_10_0.png" />
 </div>
 </div>
 <p>We can also check the column-wise distribution of null values:</p>
@@ -835,7 +818,7 @@ dtype: int64
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="_images/basics_19_0.png" src="_images/basics_19_0.png" />
+<img alt="_images/basics_17_0.png" src="_images/basics_17_0.png" />
 </div>
 </div>
 <div class="cell docutils container">
@@ -846,7 +829,7 @@ dtype: int64
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="_images/basics_20_0.png" src="_images/basics_20_0.png" />
+<img alt="_images/basics_18_0.png" src="_images/basics_18_0.png" />
 </div>
 </div>
 <div class="cell docutils container">
@@ -857,7 +840,7 @@ dtype: int64
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="_images/basics_21_0.png" src="_images/basics_21_0.png" />
+<img alt="_images/basics_19_0.png" src="_images/basics_19_0.png" />
 </div>
 </div>
 <p>We can observe a strong positive relationship between the average height of the parents and the height of their daughter. Hence, it would make sense to use the variable <code class="docutils literal notranslate"><span class="pre">height_parents</span></code> as a predictor for the outcome variable <code class="docutils literal notranslate"><span class="pre">height</span></code> in a statistical model.</p>
@@ -871,8 +854,7 @@ dtype: int64
 <p>This equation means that the data we observe can be predicted from the model we choose to fit plus some amount of error. There are different terms that basically refer to <strong>error</strong> like <strong>residual</strong>, <strong>deviation</strong> or <strong>deviance</strong>. The degree to which a statistical model represents the data collected is known as the <strong>fit of the model</strong> which is closely related to the error of the model.</p>
 <p>The model in the equation will vary depending on the design of your study, the type of data you have and what it is you’re trying to achieve with your model. Consequently, the model can also vary in its complexity.</p>
 <p>The important thing is that we can use the model computed in our <strong>sample</strong> to estimate the value in the <strong>population</strong> (which is the value in which we’re interested).</p>
-<div class="section" id="parameters">
-<h3>Parameters<a class="headerlink" href="#parameters" title="Permalink to this headline">¶</a></h3>
+<p><strong>Parameters</strong></p>
 <p>Statistical models are made up of <strong>variables</strong> and <strong>parameters</strong>. Variables are measured constructs that vary across entities in the sample. In contrast, parameters are not measured and are (usually) constants believed to represent some fundamental truth about the relations between variables in the model.</p>
 <p>Some examples of parameters with which you already are familiar are: the <strong>mean</strong> and <strong>median</strong> (which estimate the centre of the distribution). We will also cover correlation and regression coefficients (which estimate the relationship between two variables) in other applications.</p>
 <p>If we’re interested only in summarizing the outcome, as we are when we compute a <strong>mean</strong>, then we won’t have any variables in the model, only a <strong>parameter</strong> (typically called <em>b</em>), so we could write our <span class="math notranslate nohighlight">\(Outcome_i = (Model) + error_i\)</span> equation as:</p>
@@ -892,7 +874,9 @@ dtype: int64
 <li><p>In our second model, we use the variable height of parents as predictor in a linear regression model:</p></li>
 </ul>
 <p><span class="math notranslate nohighlight">\(height_i = (b_0 + b_1 \times heightparents_i ) + error_i\)</span></p>
-<p>Mean model:</p>
+</div>
+<div class="section" id="mean">
+<h2>Mean<a class="headerlink" href="#mean" title="Permalink to this headline">¶</a></h2>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># calculate the mean </span>
@@ -1001,10 +985,12 @@ dtype: int64
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="_images/basics_28_0.png" src="_images/basics_28_0.png" />
+<img alt="_images/basics_26_0.png" src="_images/basics_26_0.png" />
 </div>
 </div>
-<p>Regression model:</p>
+</div>
+<div class="section" id="regression-model">
+<h2>Regression model<a class="headerlink" href="#regression-model" title="Permalink to this headline">¶</a></h2>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># fit linear model with statsmodels.formula.api</span>
@@ -1122,7 +1108,7 @@ dtype: int64
   <th>Date:</th>             <td>Tue, 09 Nov 2021</td> <th>  Prob (F-statistic):</th> <td>2.21e-08</td>
 </tr>
 <tr>
-  <th>Time:</th>                 <td>22:09:03</td>     <th>  Log-Likelihood:    </th> <td> -17.995</td>
+  <th>Time:</th>                 <td>22:25:06</td>     <th>  Log-Likelihood:    </th> <td> -17.995</td>
 </tr>
 <tr>
   <th>No. Observations:</th>      <td>    20</td>      <th>  AIC:               </th> <td>   39.99</td>
@@ -1195,8 +1181,7 @@ dtype: int64
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="_images/basics_35_0.png" src="_images/basics_35_0.png" />
-</div>
+<img alt="_images/basics_33_0.png" src="_images/basics_33_0.png" />
 </div>
 </div>
 </div>
@@ -1211,8 +1196,9 @@ the true response value for that observation.</p>
 <div class="math notranslate nohighlight">
 \[error_i = observed_i - model_i\]</div>
 <p>In other words, the error for a particular entity is the score predicted by the model for that entity subtracted from the corresponding observed score.</p>
+</div>
 <div class="section" id="residuals-and-r-2">
-<h3>Residuals and <span class="math notranslate nohighlight">\(R^2\)</span><a class="headerlink" href="#residuals-and-r-2" title="Permalink to this headline">¶</a></h3>
+<h2>Residuals and <span class="math notranslate nohighlight">\(R^2\)</span><a class="headerlink" href="#residuals-and-r-2" title="Permalink to this headline">¶</a></h2>
 <p>Note that residuals (errors) would cancel out because some are positive and others negative. Therefore, we square each deviation. If we add these squared deviations we get the <strong>sum of squared residuals (SSR)</strong> (also known as the residual sum of squares (RSS) or the sum of squared estimate of errors (SSE)).</p>
 <p><span class="math notranslate nohighlight">\( SSR = \sum_{i=1}^n (observed_i - model_i)^2\)</span></p>
 <p>Using the <strong>mean</strong> of the outcome as a baseline model, we can calculate the difference between the observed values and the values predicted by the mean. We square these differences to give us the sum of squared differences. This sum of squared differences is known as the <strong>total sum of squares</strong> (denoted by <span class="math notranslate nohighlight">\(TSS\)</span>) and it represents how good the mean is as a model of the observed outcome scores:</p>
@@ -1248,7 +1234,8 @@ the true response value for that observation.</p>
 <p><strong>Adjusted</strong> <span class="math notranslate nohighlight">\(R^2\)</span>:</p>
 <p>Whereas <span class="math notranslate nohighlight">\(R^2\)</span> tells us how much of the variance in Y overlaps with predicted values from the model in our sample, adjusted <span class="math notranslate nohighlight">\(R^2\)</span> tells us how much variance in Y would be accounted for if the model had been derived from the <strong>population</strong> from which the sample was taken (takes degrees of freedom into account). Therefore, the adjusted value indicates the loss of predictive power or shrinkage.</p>
 <p>As a general rule it is preferrable to use the adjusted <span class="math notranslate nohighlight">\(R^2\)</span> instead of the simple <span class="math notranslate nohighlight">\(R^2\)</span>.</p>
-<p>Fit of mean:</p>
+<div class="section" id="id1">
+<h3>Mean<a class="headerlink" href="#id1" title="Permalink to this headline">¶</a></h3>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># calculate error (observation - average) and assign it to dataframe</span>
@@ -1367,7 +1354,7 @@ the true response value for that observation.</p>
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="_images/basics_41_0.png" src="_images/basics_41_0.png" />
+<img alt="_images/basics_39_0.png" src="_images/basics_39_0.png" />
 </div>
 </div>
 <div class="cell docutils container">
@@ -1378,7 +1365,7 @@ the true response value for that observation.</p>
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="_images/basics_42_0.png" src="_images/basics_42_0.png" />
+<img alt="_images/basics_40_0.png" src="_images/basics_40_0.png" />
 </div>
 </div>
 <div class="cell docutils container">
@@ -1493,7 +1480,9 @@ the true response value for that observation.</p>
 </div>
 </div>
 </div>
-<p>Fit of regression:</p>
+</div>
+<div class="section" id="regression">
+<h3>Regression<a class="headerlink" href="#regression" title="Permalink to this headline">¶</a></h3>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">lm</span><span class="o">.</span><span class="n">resid</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span>
@@ -1658,7 +1647,7 @@ the true response value for that observation.</p>
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="_images/basics_50_0.png" src="_images/basics_50_0.png" />
+<img alt="_images/basics_48_0.png" src="_images/basics_48_0.png" />
 </div>
 </div>
 <div class="cell docutils container">
@@ -1668,7 +1657,7 @@ the true response value for that observation.</p>
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="_images/basics_51_0.png" src="_images/basics_51_0.png" />
+<img alt="_images/basics_49_0.png" src="_images/basics_49_0.png" />
 </div>
 </div>
 <div class="cell docutils container">
@@ -2173,7 +2162,7 @@ Name: height, dtype: float64
   warnings.warn(msg, FutureWarning)
 </pre></div>
 </div>
-<img alt="_images/basics_91_1.png" src="_images/basics_91_1.png" />
+<img alt="_images/basics_89_1.png" src="_images/basics_89_1.png" />
 </div>
 </div>
 <p>If we know that our limits are −1.96 and 1.96 as z-scores, then to find out the corresponding scores in our raw data we can replace z in the equation (because there are two values, we get two equations):</p>
@@ -2239,7 +2228,7 @@ Upper boundary of CI 165.65161176688028
   warnings.warn(msg, FutureWarning)
 </pre></div>
 </div>
-<img alt="_images/basics_94_1.png" src="_images/basics_94_1.png" />
+<img alt="_images/basics_92_1.png" src="_images/basics_92_1.png" />
 </div>
 </div>
 <p>Model 2: Linear Regression</p>
@@ -2359,7 +2348,7 @@ Upper boundary of CI 165.65161176688028
   warnings.warn(msg, UserWarning)
 </pre></div>
 </div>
-<img alt="_images/basics_101_1.png" src="_images/basics_101_1.png" />
+<img alt="_images/basics_99_1.png" src="_images/basics_99_1.png" />
 </div>
 </div>
 </div>
@@ -2417,7 +2406,7 @@ Upper boundary of CI (t-statistics) 165.69583627664076
   warnings.warn(msg, FutureWarning)
 </pre></div>
 </div>
-<img alt="_images/basics_104_1.png" src="_images/basics_104_1.png" />
+<img alt="_images/basics_102_1.png" src="_images/basics_102_1.png" />
 </div>
 </div>
 <div class="cell docutils container">
@@ -2442,13 +2431,13 @@ Upper boundary of CI (t-statistics) 165.69583627664076
   warnings.warn(msg, FutureWarning)
 </pre></div>
 </div>
-<img alt="_images/basics_105_1.png" src="_images/basics_105_1.png" />
+<img alt="_images/basics_103_1.png" src="_images/basics_103_1.png" />
 </div>
 </div>
 </div>
 </div>
-<div class="section" id="further-measures-for-model-selection">
-<h2>Further measures for model selection<a class="headerlink" href="#further-measures-for-model-selection" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="further-measures">
+<h2>Further measures<a class="headerlink" href="#further-measures" title="Permalink to this headline">¶</a></h2>
 <p>When fitting models, it is possible to increase the likelihood by adding parameters, but doing so may result in overfitting.</p>
 <p>Both the Bayesian information criterion (<strong>BIC</strong>) (also called the Schwarz criterion SBC or SBIC) and Akaike information criterion (<strong>AIC</strong>) attempt to resolve this problem by introducing a penalty term for the number of parameters in the model; the penalty term is larger in BIC than in AIC.</p>
 <p>Both measures are an estimator of the <strong>relative quality</strong> of statistical models for a given set of data. Hence, they are used to select the best performing model.</p>

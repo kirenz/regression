@@ -39,7 +39,7 @@
 # 
 
 # 
-# # Application wages
+# # Application
 # 
 # To demonstrate the programming process, we examine a dataset which contains variables that could relate to **wages** for a group of males. The data is obtained from James et al. (2021) and consists of 12 variables for 3,000 people, so we have n = 3,000 observations and p = 12 variables (such as year, age, and more).
 # 
@@ -69,7 +69,7 @@ sns.set_theme(style="ticks", rc=custom_params, palette='winter')
 get_ipython().run_line_magic('matplotlib', 'inline')
 
 
-# ## Import and inspect data
+# ## Import data
 
 # In[2]:
 
@@ -190,7 +190,7 @@ df = df.rename(index=str, columns={"education": "edu"})
 df['edu'].value_counts() 
 
 
-# ### Data types
+# **Data types**
 # 
 # Pandas offers different options to change the data type of a variable.
 # 
@@ -252,7 +252,7 @@ df.dtypes
 #     - If `coerce`, then invalid parsing will be set as NaN
 #     - If `ignore`, then invalid parsing will return the input
 
-# ### Handle missing values
+# **Handle missing values**
 # 
 # Next, we need to check if there are missing cases in the data set. By “missing” we simply mean NA (“not available”).
 # 
@@ -289,8 +289,6 @@ print(df.isnull().sum())
 
 # ## Transform data
 
-# ### Descriptive statistics
-
 # First, we obtain some common statistics:
 
 # In[21]:
@@ -316,67 +314,13 @@ df.describe(include=['category'])
 df['age'].groupby(df['edu']).describe()
 
 
-# Some examples of how to calculate simple statistics:
-
-# In[24]:
-
-
-# calculation of the mean (e.g. for age)
-age_mean = df["age"].mean()
-
-# calculation of the median (e.g. for age)
-age_median =  df["age"].median()
-
-# print the result (e.g., age_mean)
-print('The precise mean of age is', age_mean)
-
-# print the rounded result
-print('The rounded mean of age is', round(age_mean))
-
-# print the round result (to two decimals) (this is the preferred option)
-print('The rounded mean of age with two decimals is', round(age_mean, 2))
-
-# use a function inside print()
-print('The median of age is', df["age"].median())
-
-
-# In[25]:
-
-
-# calculation of the mode
-df['age'].mode()
-
-
-# In[26]:
-
-
-# quantiles
-df['age'].quantile([.25, .5, .75])
-
-
-# In[27]:
-
-
-# Range
-df['age'].max() - df['age'].min()
-
-
-# In[28]:
-
-
-# standard deviation
-round(df['age'].std(),2)
-
-
 # ## Visualize data
-
-# ### Distribution
 
 # How you visualize the distribution of a variable will depend on whether the variable is categorical or continuous.The excellent site [From Data to Viz](https://www.data-to-viz.com/) leads you to the most appropriate graph for your data. It also links to the code to build it and lists common caveats you should avoid.
 # 
 # For example, to examine the distribution of a categorical variable, we could use a bar or count plot.
 
-# In[29]:
+# In[24]:
 
 
 # horizontal count plot (show the counts of observations in each categorical bin)
@@ -385,7 +329,7 @@ sns.countplot(y='edu', data=df);
 
 # A variable is **continuous** if it can take any of an infinite set of ordered values. To examine the distribution of a continuous variable, we could use a **histogram**:
 
-# In[30]:
+# In[25]:
 
 
 # Pandas histogram of all numerical values
@@ -394,7 +338,7 @@ df.hist();
 
 # We can also use Seaborne to plot a histogram with a kernel density estimate:
 
-# In[31]:
+# In[26]:
 
 
 # histogram with seaborn 
@@ -416,34 +360,32 @@ sns.displot(x='age', data=df, kde=True);
 # - A line (or whisker) that extends from each end of the box and goes to the
 # farthest non-outlier point in the distribution.
 
-# In[32]:
+# In[27]:
 
 
 # boxplot 
 sns.boxplot(y='age', data=df);
 
 
-# In[33]:
+# In[28]:
 
 
 # boxplot for different groups
 sns.boxplot(y='edu', x='age', data=df);
 
 
-# ### Relationship
-
 # A great way to visualise the covariation between two continuous variables is to draw a scatterplot.
 # You can see covariation as a pattern in the points. We will cover more options to test for relationships in variables
 # (e.g., correlation) in the following applications.
 
-# In[34]:
+# In[29]:
 
 
 # simple scatterplot
 sns.scatterplot(x='age', y='wage', data=df);
 
 
-# In[35]:
+# In[30]:
 
 
 # plot all numeric variables in pairs
