@@ -54,7 +54,7 @@
     <script async="async" src="_static/sphinx-thebe.js"></script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
-    <link rel="next" title="Diagnostics" href="diagnostics.html" />
+    <link rel="next" title="Regression diagnostics in Python" href="regression_diagnostics.html" />
     <link rel="prev" title="Programming Process" href="process.html" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="docsearch:language" content="en" />
@@ -127,8 +127,8 @@
 </p>
 <ul class="nav bd-sidenav">
  <li class="toctree-l1">
-  <a class="reference internal" href="diagnostics.html">
-   Diagnostics
+  <a class="reference internal" href="regression_diagnostics.html">
+   Regression diagnostics in Python
   </a>
  </li>
 </ul>
@@ -410,7 +410,7 @@
 
 <span class="c1"># seaborn settings</span>
 <span class="n">custom_params</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;axes.spines.right&quot;</span><span class="p">:</span> <span class="kc">False</span><span class="p">,</span> <span class="s2">&quot;axes.spines.top&quot;</span><span class="p">:</span> <span class="kc">False</span><span class="p">}</span>
-<span class="n">sns</span><span class="o">.</span><span class="n">set_theme</span><span class="p">(</span><span class="n">style</span><span class="o">=</span><span class="s2">&quot;ticks&quot;</span><span class="p">,</span> <span class="n">rc</span><span class="o">=</span><span class="n">custom_params</span><span class="p">,</span> <span class="n">palette</span><span class="o">=</span><span class="s1">&#39;winter&#39;</span><span class="p">)</span>
+<span class="n">sns</span><span class="o">.</span><span class="n">set_theme</span><span class="p">(</span><span class="n">style</span><span class="o">=</span><span class="s2">&quot;ticks&quot;</span><span class="p">,</span> <span class="n">rc</span><span class="o">=</span><span class="n">custom_params</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -419,25 +419,10 @@
 <h2>Import data<a class="headerlink" href="#import-data" title="Permalink to this headline">¶</a></h2>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Instead of importing data, we will create our own data</span>
-<span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">({</span> <span class="s1">&#39;name&#39;</span><span class="p">:</span> <span class="n">pd</span><span class="o">.</span><span class="n">Categorical</span><span class="p">([</span> <span class="s2">&quot;Stefanie&quot;</span><span class="p">,</span> <span class="s2">&quot;Petra&quot;</span><span class="p">,</span> <span class="s2">&quot;Stefanie&quot;</span><span class="p">,</span> 
-                                             <span class="s2">&quot;Manuela&quot;</span><span class="p">,</span> <span class="s2">&quot;Nadine&quot;</span><span class="p">,</span> <span class="s2">&quot;Sophia&quot;</span><span class="p">,</span>  
-                                             <span class="s2">&quot;Ellen&quot;</span><span class="p">,</span> <span class="s2">&quot;Emilia&quot;</span><span class="p">,</span> <span class="s2">&quot;Lina&quot;</span><span class="p">,</span> 
-                                             <span class="s2">&quot;Marie&quot;</span><span class="p">,</span> <span class="s2">&quot;Lena&quot;</span><span class="p">,</span> <span class="s2">&quot;Mila&quot;</span><span class="p">,</span>    
-                                             <span class="s2">&quot;Ida&quot;</span><span class="p">,</span> <span class="s2">&quot;Ella&quot;</span><span class="p">,</span> <span class="s2">&quot;Pia&quot;</span><span class="p">,</span> 
-                                             <span class="s2">&quot;Sarah &quot;</span><span class="p">,</span> <span class="s2">&quot;Lia&quot;</span><span class="p">,</span> <span class="s2">&quot;Lotta&quot;</span><span class="p">,</span> 
-                                             <span class="s2">&quot;Emma&quot;</span><span class="p">,</span> <span class="s2">&quot;Lina&quot;</span><span class="p">]),</span>
-                       <span class="s1">&#39;id&#39;</span><span class="p">:</span> <span class="n">pd</span><span class="o">.</span><span class="n">Categorical</span><span class="p">([</span><span class="s2">&quot;1&quot;</span><span class="p">,</span> <span class="s2">&quot;2&quot;</span><span class="p">,</span> <span class="s2">&quot;3&quot;</span><span class="p">,</span> <span class="s2">&quot;4&quot;</span><span class="p">,</span> <span class="s2">&quot;5&quot;</span><span class="p">,</span> <span class="s2">&quot;6&quot;</span><span class="p">,</span>  
-                                             <span class="s2">&quot;7&quot;</span><span class="p">,</span> <span class="s2">&quot;8&quot;</span><span class="p">,</span> <span class="s2">&quot;9&quot;</span><span class="p">,</span> <span class="s2">&quot;10&quot;</span><span class="p">,</span> <span class="s2">&quot;11&quot;</span><span class="p">,</span> <span class="s2">&quot;12&quot;</span><span class="p">,</span>    
-                                             <span class="s2">&quot;13&quot;</span><span class="p">,</span> <span class="s2">&quot;14&quot;</span><span class="p">,</span> <span class="s2">&quot;15&quot;</span><span class="p">,</span> <span class="s2">&quot;16 &quot;</span><span class="p">,</span> <span class="s2">&quot;17&quot;</span><span class="p">,</span> <span class="s2">&quot;18&quot;</span><span class="p">,</span> 
-                                             <span class="s2">&quot;19&quot;</span><span class="p">,</span> <span class="s2">&quot;20&quot;</span><span class="p">]),</span>
-                          <span class="s1">&#39;height&#39;</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mi">162</span><span class="p">,</span> <span class="mi">163</span><span class="p">,</span> <span class="mi">163</span><span class="p">,</span> <span class="mi">164</span><span class="p">,</span> <span class="mi">164</span><span class="p">,</span> <span class="mi">164</span><span class="p">,</span> <span class="mi">164</span><span class="p">,</span> <span class="mi">165</span><span class="p">,</span> 
-                                              <span class="mi">165</span><span class="p">,</span> <span class="mi">165</span><span class="p">,</span> <span class="mi">165</span><span class="p">,</span> <span class="mi">165</span><span class="p">,</span> <span class="mi">165</span><span class="p">,</span> <span class="mi">166</span><span class="p">,</span> <span class="mi">166</span><span class="p">,</span> <span class="mi">166</span><span class="p">,</span>
-                                              <span class="mi">166</span><span class="p">,</span> <span class="mi">167</span><span class="p">,</span> <span class="mi">167</span><span class="p">,</span> <span class="mi">168</span><span class="p">],</span><span class="n">dtype</span><span class="o">=</span><span class="s1">&#39;int32&#39;</span><span class="p">),</span>
-                  <span class="s1">&#39;height_parents&#39;</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mi">161</span><span class="p">,</span> <span class="mi">163</span><span class="p">,</span> <span class="mi">163</span><span class="p">,</span> <span class="mi">165</span><span class="p">,</span> <span class="mi">163</span><span class="p">,</span> <span class="mi">164</span><span class="p">,</span> <span class="mi">164</span><span class="p">,</span> <span class="mi">165</span><span class="p">,</span> 
-                                              <span class="mi">165</span><span class="p">,</span> <span class="mi">165</span><span class="p">,</span> <span class="mi">166</span><span class="p">,</span> <span class="mi">167</span><span class="p">,</span> <span class="mi">165</span><span class="p">,</span> <span class="mi">166</span><span class="p">,</span> <span class="mi">166</span><span class="p">,</span> <span class="mi">166</span><span class="p">,</span>
-                                              <span class="mi">166</span><span class="p">,</span> <span class="mi">166</span><span class="p">,</span> <span class="mi">167</span><span class="p">,</span> <span class="mi">168</span><span class="p">],</span><span class="n">dtype</span><span class="o">=</span><span class="s1">&#39;int32&#39;</span><span class="p">),</span>
-                                    <span class="s1">&#39;gender&#39;</span><span class="p">:</span> <span class="s1">&#39;female&#39;</span> <span class="p">})</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># import data</span>
+<span class="n">ROOT</span> <span class="o">=</span> <span class="s2">&quot;https://raw.githubusercontent.com/kirenz/modern-statistics/main/data/&quot;</span>
+<span class="n">DATA</span> <span class="o">=</span> <span class="s2">&quot;height.csv&quot;</span>
+<span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="n">ROOT</span> <span class="o">+</span> <span class="n">DATA</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -471,7 +456,7 @@
       <th>name</th>
       <th>id</th>
       <th>height</th>
-      <th>height_parents</th>
+      <th>average_height_parents</th>
       <th>gender</th>
     </tr>
   </thead>
@@ -486,11 +471,11 @@
     </tr>
     <tr>
       <th>1</th>
-      <td>Petra</td>
+      <td>Peter</td>
       <td>2</td>
       <td>163</td>
       <td>163</td>
-      <td>female</td>
+      <td>male</td>
     </tr>
     <tr>
       <th>2</th>
@@ -510,11 +495,11 @@
     </tr>
     <tr>
       <th>4</th>
-      <td>Nadine</td>
+      <td>Simon</td>
       <td>5</td>
       <td>164</td>
       <td>163</td>
-      <td>female</td>
+      <td>male</td>
     </tr>
   </tbody>
 </table>
@@ -549,50 +534,50 @@
       <th>name</th>
       <th>id</th>
       <th>height</th>
-      <th>height_parents</th>
+      <th>average_height_parents</th>
       <th>gender</th>
     </tr>
   </thead>
   <tbody>
     <tr>
       <th>15</th>
-      <td>Sarah</td>
+      <td>Marc</td>
       <td>16</td>
       <td>166</td>
       <td>166</td>
-      <td>female</td>
+      <td>male</td>
     </tr>
     <tr>
       <th>16</th>
-      <td>Lia</td>
+      <td>Ralph</td>
       <td>17</td>
       <td>166</td>
       <td>166</td>
-      <td>female</td>
+      <td>male</td>
     </tr>
     <tr>
       <th>17</th>
-      <td>Lotta</td>
+      <td>Tom</td>
       <td>18</td>
       <td>167</td>
       <td>166</td>
-      <td>female</td>
+      <td>male</td>
     </tr>
     <tr>
       <th>18</th>
-      <td>Emma</td>
+      <td>Steven</td>
       <td>19</td>
       <td>167</td>
       <td>167</td>
-      <td>female</td>
+      <td>male</td>
     </tr>
     <tr>
       <th>19</th>
-      <td>Lina</td>
+      <td>Emanuel</td>
       <td>20</td>
       <td>168</td>
       <td>168</td>
-      <td>female</td>
+      <td>male</td>
     </tr>
   </tbody>
 </table>
@@ -609,15 +594,15 @@
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;class &#39;pandas.core.frame.DataFrame&#39;&gt;
 RangeIndex: 20 entries, 0 to 19
 Data columns (total 5 columns):
- #   Column          Non-Null Count  Dtype   
----  ------          --------------  -----   
- 0   name            20 non-null     category
- 1   id              20 non-null     category
- 2   height          20 non-null     int32   
- 3   height_parents  20 non-null     int32   
- 4   gender          20 non-null     object  
-dtypes: category(2), int32(2), object(1)
-memory usage: 2.0+ KB
+ #   Column                  Non-Null Count  Dtype 
+---  ------                  --------------  ----- 
+ 0   name                    20 non-null     object
+ 1   id                      20 non-null     int64 
+ 2   height                  20 non-null     int64 
+ 3   average_height_parents  20 non-null     int64 
+ 4   gender                  20 non-null     object
+dtypes: int64(3), object(2)
+memory usage: 928.0+ bytes
 </pre></div>
 </div>
 </div>
@@ -630,7 +615,7 @@ memory usage: 2.0+ KB
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Index([&#39;name&#39;, &#39;id&#39;, &#39;height&#39;, &#39;height_parents&#39;, &#39;gender&#39;], dtype=&#39;object&#39;)
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Index([&#39;name&#39;, &#39;id&#39;, &#39;height&#39;, &#39;average_height_parents&#39;, &#39;gender&#39;], dtype=&#39;object&#39;)
 </pre></div>
 </div>
 </div>
@@ -640,8 +625,15 @@ memory usage: 2.0+ KB
 <h2>Tidying data<a class="headerlink" href="#tidying-data" title="Permalink to this headline">¶</a></h2>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># we don&#39;t need the variable gender </span>
-<span class="n">df</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">drop</span><span class="p">(</span><span class="s1">&#39;gender&#39;</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># change data type</span>
+<span class="n">df</span><span class="p">[</span><span class="s1">&#39;name&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">Categorical</span><span class="p">(</span><span class="n">df</span><span class="p">[</span><span class="s1">&#39;name&#39;</span><span class="p">])</span>
+<span class="n">df</span><span class="p">[</span><span class="s1">&#39;id&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">Categorical</span><span class="p">(</span><span class="n">df</span><span class="p">[</span><span class="s1">&#39;id&#39;</span><span class="p">])</span>
+<span class="n">df</span><span class="p">[</span><span class="s1">&#39;gender&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">Categorical</span><span class="p">(</span><span class="n">df</span><span class="p">[</span><span class="s1">&#39;gender&#39;</span><span class="p">])</span>
+
+<span class="n">df</span><span class="o">.</span><span class="n">rename</span><span class="p">(</span><span class="n">columns</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="s2">&quot;average_height_parents&quot;</span><span class="p">:</span> <span class="s2">&quot;height_parents&quot;</span><span class="p">},</span>
+    <span class="n">inplace</span><span class="o">=</span><span class="kc">True</span>
+    <span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -669,6 +661,7 @@ memory usage: 2.0+ KB
 id                0
 height            0
 height_parents    0
+gender            0
 dtype: int64
 </pre></div>
 </div>
@@ -679,8 +672,8 @@ dtype: int64
 <h2>Transform data<a class="headerlink" href="#transform-data" title="Permalink to this headline">¶</a></h2>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># summary statistics for all numerical columns</span>
-<span class="nb">round</span><span class="p">(</span><span class="n">df</span><span class="o">.</span><span class="n">describe</span><span class="p">(),</span><span class="mi">2</span><span class="p">)</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># summary statistics for all numerical columns (in transposed view)</span>
+<span class="nb">round</span><span class="p">(</span><span class="n">df</span><span class="o">.</span><span class="n">describe</span><span class="p">(),</span><span class="mi">2</span><span class="p">)</span><span class="o">.</span><span class="n">T</span>
 </pre></div>
 </div>
 </div>
@@ -703,50 +696,156 @@ dtype: int64
   <thead>
     <tr style="text-align: right;">
       <th></th>
-      <th>height</th>
-      <th>height_parents</th>
+      <th>count</th>
+      <th>mean</th>
+      <th>std</th>
+      <th>min</th>
+      <th>25%</th>
+      <th>50%</th>
+      <th>75%</th>
+      <th>max</th>
     </tr>
   </thead>
   <tbody>
     <tr>
+      <th>height</th>
+      <td>20.0</td>
+      <td>165.00</td>
+      <td>1.49</td>
+      <td>162.0</td>
+      <td>164.0</td>
+      <td>165.0</td>
+      <td>166.0</td>
+      <td>168.0</td>
+    </tr>
+    <tr>
+      <th>height_parents</th>
+      <td>20.0</td>
+      <td>165.05</td>
+      <td>1.67</td>
+      <td>161.0</td>
+      <td>164.0</td>
+      <td>165.0</td>
+      <td>166.0</td>
+      <td>168.0</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Grouped summary statistics for all numerical columns (in transposed view)</span>
+<span class="n">df</span><span class="o">.</span><span class="n">groupby</span><span class="p">([</span><span class="s2">&quot;gender&quot;</span><span class="p">])</span><span class="o">.</span><span class="n">describe</span><span class="p">()</span><span class="o">.</span><span class="n">T</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>gender</th>
+      <th>female</th>
+      <th>male</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th rowspan="8" valign="top">height</th>
       <th>count</th>
-      <td>20.00</td>
-      <td>20.00</td>
+      <td>11.000000</td>
+      <td>9.000000</td>
     </tr>
     <tr>
       <th>mean</th>
-      <td>165.00</td>
-      <td>165.05</td>
+      <td>164.363636</td>
+      <td>165.777778</td>
     </tr>
     <tr>
       <th>std</th>
-      <td>1.49</td>
-      <td>1.67</td>
+      <td>1.120065</td>
+      <td>1.563472</td>
     </tr>
     <tr>
       <th>min</th>
-      <td>162.00</td>
-      <td>161.00</td>
+      <td>162.000000</td>
+      <td>163.000000</td>
     </tr>
     <tr>
       <th>25%</th>
-      <td>164.00</td>
-      <td>164.00</td>
+      <td>164.000000</td>
+      <td>165.000000</td>
     </tr>
     <tr>
       <th>50%</th>
-      <td>165.00</td>
-      <td>165.00</td>
+      <td>165.000000</td>
+      <td>166.000000</td>
     </tr>
     <tr>
       <th>75%</th>
-      <td>166.00</td>
-      <td>166.00</td>
+      <td>165.000000</td>
+      <td>167.000000</td>
     </tr>
     <tr>
       <th>max</th>
-      <td>168.00</td>
-      <td>168.00</td>
+      <td>166.000000</td>
+      <td>168.000000</td>
+    </tr>
+    <tr>
+      <th rowspan="8" valign="top">height_parents</th>
+      <th>count</th>
+      <td>11.000000</td>
+      <td>9.000000</td>
+    </tr>
+    <tr>
+      <th>mean</th>
+      <td>164.636364</td>
+      <td>165.555556</td>
+    </tr>
+    <tr>
+      <th>std</th>
+      <td>1.629278</td>
+      <td>1.666667</td>
+    </tr>
+    <tr>
+      <th>min</th>
+      <td>161.000000</td>
+      <td>163.000000</td>
+    </tr>
+    <tr>
+      <th>25%</th>
+      <td>164.000000</td>
+      <td>165.000000</td>
+    </tr>
+    <tr>
+      <th>50%</th>
+      <td>165.000000</td>
+      <td>166.000000</td>
+    </tr>
+    <tr>
+      <th>75%</th>
+      <td>165.500000</td>
+      <td>166.000000</td>
+    </tr>
+    <tr>
+      <th>max</th>
+      <td>167.000000</td>
+      <td>168.000000</td>
     </tr>
   </tbody>
 </table>
@@ -780,6 +879,7 @@ dtype: int64
       <th></th>
       <th>name</th>
       <th>id</th>
+      <th>gender</th>
     </tr>
   </thead>
   <tbody>
@@ -787,21 +887,25 @@ dtype: int64
       <th>count</th>
       <td>20</td>
       <td>20</td>
+      <td>20</td>
     </tr>
     <tr>
       <th>unique</th>
-      <td>18</td>
+      <td>19</td>
       <td>20</td>
+      <td>2</td>
     </tr>
     <tr>
       <th>top</th>
       <td>Stefanie</td>
-      <td>9</td>
+      <td>20</td>
+      <td>female</td>
     </tr>
     <tr>
       <th>freq</th>
       <td>2</td>
       <td>1</td>
+      <td>11</td>
     </tr>
   </tbody>
 </table>
@@ -818,7 +922,18 @@ dtype: int64
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="_images/basics_17_0.png" src="_images/basics_17_0.png" />
+<img alt="_images/basics_18_0.png" src="_images/basics_18_0.png" />
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># histogram with seaborn</span>
+<span class="n">sns</span><span class="o">.</span><span class="n">pairplot</span><span class="p">(</span><span class="n">data</span><span class="o">=</span><span class="n">df</span><span class="p">,</span> <span class="n">hue</span><span class="o">=</span><span class="s2">&quot;gender&quot;</span><span class="p">);</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="_images/basics_19_0.png" src="_images/basics_19_0.png" />
 </div>
 </div>
 <div class="cell docutils container">
@@ -829,21 +944,32 @@ dtype: int64
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="_images/basics_18_0.png" src="_images/basics_18_0.png" />
+<img alt="_images/basics_20_0.png" src="_images/basics_20_0.png" />
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># boxplot</span>
+<span class="n">sns</span><span class="o">.</span><span class="n">boxplot</span><span class="p">(</span><span class="n">data</span><span class="o">=</span><span class="n">df</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="s2">&quot;height&quot;</span><span class="p">,</span> <span class="n">x</span><span class="o">=</span><span class="s2">&quot;gender&quot;</span><span class="p">);</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="_images/basics_21_0.png" src="_images/basics_21_0.png" />
 </div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># check relationship with a joint plot</span>
-<span class="n">sns</span><span class="o">.</span><span class="n">jointplot</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="s2">&quot;height_parents&quot;</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="s2">&quot;height&quot;</span><span class="p">,</span> <span class="n">data</span><span class="o">=</span><span class="n">df</span><span class="p">);</span>
+<span class="n">sns</span><span class="o">.</span><span class="n">jointplot</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="s2">&quot;height_parents&quot;</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="s2">&quot;height&quot;</span><span class="p">,</span> <span class="n">hue</span><span class="o">=</span><span class="s2">&quot;gender&quot;</span><span class="p">,</span> <span class="n">data</span><span class="o">=</span><span class="n">df</span><span class="p">);</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="_images/basics_19_0.png" src="_images/basics_19_0.png" />
+<img alt="_images/basics_22_0.png" src="_images/basics_22_0.png" />
 </div>
 </div>
-<p>We can observe a strong positive relationship between the average height of the parents and the height of their daughter. Hence, it would make sense to use the variable <code class="docutils literal notranslate"><span class="pre">height_parents</span></code> as a predictor for the outcome variable <code class="docutils literal notranslate"><span class="pre">height</span></code> in a statistical model.</p>
+<p>We can observe a strong positive relationship between height and the average height of the parents. Hence, it would make sense to use the variable <code class="docutils literal notranslate"><span class="pre">height_parents</span></code> as a predictor for the outcome variable <code class="docutils literal notranslate"><span class="pre">height</span></code> in a statistical model.</p>
 </div>
 <div class="section" id="model">
 <h2>Model<a class="headerlink" href="#model" title="Permalink to this headline">¶</a></h2>
@@ -922,6 +1048,7 @@ dtype: int64
       <th>id</th>
       <th>height</th>
       <th>height_parents</th>
+      <th>gender</th>
       <th>average</th>
     </tr>
   </thead>
@@ -932,14 +1059,16 @@ dtype: int64
       <td>1</td>
       <td>162</td>
       <td>161</td>
+      <td>female</td>
       <td>165.0</td>
     </tr>
     <tr>
       <th>1</th>
-      <td>Petra</td>
+      <td>Peter</td>
       <td>2</td>
       <td>163</td>
       <td>163</td>
+      <td>male</td>
       <td>165.0</td>
     </tr>
     <tr>
@@ -948,6 +1077,7 @@ dtype: int64
       <td>3</td>
       <td>163</td>
       <td>163</td>
+      <td>female</td>
       <td>165.0</td>
     </tr>
     <tr>
@@ -956,14 +1086,16 @@ dtype: int64
       <td>4</td>
       <td>164</td>
       <td>165</td>
+      <td>female</td>
       <td>165.0</td>
     </tr>
     <tr>
       <th>4</th>
-      <td>Nadine</td>
+      <td>Simon</td>
       <td>5</td>
       <td>164</td>
       <td>163</td>
+      <td>male</td>
       <td>165.0</td>
     </tr>
   </tbody>
@@ -985,7 +1117,7 @@ dtype: int64
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="_images/basics_26_0.png" src="_images/basics_26_0.png" />
+<img alt="_images/basics_29_0.png" src="_images/basics_29_0.png" />
 </div>
 </div>
 </div>
@@ -1031,6 +1163,7 @@ dtype: int64
       <th>id</th>
       <th>height</th>
       <th>height_parents</th>
+      <th>gender</th>
       <th>average</th>
       <th>pred</th>
     </tr>
@@ -1042,15 +1175,17 @@ dtype: int64
       <td>1</td>
       <td>162</td>
       <td>161</td>
+      <td>female</td>
       <td>165.0</td>
       <td>161.711048</td>
     </tr>
     <tr>
       <th>1</th>
-      <td>Petra</td>
+      <td>Peter</td>
       <td>2</td>
       <td>163</td>
       <td>163</td>
+      <td>male</td>
       <td>165.0</td>
       <td>163.335222</td>
     </tr>
@@ -1060,6 +1195,7 @@ dtype: int64
       <td>3</td>
       <td>163</td>
       <td>163</td>
+      <td>female</td>
       <td>165.0</td>
       <td>163.335222</td>
     </tr>
@@ -1069,15 +1205,17 @@ dtype: int64
       <td>4</td>
       <td>164</td>
       <td>165</td>
+      <td>female</td>
       <td>165.0</td>
       <td>164.959396</td>
     </tr>
     <tr>
       <th>4</th>
-      <td>Nadine</td>
+      <td>Simon</td>
       <td>5</td>
       <td>164</td>
       <td>163</td>
+      <td>male</td>
       <td>165.0</td>
       <td>163.335222</td>
     </tr>
@@ -1105,10 +1243,10 @@ dtype: int64
   <th>Method:</th>             <td>Least Squares</td>  <th>  F-statistic:       </th> <td>   88.78</td>
 </tr>
 <tr>
-  <th>Date:</th>             <td>Tue, 09 Nov 2021</td> <th>  Prob (F-statistic):</th> <td>2.21e-08</td>
+  <th>Date:</th>             <td>Sat, 13 Nov 2021</td> <th>  Prob (F-statistic):</th> <td>2.21e-08</td>
 </tr>
 <tr>
-  <th>Time:</th>                 <td>22:25:06</td>     <th>  Log-Likelihood:    </th> <td> -17.995</td>
+  <th>Time:</th>                 <td>22:26:32</td>     <th>  Log-Likelihood:    </th> <td> -17.995</td>
 </tr>
 <tr>
   <th>No. Observations:</th>      <td>    20</td>      <th>  AIC:               </th> <td>   39.99</td>
@@ -1181,7 +1319,7 @@ dtype: int64
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="_images/basics_33_0.png" src="_images/basics_33_0.png" />
+<img alt="_images/basics_36_0.png" src="_images/basics_36_0.png" />
 </div>
 </div>
 </div>
@@ -1267,6 +1405,7 @@ the true response value for that observation.</p>
       <th>id</th>
       <th>height</th>
       <th>height_parents</th>
+      <th>gender</th>
       <th>average</th>
       <th>pred</th>
       <th>error</th>
@@ -1279,16 +1418,18 @@ the true response value for that observation.</p>
       <td>1</td>
       <td>162</td>
       <td>161</td>
+      <td>female</td>
       <td>165.0</td>
       <td>161.711048</td>
       <td>-3.0</td>
     </tr>
     <tr>
       <th>1</th>
-      <td>Petra</td>
+      <td>Peter</td>
       <td>2</td>
       <td>163</td>
       <td>163</td>
+      <td>male</td>
       <td>165.0</td>
       <td>163.335222</td>
       <td>-2.0</td>
@@ -1299,6 +1440,7 @@ the true response value for that observation.</p>
       <td>3</td>
       <td>163</td>
       <td>163</td>
+      <td>female</td>
       <td>165.0</td>
       <td>163.335222</td>
       <td>-2.0</td>
@@ -1309,16 +1451,18 @@ the true response value for that observation.</p>
       <td>4</td>
       <td>164</td>
       <td>165</td>
+      <td>female</td>
       <td>165.0</td>
       <td>164.959396</td>
       <td>-1.0</td>
     </tr>
     <tr>
       <th>4</th>
-      <td>Nadine</td>
+      <td>Simon</td>
       <td>5</td>
       <td>164</td>
       <td>163</td>
+      <td>male</td>
       <td>165.0</td>
       <td>163.335222</td>
       <td>-1.0</td>
@@ -1354,7 +1498,7 @@ the true response value for that observation.</p>
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="_images/basics_39_0.png" src="_images/basics_39_0.png" />
+<img alt="_images/basics_42_0.png" src="_images/basics_42_0.png" />
 </div>
 </div>
 <div class="cell docutils container">
@@ -1365,7 +1509,7 @@ the true response value for that observation.</p>
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="_images/basics_40_0.png" src="_images/basics_40_0.png" />
+<img alt="_images/basics_43_0.png" src="_images/basics_43_0.png" />
 </div>
 </div>
 <div class="cell docutils container">
@@ -1399,6 +1543,7 @@ the true response value for that observation.</p>
       <th>id</th>
       <th>height</th>
       <th>height_parents</th>
+      <th>gender</th>
       <th>average</th>
       <th>pred</th>
       <th>error</th>
@@ -1412,6 +1557,7 @@ the true response value for that observation.</p>
       <td>1</td>
       <td>162</td>
       <td>161</td>
+      <td>female</td>
       <td>165.0</td>
       <td>161.711048</td>
       <td>-3.0</td>
@@ -1419,10 +1565,11 @@ the true response value for that observation.</p>
     </tr>
     <tr>
       <th>1</th>
-      <td>Petra</td>
+      <td>Peter</td>
       <td>2</td>
       <td>163</td>
       <td>163</td>
+      <td>male</td>
       <td>165.0</td>
       <td>163.335222</td>
       <td>-2.0</td>
@@ -1434,6 +1581,7 @@ the true response value for that observation.</p>
       <td>3</td>
       <td>163</td>
       <td>163</td>
+      <td>female</td>
       <td>165.0</td>
       <td>163.335222</td>
       <td>-2.0</td>
@@ -1445,6 +1593,7 @@ the true response value for that observation.</p>
       <td>4</td>
       <td>164</td>
       <td>165</td>
+      <td>female</td>
       <td>165.0</td>
       <td>164.959396</td>
       <td>-1.0</td>
@@ -1452,10 +1601,11 @@ the true response value for that observation.</p>
     </tr>
     <tr>
       <th>4</th>
-      <td>Nadine</td>
+      <td>Simon</td>
       <td>5</td>
       <td>164</td>
       <td>163</td>
+      <td>male</td>
       <td>165.0</td>
       <td>163.335222</td>
       <td>-1.0</td>
@@ -1529,6 +1679,7 @@ the true response value for that observation.</p>
       <th>id</th>
       <th>height</th>
       <th>height_parents</th>
+      <th>gender</th>
       <th>average</th>
       <th>pred</th>
       <th>error</th>
@@ -1544,6 +1695,7 @@ the true response value for that observation.</p>
       <td>1</td>
       <td>162</td>
       <td>161</td>
+      <td>female</td>
       <td>165.0</td>
       <td>161.711048</td>
       <td>-3.0</td>
@@ -1553,10 +1705,11 @@ the true response value for that observation.</p>
     </tr>
     <tr>
       <th>1</th>
-      <td>Petra</td>
+      <td>Peter</td>
       <td>2</td>
       <td>163</td>
       <td>163</td>
+      <td>male</td>
       <td>165.0</td>
       <td>163.335222</td>
       <td>-2.0</td>
@@ -1570,6 +1723,7 @@ the true response value for that observation.</p>
       <td>3</td>
       <td>163</td>
       <td>163</td>
+      <td>female</td>
       <td>165.0</td>
       <td>163.335222</td>
       <td>-2.0</td>
@@ -1583,6 +1737,7 @@ the true response value for that observation.</p>
       <td>4</td>
       <td>164</td>
       <td>165</td>
+      <td>female</td>
       <td>165.0</td>
       <td>164.959396</td>
       <td>-1.0</td>
@@ -1592,10 +1747,11 @@ the true response value for that observation.</p>
     </tr>
     <tr>
       <th>4</th>
-      <td>Nadine</td>
+      <td>Simon</td>
       <td>5</td>
       <td>164</td>
       <td>163</td>
+      <td>male</td>
       <td>165.0</td>
       <td>163.335222</td>
       <td>-1.0</td>
@@ -1647,7 +1803,7 @@ the true response value for that observation.</p>
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="_images/basics_48_0.png" src="_images/basics_48_0.png" />
+<img alt="_images/basics_51_0.png" src="_images/basics_51_0.png" />
 </div>
 </div>
 <div class="cell docutils container">
@@ -1657,7 +1813,7 @@ the true response value for that observation.</p>
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="_images/basics_49_0.png" src="_images/basics_49_0.png" />
+<img alt="_images/basics_52_0.png" src="_images/basics_52_0.png" />
 </div>
 </div>
 <div class="cell docutils container">
@@ -2147,9 +2303,11 @@ Name: height, dtype: float64
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">plt</span> <span class="o">=</span> <span class="n">sns</span><span class="o">.</span><span class="n">distplot</span><span class="p">(</span><span class="n">df</span><span class="o">.</span><span class="n">z</span><span class="p">);</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">plt</span> <span class="o">=</span> <span class="n">sns</span><span class="o">.</span><span class="n">histplot</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="s2">&quot;z&quot;</span><span class="p">,</span> <span class="n">data</span> <span class="o">=</span> <span class="n">df</span><span class="p">,</span> <span class="n">bins</span><span class="o">=</span><span class="mi">5</span><span class="p">);</span>
+
 <span class="c1"># draw a vertical line</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">axvline</span><span class="p">(</span><span class="mf">1.96</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="n">linewidth</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;r&#39;</span><span class="p">);</span>
+
 <span class="c1"># add text</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">text</span><span class="p">(</span><span class="mf">2.1</span><span class="p">,</span> <span class="mf">0.3</span><span class="p">,</span><span class="s1">&#39;z = 1.96&#39;</span><span class="p">,</span> <span class="n">rotation</span><span class="o">=</span><span class="mi">90</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;r&#39;</span><span class="p">);</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">axvline</span><span class="p">(</span><span class="o">-</span><span class="mf">1.96</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="n">linewidth</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;r&#39;</span><span class="p">);</span>
@@ -2158,11 +2316,7 @@ Name: height, dtype: float64
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/Users/jankirenz/opt/anaconda3/lib/python3.7/site-packages/seaborn/distributions.py:2619: FutureWarning: `distplot` is a deprecated function and will be removed in a future version. Please adapt your code to use either `displot` (a figure-level function with similar flexibility) or `histplot` (an axes-level function for histograms).
-  warnings.warn(msg, FutureWarning)
-</pre></div>
-</div>
-<img alt="_images/basics_89_1.png" src="_images/basics_89_1.png" />
+<img alt="_images/basics_92_0.png" src="_images/basics_92_0.png" />
 </div>
 </div>
 <p>If we know that our limits are −1.96 and 1.96 as z-scores, then to find out the corresponding scores in our raw data we can replace z in the equation (because there are two values, we get two equations):</p>
@@ -2208,27 +2362,23 @@ Upper boundary of CI 165.65161176688028
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># draw limits of confidence intervall</span>
-<span class="n">plt</span> <span class="o">=</span> <span class="n">sns</span><span class="o">.</span><span class="n">distplot</span><span class="p">(</span><span class="n">df</span><span class="o">.</span><span class="n">height</span><span class="p">);</span>
+<span class="n">plt</span> <span class="o">=</span> <span class="n">sns</span><span class="o">.</span><span class="n">histplot</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="s2">&quot;height&quot;</span><span class="p">,</span> <span class="n">data</span><span class="o">=</span><span class="n">df</span><span class="p">,</span> <span class="n">bins</span><span class="o">=</span><span class="mi">5</span><span class="p">);</span>
 <span class="c1"># draw a vertical line to mark the mean </span>
 <span class="n">plt</span><span class="o">.</span><span class="n">axvline</span><span class="p">(</span><span class="mi">165</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="n">linewidth</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;b&#39;</span><span class="p">);</span>
 <span class="c1"># add text</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">text</span><span class="p">(</span><span class="mf">165.1</span><span class="p">,</span> <span class="mf">0.1</span><span class="p">,</span><span class="s1">&#39;Mean = 165&#39;</span><span class="p">,</span> <span class="n">rotation</span><span class="o">=</span><span class="mi">90</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;b&#39;</span><span class="p">);</span>
 <span class="c1"># draw a vertical line to mark the lower limit of the confidence intervall</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">axvline</span><span class="p">(</span><span class="mf">164.348388</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="n">linewidth</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;w&#39;</span><span class="p">);</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">axvline</span><span class="p">(</span><span class="mf">164.348388</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="n">linewidth</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;r&#39;</span><span class="p">);</span>
 <span class="c1"># add text</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">text</span><span class="p">(</span><span class="mi">164</span><span class="p">,</span> <span class="mf">0.15</span><span class="p">,</span><span class="s1">&#39;Lower limit = 164.34 &#39;</span><span class="p">,</span> <span class="n">rotation</span><span class="o">=</span><span class="mi">90</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;w&#39;</span><span class="p">);</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">text</span><span class="p">(</span><span class="mi">164</span><span class="p">,</span> <span class="mf">0.15</span><span class="p">,</span><span class="s1">&#39;Lower limit = 164.34 &#39;</span><span class="p">,</span> <span class="n">rotation</span><span class="o">=</span><span class="mi">90</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;r&#39;</span><span class="p">);</span>
 <span class="c1"># draw a vertical line to mark the upper limit of the confidence intervall</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">axvline</span><span class="p">(</span><span class="mf">165.651612</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="n">linewidth</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;w&#39;</span><span class="p">);</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">text</span><span class="p">(</span><span class="mf">165.8</span><span class="p">,</span> <span class="mf">0.15</span><span class="p">,</span><span class="s1">&#39;Upper limit = 165.65&#39;</span><span class="p">,</span> <span class="n">rotation</span><span class="o">=</span><span class="mi">90</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;w&#39;</span><span class="p">);</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">axvline</span><span class="p">(</span><span class="mf">165.651612</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="n">linewidth</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;r&#39;</span><span class="p">);</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">text</span><span class="p">(</span><span class="mf">165.8</span><span class="p">,</span> <span class="mf">0.15</span><span class="p">,</span><span class="s1">&#39;Upper limit = 165.65&#39;</span><span class="p">,</span> <span class="n">rotation</span><span class="o">=</span><span class="mi">90</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;r&#39;</span><span class="p">);</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/Users/jankirenz/opt/anaconda3/lib/python3.7/site-packages/seaborn/distributions.py:2619: FutureWarning: `distplot` is a deprecated function and will be removed in a future version. Please adapt your code to use either `displot` (a figure-level function with similar flexibility) or `histplot` (an axes-level function for histograms).
-  warnings.warn(msg, FutureWarning)
-</pre></div>
-</div>
-<img alt="_images/basics_92_1.png" src="_images/basics_92_1.png" />
+<img alt="_images/basics_95_0.png" src="_images/basics_95_0.png" />
 </div>
 </div>
 <p>Model 2: Linear Regression</p>
@@ -2339,16 +2489,12 @@ Upper boundary of CI 165.65161176688028
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Plot regression line with CI 95%</span>
-<span class="n">sns</span><span class="o">.</span><span class="n">lmplot</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="s1">&#39;height_parents&#39;</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="s1">&#39;height&#39;</span><span class="p">,</span> <span class="n">data</span><span class="o">=</span><span class="n">df</span><span class="p">,</span> <span class="n">order</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">line_kws</span><span class="o">=</span><span class="p">{</span><span class="s1">&#39;color&#39;</span><span class="p">:</span><span class="s1">&#39;red&#39;</span><span class="p">},</span> <span class="n">size</span><span class="o">=</span><span class="mi">7</span><span class="p">,</span> <span class="n">aspect</span><span class="o">=</span><span class="mf">1.5</span><span class="p">,</span> <span class="n">ci</span><span class="o">=</span><span class="mi">95</span><span class="p">);</span>
+<span class="n">sns</span><span class="o">.</span><span class="n">lmplot</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="s1">&#39;height_parents&#39;</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="s1">&#39;height&#39;</span><span class="p">,</span> <span class="n">data</span><span class="o">=</span><span class="n">df</span><span class="p">,</span> <span class="n">order</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">line_kws</span><span class="o">=</span><span class="p">{</span><span class="s1">&#39;color&#39;</span><span class="p">:</span><span class="s1">&#39;red&#39;</span><span class="p">},</span> <span class="n">height</span><span class="o">=</span><span class="mi">7</span><span class="p">,</span> <span class="n">aspect</span><span class="o">=</span><span class="mf">1.5</span><span class="p">,</span> <span class="n">ci</span><span class="o">=</span><span class="mi">95</span><span class="p">);</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/Users/jankirenz/opt/anaconda3/lib/python3.7/site-packages/seaborn/regression.py:581: UserWarning: The `size` parameter has been renamed to `height`; please update your code.
-  warnings.warn(msg, UserWarning)
-</pre></div>
-</div>
-<img alt="_images/basics_99_1.png" src="_images/basics_99_1.png" />
+<img alt="_images/basics_102_0.png" src="_images/basics_102_0.png" />
 </div>
 </div>
 </div>
@@ -2386,7 +2532,7 @@ Upper boundary of CI (t-statistics) 165.69583627664076
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># draw limits of confidence intervall for t-statistic</span>
-<span class="n">plt</span> <span class="o">=</span> <span class="n">sns</span><span class="o">.</span><span class="n">distplot</span><span class="p">(</span><span class="n">df</span><span class="o">.</span><span class="n">height</span><span class="p">);</span>
+<span class="n">plt</span> <span class="o">=</span> <span class="n">sns</span><span class="o">.</span><span class="n">histplot</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="s2">&quot;height&quot;</span><span class="p">,</span> <span class="n">data</span><span class="o">=</span><span class="n">df</span><span class="p">,</span> <span class="n">bins</span><span class="o">=</span><span class="mi">5</span><span class="p">);</span>
 <span class="c1"># draw a vertical line to mark the mean </span>
 <span class="n">plt</span><span class="o">.</span><span class="n">axvline</span><span class="p">(</span><span class="mi">165</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="n">linewidth</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;b&#39;</span><span class="p">);</span>
 <span class="c1"># add text</span>
@@ -2402,18 +2548,14 @@ Upper boundary of CI (t-statistics) 165.69583627664076
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/Users/jankirenz/opt/anaconda3/lib/python3.7/site-packages/seaborn/distributions.py:2619: FutureWarning: `distplot` is a deprecated function and will be removed in a future version. Please adapt your code to use either `displot` (a figure-level function with similar flexibility) or `histplot` (an axes-level function for histograms).
-  warnings.warn(msg, FutureWarning)
-</pre></div>
-</div>
-<img alt="_images/basics_102_1.png" src="_images/basics_102_1.png" />
+<img alt="_images/basics_105_0.png" src="_images/basics_105_0.png" />
 </div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># compare CI z-statistic with t-statistic</span>
 <span class="c1"># draw limits of confidence intervall</span>
-<span class="n">plt</span> <span class="o">=</span> <span class="n">sns</span><span class="o">.</span><span class="n">distplot</span><span class="p">(</span><span class="n">df</span><span class="o">.</span><span class="n">height</span><span class="p">);</span>
+<span class="n">plt</span> <span class="o">=</span> <span class="n">sns</span><span class="o">.</span><span class="n">histplot</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="s2">&quot;height&quot;</span><span class="p">,</span> <span class="n">data</span><span class="o">=</span><span class="n">df</span><span class="p">,</span> <span class="n">bins</span><span class="o">=</span><span class="mi">5</span><span class="p">);</span>
 <span class="c1"># draw a vertical line to mark the mean </span>
 <span class="n">plt</span><span class="o">.</span><span class="n">axvline</span><span class="p">(</span><span class="mi">165</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="n">linewidth</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;b&#39;</span><span class="p">);</span>
 <span class="c1"># add text</span>
@@ -2427,11 +2569,7 @@ Upper boundary of CI (t-statistics) 165.69583627664076
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/Users/jankirenz/opt/anaconda3/lib/python3.7/site-packages/seaborn/distributions.py:2619: FutureWarning: `distplot` is a deprecated function and will be removed in a future version. Please adapt your code to use either `displot` (a figure-level function with similar flexibility) or `histplot` (an axes-level function for histograms).
-  warnings.warn(msg, FutureWarning)
-</pre></div>
-</div>
-<img alt="_images/basics_103_1.png" src="_images/basics_103_1.png" />
+<img alt="_images/basics_106_0.png" src="_images/basics_106_0.png" />
 </div>
 </div>
 </div>
@@ -2441,7 +2579,6 @@ Upper boundary of CI (t-statistics) 165.69583627664076
 <p>When fitting models, it is possible to increase the likelihood by adding parameters, but doing so may result in overfitting.</p>
 <p>Both the Bayesian information criterion (<strong>BIC</strong>) (also called the Schwarz criterion SBC or SBIC) and Akaike information criterion (<strong>AIC</strong>) attempt to resolve this problem by introducing a penalty term for the number of parameters in the model; the penalty term is larger in BIC than in AIC.</p>
 <p>Both measures are an estimator of the <strong>relative quality</strong> of statistical models for a given set of data. Hence, they are used to select the best performing model.</p>
-<p>Here we cover AIC and BIC in the case of a linear model fit using least squares; however, these quantities can also be defined for more general types of models.</p>
 <p>For both measures, lower values are better</p>
 <div class="section" id="bayesian-information-criterion-bic">
 <h3>Bayesian information criterion (BIC)<a class="headerlink" href="#bayesian-information-criterion-bic" title="Permalink to this headline">¶</a></h3>
@@ -2517,10 +2654,10 @@ Upper boundary of CI (t-statistics) 165.69583627664076
         </a>
     </div>
      <div id="next">
-        <a class="right-next" href="diagnostics.html" title="next page">
+        <a class="right-next" href="regression_diagnostics.html" title="next page">
             <div class="prevnext-info">
                 <p class="prevnext-label">next</p>
-                <p class="prevnext-title">Diagnostics</p>
+                <p class="prevnext-title">Regression diagnostics in Python</p>
             </div>
             <i class="prevnext-label fas fa-angle-right"></i>
         </a>
