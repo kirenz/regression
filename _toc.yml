@@ -10,7 +10,7 @@ parts:
     - file: basics.ipynb
   - caption: Diagnostics
     chapters:
-    - file: diagnostics.ipynb
+    - file: regression_diagnostics.ipynb
   - caption: Applications
     chapters:
     - file: case_simulated.ipynb
