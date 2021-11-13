@@ -121,14 +121,14 @@ print(df.isnull().sum())
 
 
 # summary statistics for all numerical columns
-round(df.describe(),2)
+round(df.describe(),2).T
 
 
 # In[11]:
 
 
 # summary statistics for all categorical columns
-df.describe(include=['category'])
+df.describe(include=['category']).T
 
 
 # #### Visualize data
@@ -143,6 +143,7 @@ sns.boxplot(y='mpg', data=df, palette='winter');
 # In[13]:
 
 
+# check for relationships between dependent variable mpg and features
 sns.pairplot(df);
 
 

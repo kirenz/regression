@@ -23,7 +23,7 @@ import seaborn as sns
 
 # seaborn settings
 custom_params = {"axes.spines.right": False, "axes.spines.top": False}
-sns.set_theme(style="ticks", rc=custom_params, palette='winter')
+sns.set_theme(style="ticks", rc=custom_params)
 
 
 # ## Import data
@@ -31,25 +31,10 @@ sns.set_theme(style="ticks", rc=custom_params, palette='winter')
 # In[2]:
 
 
-# Instead of importing data, we will create our own data
-df = pd.DataFrame({ 'name': pd.Categorical([ "Stefanie", "Petra", "Stefanie", 
-                                             "Manuela", "Nadine", "Sophia",  
-                                             "Ellen", "Emilia", "Lina", 
-                                             "Marie", "Lena", "Mila",    
-                                             "Ida", "Ella", "Pia", 
-                                             "Sarah ", "Lia", "Lotta", 
-                                             "Emma", "Lina"]),
-                       'id': pd.Categorical(["1", "2", "3", "4", "5", "6",  
-                                             "7", "8", "9", "10", "11", "12",    
-                                             "13", "14", "15", "16 ", "17", "18", 
-                                             "19", "20"]),
-                          'height': np.array([162, 163, 163, 164, 164, 164, 164, 165, 
-                                              165, 165, 165, 165, 165, 166, 166, 166,
-                                              166, 167, 167, 168],dtype='int32'),
-                  'height_parents': np.array([161, 163, 163, 165, 163, 164, 164, 165, 
-                                              165, 165, 166, 167, 165, 166, 166, 166,
-                                              166, 166, 167, 168],dtype='int32'),
-                                    'gender': 'female' })
+# import data
+ROOT = "https://raw.githubusercontent.com/kirenz/modern-statistics/main/data/"
+DATA = "height.csv"
+df = pd.read_csv(ROOT + DATA)
 
 
 # In[3]:
@@ -85,8 +70,15 @@ df.columns
 # In[7]:
 
 
-# we don't need the variable gender 
-df = df.drop('gender', axis=1)
+# change data type
+df['name'] = pd.Categorical(df['name'])
+df['id'] = pd.Categorical(df['id'])
+df['gender'] = pd.Categorical(df['gender'])
+
+df.rename(columns = {
+    "average_height_parents": "height_parents"},
+    inplace=True
+    )
 
 
 # In[8]:
@@ -109,11 +101,18 @@ print(df.isnull().sum())
 # In[10]:
 
 
-# summary statistics for all numerical columns
-round(df.describe(),2)
+# summary statistics for all numerical columns (in transposed view)
+round(df.describe(),2).T
 
 
 # In[11]:
+
+
+# Grouped summary statistics for all numerical columns (in transposed view)
+df.groupby(["gender"]).describe().T
+
+
+# In[12]:
 
 
 # summary statistics for all categorical columns
@@ -122,28 +121,42 @@ df.describe(include=['category'])
 
 # ## Visualize data
 
-# In[12]:
+# In[13]:
 
 
 # histogram with seaborn
 sns.pairplot(data=df);
 
 
-# In[13]:
+# In[14]:
+
+
+# histogram with seaborn
+sns.pairplot(data=df, hue="gender");
+
+
+# In[15]:
 
 
 # boxplot
 sns.boxplot(data=df);
 
 
-# In[14]:
+# In[16]:
+
+
+# boxplot
+sns.boxplot(data=df, y="height", x="gender");
+
+
+# In[17]:
 
 
 # check relationship with a joint plot
-sns.jointplot(x="height_parents", y="height", data=df);
+sns.jointplot(x="height_parents", y="height", hue="gender", data=df);
 
 
-# We can observe a strong positive relationship between the average height of the parents and the height of their daughter. Hence, it would make sense to use the variable `height_parents` as a predictor for the outcome variable `height` in a statistical model.
+# We can observe a strong positive relationship between height and the average height of the parents. Hence, it would make sense to use the variable `height_parents` as a predictor for the outcome variable `height` in a statistical model.
 
 # ## Model
 
@@ -194,14 +207,14 @@ sns.jointplot(x="height_parents", y="height", data=df);
 
 # ## Mean
 
-# In[15]:
+# In[18]:
 
 
 # calculate the mean 
 df["height"].mean()
 
 
-# In[16]:
+# In[19]:
 
 
 # add the mean (we call it "average") to our DataFrame
@@ -210,7 +223,7 @@ df = df.assign(average = df["height"].mean())
 df.head()
 
 
-# In[17]:
+# In[20]:
 
 
 # create a scatterplot (plt)
@@ -226,7 +239,7 @@ plt.text(1, 165.2,'mean = 165', rotation=0, color='r');
 
 # ## Regression model
 
-# In[18]:
+# In[21]:
 
 
 # fit linear model with statsmodels.formula.api
@@ -236,20 +249,20 @@ lm = smf.ols(formula ='height ~ height_parents', data=df).fit()
 df['pred'] = lm.predict()
 
 
-# In[19]:
+# In[22]:
 
 
 df.head(5)
 
 
-# In[20]:
+# In[23]:
 
 
 # summary of regression results
 lm.summary()
 
 
-# In[21]:
+# In[24]:
 
 
 # This is just a simple example of how regression works.
@@ -268,7 +281,7 @@ print(round(prediction,2))
 
 # We use [Seaborn's lmplot](https://seaborn.pydata.org/generated/seaborn.lmplot.html) to plot the regression line:
 
-# In[22]:
+# In[25]:
 
 
 # Plot regression line 
@@ -345,7 +358,7 @@ sns.lmplot(x='height_parents', y='height', data=df, line_kws={'color':'red'}, he
 
 # ### Mean
 
-# In[23]:
+# In[26]:
 
 
 # calculate error (observation - average) and assign it to dataframe
@@ -359,14 +372,14 @@ df.head(5)
 # 
 # total error $= \sum_{i=1}^n (outcome_i - model_i)$ 
 
-# In[24]:
+# In[27]:
 
 
 # calculate the sum of the errors 
 df.error.sum()
 
 
-# In[25]:
+# In[28]:
 
 
 # create a scatterplot (plt)
@@ -376,14 +389,14 @@ plt.plot([0, 20], [165, 165], linewidth=2, color='r');
 plt.text(1, 165.2,'mean = 165', rotation=0, color='r');
 
 
-# In[26]:
+# In[29]:
 
 
 # residual plot
 sns.residplot(x="average", y="height", data=df, scatter_kws={"s": 80});
 
 
-# In[27]:
+# In[30]:
 
 
 # calculate squared error and assign it to dataframe
@@ -391,7 +404,7 @@ df = df.assign(error_sq = (df['height'] - df['average'])**2)
 df.head(5)
 
 
-# In[28]:
+# In[31]:
 
 
 # calculate sum of squared error (which is in case of the mean the total error)
@@ -402,13 +415,13 @@ print('Sum of squared error (TSS) of model 1:', TSS)
 
 # ### Regression
 
-# In[29]:
+# In[32]:
 
 
 lm.resid.sum()
 
 
-# In[30]:
+# In[33]:
 
 
 # obtain the residuals from statsmodel (resid)
@@ -419,14 +432,14 @@ df['error_sq_2'] = df['error_2']**2
 df.head(5)
 
 
-# In[31]:
+# In[34]:
 
 
 # Total sum of squares (TSS: sum of squared errors of the base model, i.e. the mean)
 print(TSS)
 
 
-# In[32]:
+# In[35]:
 
 
 # Sum of squared residuals (SS_R)
@@ -436,20 +449,20 @@ print(SSR)
 lm.ssr
 
 
-# In[33]:
+# In[36]:
 
 
 # Plot regression line 
 sns.lmplot(x='height_parents', y='height', data=df, line_kws={'color':'red'}, height=5, ci=None);
 
 
-# In[34]:
+# In[37]:
 
 
 sns.residplot(x="height_parents", y="height", data=df, scatter_kws={"s": 80});
 
 
-# In[35]:
+# In[38]:
 
 
 # Explained sum of squares  (SS_M = TSS - SS_R)
@@ -461,7 +474,7 @@ lm.ess
 
 # $R^2$ is the proportion of the variance in the dependent variable that is predictable from the independent variable
 
-# In[36]:
+# In[39]:
 
 
 # R_Squared: explained sum of squared residuals
@@ -469,14 +482,14 @@ R_squared = SSM / TSS
 print(R_squared)
 
 
-# In[37]:
+# In[40]:
 
 
 # R_Squared of statsmodel
 lm.rsquared
 
 
-# In[38]:
+# In[41]:
 
 
 # Adjusted R_Squared: 
@@ -518,7 +531,7 @@ lm.rsquared_adj
 
 # Let`s caculate the $R^2$ for our regression model:
 
-# In[39]:
+# In[42]:
 
 
 # correlation coefficient r
@@ -526,7 +539,7 @@ r = np.sqrt(R_squared)
 print(r)
 
 
-# In[40]:
+# In[43]:
 
 
 # correlation coefficient with p-value
@@ -565,7 +578,7 @@ stats.pearsonr(df['height'], df['height_parents'])
 # A small **standard deviation** represents a scenario in which most data points are close to the mean, whereas a large standard deviation represents a situation in which data points are widely spread from the mean. 
 # 
 
-# In[41]:
+# In[44]:
 
 
 # calculate variance of the model mean
@@ -581,7 +594,7 @@ print('variance of the mean:', variance)
 # 
 # In our example, $n=20$, we have one parameter, p=1 (the mean), and therefore, the degrees of freedom are df = (p-1) = 20-1 = 19.
 
-# In[42]:
+# In[45]:
 
 
 # obtain the standard deviation
@@ -596,7 +609,7 @@ print(f'Standard deviation (SD) of model 1 = {round(np.sqrt(variance),2)}')
 #   * mse_resid : Mean squared error of the residuals. The sum of squared residuals divided by the residual degrees of freedom.
 #   * mse_total : Total mean squared error. Defined as the uncentered total sum of squares divided by n the number of observations.
 
-# In[43]:
+# In[46]:
 
 
 # Total MSE_T (this is the MSE of the basline mean model) from statsmodel
@@ -606,7 +619,7 @@ print('Total mean squared error (MSE_T):', MSE_T)
 # compare this result to mse... they are the same
 
 
-# In[44]:
+# In[47]:
 
 
 # Mean squared error of residuals (MSE_R)
@@ -616,7 +629,7 @@ print('Mean squared error of residuals (MSE_R):', MSE_R)
 print(f'Mean squared error od residuals (MSE_R): {lm.mse_resid}')
 
 
-# In[45]:
+# In[48]:
 
 
 # the standard deviation equals the root of the MSE_R
@@ -657,7 +670,7 @@ print(f'Standard deviation (SD) of model 2 = {round(np.sqrt(MSE_R),2)}')
 
 # Model 2: Linear Regression
 
-# In[46]:
+# In[49]:
 
 
 # Mean squared error of the model (MSE_M)
@@ -668,7 +681,7 @@ print('MSM =', MSM)
 print(f'MS_M = {lm.mse_model}')
 
 
-# In[47]:
+# In[50]:
 
 
 # Adjust notation and calculate F-value
@@ -678,7 +691,7 @@ F_value = (MSM / MSR)
 print(F_value)
 
 
-# In[48]:
+# In[51]:
 
 
 # statsmodel
@@ -729,7 +742,7 @@ print(F_val)
 
 # Model 1: Mean
 
-# In[49]:
+# In[52]:
 
 
 # calculate standard error (...we ignore the fact that our sample is small since n < 30) 
@@ -739,7 +752,7 @@ print(se)
 df = df.assign(se=se)
 
 
-# In[50]:
+# In[53]:
 
 
 # alternative way to calculate standard error (se)
@@ -752,7 +765,7 @@ print(se)
 
 # Model 2: Linear Regression
 
-# In[51]:
+# In[54]:
 
 
 # Get standard error of parameters
@@ -785,13 +798,13 @@ print('Standard error (SE) od model 2:', se_2)
 # 
 # *Review [this notebook](https://kirenz.github.io/inference/t_test.html) to learn more about the t-statistic.*
 
-# In[52]:
+# In[55]:
 
 
 lm.summary().tables[1]
 
 
-# In[53]:
+# In[56]:
 
 
 model_result = pd.read_html(lm.summary().tables[1].as_html(),header=0,index_col=0)[0]
@@ -846,7 +859,7 @@ print("t-statistic:", t_statistic)
 # 
 # $$z = \frac{X-\bar{X}}{s}$$
 
-# In[54]:
+# In[57]:
 
 
 # calculate z-scores
@@ -856,12 +869,14 @@ print(z)
 df = df.assign(z = z)
 
 
-# In[55]:
+# In[58]:
 
 
-plt = sns.distplot(df.z);
+plt = sns.histplot(x="z", data = df, bins=5);
+
 # draw a vertical line
 plt.axvline(1.96, 0, 1, linewidth=2, color='r');
+
 # add text
 plt.text(2.1, 0.3,'z = 1.96', rotation=90, color='r');
 plt.axvline(-1.96, 0, 1, linewidth=2, color='r');
@@ -901,7 +916,7 @@ plt.text(-2.2, 0.3,'z = -1.96', rotation=90, color='r');
 # 
 # As such, the mean is always in the centre of the confidence interval. We know that 95% of confidence intervals contain the population mean, so we can assume this confidence interval contains the true mean; therefore, if the interval is small,the sample mean must be very close to the true man. Conversely, if the confidenve interval is very wide then the sample mean could be very different from the true mean, indicating that it is a bad representation of the population.
 
-# In[56]:
+# In[59]:
 
 
 # lower boundary
@@ -912,22 +927,22 @@ print('Lower boundary of CI', lb)
 print('Upper boundary of CI', up)
 
 
-# In[57]:
+# In[60]:
 
 
 # draw limits of confidence intervall
-plt = sns.distplot(df.height);
+plt = sns.histplot(x="height", data=df, bins=5);
 # draw a vertical line to mark the mean 
 plt.axvline(165, 0, 1, linewidth=3, color='b');
 # add text
 plt.text(165.1, 0.1,'Mean = 165', rotation=90, color='b');
 # draw a vertical line to mark the lower limit of the confidence intervall
-plt.axvline(164.348388, 0, 1, linewidth=3, color='w');
+plt.axvline(164.348388, 0, 1, linewidth=3, color='r');
 # add text
-plt.text(164, 0.15,'Lower limit = 164.34 ', rotation=90, color='w');
+plt.text(164, 0.15,'Lower limit = 164.34 ', rotation=90, color='r');
 # draw a vertical line to mark the upper limit of the confidence intervall
-plt.axvline(165.651612, 0, 1, linewidth=3, color='w');
-plt.text(165.8, 0.15,'Upper limit = 165.65', rotation=90, color='w');
+plt.axvline(165.651612, 0, 1, linewidth=3, color='r');
+plt.text(165.8, 0.15,'Upper limit = 165.65', rotation=90, color='r');
 
 
 # Model 2: Linear Regression
@@ -938,14 +953,14 @@ plt.text(165.8, 0.15,'Upper limit = 165.65', rotation=90, color='w');
 # 
 # **upper boundary of confidence intervall** = $b_1 + (1.96 \times SE(b_1))$
 
-# In[58]:
+# In[61]:
 
 
 # Obtain confidence interval for fitted parameters 
 lm.conf_int(alpha=0.05)
 
 
-# In[59]:
+# In[62]:
 
 
 # Make a prediction for height when parents average height is 168 cm
@@ -961,11 +976,11 @@ round(results.summary_frame(alpha=0.05),2)
 # 
 # We interpret this to mean that 95% of intervals of this form will contain the true value of Y for parents with this average height. Note that both intervals are centered at 167.4 cm, but that the **prediction interval** is substantially wider than the confidence interval, reflecting the increased uncertainty about the individual height for given parents height in comparison to the average height of many parents. 
 
-# In[60]:
+# In[63]:
 
 
 # Plot regression line with CI 95%
-sns.lmplot(x='height_parents', y='height', data=df, order=1, line_kws={'color':'red'}, size=7, aspect=1.5, ci=95);
+sns.lmplot(x='height_parents', y='height', data=df, order=1, line_kws={'color':'red'}, height=7, aspect=1.5, ci=95);
 
 
 # ### Confidence intervals in small samples
@@ -980,7 +995,7 @@ sns.lmplot(x='height_parents', y='height', data=df, order=1, line_kws={'color':'
 # 
 # The (n − 1) in the equations is the degrees of freedom and tells us which of the t-distributions to use. For a 95% confidence interval, we can calculate the value of t for a two-tailed test with probability of 0.05, for the appropriate degrees of freedom.
 
-# In[61]:
+# In[64]:
 
 
 # calculate t-statistic
@@ -996,11 +1011,11 @@ print('Lower boundary of CI (t-statistics)', lb_t)
 print('Upper boundary of CI (t-statistics)', up_t)
 
 
-# In[62]:
+# In[65]:
 
 
 # draw limits of confidence intervall for t-statistic
-plt = sns.distplot(df.height);
+plt = sns.histplot(x="height", data=df, bins=5);
 # draw a vertical line to mark the mean 
 plt.axvline(165, 0, 1, linewidth=3, color='b');
 # add text
@@ -1014,12 +1029,12 @@ plt.axvline(165.695836, 0, 1, linewidth=3, color='r');
 plt.text(165.8, 0.15,'Upper limit = 165.69', rotation=90, color='r');
 
 
-# In[63]:
+# In[66]:
 
 
 # compare CI z-statistic with t-statistic
 # draw limits of confidence intervall
-plt = sns.distplot(df.height);
+plt = sns.histplot(x="height", data=df, bins=5);
 # draw a vertical line to mark the mean 
 plt.axvline(165, 0, 1, linewidth=3, color='b');
 # add text
@@ -1039,13 +1054,11 @@ plt.axvline(165.695836, 0, 1, linewidth=3, color='r');
 # 
 # Both measures are an estimator of the **relative quality** of statistical models for a given set of data. Hence, they are used to select the best performing model.  
 # 
-# Here we cover AIC and BIC in the case of a linear model fit using least squares; however, these quantities can also be defined for more general types of models.
-# 
 # For both measures, lower values are better
 
 # ### Bayesian information criterion (BIC) 
 
-# In[64]:
+# In[67]:
 
 
 # BIC
@@ -1054,7 +1067,7 @@ lm.bic
 
 # ### Akaike information criterion (AIC) 
 
-# In[65]:
+# In[68]:
 
 
 # AIC

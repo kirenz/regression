@@ -1,0 +1,1504 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Diagnostics &#8212; Introduction to Linear Regression Models</title>
+    
+  <link href="_static/css/theme.css" rel="stylesheet" />
+  <link href="_static/css/index.c5995385ac14fb8791e8eb36b4908be2.css" rel="stylesheet" />
+
+    
+  <link rel="stylesheet"
+    href="_static/vendor/fontawesome/5.13.0/css/all.min.css">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="_static/vendor/fontawesome/5.13.0/webfonts/fa-solid-900.woff2">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2">
+
+    
+      
+
+    
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="_static/sphinx-book-theme.css?digest=c3fdc42140077d1ad13ad2f1588a4309" />
+    <link rel="stylesheet" type="text/css" href="_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="_static/mystnb.css" />
+    <link rel="stylesheet" type="text/css" href="_static/sphinx-thebe.css" />
+    <link rel="stylesheet" type="text/css" href="_static/panels-main.c949a650a448cc0ae9fd3441c0e17fb0.css" />
+    <link rel="stylesheet" type="text/css" href="_static/panels-variables.06eb56fa6e07937060861dad626602ad.css" />
+    
+  <link rel="preload" as="script" href="_static/js/index.1c5a1a01449ed65a7b51.js">
+
+    <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
+    <script src="_static/jquery.js"></script>
+    <script src="_static/underscore.js"></script>
+    <script src="_static/doctools.js"></script>
+    <script src="_static/togglebutton.js"></script>
+    <script src="_static/clipboard.min.js"></script>
+    <script src="_static/copybutton.js"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
+    <script src="_static/sphinx-book-theme.12a9622fbb08dcb3a2a40b2c02b83a57.js"></script>
+    <script src="_static/sphinx-book-theme.js"></script>
+    <script async="async" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script async="async" src="https://unpkg.com/thebe@0.5.1/lib/index.js"></script>
+    <script>
+        const thebe_selector = ".thebe"
+        const thebe_selector_input = "pre"
+        const thebe_selector_output = ".output"
+    </script>
+    <script async="async" src="_static/sphinx-thebe.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="docsearch:language" content="en" />
+    
+  </head>
+  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="80">
+    
+    <div class="container-fluid" id="banner"></div>
+
+    
+
+    <div class="container-xl">
+      <div class="row">
+          
+<div class="col-12 col-md-3 bd-sidebar site-navigation show" id="site-navigation">
+    
+        <div class="navbar-brand-box">
+    <a class="navbar-brand text-wrap" href="index.html">
+      
+        <!-- `logo` is deprecated in Sphinx 4.0, so remove this when we stop supporting 3 -->
+        
+      
+      
+      <img src="_static/logo.png" class="logo" alt="logo">
+      
+      
+      <h1 class="site-logo" id="site-title">Introduction to Linear Regression Models</h1>
+      
+    </a>
+</div><form class="bd-search d-flex align-items-center" action="search.html" method="get">
+  <i class="icon fas fa-search"></i>
+  <input type="search" class="form-control" name="q" id="search-input" placeholder="Search this book..." aria-label="Search this book..." autocomplete="off" >
+</form><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item active">
+        <ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="intro.html">
+   Welcome
+  </a>
+ </li>
+</ul>
+<p class="caption" role="heading">
+ <span class="caption-text">
+  Programming
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="process.html">
+   Programming Process
+  </a>
+ </li>
+</ul>
+<p class="caption" role="heading">
+ <span class="caption-text">
+  Basics
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="basics.html">
+   Regression basics
+  </a>
+ </li>
+</ul>
+<p class="caption" role="heading">
+ <span class="caption-text">
+  Diagnostics
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="regression_diagnostics.html">
+   Regression diagnostics in Python
+  </a>
+ </li>
+</ul>
+<p class="caption" role="heading">
+ <span class="caption-text">
+  Applications
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="case_simulated.html">
+   Model with simulated data
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="case_auto.html">
+   Diagnostics tutorial
+  </a>
+ </li>
+</ul>
+<p class="caption" role="heading">
+ <span class="caption-text">
+  References
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="reference.html">
+   Bibliography
+  </a>
+ </li>
+</ul>
+
+    </div>
+</nav> <!-- To handle the deprecated key -->
+
+<div class="navbar_extra_footer">
+  Powered by <a href="https://jupyterbook.org">Jupyter Book</a>
+</div>
+
+</div>
+
+
+          
+
+
+          
+<main class="col py-md-3 pl-md-4 bd-content overflow-auto" role="main">
+    
+    <div class="topbar container-xl fixed-top">
+    <div class="topbar-contents row">
+        <div class="col-12 col-md-3 bd-topbar-whitespace site-navigation show"></div>
+        <div class="col pl-md-4 topbar-main">
+            
+            <button id="navbar-toggler" class="navbar-toggler ml-0" type="button" data-toggle="collapse"
+                data-toggle="tooltip" data-placement="bottom" data-target=".site-navigation" aria-controls="navbar-menu"
+                aria-expanded="true" aria-label="Toggle navigation" aria-controls="site-navigation"
+                title="Toggle navigation" data-toggle="tooltip" data-placement="left">
+                <i class="fas fa-bars"></i>
+                <i class="fas fa-arrow-left"></i>
+                <i class="fas fa-arrow-up"></i>
+            </button>
+            
+            
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn" aria-label="Download this page"><i
+            class="fas fa-download"></i></button>
+
+    <div class="dropdown-buttons">
+        <!-- ipynb file if we had a myst markdown file -->
+        
+        <!-- Download raw file -->
+        <a class="dropdown-buttons" href="_sources/diagnostics_auto.ipynb"><button type="button"
+                class="btn btn-secondary topbarbtn" title="Download source file" data-toggle="tooltip"
+                data-placement="left">.ipynb</button></a>
+        <!-- Download PDF via print -->
+        <button type="button" id="download-print" class="btn btn-secondary topbarbtn" title="Print to PDF"
+            onClick="window.print()" data-toggle="tooltip" data-placement="left">.pdf</button>
+    </div>
+</div>
+
+            <!-- Source interaction buttons -->
+
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn"
+        aria-label="Connect with source repository"><i class="fab fa-github"></i></button>
+    <div class="dropdown-buttons sourcebuttons">
+        <a class="repository-button"
+            href="https://github.com/kirenz/linear_regression"><button type="button" class="btn btn-secondary topbarbtn"
+                data-toggle="tooltip" data-placement="left" title="Source repository"><i
+                    class="fab fa-github"></i>repository</button></a>
+        <a class="issues-button"
+            href="https://github.com/kirenz/linear_regression/issues/new?title=Issue%20on%20page%20%2Fdiagnostics_auto.html&body=Your%20issue%20content%20here."><button
+                type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip" data-placement="left"
+                title="Open an issue"><i class="fas fa-lightbulb"></i>open issue</button></a>
+        
+    </div>
+</div>
+
+            <!-- Full screen (wrap in <a> to have style consistency -->
+
+<a class="full-screen-button"><button type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip"
+        data-placement="bottom" onclick="toggleFullScreen()" aria-label="Fullscreen mode"
+        title="Fullscreen mode"><i
+            class="fas fa-expand"></i></button></a>
+
+            <!-- Launch buttons -->
+
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn"
+        aria-label="Launch interactive content"><i class="fas fa-rocket"></i></button>
+    <div class="dropdown-buttons">
+        
+        
+        
+        <a class="colab-button" href="https://colab.research.google.com/github/kirenz/linear_regression/blob/main/diagnostics_auto.ipynb"><button type="button" class="btn btn-secondary topbarbtn"
+                title="Launch Colab" data-toggle="tooltip" data-placement="left"><img class="colab-button-logo"
+                    src="_static/images/logo_colab.png"
+                    alt="Interact on Colab">Colab</button></a>
+        
+        
+    </div>
+</div>
+
+        </div>
+
+        <!-- Table of contents -->
+        <div class="d-none d-md-block col-md-2 bd-toc show">
+            
+            <div class="tocsection onthispage pt-5 pb-3">
+                <i class="fas fa-list"></i> Contents
+            </div>
+            <nav id="bd-toc-nav" aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#python-setup">
+   Python setup
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#import-data">
+   Import data
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#tidying-data">
+   Tidying data
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#handle-missing-values">
+     Handle missing values
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#regression-model">
+   Regression model
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#id1">
+   Diagnostics
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#plot-regress-exog">
+     plot_regress_exog
+    </a>
+    <ul class="nav section-nav flex-column">
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#residuals-vs-horsepower">
+       Residuals vs horsepower
+      </a>
+     </li>
+    </ul>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#non-linearity">
+     Non-linearity
+    </a>
+    <ul class="nav section-nav flex-column">
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#harvey-collier-multiplier-test">
+       Harvey-Collier multiplier test
+      </a>
+     </li>
+    </ul>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#residuals-vs-fitted-plot">
+     Residuals vs fitted plot
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#normality">
+     Normality
+    </a>
+    <ul class="nav section-nav flex-column">
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#jarque-bera-test">
+       Jarque-Bera test
+      </a>
+     </li>
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#omnibus-normtest">
+       Omnibus normtest
+      </a>
+     </li>
+    </ul>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#outliers">
+     Outliers
+    </a>
+    <ul class="nav section-nav flex-column">
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#normal-q-q-plot">
+       Normal Q-Q-Plot
+      </a>
+     </li>
+    </ul>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#correlation">
+     Correlation
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#variance-of-error-terms">
+     Variance of error terms
+    </a>
+    <ul class="nav section-nav flex-column">
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#breusch-pagan-test">
+       Breusch-Pagan test:
+      </a>
+     </li>
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#scale-location-plot">
+       Scale-Location plot
+      </a>
+     </li>
+    </ul>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#leverage">
+     Leverage
+    </a>
+    <ul class="nav section-nav flex-column">
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#statsmodel-influence">
+       Statsmodel influence
+      </a>
+     </li>
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#residuals-vs-leverage">
+       Residuals vs leverage
+      </a>
+     </li>
+    </ul>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#multicollinearity">
+     Multicollinearity
+    </a>
+   </li>
+  </ul>
+ </li>
+</ul>
+
+            </nav>
+        </div>
+    </div>
+</div>
+    <div id="main-content" class="row">
+        <div class="col-12 col-md-9 pl-md-3 pr-md-0">
+        
+              <div>
+                
+  <div class="tex2jax_ignore mathjax_ignore section" id="diagnostics">
+<h1>Diagnostics<a class="headerlink" href="#diagnostics" title="Permalink to this headline">¶</a></h1>
+<p>When we fit a linear regression model to a particular data set, many problems may occur. Most common among these are the following:</p>
+<ol class="simple">
+<li><p>Non-linearity of the response-predictor relationships</p></li>
+<li><p>Non-normally distributed errors</p></li>
+<li><p>Correlation of error terms</p></li>
+<li><p>Non-constant variance of error terms (heteroskedasticity)</p></li>
+<li><p>High-leverage points</p></li>
+<li><p>Multicollinearity</p></li>
+</ol>
+<p>In many cases of statistical analysis, we are not sure whether our statistical model is correctly specified. For example when using OLS, linearity and homoscedasticity are assumed. Some test statistics additionally assume that the errors are normally distributed or that we have a large sample. Since our results depend on these statistical assumptions, the results are only correct if our assumptions hold (at least approximately).</p>
+<p>Therefore, we need to test whether our sample is consistent with these assumptions, which we cover in this application. Alternatively, we could use robust methods, for example <a class="reference external" href="https://www.statsmodels.org/dev/examples/notebooks/generated/regression_plots.html#Using-robust-regression-to-correct-for-outliers.">robust regression</a> or robust covariance estimators, which we’ll not cover in this application.</p>
+<p>Let’s use the Auto dataset to perform a linear regression:</p>
+<ul class="simple">
+<li><p>Dependent variable: <code class="docutils literal notranslate"><span class="pre">mpg</span></code></p></li>
+<li><p>Features: <code class="docutils literal notranslate"><span class="pre">horsepower</span></code>, <code class="docutils literal notranslate"><span class="pre">weight</span></code> and <code class="docutils literal notranslate"><span class="pre">acceleration</span></code></p></li>
+</ul>
+<p>Source:</p>
+<ul class="simple">
+<li><p>Statsmodels <a class="reference external" href="https://www.statsmodels.org/stable/diagnostic.html">regression diagnostic page</a></p></li>
+<li><p><a class="reference external" href="https://www.statsmodels.org/dev/examples/notebooks/generated/regression_diagnostics.html">Statsmodel examples with code</a></p></li>
+</ul>
+<div class="section" id="python-setup">
+<h2>Python setup<a class="headerlink" href="#python-setup" title="Permalink to this headline">¶</a></h2>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+
+<span class="kn">import</span> <span class="nn">statsmodels.api</span> <span class="k">as</span> <span class="nn">sm</span>
+<span class="kn">import</span> <span class="nn">statsmodels.formula.api</span> <span class="k">as</span> <span class="nn">smf</span>
+<span class="kn">from</span> <span class="nn">statsmodels.compat</span> <span class="kn">import</span> <span class="n">lzip</span>
+<span class="kn">from</span> <span class="nn">statsmodels.graphics.gofplots</span> <span class="kn">import</span> <span class="n">ProbPlot</span>
+<span class="kn">from</span> <span class="nn">statsmodels.graphics.regressionplots</span> <span class="kn">import</span> <span class="n">plot_leverage_resid2</span>
+<span class="kn">from</span> <span class="nn">statsmodels.stats.outliers_influence</span> <span class="kn">import</span> <span class="n">variance_inflation_factor</span>
+
+
+<span class="kn">from</span> <span class="nn">patsy</span> <span class="kn">import</span> <span class="n">dmatrices</span>
+
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+<span class="kn">import</span> <span class="nn">seaborn</span> <span class="k">as</span> <span class="nn">sns</span>  
+
+<span class="o">%</span><span class="k">matplotlib</span> inline 
+<span class="n">plt</span><span class="o">.</span><span class="n">rc</span><span class="p">(</span><span class="s2">&quot;figure&quot;</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">16</span><span class="p">,</span> <span class="mi">8</span><span class="p">))</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">rc</span><span class="p">(</span><span class="s2">&quot;font&quot;</span><span class="p">,</span> <span class="n">size</span><span class="o">=</span><span class="mi">14</span><span class="p">)</span>
+<span class="n">sns</span><span class="o">.</span><span class="n">set</span><span class="p">()</span> 
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="section" id="import-data">
+<h2>Import data<a class="headerlink" href="#import-data" title="Permalink to this headline">¶</a></h2>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Load the csv data files into pandas dataframes</span>
+<span class="n">ROOT</span> <span class="o">=</span> <span class="s2">&quot;https://raw.githubusercontent.com/kirenz/datasets/master/&quot;</span>
+<span class="n">DATA</span> <span class="o">=</span> <span class="s2">&quot;Auto.csv&quot;</span>
+
+<span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="n">ROOT</span> <span class="o">+</span> <span class="n">DATA</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># show df</span>
+<span class="n">df</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>mpg</th>
+      <th>cylinders</th>
+      <th>displacement</th>
+      <th>horsepower</th>
+      <th>weight</th>
+      <th>acceleration</th>
+      <th>year</th>
+      <th>origin</th>
+      <th>name</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>18.0</td>
+      <td>8</td>
+      <td>307.0</td>
+      <td>130</td>
+      <td>3504</td>
+      <td>12.0</td>
+      <td>70</td>
+      <td>1</td>
+      <td>chevrolet chevelle malibu</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>15.0</td>
+      <td>8</td>
+      <td>350.0</td>
+      <td>165</td>
+      <td>3693</td>
+      <td>11.5</td>
+      <td>70</td>
+      <td>1</td>
+      <td>buick skylark 320</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>18.0</td>
+      <td>8</td>
+      <td>318.0</td>
+      <td>150</td>
+      <td>3436</td>
+      <td>11.0</td>
+      <td>70</td>
+      <td>1</td>
+      <td>plymouth satellite</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>16.0</td>
+      <td>8</td>
+      <td>304.0</td>
+      <td>150</td>
+      <td>3433</td>
+      <td>12.0</td>
+      <td>70</td>
+      <td>1</td>
+      <td>amc rebel sst</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>17.0</td>
+      <td>8</td>
+      <td>302.0</td>
+      <td>140</td>
+      <td>3449</td>
+      <td>10.5</td>
+      <td>70</td>
+      <td>1</td>
+      <td>ford torino</td>
+    </tr>
+    <tr>
+      <th>...</th>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+    </tr>
+    <tr>
+      <th>392</th>
+      <td>27.0</td>
+      <td>4</td>
+      <td>140.0</td>
+      <td>86</td>
+      <td>2790</td>
+      <td>15.6</td>
+      <td>82</td>
+      <td>1</td>
+      <td>ford mustang gl</td>
+    </tr>
+    <tr>
+      <th>393</th>
+      <td>44.0</td>
+      <td>4</td>
+      <td>97.0</td>
+      <td>52</td>
+      <td>2130</td>
+      <td>24.6</td>
+      <td>82</td>
+      <td>2</td>
+      <td>vw pickup</td>
+    </tr>
+    <tr>
+      <th>394</th>
+      <td>32.0</td>
+      <td>4</td>
+      <td>135.0</td>
+      <td>84</td>
+      <td>2295</td>
+      <td>11.6</td>
+      <td>82</td>
+      <td>1</td>
+      <td>dodge rampage</td>
+    </tr>
+    <tr>
+      <th>395</th>
+      <td>28.0</td>
+      <td>4</td>
+      <td>120.0</td>
+      <td>79</td>
+      <td>2625</td>
+      <td>18.6</td>
+      <td>82</td>
+      <td>1</td>
+      <td>ford ranger</td>
+    </tr>
+    <tr>
+      <th>396</th>
+      <td>31.0</td>
+      <td>4</td>
+      <td>119.0</td>
+      <td>82</td>
+      <td>2720</td>
+      <td>19.4</td>
+      <td>82</td>
+      <td>1</td>
+      <td>chevy s-10</td>
+    </tr>
+  </tbody>
+</table>
+<p>397 rows × 9 columns</p>
+</div></div></div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">df</span><span class="o">.</span><span class="n">info</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;class &#39;pandas.core.frame.DataFrame&#39;&gt;
+RangeIndex: 397 entries, 0 to 396
+Data columns (total 9 columns):
+ #   Column        Non-Null Count  Dtype  
+---  ------        --------------  -----  
+ 0   mpg           397 non-null    float64
+ 1   cylinders     397 non-null    int64  
+ 2   displacement  397 non-null    float64
+ 3   horsepower    397 non-null    object 
+ 4   weight        397 non-null    int64  
+ 5   acceleration  397 non-null    float64
+ 6   year          397 non-null    int64  
+ 7   origin        397 non-null    int64  
+ 8   name          397 non-null    object 
+dtypes: float64(3), int64(4), object(2)
+memory usage: 28.0+ KB
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="section" id="tidying-data">
+<h2>Tidying data<a class="headerlink" href="#tidying-data" title="Permalink to this headline">¶</a></h2>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># change data type</span>
+<span class="n">df</span><span class="p">[</span><span class="s1">&#39;origin&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">Categorical</span><span class="p">(</span><span class="n">df</span><span class="p">[</span><span class="s1">&#39;origin&#39;</span><span class="p">])</span>
+<span class="n">df</span><span class="p">[</span><span class="s1">&#39;year&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">Categorical</span><span class="p">(</span><span class="n">df</span><span class="p">[</span><span class="s1">&#39;year&#39;</span><span class="p">],</span> <span class="n">ordered</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="n">df</span><span class="p">[</span><span class="s1">&#39;horsepower&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">to_numeric</span><span class="p">(</span><span class="n">df</span><span class="p">[</span><span class="s1">&#39;horsepower&#39;</span><span class="p">],</span> <span class="n">errors</span><span class="o">=</span><span class="s1">&#39;coerce&#39;</span><span class="p">)</span> 
+</pre></div>
+</div>
+</div>
+</div>
+<div class="section" id="handle-missing-values">
+<h3>Handle missing values<a class="headerlink" href="#handle-missing-values" title="Permalink to this headline">¶</a></h3>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># show missing values (missing values - if present - will be displayed in yellow )</span>
+<span class="n">sns</span><span class="o">.</span><span class="n">heatmap</span><span class="p">(</span><span class="n">df</span><span class="o">.</span><span class="n">isnull</span><span class="p">(),</span><span class="n">yticklabels</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span><span class="n">cbar</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span><span class="n">cmap</span><span class="o">=</span><span class="s1">&#39;viridis&#39;</span><span class="p">);</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="_images/diagnostics_auto_10_0.png" src="_images/diagnostics_auto_10_0.png" />
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="n">df</span><span class="o">.</span><span class="n">isnull</span><span class="p">()</span><span class="o">.</span><span class="n">sum</span><span class="p">())</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>mpg             0
+cylinders       0
+displacement    0
+horsepower      5
+weight          0
+acceleration    0
+year            0
+origin          0
+name            0
+dtype: int64
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># there are only 5 missing values therefore we simply delete the rows</span>
+<span class="n">df</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">dropna</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="n">df</span><span class="o">.</span><span class="n">isnull</span><span class="p">()</span><span class="o">.</span><span class="n">sum</span><span class="p">())</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>mpg             0
+cylinders       0
+displacement    0
+horsepower      0
+weight          0
+acceleration    0
+year            0
+origin          0
+name            0
+dtype: int64
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">sns</span><span class="o">.</span><span class="n">pairplot</span><span class="p">(</span><span class="n">data</span><span class="o">=</span><span class="n">df</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;seaborn.axisgrid.PairGrid at 0x7ff798c37c10&gt;
+</pre></div>
+</div>
+<img alt="_images/diagnostics_auto_14_1.png" src="_images/diagnostics_auto_14_1.png" />
+</div>
+</div>
+</div>
+</div>
+<div class="section" id="regression-model">
+<h2>Regression model<a class="headerlink" href="#regression-model" title="Permalink to this headline">¶</a></h2>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># fit linear model with statsmodels.formula.api (with R-style formulas) </span>
+<span class="n">lm</span> <span class="o">=</span> <span class="n">smf</span><span class="o">.</span><span class="n">ols</span><span class="p">(</span><span class="n">formula</span> <span class="o">=</span><span class="s1">&#39;mpg ~ horsepower + weight + acceleration&#39;</span><span class="p">,</span> <span class="n">data</span><span class="o">=</span><span class="n">df</span><span class="p">)</span><span class="o">.</span><span class="n">fit</span><span class="p">()</span>
+<span class="n">lm</span><span class="o">.</span><span class="n">summary</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><table class="simpletable">
+<caption>OLS Regression Results</caption>
+<tr>
+  <th>Dep. Variable:</th>           <td>mpg</td>       <th>  R-squared:         </th> <td>   0.706</td> 
+</tr>
+<tr>
+  <th>Model:</th>                   <td>OLS</td>       <th>  Adj. R-squared:    </th> <td>   0.704</td> 
+</tr>
+<tr>
+  <th>Method:</th>             <td>Least Squares</td>  <th>  F-statistic:       </th> <td>   311.1</td> 
+</tr>
+<tr>
+  <th>Date:</th>             <td>Sat, 13 Nov 2021</td> <th>  Prob (F-statistic):</th> <td>7.48e-103</td>
+</tr>
+<tr>
+  <th>Time:</th>                 <td>12:29:14</td>     <th>  Log-Likelihood:    </th> <td> -1121.0</td> 
+</tr>
+<tr>
+  <th>No. Observations:</th>      <td>   392</td>      <th>  AIC:               </th> <td>   2250.</td> 
+</tr>
+<tr>
+  <th>Df Residuals:</th>          <td>   388</td>      <th>  BIC:               </th> <td>   2266.</td> 
+</tr>
+<tr>
+  <th>Df Model:</th>              <td>     3</td>      <th>                     </th>     <td> </td>    
+</tr>
+<tr>
+  <th>Covariance Type:</th>      <td>nonrobust</td>    <th>                     </th>     <td> </td>    
+</tr>
+</table>
+<table class="simpletable">
+<tr>
+        <td></td>          <th>coef</th>     <th>std err</th>      <th>t</th>      <th>P>|t|</th>  <th>[0.025</th>    <th>0.975]</th>  
+</tr>
+<tr>
+  <th>Intercept</th>    <td>   45.6783</td> <td>    2.409</td> <td>   18.965</td> <td> 0.000</td> <td>   40.943</td> <td>   50.414</td>
+</tr>
+<tr>
+  <th>horsepower</th>   <td>   -0.0475</td> <td>    0.016</td> <td>   -2.970</td> <td> 0.003</td> <td>   -0.079</td> <td>   -0.016</td>
+</tr>
+<tr>
+  <th>weight</th>       <td>   -0.0058</td> <td>    0.001</td> <td>  -10.024</td> <td> 0.000</td> <td>   -0.007</td> <td>   -0.005</td>
+</tr>
+<tr>
+  <th>acceleration</th> <td>   -0.0021</td> <td>    0.123</td> <td>   -0.017</td> <td> 0.987</td> <td>   -0.245</td> <td>    0.240</td>
+</tr>
+</table>
+<table class="simpletable">
+<tr>
+  <th>Omnibus:</th>       <td>35.392</td> <th>  Durbin-Watson:     </th> <td>   0.858</td>
+</tr>
+<tr>
+  <th>Prob(Omnibus):</th> <td> 0.000</td> <th>  Jarque-Bera (JB):  </th> <td>  46.071</td>
+</tr>
+<tr>
+  <th>Skew:</th>          <td> 0.684</td> <th>  Prob(JB):          </th> <td>9.91e-11</td>
+</tr>
+<tr>
+  <th>Kurtosis:</th>      <td> 3.975</td> <th>  Cond. No.          </th> <td>3.48e+04</td>
+</tr>
+</table><br/><br/>Notes:<br/>[1] Standard Errors assume that the covariance matrix of the errors is correctly specified.<br/>[2] The condition number is large, 3.48e+04. This might indicate that there are<br/>strong multicollinearity or other numerical problems.</div></div>
+</div>
+</div>
+<div class="section" id="id1">
+<h2>Diagnostics<a class="headerlink" href="#id1" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="plot-regress-exog">
+<h3>plot_regress_exog<a class="headerlink" href="#plot-regress-exog" title="Permalink to this headline">¶</a></h3>
+<p>The <code class="docutils literal notranslate"><span class="pre">plot_regress_exog</span></code> function is a convenience function that gives a 2x2 plot containing</p>
+<ol class="simple">
+<li><p>the dependent variable and fitted values with confidence intervals vs. the independent variable chosen,</p></li>
+<li><p>the residuals of the model vs. the chosen independent variable,</p></li>
+<li><p>a partial regression plot,</p></li>
+<li><p>and a CCPR plot.</p></li>
+</ol>
+<p>This function can be used for quickly checking modeling assumptions with respect to a single regressor (<a class="reference external" href="https://www.statsmodels.org/dev/examples/notebooks/generated/regression_plots.html">see statsmodels documentation</a>)</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">fig</span> <span class="o">=</span> <span class="n">sm</span><span class="o">.</span><span class="n">graphics</span><span class="o">.</span><span class="n">plot_regress_exog</span><span class="p">(</span><span class="n">lm</span><span class="p">,</span> <span class="s2">&quot;horsepower&quot;</span><span class="p">)</span>
+<span class="n">fig</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">(</span><span class="n">pad</span><span class="o">=</span><span class="mf">1.0</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="_images/diagnostics_auto_18_0.png" src="_images/diagnostics_auto_18_0.png" />
+</div>
+</div>
+<p>Let’s take a look at the different plots.</p>
+<ol class="simple">
+<li><p><strong>Y and fitted vs X</strong>: plots the fitted values versus a chosen independent variable. It includes prediction confidence intervals and plots the true dependent variable.</p></li>
+<li><p><strong>Residuals versus horsepower</strong>: The residuals are not equally spread around a horizontal line which is an indication for a non-linear relationship. This means there seems to be a non-linear relationship between the predictor and the response variable which the model doesn’t capture.</p></li>
+<li><p><strong>Partial regression plot</strong>: attempts to show the effect of adding another variable to a model that already has one or more independent variables.</p></li>
+</ol>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">fig</span> <span class="o">=</span> <span class="n">sm</span><span class="o">.</span><span class="n">graphics</span><span class="o">.</span><span class="n">plot_fit</span><span class="p">(</span><span class="n">lm</span><span class="p">,</span> <span class="s2">&quot;horsepower&quot;</span><span class="p">)</span>
+<span class="n">fig</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">(</span><span class="n">pad</span><span class="o">=</span><span class="mf">1.0</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="_images/diagnostics_auto_20_0.png" src="_images/diagnostics_auto_20_0.png" />
+</div>
+</div>
+<div class="section" id="residuals-vs-horsepower">
+<h4>Residuals vs horsepower<a class="headerlink" href="#residuals-vs-horsepower" title="Permalink to this headline">¶</a></h4>
+</div>
+</div>
+<div class="section" id="non-linearity">
+<h3>Non-linearity<a class="headerlink" href="#non-linearity" title="Permalink to this headline">¶</a></h3>
+<div class="section" id="harvey-collier-multiplier-test">
+<h4>Harvey-Collier multiplier test<a class="headerlink" href="#harvey-collier-multiplier-test" title="Permalink to this headline">¶</a></h4>
+<p>Harvey-Collier multiplier test for Null hypothesis that the linear specification is correct. This test is a t-test that the mean of the recursive ols residuals is zero.</p>
+<p>A significant result (rejecting the null) occurs when the fit is better with a range restriction (which is what happens if the model is nonlinear).</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">name</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;t value&#39;</span><span class="p">,</span> <span class="s1">&#39;p value&#39;</span><span class="p">]</span>
+<span class="n">test</span> <span class="o">=</span> <span class="n">sm</span><span class="o">.</span><span class="n">stats</span><span class="o">.</span><span class="n">linear_harvey_collier</span><span class="p">(</span><span class="n">lm</span><span class="p">)</span>
+
+<span class="c1"># show result</span>
+<span class="n">lzip</span><span class="p">(</span><span class="n">name</span><span class="p">,</span> <span class="n">test</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[(&#39;t value&#39;, 10.379536006123756), (&#39;p value&#39;, 1.948695934039888e-22)]
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="section" id="residuals-vs-fitted-plot">
+<h3>Residuals vs fitted plot<a class="headerlink" href="#residuals-vs-fitted-plot" title="Permalink to this headline">¶</a></h3>
+<p>Residual plots are also a very useful graphical tool for identifying non-linearity:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># fitted values</span>
+<span class="n">model_fitted_y</span> <span class="o">=</span> <span class="n">lm</span><span class="o">.</span><span class="n">fittedvalues</span>
+
+<span class="c1">#  Plot</span>
+<span class="n">plot</span> <span class="o">=</span> <span class="n">sns</span><span class="o">.</span><span class="n">residplot</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="n">model_fitted_y</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="s1">&#39;mpg&#39;</span><span class="p">,</span> <span class="n">data</span><span class="o">=</span><span class="n">df</span><span class="p">,</span> <span class="n">lowess</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> 
+                     <span class="n">scatter_kws</span><span class="o">=</span><span class="p">{</span><span class="s1">&#39;alpha&#39;</span><span class="p">:</span> <span class="mf">0.5</span><span class="p">},</span> 
+                     <span class="n">line_kws</span><span class="o">=</span><span class="p">{</span><span class="s1">&#39;color&#39;</span><span class="p">:</span> <span class="s1">&#39;red&#39;</span><span class="p">,</span> <span class="s1">&#39;lw&#39;</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span> <span class="s1">&#39;alpha&#39;</span><span class="p">:</span> <span class="mf">0.8</span><span class="p">})</span>
+
+<span class="c1"># Titel and labels</span>
+<span class="n">plot</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s1">&#39;Residuals vs Fitted&#39;</span><span class="p">)</span>
+<span class="n">plot</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s1">&#39;Fitted values&#39;</span><span class="p">)</span>
+<span class="n">plot</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s1">&#39;Residuals&#39;</span><span class="p">);</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="_images/diagnostics_auto_26_0.png" src="_images/diagnostics_auto_26_0.png" />
+</div>
+</div>
+<p>The residuals are not equally spread around a horizontal line which is an indication for a <strong>non-linear</strong> relationship.</p>
+<p>This means there seems to be a non-linear relationship between the predictor and the response variable which the model doesn’t capture.</p>
+<p><strong>Advanced Plots:</strong></p>
+<p>Besides basic plots, we will also cover some more advanced plots (similar to the R regression diagnostic plots) which flag certain observations. See here for a <a class="reference external" href="https://data.library.virginia.edu/diagnostic-plots/">description of the R diagnsotic plots</a>.</p>
+<p>The code for the advanced plots was obtained from <a class="reference external" href="https://medium.com/&#64;emredjan/emulating-r-regression-plots-in-python-43741952c034">here</a></p>
+<p>Advanced Residuals vs fitted plot</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Necessary values for our advanced plots:</span>
+
+<span class="c1"># fitted values</span>
+<span class="n">model_fitted_y</span> <span class="o">=</span> <span class="n">lm</span><span class="o">.</span><span class="n">fittedvalues</span><span class="p">;</span>
+<span class="c1"># model residuals</span>
+<span class="n">model_residuals</span> <span class="o">=</span> <span class="n">lm</span><span class="o">.</span><span class="n">resid</span>
+<span class="c1"># normalized residuals</span>
+<span class="n">model_norm_residuals</span> <span class="o">=</span> <span class="n">lm</span><span class="o">.</span><span class="n">get_influence</span><span class="p">()</span><span class="o">.</span><span class="n">resid_studentized_internal</span>
+<span class="c1"># absolute squared normalized residuals</span>
+<span class="n">model_norm_residuals_abs_sqrt</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">abs</span><span class="p">(</span><span class="n">model_norm_residuals</span><span class="p">))</span>
+<span class="c1"># absolute residuals</span>
+<span class="n">model_abs_resid</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">abs</span><span class="p">(</span><span class="n">model_residuals</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Advanced plot (1)</span>
+<span class="c1"># figure size</span>
+<span class="n">plot</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+<span class="n">plot</span><span class="o">.</span><span class="n">set_figheight</span><span class="p">(</span><span class="mi">8</span><span class="p">)</span>
+<span class="n">plot</span><span class="o">.</span><span class="n">set_figwidth</span><span class="p">(</span><span class="mi">12</span><span class="p">)</span>
+<span class="c1"># generate figure with sns.residplot </span>
+<span class="n">plot</span><span class="o">.</span><span class="n">axes</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="n">sns</span><span class="o">.</span><span class="n">residplot</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="n">model_fitted_y</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="s1">&#39;mpg&#39;</span><span class="p">,</span> <span class="n">data</span><span class="o">=</span><span class="n">df</span><span class="p">,</span> 
+                          <span class="n">lowess</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">scatter_kws</span><span class="o">=</span><span class="p">{</span><span class="s1">&#39;alpha&#39;</span><span class="p">:</span> <span class="mf">0.5</span><span class="p">},</span> 
+                          <span class="n">line_kws</span><span class="o">=</span><span class="p">{</span><span class="s1">&#39;color&#39;</span><span class="p">:</span> <span class="s1">&#39;red&#39;</span><span class="p">,</span> <span class="s1">&#39;lw&#39;</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span> <span class="s1">&#39;alpha&#39;</span><span class="p">:</span> <span class="mf">0.8</span><span class="p">})</span>
+<span class="c1"># label axes</span>
+<span class="n">plot</span><span class="o">.</span><span class="n">axes</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s1">&#39;Residuals vs Fitted&#39;</span><span class="p">)</span>
+<span class="n">plot</span><span class="o">.</span><span class="n">axes</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s1">&#39;Fitted values&#39;</span><span class="p">)</span>
+<span class="n">plot</span><span class="o">.</span><span class="n">axes</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s1">&#39;Residuals&#39;</span><span class="p">)</span>
+
+<span class="c1"># annotations</span>
+<span class="n">abs_resid</span> <span class="o">=</span> <span class="n">model_abs_resid</span><span class="o">.</span><span class="n">sort_values</span><span class="p">(</span><span class="n">ascending</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+<span class="n">abs_resid_top_3</span> <span class="o">=</span> <span class="n">abs_resid</span><span class="p">[:</span><span class="mi">3</span><span class="p">]</span>
+
+<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">abs_resid_top_3</span><span class="o">.</span><span class="n">index</span><span class="p">:</span>
+    <span class="n">plot</span><span class="o">.</span><span class="n">axes</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">annotate</span><span class="p">(</span><span class="n">i</span><span class="p">,</span> <span class="n">xy</span><span class="o">=</span><span class="p">(</span><span class="n">model_fitted_y</span><span class="p">[</span><span class="n">i</span><span class="p">],</span> <span class="n">model_residuals</span><span class="p">[</span><span class="n">i</span><span class="p">]));</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="_images/diagnostics_auto_31_0.png" src="_images/diagnostics_auto_31_0.png" />
+</div>
+</div>
+<p>Deal with non-linearity</p>
+<p>We can fit a non-linear function (polynomial regression)</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">lm_2</span> <span class="o">=</span> <span class="n">smf</span><span class="o">.</span><span class="n">ols</span><span class="p">(</span><span class="n">formula</span><span class="o">=</span><span class="s1">&#39;mpg ~ horsepower + I(horsepower**2)&#39;</span><span class="p">,</span> <span class="n">data</span><span class="o">=</span><span class="n">df</span><span class="p">)</span><span class="o">.</span><span class="n">fit</span><span class="p">()</span>
+<span class="n">lm_2</span><span class="o">.</span><span class="n">summary</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><table class="simpletable">
+<caption>OLS Regression Results</caption>
+<tr>
+  <th>Dep. Variable:</th>           <td>mpg</td>       <th>  R-squared:         </th> <td>   0.688</td>
+</tr>
+<tr>
+  <th>Model:</th>                   <td>OLS</td>       <th>  Adj. R-squared:    </th> <td>   0.686</td>
+</tr>
+<tr>
+  <th>Method:</th>             <td>Least Squares</td>  <th>  F-statistic:       </th> <td>   428.0</td>
+</tr>
+<tr>
+  <th>Date:</th>             <td>Sat, 13 Nov 2021</td> <th>  Prob (F-statistic):</th> <td>5.40e-99</td>
+</tr>
+<tr>
+  <th>Time:</th>                 <td>12:29:15</td>     <th>  Log-Likelihood:    </th> <td> -1133.2</td>
+</tr>
+<tr>
+  <th>No. Observations:</th>      <td>   392</td>      <th>  AIC:               </th> <td>   2272.</td>
+</tr>
+<tr>
+  <th>Df Residuals:</th>          <td>   389</td>      <th>  BIC:               </th> <td>   2284.</td>
+</tr>
+<tr>
+  <th>Df Model:</th>              <td>     2</td>      <th>                     </th>     <td> </td>   
+</tr>
+<tr>
+  <th>Covariance Type:</th>      <td>nonrobust</td>    <th>                     </th>     <td> </td>   
+</tr>
+</table>
+<table class="simpletable">
+<tr>
+           <td></td>             <th>coef</th>     <th>std err</th>      <th>t</th>      <th>P>|t|</th>  <th>[0.025</th>    <th>0.975]</th>  
+</tr>
+<tr>
+  <th>Intercept</th>          <td>   56.9001</td> <td>    1.800</td> <td>   31.604</td> <td> 0.000</td> <td>   53.360</td> <td>   60.440</td>
+</tr>
+<tr>
+  <th>horsepower</th>         <td>   -0.4662</td> <td>    0.031</td> <td>  -14.978</td> <td> 0.000</td> <td>   -0.527</td> <td>   -0.405</td>
+</tr>
+<tr>
+  <th>I(horsepower ** 2)</th> <td>    0.0012</td> <td>    0.000</td> <td>   10.080</td> <td> 0.000</td> <td>    0.001</td> <td>    0.001</td>
+</tr>
+</table>
+<table class="simpletable">
+<tr>
+  <th>Omnibus:</th>       <td>16.158</td> <th>  Durbin-Watson:     </th> <td>   1.078</td>
+</tr>
+<tr>
+  <th>Prob(Omnibus):</th> <td> 0.000</td> <th>  Jarque-Bera (JB):  </th> <td>  30.662</td>
+</tr>
+<tr>
+  <th>Skew:</th>          <td> 0.218</td> <th>  Prob(JB):          </th> <td>2.20e-07</td>
+</tr>
+<tr>
+  <th>Kurtosis:</th>      <td> 4.299</td> <th>  Cond. No.          </th> <td>1.29e+05</td>
+</tr>
+</table><br/><br/>Notes:<br/>[1] Standard Errors assume that the covariance matrix of the errors is correctly specified.<br/>[2] The condition number is large, 1.29e+05. This might indicate that there are<br/>strong multicollinearity or other numerical problems.</div></div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># fitted values</span>
+<span class="n">model_fitted_y_2</span> <span class="o">=</span> <span class="n">lm_2</span><span class="o">.</span><span class="n">fittedvalues</span><span class="p">;</span>
+<span class="c1"># Basic plot</span>
+<span class="n">plot</span> <span class="o">=</span> <span class="n">sns</span><span class="o">.</span><span class="n">residplot</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="n">model_fitted_y_2</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="s1">&#39;mpg&#39;</span><span class="p">,</span> <span class="n">data</span><span class="o">=</span><span class="n">df</span><span class="p">,</span> <span class="n">lowess</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> 
+                     <span class="n">scatter_kws</span><span class="o">=</span><span class="p">{</span><span class="s1">&#39;alpha&#39;</span><span class="p">:</span> <span class="mf">0.5</span><span class="p">},</span> 
+                     <span class="n">line_kws</span><span class="o">=</span><span class="p">{</span><span class="s1">&#39;color&#39;</span><span class="p">:</span> <span class="s1">&#39;red&#39;</span><span class="p">,</span> <span class="s1">&#39;lw&#39;</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span> <span class="s1">&#39;alpha&#39;</span><span class="p">:</span> <span class="mf">0.8</span><span class="p">});</span>
+
+<span class="n">plot</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s1">&#39;Residuals vs Fitted&#39;</span><span class="p">);</span>
+<span class="n">plot</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s1">&#39;Fitted values&#39;</span><span class="p">);</span>
+<span class="n">plot</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s1">&#39;Residuals&#39;</span><span class="p">);</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="_images/diagnostics_auto_35_0.png" src="_images/diagnostics_auto_35_0.png" />
+</div>
+</div>
+</div>
+<div class="section" id="normality">
+<h3>Normality<a class="headerlink" href="#normality" title="Permalink to this headline">¶</a></h3>
+<p>It can be helpful if the residuals in the model are random, normally distributed variables with a mean of 0.</p>
+<p>This assumption means that the differences between the predicted and observed data are most frequently zero or very close to zero, and that differences much greater than zero happen only occasionally.</p>
+<p>Some people confuse this assumption with the idea that predictors have to be normally distributed, which they don’t. In small samples a lack of normality invalidates confidence intervals and significance tests, whereas in large samples it will not because of the <strong>central limit theorem</strong>.</p>
+<p>If you are concerned only with estimating the model parameters (and not significance tests and confidence intervals) then this assumption barely matters. If you bootstrap confidence intervals then you can ignore this assumption.</p>
+<div class="section" id="jarque-bera-test">
+<h4>Jarque-Bera test<a class="headerlink" href="#jarque-bera-test" title="Permalink to this headline">¶</a></h4>
+<p>The Jarque–Bera test is a goodness-of-fit test of whether sample data have the skewness and kurtosis matching a normal distribution.</p>
+<p>The null hypothesis is a joint hypothesis of the skewness being zero and the excess kurtosis being zero.</p>
+<p>Samples from a normal distribution have an expected skewness of 0 and an expected excess kurtosis of 0 (which is the same as a kurtosis of 3). As the definition of JB shows, any deviation from this increases the JB statistic.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">name</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;Jarque-Bera&#39;</span><span class="p">,</span> <span class="s1">&#39;Chi^2 two-tail prob.&#39;</span><span class="p">,</span> <span class="s1">&#39;Skew&#39;</span><span class="p">,</span> <span class="s1">&#39;Kurtosis&#39;</span><span class="p">]</span>
+<span class="n">test</span> <span class="o">=</span> <span class="n">sm</span><span class="o">.</span><span class="n">stats</span><span class="o">.</span><span class="n">jarque_bera</span><span class="p">(</span><span class="n">lm</span><span class="o">.</span><span class="n">resid</span><span class="p">)</span>
+
+<span class="n">lzip</span><span class="p">(</span><span class="n">name</span><span class="p">,</span> <span class="n">test</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[(&#39;Jarque-Bera&#39;, 46.07073936812634),
+ (&#39;Chi^2 two-tail prob.&#39;, 9.905264058149424e-11),
+ (&#39;Skew&#39;, 0.6835893357215456),
+ (&#39;Kurtosis&#39;, 3.975438359244381)]
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="section" id="omnibus-normtest">
+<h4>Omnibus normtest<a class="headerlink" href="#omnibus-normtest" title="Permalink to this headline">¶</a></h4>
+<p>Test for normal distribution of residuals. In this case, we use the <span class="math notranslate nohighlight">\(Chi^2\)</span>-Test. The Chi-Square Test for normality allows us to check whether or not the model residuals follow an approximately normal distribution.</p>
+<p>Our null hypothesis is that the residuals are from a normal distribution.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">name</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;Chi^2&#39;</span><span class="p">,</span> <span class="s1">&#39;Two-tail probability&#39;</span><span class="p">]</span>
+<span class="n">test</span> <span class="o">=</span> <span class="n">sm</span><span class="o">.</span><span class="n">stats</span><span class="o">.</span><span class="n">omni_normtest</span><span class="p">(</span><span class="n">lm</span><span class="o">.</span><span class="n">resid</span><span class="p">)</span>
+<span class="n">lzip</span><span class="p">(</span><span class="n">name</span><span class="p">,</span> <span class="n">test</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[(&#39;Chi^2&#39;, 35.39211231745856), (&#39;Two-tail probability&#39;, 2.063956114880732e-08)]
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="section" id="outliers">
+<h3>Outliers<a class="headerlink" href="#outliers" title="Permalink to this headline">¶</a></h3>
+<p>An outlier is a point for which <span class="math notranslate nohighlight">\(y_i\)</span> is far from the value predicted by the model. Outliers can arise for a variety of reasons, such as incorrect recording of an observation during data collection.</p>
+<p>In practice, it can be difficult to decide how large a residual needs to be before we consider the point to be an outlier. To address this problem, instead of plotting the residuals, we can plot the studentized residuals, computed by dividing each residual by its estimated standard error.</p>
+<p>Observations whose studentized residuals are greater than 3 in absolute value are possible outliers.</p>
+<p>If we believe that an outlier has occurred due to an error in data collection or recording, then one solution is to simply remove the observation. However, care should be taken, since an outlier may instead indicate a deficiency with the model, such as a missing predictor.</p>
+<div class="section" id="normal-q-q-plot">
+<h4>Normal Q-Q-Plot<a class="headerlink" href="#normal-q-q-plot" title="Permalink to this headline">¶</a></h4>
+<p>This plots the standardized (z-score) residuals against the theoretical normal quantiles. Anything quite off the diagonal lines may be a concern for further investigation.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Use standardized residuals</span>
+<span class="n">sm</span><span class="o">.</span><span class="n">qqplot</span><span class="p">(</span><span class="n">lm</span><span class="o">.</span><span class="n">get_influence</span><span class="p">()</span><span class="o">.</span><span class="n">resid_studentized_internal</span><span class="p">);</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/Users/jankirenz/opt/anaconda3/lib/python3.8/site-packages/statsmodels/graphics/gofplots.py:993: UserWarning: marker is redundantly defined by the &#39;marker&#39; keyword argument and the fmt string &quot;bo&quot; (-&gt; marker=&#39;o&#39;). The keyword argument will take precedence.
+  ax.plot(x, y, fmt, **plot_style)
+</pre></div>
+</div>
+<img alt="_images/diagnostics_auto_43_1.png" src="_images/diagnostics_auto_43_1.png" />
+</div>
+</div>
+<p>This plot shows if residuals are normally distributed. If a normal distribution is present, the residuals should (more or less) follow a straight line.
+We can observe that only some residuals (in the lower left and the upper right corner) deviate from the straight line.</p>
+<p>We could obtain the 3 observations with the largest deviations from our advanced plot below (observations 330, 327 and 320).</p>
+<p><strong>Advanced QQ-Plot</strong></p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Advanced plot (2)</span>
+<span class="c1"># ProbPlot and its qqplot method from statsmodels graphics API. </span>
+<span class="n">QQ</span> <span class="o">=</span> <span class="n">ProbPlot</span><span class="p">(</span><span class="n">model_norm_residuals</span><span class="p">)</span>
+<span class="n">plot_lm_2</span> <span class="o">=</span> <span class="n">QQ</span><span class="o">.</span><span class="n">qqplot</span><span class="p">(</span><span class="n">line</span><span class="o">=</span><span class="s1">&#39;45&#39;</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.5</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;#4C72B0&#39;</span><span class="p">,</span> <span class="n">lw</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+<span class="c1"># figure size</span>
+<span class="n">plot_lm_2</span><span class="o">.</span><span class="n">set_figheight</span><span class="p">(</span><span class="mi">8</span><span class="p">)</span>
+<span class="n">plot_lm_2</span><span class="o">.</span><span class="n">set_figwidth</span><span class="p">(</span><span class="mi">12</span><span class="p">)</span>
+<span class="c1"># figure labels</span>
+<span class="n">plot_lm_2</span><span class="o">.</span><span class="n">axes</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s1">&#39;Normal Q-Q&#39;</span><span class="p">)</span>
+<span class="n">plot_lm_2</span><span class="o">.</span><span class="n">axes</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s1">&#39;Theoretical Quantiles&#39;</span><span class="p">)</span>
+<span class="n">plot_lm_2</span><span class="o">.</span><span class="n">axes</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s1">&#39;Standardized Residuals&#39;</span><span class="p">);</span>
+<span class="c1"># annotations</span>
+<span class="n">abs_norm_resid</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">flip</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">argsort</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">abs</span><span class="p">(</span><span class="n">model_norm_residuals</span><span class="p">)),</span> <span class="mi">0</span><span class="p">)</span>
+<span class="n">abs_norm_resid_top_3</span> <span class="o">=</span> <span class="n">abs_norm_resid</span><span class="p">[:</span><span class="mi">3</span><span class="p">]</span>
+<span class="c1"># label 3 largest deviations</span>
+<span class="k">for</span> <span class="n">r</span><span class="p">,</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">abs_norm_resid_top_3</span><span class="p">):</span>
+    <span class="n">plot_lm_2</span><span class="o">.</span><span class="n">axes</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">annotate</span><span class="p">(</span><span class="n">i</span><span class="p">,</span> 
+                               <span class="n">xy</span><span class="o">=</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">flip</span><span class="p">(</span><span class="n">QQ</span><span class="o">.</span><span class="n">theoretical_quantiles</span><span class="p">,</span> <span class="mi">0</span><span class="p">)[</span><span class="n">r</span><span class="p">],</span>
+                                   <span class="n">model_norm_residuals</span><span class="p">[</span><span class="n">i</span><span class="p">]));</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/Users/jankirenz/opt/anaconda3/lib/python3.8/site-packages/statsmodels/graphics/gofplots.py:993: UserWarning: marker is redundantly defined by the &#39;marker&#39; keyword argument and the fmt string &quot;bo&quot; (-&gt; marker=&#39;o&#39;). The keyword argument will take precedence.
+  ax.plot(x, y, fmt, **plot_style)
+/Users/jankirenz/opt/anaconda3/lib/python3.8/site-packages/statsmodels/graphics/gofplots.py:993: UserWarning: color is redundantly defined by the &#39;color&#39; keyword argument and the fmt string &quot;bo&quot; (-&gt; color=&#39;b&#39;). The keyword argument will take precedence.
+  ax.plot(x, y, fmt, **plot_style)
+</pre></div>
+</div>
+<img alt="_images/diagnostics_auto_46_1.png" src="_images/diagnostics_auto_46_1.png" />
+</div>
+</div>
+</div>
+</div>
+<div class="section" id="correlation">
+<h3>Correlation<a class="headerlink" href="#correlation" title="Permalink to this headline">¶</a></h3>
+<p>An important assumption of the linear regression model is that the error terms are uncorrelated.</p>
+<p>Such correlations frequently occur in the context of time series data, which consists of observations for which measurements are obtained at discrete points in time. In many cases, observations that are obtained at adjacent time points will have positively correlated errors. In order to determine if this is the case for a given data set, we can plot the residuals from our model as a function of time. If the errors are uncorrelated, then there should be no discernible pattern.</p>
+<p>Correlation among the error terms can also occur outside of time series data. For instance, consider a study in which individuals’ heights are predicted from their weights. The assumption of uncorrelated errors could be violated if some of the individuals in the study are members of the same family, or eat the same diet, or have been exposed to the same environmental factors.</p>
+<p>In general, the assumption of uncorrelated errors is extremely important for linear regression as well as for other statistical methods, and good experimental design is crucial in order to mitigate the risk of such correlations.</p>
+<p>A test of autocorrelation that is designed to take account of the regression model is the <strong>Durbin-Watson test</strong>. It is used to test the hypothesis that there is no <strong>lag one autocorrelation</strong> in the residuals. If there is no autocorrelation, the Durbin-Watson distribution is symmetric around 2.</p>
+<p>A small p-value indicates there is significant autocorrelation remaining in the residuals.</p>
+<p>As a rough rule of thumb, if Durbin–Watson is less than 1.0, there may be cause for alarm. Small values of d indicate successive error terms are positively correlated. If d &gt; 2, successive error terms are negatively correlated.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">sm</span><span class="o">.</span><span class="n">stats</span><span class="o">.</span><span class="n">durbin_watson</span><span class="p">(</span><span class="n">lm</span><span class="o">.</span><span class="n">resid</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>0.8579182711447428
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="section" id="variance-of-error-terms">
+<h3>Variance of error terms<a class="headerlink" href="#variance-of-error-terms" title="Permalink to this headline">¶</a></h3>
+<p>Another important assumption of the linear regression model is that the error terms have a constant variance.</p>
+<p>For instance, the variances of the error terms may increase with the value of the response. One can identify non-constant variances in
+the errors, or <strong>heteroscedasticity</strong>, from the presence of a funnel shape in the residual plot.</p>
+<p>When faced with this problem, one possible solution is to transform the response Y using a concave function such as log Y or √Y . Such a transformation results in a greater amount of shrinkage of the larger responses, leading to a reduction in heteroscedasticity.</p>
+<div class="section" id="breusch-pagan-test">
+<h4>Breusch-Pagan test:<a class="headerlink" href="#breusch-pagan-test" title="Permalink to this headline">¶</a></h4>
+<p>Test assumes homoskedasticity (null hypothesis). If one of the test statistics is significant, then you have evidence of heteroskedasticity.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">name</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;Lagrange multiplier statistic&#39;</span><span class="p">,</span> <span class="s1">&#39;p-value&#39;</span><span class="p">,</span> 
+        <span class="s1">&#39;f-value&#39;</span><span class="p">,</span> <span class="s1">&#39;f p-value&#39;</span><span class="p">]</span>
+<span class="n">test</span> <span class="o">=</span> <span class="n">sm</span><span class="o">.</span><span class="n">stats</span><span class="o">.</span><span class="n">het_breuschpagan</span><span class="p">(</span><span class="n">lm</span><span class="o">.</span><span class="n">resid</span><span class="p">,</span> <span class="n">lm</span><span class="o">.</span><span class="n">model</span><span class="o">.</span><span class="n">exog</span><span class="p">)</span>
+<span class="n">lzip</span><span class="p">(</span><span class="n">name</span><span class="p">,</span> <span class="n">test</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[(&#39;Lagrange multiplier statistic&#39;, 32.046771823753346),
+ (&#39;p-value&#39;, 5.116017976864222e-07),
+ (&#39;f-value&#39;, 11.514595503250657),
+ (&#39;f p-value&#39;, 3.0178180637486394e-07)]
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="section" id="scale-location-plot">
+<h4>Scale-Location plot<a class="headerlink" href="#scale-location-plot" title="Permalink to this headline">¶</a></h4>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Scale Location plot</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="n">model_fitted_y</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="n">model_norm_residuals_abs_sqrt</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.5</span><span class="p">)</span>
+<span class="n">sns</span><span class="o">.</span><span class="n">regplot</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="n">model_fitted_y</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="n">model_norm_residuals_abs_sqrt</span><span class="p">,</span> 
+            <span class="n">scatter</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> 
+            <span class="n">ci</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> 
+            <span class="n">lowess</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+            <span class="n">line_kws</span><span class="o">=</span><span class="p">{</span><span class="s1">&#39;color&#39;</span><span class="p">:</span> <span class="s1">&#39;red&#39;</span><span class="p">,</span> <span class="s1">&#39;lw&#39;</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span> <span class="s1">&#39;alpha&#39;</span><span class="p">:</span> <span class="mf">0.8</span><span class="p">});</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="_images/diagnostics_auto_54_0.png" src="_images/diagnostics_auto_54_0.png" />
+</div>
+</div>
+<p>This plot shows if residuals are spread equally along the ranges of predictors. This is how we can check the assumption of equal variance (<strong>homoscedasticity</strong>). It’s good if we observe a horizontal line with equally (randomly) spread points.</p>
+<p>In our model the residuals begin to spread wider along the y-axis as it passes the x value of around 18. Because the residuals spread wider and wider with an increase of x, the red smooth line is not horizontal and shows a positive angle. This is an indication of <strong>heteroskedasticity</strong>.</p>
+</div>
+</div>
+<div class="section" id="leverage">
+<h3>Leverage<a class="headerlink" href="#leverage" title="Permalink to this headline">¶</a></h3>
+<p>We just saw that outliers are observations for which the response <span class="math notranslate nohighlight">\(y_i\)</span> is unusual given the predictor <span class="math notranslate nohighlight">\(x_i\)</span>. In contrast, observations with high leverage have an unusual value for <span class="math notranslate nohighlight">\(x_i\)</span>.</p>
+<p>In a simple linear regression, high leverage observations are fairly easy to identify, since we can simply look for observations for which the predictor value is outside of the normal range of the observations. But in a multiple linear regression with many predictors, it is possible to have an observation that is well within the range of each individual predictor’s values, but that is unusual in terms of the full set of predictors.</p>
+<p>A general rule of thumb is that observations with a <strong>Cook’s D</strong> over 4/n, where n is the number of observations, is an possible outlier with leverage.</p>
+<div class="section" id="statsmodel-influence">
+<h4>Statsmodel influence<a class="headerlink" href="#statsmodel-influence" title="Permalink to this headline">¶</a></h4>
+<p>Once created, an object of class OLSInfluence holds attributes and methods that allow users to assess the influence of each observation.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># obtain statistics</span>
+<span class="n">infl</span> <span class="o">=</span> <span class="n">lm</span><span class="o">.</span><span class="n">get_influence</span><span class="p">()</span>
+
+<span class="n">lm_cooksd</span> <span class="o">=</span> <span class="n">lm</span><span class="o">.</span><span class="n">get_influence</span><span class="p">()</span><span class="o">.</span><span class="n">cooks_distance</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+<span class="n">n</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">df</span><span class="p">[</span><span class="s2">&quot;name&quot;</span><span class="p">])</span>
+<span class="n">critical_d</span> <span class="o">=</span> <span class="mi">4</span><span class="o">/</span><span class="n">n</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Critical Cooks d:&#39;</span><span class="p">,</span> <span class="n">critical_d</span><span class="p">)</span>
+<span class="c1">#identification of potential outliers</span>
+<span class="n">out_d</span> <span class="o">=</span> <span class="n">lm_cooksd</span> <span class="o">&gt;</span> <span class="n">critical_d</span>
+<span class="c1"># Output potential outliers</span>
+<span class="n">df</span><span class="o">.</span><span class="n">index</span><span class="p">[</span><span class="n">out_d</span><span class="p">],</span><span class="n">lm_cooksd</span><span class="p">[</span><span class="n">out_d</span><span class="p">]</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Critical Cooks d: 0.01020408163265306
+</pre></div>
+</div>
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(Int64Index([  8,  13,  59,  60,  95, 108, 111, 112, 116, 154, 155, 196, 244,
+             309, 322, 324, 325, 326, 327, 328, 329, 333, 364, 386, 390, 393],
+            dtype=&#39;int64&#39;),
+ array([0.01391074, 0.02074964, 0.02033584, 0.01351444, 0.01590707,
+        0.01526168, 0.01615147, 0.01265893, 0.02959056, 0.01735372,
+        0.0154464 , 0.01029078, 0.02823691, 0.01436237, 0.02154478,
+        0.0134592 , 0.03845612, 0.0722928 , 0.02129834, 0.01323037,
+        0.03114715, 0.01533754, 0.01034796, 0.01538567, 0.01088558,
+        0.10214432]))
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Show summary frame of leverage statistics</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">infl</span><span class="o">.</span><span class="n">summary_frame</span><span class="p">()</span><span class="o">.</span><span class="n">filter</span><span class="p">([</span><span class="s2">&quot;student_resid&quot;</span><span class="p">,</span><span class="s2">&quot;dffits&quot;</span><span class="p">,</span><span class="s2">&quot;cooks_d&quot;</span><span class="p">]))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>     student_resid    dffits   cooks_d
+0        -0.281855 -0.026006  0.000169
+1        -0.340173 -0.036831  0.000340
+2        -0.151040 -0.015199  0.000058
+3        -0.627370 -0.058515  0.000857
+4        -0.482822 -0.053204  0.000709
+..             ...       ...       ...
+392       0.375223  0.026069  0.000170
+393       3.203068  0.646783  0.102144
+394       0.861453  0.122852  0.003776
+395       0.308964  0.023605  0.000140
+396       1.184191  0.109732  0.003007
+
+[392 rows x 3 columns]
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="section" id="residuals-vs-leverage">
+<h4>Residuals vs leverage<a class="headerlink" href="#residuals-vs-leverage" title="Permalink to this headline">¶</a></h4>
+<p>Plots leverage statistics vs. normalized residuals squared. See <a class="reference external" href="http://www.statsmodels.org/0.6.1/generated/statsmodels.graphics.regressionplots.plot_leverage_resid2.html">statsmodel documentation</a></p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">8</span><span class="p">,</span><span class="mi">6</span><span class="p">))</span>
+<span class="n">fig</span> <span class="o">=</span> <span class="n">plot_leverage_resid2</span><span class="p">(</span><span class="n">lm</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">ax</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="_images/diagnostics_auto_62_0.png" src="_images/diagnostics_auto_62_0.png" />
+</div>
+</div>
+</div>
+</div>
+<div class="section" id="multicollinearity">
+<h3>Multicollinearity<a class="headerlink" href="#multicollinearity" title="Permalink to this headline">¶</a></h3>
+<p>Collinearity refers to the situation in which two or more predictor variables collinearity are closely related to one another.</p>
+<p>The presence of collinearity can pose problems in the regression context, since it can be difficult to separate out the individual effects of collinear variables on the response.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># plot all variables in a scatter matrix</span>
+<span class="n">pd</span><span class="o">.</span><span class="n">plotting</span><span class="o">.</span><span class="n">scatter_matrix</span><span class="p">(</span><span class="n">df</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.8</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">10</span><span class="p">),</span> <span class="n">diagonal</span><span class="o">=</span><span class="s1">&#39;kde&#39;</span><span class="p">);</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="_images/diagnostics_auto_64_0.png" src="_images/diagnostics_auto_64_0.png" />
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Inspect correlation</span>
+<span class="c1"># Calculate correlation using the default method ( &quot;pearson&quot;)</span>
+<span class="n">corr</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">corr</span><span class="p">()</span>
+<span class="c1"># optimize aesthetics: generate mask for removing duplicate / unnecessary info</span>
+<span class="n">mask</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros_like</span><span class="p">(</span><span class="n">corr</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="nb">bool</span><span class="p">)</span>
+<span class="n">mask</span><span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">triu_indices_from</span><span class="p">(</span><span class="n">mask</span><span class="p">)]</span> <span class="o">=</span> <span class="kc">True</span>
+<span class="c1"># Generate a custom diverging colormap as indicator for correlations:</span>
+<span class="n">cmap</span> <span class="o">=</span> <span class="n">sns</span><span class="o">.</span><span class="n">diverging_palette</span><span class="p">(</span><span class="mi">220</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="n">as_cmap</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="c1"># Plot</span>
+<span class="n">sns</span><span class="o">.</span><span class="n">heatmap</span><span class="p">(</span><span class="n">corr</span><span class="p">,</span> <span class="n">mask</span><span class="o">=</span><span class="n">mask</span><span class="p">,</span> <span class="n">cmap</span><span class="o">=</span><span class="n">cmap</span><span class="p">,</span> <span class="n">annot</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>  <span class="n">square</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">annot_kws</span><span class="o">=</span><span class="p">{</span><span class="s2">&quot;size&quot;</span><span class="p">:</span> <span class="mi">12</span><span class="p">});</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="_images/diagnostics_auto_65_0.png" src="_images/diagnostics_auto_65_0.png" />
+</div>
+</div>
+<p>A simple way to detect collinearity is to look at the <strong>correlation matrix</strong> of the predictors. An element of this matrix that is large in absolute value indicates a pair of highly correlated variables, and therefore a collinearity problem in the data.</p>
+<p>Unfortunately, not all collinearity problems can be detected by inspection of the correlation matrix: it is possible for collinearity to exist between three or more variables even if no pair of variables has a particularly high correlation. We call this situation <strong>multicollinearity</strong>.</p>
+<p>Instead of inspecting the correlation matrix, a better way to assess multicollinearity is to compute the condition number test. If the condition number is above 30, the regression may have significant multicollinearity.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># makes here no sense since we only have one predictor...</span>
+<span class="n">np</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">cond</span><span class="p">(</span><span class="n">lm</span><span class="o">.</span><span class="n">model</span><span class="o">.</span><span class="n">exog</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>34838.06097745096
+</pre></div>
+</div>
+</div>
+</div>
+<p>Instead of inspecting the correlation matrix, a better way to assess multicollinearity is to compute the variance inflation factor (VIF). The smallest possible value for VIF is 1, which indicates the complete absence of collinearity. Typically in practice there is a small amount of collinearity among the predictors. As a rule of thumb, a VIF value that exceeds 5 or 10 indicates a problematic amount of collinearity.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">sm</span><span class="o">.</span><span class="n">stats</span><span class="o">.</span><span class="n">outliers_influence</span><span class="o">.</span><span class="n">variance_inflation_factor</span><span class="p">(</span><span class="n">exog</span><span class="p">,</span> <span class="n">exog_idx</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
+<span class="ne">AttributeError</span><span class="g g-Whitespace">                            </span>Traceback (most recent call last)
+<span class="o">/</span><span class="n">var</span><span class="o">/</span><span class="n">folders</span><span class="o">/</span><span class="mi">9</span><span class="n">c</span><span class="o">/</span><span class="n">_3s5jt3n60j__flsgl0t72340000gn</span><span class="o">/</span><span class="n">T</span><span class="o">/</span><span class="n">ipykernel_1367</span><span class="o">/</span><span class="mf">507250405.</span><span class="n">py</span> <span class="ow">in</span> <span class="o">&lt;</span><span class="n">module</span><span class="o">&gt;</span>
+<span class="ne">----&gt; </span><span class="mi">1</span> <span class="n">sm</span><span class="o">.</span><span class="n">stats</span><span class="o">.</span><span class="n">outliers_influence</span><span class="o">.</span><span class="n">variance_inflation_factor</span><span class="p">(</span><span class="n">exog</span><span class="p">,</span> <span class="n">exog_idx</span><span class="p">)</span>
+
+<span class="ne">AttributeError</span>: module &#39;statsmodels.stats.api&#39; has no attribute &#39;outliers_influence&#39;
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">y</span><span class="p">,</span> <span class="n">X</span> <span class="o">=</span> <span class="n">dmatrices</span><span class="p">(</span><span class="s1">&#39;mpg ~ horsepower+ cylinders + displacement&#39;</span><span class="p">,</span> <span class="n">df</span><span class="p">,</span> <span class="n">return_type</span><span class="o">=</span><span class="s1">&#39;dataframe&#39;</span><span class="p">)</span>
+
+<span class="c1"># For each X, calculate VIF and save in dataframe</span>
+<span class="n">vif</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">()</span>
+<span class="n">vif</span><span class="p">[</span><span class="s2">&quot;VIF Factor&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="p">[</span><span class="n">variance_inflation_factor</span><span class="p">(</span><span class="n">X</span><span class="o">.</span><span class="n">values</span><span class="p">,</span> <span class="n">i</span><span class="p">)</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">X</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">])]</span>
+<span class="n">vif</span><span class="p">[</span><span class="s2">&quot;Feature&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">X</span><span class="o">.</span><span class="n">columns</span>
+
+<span class="n">vif</span><span class="o">.</span><span class="n">round</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
+<span class="ne">NameError</span><span class="g g-Whitespace">                                 </span>Traceback (most recent call last)
+<span class="o">/</span><span class="n">var</span><span class="o">/</span><span class="n">folders</span><span class="o">/</span><span class="mi">9</span><span class="n">c</span><span class="o">/</span><span class="n">_3s5jt3n60j__flsgl0t72340000gn</span><span class="o">/</span><span class="n">T</span><span class="o">/</span><span class="n">ipykernel_1367</span><span class="o">/</span><span class="mf">197413710.</span><span class="n">py</span> <span class="ow">in</span> <span class="o">&lt;</span><span class="n">module</span><span class="o">&gt;</span>
+<span class="ne">----&gt; </span><span class="mi">1</span> <span class="n">y</span><span class="p">,</span> <span class="n">X</span> <span class="o">=</span> <span class="n">dmatrices</span><span class="p">(</span><span class="s1">&#39;mpg ~ horsepower+ cylinders + displacement&#39;</span><span class="p">,</span> <span class="n">df</span><span class="p">,</span> <span class="n">return_type</span><span class="o">=</span><span class="s1">&#39;dataframe&#39;</span><span class="p">)</span>
+<span class="g g-Whitespace">      </span><span class="mi">2</span> 
+<span class="g g-Whitespace">      </span><span class="mi">3</span> <span class="c1"># For each X, calculate VIF and save in dataframe</span>
+<span class="g g-Whitespace">      </span><span class="mi">4</span> <span class="n">vif</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">()</span>
+<span class="g g-Whitespace">      </span><span class="mi">5</span> <span class="n">vif</span><span class="p">[</span><span class="s2">&quot;VIF Factor&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="p">[</span><span class="n">variance_inflation_factor</span><span class="p">(</span><span class="n">X</span><span class="o">.</span><span class="n">values</span><span class="p">,</span> <span class="n">i</span><span class="p">)</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">X</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">])]</span>
+
+<span class="ne">NameError</span>: name &#39;df&#39; is not defined
+</pre></div>
+</div>
+</div>
+</div>
+<p>When faced with the problem of collinearity, there are two simple solutions:</p>
+<p>The first is to drop one of the problematic variables from the regression. This can usually be done without much compromise to the regression fit, since the presence of collinearity implies that the information that this variable provides about the response is redundant in the presence of the other variables.</p>
+<p>The second solution is to combine the collinear variables together into a single predictor. For instance, we might take the average of standardized versions of limit and rating in order to create a new variable that measures credit worthiness.</p>
+</div>
+</div>
+</div>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            kernelName: "python3",
+            path: "./."
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+              </div>
+              
+        
+            
+
+
+
+<div class='prev-next-bottom'>
+    
+
+</div>
+        
+        </div>
+    </div>
+    <footer class="footer">
+    <div class="container">
+      <p>
+        
+          By Jan Kirenz<br/>
+        
+            &copy; Copyright 2021.<br/>
+      </p>
+    </div>
+  </footer>
+</main>
+
+
+      </div>
+    </div>
+  
+  <script src="_static/js/index.1c5a1a01449ed65a7b51.js"></script>
+
+  
+  </body>
+</html>
