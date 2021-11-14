@@ -6,7 +6,7 @@ Linear regression is still a useful and widely used statistical learning method.
 
 :::{note}
  Linear regression is a useful tool for predicting a quantitative response
- :::
+:::
 
 
 <a rel="license" href="https://creativecommons.org/licenses/by-sa/4.0/"><img src="https://licensebuttons.net/l/by-sa/4.0/88x31.png" alt="Creative Commons License" style="border-width:0"/></a><br />

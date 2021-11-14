@@ -14,7 +14,7 @@
 # 
 # As an example of how to identify these problems, we use data about the prestige of canadian occupations to estimate a regression model with `prestige` as the response and `income` and `education` as predictors. Review this [site](https://vincentarelbundock.github.io/Rdatasets/doc/carData/Prestige.html) to learn more about the data.
 # 
-# *This tutorial is mainly based on the [statmodels documentation](https://www.statsmodels.org/dev/examples/notebooks/generated/regression_plots.html#Partial-Regression-Plots-(Crime-Data)) about regression plots.*
+# *This tutorial is mainly based on the excellent [statmodels documentation](https://www.statsmodels.org/dev/examples/notebooks/generated/regression_plots.html#Partial-Regression-Plots-(Crime-Data)) about regression plots.*
 # 
 #  ## Python setup
 
@@ -93,6 +93,7 @@ print(lm.summary())
 # In[7]:
 
 
+# HIDE CODE
 df_outlier = pd.DataFrame(
         { 'observation': pd.Categorical([ "A", "B", "C", "D", "E" ]),
           'x': np.array([1, 2, 3, 4, 5],dtype='int32'),
@@ -107,6 +108,7 @@ sns.lmplot(x="x", y="y", data=df_outlier, ci=False);
 # In[8]:
 
 
+# HIDE CODE
 df_leverage = pd.DataFrame(
         { 'observation': pd.Categorical([ "A", "B", "C", "D", "E" ]),
           'x': np.array([1, 2, 3, 4, 20],dtype='int32'),
@@ -116,9 +118,7 @@ df_leverage = pd.DataFrame(
 sns.lmplot(x="x", y="y", data=df_leverage, ci=False);
 
 
-# For example, observation E has high leverage, in that the predictor value for this observation is large relative to the other observations. The removal of the high leverage observation would have a substantial impact on the regression line. In general, high leverage observations tend to have a sizable impact on the estimated regression line.
-# 
-# Therefore, it is important to detect influential observations and to take them into consideration when interpreting the results.
+# For example, the observation with a value of $x=20$ has high leverage, in that the predictor value for this observation is large relative to the other observations. The removal of the high leverage observation would have a substantial impact on the regression line. In general, high leverage observations tend to have a sizable impact on the estimated regression line. Therefore, it is important to detect influential observations and to take them into consideration when interpreting the results.
 
 # ### Influence plots
 # 
@@ -196,7 +196,9 @@ print(df.index[out_d], "\n",
 # 
 # One crucial assumption of the linear regression model is the linear relationship between the response and the dependent variables. We can identify non-linear relationships in the regression model residuals if the residuals are not equally spread around the horizontal line (where the residuals are zero) but instead show a pattern, then this gives us an indication for a non-linear relationship. 
 # 
-# We can deal with non-linear relationships via basis expansions (e.g. polynomial regression) or regression splines (see {cite:t}`Kuhn2019`](http://www.feat.engineering/numeric-one-to-many.html#numeric-basis-functions))
+# :::{note}
+# We can deal with non-linear relationships via basis expansions (e.g. polynomial regression) or regression splines ([see {cite:t}`Kuhn2019`](http://www.feat.engineering/numeric-one-to-many.html#numeric-basis-functions))
+# :::
 # 
 # Another important assumption is that the error terms have a constant variance (homoscedasticity). For instance, the variances of the error terms may increase with the value of the response. One can identify non-constant variances in the errors, or heteroscedasticity, from the presence of a funnel shape in a residual plot. 
 # 
@@ -364,13 +366,13 @@ plot.set_ylabel('Residuals');
 
 # This plot shows how residuals are spread along the ranges of predictors. It’s a good sign if we observe relatively equal (randomly) spreaded points along the dotted horizontal line where the residuals are zero. 
 # 
-# The red line indicates the fit of a locally weighted scatterplot smoothing (lowess), a local regression method, to the residual scatterplot. **Local regression** is a different approach for fitting flexible non-linear functions, which involves computing the fit at a target point $x_0$ using only the nearby training observations {see cit:t}`James2021` for more details). In essence, lowess creates a smooth line through the scatter plot to help us investigate the relationship between the fitted values and the residuals.
+# The red line indicates the fit of a locally weighted scatterplot smoothing (lowess), a local regression method, to the residual scatterplot. **Local regression** is a different approach for fitting flexible non-linear functions, which involves computing the fit at a target point $x_0$ using only the nearby training observations {see cite:t}`James2021` for more details). 
 # 
-# We can interpret the result of our lowess fit as follows:
+# :::{note}
+# lowess creates a smooth line through the scatter plot to help us investigate the relationship between the fitted values and the residuals.
+# :::
 # 
-# - The fit is almost equal to the dotted horizontal line where the residuals are zero. This is an indication for a linear relationship.
-# 
-# Note that in the case of non-linear relationships, we typically observe a pattern in lowess which deviates strongly from a horizontal line.  
+# We can interpret the result of our lowess fit as follows: The fit is almost equal to the dotted horizontal line where the residuals are zero. This is an indication for a linear relationship. Note that in the case of non-linear relationships, we typically observe a pattern which deviates strongly from a horizontal line.  
 # 
 # Regarding **homoscedasticity**, the residuals seem to spread equally wide with an increase of x. This is an indication of homoscedasticiy. Next, we use the Breusch-Pagan Lagrange Multiplier test to confirm our assumption.
 
@@ -470,7 +472,7 @@ lzip(name, test)
 # 
 # ### Durbin-Watson test
 # 
-# A test of autocorrelation that is designed to take account of the regression model is the **Durbin-Watson test** (also included in the regression summary). It is used to test the hypothesis that there is no **lag one autocorrelation** in the residuals.
+# A test of autocorrelation that is designed to take account of the regression model is the **Durbin-Watson test** (also included in the regression summary). It is used to test the hypothesis that there is no **lag one autocorrelation** in the residuals. This means if there is no lag one autocorrelation, then information about $ϵ_i$ provides little or no information about $ϵ_{i+1}.
 # 
 # > A small p-value indicates there is significant autocorrelation remaining in the residuals.
 # 
