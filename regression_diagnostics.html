@@ -201,9 +201,9 @@
         <!-- ipynb file if we had a myst markdown file -->
         
         <!-- Download raw file -->
-        <a class="dropdown-buttons" href="_sources/regression_diagnostics.ipynb"><button type="button"
+        <a class="dropdown-buttons" href="_sources/regression_diagnostics.md"><button type="button"
                 class="btn btn-secondary topbarbtn" title="Download source file" data-toggle="tooltip"
-                data-placement="left">.ipynb</button></a>
+                data-placement="left">.md</button></a>
         <!-- Download PDF via print -->
         <button type="button" id="download-print" class="btn btn-secondary topbarbtn" title="Print to PDF"
             onClick="window.print()" data-toggle="tooltip" data-placement="left">.pdf</button>
@@ -236,22 +236,6 @@
             class="fas fa-expand"></i></button></a>
 
             <!-- Launch buttons -->
-
-<div class="dropdown-buttons-trigger">
-    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn"
-        aria-label="Launch interactive content"><i class="fas fa-rocket"></i></button>
-    <div class="dropdown-buttons">
-        
-        
-        
-        <a class="colab-button" href="https://colab.research.google.com/github/kirenz/linear_regression/blob/main/regression_diagnostics.ipynb"><button type="button" class="btn btn-secondary topbarbtn"
-                title="Launch Colab" data-toggle="tooltip" data-placement="left"><img class="colab-button-logo"
-                    src="_static/images/logo_colab.png"
-                    alt="Interact on Colab">Colab</button></a>
-        
-        
-    </div>
-</div>
 
         </div>
 
@@ -410,9 +394,7 @@
 <p><em>This tutorial is mainly based on the excellent <a class="reference external" href="https://www.statsmodels.org/dev/examples/notebooks/generated/regression_plots.html#Partial-Regression-Plots-(Crime-Data)">statmodels documentation</a> about regression plots.</em></p>
 <div class="section" id="python-setup">
 <h2>Python setup<a class="headerlink" href="#python-setup" title="Permalink to this headline">¶</a></h2>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
 <span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
 <span class="kn">from</span> <span class="nn">patsy</span> <span class="kn">import</span> <span class="n">dmatrices</span>
 
@@ -424,107 +406,26 @@
 <span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
 <span class="kn">import</span> <span class="nn">seaborn</span> <span class="k">as</span> <span class="nn">sns</span>
 
-<span class="o">%</span><span class="k">matplotlib</span> inline
+<span class="o">%</span><span class="n">matplotlib</span> <span class="n">inline</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">rc</span><span class="p">(</span><span class="s2">&quot;figure&quot;</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">16</span><span class="p">,</span> <span class="mi">8</span><span class="p">))</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">rc</span><span class="p">(</span><span class="s2">&quot;font&quot;</span><span class="p">,</span> <span class="n">size</span><span class="o">=</span><span class="mi">14</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
-</div>
-</div>
 <div class="section" id="import-data">
 <h2>Import data<a class="headerlink" href="#import-data" title="Permalink to this headline">¶</a></h2>
 <p>We use the function <code class="docutils literal notranslate"><span class="pre">.datasets.get_rdataset</span></code> to load the dataset from the <a href="https://vincentarelbundock.github.io/Rdatasets/">Rdatasets package</a>.</p>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># import data</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># import data</span>
 <span class="n">df</span> <span class="o">=</span> <span class="n">sm</span><span class="o">.</span><span class="n">datasets</span><span class="o">.</span><span class="n">get_rdataset</span><span class="p">(</span><span class="s2">&quot;Duncan&quot;</span><span class="p">,</span> <span class="s2">&quot;carData&quot;</span><span class="p">,</span> <span class="n">cache</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span><span class="o">.</span><span class="n">data</span>
 </pre></div>
 </div>
-</div>
-</div>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># show head of DataFrame</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># show head of DataFrame</span>
 <span class="n">df</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
 </pre></div>
 </div>
-</div>
-<div class="cell_output docutils container">
-<div class="output text_html"><div>
-<style scoped>
-    .dataframe tbody tr th:only-of-type {
-        vertical-align: middle;
-    }
-
-    .dataframe tbody tr th {
-        vertical-align: top;
-    }
-
-    .dataframe thead th {
-        text-align: right;
-    }
-</style>
-<table border="1" class="dataframe">
-  <thead>
-    <tr style="text-align: right;">
-      <th></th>
-      <th>type</th>
-      <th>income</th>
-      <th>education</th>
-      <th>prestige</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <th>accountant</th>
-      <td>prof</td>
-      <td>62</td>
-      <td>86</td>
-      <td>82</td>
-    </tr>
-    <tr>
-      <th>pilot</th>
-      <td>prof</td>
-      <td>72</td>
-      <td>76</td>
-      <td>83</td>
-    </tr>
-    <tr>
-      <th>architect</th>
-      <td>prof</td>
-      <td>75</td>
-      <td>92</td>
-      <td>90</td>
-    </tr>
-    <tr>
-      <th>author</th>
-      <td>prof</td>
-      <td>55</td>
-      <td>90</td>
-      <td>76</td>
-    </tr>
-    <tr>
-      <th>chemist</th>
-      <td>prof</td>
-      <td>64</td>
-      <td>86</td>
-      <td>90</td>
-    </tr>
-  </tbody>
-</table>
-</div></div></div>
-</div>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># plot numerical data as pairs</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># plot numerical data as pairs</span>
 <span class="n">sns</span><span class="o">.</span><span class="n">pairplot</span><span class="p">(</span><span class="n">df</span><span class="p">);</span>
 </pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<img alt="_images/regression_diagnostics_5_0.png" src="_images/regression_diagnostics_5_0.png" />
-</div>
 </div>
 <p>Findings:</p>
 <ul class="simple">
@@ -534,51 +435,13 @@
 </div>
 <div class="section" id="model">
 <h2>Model<a class="headerlink" href="#model" title="Permalink to this headline">¶</a></h2>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># estimate the model and save it as lm (linear model)</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># estimate the model and save it as lm (linear model)</span>
 <span class="n">lm</span> <span class="o">=</span> <span class="n">ols</span><span class="p">(</span><span class="s2">&quot;prestige ~ income + education&quot;</span><span class="p">,</span> <span class="n">data</span><span class="o">=</span><span class="n">df</span><span class="p">)</span><span class="o">.</span><span class="n">fit</span><span class="p">()</span>
 </pre></div>
 </div>
-</div>
-</div>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># print regression results</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># print regression results</span>
 <span class="nb">print</span><span class="p">(</span><span class="n">lm</span><span class="o">.</span><span class="n">summary</span><span class="p">())</span>
 </pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>                            OLS Regression Results                            
-==============================================================================
-Dep. Variable:               prestige   R-squared:                       0.828
-Model:                            OLS   Adj. R-squared:                  0.820
-Method:                 Least Squares   F-statistic:                     101.2
-Date:                Sun, 14 Nov 2021   Prob (F-statistic):           8.65e-17
-Time:                        11:52:44   Log-Likelihood:                -178.98
-No. Observations:                  45   AIC:                             364.0
-Df Residuals:                      42   BIC:                             369.4
-Df Model:                           2                                         
-Covariance Type:            nonrobust                                         
-==============================================================================
-                 coef    std err          t      P&gt;|t|      [0.025      0.975]
-------------------------------------------------------------------------------
-Intercept     -6.0647      4.272     -1.420      0.163     -14.686       2.556
-income         0.5987      0.120      5.003      0.000       0.357       0.840
-education      0.5458      0.098      5.555      0.000       0.348       0.744
-==============================================================================
-Omnibus:                        1.279   Durbin-Watson:                   1.458
-Prob(Omnibus):                  0.528   Jarque-Bera (JB):                0.520
-Skew:                           0.155   Prob(JB):                        0.771
-Kurtosis:                       3.426   Cond. No.                         163.
-==============================================================================
-
-Notes:
-[1] Standard Errors assume that the covariance matrix of the errors is correctly specified.
-</pre></div>
-</div>
-</div>
 </div>
 </div>
 </div>
@@ -587,9 +450,7 @@ Notes:
 <div class="section" id="high-leverage-points">
 <h2>High-leverage points<a class="headerlink" href="#high-leverage-points" title="Permalink to this headline">¶</a></h2>
 <p>In a regression analysis, single observations can have a strong influence on the results of the model. For example, in the plot below we can see how a single outlying data point can affect a model.</p>
-<div class="cell tag_hide-input docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># HIDE CODE</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># HIDE CODE</span>
 <span class="n">df_outlier</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span>
         <span class="p">{</span> <span class="s1">&#39;observation&#39;</span><span class="p">:</span> <span class="n">pd</span><span class="o">.</span><span class="n">Categorical</span><span class="p">([</span> <span class="s2">&quot;A&quot;</span><span class="p">,</span> <span class="s2">&quot;B&quot;</span><span class="p">,</span> <span class="s2">&quot;C&quot;</span><span class="p">,</span> <span class="s2">&quot;D&quot;</span><span class="p">,</span> <span class="s2">&quot;E&quot;</span> <span class="p">]),</span>
           <span class="s1">&#39;x&#39;</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">5</span><span class="p">],</span><span class="n">dtype</span><span class="o">=</span><span class="s1">&#39;int32&#39;</span><span class="p">),</span>
@@ -599,15 +460,8 @@ Notes:
 <span class="n">sns</span><span class="o">.</span><span class="n">lmplot</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="s2">&quot;x&quot;</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="s2">&quot;y&quot;</span><span class="p">,</span> <span class="n">data</span><span class="o">=</span><span class="n">df_outlier</span><span class="p">,</span> <span class="n">ci</span><span class="o">=</span><span class="kc">False</span><span class="p">);</span>
 </pre></div>
 </div>
-</div>
-<div class="cell_output docutils container">
-<img alt="_images/regression_diagnostics_11_0.png" src="_images/regression_diagnostics_11_0.png" />
-</div>
-</div>
 <p>We just saw that outliers are observations for which the response <span class="math notranslate nohighlight">\(y_i\)</span> is unusual given the predictor <span class="math notranslate nohighlight">\(x_i\)</span>. In contrast, observations with high <strong>leverage</strong> have an unusual value for <span class="math notranslate nohighlight">\(x_i\)</span>.</p>
-<div class="cell tag_hide-input docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># HIDE CODE</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># HIDE CODE</span>
 <span class="n">df_leverage</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span>
         <span class="p">{</span> <span class="s1">&#39;observation&#39;</span><span class="p">:</span> <span class="n">pd</span><span class="o">.</span><span class="n">Categorical</span><span class="p">([</span> <span class="s2">&quot;A&quot;</span><span class="p">,</span> <span class="s2">&quot;B&quot;</span><span class="p">,</span> <span class="s2">&quot;C&quot;</span><span class="p">,</span> <span class="s2">&quot;D&quot;</span><span class="p">,</span> <span class="s2">&quot;E&quot;</span> <span class="p">]),</span>
           <span class="s1">&#39;x&#39;</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">20</span><span class="p">],</span><span class="n">dtype</span><span class="o">=</span><span class="s1">&#39;int32&#39;</span><span class="p">),</span>
@@ -617,12 +471,8 @@ Notes:
 <span class="n">sns</span><span class="o">.</span><span class="n">lmplot</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="s2">&quot;x&quot;</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="s2">&quot;y&quot;</span><span class="p">,</span> <span class="n">data</span><span class="o">=</span><span class="n">df_leverage</span><span class="p">,</span> <span class="n">ci</span><span class="o">=</span><span class="kc">False</span><span class="p">);</span>
 </pre></div>
 </div>
-</div>
-<div class="cell_output docutils container">
-<img alt="_images/regression_diagnostics_13_0.png" src="_images/regression_diagnostics_13_0.png" />
-</div>
-</div>
 <p>For example, the observation with a value of <span class="math notranslate nohighlight">\(x=20\)</span> has high leverage, in that the predictor value for this observation is large relative to the other observations. The removal of the high leverage observation would have a substantial impact on the regression line. In general, high leverage observations tend to have a sizable impact on the estimated regression line. Therefore, it is important to detect influential observations and to take them into consideration when interpreting the results.</p>
+<!-- #region -->
 <div class="section" id="influence-plots">
 <h3>Influence plots<a class="headerlink" href="#influence-plots" title="Permalink to this headline">¶</a></h3>
 <p>We can use <strong>influence plots</strong> to identify observations in our independent variables which have “unusual” values in comparison to other values.</p>
@@ -645,16 +495,10 @@ Notes:
 <li><p>Refit the regression model on remaining (n−1) observations</p></li>
 <li><p>Examine how much all of the fitted values change when the ith observation is deleted.</p></li>
 </ol>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">fig</span> <span class="o">=</span> <span class="n">sm</span><span class="o">.</span><span class="n">graphics</span><span class="o">.</span><span class="n">influence_plot</span><span class="p">(</span><span class="n">lm</span><span class="p">,</span> <span class="n">criterion</span><span class="o">=</span><span class="s2">&quot;cooks&quot;</span><span class="p">)</span>
+<!-- #endregion -->
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">fig</span> <span class="o">=</span> <span class="n">sm</span><span class="o">.</span><span class="n">graphics</span><span class="o">.</span><span class="n">influence_plot</span><span class="p">(</span><span class="n">lm</span><span class="p">,</span> <span class="n">criterion</span><span class="o">=</span><span class="s2">&quot;cooks&quot;</span><span class="p">)</span>
 <span class="n">fig</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">(</span><span class="n">pad</span><span class="o">=</span><span class="mf">1.0</span><span class="p">)</span>
 </pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<img alt="_images/regression_diagnostics_16_0.png" src="_images/regression_diagnostics_16_0.png" />
-</div>
 </div>
 <p>To identify values with high influence, we look for observations with:</p>
 <ol class="simple">
@@ -670,9 +514,7 @@ Notes:
 </ul>
 <p>A general rule of thumb is that observations with a <strong>Cook’s distance</strong> over <span class="math notranslate nohighlight">\(4/n\)</span> (where n is the number of observations) are possible outliers with leverage.</p>
 <p>In addition to our plot, we can use the function <code class="docutils literal notranslate"><span class="pre">.get_influence()</span></code> to assess the influence of each observation and compare them to the cricital Cook’s distance :</p>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># obtain Cook&#39;s distance </span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># obtain Cook&#39;s distance </span>
 <span class="n">lm_cooksd</span> <span class="o">=</span> <span class="n">lm</span><span class="o">.</span><span class="n">get_influence</span><span class="p">()</span><span class="o">.</span><span class="n">cooks_distance</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
 
 <span class="c1"># get length of df to obtain n</span>
@@ -689,15 +531,6 @@ Notes:
 <span class="nb">print</span><span class="p">(</span><span class="n">df</span><span class="o">.</span><span class="n">index</span><span class="p">[</span><span class="n">out_d</span><span class="p">],</span> <span class="s2">&quot;</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">,</span> 
     <span class="n">lm_cooksd</span><span class="p">[</span><span class="n">out_d</span><span class="p">])</span>
 </pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Critical Cooks distance: 0.08888888888888889
-Index([&#39;minister&#39;, &#39;reporter&#39;, &#39;conductor&#39;], dtype=&#39;object&#39;) 
- [0.56637974 0.09898456 0.22364122]
-</pre></div>
-</div>
-</div>
 </div>
 <p>We will deal with the crictical values in the section below.</p>
 </div>
@@ -767,27 +600,13 @@ Index([&#39;minister&#39;, &#39;reporter&#39;, &#39;conductor&#39;], dtype=&#39;
 <br/>
 <p>For a quick check of all the regressors, you can use <code class="docutils literal notranslate"><span class="pre">plot_partregress_grid</span></code>. These plots will not label the
 points, but you can use them to identify problems and then use <code class="docutils literal notranslate"><span class="pre">plot_partregress</span></code> to get more information.</p>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">fig</span> <span class="o">=</span> <span class="n">sm</span><span class="o">.</span><span class="n">graphics</span><span class="o">.</span><span class="n">plot_partregress_grid</span><span class="p">(</span><span class="n">lm</span><span class="p">)</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">fig</span> <span class="o">=</span> <span class="n">sm</span><span class="o">.</span><span class="n">graphics</span><span class="o">.</span><span class="n">plot_partregress_grid</span><span class="p">(</span><span class="n">lm</span><span class="p">)</span>
 <span class="n">fig</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">(</span><span class="n">pad</span><span class="o">=</span><span class="mf">1.0</span><span class="p">)</span>
 </pre></div>
 </div>
-</div>
-<div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>eval_env: 1
-eval_env: 1
-eval_env: 1
-</pre></div>
-</div>
-<img alt="_images/regression_diagnostics_22_1.png" src="_images/regression_diagnostics_22_1.png" />
-</div>
-</div>
 <p>We observe a positive relationship between prestige and income as well as between prestige and education. The relationship seems to be linear in both cases.</p>
 <p>Next, let’s take a closer look at the observations.</p>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">sm</span><span class="o">.</span><span class="n">graphics</span><span class="o">.</span><span class="n">plot_partregress</span><span class="p">(</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">sm</span><span class="o">.</span><span class="n">graphics</span><span class="o">.</span><span class="n">plot_partregress</span><span class="p">(</span>
                              <span class="n">endog</span><span class="o">=</span><span class="s1">&#39;prestige&#39;</span><span class="p">,</span> <span class="c1"># response</span>
                              <span class="n">exog_i</span><span class="o">=</span><span class="s1">&#39;income&#39;</span><span class="p">,</span> <span class="c1"># variable of interest</span>
                              <span class="n">exog_others</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;education&#39;</span><span class="p">],</span> <span class="c1"># other predictors</span>
@@ -796,99 +615,24 @@ eval_env: 1
                              <span class="p">);</span>
 </pre></div>
 </div>
-</div>
-<div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>eval_env: 1
-</pre></div>
-</div>
-<img alt="_images/regression_diagnostics_24_1.png" src="_images/regression_diagnostics_24_1.png" />
-</div>
-</div>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># same plot for education</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># same plot for education</span>
 <span class="n">fig</span> <span class="o">=</span> <span class="n">sm</span><span class="o">.</span><span class="n">graphics</span><span class="o">.</span><span class="n">plot_partregress</span><span class="p">(</span><span class="s2">&quot;prestige&quot;</span><span class="p">,</span> <span class="s2">&quot;education&quot;</span><span class="p">,</span> <span class="p">[</span><span class="s2">&quot;income&quot;</span><span class="p">],</span> <span class="n">data</span><span class="o">=</span><span class="n">df</span><span class="p">)</span>
 <span class="n">fig</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">(</span><span class="n">pad</span><span class="o">=</span><span class="mf">1.0</span><span class="p">)</span>
 </pre></div>
 </div>
-</div>
-<div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>eval_env: 1
-</pre></div>
-</div>
-<img alt="_images/regression_diagnostics_25_1.png" src="_images/regression_diagnostics_25_1.png" />
-</div>
-</div>
 <p>The partial regression plots confirm the influence of <code class="docutils literal notranslate"><span class="pre">conductor</span></code>, <code class="docutils literal notranslate"><span class="pre">minister</span></code> on the partial relationships between prestige and the predictors income and education. The influence of <code class="docutils literal notranslate"><span class="pre">reporter</span></code> is less obvious but since the observation was considered critical according to Cook`s D, we also drop this case.</p>
 <p>Note that influential cases potentially bias the effect of income and education on prestige. Therefore, we will drop these cases and perform a linear regression without them.</p>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># make a subset and flag as TRUE if index doesn&#39;t contain ...</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># make a subset and flag as TRUE if index doesn&#39;t contain ...</span>
 <span class="n">subset</span> <span class="o">=</span> <span class="o">~</span><span class="n">df</span><span class="o">.</span><span class="n">index</span><span class="o">.</span><span class="n">isin</span><span class="p">([</span><span class="s2">&quot;conductor&quot;</span><span class="p">,</span> <span class="s2">&quot;minister&quot;</span><span class="p">,</span> <span class="s2">&quot;reporter&quot;</span><span class="p">])</span>
 
 <span class="nb">print</span><span class="p">(</span><span class="n">df</span><span class="o">.</span><span class="n">index</span><span class="p">,</span> <span class="s2">&quot;</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">,</span> <span class="n">subset</span><span class="p">)</span>
 </pre></div>
 </div>
-</div>
-<div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Index([&#39;accountant&#39;, &#39;pilot&#39;, &#39;architect&#39;, &#39;author&#39;, &#39;chemist&#39;, &#39;minister&#39;,
-       &#39;professor&#39;, &#39;dentist&#39;, &#39;reporter&#39;, &#39;engineer&#39;, &#39;undertaker&#39;, &#39;lawyer&#39;,
-       &#39;physician&#39;, &#39;welfare.worker&#39;, &#39;teacher&#39;, &#39;conductor&#39;, &#39;contractor&#39;,
-       &#39;factory.owner&#39;, &#39;store.manager&#39;, &#39;banker&#39;, &#39;bookkeeper&#39;,
-       &#39;mail.carrier&#39;, &#39;insurance.agent&#39;, &#39;store.clerk&#39;, &#39;carpenter&#39;,
-       &#39;electrician&#39;, &#39;RR.engineer&#39;, &#39;machinist&#39;, &#39;auto.repairman&#39;, &#39;plumber&#39;,
-       &#39;gas.stn.attendant&#39;, &#39;coal.miner&#39;, &#39;streetcar.motorman&#39;, &#39;taxi.driver&#39;,
-       &#39;truck.driver&#39;, &#39;machine.operator&#39;, &#39;barber&#39;, &#39;bartender&#39;,
-       &#39;shoe.shiner&#39;, &#39;cook&#39;, &#39;soda.clerk&#39;, &#39;watchman&#39;, &#39;janitor&#39;, &#39;policeman&#39;,
-       &#39;waiter&#39;],
-      dtype=&#39;object&#39;) 
- [ True  True  True  True  True False  True  True False  True  True  True
-  True  True  True False  True  True  True  True  True  True  True  True
-  True  True  True  True  True  True  True  True  True  True  True  True
-  True  True  True  True  True  True  True  True  True]
-</pre></div>
-</div>
-</div>
-</div>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># compute regression without influential cases</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># compute regression without influential cases</span>
 <span class="n">lm2</span> <span class="o">=</span> <span class="n">ols</span><span class="p">(</span><span class="s2">&quot;prestige ~ income + education&quot;</span><span class="p">,</span> <span class="n">data</span><span class="o">=</span><span class="n">df</span><span class="p">,</span> <span class="n">subset</span><span class="o">=</span><span class="n">subset</span><span class="p">)</span><span class="o">.</span><span class="n">fit</span><span class="p">()</span>
 
 <span class="nb">print</span><span class="p">(</span><span class="n">lm2</span><span class="o">.</span><span class="n">summary</span><span class="p">())</span>
 </pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>                            OLS Regression Results                            
-==============================================================================
-Dep. Variable:               prestige   R-squared:                       0.897
-Model:                            OLS   Adj. R-squared:                  0.891
-Method:                 Least Squares   F-statistic:                     169.0
-Date:                Sun, 14 Nov 2021   Prob (F-statistic):           6.13e-20
-Time:                        11:52:46   Log-Likelihood:                -157.02
-No. Observations:                  42   AIC:                             320.0
-Df Residuals:                      39   BIC:                             325.2
-Df Model:                           2                                         
-Covariance Type:            nonrobust                                         
-==============================================================================
-                 coef    std err          t      P&gt;|t|      [0.025      0.975]
-------------------------------------------------------------------------------
-Intercept     -7.2414      3.391     -2.136      0.039     -14.099      -0.383
-income         0.8773      0.113      7.775      0.000       0.649       1.106
-education      0.3538      0.092      3.861      0.000       0.168       0.539
-==============================================================================
-Omnibus:                        1.483   Durbin-Watson:                   1.577
-Prob(Omnibus):                  0.476   Jarque-Bera (JB):                0.744
-Skew:                          -0.291   Prob(JB):                        0.689
-Kurtosis:                       3.293   Cond. No.                         156.
-==============================================================================
-
-Notes:
-[1] Standard Errors assume that the covariance matrix of the errors is correctly specified.
-</pre></div>
-</div>
-</div>
 </div>
 <p>Dropping the influential cases confirms our believe. The new regression model without the influential cases is superior to the initial one. To see this, compare the regression summary above with our initial summary (e.g., see <span class="math notranslate nohighlight">\(R^2\)</span>, adjusted <span class="math notranslate nohighlight">\(R^2\)</span> and the F-statistic).</p>
 </div>
@@ -908,38 +652,22 @@ Notes:
 </ol>
 <p>A significant difference between the residual line and the actual distribution of values indicates that the predictor does not have a linear relationship with the dependent variable.</p>
 <p><em>Care should be taken if <span class="math notranslate nohighlight">\(X_i\)</span> is highly correlated with any of the other independent variables (see multicollinearity). If this is the case, the variance evident in the plot will be an underestimate of the true variance.</em></p>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">fig</span> <span class="o">=</span> <span class="n">sm</span><span class="o">.</span><span class="n">graphics</span><span class="o">.</span><span class="n">plot_ccpr</span><span class="p">(</span><span class="n">lm</span><span class="p">,</span> <span class="s2">&quot;education&quot;</span><span class="p">)</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">fig</span> <span class="o">=</span> <span class="n">sm</span><span class="o">.</span><span class="n">graphics</span><span class="o">.</span><span class="n">plot_ccpr</span><span class="p">(</span><span class="n">lm</span><span class="p">,</span> <span class="s2">&quot;education&quot;</span><span class="p">)</span>
 <span class="n">fig</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">(</span><span class="n">pad</span><span class="o">=</span><span class="mf">1.0</span><span class="p">)</span>
 </pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<img alt="_images/regression_diagnostics_31_0.png" src="_images/regression_diagnostics_31_0.png" />
-</div>
 </div>
 <p>As you can see the relationship between the variation in <span class="math notranslate nohighlight">\(y\)</span> explained by education conditional on income seems to be linear, though you can see there are some observations that are exerting considerable influence on the relationship (see section leverage).</p>
 <p>We can quickly look at more than one variable by using <code class="docutils literal notranslate"><span class="pre">plot_ccpr_grid</span></code>.</p>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">fig</span> <span class="o">=</span> <span class="n">sm</span><span class="o">.</span><span class="n">graphics</span><span class="o">.</span><span class="n">plot_ccpr_grid</span><span class="p">(</span><span class="n">lm</span><span class="p">)</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">fig</span> <span class="o">=</span> <span class="n">sm</span><span class="o">.</span><span class="n">graphics</span><span class="o">.</span><span class="n">plot_ccpr_grid</span><span class="p">(</span><span class="n">lm</span><span class="p">)</span>
 <span class="n">fig</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">(</span><span class="n">pad</span><span class="o">=</span><span class="mf">1.0</span><span class="p">)</span>
 </pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<img alt="_images/regression_diagnostics_33_0.png" src="_images/regression_diagnostics_33_0.png" />
-</div>
 </div>
 </div>
 <div class="section" id="residuals-vs-fitted-plot">
 <h3>Residuals vs fitted plot<a class="headerlink" href="#residuals-vs-fitted-plot" title="Permalink to this headline">¶</a></h3>
 <p>Residual plots are a useful graphical tool for identifying non-linearity as well as heteroscedasticity. The residuals of this plot are those of the regression fit with all predictors.</p>
 <p>You can use <a class="reference external" href="https://seaborn.pydata.org/generated/seaborn.residplot.html">seaborn’s residplot</a> to investigate possible violations of underlying assumptions such as linearity and homoskedasticity.</p>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># fitted values</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># fitted values</span>
 <span class="n">model_fitted_y</span> <span class="o">=</span> <span class="n">lm</span><span class="o">.</span><span class="n">fittedvalues</span>
 
 <span class="c1">#  Plot</span>
@@ -952,11 +680,6 @@ Notes:
 <span class="n">plot</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s1">&#39;Fitted values&#39;</span><span class="p">)</span>
 <span class="n">plot</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s1">&#39;Residuals&#39;</span><span class="p">);</span>
 </pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<img alt="_images/regression_diagnostics_35_0.png" src="_images/regression_diagnostics_35_0.png" />
-</div>
 </div>
 <p>This plot shows how residuals are spread along the ranges of predictors. It’s a good sign if we observe relatively equal (randomly) spreaded points along the dotted horizontal line where the residuals are zero.</p>
 <p>The red line indicates the fit of a locally weighted scatterplot smoothing (lowess), a local regression method, to the residual scatterplot. <strong>Local regression</strong> is a different approach for fitting flexible non-linear functions, which involves computing the fit at a target point <span class="math notranslate nohighlight">\(x_0\)</span> using only the nearby training observations {see cite:t}<code class="docutils literal notranslate"><span class="pre">James2021</span></code> for more details).</p>
@@ -971,22 +694,10 @@ Notes:
 <p>The Breusch-Pagan Lagrange Multiplier test can be used to identify heteroscedasticity. The test assumes homoscedasticity (this is the null hypothesis <span class="math notranslate nohighlight">\(H_0\)</span>) which means that the residual variance does not depend on the values of the variables in x.</p>
 <p><em>Note that this test may exaggerate the significance of results in small or moderately large samples <span id="id3">[<a class="reference internal" href="reference.html#id2">Greene, 2000</a>]</span>. In this case the F-statistic is preferable.</em></p>
 <p>If one of the test statistics is significant (i.e., p &lt;= 0.05), then you have indication of heteroscedasticity.</p>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">name</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;Lagrange multiplier statistic&#39;</span><span class="p">,</span> <span class="s1">&#39;p-value&#39;</span><span class="p">,</span> <span class="s1">&#39;f-value&#39;</span><span class="p">,</span> <span class="s1">&#39;f p-value&#39;</span><span class="p">]</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">name</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;Lagrange multiplier statistic&#39;</span><span class="p">,</span> <span class="s1">&#39;p-value&#39;</span><span class="p">,</span> <span class="s1">&#39;f-value&#39;</span><span class="p">,</span> <span class="s1">&#39;f p-value&#39;</span><span class="p">]</span>
 <span class="n">test</span> <span class="o">=</span> <span class="n">sm</span><span class="o">.</span><span class="n">stats</span><span class="o">.</span><span class="n">het_breuschpagan</span><span class="p">(</span><span class="n">lm</span><span class="o">.</span><span class="n">resid</span><span class="p">,</span> <span class="n">lm</span><span class="o">.</span><span class="n">model</span><span class="o">.</span><span class="n">exog</span><span class="p">)</span>
 <span class="n">lzip</span><span class="p">(</span><span class="n">name</span><span class="p">,</span> <span class="n">test</span><span class="p">)</span>
 </pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[(&#39;Lagrange multiplier statistic&#39;, 0.5752191351127306),
- (&#39;p-value&#39;, 0.7500543806429694),
- (&#39;f-value&#39;, 0.27191134322318933),
- (&#39;f p-value&#39;, 0.7632527707017838)]
-</pre></div>
-</div>
-</div>
 </div>
 <p>In our case, both p-values are above 0.05, which means we can accept the null hypothesis. Therefore, we have an indication of homoscedasticity.</p>
 </div>
@@ -1001,20 +712,11 @@ Notes:
 <li><p>a partial regression plot, and a</p></li>
 <li><p>CCPR plot.</p></li>
 </ol>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">fig</span> <span class="o">=</span> <span class="n">sm</span><span class="o">.</span><span class="n">graphics</span><span class="o">.</span><span class="n">plot_regress_exog</span><span class="p">(</span><span class="n">lm</span><span class="p">,</span> <span class="s2">&quot;income&quot;</span><span class="p">)</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">fig</span> <span class="o">=</span> <span class="n">sm</span><span class="o">.</span><span class="n">graphics</span><span class="o">.</span><span class="n">plot_regress_exog</span><span class="p">(</span><span class="n">lm</span><span class="p">,</span> <span class="s2">&quot;income&quot;</span><span class="p">)</span>
 <span class="n">fig</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">(</span><span class="n">pad</span><span class="o">=</span><span class="mf">1.0</span><span class="p">)</span>
 </pre></div>
 </div>
-</div>
-<div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>eval_env: 1
-</pre></div>
-</div>
-<img alt="_images/regression_diagnostics_42_1.png" src="_images/regression_diagnostics_42_1.png" />
-</div>
-</div>
+<!-- #region -->
 </div>
 </div>
 <div class="section" id="non-normally-distributed-errors">
@@ -1035,23 +737,12 @@ Notes:
 <li><p>an expected <em>excess</em> kurtosis of 0 (which is the same as a kurtosis of 3).</p></li>
 </ol>
 <p>Any deviation from this assumptions increases the JB statistic. Next, we calculate the statistics but you can also find the results of the Jarque-Bera test in the regression summary.</p>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">name</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;Jarque-Bera&#39;</span><span class="p">,</span> <span class="s1">&#39;Chi^2 two-tail prob.&#39;</span><span class="p">,</span> <span class="s1">&#39;Skew&#39;</span><span class="p">,</span> <span class="s1">&#39;Kurtosis&#39;</span><span class="p">]</span>
+<!-- #endregion -->
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">name</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;Jarque-Bera&#39;</span><span class="p">,</span> <span class="s1">&#39;Chi^2 two-tail prob.&#39;</span><span class="p">,</span> <span class="s1">&#39;Skew&#39;</span><span class="p">,</span> <span class="s1">&#39;Kurtosis&#39;</span><span class="p">]</span>
 <span class="n">test</span> <span class="o">=</span> <span class="n">sm</span><span class="o">.</span><span class="n">stats</span><span class="o">.</span><span class="n">jarque_bera</span><span class="p">(</span><span class="n">lm</span><span class="o">.</span><span class="n">resid</span><span class="p">)</span>
 
 <span class="n">lzip</span><span class="p">(</span><span class="n">name</span><span class="p">,</span> <span class="n">test</span><span class="p">)</span>
 </pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[(&#39;Jarque-Bera&#39;, 0.5195278349686433),
- (&#39;Chi^2 two-tail prob.&#39;, 0.7712336390906139),
- (&#39;Skew&#39;, 0.1549318677987544),
- (&#39;Kurtosis&#39;, 3.425518480614924)]
-</pre></div>
-</div>
-</div>
 </div>
 <p>The p-value is above 0.05 and we can accept <span class="math notranslate nohighlight">\(H_0\)</span>. Therefore, the test gives us an indication that the errors are normally distributed.</p>
 </div>
@@ -1059,19 +750,10 @@ Notes:
 <h3>Omnibus normtest<a class="headerlink" href="#omnibus-normtest" title="Permalink to this headline">¶</a></h3>
 <p>Another test for normal distribution of residuals is the Omnibus normtest (also included in the regression summary). The test allows us to check whether or not the model residuals follow an approximately normal distribution.</p>
 <p>Our null hypothesis (<span class="math notranslate nohighlight">\(H_0\)</span>) is that the residuals are from a normal distribution.</p>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">name</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;Chi^2&#39;</span><span class="p">,</span> <span class="s1">&#39;Two-tail probability&#39;</span><span class="p">]</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">name</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;Chi^2&#39;</span><span class="p">,</span> <span class="s1">&#39;Two-tail probability&#39;</span><span class="p">]</span>
 <span class="n">test</span> <span class="o">=</span> <span class="n">sm</span><span class="o">.</span><span class="n">stats</span><span class="o">.</span><span class="n">omni_normtest</span><span class="p">(</span><span class="n">lm</span><span class="o">.</span><span class="n">resid</span><span class="p">)</span>
 <span class="n">lzip</span><span class="p">(</span><span class="n">name</span><span class="p">,</span> <span class="n">test</span><span class="p">)</span>
 </pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[(&#39;Chi^2&#39;, 1.2788071145675917), (&#39;Two-tail probability&#39;, 0.5276070175778638)]
-</pre></div>
-</div>
-</div>
 </div>
 <p>The p-value is above 0.05 and we can accept <span class="math notranslate nohighlight">\(H_0\)</span>. Therefore, the test gives us an indication that the errors are from a normal distribution.</p>
 </div>
@@ -1094,17 +776,8 @@ Notes:
 <li><p>Small values of d indicate successive error terms are positively correlated.</p></li>
 <li><p>If d &gt; 2, successive error terms are negatively correlated.</p></li>
 </ul>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">sm</span><span class="o">.</span><span class="n">stats</span><span class="o">.</span><span class="n">durbin_watson</span><span class="p">(</span><span class="n">lm</span><span class="o">.</span><span class="n">resid</span><span class="p">)</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">sm</span><span class="o">.</span><span class="n">stats</span><span class="o">.</span><span class="n">durbin_watson</span><span class="p">(</span><span class="n">lm</span><span class="o">.</span><span class="n">resid</span><span class="p">)</span>
 </pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>1.458332862235202
-</pre></div>
-</div>
-</div>
 </div>
 </div>
 </div>
@@ -1116,9 +789,7 @@ Notes:
 <h3>Correlation matrix<a class="headerlink" href="#correlation-matrix" title="Permalink to this headline">¶</a></h3>
 <p>A simple way to detect collinearity is to look at the <strong>correlation matrix</strong> of the predictors. An element of this matrix that is large in absolute value indicates a pair of highly correlated variables, and therefore a collinearity problem in the data.</p>
 <p>Unfortunately, not all collinearity problems can be detected by inspection of the correlation matrix since it is possible for collinearity to exist between three or more variables even if no pair of variables has a particularly high correlation.</p>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Inspect correlation</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Inspect correlation</span>
 <span class="c1"># Calculate correlation using the default method ( &quot;pearson&quot;)</span>
 <span class="n">corr</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">corr</span><span class="p">()</span>
 <span class="c1"># optimize aesthetics: generate mask for removing duplicate / unnecessary info</span>
@@ -1131,11 +802,6 @@ Notes:
 </pre></div>
 </div>
 </div>
-<div class="cell_output docutils container">
-<img alt="_images/regression_diagnostics_52_0.png" src="_images/regression_diagnostics_52_0.png" />
-</div>
-</div>
-</div>
 <div class="section" id="variance-inflation-factor-vif">
 <h3>Variance inflation factor (VIF)<a class="headerlink" href="#variance-inflation-factor-vif" title="Permalink to this headline">¶</a></h3>
 <p>Instead of inspecting the correlation matrix, a better way to assess <strong>multicollinearity</strong> is to compute the variance inflation factor (VIF). Note that we ignore the intercept in this test.</p>
@@ -1144,9 +810,7 @@ Notes:
 <li><p>Typically in practice there is a small amount of collinearity among the predictors.</p></li>
 <li><p>As a rule of thumb, a VIF value that exceeds 5 indicates a problematic amount of collinearity and the parameter estimates will have large standard errors because of this.</p></li>
 </ul>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">y</span><span class="p">,</span> <span class="n">X</span> <span class="o">=</span> <span class="n">dmatrices</span><span class="p">(</span><span class="s1">&#39;prestige ~ income + education&#39;</span><span class="p">,</span> <span class="n">df</span><span class="p">,</span> <span class="n">return_type</span><span class="o">=</span><span class="s1">&#39;dataframe&#39;</span><span class="p">)</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">y</span><span class="p">,</span> <span class="n">X</span> <span class="o">=</span> <span class="n">dmatrices</span><span class="p">(</span><span class="s1">&#39;prestige ~ income + education&#39;</span><span class="p">,</span> <span class="n">df</span><span class="p">,</span> <span class="n">return_type</span><span class="o">=</span><span class="s1">&#39;dataframe&#39;</span><span class="p">)</span>
 
 <span class="c1"># For each X, calculate VIF and save in dataframe</span>
 <span class="n">vif</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">()</span>
@@ -1155,50 +819,6 @@ Notes:
 
 <span class="n">vif</span><span class="o">.</span><span class="n">round</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>
 </pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output text_html"><div>
-<style scoped>
-    .dataframe tbody tr th:only-of-type {
-        vertical-align: middle;
-    }
-
-    .dataframe tbody tr th {
-        vertical-align: top;
-    }
-
-    .dataframe thead th {
-        text-align: right;
-    }
-</style>
-<table border="1" class="dataframe">
-  <thead>
-    <tr style="text-align: right;">
-      <th></th>
-      <th>VIF Factor</th>
-      <th>Feature</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <th>0</th>
-      <td>4.59</td>
-      <td>Intercept</td>
-    </tr>
-    <tr>
-      <th>1</th>
-      <td>2.10</td>
-      <td>income</td>
-    </tr>
-    <tr>
-      <th>2</th>
-      <td>2.10</td>
-      <td>education</td>
-    </tr>
-  </tbody>
-</table>
-</div></div></div>
 </div>
 <p>We don’t have a problematic amount of collinearity in our data.</p>
 </div>
