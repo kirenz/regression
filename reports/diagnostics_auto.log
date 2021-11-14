@@ -22,7 +22,7 @@ sm.stats.outliers_influence.variance_inflation_factor(exog, exog_idx)
 
 [0;31m---------------------------------------------------------------------------[0m
 [0;31mAttributeError[0m                            Traceback (most recent call last)
-[0;32m/var/folders/35/43bdsj9j64j16410rds5g9vr0000gp/T/ipykernel_39171/507250405.py[0m in [0;36m<module>[0;34m[0m
+[0;32m/var/folders/35/43bdsj9j64j16410rds5g9vr0000gp/T/ipykernel_40830/507250405.py[0m in [0;36m<module>[0;34m[0m
 [0;32m----> 1[0;31m [0msm[0m[0;34m.[0m[0mstats[0m[0;34m.[0m[0moutliers_influence[0m[0;34m.[0m[0mvariance_inflation_factor[0m[0;34m([0m[0mexog[0m[0;34m,[0m [0mexog_idx[0m[0;34m)[0m[0;34m[0m[0;34m[0m[0m
 [0m
 [0;31mAttributeError[0m: module 'statsmodels.stats.api' has no attribute 'outliers_influence'

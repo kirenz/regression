@@ -407,7 +407,7 @@
 <li><p>Collinearity</p></li>
 </ol>
 <p>As an example of how to identify these problems, we use data about the prestige of canadian occupations to estimate a regression model with <code class="docutils literal notranslate"><span class="pre">prestige</span></code> as the response and <code class="docutils literal notranslate"><span class="pre">income</span></code> and <code class="docutils literal notranslate"><span class="pre">education</span></code> as predictors. Review this <a class="reference external" href="https://vincentarelbundock.github.io/Rdatasets/doc/carData/Prestige.html">site</a> to learn more about the data.</p>
-<p><em>This tutorial is mainly based on the <a class="reference external" href="https://www.statsmodels.org/dev/examples/notebooks/generated/regression_plots.html#Partial-Regression-Plots-(Crime-Data)">statmodels documentation</a> about regression plots.</em></p>
+<p><em>This tutorial is mainly based on the excellent <a class="reference external" href="https://www.statsmodels.org/dev/examples/notebooks/generated/regression_plots.html#Partial-Regression-Plots-(Crime-Data)">statmodels documentation</a> about regression plots.</em></p>
 <div class="section" id="python-setup">
 <h2>Python setup<a class="headerlink" href="#python-setup" title="Permalink to this headline">¶</a></h2>
 <div class="cell docutils container">
@@ -555,8 +555,8 @@
 Dep. Variable:               prestige   R-squared:                       0.828
 Model:                            OLS   Adj. R-squared:                  0.820
 Method:                 Least Squares   F-statistic:                     101.2
-Date:                Sat, 13 Nov 2021   Prob (F-statistic):           8.65e-17
-Time:                        22:27:06   Log-Likelihood:                -178.98
+Date:                Sun, 14 Nov 2021   Prob (F-statistic):           8.65e-17
+Time:                        11:52:44   Log-Likelihood:                -178.98
 No. Observations:                  45   AIC:                             364.0
 Df Residuals:                      42   BIC:                             369.4
 Df Model:                           2                                         
@@ -587,9 +587,10 @@ Notes:
 <div class="section" id="high-leverage-points">
 <h2>High-leverage points<a class="headerlink" href="#high-leverage-points" title="Permalink to this headline">¶</a></h2>
 <p>In a regression analysis, single observations can have a strong influence on the results of the model. For example, in the plot below we can see how a single outlying data point can affect a model.</p>
-<div class="cell docutils container">
+<div class="cell tag_hide-input docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">df_outlier</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># HIDE CODE</span>
+<span class="n">df_outlier</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span>
         <span class="p">{</span> <span class="s1">&#39;observation&#39;</span><span class="p">:</span> <span class="n">pd</span><span class="o">.</span><span class="n">Categorical</span><span class="p">([</span> <span class="s2">&quot;A&quot;</span><span class="p">,</span> <span class="s2">&quot;B&quot;</span><span class="p">,</span> <span class="s2">&quot;C&quot;</span><span class="p">,</span> <span class="s2">&quot;D&quot;</span><span class="p">,</span> <span class="s2">&quot;E&quot;</span> <span class="p">]),</span>
           <span class="s1">&#39;x&#39;</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">5</span><span class="p">],</span><span class="n">dtype</span><span class="o">=</span><span class="s1">&#39;int32&#39;</span><span class="p">),</span>
           <span class="s1">&#39;y&#39;</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mi">2</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">6</span><span class="p">,</span> <span class="mi">8</span><span class="p">,</span> <span class="mi">3</span><span class="p">],</span><span class="n">dtype</span><span class="o">=</span><span class="s1">&#39;int32&#39;</span><span class="p">)}</span>
@@ -604,9 +605,10 @@ Notes:
 </div>
 </div>
 <p>We just saw that outliers are observations for which the response <span class="math notranslate nohighlight">\(y_i\)</span> is unusual given the predictor <span class="math notranslate nohighlight">\(x_i\)</span>. In contrast, observations with high <strong>leverage</strong> have an unusual value for <span class="math notranslate nohighlight">\(x_i\)</span>.</p>
-<div class="cell docutils container">
+<div class="cell tag_hide-input docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">df_leverage</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># HIDE CODE</span>
+<span class="n">df_leverage</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span>
         <span class="p">{</span> <span class="s1">&#39;observation&#39;</span><span class="p">:</span> <span class="n">pd</span><span class="o">.</span><span class="n">Categorical</span><span class="p">([</span> <span class="s2">&quot;A&quot;</span><span class="p">,</span> <span class="s2">&quot;B&quot;</span><span class="p">,</span> <span class="s2">&quot;C&quot;</span><span class="p">,</span> <span class="s2">&quot;D&quot;</span><span class="p">,</span> <span class="s2">&quot;E&quot;</span> <span class="p">]),</span>
           <span class="s1">&#39;x&#39;</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">20</span><span class="p">],</span><span class="n">dtype</span><span class="o">=</span><span class="s1">&#39;int32&#39;</span><span class="p">),</span>
           <span class="s1">&#39;y&#39;</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mi">2</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">6</span><span class="p">,</span> <span class="mi">8</span><span class="p">,</span> <span class="mi">30</span><span class="p">],</span><span class="n">dtype</span><span class="o">=</span><span class="s1">&#39;int32&#39;</span><span class="p">)}</span>
@@ -620,8 +622,7 @@ Notes:
 <img alt="_images/regression_diagnostics_13_0.png" src="_images/regression_diagnostics_13_0.png" />
 </div>
 </div>
-<p>For example, observation E has high leverage, in that the predictor value for this observation is large relative to the other observations. The removal of the high leverage observation would have a substantial impact on the regression line. In general, high leverage observations tend to have a sizable impact on the estimated regression line.</p>
-<p>Therefore, it is important to detect influential observations and to take them into consideration when interpreting the results.</p>
+<p>For example, the observation with a value of <span class="math notranslate nohighlight">\(x=20\)</span> has high leverage, in that the predictor value for this observation is large relative to the other observations. The removal of the high leverage observation would have a substantial impact on the regression line. In general, high leverage observations tend to have a sizable impact on the estimated regression line. Therefore, it is important to detect influential observations and to take them into consideration when interpreting the results.</p>
 <div class="section" id="influence-plots">
 <h3>Influence plots<a class="headerlink" href="#influence-plots" title="Permalink to this headline">¶</a></h3>
 <p>We can use <strong>influence plots</strong> to identify observations in our independent variables which have “unusual” values in comparison to other values.</p>
@@ -704,7 +705,10 @@ Index([&#39;minister&#39;, &#39;reporter&#39;, &#39;conductor&#39;], dtype=&#39;
 <div class="section" id="non-linearity-and-heteroscedasticity">
 <h2>Non-linearity and heteroscedasticity<a class="headerlink" href="#non-linearity-and-heteroscedasticity" title="Permalink to this headline">¶</a></h2>
 <p>One crucial assumption of the linear regression model is the linear relationship between the response and the dependent variables. We can identify non-linear relationships in the regression model residuals if the residuals are not equally spread around the horizontal line (where the residuals are zero) but instead show a pattern, then this gives us an indication for a non-linear relationship.</p>
-<p>We can deal with non-linear relationships via basis expansions (e.g. polynomial regression) or regression splines (see <span id="id2">Kuhn and Johnson [<a class="reference internal" href="reference.html#id5">2019</a>]</span>](<a class="reference external" href="http://www.feat.engineering/numeric-one-to-many.html#numeric-basis-functions">http://www.feat.engineering/numeric-one-to-many.html#numeric-basis-functions</a>))</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>We can deal with non-linear relationships via basis expansions (e.g. polynomial regression) or regression splines (<a class="reference external" href="http://www.feat.engineering/numeric-one-to-many.html#numeric-basis-functions">see <span id="id2">Kuhn and Johnson [<a class="reference internal" href="reference.html#id5">2019</a>]</span></a>)</p>
+</div>
 <p>Another important assumption is that the error terms have a constant variance (homoscedasticity). For instance, the variances of the error terms may increase with the value of the response. One can identify non-constant variances in the errors, or heteroscedasticity, from the presence of a funnel shape in a residual plot.</p>
 <p>When faced with this problem, one possible solution is to use <a class="reference external" href="https://www.statsmodels.org/dev/examples/notebooks/generated/wls.html">weighted regression</a>. This type of regression assigns a weight to each data point based on the variance of its fitted value. Essentially, this gives small weights to data points that have higher variances, which shrinks their squared residuals. When the proper weights are used, this can eliminate the problem of heteroscedasticity.</p>
 <div class="section" id="partial-regression-plots">
@@ -861,8 +865,8 @@ eval_env: 1
 Dep. Variable:               prestige   R-squared:                       0.897
 Model:                            OLS   Adj. R-squared:                  0.891
 Method:                 Least Squares   F-statistic:                     169.0
-Date:                Sat, 13 Nov 2021   Prob (F-statistic):           6.13e-20
-Time:                        22:27:11   Log-Likelihood:                -157.02
+Date:                Sun, 14 Nov 2021   Prob (F-statistic):           6.13e-20
+Time:                        11:52:46   Log-Likelihood:                -157.02
 No. Observations:                  42   AIC:                             320.0
 Df Residuals:                      39   BIC:                             325.2
 Df Model:                           2                                         
@@ -955,12 +959,12 @@ Notes:
 </div>
 </div>
 <p>This plot shows how residuals are spread along the ranges of predictors. It’s a good sign if we observe relatively equal (randomly) spreaded points along the dotted horizontal line where the residuals are zero.</p>
-<p>The red line indicates the fit of a locally weighted scatterplot smoothing (lowess), a local regression method, to the residual scatterplot. <strong>Local regression</strong> is a different approach for fitting flexible non-linear functions, which involves computing the fit at a target point <span class="math notranslate nohighlight">\(x_0\)</span> using only the nearby training observations {see cit:t}<code class="docutils literal notranslate"><span class="pre">James2021</span></code> for more details). In essence, lowess creates a smooth line through the scatter plot to help us investigate the relationship between the fitted values and the residuals.</p>
-<p>We can interpret the result of our lowess fit as follows:</p>
-<ul class="simple">
-<li><p>The fit is almost equal to the dotted horizontal line where the residuals are zero. This is an indication for a linear relationship.</p></li>
-</ul>
-<p>Note that in the case of non-linear relationships, we typically observe a pattern in lowess which deviates strongly from a horizontal line.</p>
+<p>The red line indicates the fit of a locally weighted scatterplot smoothing (lowess), a local regression method, to the residual scatterplot. <strong>Local regression</strong> is a different approach for fitting flexible non-linear functions, which involves computing the fit at a target point <span class="math notranslate nohighlight">\(x_0\)</span> using only the nearby training observations {see cite:t}<code class="docutils literal notranslate"><span class="pre">James2021</span></code> for more details).</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>lowess creates a smooth line through the scatter plot to help us investigate the relationship between the fitted values and the residuals.</p>
+</div>
+<p>We can interpret the result of our lowess fit as follows: The fit is almost equal to the dotted horizontal line where the residuals are zero. This is an indication for a linear relationship. Note that in the case of non-linear relationships, we typically observe a pattern which deviates strongly from a horizontal line.</p>
 <p>Regarding <strong>homoscedasticity</strong>, the residuals seem to spread equally wide with an increase of x. This is an indication of homoscedasticiy. Next, we use the Breusch-Pagan Lagrange Multiplier test to confirm our assumption.</p>
 <div class="section" id="breusch-pagan-lagrange-multiplier-test">
 <h4>Breusch-Pagan Lagrange Multiplier test<a class="headerlink" href="#breusch-pagan-lagrange-multiplier-test" title="Permalink to this headline">¶</a></h4>
@@ -1079,7 +1083,7 @@ Notes:
 <p>Correlation among the error terms can also occur outside of time series data. For instance, consider a study in which individuals’ heights are predicted from their weights. The assumption of uncorrelated errors could be violated if some of the individuals in the study are members of the same family, or eat the same diet, or have been exposed to the same environmental factors <span id="id5">[<a class="reference internal" href="reference.html#id3">Field, 2013</a>]</span>.</p>
 <div class="section" id="durbin-watson-test">
 <h3>Durbin-Watson test<a class="headerlink" href="#durbin-watson-test" title="Permalink to this headline">¶</a></h3>
-<p>A test of autocorrelation that is designed to take account of the regression model is the <strong>Durbin-Watson test</strong> (also included in the regression summary). It is used to test the hypothesis that there is no <strong>lag one autocorrelation</strong> in the residuals.</p>
+<p>A test of autocorrelation that is designed to take account of the regression model is the <strong>Durbin-Watson test</strong> (also included in the regression summary). It is used to test the hypothesis that there is no <strong>lag one autocorrelation</strong> in the residuals. This means if there is no lag one autocorrelation, then information about <span class="math notranslate nohighlight">\(ϵ_i\)</span> provides little or no information about $ϵ_{i+1}.</p>
 <blockquote>
 <div><p>A small p-value indicates there is significant autocorrelation remaining in the residuals.</p>
 </div></blockquote>
