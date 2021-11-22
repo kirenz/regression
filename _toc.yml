@@ -1,6 +1,5 @@
-# Table of contents
 format: jb-book
-root: docs/intro
+root: docs/intro.md
 parts:
   - caption: Basics
     chapters:
