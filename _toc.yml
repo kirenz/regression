@@ -1,17 +1,17 @@
 # Table of contents
 format: jb-book
-root: intro
+root: docs/intro
 parts:
   - caption: Basics
     chapters:
-    - file: basics.ipynb
+    - file: docs/basics.ipynb
   - caption: Diagnostics
     chapters:
-    - file: regression_diagnostics.ipynb
+    - file: docs/diagnostics.ipynb
   - caption: Applications
     chapters:
-    - file: case_simulated.ipynb
-    - file: case_auto.ipynb
+    - file: docs/case-simulated.ipynb
+    - file: docs/case-auto.ipynb
   - caption: References
     chapters:
-    - file: reference.md
+    - file: docs/reference.md
