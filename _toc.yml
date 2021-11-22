@@ -2,9 +2,6 @@
 format: jb-book
 root: intro
 parts:
-  - caption: Programming
-    chapters:
-    - file: process.ipynb
   - caption: Basics
     chapters:
     - file: basics.ipynb
