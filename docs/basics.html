@@ -54,7 +54,7 @@
     <script async="async" src="../_static/sphinx-thebe.js"></script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="Regression diagnostics in Python" href="diagnostics.html" />
+    <link rel="next" title="Regression diagnostics" href="diagnostics.html" />
     <link rel="prev" title="Welcome" href="intro.html" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="docsearch:language" content="en" />
@@ -116,7 +116,7 @@
 <ul class="nav bd-sidenav">
  <li class="toctree-l1">
   <a class="reference internal" href="diagnostics.html">
-   Regression diagnostics in Python
+   Regression diagnostics
   </a>
  </li>
 </ul>
@@ -1934,11 +1934,10 @@ the true response value for that observation.</p>
 <div class="section" id="variance">
 <h3>Variance<a class="headerlink" href="#variance" title="Permalink to this headline">¶</a></h3>
 <p>In the case of our mean model, we use the <strong>variance</strong> as a measure of dispersion. Furthermore, the <strong>standard deviation</strong> is the square root of the variance:</p>
-<p>Variance = $<span class="math notranslate nohighlight">\(s^2 = \frac {SS}{df} = \frac {\sum_{i=1}^n (outcome_i - model_i)^2}{df}\)</span>$</p>
-<p>Standard Deviation = $<span class="math notranslate nohighlight">\(\sqrt{s^2} = \sqrt{\frac{\sum\limits_{i=1}^{n} \left(x_{i} - \bar{x}\right)^{2}} {df}}\)</span>$</p>
+<p>Variance = <span class="math notranslate nohighlight">\(s^2 = \frac {SS}{df} = \frac {\sum_{i=1}^n (outcome_i - model_i)^2}{df}\)</span></p>
+<p>Standard Deviation = <span class="math notranslate nohighlight">\(\sqrt{s^2} = \sqrt{\frac{\sum\limits_{i=1}^{n} \left(x_{i} - \bar{x}\right)^{2}} {df}}\)</span></p>
 <p>which equals:</p>
-<div class="math notranslate nohighlight">
-\[s =  \frac {\sum_{i=1}^n (outcome_i - model_i)}{df}\]</div>
+<p><span class="math notranslate nohighlight">\(s =  \frac {\sum_{i=1}^n (outcome_i - model_i)}{df}\)</span></p>
 <p>A small <strong>standard deviation</strong> represents a scenario in which most data points are close to the mean, whereas a large standard deviation represents a situation in which data points are widely spread from the mean.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -2652,7 +2651,7 @@ Upper boundary of CI (t-statistics) 165.69583627664076
         <a class="right-next" href="diagnostics.html" title="next page">
             <div class="prevnext-info">
                 <p class="prevnext-label">next</p>
-                <p class="prevnext-title">Regression diagnostics in Python</p>
+                <p class="prevnext-title">Regression diagnostics</p>
             </div>
             <i class="prevnext-label fas fa-angle-right"></i>
         </a>
