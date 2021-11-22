@@ -5,7 +5,7 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Regression diagnostics in Python &#8212; Introduction to Linear Regression Models</title>
+    <title>Regression diagnostics &#8212; Introduction to Linear Regression Models</title>
     
   <link href="../_static/css/theme.css" rel="stylesheet" />
   <link href="../_static/css/index.c5995385ac14fb8791e8eb36b4908be2.css" rel="stylesheet" />
@@ -116,7 +116,7 @@
 <ul class="current nav bd-sidenav">
  <li class="toctree-l1 current active">
   <a class="current reference internal" href="#">
-   Regression diagnostics in Python
+   Regression diagnostics
   </a>
  </li>
 </ul>
@@ -253,7 +253,7 @@
                 <ul class="visible nav section-nav flex-column">
  <li class="toc-h1 nav-item toc-entry">
   <a class="reference internal nav-link" href="#">
-   Regression diagnostics in Python
+   Regression diagnostics
   </a>
   <ul class="visible nav section-nav flex-column">
    <li class="toc-h2 nav-item toc-entry">
@@ -274,7 +274,7 @@
   </ul>
  </li>
  <li class="toc-h1 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#regression-diagnostics">
+  <a class="reference internal nav-link" href="#id2">
    Regression diagnostics
   </a>
   <ul class="visible nav section-nav flex-column">
@@ -326,7 +326,7 @@
       </a>
      </li>
      <li class="toc-h3 nav-item toc-entry">
-      <a class="reference internal nav-link" href="#id4">
+      <a class="reference internal nav-link" href="#id5">
        Solutions
       </a>
      </li>
@@ -365,7 +365,7 @@
       </a>
      </li>
      <li class="toc-h3 nav-item toc-entry">
-      <a class="reference internal nav-link" href="#id10">
+      <a class="reference internal nav-link" href="#id11">
        Solution
       </a>
      </li>
@@ -387,7 +387,7 @@
       </a>
      </li>
      <li class="toc-h3 nav-item toc-entry">
-      <a class="reference internal nav-link" href="#id11">
+      <a class="reference internal nav-link" href="#id12">
        Solution
       </a>
      </li>
@@ -406,8 +406,8 @@
         
               <div>
                 
-  <div class="tex2jax_ignore mathjax_ignore section" id="regression-diagnostics-in-python">
-<h1>Regression diagnostics in Python<a class="headerlink" href="#regression-diagnostics-in-python" title="Permalink to this headline">¶</a></h1>
+  <div class="tex2jax_ignore mathjax_ignore section" id="regression-diagnostics">
+<h1>Regression diagnostics<a class="headerlink" href="#regression-diagnostics" title="Permalink to this headline">¶</a></h1>
 <p>When we fit a linear regression model to a particular data set, many problems may occur. Most common among these are the following <span id="id1">[<a class="reference internal" href="reference.html#id7">James <em>et al.</em>, 2021</a>]</span>:</p>
 <ol class="simple">
 <li><p>Outliers and high-leverage points</p></li>
@@ -593,8 +593,8 @@ Notes:
 </div>
 </div>
 </div>
-<div class="tex2jax_ignore mathjax_ignore section" id="regression-diagnostics">
-<h1>Regression diagnostics<a class="headerlink" href="#regression-diagnostics" title="Permalink to this headline">¶</a></h1>
+<div class="tex2jax_ignore mathjax_ignore section" id="id2">
+<h1>Regression diagnostics<a class="headerlink" href="#id2" title="Permalink to this headline">¶</a></h1>
 <div class="section" id="outliers-and-high-leverage-points">
 <h2>Outliers and high-leverage points<a class="headerlink" href="#outliers-and-high-leverage-points" title="Permalink to this headline">¶</a></h2>
 <p>In a regression analysis, single observations can have a strong influence on the results of the model.</p>
@@ -773,7 +773,7 @@ Index([&#39;minister&#39;, &#39;reporter&#39;, &#39;conductor&#39;], dtype=&#39;
 <p>One crucial assumption of the linear regression model is the linear relationship between the response and the dependent variables. We can identify non-linear relationships in the regression model residuals if the residuals are not equally spread around the horizontal line (where the residuals are zero) but instead show a pattern, then this gives us an indication for a non-linear relationship.</p>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
-<p>We can deal with non-linear relationships via basis expansions (e.g. polynomial regression) or regression splines (<a class="reference external" href="http://www.feat.engineering/numeric-one-to-many.html#numeric-basis-functions">see <span id="id2">Kuhn and Johnson [<a class="reference internal" href="reference.html#id5">2019</a>]</span></a>)</p>
+<p>We can deal with non-linear relationships via basis expansions (e.g. polynomial regression) or regression splines (<a class="reference external" href="http://www.feat.engineering/numeric-one-to-many.html#numeric-basis-functions">see <span id="id3">Kuhn and Johnson [<a class="reference internal" href="reference.html#id5">2019</a>]</span></a>)</p>
 </div>
 <p>Another important assumption is that the error terms have a constant variance (homoscedasticity). For instance, the variances of the error terms may increase with the value of the response. One can identify non-constant variances in the errors, or heteroscedasticity, from the presence of a funnel shape in a residual plot.</p>
 <p>When faced with this problem, one possible solution is to use <a class="reference external" href="https://www.statsmodels.org/dev/examples/notebooks/generated/wls.html">weighted regression</a>. This type of regression assigns a weight to each data point based on the variance of its fitted value. Essentially, this gives small weights to data points that have higher variances, which shrinks their squared residuals. When the proper weights are used, this can eliminate the problem of heteroscedasticity.</p>
@@ -1029,7 +1029,7 @@ Notes:
 <div><p>The Breusch-Pagan Lagrange Multiplier test can be used to identify heteroscedasticity.</p>
 </div></blockquote>
 <p>The test assumes homoscedasticity (this is the null hypothesis <span class="math notranslate nohighlight">\(H_0\)</span>) which means that the residual variance does not depend on the values of the variables in x.</p>
-<p><em>Note that this test may exaggerate the significance of results in small or moderately large samples <span id="id3">[<a class="reference internal" href="reference.html#id2">Greene, 2000</a>]</span>. In this case the F-statistic is preferable.</em></p>
+<p><em>Note that this test may exaggerate the significance of results in small or moderately large samples <span id="id4">[<a class="reference internal" href="reference.html#id2">Greene, 2000</a>]</span>. In this case the F-statistic is preferable.</em></p>
 <p>If one of the test statistics is significant (i.e., p &lt;= 0.05), then you have indication of heteroscedasticity.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -1072,16 +1072,16 @@ Notes:
 </div>
 </div>
 </div>
-<div class="section" id="id4">
-<h3>Solutions<a class="headerlink" href="#id4" title="Permalink to this headline">¶</a></h3>
-<p>If we are faced with non-linear relationships between the dependent and independent variables, we can adjust the linear model via different methods (for more details, <a class="reference external" href="http://www.feat.engineering/numeric-one-to-many.html">see <span id="id5">Kuhn and Johnson [<a class="reference internal" href="reference.html#id5">2019</a>]</span></a>):</p>
+<div class="section" id="id5">
+<h3>Solutions<a class="headerlink" href="#id5" title="Permalink to this headline">¶</a></h3>
+<p>If we are faced with non-linear relationships between the dependent and independent variables, we can adjust the linear model via different methods (for more details, <a class="reference external" href="http://www.feat.engineering/numeric-one-to-many.html">see <span id="id6">Kuhn and Johnson [<a class="reference internal" href="reference.html#id5">2019</a>]</span></a>):</p>
 <ul class="simple">
 <li><p>Basis expansions (polynomial features)</p></li>
 <li><p>Regression splines (especially natural cubic splines)</p></li>
 <li><p>Locally weighted scatterplot smoothing (loess)</p></li>
 <li><p>Generalized additive models (GAMs)</p></li>
 </ul>
-<p>In particular, GAMs extend general linear models to have nonlinear terms for individual predictors. GAM models can adaptively model separate basis functions for different variables and estimate the complexity for each. In other words, different predictors can be modeled with different levels of complexity <span id="id6">[<a class="reference internal" href="reference.html#id5">Kuhn and Johnson, 2019</a>]</span>.</p>
+<p>In particular, GAMs extend general linear models to have nonlinear terms for individual predictors. GAM models can adaptively model separate basis functions for different variables and estimate the complexity for each. In other words, different predictors can be modeled with different levels of complexity <span id="id7">[<a class="reference internal" href="reference.html#id5">Kuhn and Johnson, 2019</a>]</span>.</p>
 <p>In case of heteroscedasticity, you have the following options to get realsitic estimates of the standard errors:</p>
 <ul class="simple">
 <li><p>Use heteroskedasticity-consistent standard error estimators for OLS regression (see <a class="reference external" href="https://www.statsmodels.org/dev/generated/statsmodels.regression.linear_model.OLSResults.get_robustcov_results.html">statsmodels</a></p></li>
@@ -1155,9 +1155,9 @@ Notes:
 </div>
 <div class="section" id="correlation-of-error-terms">
 <h2>Correlation of error terms<a class="headerlink" href="#correlation-of-error-terms" title="Permalink to this headline">¶</a></h2>
-<p>Another important assumption of the linear regression model is that the error terms are uncorrelated. If they are not, then p-values associated with the model will be lower than they should be and confidence intervalls are not reliable <span id="id7">[<a class="reference internal" href="reference.html#id7">James <em>et al.</em>, 2021</a>]</span>.</p>
+<p>Another important assumption of the linear regression model is that the error terms are uncorrelated. If they are not, then p-values associated with the model will be lower than they should be and confidence intervalls are not reliable <span id="id8">[<a class="reference internal" href="reference.html#id7">James <em>et al.</em>, 2021</a>]</span>.</p>
 <p>Correlated errors occur especially in the context of time series data. In order to determine if this is the case for a given data set, we can plot the residuals from our model as a function of time. If the errors are uncorrelated, then there should be no evident pattern. This means if the errors are uncorrelated, then the fact that <span class="math notranslate nohighlight">\(ϵ_i\)</span> is positive provides little or no information about the sign of <span class="math notranslate nohighlight">\(ϵ_{i+1}\)</span>.</p>
-<p>Correlation among the error terms can also occur outside of time series data. For instance, consider a study in which individuals’ heights are predicted from their weights. The assumption of uncorrelated errors could be violated if some of the individuals in the study are members of the same family, or eat the same diet, or have been exposed to the same environmental factors <span id="id8">[<a class="reference internal" href="reference.html#id3">Field, 2013</a>]</span>.</p>
+<p>Correlation among the error terms can also occur outside of time series data. For instance, consider a study in which individuals’ heights are predicted from their weights. The assumption of uncorrelated errors could be violated if some of the individuals in the study are members of the same family, or eat the same diet, or have been exposed to the same environmental factors <span id="id9">[<a class="reference internal" href="reference.html#id3">Field, 2013</a>]</span>.</p>
 <div class="section" id="durbin-watson-test">
 <h3>Durbin-Watson test<a class="headerlink" href="#durbin-watson-test" title="Permalink to this headline">¶</a></h3>
 <p>A test of autocorrelation that is designed to take account of the regression model is the <strong>Durbin-Watson test</strong> (also included in the regression summary). It is used to test the hypothesis that there is no <strong>lag one autocorrelation</strong> in the residuals. This means if there is no lag one autocorrelation, then information about <span class="math notranslate nohighlight">\(ϵ_i\)</span> provides little or no information about $ϵ_{i+1}.</p>
@@ -1165,7 +1165,7 @@ Notes:
 <div><p>A small p-value indicates there is significant autocorrelation remaining in the residuals.</p>
 </div></blockquote>
 <p>If there is no autocorrelation, the Durbin-Watson distribution is symmetric around 2.</p>
-<p>As a rough rule of thumb <span id="id9">[<a class="reference internal" href="reference.html#id3">Field, 2013</a>]</span>:</p>
+<p>As a rough rule of thumb <span id="id10">[<a class="reference internal" href="reference.html#id3">Field, 2013</a>]</span>:</p>
 <ul class="simple">
 <li><p>If Durbin–Watson is less than 1.0, there may be cause for concern.</p></li>
 <li><p>Small values of d indicate successive error terms are positively correlated.</p></li>
@@ -1184,8 +1184,8 @@ Notes:
 </div>
 </div>
 </div>
-<div class="section" id="id10">
-<h3>Solution<a class="headerlink" href="#id10" title="Permalink to this headline">¶</a></h3>
+<div class="section" id="id11">
+<h3>Solution<a class="headerlink" href="#id11" title="Permalink to this headline">¶</a></h3>
 <p>We can get consistent estimates of the standard errors with <a class="reference external" href="https://en.wikipedia.org/wiki/Newey%E2%80%93West_estimator">Newey-West standard errors</a>. See <a class="reference external" href="https://www.statsmodels.org/dev/generated/statsmodels.stats.sandwich_covariance.cov_hac.html">statsmodels documentation</a> for implementation details.</p>
 <p>Furthermore, you can use a <a class="reference external" href="https://www.statsmodels.org/dev/generated/statsmodels.regression.linear_model.GLS.html">generalized least squares (GLS)</a> model instead of the ordinary least squares (OLS).</p>
 </div>
@@ -1284,8 +1284,8 @@ Notes:
 </div>
 <p>We don’t have a problematic amount of collinearity in our data.</p>
 </div>
-<div class="section" id="id11">
-<h3>Solution<a class="headerlink" href="#id11" title="Permalink to this headline">¶</a></h3>
+<div class="section" id="id12">
+<h3>Solution<a class="headerlink" href="#id12" title="Permalink to this headline">¶</a></h3>
 <p>In the case of correlated errors, you may use a multilevel model (also known as hierarchical linear models, linear mixed-effect model, mixed models, nested data models, random coefficient, random-effects models, random parameter models, or split-plot designs).</p>
 <p>Multilevel models are particularly appropriate for research designs where data for participants are organized at more than one level (i.e., nested data). The units of analysis are usually individuals (at a lower level) who are nested within contextual/aggregate units (at a higher level).</p>
 <p>See <a class="reference external" href="https://www.statsmodels.org/stable/mixed_linear.html">statsmodels’ documentation</a> to learn how to implement multilevel models.</p>

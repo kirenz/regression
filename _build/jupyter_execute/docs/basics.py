@@ -565,13 +565,13 @@ stats.pearsonr(df['height'], df['height_parents'])
 
 # In the case of our mean model, we use the **variance** as a measure of dispersion. Furthermore, the **standard deviation** is the square root of the variance:
 # 
-# Variance = $$s^2 = \frac {SS}{df} = \frac {\sum_{i=1}^n (outcome_i - model_i)^2}{df}$$
+# Variance = $s^2 = \frac {SS}{df} = \frac {\sum_{i=1}^n (outcome_i - model_i)^2}{df}$
 # 
-# Standard Deviation = $$\sqrt{s^2} = \sqrt{\frac{\sum\limits_{i=1}^{n} \left(x_{i} - \bar{x}\right)^{2}} {df}}$$
+# Standard Deviation = $\sqrt{s^2} = \sqrt{\frac{\sum\limits_{i=1}^{n} \left(x_{i} - \bar{x}\right)^{2}} {df}}$
 # 
 # which equals:
 # 
-# $$s =  \frac {\sum_{i=1}^n (outcome_i - model_i)}{df}$$
+# $s =  \frac {\sum_{i=1}^n (outcome_i - model_i)}{df}$
 # 
 # A small **standard deviation** represents a scenario in which most data points are close to the mean, whereas a large standard deviation represents a situation in which data points are widely spread from the mean. 
 

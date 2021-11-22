@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 # coding: utf-8
 
-# # Regression diagnostics in Python
+# # Regression diagnostics
 
 # When we fit a linear regression model to a particular data set, many problems may occur. Most common among these are the following {cite:p}`James2021`:
 # 
