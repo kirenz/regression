@@ -1,111 +1,459 @@
 #!/usr/bin/env python
 # coding: utf-8
 
-# This lab on Splines and GAMs is a python adaptation of p. 293-297 of "Introduction to Statistical Learning with Applications in R" by Gareth James, Daniela Witten, Trevor Hastie and Robert Tibshirani. It was originally written by <a href = "https://github.com/JWarmenhoven">Jordi Warmenhoven</a>, and was adapted by R. Jordan Crouser at Smith College in Spring 2016. 
+# # Splines
+
+# The following tutorial is based oj James et al. (2021) and [Singh (2018)](https://www.analyticsvidhya.com/blog/2018/03/introduction-regression-splines-python-codes/)
+# 
+
+# ## Python setup
 
 # In[1]:
 
 
+# import modules
 import pandas as pd
 import numpy as np
-import matplotlib as mpl
-import matplotlib.pyplot as plt
-
-from sklearn.preprocessing import PolynomialFeatures
 import statsmodels.api as sm
-import statsmodels.formula.api as smf
-
+import matplotlib.pyplot as plt 
 get_ipython().run_line_magic('matplotlib', 'inline')
 
 
-# In[2]:
+# ## Data import
+
+# In[16]:
 
 
-# Read in the data
+# read data_set
 df = pd.read_csv('https://raw.githubusercontent.com/kirenz/datasets/master/wage.csv')
-
-# Generate a sequence of age values spanning the range
-age_grid = np.arange(df.age.min(), df.age.max()).reshape(-1,1)
+df
 
 
-# # 7.8.2 Splines
+# In[ ]:
+
+
+# Data preparation
+x = df['age']
+y = df['wage']
+
+
+# In[17]:
+
+
+# Dividing data into train and validation datasets
+from sklearn.model_selection import train_test_split
+
+train_x, valid_x, train_y, valid_y = train_test_split(x, y, test_size=0.33, random_state = 1)
+
+
+# In[ ]:
+
+
+# Visualize the relationship b/w age and wage
+import matplotlib.pyplot as plt
+plt.scatter(train_x, train_y, facecolor='None', edgecolor='k', alpha=0.3)
+plt.show()
+
+
+# In[22]:
+
+
+# prepare data shape for linear regression
+x = train_x.values.reshape(-1,1)
+
+
+# ## Simple regression
+
+# In[25]:
+
+
+from sklearn.linear_model import LinearRegression
+
+model = LinearRegression()
+model.fit(x,train_y)
+
+print(model.coef_)
+print(model.intercept_)
+
+
+# ## Polynomial regression
+
+# In[26]:
+
+
+# Generating weights for polynomial function with degree =2
+weights = np.polyfit(train_x, train_y, 2)
+
+print(weights)
+
+
+# In[27]:
+
+
+# Generating model with the given weights
+model = np.poly1d(weights)
+
+
+# In[28]:
+
+
+# Prediction on validation set
+pred = model(valid_x)
+
+
+# In[29]:
+
+
+# We will plot the graph for 70 observations only
+xp = np.linspace(valid_x.min(),valid_x.max(),70)
+
+pred_plot = model(xp)
+
+plt.scatter(valid_x, valid_y, 
+            facecolor='None', 
+            edgecolor='k', 
+            alpha=0.3)
+
+plt.plot(xp, pred_plot)
+plt.show()
+
+
+# ## Piecewise Step Functions
 # 
-# In order to fit regression splines in python, we use the ${\tt dmatrix}$ module from the ${\tt patsy}$ library. In lecture, we saw that regression splines can be fit by constructing an appropriate matrix of basis functions. The ${\tt bs()}$ function generates the entire matrix of basis functions for splines with the specified set of knots.  Fitting ${\tt wage}$ to ${\tt age}$ using a regression spline is simple:
+# A step function is a function which remains constant within the interval. We can fit individual step functions to each of the divided portions in order to avoid imposing a global structure. 
+# 
+# Here we break the range of X into bins, and fit a different constant in each bin.
 
-# In[3]:
+# ### Data preparation
+
+# In[50]:
+
+
+# Dividing the data into 4 bins
+df_cut, bins = pd.cut(train_x, 4, retbins=True, right=True)
+df_cut.value_counts(sort=False)
+
+
+# In[51]:
+
+
+df_steps = pd.concat([train_x, df_cut, train_y], keys=['age','age_cuts','wage'], axis=1)
+
+# Create dummy variables for the age groups
+df_steps_dummies = pd.get_dummies(df_cut)
+df_steps_dummies.head()
+
+
+# In[52]:
+
+
+df_steps_dummies.columns = ['17.938-33.5','33.5-49','49-64.5','64.5-80'] 
+
+
+# ### Fit model
+
+# In[53]:
+
+
+# Fitting Generalised linear models
+fit3 = sm.GLM(df_steps.wage, df_steps_dummies).fit()
+
+
+# In[54]:
+
+
+# Binning validation set into same 4 bins
+bin_mapping = np.digitize(valid_x, bins) 
+X_valid = pd.get_dummies(bin_mapping)
+
+
+# In[55]:
+
+
+# Removing any outliers
+X_valid = pd.get_dummies(bin_mapping).drop([5], axis=1)
+
+
+# In[56]:
+
+
+# Prediction
+pred2 = fit3.predict(X_valid)
+
+
+# In[57]:
+
+
+# Calculating RMSE
+from sklearn.metrics import mean_squared_error 
+
+rms = mean_squared_error(valid_y, pred2, squared=False) 
+print(round(rms,2))
+
+
+# ### Plot
+
+# In[58]:
+
+
+# We will plot the graph for 70 observations only
+xp = np.linspace(valid_x.min(),valid_x.max()-1,70) 
+
+bin_mapping = np.digitize(xp, bins) 
+
+X_valid_2 = pd.get_dummies(bin_mapping) 
+
+pred2 = fit3.predict(X_valid_2)
+
+
+# In[59]:
+
+
+# Visualisation
+fig, (ax1) = plt.subplots(1,1, figsize=(12,5))
+fig.suptitle('Piecewise Constant', fontsize=14)
+
+# Scatter plot with polynomial regression line
+ax1.scatter(train_x, train_y, facecolor='None', edgecolor='k', alpha=0.3)
+ax1.plot(xp, pred2, c='b')
+
+ax1.set_xlabel('age')
+ax1.set_ylabel('wage')
+plt.show()
+
+
+# Binning has its obvious issues:
+# 
+# - most phenomena we study to vary continuously with inputs. 
+# - Binned regression does not create continuous functions of the predictor.
+# 
+# For example, in the above graph, we can see that the first bin clearly misses the increasing trend of wage with age.
+
+# ## Basis functions
+
+# To capture non-linearity in regression models, we need to transform some, or all of the predictors. 
+# 
+# To avoid having to treat every predictor as linear, we want to apply a very general family of transformations to our predictors. 
+# 
+# The family should be flexible enough to adapt (when the model is fit) to a wide variety of shapes, but not too flexible as to over-fit.
+# 
+# This concept of a family of transformations that can fit together to capture general shapes is called a basis function.
+
+# ## Piecewise Polynomials
+# 
+# Instead of fitting a constant function over different bins across the range of X, piecewise polynomial regression involves fitting separate low-degree polynomials over different regions of X. 
+# 
+# As we use lower degrees of polynomials, we don’t observe high oscillations of the curve around the data.
+# 
+# For example, a piecewise quadratic polynomial works by fitting a quadratic regression equation.
+# 
+# In other words, we fit two different polynomial functions to the data: one on the subset of the observations with $x_i$ < c, and one on the subset of the observations with $x_i$ ≥ c.
+# 
+# The first polynomial function has coefficients β01, β11, β21, β31 and the second has coefficients β02, β12, β22, β32. Each of these polynomial functions can be fit using the least squares error metric.
+# 
+# Remember that this family of polynomial functions has 8 degrees of freedom, 4 for each polynomial (as there are 4 variables).
+# 
+# Using more knots leads to a more flexible piecewise polynomial, as we use different functions for every bin. These functions depend only on the distribution of data of that particular bin. 
+# 
+# In general, if we place K different knots throughout the range of X, we will end up fitting K+1 different cubic polynomials. We can use any low degree polynomial to fit these individual bins. For example, we can instead fit piecewise linear functions. In fact, the stepwise functions used above are actually piecewise polynomials of degree 0.
+# 
+# Now we will look at some necessary conditions and constraints that should be followed while forming piecewise polynomials.
+
+# ## Cubic splines
+# 
+# Cubic spline is a piecewise polynomial with a set of extra constraints (continuity, continuity of the first derivative, and continuity of the second derivative). 
+# 
+# In general, a cubic spline with K knots uses cubic spline with a total of 4 + K degrees of freedom. There is seldom any good reason to go beyond cubic-splines (unless one is interested in smooth derivatives).
+
+# In[60]:
 
 
 from patsy import dmatrix
-
-# Specifying 3 knots
-transformed_x1 = dmatrix("bs(df.age, knots=(25,40,60), degree=3, include_intercept=False)",
-                        {"df.age": df.age}, return_type='dataframe')
-
-# Build a regular linear model from the splines
-fit1 = sm.GLM(df.wage, transformed_x1).fit()
-fit1.params
+import statsmodels.api as sm
 
 
-# Here we have prespecified knots at ages 25, 40, and 60. This produces a
-# spline with six basis functions. (Recall that a cubic spline with three knots
-# has seven degrees of freedom; these degrees of freedom are used up by an
-# intercept, plus six basis functions.) We could also use the ${\tt df}$ option to
-# produce a spline with knots at uniform quantiles of the data:
-
-# In[4]:
+# In[62]:
 
 
-# Specifying 6 degrees of freedom 
-transformed_x2 = dmatrix("bs(df.age, df=6, include_intercept=False)",
-                        {"df.age": df.age}, return_type='dataframe')
-fit2 = sm.GLM(df.wage, transformed_x2).fit()
-fit2.params
+# Generating cubic spline with 3 knots at 25, 40 and 60
+transformed_x = dmatrix("bs(train, knots=(25,40,60), degree=3, include_intercept=False)", 
+                {"train": train_x},return_type='dataframe')
 
 
-# In this case python chooses knots which correspond
-# to the 25th, 50th, and 75th percentiles of ${\tt age}$. The function ${\tt bs()}$ also has
-# a ${\tt degree}$ argument, so we can fit splines of any degree, rather than the
-# default degree of 3 (which yields a cubic spline).
-# 
-# In order to instead fit a natural spline, we use the ${\tt cr()}$ function. Here
-# we fit a natural spline with four degrees of freedom:
-
-# In[5]:
+# In[63]:
 
 
-# Specifying 4 degrees of freedom
-transformed_x3 = dmatrix("cr(df.age, df=4)", {"df.age": df.age}, return_type='dataframe')
-fit3 = sm.GLM(df.wage, transformed_x3).fit()
-fit3.params
+# Fitting Generalised linear model on transformed dataset
+fit1 = sm.GLM(train_y, transformed_x).fit()
 
 
-# As with the ${\tt bs()}$ function, we could instead specify the knots directly using
-# the ${\tt knots}$ option.
-# 
-# Let's see how these three models stack up:
-
-# In[6]:
+# In[64]:
 
 
-# Generate a sequence of age values spanning the range
-age_grid = np.arange(df.age.min(), df.age.max()).reshape(-1,1)
+# Generating cubic spline with 4 knots
+transformed_x2 = dmatrix("bs(train, knots=(25,40,50,65),degree=3, include_intercept=False)", 
+                {"train": train_x}, return_type='dataframe')
+
+
+# In[66]:
+
+
+# Fitting Generalised linear model on transformed dataset
+fit2 = sm.GLM(train_y, transformed_x2).fit()
+
+
+# In[67]:
+
+
+# Predictions on both splines
+pred1 = fit1.predict(dmatrix("bs(valid, knots=(25,40,60), include_intercept=False)", {"valid": valid_x}, return_type='dataframe'))
+pred2 = fit2.predict(dmatrix("bs(valid, knots=(25,40,50,65),degree =3, include_intercept=False)", {"valid": valid_x}, return_type='dataframe'))
+
+
+# In[71]:
+
+
+# Calculating RMSE values
+rms1 = (mean_squared_error(valid_y, pred1, squared=False))
+print(rms1)
+
+rms2 = (mean_squared_error(valid_y, pred2, squared=False))
+print(rms2)
+
+
+# ### Plot
+
+# In[72]:
+
+
+
+# We will plot the graph for 70 observations only
+xp = np.linspace(valid_x.min(),valid_x.max(),70)
 
 # Make some predictions
-pred1 = fit1.predict(dmatrix("bs(age_grid, knots=(25,40,60), include_intercept=False)",
-                             {"age_grid": age_grid}, return_type='dataframe'))
-pred2 = fit2.predict(dmatrix("bs(age_grid, df=6, include_intercept=False)",
-                             {"age_grid": age_grid}, return_type='dataframe'))
-pred3 = fit3.predict(dmatrix("cr(age_grid, df=4)", {"age_grid": age_grid}, return_type='dataframe'))
+pred1 = fit1.predict(dmatrix("bs(xp, knots=(25,40,60), include_intercept=False)", {"xp": xp}, return_type='dataframe'))
+pred2 = fit2.predict(dmatrix("bs(xp, knots=(25,40,50,65),degree =3, include_intercept=False)", {"xp": xp}, return_type='dataframe'))
 
 # Plot the splines and error bands
-plt.scatter(df.age, df.wage, facecolor='None', edgecolor='k', alpha=0.1)
-plt.plot(age_grid, pred1, color='b', label='Specifying three knots')
-plt.plot(age_grid, pred2, color='r', label='Specifying df=6')
-plt.plot(age_grid, pred3, color='g', label='Natural spline df=4')
-[plt.vlines(i , 0, 350, linestyles='dashed', lw=2, colors='b') for i in [25,40,60]]
+plt.scatter(data.age, data.wage, facecolor='None', edgecolor='k', alpha=0.1)
+plt.plot(xp, pred1, label='Specifying degree =3 with 3 knots')
+plt.plot(xp, pred2, color='r', label='Specifying degree =3 with 4 knots')
 plt.legend()
 plt.xlim(15,85)
 plt.ylim(0,350)
 plt.xlabel('age')
 plt.ylabel('wage')
+plt.show()
+
+
+# We know that the behavior of polynomials that are fit to the data tends to be erratic near the boundaries. Such variability can be dangerous. These problems are resembled by splines, too. The polynomials fit beyond the boundary knots behave even more wildly than the corresponding global polynomials in that region. To smooth the polynomial beyond the boundary knots, we will use a special type of spline known as Natural Spline.
+
+# ## Natural cubic spline
+
+# A natural cubic spline adds additional constraints, namely that the function is linear beyond the boundary knots. 
+# 
+# This constrains the cubic and quadratic parts there to 0, each reducing the degrees of freedom by 2. That’s 2 degrees of freedom at each of the two ends of the curve, reducing K+4 to K.
+
+# In[73]:
+
+
+# Generating natural cubic spline
+transformed_x3 = dmatrix("cr(train,df = 3)", 
+                {"train": train_x}, return_type='dataframe')
+
+fit3 = sm.GLM(train_y, transformed_x3).fit()
+
+
+# In[74]:
+
+
+# Prediction on validation set
+pred3 = fit3.predict(dmatrix("cr(valid, df=3)", 
+        {"valid": valid_x}, return_type='dataframe'))
+
+
+# In[75]:
+
+
+# Calculating RMSE value
+rms = sqrt(mean_squared_error(valid_y, pred3))
+print(rms)
+
+
+# ### Plot
+
+# In[77]:
+
+
+# We will plot the graph for 70 observations only
+xp = np.linspace(valid_x.min(),valid_x.max(),70)
+pred3 = fit3.predict(dmatrix("cr(xp, df=3)", {"xp": xp}, return_type='dataframe'))
+
+# Plot the spline
+plt.scatter(df.age, df.wage, facecolor='None', edgecolor='k', alpha=0.1)
+plt.plot(xp, pred3,color='g', label='Natural spline')
+
+plt.legend()
+plt.xlim(15,85)
+plt.ylim(0,350)
+plt.xlabel('age')
+plt.ylabel('wage')
+plt.show()
+
+
+# Choosing the Number and Locations of the Knots
+# When we fit a spline, where should we place the knots? One potential place would be the area of high variability, because in those regions the polynomial coefficients can change rapidly. Hence, one option is to place more knots in places where we feel the function might vary most rapidly, and to place fewer knots where it seems more stable.
+# 
+# While this option can work well, in practice it is common to place knots in a uniform fashion. One way to do this is to specify the desired degrees of freedom, and then have the software automatically place the corresponding number of knots at uniform quantiles of the data.
+# 
+# Another option is to try out different numbers of knots and see which produces the best looking curve.
+
+# ## Cubic spline with scipy
+
+# <!--BOOK_INFORMATION-->
+# 
+# *This notebook contains an excerpt from the [Python Programming and Numerical Methods - A Guide for Engineers and Scientists](https://www.elsevier.com/books/python-programming-and-numerical-methods/kong/978-0-12-819549-9), the content is also available at [Berkeley Python Numerical Methods](https://pythonnumericalmethods.berkeley.edu/notebooks/Index.html).*
+
+# In[78]:
+
+
+from scipy.interpolate import CubicSpline
+import numpy as np
+import matplotlib.pyplot as plt
+
+plt.style.use('seaborn-poster')
+
+
+# In[79]:
+
+
+# make simple dataset
+x = [0, 1, 2]
+y = [1, 3, 2]
+
+
+# In[84]:
+
+
+# use bc_type = 'natural'
+natural_spline = CubicSpline(x, y, bc_type='natural')
+
+
+# In[85]:
+
+
+x_new = np.linspace(0, 2, 100)
+y_new = natural_spline(x_new)
+
+
+# In[86]:
+
+
+plt.figure(figsize = (10,8))
+plt.plot(x_new, y_new, 'b')
+plt.plot(x, y, 'ro')
+plt.title('Cubic Spline Interpolation')
+plt.xlabel('x')
+plt.ylabel('y')
+plt.show()
 
