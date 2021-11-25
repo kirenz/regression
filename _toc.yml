@@ -7,11 +7,9 @@ parts:
   - caption: Diagnostics
     chapters:
     - file: docs/diagnostics.ipynb
-  - caption: Lasso
+  - caption: Advanced
     chapters:
     - file: docs/lasso.ipynb
-  - caption: Splines
-    chapters:
     - file: docs/splines.ipynb   
   - caption: Applications
     chapters:

@@ -3,8 +3,7 @@
 
 # # Splines
 
-# The following tutorial is based oj James et al. (2021) and [Singh (2018)](https://www.analyticsvidhya.com/blog/2018/03/introduction-regression-splines-python-codes/)
-# 
+# The following tutorial is based on an example from {cite:p}`James2021` and Python code from [Singh (2018)](https://www.analyticsvidhya.com/blog/2018/03/introduction-regression-splines-python-codes/).
 
 # ## Python setup
 
@@ -21,7 +20,7 @@ get_ipython().run_line_magic('matplotlib', 'inline')
 
 # ## Data import
 
-# In[16]:
+# In[2]:
 
 
 # read data_set
@@ -29,24 +28,24 @@ df = pd.read_csv('https://raw.githubusercontent.com/kirenz/datasets/master/wage.
 df
 
 
-# In[ ]:
+# In[3]:
 
 
-# Data preparation
+# We only use the feature age to predict wage
 x = df['age']
 y = df['wage']
 
 
-# In[17]:
+# In[4]:
 
 
-# Dividing data into train and validation datasets
+# Dividing data into train and test datasets
 from sklearn.model_selection import train_test_split
 
-train_x, valid_x, train_y, valid_y = train_test_split(x, y, test_size=0.33, random_state = 1)
+train_x, test_x, train_y, test_y = train_test_split(x, y, test_size=0.33, random_state = 1)
 
 
-# In[ ]:
+# In[5]:
 
 
 # Visualize the relationship b/w age and wage
@@ -55,7 +54,7 @@ plt.scatter(train_x, train_y, facecolor='None', edgecolor='k', alpha=0.3)
 plt.show()
 
 
-# In[22]:
+# In[6]:
 
 
 # prepare data shape for linear regression
@@ -64,7 +63,7 @@ x = train_x.values.reshape(-1,1)
 
 # ## Simple regression
 
-# In[25]:
+# In[7]:
 
 
 from sklearn.linear_model import LinearRegression
@@ -78,38 +77,38 @@ print(model.intercept_)
 
 # ## Polynomial regression
 
-# In[26]:
+# In[8]:
 
 
 # Generating weights for polynomial function with degree =2
-weights = np.polyfit(train_x, train_y, 2)
+poly_2 = np.polyfit(train_x, train_y, 2)
 
-print(weights)
+print(poly_2)
 
 
-# In[27]:
+# In[9]:
 
 
 # Generating model with the given weights
-model = np.poly1d(weights)
+model = np.poly1d(poly_2)
 
 
-# In[28]:
+# In[10]:
 
 
-# Prediction on validation set
-pred = model(valid_x)
+# Prediction on testation set
+pred = model(test_x)
 
 
-# In[29]:
+# In[11]:
 
 
 # We will plot the graph for 70 observations only
-xp = np.linspace(valid_x.min(),valid_x.max(),70)
+xp = np.linspace(test_x.min(),test_x.max(),70)
 
 pred_plot = model(xp)
 
-plt.scatter(valid_x, valid_y, 
+plt.scatter(test_x, test_y, 
             facecolor='None', 
             edgecolor='k', 
             alpha=0.3)
@@ -126,7 +125,7 @@ plt.show()
 
 # ### Data preparation
 
-# In[50]:
+# In[12]:
 
 
 # Dividing the data into 4 bins
@@ -134,7 +133,7 @@ df_cut, bins = pd.cut(train_x, 4, retbins=True, right=True)
 df_cut.value_counts(sort=False)
 
 
-# In[51]:
+# In[13]:
 
 
 df_steps = pd.concat([train_x, df_cut, train_y], keys=['age','age_cuts','wage'], axis=1)
@@ -144,7 +143,7 @@ df_steps_dummies = pd.get_dummies(df_cut)
 df_steps_dummies.head()
 
 
-# In[52]:
+# In[14]:
 
 
 df_steps_dummies.columns = ['17.938-33.5','33.5-49','49-64.5','64.5-80'] 
@@ -152,61 +151,61 @@ df_steps_dummies.columns = ['17.938-33.5','33.5-49','49-64.5','64.5-80']
 
 # ### Fit model
 
-# In[53]:
+# In[15]:
 
 
 # Fitting Generalised linear models
 fit3 = sm.GLM(df_steps.wage, df_steps_dummies).fit()
 
 
-# In[54]:
+# In[16]:
 
 
-# Binning validation set into same 4 bins
-bin_mapping = np.digitize(valid_x, bins) 
-X_valid = pd.get_dummies(bin_mapping)
+# Binning testation set into same 4 bins
+bin_mapping = np.digitize(test_x, bins) 
+X_test = pd.get_dummies(bin_mapping)
 
 
-# In[55]:
+# In[17]:
 
 
 # Removing any outliers
-X_valid = pd.get_dummies(bin_mapping).drop([5], axis=1)
+X_test = pd.get_dummies(bin_mapping).drop([5], axis=1)
 
 
-# In[56]:
+# In[18]:
 
 
 # Prediction
-pred2 = fit3.predict(X_valid)
+pred2 = fit3.predict(X_test)
 
 
-# In[57]:
+# In[19]:
 
 
 # Calculating RMSE
 from sklearn.metrics import mean_squared_error 
 
-rms = mean_squared_error(valid_y, pred2, squared=False) 
+rms = mean_squared_error(test_y, pred2, squared=False) 
 print(round(rms,2))
 
 
 # ### Plot
 
-# In[58]:
+# In[20]:
 
 
 # We will plot the graph for 70 observations only
-xp = np.linspace(valid_x.min(),valid_x.max()-1,70) 
+xp = np.linspace(test_x.min(),test_x.max()-1,70) 
 
 bin_mapping = np.digitize(xp, bins) 
 
-X_valid_2 = pd.get_dummies(bin_mapping) 
+X_test_2 = pd.get_dummies(bin_mapping) 
 
-pred2 = fit3.predict(X_valid_2)
+pred2 = fit3.predict(X_test_2)
 
 
-# In[59]:
+# In[21]:
 
 
 # Visualisation
@@ -265,14 +264,14 @@ plt.show()
 # 
 # In general, a cubic spline with K knots uses cubic spline with a total of 4 + K degrees of freedom. There is seldom any good reason to go beyond cubic-splines (unless one is interested in smooth derivatives).
 
-# In[60]:
+# In[22]:
 
 
 from patsy import dmatrix
 import statsmodels.api as sm
 
 
-# In[62]:
+# In[23]:
 
 
 # Generating cubic spline with 3 knots at 25, 40 and 60
@@ -280,14 +279,14 @@ transformed_x = dmatrix("bs(train, knots=(25,40,60), degree=3, include_intercept
                 {"train": train_x},return_type='dataframe')
 
 
-# In[63]:
+# In[24]:
 
 
 # Fitting Generalised linear model on transformed dataset
 fit1 = sm.GLM(train_y, transformed_x).fit()
 
 
-# In[64]:
+# In[25]:
 
 
 # Generating cubic spline with 4 knots
@@ -295,47 +294,47 @@ transformed_x2 = dmatrix("bs(train, knots=(25,40,50,65),degree=3, include_interc
                 {"train": train_x}, return_type='dataframe')
 
 
-# In[66]:
+# In[26]:
 
 
 # Fitting Generalised linear model on transformed dataset
 fit2 = sm.GLM(train_y, transformed_x2).fit()
 
 
-# In[67]:
+# In[27]:
 
 
 # Predictions on both splines
-pred1 = fit1.predict(dmatrix("bs(valid, knots=(25,40,60), include_intercept=False)", {"valid": valid_x}, return_type='dataframe'))
-pred2 = fit2.predict(dmatrix("bs(valid, knots=(25,40,50,65),degree =3, include_intercept=False)", {"valid": valid_x}, return_type='dataframe'))
+pred1 = fit1.predict(dmatrix("bs(test, knots=(25,40,60), include_intercept=False)", {"test": test_x}, return_type='dataframe'))
+pred2 = fit2.predict(dmatrix("bs(test, knots=(25,40,50,65),degree =3, include_intercept=False)", {"test": test_x}, return_type='dataframe'))
 
 
-# In[71]:
+# In[28]:
 
 
 # Calculating RMSE values
-rms1 = (mean_squared_error(valid_y, pred1, squared=False))
+rms1 = (mean_squared_error(test_y, pred1, squared=False))
 print(rms1)
 
-rms2 = (mean_squared_error(valid_y, pred2, squared=False))
+rms2 = (mean_squared_error(test_y, pred2, squared=False))
 print(rms2)
 
 
 # ### Plot
 
-# In[72]:
+# In[29]:
 
 
 
 # We will plot the graph for 70 observations only
-xp = np.linspace(valid_x.min(),valid_x.max(),70)
+xp = np.linspace(test_x.min(),test_x.max(),70)
 
 # Make some predictions
 pred1 = fit1.predict(dmatrix("bs(xp, knots=(25,40,60), include_intercept=False)", {"xp": xp}, return_type='dataframe'))
 pred2 = fit2.predict(dmatrix("bs(xp, knots=(25,40,50,65),degree =3, include_intercept=False)", {"xp": xp}, return_type='dataframe'))
 
 # Plot the splines and error bands
-plt.scatter(data.age, data.wage, facecolor='None', edgecolor='k', alpha=0.1)
+plt.scatter(df.age, df.wage, facecolor='None', edgecolor='k', alpha=0.1)
 plt.plot(xp, pred1, label='Specifying degree =3 with 3 knots')
 plt.plot(xp, pred2, color='r', label='Specifying degree =3 with 4 knots')
 plt.legend()
@@ -354,7 +353,7 @@ plt.show()
 # 
 # This constrains the cubic and quadratic parts there to 0, each reducing the degrees of freedom by 2. That’s 2 degrees of freedom at each of the two ends of the curve, reducing K+4 to K.
 
-# In[73]:
+# In[30]:
 
 
 # Generating natural cubic spline
@@ -364,29 +363,29 @@ transformed_x3 = dmatrix("cr(train,df = 3)",
 fit3 = sm.GLM(train_y, transformed_x3).fit()
 
 
-# In[74]:
+# In[31]:
 
 
-# Prediction on validation set
-pred3 = fit3.predict(dmatrix("cr(valid, df=3)", 
-        {"valid": valid_x}, return_type='dataframe'))
+# Prediction on test set
+pred3 = fit3.predict(dmatrix("cr(test, df=3)", 
+        {"test": test_x}, return_type='dataframe'))
 
 
-# In[75]:
+# In[32]:
 
 
 # Calculating RMSE value
-rms = sqrt(mean_squared_error(valid_y, pred3))
+rms = mean_squared_error(test_y, pred3, squared=False)
 print(rms)
 
 
 # ### Plot
 
-# In[77]:
+# In[33]:
 
 
 # We will plot the graph for 70 observations only
-xp = np.linspace(valid_x.min(),valid_x.max(),70)
+xp = np.linspace(test_x.min(),test_x.max(),70)
 pred3 = fit3.predict(dmatrix("cr(xp, df=3)", {"xp": xp}, return_type='dataframe'))
 
 # Plot the spline
@@ -401,7 +400,8 @@ plt.ylabel('wage')
 plt.show()
 
 
-# Choosing the Number and Locations of the Knots
+# ### Number and Locations of Knots
+# 
 # When we fit a spline, where should we place the knots? One potential place would be the area of high variability, because in those regions the polynomial coefficients can change rapidly. Hence, one option is to place more knots in places where we feel the function might vary most rapidly, and to place fewer knots where it seems more stable.
 # 
 # While this option can work well, in practice it is common to place knots in a uniform fashion. One way to do this is to specify the desired degrees of freedom, and then have the software automatically place the corresponding number of knots at uniform quantiles of the data.
@@ -414,7 +414,7 @@ plt.show()
 # 
 # *This notebook contains an excerpt from the [Python Programming and Numerical Methods - A Guide for Engineers and Scientists](https://www.elsevier.com/books/python-programming-and-numerical-methods/kong/978-0-12-819549-9), the content is also available at [Berkeley Python Numerical Methods](https://pythonnumericalmethods.berkeley.edu/notebooks/Index.html).*
 
-# In[78]:
+# In[34]:
 
 
 from scipy.interpolate import CubicSpline
@@ -424,7 +424,7 @@ import matplotlib.pyplot as plt
 plt.style.use('seaborn-poster')
 
 
-# In[79]:
+# In[35]:
 
 
 # make simple dataset
@@ -432,21 +432,21 @@ x = [0, 1, 2]
 y = [1, 3, 2]
 
 
-# In[84]:
+# In[36]:
 
 
 # use bc_type = 'natural'
 natural_spline = CubicSpline(x, y, bc_type='natural')
 
 
-# In[85]:
+# In[37]:
 
 
 x_new = np.linspace(0, 2, 100)
 y_new = natural_spline(x_new)
 
 
-# In[86]:
+# In[38]:
 
 
 plt.figure(figsize = (10,8))
