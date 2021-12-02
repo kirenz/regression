@@ -11,10 +11,10 @@ parts:
     chapters:
     - file: docs/lasso.ipynb
     - file: docs/splines.ipynb   
-  - caption: Applications
-    chapters:
-    - file: docs/case-simulated.ipynb
-    - file: docs/case-auto.ipynb
+  #- caption: Applications
+  #  chapters:
+  #  - file: docs/case-simulated.ipynb
+  #  - file: docs/case-auto.ipynb
   - caption: References
     chapters:
     - file: docs/reference.md
