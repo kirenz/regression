@@ -86,7 +86,7 @@
     </a>
 </div><form class="bd-search d-flex align-items-center" action="../search.html" method="get">
   <i class="icon fas fa-search"></i>
-  <input type="search" class="form-control" name="q" id="search-input" placeholder="Dieses Buch durchsuchen ..." aria-label="Dieses Buch durchsuchen ..." autocomplete="off" >
+  <input type="search" class="form-control" name="q" id="search-input" placeholder="Search this book..." aria-label="Search this book..." autocomplete="off" >
 </form><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
     <div class="bd-toc-item active">
         <ul class="nav bd-sidenav">
@@ -173,8 +173,8 @@
             
             <button id="navbar-toggler" class="navbar-toggler ml-0" type="button" data-toggle="collapse"
                 data-toggle="tooltip" data-placement="bottom" data-target=".site-navigation" aria-controls="navbar-menu"
-                aria-expanded="true" aria-label="Navigation umschalten" aria-controls="site-navigation"
-                title="Navigation umschalten" data-toggle="tooltip" data-placement="left">
+                aria-expanded="true" aria-label="Toggle navigation" aria-controls="site-navigation"
+                title="Toggle navigation" data-toggle="tooltip" data-placement="left">
                 <i class="fas fa-bars"></i>
                 <i class="fas fa-arrow-left"></i>
                 <i class="fas fa-arrow-up"></i>
@@ -182,7 +182,7 @@
             
             
 <div class="dropdown-buttons-trigger">
-    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn" aria-label="Laden Sie diese Seite herunter"><i
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn" aria-label="Download this page"><i
             class="fas fa-download"></i></button>
 
     <div class="dropdown-buttons">
@@ -190,10 +190,10 @@
         
         <!-- Download raw file -->
         <a class="dropdown-buttons" href="../_sources/docs/basics.ipynb"><button type="button"
-                class="btn btn-secondary topbarbtn" title="Quelldatei herunterladen" data-toggle="tooltip"
+                class="btn btn-secondary topbarbtn" title="Download source file" data-toggle="tooltip"
                 data-placement="left">.ipynb</button></a>
         <!-- Download PDF via print -->
-        <button type="button" id="download-print" class="btn btn-secondary topbarbtn" title="In PDF drucken"
+        <button type="button" id="download-print" class="btn btn-secondary topbarbtn" title="Print to PDF"
             onClick="window.print()" data-toggle="tooltip" data-placement="left">.pdf</button>
     </div>
 </div>
@@ -206,12 +206,12 @@
     <div class="dropdown-buttons sourcebuttons">
         <a class="repository-button"
             href="https://github.com/kirenz/linear_regression"><button type="button" class="btn btn-secondary topbarbtn"
-                data-toggle="tooltip" data-placement="left" title="Quell-Repository"><i
-                    class="fab fa-github"></i>Repository</button></a>
+                data-toggle="tooltip" data-placement="left" title="Source repository"><i
+                    class="fab fa-github"></i>repository</button></a>
         <a class="issues-button"
             href="https://github.com/kirenz/linear_regression/issues/new?title=Issue%20on%20page%20%2Fdocs/basics.html&body=Your%20issue%20content%20here."><button
                 type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip" data-placement="left"
-                title="Öffnen Sie ein Problem"><i class="fas fa-lightbulb"></i>offenes Thema</button></a>
+                title="Open an issue"><i class="fas fa-lightbulb"></i>open issue</button></a>
         
     </div>
 </div>
@@ -219,8 +219,8 @@
             <!-- Full screen (wrap in <a> to have style consistency -->
 
 <a class="full-screen-button"><button type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip"
-        data-placement="bottom" onclick="toggleFullScreen()" aria-label="Vollbildmodus"
-        title="Vollbildmodus"><i
+        data-placement="bottom" onclick="toggleFullScreen()" aria-label="Fullscreen mode"
+        title="Fullscreen mode"><i
             class="fas fa-expand"></i></button></a>
 
             <!-- Launch buttons -->
@@ -233,7 +233,7 @@
         
         
         <a class="colab-button" href="https://colab.research.google.com/github/kirenz/linear_regression/blob/main/docs/basics.ipynb"><button type="button" class="btn btn-secondary topbarbtn"
-                title="Starten Colab" data-toggle="tooltip" data-placement="left"><img class="colab-button-logo"
+                title="Launch Colab" data-toggle="tooltip" data-placement="left"><img class="colab-button-logo"
                     src="../_static/images/logo_colab.png"
                     alt="Interact on Colab">Colab</button></a>
         
@@ -247,7 +247,7 @@
         <div class="d-none d-md-block col-md-2 bd-toc show">
             
             <div class="tocsection onthispage pt-5 pb-3">
-                <i class="fas fa-list"></i> Inhalt
+                <i class="fas fa-list"></i> Contents
             </div>
             <nav id="bd-toc-nav" aria-label="Page">
                 <ul class="visible nav section-nav flex-column">
@@ -305,7 +305,7 @@
   </a>
   <ul class="nav section-nav flex-column">
    <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#id1">
+    <a class="reference internal nav-link" href="#id2">
      Mean
     </a>
    </li>
@@ -386,6 +386,7 @@
                 
   <div class="tex2jax_ignore mathjax_ignore section" id="regression-basics">
 <h1>Regression basics<a class="headerlink" href="#regression-basics" title="Permalink to this headline">¶</a></h1>
+<p><em>The explanations of statistical concepts are partly based on <span id="id1">Field [<a class="reference internal" href="reference.html#id3">2013</a>]</span></em></p>
 <p>One of the simplest models we use in statistics is the <strong>mean</strong>. It is a (simple) model because it represents a summary of data. Therefore, let’s use the mean as a baseline model and compare the quality of fit between the mean and a simple linear regression model with only one predictor.</p>
 <p>We use a small sample of 20 women from whom we obtained their height (this is our outcome variable) and the average height of their parents (this is our feature).</p>
 <div class="section" id="python-setup">
@@ -1367,8 +1368,8 @@ the true response value for that observation.</p>
 <p><strong>Adjusted</strong> <span class="math notranslate nohighlight">\(R^2\)</span>:</p>
 <p>Whereas <span class="math notranslate nohighlight">\(R^2\)</span> tells us how much of the variance in Y overlaps with predicted values from the model in our sample, adjusted <span class="math notranslate nohighlight">\(R^2\)</span> tells us how much variance in Y would be accounted for if the model had been derived from the <strong>population</strong> from which the sample was taken (takes degrees of freedom into account). Therefore, the adjusted value indicates the loss of predictive power or shrinkage.</p>
 <p>As a general rule it is preferrable to use the adjusted <span class="math notranslate nohighlight">\(R^2\)</span> instead of the simple <span class="math notranslate nohighlight">\(R^2\)</span>.</p>
-<div class="section" id="id1">
-<h3>Mean<a class="headerlink" href="#id1" title="Permalink to this headline">¶</a></h3>
+<div class="section" id="id2">
+<h3>Mean<a class="headerlink" href="#id2" title="Permalink to this headline">¶</a></h3>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># calculate error (observation - average) and assign it to dataframe</span>
@@ -2239,7 +2240,7 @@ t_{N - p} = \frac{{\beta_1} }{SE_{\hat{\beta}}}
 <div class="section" id="confidence-interval">
 <h3>Confidence interval<a class="headerlink" href="#confidence-interval" title="Permalink to this headline">¶</a></h3>
 <p>Now let’s cover confidence intervalls. As a brief recap, we usually use a <strong>sample value</strong> as an estimate of a <strong>parameter</strong> (e.g., the mean or any other parameter b) in the <strong>population</strong>. We’ve just seen that the <strong>estimate of a parameter</strong> (e.g., the mean) will differ across samples, and we can use the <strong>standard error</strong> to get some idea of the extent to which these estimates differ across samples. We can also use this information to calculate boundaries within which we believe the population value will fall. Such boundaries are called <strong>confidence intervals</strong>.</p>
-<p>For example, perhaps we might want to know how often, <em>in the long run</em>, an interval contains the true value of the parameter we’re trying to estimate (in the case of model 1, the mean). This is what a <strong>confidence interval</strong> does. T</p>
+<p>For example, perhaps we might want to know how often, <em>in the long run</em>, an interval contains the true value of the parameter we’re trying to estimate (in the case of model 1, the mean). This is what a <strong>confidence interval</strong> does.</p>
 <p>Typically, we look at 95% confidence intervals, and sometimes 99% confidence intervals, but they all have a similar interpretation: they are limits constructed such that, for a certain percentage of samples (be that 95% or 99%), the true value of the population parameter falls within the limits. So, when you see a 95% confidence interval for a mean, think of it like this:</p>
 <ul class="simple">
 <li><p>if we’d collected 100 samples, and for each sample calculated the parameter (e.g. the mean) and a confidence interval for it, then for 95 of these samples, the confidence interval contains the value of the parameter (e.g. the mean) in the population, and in 5 of the samples the confidence interval does not contain the population paramater (e.g. the mean).</p></li>
@@ -2665,9 +2666,9 @@ Upper boundary of CI (t-statistics) 165.69583627664076
     <div class="container">
       <p>
         
-          Durch Jan Kirenz<br/>
+          By Jan Kirenz<br/>
         
-            &copy; Urheberrechte © 2021.<br/>
+            &copy; Copyright 2021.<br/>
       </p>
     </div>
   </footer>
