@@ -1,13 +1,14 @@
 #!/usr/bin/env python
 # coding: utf-8
 
-# # Lasso
+# # Lasso regression in Python
 
 # ## Basics
 
-# Lasso performs a so called `L1 regularization` (a process of introducing additional information in order to prevent overfitting), i.e. adds penalty equivalent to absolute value of the magnitude of coefficients.
 # 
-# In particular, the minimization objective does not only include the residual sum of squares (RSS) - like in the OLS regression setting - but also the sum of the absolute value of coefficients.
+# *This tutorial is mainly based on the excellent book ["An Introduction to Statistical Learning"](https://www.statlearning.com/) from James et al. (2021), the scikit-learn documentation about [regressors with variable selection](https://scikit-learn.org/stable/modules/classes.html#regressors-with-variable-selection) as well as Python code provided by Jordi Warmenhoven in this [GitHub repository](https://nbviewer.org/github/JWarmenhoven/ISL-python/blob/master/Notebooks/Chapter%206.ipynb).*
+# 
+# Lasso regression relies upon the linear regression model but additionaly performs a so called `L1 regularization`, which is a process of introducing additional information in order to prevent overfitting. As a consequence, we can fit a model containing all possible predictors and use lasso to perform variable selection by using a technique that regularizes the coefficient estimates (it shrinks the coefficient estimates towards zero). In particular, the minimization objective does not only include the residual sum of squares (RSS) - like in the OLS regression setting - but also the sum of the absolute value of coefficients.
 # 
 # The residual sum of squares (RSS) is calculated as follows:
 # 
@@ -17,337 +18,339 @@
 # 
 # $$ RSS = \sum_{i=1}^{n} \bigg(y_i - \big( \beta_{0} + \sum_{j=1}^{p} \beta_{j} x_{ij} \big) \bigg)^2  $$
 # 
-# - $n$ represents the number of distinct data points, or observations, in our sample.
+# - $n$ represents the number of observations.
 # - $p$ denotes the number of variables that are available in the dataset.
 # - $x_{ij}$ represents the value of the jth variable for the ith observation, where i = 1, 2, . . ., n and j = 1, 2, . . . , p.
 # 
 # In the lasso regression, the minimization objective becomes:
 # 
-# $$ \sum_{i=1}^{n} \bigg(y_i - \big( \beta_{0} + \sum_{j=1}^{p} \beta_{j} x_{ij} \big) \bigg)^2 + \lambda \sum_{j=1}^{p} |\beta_j|   $$
+# $$ \sum_{i=1}^{n} \bigg(y_i - \big( \beta_{0} + \sum_{j=1}^{p} \beta_{j} x_{ij} \big) \bigg)^2 + \alpha \sum_{j=1}^{p} |\beta_j|   $$
 # 
 # which equals:
 # 
-# $$RSS + \lambda \sum_{j=1}^{p} |\beta_j|  $$
+# $$RSS + \alpha \sum_{j=1}^{p} |\beta_j|  $$
 # 
+# $\alpha$ (alpha) can take various values:
 # 
-# $\lambda$ (lambda) provides a trade-off between balancing RSS and magnitude of coefficients.
+#   - $\alpha$ = 0: Same coefficients as least squares linear regression
+#   - $\alpha$ = ∞: All coefficients are zero
+#   - 0 < $\alpha$ < ∞: coefficients are between 0 and that of least squares linear regression
 # 
-# $\lambda$ can take various values:
+# Lasso regression’s advantage over least squares linear regression is rooted in the bias-variance trade-off. As $\alpha$ increases, the flexibility of the lasso regression fit decreases, leading to decreased variance but increased bias. This procedure is more restrictive in estimating the coefficients and - depending on your value of $\alpha$ - may set a number of them to exactly zero. This means in the final model the response variable will only be related to a small subset of the predictors—namely, those with nonzero coeffcient estimates. Therefore, selecting a good value of $\alpha$ is critical.
+
+# ## Data
 # 
-#   - $\lambda$ = 0: Same coefficients as simple linear regression
-#   - $\lambda$ = ∞: All coefficients zero (same logic as before)
-#   - 0 < $\lambda$ < ∞: coefficients between 0 and that of simple linear regression
+# We illustrate the use of lasso regression on a data frame called "Hitters" with 20 variables and 322 observations of major league players (see [this documentation](https://cran.r-project.org/web/packages/ISLR/ISLR.pdf) for more information about the data). We want to predict a baseball player’s salary on the basis of various statistics associated with performance in the previous year.
+# 
+# ### Import
 
-# ## Python setup
-
-# In[58]:
+# In[18]:
 
 
-import numpy as np
 import pandas as pd
 
-import matplotlib.pyplot as plt
-get_ipython().run_line_magic('matplotlib', 'inline')
+df = pd.read_csv("https://raw.githubusercontent.com/kirenz/datasets/master/Hitters.csv")
 
 
-# ## Import data
-# 
-# This notebook involves the use of the Lasso regression on an automobile dataset. 
-
-# In[59]:
-
-
-df = pd.read_csv("https://raw.githubusercontent.com/kirenz/datasets/master/Auto.csv")
-
-
-# In[60]:
+# In[19]:
 
 
 df
 
 
-# In[61]:
+# In[20]:
 
 
 df.info()
 
 
-# ## Tidying data
+# ### Missing values
 # 
-# We only use observations 1 to 200 for our analysis and drop the `name` variable.
+# Note that the salary is missing for some of the players:
 
-# In[62]:
+# In[21]:
 
-
-df = df.iloc[0:200]
-df = df.drop(['name'], axis=1)
-
-
-# In[63]:
-
-
-df['origin'] = pd.Categorical(df['origin'])
-df['horsepower'] = pd.to_numeric(df['horsepower'], errors='coerce')
 
 print(df.isnull().sum())
 
 
-# In[64]:
+# We simply drop the missing cases: 
+
+# In[22]:
 
 
 # drop missing cases
 df = df.dropna()
 
 
-# ## Transform data
+# ### Create labels and features
+# 
+# Since we will use the lasso algorithm from scikit learn, we need to encode our categorical features as one-hot numeric features (dummy variables):
 
-# In[65]:
+# In[23]:
 
 
-# Convert all columns to integer
-df = df.astype('int')
+dummies = pd.get_dummies(df[['League', 'Division','NewLeague']])
+
+
+# In[24]:
+
+
+dummies.info()
+
+
+# In[25]:
+
+
+print(dummies.head())
+
+
+# Next, we create our label y:
+
+# In[26]:
+
+
+y = df['Salary']
+
+
+# We drop the column with the outcome variable (Salary), and categorical columns for which we already created dummy variables:
+
+# In[27]:
+
+
+X_numerical = df.drop(['Salary', 'League', 'Division', 'NewLeague'], axis=1).astype('float64')
+
+
+# Make a list of all numerical features (we need them later):
+
+# In[28]:
+
+
+list_numerical = X_numerical.columns
+list_numerical
+
+
+# In[29]:
+
+
+# Create all features
+X = pd.concat([X_numerical, dummies[['League_N', 'Division_W', 'NewLeague_N']]], axis=1)
+X.info()
 
 
 # ### Split data
-# 
-# Split the data set into train and test sets (use `X_train`, `X_test`, `y_train`, `y_test`), with the first 75% of the data for training and the remaining for testing. (module: `from sklearn.model_selection import train_test_split`)
 
-# In[66]:
+# Split the data set into train and test set with the first 70% of the data for training and the remaining 30% for testing.
 
-
-X = df.drop(['mpg'], axis=1)
-y = df['mpg']
-
-
-# In[67]:
+# In[30]:
 
 
 from sklearn.model_selection import train_test_split
 
-X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.25, random_state=10)
+X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.3, random_state=10)
+
+
+# In[31]:
+
+
+X_train.head()
 
 
 # ### Standardization
 # 
-# *Standardize the features with the module: `from sklearn.preprocessing import StandardScaler`*
+# Lasso performs best when all numerical features are centered around 0 and have variance in the same order. If a feature has a variance that is orders of magnitude larger than others, it might dominate the objective function and make the estimator unable to learn from other features correctly as expected.
 # 
-# It is important to standardize the features by removing the mean and scaling to unit variance. The L1 (Lasso) and L2 (Ridge) regularizers of linear models assume that all features are centered around 0 and have variance in the same order. If a feature has a variance that is orders of magnitude larger that others, it might dominate the objective function and make the estimator unable to learn from other features correctly as expected.
+# This means it is important to standardize our features. We do this by subtracting the mean from our observations and then dividing the difference by the standard deviation. This so called standard score $z$ for an observation $x$ is calculated as:
+# 
+# $$z = \frac{(x- \bar x)}{s}$$
+# 
+# where:
+# 
+# - x is an observation in a feature
+# - $\bar x$ is the mean of that feature
+# -  s is the standard deviation of that feature.
+# 
+# To avoid [data leakage](https://en.wikipedia.org/wiki/Leakage_(machine_learning)), the standardization of numerical features should always be performed after data splitting and only from training data. Furthermore, we obtain all necessary statistics for our features (mean and standard deviation) from training data and also use them on test data. Note that we don't standardize our dummy variables (which only have values of 0 or 1).
 
-# In[68]:
-
-
-dfs.columns
-
-
-# In[69]:
+# In[32]:
 
 
 from sklearn.preprocessing import StandardScaler
 
-scaler = StandardScaler()
+scaler = StandardScaler().fit(X_train[list_numerical]) 
 
-X_train = scaler.fit_transform(X_train)
-X_test = scaler.fit_transform(X_test)
+X_train = scaler.transform(X_train[list_numerical])
+X_test = scaler.transform(X_test[list_numerical])
 
 
-# ## Model
+# In[33]:
 
-# Apply **Lasso regression** on the training set with the regularization parameter **lambda = 0.5** (module: `from sklearn.linear_model import Lasso`) and print the $R^2$-score for the training and test set. Comment on your findings.
 
-# In[70]:
+X_train
+
+
+# ## Lasso regression
+
+# First, we apply lasso regression on the training set with an arbitrarily regularization parameter $\alpha$ of 1. 
+
+# In[89]:
 
 
 from sklearn.linear_model import Lasso
 
-reg = Lasso(alpha=0.5)
+reg = Lasso(alpha=1)
 reg.fit(X_train, y_train)
 
 
-# In[71]:
+# ### Model evaluation
+
+# We print the $R^2$-score for the training and test set.
+
+# In[90]:
 
 
-print('Lasso Regression: R squared score on training set', round(reg.score(X_train, y_train)*100, 2))
-print('Lasso Regression: R squared score on test set', round(reg.score(X_test, y_test)*100, 2))
+print('R squared training set', round(reg.score(X_train, y_train)*100, 2))
+print('R squared test set', round(reg.score(X_test, y_test)*100, 2))
 
 
-# ### Tune lambda
+# MSE for the training and test set.
 
-# #### Fit models
-
-# Apply the **Lasso regression** on the training set with the following **λ parameters: (0.001, 0.01, 0.1, 0.5, 1, 2, 10)**. 
-# 
-# Evaluate the $R^2$ score for all the models you obtain on both the train and test sets.
-
-# In[72]:
-
-
-lambdas = (0.001, 0.01, 0.1, 0.5, 1, 2, 10)
-l_num = 7
-pred_num = X.shape[1]
-
-
-# In[73]:
-
-
-# prepare data for enumerate
-coeff_a = np.zeros((l_num, pred_num))
-train_r_squared = np.zeros(l_num)
-test_r_squared = np.zeros(l_num)
-
-
-# In[74]:
-
-
-# enumerate through lambdas with index and i
-for ind, i in enumerate(lambdas):    
-    reg = Lasso(alpha = i)
-    reg.fit(X_train, y_train)
-
-    coeff_a[ind,:] = reg.coef_
-    train_r_squared[ind] = reg.score(X_train, y_train)
-    test_r_squared[ind] = reg.score(X_test, y_test)
-
-
-# #### Plot result
-
-# Plot all values for both data sets (train and test $R^2$-values) as a function of λ. Note that we use the index of the values at the x-axis, not the values themselves. 
-
-# In[75]:
-
-
-plt.figure(figsize=(18, 8))
-
-plt.plot(train_r_squared, 'o-', label=r'$R^2$ Training set', color="darkblue", alpha=0.6, linewidth=3)
-plt.plot(test_r_squared, 'o-', label=r'$R^2$ Test set', color="darkred", alpha=0.6, linewidth=3)
-
-plt.xlabel('Lamda index'); plt.ylabel(r'$R^2$')
-plt.xlim(0, 6)
-plt.title(r'Evaluate lasso regression with lamdas: 0 = 0.001, 1= 0.01, 2 = 0.1, 3 = 0.5, 4= 1, 5= 2, 6 = 10')
-plt.legend(loc='best')
-plt.grid()
-
-
-# #### Identify best lambda
-
-# Store your test data results in a DataFrame and indentify the lambda where the $R^2$ has it's **maximum value** in the **test data**. 
-
-# In[76]:
-
-
-df_lam = pd.DataFrame(test_r_squared*100, columns=['R_squared'])
-df_lam['lambda'] = (lambdas)
-# returns the index of the row where column has maximum value.
-df_lam.loc[df_lam['R_squared'].idxmax()]
-
-
-# Fit a Lasso model with this lambda parameter (use the training data) and obtain the corresponding **regression coefficients**. 
-# 
-
-# In[77]:
-
-
-reg_best = Lasso(alpha = 0.1)
-reg_best.fit(X_train, y_train)
-reg_best.coef_
-
-
-# Obtain the **mean squared error** for the test data of this model (module: `from sklearn.metrics import mean_squared_error`)
-
-# In[78]:
+# In[91]:
 
 
 from sklearn.metrics import mean_squared_error
 
-mean_squared_error(y_test, reg_best.predict(X_test))
+# Training data
+pred_train = reg.predict(X_train)
+mse_train = mean_squared_error(y_train, pred_train)
+print('MSE training set', round(mse_train, 2))
+
+# Test data
+pred = reg.predict(X_test)
+mse_test =mean_squared_error(y_test, pred)
+print('MSE test set', round(mse_test, 2))
 
 
-# ## Tune with k-fold cross validation
-
-# Evaluate the performance of a Lasso regression for different regularization parameters λ using **5-fold cross validation** on the training set (module: `from sklearn.model_selection import cross_val_score`) and plot the cross-validation (CV) $R^2$ scores of the training and test data as a function of λ.
+# ## Role of alpha
 # 
 
-#  We use the following lambda parameters:
+# To better understand the role of alpha, we plot the lasso coefficients as a function of alpha (`max_iter` are the maximum number of iterations):
 
-# In[79]:
+# In[92]:
 
 
-l_min = 0.05
-l_max = 0.2
-l_num = 20
-lambdas = np.linspace(l_min,l_max, l_num)
+import numpy as np
+import matplotlib.pyplot as plt
 
+alphas = np.linspace(0.01,500,100)
+lasso = Lasso(max_iter=10000)
+coefs = []
+
+for a in alphas:
+    lasso.set_params(alpha=a)
+    lasso.fit(X_train, y_train)
+    coefs.append(lasso.coef_)
+
+ax = plt.gca()
+
+ax.plot(alphas, coefs)
+ax.set_xscale('log')
+plt.axis('tight')
+plt.xlabel('alpha')
+plt.ylabel('Standardized Coefficients')
+plt.title('Lasso coefficients as a function of alpha');
+
+
+# Remember that if alpha = 0, then the lasso gives the least squares fit, and when alpha becomes very large, the lasso gives the null model in which all coefficient estimates equal zero. 
+# 
+# Moving from left to right in our plot, we observe that at first the lasso models contains many predictors with high magnitudes of coefficient estimates. With increasing alpha, the coefficient estimates approximate towards zero.
+# 
+# Next, we use cross-validation to find the best value for alpha.
+
+# ## Lasso with optimal alpha
+# 
+# To find the optimal value of alpha, we use scikit learns lasso linear model with iterative fitting along a regularization path ([LassoCV](https://scikit-learn.org/stable/modules/generated/sklearn.linear_model.LassoCV.html)). The best model is selected by cross-validation.
+
+# ### k-fold cross validation
 
 # In[80]:
 
 
-# data preparation
-train_r_squared = np.zeros(l_num)
-test_r_squared = np.zeros(l_num)
+from sklearn.linear_model import LassoCV
 
-pred_num = X.shape[1]
-coeff_a = np.zeros((l_num, pred_num))
+# Lasso with 5 fold cross-validation
+model = LassoCV(cv=5, random_state=0, max_iter=10000)
 
+# Fit model
+model.fit(X_train, y_train)
+
+
+# Show best value of penalization chosen by cross validation:
 
 # In[81]:
 
 
-# models
-from sklearn.model_selection import cross_val_score
-
-for ind, i in enumerate(lambdas):    
-    reg = Lasso(alpha = i)
-    reg.fit(X_train, y_train)
-    results = cross_val_score(reg, X, y, cv=5, scoring="r2")
-
-    train_r_squared[ind] = reg.score(X_train, y_train)    
-    test_r_squared[ind] = reg.score(X_test, y_test)
+model.alpha_
 
 
-# In[82]:
+# ### Best model
 
-
-# Plotting
-plt.figure(figsize=(18, 8))
-
-plt.plot(train_r_squared, 'o-', label=r'$R^2$ Training set', color="darkblue", alpha=0.6, linewidth=3)
-plt.plot(test_r_squared, 'o-', label=r'$R^2$ Test set', color="darkred", alpha=0.6, linewidth=3)
-
-plt.xlabel('Lamda index'); plt.ylabel(r'$R^2$')
-plt.xlim(0, 19)
-plt.title(r'Evaluate 5-fold cv with different lamdas')
-plt.legend(loc='best')
-plt.grid()
-
-
-# Finally, store your test data results in a DataFrame and identify the lambda where the $R^2$ has it's **maximum value** in the **test data**. 
+# Use best value for our final model:
 
 # In[83]:
 
 
-df_lam = pd.DataFrame(test_r_squared*100, columns=['R_squared'])
-df_lam['lambda'] = (lambdas)
-# returns the index of the row where column has maximum value.
-df_lam.loc[df_lam['R_squared'].idxmax()]
+# Set best alpha
+lasso_best = Lasso(alpha=model.alpha_)
+lasso_best.fit(X_train, y_train)
 
 
-# Fit a Lasso model with this lambda parameter (use the training data) and obtain the corresponding **regression coefficients**. Furthermore, obtain the **mean squared error** for the test data of this model (module: `from sklearn.metrics import mean_squared_error`)
+# Show model coefficients and names:
 
 # In[84]:
 
 
-# Best Model
-reg_best = Lasso(alpha = 0.05)
-reg_best.fit(X_train, y_train)
+print(list(zip(lasso_best.coef_, X)))
 
 
-# In[85]:
+# ### Model evaluation
+
+# In[88]:
 
 
-mean_squared_error(y_test, reg_best.predict(X_test))
+print('R squared training set', round(lasso_best.score(X_train, y_train)*100, 2))
+print('R squared test set', round(lasso_best.score(X_test, y_test)*100, 2))
 
 
-# In[86]:
+# In[93]:
 
 
-reg_best.coef_
+mean_squared_error(y_test, lasso_best.predict(X_test))
+
+
+# Lasso path: plot results of cross-validation with mean squared erros (for more information about the plot visit the [scikit-learn documentation](https://scikit-learn.org/stable/auto_examples/linear_model/plot_lasso_model_selection.html#sphx-glr-auto-examples-linear-model-plot-lasso-model-selection-py))
+
+# In[105]:
+
+
+plt.semilogx(model.alphas_, model.mse_path_, ":")
+plt.plot(
+    model.alphas_ ,
+    model.mse_path_.mean(axis=-1),
+    "k",
+    label="Average across the folds",
+    linewidth=2,
+)
+plt.axvline(
+    model.alpha_ + EPSILON, linestyle="--", color="k", label="alpha: CV estimate"
+)
+
+plt.legend()
+plt.xlabel("alphas")
+plt.ylabel("Mean square error")
+plt.title("Mean square error on each fold")
+plt.axis("tight")
+
+ymin, ymax = 50000, 250000
+plt.ylim(ymin, ymax);
 
