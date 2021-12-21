@@ -52,7 +52,7 @@
     <script async="async" src="../_static/sphinx-thebe.js"></script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="Bibliography" href="reference.html" />
+    <link rel="next" title="Lasso Regression and model subset selection" href="lasso-model-selection.html" />
     <link rel="prev" title="Lasso regression in Python" href="lasso.html" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="docsearch:language" content="en" />
@@ -132,6 +132,11 @@
  <li class="toctree-l1 current active">
   <a class="current reference internal" href="#">
    Splines in Python
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="lasso-model-selection.html">
+   Lasso Regression and model subset selection
   </a>
  </li>
 </ul>
@@ -296,11 +301,6 @@
    Natural cubic spline
   </a>
  </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#natural-cubic-spline-with-scipy">
-   Natural cubic spline with scipy
-  </a>
- </li>
 </ul>
 
             </nav>
@@ -314,7 +314,7 @@
                 
   <div class="tex2jax_ignore mathjax_ignore section" id="splines-in-python">
 <h1>Splines in Python<a class="headerlink" href="#splines-in-python" title="Permalink to this headline">¶</a></h1>
-<p>The following tutorial is mainly based on examples from <span id="id1">[<a class="reference internal" href="reference.html#id7">James <em>et al.</em>, 2021</a>]</span> and Python code from <a class="reference external" href="https://nbviewer.org/github/JWarmenhoven/ISL-python/blob/master/Notebooks/Chapter%207.ipynb">Jordi Warmenhoven</a>.</p>
+<p>The following code tutorial is mainly based on code provided by<a class="reference external" href="https://nbviewer.org/github/JWarmenhoven/ISL-python/blob/master/Notebooks/Chapter%207.ipynb">Jordi Warmenhoven</a>. To learn more about the regression methods, review <a class="reference external" href="https://www.statlearning.com/">“An Introduction to Statistical Learning”</a> from James et al. (2021).</p>
 <div class="section" id="data">
 <h2>Data<a class="headerlink" href="#data" title="Permalink to this headline">¶</a></h2>
 <div class="section" id="import">
@@ -563,11 +563,14 @@
 <p>Visualize the relationship between age and wage:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
-<span class="o">%</span><span class="k">matplotlib</span> inline
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">seaborn</span> <span class="k">as</span> <span class="nn">sns</span>  
 
-<span class="n">plt</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">X_train</span><span class="p">,</span> <span class="n">y_train</span><span class="p">,</span> <span class="n">facecolor</span><span class="o">=</span><span class="s1">&#39;None&#39;</span><span class="p">,</span> <span class="n">edgecolor</span><span class="o">=</span><span class="s1">&#39;k&#39;</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.3</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+<span class="c1"># seaborn settings</span>
+<span class="n">custom_params</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;axes.spines.right&quot;</span><span class="p">:</span> <span class="kc">False</span><span class="p">,</span> <span class="s2">&quot;axes.spines.top&quot;</span><span class="p">:</span> <span class="kc">False</span><span class="p">}</span>
+<span class="n">sns</span><span class="o">.</span><span class="n">set_theme</span><span class="p">(</span><span class="n">style</span><span class="o">=</span><span class="s2">&quot;ticks&quot;</span><span class="p">,</span> <span class="n">rc</span><span class="o">=</span><span class="n">custom_params</span><span class="p">)</span>
+
+<span class="c1"># plot</span>
+<span class="n">sns</span><span class="o">.</span><span class="n">scatterplot</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="n">X_train</span><span class="p">[</span><span class="s1">&#39;age&#39;</span><span class="p">],</span> <span class="n">y</span><span class="o">=</span><span class="n">y_train</span><span class="p">[</span><span class="s1">&#39;wage&#39;</span><span class="p">],</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.4</span><span class="p">);</span>
 </pre></div>
 </div>
 </div>
@@ -626,8 +629,7 @@
     <span class="s2">&quot;model&quot;</span><span class="p">:</span> <span class="s2">&quot;Linear Model (lm)&quot;</span><span class="p">,</span>  
     <span class="s2">&quot;rmse_train&quot;</span><span class="p">:</span> <span class="p">[</span><span class="n">rmse_train</span><span class="p">],</span> 
     <span class="s2">&quot;rmse_test&quot;</span><span class="p">:</span> <span class="p">[</span><span class="n">rmse_test</span><span class="p">],</span>
-    <span class="p">}</span>
-<span class="p">)</span>
+    <span class="p">})</span>
 <span class="n">model_results_lm</span>
 </pre></div>
 </div>
@@ -667,6 +669,19 @@
 </table>
 </div></div></div>
 </div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">sns</span><span class="o">.</span><span class="n">regplot</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="n">X_train</span><span class="p">[</span><span class="s1">&#39;age&#39;</span><span class="p">],</span> 
+            <span class="n">y</span><span class="o">=</span><span class="n">y_train</span><span class="p">[</span><span class="s1">&#39;wage&#39;</span><span class="p">],</span> 
+            <span class="n">ci</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> 
+            <span class="n">line_kws</span><span class="o">=</span><span class="p">{</span><span class="s2">&quot;color&quot;</span><span class="p">:</span> <span class="s2">&quot;orange&quot;</span><span class="p">});</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/splines_16_0.png" src="../_images/splines_16_0.png" />
+</div>
+</div>
 </div>
 <div class="section" id="polynomial-regression">
 <h2>Polynomial regression<a class="headerlink" href="#polynomial-regression" title="Permalink to this headline">¶</a></h2>
@@ -700,11 +715,15 @@
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Training data</span>
 <span class="n">pred_train</span> <span class="o">=</span> <span class="n">pm</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">X_train_poly</span><span class="p">)</span>
-<span class="n">rmse_train</span> <span class="o">=</span> <span class="n">mean_squared_error</span><span class="p">(</span><span class="n">y_train</span><span class="p">,</span> <span class="n">pred_train</span><span class="p">,</span> <span class="n">squared</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+<span class="n">rmse_train</span> <span class="o">=</span> <span class="n">mean_squared_error</span><span class="p">(</span><span class="n">y_train</span><span class="p">,</span> 
+                                <span class="n">pred_train</span><span class="p">,</span> 
+                                <span class="n">squared</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
 
 <span class="c1"># Test data</span>
 <span class="n">pred_test</span> <span class="o">=</span> <span class="n">pm</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">X_test_poly</span><span class="p">)</span>
-<span class="n">rmse_test</span> <span class="o">=</span><span class="n">mean_squared_error</span><span class="p">(</span><span class="n">y_test</span><span class="p">,</span> <span class="n">pred_test</span><span class="p">,</span> <span class="n">squared</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+<span class="n">rmse_test</span> <span class="o">=</span><span class="n">mean_squared_error</span><span class="p">(</span><span class="n">y_test</span><span class="p">,</span> 
+                              <span class="n">pred_test</span><span class="p">,</span> 
+                              <span class="n">squared</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
 
 <span class="c1"># Save model results</span>
 <span class="n">model_results_pm</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span>
@@ -712,11 +731,9 @@
     <span class="s2">&quot;model&quot;</span><span class="p">:</span> <span class="s2">&quot;Polynomial Model (pm)&quot;</span><span class="p">,</span>  
     <span class="s2">&quot;rmse_train&quot;</span><span class="p">:</span> <span class="p">[</span><span class="n">rmse_train</span><span class="p">],</span> 
     <span class="s2">&quot;rmse_test&quot;</span><span class="p">:</span> <span class="p">[</span><span class="n">rmse_test</span><span class="p">],</span>
-    <span class="p">}</span>
-<span class="p">)</span>
+    <span class="p">})</span>
 
 <span class="n">results</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">concat</span><span class="p">([</span><span class="n">model_results_lm</span><span class="p">,</span> <span class="n">model_results_pm</span><span class="p">],</span> <span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
-
 <span class="n">results</span>
 </pre></div>
 </div>
@@ -761,6 +778,21 @@
   </tbody>
 </table>
 </div></div></div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># plot</span>
+<span class="n">sns</span><span class="o">.</span><span class="n">regplot</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="n">X_train</span><span class="p">[</span><span class="s1">&#39;age&#39;</span><span class="p">],</span> 
+            <span class="n">y</span><span class="o">=</span><span class="n">y_train</span><span class="p">[</span><span class="s1">&#39;wage&#39;</span><span class="p">],</span> 
+            <span class="n">ci</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> 
+            <span class="n">order</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> 
+            <span class="n">line_kws</span><span class="o">=</span><span class="p">{</span><span class="s2">&quot;color&quot;</span><span class="p">:</span> <span class="s2">&quot;orange&quot;</span><span class="p">});</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/splines_21_0.png" src="../_images/splines_21_0.png" />
+</div>
 </div>
 </div>
 <div class="section" id="cubic-spline">
@@ -882,7 +914,7 @@
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Fitting Generalised linear model on transformed dataset</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Fitting generalised linear model on transformed dataset</span>
 <span class="n">cs</span> <span class="o">=</span> <span class="n">sm</span><span class="o">.</span><span class="n">GLM</span><span class="p">(</span><span class="n">y_train</span><span class="p">,</span> <span class="n">transformed_x</span><span class="p">)</span><span class="o">.</span><span class="n">fit</span><span class="p">()</span>
 </pre></div>
 </div>
@@ -904,8 +936,7 @@
     <span class="s2">&quot;model&quot;</span><span class="p">:</span> <span class="s2">&quot;Cubic spline (cs)&quot;</span><span class="p">,</span>  
     <span class="s2">&quot;rmse_train&quot;</span><span class="p">:</span> <span class="p">[</span><span class="n">rmse_train</span><span class="p">],</span> 
     <span class="s2">&quot;rmse_test&quot;</span><span class="p">:</span> <span class="p">[</span><span class="n">rmse_test</span><span class="p">]</span>
-    <span class="p">}</span>
-<span class="p">)</span>
+    <span class="p">})</span>
 <span class="n">results</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">concat</span><span class="p">([</span><span class="n">results</span><span class="p">,</span> <span class="n">model_results_cs</span><span class="p">],</span> <span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
 <span class="n">results</span>
 </pre></div>
@@ -961,26 +992,23 @@
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
 
-<span class="c1"># We will plot the graph for 100 observations </span>
+<span class="c1"># Create observations</span>
 <span class="n">xp</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="n">X_test</span><span class="o">.</span><span class="n">min</span><span class="p">(),</span><span class="n">X_test</span><span class="o">.</span><span class="n">max</span><span class="p">(),</span> <span class="mi">100</span><span class="p">)</span>
-
 <span class="c1"># Make some predictions</span>
 <span class="n">pred</span> <span class="o">=</span> <span class="n">cs</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">dmatrix</span><span class="p">(</span><span class="s2">&quot;bs(xp, knots=(25,40,60), include_intercept=False)&quot;</span><span class="p">,</span> <span class="p">{</span><span class="s2">&quot;xp&quot;</span><span class="p">:</span> <span class="n">xp</span><span class="p">},</span> <span class="n">return_type</span><span class="o">=</span><span class="s1">&#39;dataframe&#39;</span><span class="p">))</span>
 
-<span class="c1"># Plot the splines and error bands</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">df</span><span class="o">.</span><span class="n">age</span><span class="p">,</span> <span class="n">df</span><span class="o">.</span><span class="n">wage</span><span class="p">,</span> <span class="n">facecolor</span><span class="o">=</span><span class="s1">&#39;None&#39;</span><span class="p">,</span> <span class="n">edgecolor</span><span class="o">=</span><span class="s1">&#39;k&#39;</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.1</span><span class="p">)</span>
+<span class="c1"># plot</span>
+<span class="n">sns</span><span class="o">.</span><span class="n">scatterplot</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="n">X_train</span><span class="p">[</span><span class="s1">&#39;age&#39;</span><span class="p">],</span> <span class="n">y</span><span class="o">=</span><span class="n">y_train</span><span class="p">[</span><span class="s1">&#39;wage&#39;</span><span class="p">])</span>
 
-<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">xp</span><span class="p">,</span> <span class="n">pred</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;Cubic spline with degree=3 (3 knots)&#39;</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">&#39;age&#39;</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">&#39;wage&#39;</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">xp</span><span class="p">,</span> <span class="n">pred</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;Cubic spline with degree=3 (3 knots)&#39;</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;orange&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">();</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/splines_28_0.png" src="../_images/splines_28_0.png" />
+<img alt="../_images/splines_30_0.png" src="../_images/splines_30_0.png" />
 </div>
 </div>
 </div>
@@ -988,8 +1016,7 @@
 <h2>Natural cubic spline<a class="headerlink" href="#natural-cubic-spline" title="Permalink to this headline">¶</a></h2>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Generating natural cubic spline with df=3</span>
-<span class="n">transformed_x3</span> <span class="o">=</span> <span class="n">dmatrix</span><span class="p">(</span><span class="s2">&quot;cr(train,df = 3)&quot;</span><span class="p">,</span> <span class="p">{</span><span class="s2">&quot;train&quot;</span><span class="p">:</span> <span class="n">X_train</span><span class="p">},</span> <span class="n">return_type</span><span class="o">=</span><span class="s1">&#39;dataframe&#39;</span><span class="p">)</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">transformed_x3</span> <span class="o">=</span> <span class="n">dmatrix</span><span class="p">(</span><span class="s2">&quot;cr(train,df = 3)&quot;</span><span class="p">,</span> <span class="p">{</span><span class="s2">&quot;train&quot;</span><span class="p">:</span> <span class="n">X_train</span><span class="p">},</span> <span class="n">return_type</span><span class="o">=</span><span class="s1">&#39;dataframe&#39;</span><span class="p">)</span>
 
 <span class="n">ncs</span> <span class="o">=</span> <span class="n">sm</span><span class="o">.</span><span class="n">GLM</span><span class="p">(</span><span class="n">y_train</span><span class="p">,</span> <span class="n">transformed_x3</span><span class="p">)</span><span class="o">.</span><span class="n">fit</span><span class="p">()</span>
 </pre></div>
@@ -1012,8 +1039,7 @@
     <span class="s2">&quot;model&quot;</span><span class="p">:</span> <span class="s2">&quot;Natural cubic spline (ncs)&quot;</span><span class="p">,</span>  
     <span class="s2">&quot;rmse_train&quot;</span><span class="p">:</span> <span class="p">[</span><span class="n">rmse_train</span><span class="p">],</span> 
     <span class="s2">&quot;rmse_test&quot;</span><span class="p">:</span> <span class="p">[</span><span class="n">rmse_test</span><span class="p">]</span>
-    <span class="p">}</span>
-<span class="p">)</span>
+    <span class="p">})</span>
 
 <span class="n">results</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">concat</span><span class="p">([</span><span class="n">results</span><span class="p">,</span> <span class="n">model_results_ncs</span><span class="p">],</span> <span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
 <span class="n">results</span>
@@ -1075,77 +1101,18 @@
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># We will plot the graph for 100 observations only</span>
-<span class="n">xp</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="n">X_test</span><span class="o">.</span><span class="n">min</span><span class="p">(),</span><span class="n">X_test</span><span class="o">.</span><span class="n">max</span><span class="p">(),</span><span class="mi">100</span><span class="p">)</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Make predictions</span>
 <span class="n">pred</span> <span class="o">=</span> <span class="n">ncs</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">dmatrix</span><span class="p">(</span><span class="s2">&quot;cr(xp, df=3)&quot;</span><span class="p">,</span> <span class="p">{</span><span class="s2">&quot;xp&quot;</span><span class="p">:</span> <span class="n">xp</span><span class="p">},</span> <span class="n">return_type</span><span class="o">=</span><span class="s1">&#39;dataframe&#39;</span><span class="p">))</span>
 
-<span class="c1"># Plot the spline</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">df</span><span class="o">.</span><span class="n">age</span><span class="p">,</span> <span class="n">df</span><span class="o">.</span><span class="n">wage</span><span class="p">,</span> <span class="n">facecolor</span><span class="o">=</span><span class="s1">&#39;None&#39;</span><span class="p">,</span> <span class="n">edgecolor</span><span class="o">=</span><span class="s1">&#39;k&#39;</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.1</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">xp</span><span class="p">,</span> <span class="n">pred</span><span class="p">,</span><span class="n">color</span><span class="o">=</span><span class="s1">&#39;g&#39;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;Natural spline&#39;</span><span class="p">)</span>
-
-<span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">&#39;age&#39;</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">&#39;wage&#39;</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+<span class="c1"># plot</span>
+<span class="n">sns</span><span class="o">.</span><span class="n">scatterplot</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="n">X_train</span><span class="p">[</span><span class="s1">&#39;age&#39;</span><span class="p">],</span> <span class="n">y</span><span class="o">=</span><span class="n">y_train</span><span class="p">[</span><span class="s1">&#39;wage&#39;</span><span class="p">])</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">xp</span><span class="p">,</span> <span class="n">pred</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;orange&#39;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;Natural spline with df=3&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">();</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/splines_32_0.png" src="../_images/splines_32_0.png" />
-</div>
-</div>
-</div>
-<div class="section" id="natural-cubic-spline-with-scipy">
-<h2>Natural cubic spline with scipy<a class="headerlink" href="#natural-cubic-spline-with-scipy" title="Permalink to this headline">¶</a></h2>
-<!--BOOK_INFORMATION-->
-<p><em>This notebook contains an excerpt from the <a class="reference external" href="https://www.elsevier.com/books/python-programming-and-numerical-methods/kong/978-0-12-819549-9">Python Programming and Numerical Methods - A Guide for Engineers and Scientists</a>, the content is also available at <a class="reference external" href="https://pythonnumericalmethods.berkeley.edu/notebooks/Index.html">Berkeley Python Numerical Methods</a>.</em></p>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">scipy.interpolate</span> <span class="kn">import</span> <span class="n">CubicSpline</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">style</span><span class="o">.</span><span class="n">use</span><span class="p">(</span><span class="s1">&#39;seaborn-poster&#39;</span><span class="p">)</span>
-</pre></div>
-</div>
-</div>
-</div>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># make simple dataset</span>
-<span class="n">x</span> <span class="o">=</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">]</span>
-<span class="n">y</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">2</span><span class="p">]</span>
-</pre></div>
-</div>
-</div>
-</div>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># use bc_type = &#39;natural&#39;</span>
-<span class="n">natural_spline</span> <span class="o">=</span> <span class="n">CubicSpline</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">bc_type</span><span class="o">=</span><span class="s1">&#39;natural&#39;</span><span class="p">)</span>
-</pre></div>
-</div>
-</div>
-</div>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">x_new</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">100</span><span class="p">)</span>
-<span class="n">y_new</span> <span class="o">=</span> <span class="n">natural_spline</span><span class="p">(</span><span class="n">x_new</span><span class="p">)</span>
-</pre></div>
-</div>
-</div>
-</div>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span> <span class="o">=</span> <span class="p">(</span><span class="mi">10</span><span class="p">,</span><span class="mi">8</span><span class="p">))</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x_new</span><span class="p">,</span> <span class="n">y_new</span><span class="p">,</span> <span class="s1">&#39;b&#39;</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="s1">&#39;ro&#39;</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s1">&#39;Cubic Spline Interpolation&#39;</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">&#39;x&#39;</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">&#39;y&#39;</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<img alt="../_images/splines_39_0.png" src="../_images/splines_39_0.png" />
+<img alt="../_images/splines_34_0.png" src="../_images/splines_34_0.png" />
 </div>
 </div>
 </div>
@@ -1190,10 +1157,10 @@
         </a>
     </div>
      <div id="next">
-        <a class="right-next" href="reference.html" title="next page">
+        <a class="right-next" href="lasso-model-selection.html" title="next page">
             <div class="prevnext-info">
                 <p class="prevnext-label">next</p>
-                <p class="prevnext-title">Bibliography</p>
+                <p class="prevnext-title">Lasso Regression and model subset selection</p>
             </div>
             <i class="prevnext-label fas fa-angle-right"></i>
         </a>

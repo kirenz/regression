@@ -3,7 +3,7 @@
 
 # # Splines in Python
 
-# The following tutorial is mainly based on examples from {cite:p}`James2021` and Python code from [Jordi Warmenhoven](https://nbviewer.org/github/JWarmenhoven/ISL-python/blob/master/Notebooks/Chapter%207.ipynb).
+# The following code tutorial is mainly based on code provided by[Jordi Warmenhoven](https://nbviewer.org/github/JWarmenhoven/ISL-python/blob/master/Notebooks/Chapter%207.ipynb). To learn more about the regression methods, review ["An Introduction to Statistical Learning"](https://www.statlearning.com/) from James et al. (2021).
 
 # ## Data
 
@@ -48,11 +48,14 @@ X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.3, random_
 # In[4]:
 
 
-import matplotlib.pyplot as plt
-get_ipython().run_line_magic('matplotlib', 'inline')
+import seaborn as sns  
 
-plt.scatter(X_train, y_train, facecolor='None', edgecolor='k', alpha=0.3)
-plt.show()
+# seaborn settings
+custom_params = {"axes.spines.right": False, "axes.spines.top": False}
+sns.set_theme(style="ticks", rc=custom_params)
+
+# plot
+sns.scatterplot(x=X_train['age'], y=y_train['wage'], alpha=0.4);
 
 
 # ## Simple regression
@@ -92,14 +95,22 @@ model_results_lm = pd.DataFrame(
     "model": "Linear Model (lm)",  
     "rmse_train": [rmse_train], 
     "rmse_test": [rmse_test],
-    }
-)
+    })
 model_results_lm
+
+
+# In[8]:
+
+
+sns.regplot(x=X_train['age'], 
+            y=y_train['wage'], 
+            ci=None, 
+            line_kws={"color": "orange"});
 
 
 # ## Polynomial regression
 
-# In[8]:
+# In[9]:
 
 
 from sklearn.preprocessing import PolynomialFeatures
@@ -111,23 +122,27 @@ X_train_poly = poly.fit_transform(X_train)
 X_test_poly = poly.fit_transform(X_test)
 
 
-# In[9]:
+# In[10]:
 
 
 pm = LinearRegression()
 pm.fit(X_train_poly,y_train)
 
 
-# In[10]:
+# In[11]:
 
 
 # Training data
 pred_train = pm.predict(X_train_poly)
-rmse_train = mean_squared_error(y_train, pred_train, squared=False)
+rmse_train = mean_squared_error(y_train, 
+                                pred_train, 
+                                squared=False)
 
 # Test data
 pred_test = pm.predict(X_test_poly)
-rmse_test =mean_squared_error(y_test, pred_test, squared=False)
+rmse_test =mean_squared_error(y_test, 
+                              pred_test, 
+                              squared=False)
 
 # Save model results
 model_results_pm = pd.DataFrame(
@@ -135,25 +150,34 @@ model_results_pm = pd.DataFrame(
     "model": "Polynomial Model (pm)",  
     "rmse_train": [rmse_train], 
     "rmse_test": [rmse_test],
-    }
-)
+    })
 
 results = pd.concat([model_results_lm, model_results_pm], axis=0)
-
 results
+
+
+# In[12]:
+
+
+# plot
+sns.regplot(x=X_train['age'], 
+            y=y_train['wage'], 
+            ci=None, 
+            order=2, 
+            line_kws={"color": "orange"});
 
 
 # ## Cubic spline
 # 
 # We use the module [patsy](https://patsy.readthedocs.io/en/latest/overview.html) to create non-linear transformations of the input data. We will fit 2 models with different number of knots.
 
-# In[11]:
+# In[13]:
 
 
 from patsy import dmatrix
 
 
-# In[12]:
+# In[14]:
 
 
 # Generating cubic spline with 3 knots at 25, 40 and 60
@@ -162,7 +186,7 @@ transformed_x = dmatrix(
                 {"train": X_train},return_type='dataframe')
 
 
-# In[13]:
+# In[15]:
 
 
 transformed_x.head()
@@ -170,20 +194,20 @@ transformed_x.head()
 
 # We use statsmodels to estimate a generalized linear model:
 
-# In[14]:
+# In[16]:
 
 
 import statsmodels.api as sm
 
 
-# In[15]:
+# In[17]:
 
 
-# Fitting Generalised linear model on transformed dataset
+# Fitting generalised linear model on transformed dataset
 cs = sm.GLM(y_train, transformed_x).fit()
 
 
-# In[16]:
+# In[18]:
 
 
 # Training data
@@ -200,45 +224,40 @@ model_results_cs = pd.DataFrame(
     "model": "Cubic spline (cs)",  
     "rmse_train": [rmse_train], 
     "rmse_test": [rmse_test]
-    }
-)
+    })
 results = pd.concat([results, model_results_cs], axis=0)
 results
 
 
-# In[17]:
+# In[19]:
 
 
 import numpy as np
+import matplotlib.pyplot as plt
 
-# We will plot the graph for 100 observations 
+# Create observations
 xp = np.linspace(X_test.min(),X_test.max(), 100)
-
 # Make some predictions
 pred = cs.predict(dmatrix("bs(xp, knots=(25,40,60), include_intercept=False)", {"xp": xp}, return_type='dataframe'))
 
-# Plot the splines and error bands
-plt.scatter(df.age, df.wage, facecolor='None', edgecolor='k', alpha=0.1)
+# plot
+sns.scatterplot(x=X_train['age'], y=y_train['wage'])
 
-plt.plot(xp, pred, label='Cubic spline with degree=3 (3 knots)')
-plt.legend()
-plt.xlabel('age')
-plt.ylabel('wage')
-plt.show()
+plt.plot(xp, pred, label='Cubic spline with degree=3 (3 knots)', color='orange')
+plt.legend();
 
 
 # ## Natural cubic spline
 
-# In[18]:
+# In[20]:
 
 
-# Generating natural cubic spline with df=3
 transformed_x3 = dmatrix("cr(train,df = 3)", {"train": X_train}, return_type='dataframe')
 
 ncs = sm.GLM(y_train, transformed_x3).fit()
 
 
-# In[19]:
+# In[21]:
 
 
 # Training data
@@ -255,73 +274,20 @@ model_results_ncs = pd.DataFrame(
     "model": "Natural cubic spline (ncs)",  
     "rmse_train": [rmse_train], 
     "rmse_test": [rmse_test]
-    }
-)
+    })
 
 results = pd.concat([results, model_results_ncs], axis=0)
 results
 
 
-# In[20]:
-
-
-# We will plot the graph for 100 observations only
-xp = np.linspace(X_test.min(),X_test.max(),100)
-pred = ncs.predict(dmatrix("cr(xp, df=3)", {"xp": xp}, return_type='dataframe'))
-
-# Plot the spline
-plt.scatter(df.age, df.wage, facecolor='None', edgecolor='k', alpha=0.1)
-plt.plot(xp, pred,color='g', label='Natural spline')
-
-plt.legend()
-plt.xlabel('age')
-plt.ylabel('wage')
-plt.show()
-
-
-# ## Natural cubic spline with scipy
-
-# <!--BOOK_INFORMATION-->
-# 
-# *This notebook contains an excerpt from the [Python Programming and Numerical Methods - A Guide for Engineers and Scientists](https://www.elsevier.com/books/python-programming-and-numerical-methods/kong/978-0-12-819549-9), the content is also available at [Berkeley Python Numerical Methods](https://pythonnumericalmethods.berkeley.edu/notebooks/Index.html).*
-
-# In[21]:
-
-
-from scipy.interpolate import CubicSpline
-plt.style.use('seaborn-poster')
-
-
 # In[22]:
 
 
-# make simple dataset
-x = [0, 1, 2]
-y = [1, 3, 2]
+# Make predictions
+pred = ncs.predict(dmatrix("cr(xp, df=3)", {"xp": xp}, return_type='dataframe'))
 
-
-# In[23]:
-
-
-# use bc_type = 'natural'
-natural_spline = CubicSpline(x, y, bc_type='natural')
-
-
-# In[24]:
-
-
-x_new = np.linspace(0, 2, 100)
-y_new = natural_spline(x_new)
-
-
-# In[25]:
-
-
-plt.figure(figsize = (10,8))
-plt.plot(x_new, y_new, 'b')
-plt.plot(x, y, 'ro')
-plt.title('Cubic Spline Interpolation')
-plt.xlabel('x')
-plt.ylabel('y')
-plt.show()
+# plot
+sns.scatterplot(x=X_train['age'], y=y_train['wage'])
+plt.plot(xp, pred, color='orange', label='Natural spline with df=3')
+plt.legend();
 
