@@ -5,7 +5,7 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Lasso regression in Python &#8212; Introduction to Linear Regression Models</title>
+    <title>Lasso basics &#8212; Introduction to Linear Regression Models</title>
     
   <link href="../_static/css/theme.css" rel="stylesheet" />
   <link href="../_static/css/index.c5995385ac14fb8791e8eb36b4908be2.css" rel="stylesheet" />
@@ -128,12 +128,17 @@
 <ul class="current nav bd-sidenav">
  <li class="toctree-l1 current active">
   <a class="current reference internal" href="#">
-   Lasso regression in Python
+   Lasso basics
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="splines.html">
    Splines in Python
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="feature-selection.html">
+   Feature selection
   </a>
  </li>
 </ul>
@@ -252,11 +257,6 @@
             <nav id="bd-toc-nav" aria-label="Page">
                 <ul class="visible nav section-nav flex-column">
  <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#basics">
-   Basics
-  </a>
- </li>
- <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#data">
    Data
   </a>
@@ -338,10 +338,8 @@
         
               <div>
                 
-  <div class="tex2jax_ignore mathjax_ignore section" id="lasso-regression-in-python">
-<h1>Lasso regression in Python<a class="headerlink" href="#lasso-regression-in-python" title="Permalink to this headline">¶</a></h1>
-<div class="section" id="basics">
-<h2>Basics<a class="headerlink" href="#basics" title="Permalink to this headline">¶</a></h2>
+  <div class="tex2jax_ignore mathjax_ignore section" id="lasso-basics">
+<h1>Lasso basics<a class="headerlink" href="#lasso-basics" title="Permalink to this headline">¶</a></h1>
 <p><em>This tutorial is mainly based on the excellent book <a class="reference external" href="https://www.statlearning.com/">“An Introduction to Statistical Learning”</a> from James et al. (2021), the scikit-learn documentation about <a class="reference external" href="https://scikit-learn.org/stable/modules/classes.html#regressors-with-variable-selection">regressors with variable selection</a> as well as Python code provided by Jordi Warmenhoven in this <a class="reference external" href="https://nbviewer.org/github/JWarmenhoven/ISL-python/blob/master/Notebooks/Chapter%206.ipynb">GitHub repository</a>.</em></p>
 <p>Lasso regression relies upon the linear regression model but additionaly performs a so called <code class="docutils literal notranslate"><span class="pre">L1</span> <span class="pre">regularization</span></code>, which is a process of introducing additional information in order to prevent overfitting. As a consequence, we can fit a model containing all possible predictors and use lasso to perform variable selection by using a technique that regularizes the coefficient estimates (it shrinks the coefficient estimates towards zero). In particular, the minimization objective does not only include the residual sum of squares (RSS) - like in the OLS regression setting - but also the sum of the absolute value of coefficients.</p>
 <p>The residual sum of squares (RSS) is calculated as follows:</p>
@@ -368,7 +366,6 @@
 <li><p>0 &lt; <span class="math notranslate nohighlight">\(\alpha\)</span> &lt; ∞: coefficients are between 0 and that of least squares linear regression</p></li>
 </ul>
 <p>Lasso regression’s advantage over least squares linear regression is rooted in the bias-variance trade-off. As <span class="math notranslate nohighlight">\(\alpha\)</span> increases, the flexibility of the lasso regression fit decreases, leading to decreased variance but increased bias. This procedure is more restrictive in estimating the coefficients and - depending on your value of <span class="math notranslate nohighlight">\(\alpha\)</span> - may set a number of them to exactly zero. This means in the final model the response variable will only be related to a small subset of the predictors—namely, those with nonzero coeffcient estimates. Therefore, selecting a good value of <span class="math notranslate nohighlight">\(\alpha\)</span> is critical.</p>
-</div>
 <div class="section" id="data">
 <h2>Data<a class="headerlink" href="#data" title="Permalink to this headline">¶</a></h2>
 <p>We illustrate the use of lasso regression on a data frame called “Hitters” with 20 variables and 322 observations of major league players (see <a class="reference external" href="https://cran.r-project.org/web/packages/ISLR/ISLR.pdf">this documentation</a> for more information about the data). We want to predict a baseball player’s salary on the basis of various statistics associated with performance in the previous year.</p>
@@ -1212,7 +1209,7 @@ MSE test set 131001.44
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/lasso_39_0.png" src="../_images/lasso_39_0.png" />
+<img alt="../_images/lasso_38_0.png" src="../_images/lasso_38_0.png" />
 </div>
 </div>
 <p>Remember that if alpha = 0, then the lasso gives the least squares fit, and when alpha becomes very large, the lasso gives the null model in which all coefficient estimates equal zero.</p>
@@ -1342,7 +1339,7 @@ R squared test set 35.3
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/lasso_55_0.png" src="../_images/lasso_55_0.png" />
+<img alt="../_images/lasso_54_0.png" src="../_images/lasso_54_0.png" />
 </div>
 </div>
 </div>

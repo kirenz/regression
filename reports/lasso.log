@@ -41,7 +41,7 @@ plt.ylim(ymin, ymax);
 
 [0;31m---------------------------------------------------------------------------[0m
 [0;31mNameError[0m                                 Traceback (most recent call last)
-[0;32m/var/folders/9c/_3s5jt3n60j__flsgl0t72340000gn/T/ipykernel_7271/1614548325.py[0m in [0;36m<module>[0;34m[0m
+[0;32m/var/folders/9c/_3s5jt3n60j__flsgl0t72340000gn/T/ipykernel_12038/1614548325.py[0m in [0;36m<module>[0;34m[0m
 [1;32m      8[0m )
 [1;32m      9[0m plt.axvline(
 [0;32m---> 10[0;31m     [0mmodel[0m[0;34m.[0m[0malpha_[0m [0;34m+[0m [0mEPSILON[0m[0;34m,[0m [0mlinestyle[0m[0;34m=[0m[0;34m"--"[0m[0;34m,[0m [0mcolor[0m[0;34m=[0m[0;34m"k"[0m[0;34m,[0m [0mlabel[0m[0;34m=[0m[0;34m"alpha: CV estimate"[0m[0;34m[0m[0;34m[0m[0m
