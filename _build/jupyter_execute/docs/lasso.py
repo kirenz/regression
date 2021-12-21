@@ -1,9 +1,7 @@
 #!/usr/bin/env python
 # coding: utf-8
 
-# # Lasso regression in Python
-
-# ## Basics
+# # Lasso basics
 
 # 
 # *This tutorial is mainly based on the excellent book ["An Introduction to Statistical Learning"](https://www.statlearning.com/) from James et al. (2021), the scikit-learn documentation about [regressors with variable selection](https://scikit-learn.org/stable/modules/classes.html#regressors-with-variable-selection) as well as Python code provided by Jordi Warmenhoven in this [GitHub repository](https://nbviewer.org/github/JWarmenhoven/ISL-python/blob/master/Notebooks/Chapter%206.ipynb).*
