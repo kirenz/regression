@@ -5,7 +5,7 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Lasso basics &#8212; Introduction to Regression Models</title>
+    <title>Lasso regression &#8212; Introduction to Regression Models</title>
     
   <link href="../_static/css/theme.css" rel="stylesheet">
   <link href="../_static/css/index.ff1ffe594081f20da1ef19478df9384b.css" rel="stylesheet">
@@ -54,7 +54,7 @@
     <script async="async" src="../_static/sphinx-thebe.js"></script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="Splines in Python" href="splines.html" />
+    <link rel="next" title="Splines" href="splines.html" />
     <link rel="prev" title="Regression diagnostics" href="diagnostics.html" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="docsearch:language" content="None">
@@ -131,12 +131,12 @@
 <ul class="current nav bd-sidenav">
  <li class="toctree-l1 current active">
   <a class="current reference internal" href="#">
-   Lasso basics
+   Lasso regression
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="splines.html">
-   Splines in Python
+   Splines
   </a>
  </li>
  <li class="toctree-l1">
@@ -292,7 +292,7 @@
   </ul>
  </li>
  <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#lasso-regression">
+  <a class="reference internal nav-link" href="#id1">
    Lasso regression
   </a>
   <ul class="nav section-nav flex-column">
@@ -324,7 +324,7 @@
     </a>
    </li>
    <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#id1">
+    <a class="reference internal nav-link" href="#id2">
      Model evaluation
     </a>
    </li>
@@ -341,8 +341,8 @@
         
               <div>
                 
-  <div class="tex2jax_ignore mathjax_ignore section" id="lasso-basics">
-<h1>Lasso basics<a class="headerlink" href="#lasso-basics" title="Permalink to this headline">¶</a></h1>
+  <div class="tex2jax_ignore mathjax_ignore section" id="lasso-regression">
+<h1>Lasso regression<a class="headerlink" href="#lasso-regression" title="Permalink to this headline">¶</a></h1>
 <p><em>This tutorial is mainly based on the excellent book <a class="reference external" href="https://www.statlearning.com/">“An Introduction to Statistical Learning”</a> from James et al. (2021), the scikit-learn documentation about <a class="reference external" href="https://scikit-learn.org/stable/modules/classes.html#regressors-with-variable-selection">regressors with variable selection</a> as well as Python code provided by Jordi Warmenhoven in this <a class="reference external" href="https://nbviewer.org/github/JWarmenhoven/ISL-python/blob/master/Notebooks/Chapter%206.ipynb">GitHub repository</a>.</em></p>
 <p>Lasso regression relies upon the linear regression model but additionaly performs a so called <code class="docutils literal notranslate"><span class="pre">L1</span> <span class="pre">regularization</span></code>, which is a process of introducing additional information in order to prevent overfitting. As a consequence, we can fit a model containing all possible predictors and use lasso to perform variable selection by using a technique that regularizes the coefficient estimates (it shrinks the coefficient estimates towards zero). In particular, the minimization objective does not only include the residual sum of squares (RSS) - like in the OLS regression setting - but also the sum of the absolute value of coefficients.</p>
 <p>The residual sum of squares (RSS) is calculated as follows:</p>
@@ -1122,8 +1122,8 @@ memory usage: 35.7 KB
 </div>
 </div>
 </div>
-<div class="section" id="lasso-regression">
-<h2>Lasso regression<a class="headerlink" href="#lasso-regression" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="id1">
+<h2>Lasso regression<a class="headerlink" href="#id1" title="Permalink to this headline">¶</a></h2>
 <p>First, we apply lasso regression on the training set with an arbitrarily regularization parameter <span class="math notranslate nohighlight">\(\alpha\)</span> of 1.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -1287,8 +1287,8 @@ MSE test set 131001.44
 </div>
 </div>
 </div>
-<div class="section" id="id1">
-<h3>Model evaluation<a class="headerlink" href="#id1" title="Permalink to this headline">¶</a></h3>
+<div class="section" id="id2">
+<h3>Model evaluation<a class="headerlink" href="#id2" title="Permalink to this headline">¶</a></h3>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="s1">&#39;R squared training set&#39;</span><span class="p">,</span> <span class="nb">round</span><span class="p">(</span><span class="n">lasso_best</span><span class="o">.</span><span class="n">score</span><span class="p">(</span><span class="n">X_train</span><span class="p">,</span> <span class="n">y_train</span><span class="p">)</span><span class="o">*</span><span class="mi">100</span><span class="p">,</span> <span class="mi">2</span><span class="p">))</span>
@@ -1384,7 +1384,7 @@ R squared test set 35.3
     <a class='right-next' id="next-link" href="splines.html" title="next page">
     <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title">Splines in Python</p>
+        <p class="prev-next-title">Splines</p>
     </div>
     <i class="fas fa-angle-right"></i>
     </a>

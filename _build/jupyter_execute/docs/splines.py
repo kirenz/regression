@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 # coding: utf-8
 
-# # Splines in Python
+# # Splines
 
 # The following code tutorial is mainly based on code provided by [Jordi Warmenhoven](https://nbviewer.org/github/JWarmenhoven/ISL-python/blob/master/Notebooks/Chapter%207.ipynb). To learn more about the regression methods, review ["An Introduction to Statistical Learning"](https://www.statlearning.com/) from James et al. (2021).
 
