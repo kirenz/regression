@@ -87,7 +87,7 @@
     </a>
 </div><form class="bd-search d-flex align-items-center" action="../search.html" method="get">
   <i class="icon fas fa-search"></i>
-  <input type="search" class="form-control" name="q" id="search-input" placeholder="Dieses Buch durchsuchen ..." aria-label="Dieses Buch durchsuchen ..." autocomplete="off" >
+  <input type="search" class="form-control" name="q" id="search-input" placeholder="Search this book..." aria-label="Search this book..." autocomplete="off" >
 </form><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
     <div class="bd-toc-item active">
         <ul class="nav bd-sidenav">
@@ -179,8 +179,8 @@
             
             <button id="navbar-toggler" class="navbar-toggler ml-0" type="button" data-toggle="collapse"
                 data-toggle="tooltip" data-placement="bottom" data-target=".site-navigation" aria-controls="navbar-menu"
-                aria-expanded="true" aria-label="Navigation umschalten" aria-controls="site-navigation"
-                title="Navigation umschalten" data-toggle="tooltip" data-placement="left">
+                aria-expanded="true" aria-label="Toggle navigation" aria-controls="site-navigation"
+                title="Toggle navigation" data-toggle="tooltip" data-placement="left">
                 <i class="fas fa-bars"></i>
                 <i class="fas fa-arrow-left"></i>
                 <i class="fas fa-arrow-up"></i>
@@ -188,7 +188,7 @@
             
             
 <div class="dropdown-buttons-trigger">
-    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn" aria-label="Laden Sie diese Seite herunter"><i
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn" aria-label="Download this page"><i
             class="fas fa-download"></i></button>
 
     <div class="dropdown-buttons">
@@ -196,10 +196,10 @@
         
         <!-- Download raw file -->
         <a class="dropdown-buttons" href="../_sources/docs/splines.ipynb"><button type="button"
-                class="btn btn-secondary topbarbtn" title="Quelldatei herunterladen" data-toggle="tooltip"
+                class="btn btn-secondary topbarbtn" title="Download source file" data-toggle="tooltip"
                 data-placement="left">.ipynb</button></a>
         <!-- Download PDF via print -->
-        <button type="button" id="download-print" class="btn btn-secondary topbarbtn" title="In PDF drucken"
+        <button type="button" id="download-print" class="btn btn-secondary topbarbtn" title="Print to PDF"
             onClick="window.print()" data-toggle="tooltip" data-placement="left">.pdf</button>
     </div>
 </div>
@@ -212,12 +212,12 @@
     <div class="dropdown-buttons sourcebuttons">
         <a class="repository-button"
             href="https://github.com/kirenz/regression"><button type="button" class="btn btn-secondary topbarbtn"
-                data-toggle="tooltip" data-placement="left" title="Quell-Repository"><i
-                    class="fab fa-github"></i>Repository</button></a>
+                data-toggle="tooltip" data-placement="left" title="Source repository"><i
+                    class="fab fa-github"></i>repository</button></a>
         <a class="issues-button"
             href="https://github.com/kirenz/regression/issues/new?title=Issue%20on%20page%20%2Fdocs/splines.html&body=Your%20issue%20content%20here."><button
                 type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip" data-placement="left"
-                title="Öffnen Sie ein Problem"><i class="fas fa-lightbulb"></i>offenes Thema</button></a>
+                title="Open an issue"><i class="fas fa-lightbulb"></i>open issue</button></a>
         
     </div>
 </div>
@@ -225,8 +225,8 @@
             <!-- Full screen (wrap in <a> to have style consistency -->
 
 <a class="full-screen-button"><button type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip"
-        data-placement="bottom" onclick="toggleFullScreen()" aria-label="Vollbildmodus"
-        title="Vollbildmodus"><i
+        data-placement="bottom" onclick="toggleFullScreen()" aria-label="Fullscreen mode"
+        title="Fullscreen mode"><i
             class="fas fa-expand"></i></button></a>
 
             <!-- Launch buttons -->
@@ -239,7 +239,7 @@
         
         
         <a class="colab-button" href="https://colab.research.google.com/github/kirenz/regression/blob/main/docs/splines.ipynb"><button type="button" class="btn btn-secondary topbarbtn"
-                title="Starten Colab" data-toggle="tooltip" data-placement="left"><img class="colab-button-logo"
+                title="Launch Colab" data-toggle="tooltip" data-placement="left"><img class="colab-button-logo"
                     src="../_static/images/logo_colab.png"
                     alt="Interact on Colab">Colab</button></a>
         
@@ -253,7 +253,7 @@
         <div class="d-none d-md-block col-md-2 bd-toc show">
             
             <div class="tocsection onthispage pt-5 pb-3">
-                <i class="fas fa-list"></i> Inhalt
+                <i class="fas fa-list"></i> Contents
             </div>
             <nav id="bd-toc-nav" aria-label="Page">
                 <ul class="visible nav section-nav flex-column">
@@ -285,8 +285,8 @@
   </ul>
  </li>
  <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#simple-regression">
-   Simple regression
+  <a class="reference internal nav-link" href="#ridge-regression">
+   Ridge regression
   </a>
  </li>
  <li class="toc-h2 nav-item toc-entry">
@@ -295,13 +295,25 @@
   </a>
  </li>
  <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#cubic-spline">
-   Cubic spline
+  <a class="reference internal nav-link" href="#id1">
+   Splines
   </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#splines-in-scikit-learn">
+     Splines in Scikit learn
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#splines-in-patsy">
+     Splines in patsy
+    </a>
+   </li>
+  </ul>
  </li>
  <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#natural-cubic-spline">
-   Natural cubic spline
+  <a class="reference internal nav-link" href="#natural-spline">
+   Natural spline
   </a>
  </li>
 </ul>
@@ -317,7 +329,12 @@
                 
   <div class="tex2jax_ignore mathjax_ignore section" id="splines">
 <h1>Splines<a class="headerlink" href="#splines" title="Permalink to this headline">¶</a></h1>
-<p>The following code tutorial is mainly based on code provided by <a class="reference external" href="https://nbviewer.org/github/JWarmenhoven/ISL-python/blob/master/Notebooks/Chapter%207.ipynb">Jordi Warmenhoven</a>. To learn more about the regression methods, review <a class="reference external" href="https://www.statlearning.com/">“An Introduction to Statistical Learning”</a> from James et al. (2021).</p>
+<p>The following code tutorial is mainly based on:</p>
+<ul class="simple">
+<li><p>the <a class="reference external" href="https://scikit-learn.org/stable/auto_examples/linear_model/plot_polynomial_interpolation.html#sphx-glr-auto-examples-linear-model-plot-polynomial-interpolation-py">scikit learn documentation</a> about splines provided by Mathieu Blondel, Jake Vanderplas, Christian Lorentzen and Malte Londschien.</p></li>
+<li><p>code from <a class="reference external" href="https://nbviewer.org/github/JWarmenhoven/ISL-python/blob/master/Notebooks/Chapter%207.ipynb">Jordi Warmenhoven</a></p></li>
+</ul>
+<p>To learn more about the spline regression methods, review <a class="reference external" href="https://www.statlearning.com/">“An Introduction to Statistical Learning”</a> from James et al. (2021).</p>
 <div class="section" id="data">
 <h2>Data<a class="headerlink" href="#data" title="Permalink to this headline">¶</a></h2>
 <div class="section" id="import">
@@ -583,33 +600,33 @@
 </div>
 </div>
 </div>
-<div class="section" id="simple-regression">
-<h2>Simple regression<a class="headerlink" href="#simple-regression" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="ridge-regression">
+<h2>Ridge regression<a class="headerlink" href="#ridge-regression" title="Permalink to this headline">¶</a></h2>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">sklearn.linear_model</span> <span class="kn">import</span> <span class="n">LinearRegression</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">sklearn.linear_model</span> <span class="kn">import</span> <span class="n">Ridge</span>
 
-<span class="n">lm</span> <span class="o">=</span> <span class="n">LinearRegression</span><span class="p">()</span>
-<span class="n">lm</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X_train</span><span class="p">,</span><span class="n">y_train</span><span class="p">)</span>
+<span class="n">ridge</span> <span class="o">=</span> <span class="n">Ridge</span><span class="p">()</span>
+<span class="n">ridge</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X_train</span><span class="p">,</span><span class="n">y_train</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>LinearRegression()
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Ridge()
 </pre></div>
 </div>
 </div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="n">lm</span><span class="o">.</span><span class="n">coef_</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="n">lm</span><span class="o">.</span><span class="n">intercept_</span><span class="p">)</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="n">ridge</span><span class="o">.</span><span class="n">coef_</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">ridge</span><span class="o">.</span><span class="n">intercept_</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[[0.72106369]]
-[80.58924709]
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[[0.72106116]]
+[80.58935431]
 </pre></div>
 </div>
 </div>
@@ -619,21 +636,21 @@
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">sklearn.metrics</span> <span class="kn">import</span> <span class="n">mean_squared_error</span>
 
 <span class="c1"># Training data</span>
-<span class="n">pred_train</span> <span class="o">=</span> <span class="n">lm</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">X_train</span><span class="p">)</span>
+<span class="n">pred_train</span> <span class="o">=</span> <span class="n">ridge</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">X_train</span><span class="p">)</span>
 <span class="n">rmse_train</span> <span class="o">=</span> <span class="n">mean_squared_error</span><span class="p">(</span><span class="n">y_train</span><span class="p">,</span> <span class="n">pred_train</span><span class="p">,</span> <span class="n">squared</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
 
 <span class="c1"># Test data</span>
-<span class="n">pred_test</span> <span class="o">=</span> <span class="n">lm</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">X_test</span><span class="p">)</span>
+<span class="n">pred_test</span> <span class="o">=</span> <span class="n">ridge</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">X_test</span><span class="p">)</span>
 <span class="n">rmse_test</span> <span class="o">=</span><span class="n">mean_squared_error</span><span class="p">(</span><span class="n">y_test</span><span class="p">,</span> <span class="n">pred_test</span><span class="p">,</span> <span class="n">squared</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
 
 <span class="c1"># Save model results</span>
-<span class="n">model_results_lm</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span>
+<span class="n">model_results_ridge</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span>
     <span class="p">{</span>
-    <span class="s2">&quot;model&quot;</span><span class="p">:</span> <span class="s2">&quot;Linear Model (lm)&quot;</span><span class="p">,</span>  
+    <span class="s2">&quot;model&quot;</span><span class="p">:</span> <span class="s2">&quot;Ridge model&quot;</span><span class="p">,</span>  
     <span class="s2">&quot;rmse_train&quot;</span><span class="p">:</span> <span class="p">[</span><span class="n">rmse_train</span><span class="p">],</span> 
     <span class="s2">&quot;rmse_test&quot;</span><span class="p">:</span> <span class="p">[</span><span class="n">rmse_test</span><span class="p">],</span>
     <span class="p">})</span>
-<span class="n">model_results_lm</span>
+<span class="n">model_results_ridge</span>
 </pre></div>
 </div>
 </div>
@@ -664,9 +681,9 @@
   <tbody>
     <tr>
       <th>0</th>
-      <td>Linear Model (lm)</td>
+      <td>Ridge model</td>
       <td>40.705334</td>
-      <td>41.413848</td>
+      <td>41.413847</td>
     </tr>
   </tbody>
 </table>
@@ -688,28 +705,23 @@
 </div>
 <div class="section" id="polynomial-regression">
 <h2>Polynomial regression<a class="headerlink" href="#polynomial-regression" title="Permalink to this headline">¶</a></h2>
+<p>Next, we use a pipeline to add non-linear features to a ridge regression model:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">sklearn.preprocessing</span> <span class="kn">import</span> <span class="n">PolynomialFeatures</span>
+<span class="kn">from</span> <span class="nn">sklearn.pipeline</span> <span class="kn">import</span> <span class="n">make_pipeline</span>
 
-<span class="c1"># polynomial degree 2</span>
-<span class="n">poly</span> <span class="o">=</span> <span class="n">PolynomialFeatures</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>
+<span class="c1"># use polynomial features with degree 3</span>
+<span class="n">poly</span> <span class="o">=</span> <span class="n">make_pipeline</span><span class="p">(</span><span class="n">PolynomialFeatures</span><span class="p">(</span><span class="n">degree</span><span class="o">=</span><span class="mi">2</span><span class="p">),</span> 
+                      <span class="n">Ridge</span><span class="p">())</span>
 
-<span class="n">X_train_poly</span> <span class="o">=</span> <span class="n">poly</span><span class="o">.</span><span class="n">fit_transform</span><span class="p">(</span><span class="n">X_train</span><span class="p">)</span>
-<span class="n">X_test_poly</span> <span class="o">=</span> <span class="n">poly</span><span class="o">.</span><span class="n">fit_transform</span><span class="p">(</span><span class="n">X_test</span><span class="p">)</span>
-</pre></div>
-</div>
-</div>
-</div>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">pm</span> <span class="o">=</span> <span class="n">LinearRegression</span><span class="p">()</span>
-<span class="n">pm</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X_train_poly</span><span class="p">,</span><span class="n">y_train</span><span class="p">)</span>
+<span class="n">poly</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X_train</span><span class="p">,</span> <span class="n">y_train</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>LinearRegression()
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Pipeline(steps=[(&#39;polynomialfeatures&#39;, PolynomialFeatures()),
+                (&#39;ridge&#39;, Ridge())])
 </pre></div>
 </div>
 </div>
@@ -717,26 +729,26 @@
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Training data</span>
-<span class="n">pred_train</span> <span class="o">=</span> <span class="n">pm</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">X_train_poly</span><span class="p">)</span>
+<span class="n">pred_train</span> <span class="o">=</span> <span class="n">poly</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">X_train</span><span class="p">)</span>
 <span class="n">rmse_train</span> <span class="o">=</span> <span class="n">mean_squared_error</span><span class="p">(</span><span class="n">y_train</span><span class="p">,</span> 
                                 <span class="n">pred_train</span><span class="p">,</span> 
                                 <span class="n">squared</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
 
 <span class="c1"># Test data</span>
-<span class="n">pred_test</span> <span class="o">=</span> <span class="n">pm</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">X_test_poly</span><span class="p">)</span>
+<span class="n">pred_test</span> <span class="o">=</span> <span class="n">poly</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">X_test</span><span class="p">)</span>
 <span class="n">rmse_test</span> <span class="o">=</span><span class="n">mean_squared_error</span><span class="p">(</span><span class="n">y_test</span><span class="p">,</span> 
                               <span class="n">pred_test</span><span class="p">,</span> 
                               <span class="n">squared</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
 
 <span class="c1"># Save model results</span>
-<span class="n">model_results_pm</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span>
+<span class="n">model_results_poly</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span>
     <span class="p">{</span>
-    <span class="s2">&quot;model&quot;</span><span class="p">:</span> <span class="s2">&quot;Polynomial Model (pm)&quot;</span><span class="p">,</span>  
+    <span class="s2">&quot;model&quot;</span><span class="p">:</span> <span class="s2">&quot;Polynomial Model (poly)&quot;</span><span class="p">,</span>  
     <span class="s2">&quot;rmse_train&quot;</span><span class="p">:</span> <span class="p">[</span><span class="n">rmse_train</span><span class="p">],</span> 
     <span class="s2">&quot;rmse_test&quot;</span><span class="p">:</span> <span class="p">[</span><span class="n">rmse_test</span><span class="p">],</span>
     <span class="p">})</span>
 
-<span class="n">results</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">concat</span><span class="p">([</span><span class="n">model_results_lm</span><span class="p">,</span> <span class="n">model_results_pm</span><span class="p">],</span> <span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+<span class="n">results</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">concat</span><span class="p">([</span><span class="n">model_results_ridge</span><span class="p">,</span> <span class="n">model_results_poly</span><span class="p">],</span> <span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
 <span class="n">results</span>
 </pre></div>
 </div>
@@ -768,15 +780,15 @@
   <tbody>
     <tr>
       <th>0</th>
-      <td>Linear Model (lm)</td>
+      <td>Ridge model</td>
       <td>40.705334</td>
-      <td>41.413848</td>
+      <td>41.413847</td>
     </tr>
     <tr>
       <th>0</th>
-      <td>Polynomial Model (pm)</td>
+      <td>Polynomial Model (poly)</td>
       <td>39.823165</td>
-      <td>40.344788</td>
+      <td>40.344834</td>
     </tr>
   </tbody>
 </table>
@@ -794,13 +806,135 @@
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/splines_21_0.png" src="../_images/splines_21_0.png" />
+<img alt="../_images/splines_20_0.png" src="../_images/splines_20_0.png" />
 </div>
 </div>
 </div>
-<div class="section" id="cubic-spline">
-<h2>Cubic spline<a class="headerlink" href="#cubic-spline" title="Permalink to this headline">¶</a></h2>
-<p>We use the module <a class="reference external" href="https://patsy.readthedocs.io/en/latest/overview.html">patsy</a> to create non-linear transformations of the input data. We will fit 2 models with different number of knots.</p>
+<div class="section" id="id1">
+<h2>Splines<a class="headerlink" href="#id1" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="splines-in-scikit-learn">
+<h3>Splines in Scikit learn<a class="headerlink" href="#splines-in-scikit-learn" title="Permalink to this headline">¶</a></h3>
+<p>Spline transformers are a new feature in <a class="reference external" href="https://scikit-learn.org/stable/auto_examples/release_highlights/plot_release_highlights_1_0_0.html">scikit learn 1.0</a>. Therefore, make sure to use the latest version of scikit learn. If you use Aanconda, you can update all packages using <code class="docutils literal notranslate"><span class="pre">conda</span> <span class="pre">update</span> <span class="pre">--all</span></code></p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">sklearn.preprocessing</span> <span class="kn">import</span> <span class="n">SplineTransformer</span>
+
+<span class="c1"># use a spline wit 4 knots and 3 degrees with a ridge regressions</span>
+<span class="n">spline</span> <span class="o">=</span> <span class="n">make_pipeline</span><span class="p">(</span><span class="n">SplineTransformer</span><span class="p">(</span><span class="n">n_knots</span><span class="o">=</span><span class="mi">4</span><span class="p">,</span> <span class="n">degree</span><span class="o">=</span><span class="mi">3</span><span class="p">),</span> 
+                       <span class="n">Ridge</span><span class="p">(</span><span class="n">alpha</span><span class="o">=</span><span class="mi">1</span><span class="p">))</span>
+                     
+<span class="n">spline</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X_train</span><span class="p">,</span> <span class="n">y_train</span><span class="p">)</span>
+
+<span class="n">y_pred</span> <span class="o">=</span> <span class="n">spline</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">X_train</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Training data</span>
+<span class="n">pred_train</span> <span class="o">=</span> <span class="n">spline</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">X_train</span><span class="p">)</span>
+<span class="n">rmse_train</span> <span class="o">=</span> <span class="n">mean_squared_error</span><span class="p">(</span><span class="n">y_train</span><span class="p">,</span> 
+                                <span class="n">pred_train</span><span class="p">,</span> 
+                                <span class="n">squared</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+
+<span class="c1"># Test data</span>
+<span class="n">pred_test</span> <span class="o">=</span> <span class="n">spline</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">X_test</span><span class="p">)</span>
+<span class="n">rmse_test</span> <span class="o">=</span><span class="n">mean_squared_error</span><span class="p">(</span><span class="n">y_test</span><span class="p">,</span> 
+                              <span class="n">pred_test</span><span class="p">,</span> 
+                              <span class="n">squared</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+
+<span class="c1"># Save model results</span>
+<span class="n">model_results_spline</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span>
+    <span class="p">{</span>
+    <span class="s2">&quot;model&quot;</span><span class="p">:</span> <span class="s2">&quot;Spline model (spline)&quot;</span><span class="p">,</span>  
+    <span class="s2">&quot;rmse_train&quot;</span><span class="p">:</span> <span class="p">[</span><span class="n">rmse_train</span><span class="p">],</span> 
+    <span class="s2">&quot;rmse_test&quot;</span><span class="p">:</span> <span class="p">[</span><span class="n">rmse_test</span><span class="p">],</span>
+    <span class="p">})</span>
+
+<span class="n">results</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">concat</span><span class="p">([</span><span class="n">results</span><span class="p">,</span> <span class="n">model_results_spline</span><span class="p">],</span> <span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+<span class="n">results</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>model</th>
+      <th>rmse_train</th>
+      <th>rmse_test</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>Ridge model</td>
+      <td>40.705334</td>
+      <td>41.413847</td>
+    </tr>
+    <tr>
+      <th>0</th>
+      <td>Polynomial Model (poly)</td>
+      <td>39.823165</td>
+      <td>40.344834</td>
+    </tr>
+    <tr>
+      <th>0</th>
+      <td>Spline model (spline)</td>
+      <td>39.809754</td>
+      <td>40.280061</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Create observations</span>
+<span class="n">x_new</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="n">X_test</span><span class="o">.</span><span class="n">min</span><span class="p">(),</span><span class="n">X_test</span><span class="o">.</span><span class="n">max</span><span class="p">(),</span> <span class="mi">100</span><span class="p">)</span>
+<span class="c1"># Make some predictions</span>
+<span class="n">pred</span> <span class="o">=</span> <span class="n">spline</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">x_new</span><span class="p">)</span>
+
+<span class="c1"># plot</span>
+<span class="n">sns</span><span class="o">.</span><span class="n">scatterplot</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="n">X_train</span><span class="p">[</span><span class="s1">&#39;age&#39;</span><span class="p">],</span> <span class="n">y</span><span class="o">=</span><span class="n">y_train</span><span class="p">[</span><span class="s1">&#39;wage&#39;</span><span class="p">])</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x_new</span><span class="p">,</span> <span class="n">pred</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;Cubic spline with degree=3 (3 knots)&#39;</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;orange&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">();</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/Users/jankirenz/opt/anaconda3/lib/python3.7/site-packages/sklearn/base.py:446: UserWarning: X does not have valid feature names, but SplineTransformer was fitted with feature names
+  &quot;X does not have valid feature names, but&quot;
+</pre></div>
+</div>
+<img alt="../_images/splines_24_1.png" src="../_images/splines_24_1.png" />
+</div>
+</div>
+<p>In some settings, e.g. in time series data with seasonal effects, we expect a periodic continuation of the underlying signal. Such effects can be modelled using periodic splines, which have equal function value and equal derivatives at the first and last knot. Review this notebook to learn more about periodic splines in scikit learn:</p>
+<ul class="simple">
+<li><p><a class="reference external" href="https://scikit-learn.org/stable/auto_examples/linear_model/plot_polynomial_interpolation.html#periodic-splines">periodic splines</a></p></li>
+</ul>
+</div>
+<div class="section" id="splines-in-patsy">
+<h3>Splines in patsy<a class="headerlink" href="#splines-in-patsy" title="Permalink to this headline">¶</a></h3>
+<p>Next, we use the module <a class="reference external" href="https://patsy.readthedocs.io/en/latest/overview.html">patsy</a> to create non-linear transformations of the input data. Additionaly, we use statsmodels to fit 2 models with different number of knots.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">patsy</span> <span class="kn">import</span> <span class="n">dmatrix</span>
@@ -972,15 +1106,21 @@
   <tbody>
     <tr>
       <th>0</th>
-      <td>Linear Model (lm)</td>
+      <td>Ridge model</td>
       <td>40.705334</td>
-      <td>41.413848</td>
+      <td>41.413847</td>
     </tr>
     <tr>
       <th>0</th>
-      <td>Polynomial Model (pm)</td>
+      <td>Polynomial Model (poly)</td>
       <td>39.823165</td>
-      <td>40.344788</td>
+      <td>40.344834</td>
+    </tr>
+    <tr>
+      <th>0</th>
+      <td>Spline model (spline)</td>
+      <td>39.809754</td>
+      <td>40.280061</td>
     </tr>
     <tr>
       <th>0</th>
@@ -1011,12 +1151,14 @@
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/splines_30_0.png" src="../_images/splines_30_0.png" />
+<img alt="../_images/splines_34_0.png" src="../_images/splines_34_0.png" />
 </div>
 </div>
 </div>
-<div class="section" id="natural-cubic-spline">
-<h2>Natural cubic spline<a class="headerlink" href="#natural-cubic-spline" title="Permalink to this headline">¶</a></h2>
+</div>
+<div class="section" id="natural-spline">
+<h2>Natural spline<a class="headerlink" href="#natural-spline" title="Permalink to this headline">¶</a></h2>
+<p>Finally, we fit a natural spline with patsy and statsmodels.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">transformed_x3</span> <span class="o">=</span> <span class="n">dmatrix</span><span class="p">(</span><span class="s2">&quot;cr(train,df = 3)&quot;</span><span class="p">,</span> <span class="p">{</span><span class="s2">&quot;train&quot;</span><span class="p">:</span> <span class="n">X_train</span><span class="p">},</span> <span class="n">return_type</span><span class="o">=</span><span class="s1">&#39;dataframe&#39;</span><span class="p">)</span>
@@ -1076,15 +1218,21 @@
   <tbody>
     <tr>
       <th>0</th>
-      <td>Linear Model (lm)</td>
+      <td>Ridge model</td>
       <td>40.705334</td>
-      <td>41.413848</td>
+      <td>41.413847</td>
     </tr>
     <tr>
       <th>0</th>
-      <td>Polynomial Model (pm)</td>
+      <td>Polynomial Model (poly)</td>
       <td>39.823165</td>
-      <td>40.344788</td>
+      <td>40.344834</td>
+    </tr>
+    <tr>
+      <th>0</th>
+      <td>Spline model (spline)</td>
+      <td>39.809754</td>
+      <td>40.280061</td>
     </tr>
     <tr>
       <th>0</th>
@@ -1115,7 +1263,7 @@
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/splines_34_0.png" src="../_images/splines_34_0.png" />
+<img alt="../_images/splines_38_0.png" src="../_images/splines_38_0.png" />
 </div>
 </div>
 </div>
@@ -1168,9 +1316,9 @@
     <div class="container">
       <p>
         
-          Durch Jan Kirenz<br/>
+          By Jan Kirenz<br/>
         
-            &copy; Urheberrechte © 2021.<br/>
+            &copy; Copyright 2021.<br/>
       </p>
     </div>
   </footer>
