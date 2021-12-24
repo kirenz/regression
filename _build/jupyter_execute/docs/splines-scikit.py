@@ -27,7 +27,7 @@ X = df[['age']]
 y = df[['wage']]
 
 
-# In[ ]:
+# In[3]:
 
 
 # train test split
@@ -36,7 +36,7 @@ from sklearn.model_selection import train_test_split
 X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.3, random_state = 1)
 
 
-# In[12]:
+# In[4]:
 
 
 import seaborn as sns  
@@ -46,7 +46,7 @@ sns.scatterplot(x=X_train['age'], y=y_train['wage'], alpha=0.4);
 
 # We use a pipeline to add non-linear features to a ridge regression model.
 
-# In[1]:
+# In[5]:
 
 
 from sklearn.linear_model import Ridge
@@ -54,7 +54,7 @@ from sklearn.preprocessing import PolynomialFeatures, SplineTransformer
 from sklearn.pipeline import make_pipeline
 
 
-# In[9]:
+# In[6]:
 
 
 # use polynomial features with degree 3
@@ -66,7 +66,7 @@ model.fit(X_train, y_train)
 y_pred = model.predict(X_train)
 
 
-# In[10]:
+# In[7]:
 
 
 # B-spline

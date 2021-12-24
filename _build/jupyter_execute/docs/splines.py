@@ -3,13 +3,18 @@
 
 # # Splines
 
-# The following code tutorial is mainly based on code provided by [Jordi Warmenhoven](https://nbviewer.org/github/JWarmenhoven/ISL-python/blob/master/Notebooks/Chapter%207.ipynb). To learn more about the regression methods, review ["An Introduction to Statistical Learning"](https://www.statlearning.com/) from James et al. (2021).
+# The following code tutorial is mainly based on:
+# 
+# - the [scikit learn documentation](https://scikit-learn.org/stable/auto_examples/linear_model/plot_polynomial_interpolation.html#sphx-glr-auto-examples-linear-model-plot-polynomial-interpolation-py) about splines provided by Mathieu Blondel, Jake Vanderplas, Christian Lorentzen and Malte Londschien. 
+# - code from [Jordi Warmenhoven](https://nbviewer.org/github/JWarmenhoven/ISL-python/blob/master/Notebooks/Chapter%207.ipynb)
+# 
+# To learn more about the spline regression methods, review ["An Introduction to Statistical Learning"](https://www.statlearning.com/) from James et al. (2021).
 
 # ## Data
 
 # ### Import
 
-# In[1]:
+# In[95]:
 
 
 import pandas as pd
@@ -22,7 +27,7 @@ df
 # 
 # We only use the feature age to predict wage:
 
-# In[2]:
+# In[96]:
 
 
 X = df[['age']]
@@ -33,7 +38,7 @@ y = df[['wage']]
 
 # Dividing data into train and test datasets
 
-# In[3]:
+# In[97]:
 
 
 from sklearn.model_selection import train_test_split
@@ -45,7 +50,7 @@ X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.3, random_
 # 
 # Visualize the relationship between age and wage:
 
-# In[4]:
+# In[98]:
 
 
 import seaborn as sns  
@@ -58,48 +63,48 @@ sns.set_theme(style="ticks", rc=custom_params)
 sns.scatterplot(x=X_train['age'], y=y_train['wage'], alpha=0.4);
 
 
-# ## Simple regression
+# ## Ridge regression
 
-# In[5]:
-
-
-from sklearn.linear_model import LinearRegression
-
-lm = LinearRegression()
-lm.fit(X_train,y_train)
+# In[99]:
 
 
-# In[6]:
+from sklearn.linear_model import Ridge
+
+ridge = Ridge()
+ridge.fit(X_train,y_train)
 
 
-print(lm.coef_)
-print(lm.intercept_)
+# In[100]:
 
 
-# In[7]:
+print(ridge.coef_)
+print(ridge.intercept_)
+
+
+# In[101]:
 
 
 from sklearn.metrics import mean_squared_error
 
 # Training data
-pred_train = lm.predict(X_train)
+pred_train = ridge.predict(X_train)
 rmse_train = mean_squared_error(y_train, pred_train, squared=False)
 
 # Test data
-pred_test = lm.predict(X_test)
+pred_test = ridge.predict(X_test)
 rmse_test =mean_squared_error(y_test, pred_test, squared=False)
 
 # Save model results
-model_results_lm = pd.DataFrame(
+model_results_ridge = pd.DataFrame(
     {
-    "model": "Linear Model (lm)",  
+    "model": "Ridge model",  
     "rmse_train": [rmse_train], 
     "rmse_test": [rmse_test],
     })
-model_results_lm
+model_results_ridge
 
 
-# In[8]:
+# In[102]:
 
 
 sns.regplot(x=X_train['age'], 
@@ -109,54 +114,50 @@ sns.regplot(x=X_train['age'],
 
 
 # ## Polynomial regression
+# 
+# Next, we use a pipeline to add non-linear features to a ridge regression model:
 
-# In[9]:
+# In[103]:
 
 
 from sklearn.preprocessing import PolynomialFeatures
+from sklearn.pipeline import make_pipeline
 
-# polynomial degree 2
-poly = PolynomialFeatures(2)
+# use polynomial features with degree 3
+poly = make_pipeline(PolynomialFeatures(degree=2), 
+                      Ridge())
 
-X_train_poly = poly.fit_transform(X_train)
-X_test_poly = poly.fit_transform(X_test)
-
-
-# In[10]:
+poly.fit(X_train, y_train)
 
 
-pm = LinearRegression()
-pm.fit(X_train_poly,y_train)
-
-
-# In[11]:
+# In[104]:
 
 
 # Training data
-pred_train = pm.predict(X_train_poly)
+pred_train = poly.predict(X_train)
 rmse_train = mean_squared_error(y_train, 
                                 pred_train, 
                                 squared=False)
 
 # Test data
-pred_test = pm.predict(X_test_poly)
+pred_test = poly.predict(X_test)
 rmse_test =mean_squared_error(y_test, 
                               pred_test, 
                               squared=False)
 
 # Save model results
-model_results_pm = pd.DataFrame(
+model_results_poly = pd.DataFrame(
     {
-    "model": "Polynomial Model (pm)",  
+    "model": "Polynomial Model (poly)",  
     "rmse_train": [rmse_train], 
     "rmse_test": [rmse_test],
     })
 
-results = pd.concat([model_results_lm, model_results_pm], axis=0)
+results = pd.concat([model_results_ridge, model_results_poly], axis=0)
 results
 
 
-# In[12]:
+# In[105]:
 
 
 # plot
@@ -167,17 +168,85 @@ sns.regplot(x=X_train['age'],
             line_kws={"color": "orange"});
 
 
-# ## Cubic spline
+# ## Splines 
 # 
-# We use the module [patsy](https://patsy.readthedocs.io/en/latest/overview.html) to create non-linear transformations of the input data. We will fit 2 models with different number of knots.
+# ### Splines in Scikit learn
+# 
+# Spline transformers are a new feature in [scikit learn 1.0](https://scikit-learn.org/stable/auto_examples/release_highlights/plot_release_highlights_1_0_0.html). Therefore, make sure to use the latest version of scikit learn. If you use Aanconda, you can update all packages using `conda update --all`  
 
-# In[13]:
+# In[106]:
+
+
+from sklearn.preprocessing import SplineTransformer
+
+# use a spline wit 4 knots and 3 degrees with a ridge regressions
+spline = make_pipeline(SplineTransformer(n_knots=4, degree=3), 
+                       Ridge(alpha=1))
+                     
+spline.fit(X_train, y_train)
+
+y_pred = spline.predict(X_train)
+
+
+# In[107]:
+
+
+# Training data
+pred_train = spline.predict(X_train)
+rmse_train = mean_squared_error(y_train, 
+                                pred_train, 
+                                squared=False)
+
+# Test data
+pred_test = spline.predict(X_test)
+rmse_test =mean_squared_error(y_test, 
+                              pred_test, 
+                              squared=False)
+
+# Save model results
+model_results_spline = pd.DataFrame(
+    {
+    "model": "Spline model (spline)",  
+    "rmse_train": [rmse_train], 
+    "rmse_test": [rmse_test],
+    })
+
+results = pd.concat([results, model_results_spline], axis=0)
+results
+
+
+# In[108]:
+
+
+# Create observations
+x_new = np.linspace(X_test.min(),X_test.max(), 100)
+# Make some predictions
+pred = spline.predict(x_new)
+
+# plot
+sns.scatterplot(x=X_train['age'], y=y_train['wage'])
+
+plt.plot(x_new, pred, label='Cubic spline with degree=3 (3 knots)', color='orange')
+plt.legend();
+
+
+# In some settings, e.g. in time series data with seasonal effects, we expect a periodic continuation of the underlying signal. Such effects can be modelled using periodic splines, which have equal function value and equal derivatives at the first and last knot. Review this notebook to learn more about periodic splines in scikit learn:
+# 
+# - [periodic splines](https://scikit-learn.org/stable/auto_examples/linear_model/plot_polynomial_interpolation.html#periodic-splines)
+# 
+# 
+
+# ### Splines in patsy
+# 
+# Next, we use the module [patsy](https://patsy.readthedocs.io/en/latest/overview.html) to create non-linear transformations of the input data. Additionaly, we use statsmodels to fit 2 models with different number of knots.
+
+# In[109]:
 
 
 from patsy import dmatrix
 
 
-# In[14]:
+# In[110]:
 
 
 # Generating cubic spline with 3 knots at 25, 40 and 60
@@ -186,7 +255,7 @@ transformed_x = dmatrix(
                 {"train": X_train},return_type='dataframe')
 
 
-# In[15]:
+# In[111]:
 
 
 transformed_x.head()
@@ -194,20 +263,20 @@ transformed_x.head()
 
 # We use statsmodels to estimate a generalized linear model:
 
-# In[16]:
+# In[112]:
 
 
 import statsmodels.api as sm
 
 
-# In[17]:
+# In[113]:
 
 
 # Fitting generalised linear model on transformed dataset
 cs = sm.GLM(y_train, transformed_x).fit()
 
 
-# In[18]:
+# In[114]:
 
 
 # Training data
@@ -229,7 +298,7 @@ results = pd.concat([results, model_results_cs], axis=0)
 results
 
 
-# In[19]:
+# In[115]:
 
 
 import numpy as np
@@ -247,9 +316,11 @@ plt.plot(xp, pred, label='Cubic spline with degree=3 (3 knots)', color='orange')
 plt.legend();
 
 
-# ## Natural cubic spline
+# ## Natural spline
+# 
+# Finally, we fit a natural spline with patsy and statsmodels.
 
-# In[20]:
+# In[116]:
 
 
 transformed_x3 = dmatrix("cr(train,df = 3)", {"train": X_train}, return_type='dataframe')
@@ -257,7 +328,7 @@ transformed_x3 = dmatrix("cr(train,df = 3)", {"train": X_train}, return_type='da
 ncs = sm.GLM(y_train, transformed_x3).fit()
 
 
-# In[21]:
+# In[117]:
 
 
 # Training data
@@ -280,7 +351,7 @@ results = pd.concat([results, model_results_ncs], axis=0)
 results
 
 
-# In[22]:
+# In[118]:
 
 
 # Make predictions
