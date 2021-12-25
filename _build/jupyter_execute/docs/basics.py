@@ -1053,7 +1053,7 @@ plt.axvline(165.695836, 0, 1, linewidth=3, color='r');
 # 
 # Both measures are an estimator of the **relative quality** of statistical models for a given set of data. Hence, they are used to select the best performing model.  
 # 
-# For both measures, lower values are better
+# For both measures, **lower** values are better
 
 # ### Bayesian information criterion (BIC) 
 

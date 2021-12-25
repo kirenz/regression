@@ -14,7 +14,7 @@
 
 # ### Import
 
-# In[95]:
+# In[1]:
 
 
 import pandas as pd
@@ -27,7 +27,7 @@ df
 # 
 # We only use the feature age to predict wage:
 
-# In[96]:
+# In[2]:
 
 
 X = df[['age']]
@@ -38,7 +38,7 @@ y = df[['wage']]
 
 # Dividing data into train and test datasets
 
-# In[97]:
+# In[3]:
 
 
 from sklearn.model_selection import train_test_split
@@ -50,7 +50,7 @@ X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.3, random_
 # 
 # Visualize the relationship between age and wage:
 
-# In[98]:
+# In[4]:
 
 
 import seaborn as sns  
@@ -65,46 +65,55 @@ sns.scatterplot(x=X_train['age'], y=y_train['wage'], alpha=0.4);
 
 # ## Ridge regression
 
-# In[99]:
+# In[5]:
 
 
 from sklearn.linear_model import Ridge
 
-ridge = Ridge()
-ridge.fit(X_train,y_train)
+reg = Ridge()
+reg.fit(X_train,y_train)
 
 
-# In[100]:
+# In[6]:
 
 
-print(ridge.coef_)
-print(ridge.intercept_)
+print(reg.coef_)
+print(reg.intercept_)
 
 
-# In[101]:
+# In[7]:
 
 
 from sklearn.metrics import mean_squared_error
 
-# Training data
-pred_train = ridge.predict(X_train)
-rmse_train = mean_squared_error(y_train, pred_train, squared=False)
+# create function to obtain model mse
+def model_results(model_name):
 
-# Test data
-pred_test = ridge.predict(X_test)
-rmse_test =mean_squared_error(y_test, pred_test, squared=False)
+    # Training data
+    pred_train = reg.predict(X_train)
+    rmse_train = round(mean_squared_error(y_train, pred_train, squared=False),4)
 
-# Save model results
-model_results_ridge = pd.DataFrame(
-    {
-    "model": "Ridge model",  
-    "rmse_train": [rmse_train], 
-    "rmse_test": [rmse_test],
-    })
-model_results_ridge
+    # Test data
+    pred_test = reg.predict(X_test)
+    rmse_test =round(mean_squared_error(y_test, pred_test, squared=False),4)
+
+    # Print model results
+    result = pd.DataFrame(
+        {"model": model_name, 
+        "rmse_train": [rmse_train], 
+        "rmse_test": [rmse_test]}
+        )
+    
+    return result;
 
 
-# In[102]:
+# In[8]:
+
+
+model_results(model_name="ridge")
+
+
+# In[9]:
 
 
 sns.regplot(x=X_train['age'], 
@@ -117,47 +126,26 @@ sns.regplot(x=X_train['age'],
 # 
 # Next, we use a pipeline to add non-linear features to a ridge regression model:
 
-# In[103]:
+# In[10]:
 
 
 from sklearn.preprocessing import PolynomialFeatures
 from sklearn.pipeline import make_pipeline
 
 # use polynomial features with degree 3
-poly = make_pipeline(PolynomialFeatures(degree=2), 
+reg = make_pipeline(PolynomialFeatures(degree=2), 
                       Ridge())
 
-poly.fit(X_train, y_train)
+reg.fit(X_train, y_train)
 
 
-# In[104]:
+# In[11]:
 
 
-# Training data
-pred_train = poly.predict(X_train)
-rmse_train = mean_squared_error(y_train, 
-                                pred_train, 
-                                squared=False)
-
-# Test data
-pred_test = poly.predict(X_test)
-rmse_test =mean_squared_error(y_test, 
-                              pred_test, 
-                              squared=False)
-
-# Save model results
-model_results_poly = pd.DataFrame(
-    {
-    "model": "Polynomial Model (poly)",  
-    "rmse_train": [rmse_train], 
-    "rmse_test": [rmse_test],
-    })
-
-results = pd.concat([model_results_ridge, model_results_poly], axis=0)
-results
+model_results(model_name="poly")
 
 
-# In[105]:
+# In[12]:
 
 
 # plot
@@ -174,59 +162,41 @@ sns.regplot(x=X_train['age'],
 # 
 # Spline transformers are a new feature in [scikit learn 1.0](https://scikit-learn.org/stable/auto_examples/release_highlights/plot_release_highlights_1_0_0.html). Therefore, make sure to use the latest version of scikit learn. If you use Aanconda, you can update all packages using `conda update --all`  
 
-# In[106]:
+# In[13]:
 
 
 from sklearn.preprocessing import SplineTransformer
 
 # use a spline wit 4 knots and 3 degrees with a ridge regressions
-spline = make_pipeline(SplineTransformer(n_knots=4, degree=3), 
+reg = make_pipeline(SplineTransformer(n_knots=4, degree=3), 
                        Ridge(alpha=1))
                      
-spline.fit(X_train, y_train)
+reg.fit(X_train, y_train)
 
-y_pred = spline.predict(X_train)
-
-
-# In[107]:
+y_pred = reg.predict(X_train)
 
 
-# Training data
-pred_train = spline.predict(X_train)
-rmse_train = mean_squared_error(y_train, 
-                                pred_train, 
-                                squared=False)
-
-# Test data
-pred_test = spline.predict(X_test)
-rmse_test =mean_squared_error(y_test, 
-                              pred_test, 
-                              squared=False)
-
-# Save model results
-model_results_spline = pd.DataFrame(
-    {
-    "model": "Spline model (spline)",  
-    "rmse_train": [rmse_train], 
-    "rmse_test": [rmse_test],
-    })
-
-results = pd.concat([results, model_results_spline], axis=0)
-results
+# In[14]:
 
 
-# In[108]:
+model_results(model_name = "spline")
 
+
+# In[15]:
+
+
+import numpy as np
+import matplotlib.pyplot as plt
 
 # Create observations
 x_new = np.linspace(X_test.min(),X_test.max(), 100)
 # Make some predictions
-pred = spline.predict(x_new)
+pred = reg.predict(x_new)
 
 # plot
 sns.scatterplot(x=X_train['age'], y=y_train['wage'])
 
-plt.plot(x_new, pred, label='Cubic spline with degree=3 (3 knots)', color='orange')
+plt.plot(x_new, pred, label='Cubic spline with degree=3', color='orange')
 plt.legend();
 
 
@@ -240,13 +210,13 @@ plt.legend();
 # 
 # Next, we use the module [patsy](https://patsy.readthedocs.io/en/latest/overview.html) to create non-linear transformations of the input data. Additionaly, we use statsmodels to fit 2 models with different number of knots.
 
-# In[109]:
+# In[16]:
 
 
 from patsy import dmatrix
 
 
-# In[110]:
+# In[17]:
 
 
 # Generating cubic spline with 3 knots at 25, 40 and 60
@@ -255,50 +225,44 @@ transformed_x = dmatrix(
                 {"train": X_train},return_type='dataframe')
 
 
-# In[111]:
-
-
-transformed_x.head()
-
-
 # We use statsmodels to estimate a generalized linear model:
 
-# In[112]:
+# In[18]:
 
 
 import statsmodels.api as sm
 
 
-# In[113]:
+# In[19]:
 
 
 # Fitting generalised linear model on transformed dataset
-cs = sm.GLM(y_train, transformed_x).fit()
+reg = sm.GLM(y_train, transformed_x).fit()
 
 
-# In[114]:
+# In[20]:
 
 
 # Training data
-pred_train = cs.predict(dmatrix("bs(train, knots=(25,40,60), include_intercept=False)", {"train": X_train}, return_type='dataframe'))
+pred_train = reg.predict(dmatrix("bs(train, knots=(25,40,60), include_intercept=False)", {"train": X_train}, return_type='dataframe'))
 rmse_train = mean_squared_error(y_train, pred_train, squared=False)
 
 # Test data
-pred_test = cs.predict(dmatrix("bs(test, knots=(25,40,60), include_intercept=False)", {"test": X_test}, return_type='dataframe'))
+pred_test = reg.predict(dmatrix("bs(test, knots=(25,40,60), include_intercept=False)", {"test": X_test}, return_type='dataframe'))
 rmse_test =mean_squared_error(y_test, pred_test, squared=False)
 
 # Save model results
-model_results_cs = pd.DataFrame(
+model_results = pd.DataFrame(
     {
     "model": "Cubic spline (cs)",  
     "rmse_train": [rmse_train], 
     "rmse_test": [rmse_test]
     })
-results = pd.concat([results, model_results_cs], axis=0)
-results
+
+model_results
 
 
-# In[115]:
+# In[21]:
 
 
 import numpy as np
@@ -307,7 +271,7 @@ import matplotlib.pyplot as plt
 # Create observations
 xp = np.linspace(X_test.min(),X_test.max(), 100)
 # Make some predictions
-pred = cs.predict(dmatrix("bs(xp, knots=(25,40,60), include_intercept=False)", {"xp": xp}, return_type='dataframe'))
+pred = reg.predict(dmatrix("bs(xp, knots=(25,40,60), include_intercept=False)", {"xp": xp}, return_type='dataframe'))
 
 # plot
 sns.scatterplot(x=X_train['age'], y=y_train['wage'])
@@ -320,42 +284,41 @@ plt.legend();
 # 
 # Finally, we fit a natural spline with patsy and statsmodels.
 
-# In[116]:
+# In[22]:
 
 
 transformed_x3 = dmatrix("cr(train,df = 3)", {"train": X_train}, return_type='dataframe')
 
-ncs = sm.GLM(y_train, transformed_x3).fit()
+reg = sm.GLM(y_train, transformed_x3).fit()
 
 
-# In[117]:
+# In[23]:
 
 
 # Training data
-pred_train = ncs.predict(dmatrix("cr(train, df=3)", {"train": X_train}, return_type='dataframe'))
+pred_train = reg.predict(dmatrix("cr(train, df=3)", {"train": X_train}, return_type='dataframe'))
 rmse_train = mean_squared_error(y_train, pred_train, squared=False)
 
 # Test data
-pred_test = ncs.predict(dmatrix("cr(test, df=3)", {"test": X_test}, return_type='dataframe'))
-rmse_test =mean_squared_error(y_test, pred_test, squared=False)
+pred_test = reg.predict(dmatrix("cr(test, df=3)", {"test": X_test}, return_type='dataframe'))
+rmse_test = mean_squared_error(y_test, pred_test, squared=False)
 
 # Save model results
-model_results_ncs = pd.DataFrame(
+model_results_ns = pd.DataFrame(
     {
-    "model": "Natural cubic spline (ncs)",  
+    "model": "Natural spline (ns)",  
     "rmse_train": [rmse_train], 
     "rmse_test": [rmse_test]
     })
 
-results = pd.concat([results, model_results_ncs], axis=0)
-results
+model_results_ns
 
 
-# In[118]:
+# In[24]:
 
 
 # Make predictions
-pred = ncs.predict(dmatrix("cr(xp, df=3)", {"xp": xp}, return_type='dataframe'))
+pred = reg.predict(dmatrix("cr(xp, df=3)", {"xp": xp}, return_type='dataframe'))
 
 # plot
 sns.scatterplot(x=X_train['age'], y=y_train['wage'])

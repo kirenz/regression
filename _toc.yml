@@ -7,10 +7,12 @@ parts:
   - caption: Diagnostics
     chapters:
     - file: docs/diagnostics.ipynb
-  - caption: Advanced
+  - caption: Lasso & Splines
     chapters:
     - file: docs/lasso.ipynb
     - file: docs/splines.ipynb   
+  - caption: Feature Selection
+    chapters:
     - file: docs/feature-selection.ipynb
   #- caption: Applications
   #  chapters:
