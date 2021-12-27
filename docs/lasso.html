@@ -1097,8 +1097,8 @@ memory usage: 35.7 KB
 
 <span class="n">scaler</span> <span class="o">=</span> <span class="n">StandardScaler</span><span class="p">()</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X_train</span><span class="p">[</span><span class="n">list_numerical</span><span class="p">])</span> 
 
-<span class="n">X_train</span> <span class="o">=</span> <span class="n">scaler</span><span class="o">.</span><span class="n">transform</span><span class="p">(</span><span class="n">X_train</span><span class="p">[</span><span class="n">list_numerical</span><span class="p">])</span>
-<span class="n">X_test</span> <span class="o">=</span> <span class="n">scaler</span><span class="o">.</span><span class="n">transform</span><span class="p">(</span><span class="n">X_test</span><span class="p">[</span><span class="n">list_numerical</span><span class="p">])</span>
+<span class="n">X_train</span><span class="p">[</span><span class="n">list_numerical</span><span class="p">]</span> <span class="o">=</span> <span class="n">scaler</span><span class="o">.</span><span class="n">transform</span><span class="p">(</span><span class="n">X_train</span><span class="p">[</span><span class="n">list_numerical</span><span class="p">])</span>
+<span class="n">X_test</span><span class="p">[</span><span class="n">list_numerical</span><span class="p">]</span> <span class="o">=</span> <span class="n">scaler</span><span class="o">.</span><span class="n">transform</span><span class="p">(</span><span class="n">X_test</span><span class="p">[</span><span class="n">list_numerical</span><span class="p">])</span>
 </pre></div>
 </div>
 </div>
@@ -1110,22 +1110,292 @@ memory usage: 35.7 KB
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([[ 0.64457746,  0.25743852, -0.45696255, ..., -0.48238745,
-         1.74622935,  3.02223296],
-       [-0.59280689, -0.67135927, -0.5729365 , ..., -0.85154662,
-         0.02227564,  2.57473494],
-       [-0.41307508, -0.10501916, -0.68891044, ..., -0.29445186,
-        -0.43467595,  0.63557689],
-       ...,
-       [ 1.47410887,  1.25419712,  1.74654239, ..., -0.63340711,
-         1.31004829,  0.9339089 ],
-       [-1.47072763, -1.39627462, -1.15280622, ..., -0.66025505,
-         0.40306863,  1.0830749 ],
-       [-1.64354667, -1.55484985, -1.15280622, ...,  0.11162323,
-        -0.69084578, -1.00524916]])
-</pre></div>
-</div>
-</div>
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>AtBat</th>
+      <th>Hits</th>
+      <th>HmRun</th>
+      <th>Runs</th>
+      <th>RBI</th>
+      <th>Walks</th>
+      <th>Years</th>
+      <th>CAtBat</th>
+      <th>CHits</th>
+      <th>CHmRun</th>
+      <th>CRuns</th>
+      <th>CRBI</th>
+      <th>CWalks</th>
+      <th>PutOuts</th>
+      <th>Assists</th>
+      <th>Errors</th>
+      <th>League_N</th>
+      <th>Division_W</th>
+      <th>NewLeague_N</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>260</th>
+      <td>0.644577</td>
+      <td>0.257439</td>
+      <td>-0.456963</td>
+      <td>0.101010</td>
+      <td>-0.763917</td>
+      <td>-0.975959</td>
+      <td>-0.070553</td>
+      <td>0.298535</td>
+      <td>0.239063</td>
+      <td>-0.407836</td>
+      <td>0.011298</td>
+      <td>-0.163736</td>
+      <td>-0.361084</td>
+      <td>-0.482387</td>
+      <td>1.746229</td>
+      <td>3.022233</td>
+      <td>1</td>
+      <td>1</td>
+      <td>1</td>
+    </tr>
+    <tr>
+      <th>92</th>
+      <td>-0.592807</td>
+      <td>-0.671359</td>
+      <td>-0.572936</td>
+      <td>-0.778318</td>
+      <td>-0.685806</td>
+      <td>-0.458312</td>
+      <td>-1.306911</td>
+      <td>-1.001403</td>
+      <td>-0.969702</td>
+      <td>-0.746705</td>
+      <td>-0.957639</td>
+      <td>-0.898919</td>
+      <td>-0.844319</td>
+      <td>-0.851547</td>
+      <td>0.022276</td>
+      <td>2.574735</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <th>137</th>
+      <td>-0.413075</td>
+      <td>-0.105019</td>
+      <td>-0.688910</td>
+      <td>-0.258715</td>
+      <td>-0.646751</td>
+      <td>-0.081841</td>
+      <td>1.577925</td>
+      <td>0.717456</td>
+      <td>0.706633</td>
+      <td>-0.010542</td>
+      <td>0.645511</td>
+      <td>0.259369</td>
+      <td>0.220252</td>
+      <td>-0.294452</td>
+      <td>-0.434676</td>
+      <td>0.635577</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <th>90</th>
+      <td>-0.613545</td>
+      <td>-0.558091</td>
+      <td>0.122907</td>
+      <td>-0.618440</td>
+      <td>-0.256196</td>
+      <td>-1.211253</td>
+      <td>-0.482672</td>
+      <td>-0.514087</td>
+      <td>-0.478077</td>
+      <td>-0.501317</td>
+      <td>-0.602362</td>
+      <td>-0.526826</td>
+      <td>-0.684451</td>
+      <td>0.786178</td>
+      <td>-0.545452</td>
+      <td>-0.706917</td>
+      <td>0</td>
+      <td>1</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <th>100</th>
+      <td>0.637665</td>
+      <td>0.982354</td>
+      <td>0.586803</td>
+      <td>0.260888</td>
+      <td>1.227914</td>
+      <td>1.706394</td>
+      <td>0.547626</td>
+      <td>1.267183</td>
+      <td>1.437305</td>
+      <td>2.384908</td>
+      <td>1.535171</td>
+      <td>2.041811</td>
+      <td>1.615457</td>
+      <td>2.504446</td>
+      <td>-0.213124</td>
+      <td>0.635577</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <th>...</th>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+    </tr>
+    <tr>
+      <th>274</th>
+      <td>0.824309</td>
+      <td>0.733164</td>
+      <td>0.470829</td>
+      <td>0.740521</td>
+      <td>0.954525</td>
+      <td>0.859335</td>
+      <td>-0.688732</td>
+      <td>-0.824858</td>
+      <td>-0.808834</td>
+      <td>-0.571428</td>
+      <td>-0.787341</td>
+      <td>-0.685866</td>
+      <td>-0.648118</td>
+      <td>3.427344</td>
+      <td>0.326910</td>
+      <td>1.232241</td>
+      <td>1</td>
+      <td>0</td>
+      <td>1</td>
+    </tr>
+    <tr>
+      <th>196</th>
+      <td>0.423369</td>
+      <td>0.461321</td>
+      <td>1.862516</td>
+      <td>0.500704</td>
+      <td>1.618469</td>
+      <td>0.482865</td>
+      <td>1.165805</td>
+      <td>1.354814</td>
+      <td>1.246368</td>
+      <td>1.625375</td>
+      <td>1.112362</td>
+      <td>1.516681</td>
+      <td>0.681687</td>
+      <td>-1.002566</td>
+      <td>-0.822392</td>
+      <td>-1.303581</td>
+      <td>0</td>
+      <td>1</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <th>159</th>
+      <td>1.474109</td>
+      <td>1.254197</td>
+      <td>1.746542</td>
+      <td>1.140215</td>
+      <td>2.126191</td>
+      <td>-0.458312</td>
+      <td>-0.894792</td>
+      <td>-0.522636</td>
+      <td>-0.520174</td>
+      <td>-0.068968</td>
+      <td>-0.528958</td>
+      <td>-0.322776</td>
+      <td>-0.662651</td>
+      <td>-0.633407</td>
+      <td>1.310048</td>
+      <td>0.933909</td>
+      <td>0</td>
+      <td>1</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <th>17</th>
+      <td>-1.470728</td>
+      <td>-1.396275</td>
+      <td>-1.152806</td>
+      <td>-1.217982</td>
+      <td>-1.740306</td>
+      <td>-1.258312</td>
+      <td>-0.482672</td>
+      <td>-0.932153</td>
+      <td>-0.933620</td>
+      <td>-0.770075</td>
+      <td>-0.869554</td>
+      <td>-0.934928</td>
+      <td>-0.818885</td>
+      <td>-0.660255</td>
+      <td>0.403069</td>
+      <td>1.083075</td>
+      <td>0</td>
+      <td>1</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <th>162</th>
+      <td>-1.643547</td>
+      <td>-1.554850</td>
+      <td>-1.152806</td>
+      <td>-1.657646</td>
+      <td>-1.701250</td>
+      <td>-1.211253</td>
+      <td>-0.894792</td>
+      <td>-1.053127</td>
+      <td>-1.020819</td>
+      <td>-0.805130</td>
+      <td>-1.007554</td>
+      <td>-0.973938</td>
+      <td>-0.895185</td>
+      <td>0.111623</td>
+      <td>-0.690846</td>
+      <td>-1.005249</td>
+      <td>0</td>
+      <td>1</td>
+      <td>1</td>
+    </tr>
+  </tbody>
+</table>
+<p>184 rows × 19 columns</p>
+</div></div></div>
 </div>
 </div>
 </div>
@@ -1158,8 +1428,8 @@ memory usage: 35.7 KB
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>R squared training set 57.77
-R squared test set 34.71
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>R squared training set 60.43
+R squared test set 33.01
 </pre></div>
 </div>
 </div>
@@ -1182,8 +1452,8 @@ R squared test set 34.71
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>MSE training set 85993.51
-MSE test set 131001.44
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>MSE training set 80571.73
+MSE test set 134426.33
 </pre></div>
 </div>
 </div>
@@ -1257,7 +1527,7 @@ MSE test set 131001.44
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>25.13527859160674
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>2.3441244939374593
 </pre></div>
 </div>
 </div>
@@ -1275,7 +1545,7 @@ MSE test set 131001.44
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Lasso(alpha=25.13527859160674)
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Lasso(alpha=2.3441244939374593)
 </pre></div>
 </div>
 </div>
@@ -1288,7 +1558,7 @@ MSE test set 131001.44
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[(0.0, &#39;AtBat&#39;), (95.65781002213558, &#39;Hits&#39;), (-0.0, &#39;HmRun&#39;), (0.0, &#39;Runs&#39;), (0.0, &#39;RBI&#39;), (47.53698301615358, &#39;Walks&#39;), (0.0, &#39;Years&#39;), (0.0, &#39;CAtBat&#39;), (0.0, &#39;CHits&#39;), (0.0, &#39;CHmRun&#39;), (118.35868649369893, &#39;CRuns&#39;), (99.71747797713148, &#39;CRBI&#39;), (0.0, &#39;CWalks&#39;), (46.60969823187552, &#39;PutOuts&#39;), (-0.0, &#39;Assists&#39;), (-0.0, &#39;Errors&#39;)]
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[(-176.45309657050424, &#39;AtBat&#39;), (271.23333276345227, &#39;Hits&#39;), (-13.049492223041824, &#39;HmRun&#39;), (-48.978784124967035, &#39;Runs&#39;), (-13.836964370155242, &#39;RBI&#39;), (140.12896436568258, &#39;Walks&#39;), (-10.616534012348875, &#39;Years&#39;), (-0.0, &#39;CAtBat&#39;), (0.0, &#39;CHits&#39;), (78.65781330867297, &#39;CHmRun&#39;), (355.66188056426313, &#39;CRuns&#39;), (60.505483348070406, &#39;CRBI&#39;), (-262.75123524025435, &#39;CWalks&#39;), (65.61587416521269, &#39;PutOuts&#39;), (-0.14505342495248766, &#39;Assists&#39;), (-1.2293157493169136, &#39;Errors&#39;), (99.66112742179959, &#39;League_N&#39;), (-116.86405569164924, &#39;Division_W&#39;), (-69.87497671182594, &#39;NewLeague_N&#39;)]
 </pre></div>
 </div>
 </div>
@@ -1304,8 +1574,8 @@ MSE test set 131001.44
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>R squared training set 50.43
-R squared test set 35.3
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>R squared training set 59.18
+R squared test set 35.48
 </pre></div>
 </div>
 </div>
@@ -1317,7 +1587,7 @@ R squared test set 35.3
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>129820.58899270633
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>129468.59746481002
 </pre></div>
 </div>
 </div>
@@ -1334,7 +1604,7 @@ R squared test set 35.3
     <span class="n">linewidth</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span>
 <span class="p">)</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">axvline</span><span class="p">(</span>
-    <span class="n">model</span><span class="o">.</span><span class="n">alpha_</span> <span class="o">+</span> <span class="n">EPSILON</span><span class="p">,</span> <span class="n">linestyle</span><span class="o">=</span><span class="s2">&quot;--&quot;</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s2">&quot;k&quot;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;alpha: CV estimate&quot;</span>
+    <span class="n">model</span><span class="o">.</span><span class="n">alpha_</span><span class="p">,</span> <span class="n">linestyle</span><span class="o">=</span><span class="s2">&quot;--&quot;</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s2">&quot;k&quot;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;alpha: CV estimate&quot;</span>
 <span class="p">)</span>
 
 <span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
