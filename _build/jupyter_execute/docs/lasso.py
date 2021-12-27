@@ -42,7 +42,7 @@
 # 
 # ### Import
 
-# In[18]:
+# In[1]:
 
 
 import pandas as pd
@@ -50,13 +50,13 @@ import pandas as pd
 df = pd.read_csv("https://raw.githubusercontent.com/kirenz/datasets/master/Hitters.csv")
 
 
-# In[19]:
+# In[2]:
 
 
 df
 
 
-# In[20]:
+# In[3]:
 
 
 df.info()
@@ -66,7 +66,7 @@ df.info()
 # 
 # Note that the salary is missing for some of the players:
 
-# In[21]:
+# In[4]:
 
 
 print(df.isnull().sum())
@@ -74,7 +74,7 @@ print(df.isnull().sum())
 
 # We simply drop the missing cases: 
 
-# In[22]:
+# In[5]:
 
 
 # drop missing cases
@@ -85,19 +85,19 @@ df = df.dropna()
 # 
 # Since we will use the lasso algorithm from scikit learn, we need to encode our categorical features as one-hot numeric features (dummy variables):
 
-# In[23]:
+# In[6]:
 
 
 dummies = pd.get_dummies(df[['League', 'Division','NewLeague']])
 
 
-# In[24]:
+# In[7]:
 
 
 dummies.info()
 
 
-# In[25]:
+# In[8]:
 
 
 print(dummies.head())
@@ -105,7 +105,7 @@ print(dummies.head())
 
 # Next, we create our label y:
 
-# In[26]:
+# In[9]:
 
 
 y = df['Salary']
@@ -113,7 +113,7 @@ y = df['Salary']
 
 # We drop the column with the outcome variable (Salary), and categorical columns for which we already created dummy variables:
 
-# In[27]:
+# In[10]:
 
 
 X_numerical = df.drop(['Salary', 'League', 'Division', 'NewLeague'], axis=1).astype('float64')
@@ -121,14 +121,14 @@ X_numerical = df.drop(['Salary', 'League', 'Division', 'NewLeague'], axis=1).ast
 
 # Make a list of all numerical features (we need them later):
 
-# In[28]:
+# In[11]:
 
 
 list_numerical = X_numerical.columns
 list_numerical
 
 
-# In[29]:
+# In[12]:
 
 
 # Create all features
@@ -140,7 +140,7 @@ X.info()
 
 # Split the data set into train and test set with the first 70% of the data for training and the remaining 30% for testing.
 
-# In[30]:
+# In[13]:
 
 
 from sklearn.model_selection import train_test_split
@@ -148,7 +148,7 @@ from sklearn.model_selection import train_test_split
 X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.3, random_state=10)
 
 
-# In[31]:
+# In[14]:
 
 
 X_train.head()
@@ -170,18 +170,18 @@ X_train.head()
 # 
 # To avoid [data leakage](https://en.wikipedia.org/wiki/Leakage_(machine_learning)), the standardization of numerical features should always be performed after data splitting and only from training data. Furthermore, we obtain all necessary statistics for our features (mean and standard deviation) from training data and also use them on test data. Note that we don't standardize our dummy variables (which only have values of 0 or 1).
 
-# In[32]:
+# In[15]:
 
 
 from sklearn.preprocessing import StandardScaler
 
 scaler = StandardScaler().fit(X_train[list_numerical]) 
 
-X_train = scaler.transform(X_train[list_numerical])
-X_test = scaler.transform(X_test[list_numerical])
+X_train[list_numerical] = scaler.transform(X_train[list_numerical])
+X_test[list_numerical] = scaler.transform(X_test[list_numerical])
 
 
-# In[33]:
+# In[16]:
 
 
 X_train
@@ -191,7 +191,7 @@ X_train
 
 # First, we apply lasso regression on the training set with an arbitrarily regularization parameter $\alpha$ of 1. 
 
-# In[89]:
+# In[17]:
 
 
 from sklearn.linear_model import Lasso
@@ -204,7 +204,7 @@ reg.fit(X_train, y_train)
 
 # We print the $R^2$-score for the training and test set.
 
-# In[90]:
+# In[18]:
 
 
 print('R squared training set', round(reg.score(X_train, y_train)*100, 2))
@@ -213,7 +213,7 @@ print('R squared test set', round(reg.score(X_test, y_test)*100, 2))
 
 # MSE for the training and test set.
 
-# In[91]:
+# In[19]:
 
 
 from sklearn.metrics import mean_squared_error
@@ -234,7 +234,7 @@ print('MSE test set', round(mse_test, 2))
 
 # To better understand the role of alpha, we plot the lasso coefficients as a function of alpha (`max_iter` are the maximum number of iterations):
 
-# In[92]:
+# In[20]:
 
 
 import numpy as np
@@ -271,7 +271,7 @@ plt.title('Lasso coefficients as a function of alpha');
 
 # ### k-fold cross validation
 
-# In[80]:
+# In[21]:
 
 
 from sklearn.linear_model import LassoCV
@@ -285,7 +285,7 @@ model.fit(X_train, y_train)
 
 # Show best value of penalization chosen by cross validation:
 
-# In[81]:
+# In[22]:
 
 
 model.alpha_
@@ -295,7 +295,7 @@ model.alpha_
 
 # Use best value for our final model:
 
-# In[83]:
+# In[23]:
 
 
 # Set best alpha
@@ -305,7 +305,7 @@ lasso_best.fit(X_train, y_train)
 
 # Show model coefficients and names:
 
-# In[84]:
+# In[24]:
 
 
 print(list(zip(lasso_best.coef_, X)))
@@ -313,14 +313,14 @@ print(list(zip(lasso_best.coef_, X)))
 
 # ### Model evaluation
 
-# In[88]:
+# In[25]:
 
 
 print('R squared training set', round(lasso_best.score(X_train, y_train)*100, 2))
 print('R squared test set', round(lasso_best.score(X_test, y_test)*100, 2))
 
 
-# In[93]:
+# In[26]:
 
 
 mean_squared_error(y_test, lasso_best.predict(X_test))
@@ -328,7 +328,7 @@ mean_squared_error(y_test, lasso_best.predict(X_test))
 
 # Lasso path: plot results of cross-validation with mean squared erros (for more information about the plot visit the [scikit-learn documentation](https://scikit-learn.org/stable/auto_examples/linear_model/plot_lasso_model_selection.html#sphx-glr-auto-examples-linear-model-plot-lasso-model-selection-py))
 
-# In[105]:
+# In[27]:
 
 
 plt.semilogx(model.alphas_, model.mse_path_, ":")
@@ -340,7 +340,7 @@ plt.plot(
     linewidth=2,
 )
 plt.axvline(
-    model.alpha_ + EPSILON, linestyle="--", color="k", label="alpha: CV estimate"
+    model.alpha_, linestyle="--", color="k", label="alpha: CV estimate"
 )
 
 plt.legend()
