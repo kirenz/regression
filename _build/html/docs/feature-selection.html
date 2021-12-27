@@ -7,8 +7,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Feature selection &#8212; Introduction to Regression Models</title>
     
-  <link href="../_static/css/theme.css" rel="stylesheet">
-  <link href="../_static/css/index.ff1ffe594081f20da1ef19478df9384b.css" rel="stylesheet">
+  <link href="../_static/css/theme.css" rel="stylesheet" />
+  <link href="../_static/css/index.c5995385ac14fb8791e8eb36b4908be2.css" rel="stylesheet" />
 
     
   <link rel="stylesheet"
@@ -31,7 +31,7 @@
     <link rel="stylesheet" type="text/css" href="../_static/panels-main.c949a650a448cc0ae9fd3441c0e17fb0.css" />
     <link rel="stylesheet" type="text/css" href="../_static/panels-variables.06eb56fa6e07937060861dad626602ad.css" />
     
-  <link rel="preload" as="script" href="../_static/js/index.be7d3bbb2ef33a8344ce.js">
+  <link rel="preload" as="script" href="../_static/js/index.1c5a1a01449ed65a7b51.js">
 
     <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
     <script src="../_static/jquery.js"></script>
@@ -53,12 +53,9 @@
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
     <link rel="next" title="Bibliography" href="reference.html" />
-    <link rel="prev" title="Splines in Python" href="splines.html" />
+    <link rel="prev" title="Splines" href="splines.html" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <meta name="docsearch:language" content="None">
-    
-
-    <!-- Google Analytics -->
+    <meta name="docsearch:language" content="en" />
     
   </head>
   <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="80">
@@ -87,7 +84,7 @@
     </a>
 </div><form class="bd-search d-flex align-items-center" action="../search.html" method="get">
   <i class="icon fas fa-search"></i>
-  <input type="search" class="form-control" name="q" id="search-input" placeholder="Dieses Buch durchsuchen ..." aria-label="Dieses Buch durchsuchen ..." autocomplete="off" >
+  <input type="search" class="form-control" name="q" id="search-input" placeholder="Search this book..." aria-label="Search this book..." autocomplete="off" >
 </form><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
     <div class="bd-toc-item active">
         <ul class="nav bd-sidenav">
@@ -97,7 +94,7 @@
   </a>
  </li>
 </ul>
-<p aria-level="2" class="caption" role="heading">
+<p class="caption" role="heading">
  <span class="caption-text">
   Basics
  </span>
@@ -109,7 +106,7 @@
   </a>
  </li>
 </ul>
-<p aria-level="2" class="caption" role="heading">
+<p class="caption" role="heading">
  <span class="caption-text">
   Diagnostics
  </span>
@@ -121,29 +118,36 @@
   </a>
  </li>
 </ul>
-<p aria-level="2" class="caption" role="heading">
+<p class="caption" role="heading">
  <span class="caption-text">
-  Advanced
+  Lasso &amp; Splines
  </span>
 </p>
-<ul class="current nav bd-sidenav">
+<ul class="nav bd-sidenav">
  <li class="toctree-l1">
   <a class="reference internal" href="lasso.html">
-   Lasso basics
+   Lasso regression
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="splines.html">
-   Splines in Python
+   Splines
   </a>
  </li>
+</ul>
+<p class="caption" role="heading">
+ <span class="caption-text">
+  Feature Selection
+ </span>
+</p>
+<ul class="current nav bd-sidenav">
  <li class="toctree-l1 current active">
   <a class="current reference internal" href="#">
    Feature selection
   </a>
  </li>
 </ul>
-<p aria-level="2" class="caption" role="heading">
+<p class="caption" role="heading">
  <span class="caption-text">
   References
  </span>
@@ -179,8 +183,8 @@
             
             <button id="navbar-toggler" class="navbar-toggler ml-0" type="button" data-toggle="collapse"
                 data-toggle="tooltip" data-placement="bottom" data-target=".site-navigation" aria-controls="navbar-menu"
-                aria-expanded="true" aria-label="Navigation umschalten" aria-controls="site-navigation"
-                title="Navigation umschalten" data-toggle="tooltip" data-placement="left">
+                aria-expanded="true" aria-label="Toggle navigation" aria-controls="site-navigation"
+                title="Toggle navigation" data-toggle="tooltip" data-placement="left">
                 <i class="fas fa-bars"></i>
                 <i class="fas fa-arrow-left"></i>
                 <i class="fas fa-arrow-up"></i>
@@ -188,7 +192,7 @@
             
             
 <div class="dropdown-buttons-trigger">
-    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn" aria-label="Laden Sie diese Seite herunter"><i
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn" aria-label="Download this page"><i
             class="fas fa-download"></i></button>
 
     <div class="dropdown-buttons">
@@ -196,10 +200,10 @@
         
         <!-- Download raw file -->
         <a class="dropdown-buttons" href="../_sources/docs/feature-selection.ipynb"><button type="button"
-                class="btn btn-secondary topbarbtn" title="Quelldatei herunterladen" data-toggle="tooltip"
+                class="btn btn-secondary topbarbtn" title="Download source file" data-toggle="tooltip"
                 data-placement="left">.ipynb</button></a>
         <!-- Download PDF via print -->
-        <button type="button" id="download-print" class="btn btn-secondary topbarbtn" title="In PDF drucken"
+        <button type="button" id="download-print" class="btn btn-secondary topbarbtn" title="Print to PDF"
             onClick="window.print()" data-toggle="tooltip" data-placement="left">.pdf</button>
     </div>
 </div>
@@ -212,12 +216,12 @@
     <div class="dropdown-buttons sourcebuttons">
         <a class="repository-button"
             href="https://github.com/kirenz/regression"><button type="button" class="btn btn-secondary topbarbtn"
-                data-toggle="tooltip" data-placement="left" title="Quell-Repository"><i
-                    class="fab fa-github"></i>Repository</button></a>
+                data-toggle="tooltip" data-placement="left" title="Source repository"><i
+                    class="fab fa-github"></i>repository</button></a>
         <a class="issues-button"
             href="https://github.com/kirenz/regression/issues/new?title=Issue%20on%20page%20%2Fdocs/feature-selection.html&body=Your%20issue%20content%20here."><button
                 type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip" data-placement="left"
-                title="Öffnen Sie ein Problem"><i class="fas fa-lightbulb"></i>offenes Thema</button></a>
+                title="Open an issue"><i class="fas fa-lightbulb"></i>open issue</button></a>
         
     </div>
 </div>
@@ -225,8 +229,8 @@
             <!-- Full screen (wrap in <a> to have style consistency -->
 
 <a class="full-screen-button"><button type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip"
-        data-placement="bottom" onclick="toggleFullScreen()" aria-label="Vollbildmodus"
-        title="Vollbildmodus"><i
+        data-placement="bottom" onclick="toggleFullScreen()" aria-label="Fullscreen mode"
+        title="Fullscreen mode"><i
             class="fas fa-expand"></i></button></a>
 
             <!-- Launch buttons -->
@@ -239,7 +243,7 @@
         
         
         <a class="colab-button" href="https://colab.research.google.com/github/kirenz/regression/blob/main/docs/feature-selection.ipynb"><button type="button" class="btn btn-secondary topbarbtn"
-                title="Starten Colab" data-toggle="tooltip" data-placement="left"><img class="colab-button-logo"
+                title="Launch Colab" data-toggle="tooltip" data-placement="left"><img class="colab-button-logo"
                     src="../_static/images/logo_colab.png"
                     alt="Interact on Colab">Colab</button></a>
         
@@ -253,18 +257,13 @@
         <div class="d-none d-md-block col-md-2 bd-toc show">
             
             <div class="tocsection onthispage pt-5 pb-3">
-                <i class="fas fa-list"></i> Inhalt
+                <i class="fas fa-list"></i> Contents
             </div>
             <nav id="bd-toc-nav" aria-label="Page">
                 <ul class="visible nav section-nav flex-column">
  <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#import-data">
-   Import data
-  </a>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#data-preprocessing-exploration">
-   Data preprocessing &amp; exploration
+  <a class="reference internal nav-link" href="#prepara-data">
+   Prepara data
   </a>
  </li>
  <li class="toc-h2 nav-item toc-entry">
@@ -278,13 +277,13 @@
   </a>
   <ul class="nav section-nav flex-column">
    <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#based-on-importance">
-     Based on importance
+    <a class="reference internal nav-link" href="#filter-method">
+     Filter method
     </a>
    </li>
    <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#sequential-feature-selection-sfs">
-     Sequential Feature Selection (SFS)
+    <a class="reference internal nav-link" href="#wrapper-method">
+     Wrapper method
     </a>
     <ul class="nav section-nav flex-column">
      <li class="toc-h4 nav-item toc-entry">
@@ -319,54 +318,146 @@
                 
   <div class="tex2jax_ignore mathjax_ignore section" id="feature-selection">
 <h1>Feature selection<a class="headerlink" href="#feature-selection" title="Permalink to this headline">¶</a></h1>
-<p>This content is mainly based on the following scikit learn documentations:</p>
+<p>The following content is mainly based on scikit learn documentations:</p>
 <ul class="simple">
 <li><p><a class="reference external" href="https://scikit-learn.org/stable/modules/feature_selection.html">Feature selection</a></p></li>
 <li><p><a class="reference external" href="https://scikit-learn.org/stable/auto_examples/feature_selection/plot_select_from_model_diabetes.html#sphx-glr-auto-examples-feature-selection-plot-select-from-model-diabetes-py">Model-based and sequential feature selection</a> from Manoj Kumar, Maria Telenczuk and Nicolas Hug.</p></li>
 <li><p><a class="reference external" href="https://scikit-learn.org/stable/auto_examples/inspection/plot_linear_model_coefficient_interpretation.html#sphx-glr-auto-examples-inspection-plot-linear-model-coefficient-interpretation-py">Common pitfalls in the interpretation of coefficients of linear models</a></p></li>
 </ul>
-<div class="section" id="import-data">
-<h2>Import data<a class="headerlink" href="#import-data" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="prepara-data">
+<h2>Prepara data<a class="headerlink" href="#prepara-data" title="Permalink to this headline">¶</a></h2>
+<p>We use a data frame of major league baseball players to predict their salaries from some career statistics (<a class="reference external" href="https://rdrr.io/cran/ISLR/man/Hitters.html">more information about data</a>). Note that the data is already preprocessed.</p>
+<p><em>To get an overview about the data preparation, visit <a class="reference external" href="https://kirenz.github.io/regression/docs/lasso.html#data">this tutorial</a>.</em></p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
 
-<span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s2">&quot;https://raw.githubusercontent.com/kirenz/datasets/master/happiness_report.csv&quot;</span><span class="p">)</span>
+<span class="c1"># import data</span>
+<span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s2">&quot;https://raw.githubusercontent.com/kirenz/datasets/master/hitters-clean.csv&quot;</span><span class="p">)</span>
 <span class="n">df</span><span class="o">.</span><span class="n">info</span><span class="p">()</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;class &#39;pandas.core.frame.DataFrame&#39;&gt;
-RangeIndex: 157 entries, 0 to 156
-Data columns (total 7 columns):
- #   Column          Non-Null Count  Dtype  
----  ------          --------------  -----  
- 0   id              157 non-null    int64  
- 1   country         157 non-null    object 
- 2   happiness       157 non-null    float64
- 3   gdp             157 non-null    float64
- 4   family          157 non-null    float64
- 5   lifeexpectancy  157 non-null    float64
- 6   trust           157 non-null    float64
-dtypes: float64(5), int64(1), object(1)
-memory usage: 8.7+ KB
+RangeIndex: 263 entries, 0 to 262
+Data columns (total 20 columns):
+ #   Column       Non-Null Count  Dtype  
+---  ------       --------------  -----  
+ 0   AtBat        263 non-null    float64
+ 1   Hits         263 non-null    float64
+ 2   HmRun        263 non-null    float64
+ 3   Runs         263 non-null    float64
+ 4   RBI          263 non-null    float64
+ 5   Walks        263 non-null    float64
+ 6   Years        263 non-null    float64
+ 7   CAtBat       263 non-null    float64
+ 8   CHits        263 non-null    float64
+ 9   CHmRun       263 non-null    float64
+ 10  CRuns        263 non-null    float64
+ 11  CRBI         263 non-null    float64
+ 12  CWalks       263 non-null    float64
+ 13  PutOuts      263 non-null    float64
+ 14  Assists      263 non-null    float64
+ 15  Errors       263 non-null    float64
+ 16  Salary       263 non-null    float64
+ 17  League_N     263 non-null    int64  
+ 18  Division_W   263 non-null    int64  
+ 19  NewLeague_N  263 non-null    int64  
+dtypes: float64(17), int64(3)
+memory usage: 41.2 KB
 </pre></div>
 </div>
 </div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># reset index</span>
-<span class="n">df</span><span class="o">.</span><span class="n">set_index</span><span class="p">(</span><span class="s1">&#39;country&#39;</span><span class="p">,</span> <span class="n">inplace</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># create label</span>
+<span class="n">y</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="s1">&#39;Salary&#39;</span><span class="p">]</span>
+<span class="c1"># create features</span>
+<span class="n">X</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">drop</span><span class="p">([</span><span class="s1">&#39;Salary&#39;</span><span class="p">],</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="nb">float</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># show data</span>
-<span class="n">df</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">sklearn.model_selection</span> <span class="kn">import</span> <span class="n">train_test_split</span>
+
+<span class="c1"># data split</span>
+<span class="n">X_train</span><span class="p">,</span> <span class="n">X_test</span><span class="p">,</span> <span class="n">y_train</span><span class="p">,</span> <span class="n">y_test</span> <span class="o">=</span> <span class="n">train_test_split</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">test_size</span><span class="o">=</span><span class="mf">0.3</span><span class="p">,</span> <span class="n">random_state</span><span class="o">=</span><span class="mi">10</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">sklearn.preprocessing</span> <span class="kn">import</span> <span class="n">StandardScaler</span>
+
+<span class="c1"># make list of numerical features (League_N, Division_W and NewLeague_N are categorcial) </span>
+<span class="n">list_numerical</span> <span class="o">=</span> <span class="n">X</span><span class="o">.</span><span class="n">drop</span><span class="p">([</span><span class="s1">&#39;League_N&#39;</span><span class="p">,</span> <span class="s1">&#39;Division_W&#39;</span><span class="p">,</span> <span class="s1">&#39;NewLeague_N&#39;</span><span class="p">],</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span><span class="o">.</span><span class="n">columns</span>
+<span class="c1"># standardize numerical features</span>
+<span class="n">scaler</span> <span class="o">=</span> <span class="n">StandardScaler</span><span class="p">()</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X_train</span><span class="p">[</span><span class="n">list_numerical</span><span class="p">])</span> 
+<span class="n">X_train</span> <span class="o">=</span> <span class="n">scaler</span><span class="o">.</span><span class="n">transform</span><span class="p">(</span><span class="n">X_train</span><span class="p">[</span><span class="n">list_numerical</span><span class="p">])</span>
+<span class="n">X_test</span> <span class="o">=</span> <span class="n">scaler</span><span class="o">.</span><span class="n">transform</span><span class="p">(</span><span class="n">X_test</span><span class="p">[</span><span class="n">list_numerical</span><span class="p">])</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="section" id="model">
+<h2>Model<a class="headerlink" href="#model" title="Permalink to this headline">¶</a></h2>
+<p>We fit a lasso regression with 5-fold cross validation to choose the best regularization parameter based on the mean squared error:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">sklearn.linear_model</span> <span class="kn">import</span> <span class="n">LassoCV</span>
+
+<span class="n">reg</span> <span class="o">=</span> <span class="n">LassoCV</span><span class="p">(</span><span class="n">cv</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span> <span class="n">random_state</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span> <span class="n">max_iter</span><span class="o">=</span><span class="mi">10000</span><span class="p">)</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X_train</span><span class="p">,</span> <span class="n">y_train</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># show best alpha parameter</span>
+<span class="n">reg</span><span class="o">.</span><span class="n">alpha_</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>25.13527859160674
+</pre></div>
+</div>
+</div>
+</div>
+<p>Show feature importance (note that our features ‘League_N’, ‘Division_W’ and ‘NewLeague_N’ are not included in the list).</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># make list of feature names</span>
+<span class="n">features</span> <span class="o">=</span> <span class="n">X</span><span class="o">.</span><span class="n">columns</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="nb">list</span><span class="p">(</span><span class="nb">zip</span><span class="p">(</span><span class="n">reg</span><span class="o">.</span><span class="n">coef_</span><span class="p">,</span> <span class="n">feature_names</span><span class="p">)))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[(0.0, &#39;AtBat&#39;), (95.65781002213558, &#39;Hits&#39;), (-0.0, &#39;HmRun&#39;), (0.0, &#39;Runs&#39;), (0.0, &#39;RBI&#39;), (47.53698301615358, &#39;Walks&#39;), (0.0, &#39;Years&#39;), (0.0, &#39;CAtBat&#39;), (0.0, &#39;CHits&#39;), (0.0, &#39;CHmRun&#39;), (118.35868649369893, &#39;CRuns&#39;), (99.71747797713148, &#39;CRBI&#39;), (0.0, &#39;CWalks&#39;), (46.60969823187552, &#39;PutOuts&#39;), (-0.0, &#39;Assists&#39;), (-0.0, &#39;Errors&#39;)]
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># make dictionary with coefficients and feature names</span>
+<span class="n">coef_dict</span> <span class="o">=</span> <span class="p">{}</span>
+<span class="k">for</span> <span class="n">coef</span><span class="p">,</span> <span class="n">feat</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">reg</span><span class="o">.</span><span class="n">coef_</span><span class="p">,</span> <span class="n">features</span><span class="p">):</span>
+    <span class="n">coef_dict</span><span class="p">[</span><span class="n">feat</span><span class="p">]</span> <span class="o">=</span> <span class="n">coef</span>
+
+<span class="c1"># create dataframe from dictionary</span>
+<span class="n">df_coef</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="o">.</span><span class="n">from_dict</span><span class="p">(</span><span class="n">coef_dict</span><span class="p">,</span> <span class="n">orient</span><span class="o">=</span><span class="s1">&#39;index&#39;</span><span class="p">,</span> <span class="n">columns</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;coef&#39;</span><span class="p">])</span>
+<span class="n">df_coef</span><span class="p">[</span><span class="s1">&#39;feature_importance&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">df_</span><span class="o">.</span><span class="n">coef</span><span class="o">.</span><span class="n">abs</span><span class="p">()</span>
+<span class="n">df_coef</span><span class="p">[</span><span class="s1">&#39;feature_names&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">df_</span><span class="o">.</span><span class="n">index</span>    
+<span class="n">df_coef</span>
 </pre></div>
 </div>
 </div>
@@ -389,239 +480,146 @@ memory usage: 8.7+ KB
   <thead>
     <tr style="text-align: right;">
       <th></th>
-      <th>id</th>
-      <th>happiness</th>
-      <th>gdp</th>
-      <th>family</th>
-      <th>lifeexpectancy</th>
-      <th>trust</th>
-    </tr>
-    <tr>
-      <th>country</th>
-      <th></th>
-      <th></th>
-      <th></th>
-      <th></th>
-      <th></th>
-      <th></th>
+      <th>coef</th>
+      <th>feature_importance</th>
+      <th>feature_names</th>
     </tr>
   </thead>
   <tbody>
     <tr>
-      <th>Denmark</th>
-      <td>1</td>
-      <td>7.526</td>
-      <td>1.44178</td>
-      <td>1.16374</td>
-      <td>0.79504</td>
-      <td>0.44453</td>
+      <th>AtBat</th>
+      <td>0.000000</td>
+      <td>0.000000</td>
+      <td>AtBat</td>
     </tr>
     <tr>
-      <th>Switzerland</th>
-      <td>2</td>
-      <td>7.509</td>
-      <td>1.52733</td>
-      <td>1.14524</td>
-      <td>0.86303</td>
-      <td>0.41203</td>
+      <th>Hits</th>
+      <td>95.657810</td>
+      <td>95.657810</td>
+      <td>Hits</td>
     </tr>
     <tr>
-      <th>Iceland</th>
-      <td>3</td>
-      <td>7.501</td>
-      <td>1.42666</td>
-      <td>1.18326</td>
-      <td>0.86733</td>
-      <td>0.14975</td>
+      <th>HmRun</th>
+      <td>-0.000000</td>
+      <td>0.000000</td>
+      <td>HmRun</td>
     </tr>
     <tr>
-      <th>Norway</th>
-      <td>4</td>
-      <td>7.498</td>
-      <td>1.57744</td>
-      <td>1.12690</td>
-      <td>0.79579</td>
-      <td>0.35776</td>
+      <th>Runs</th>
+      <td>0.000000</td>
+      <td>0.000000</td>
+      <td>Runs</td>
     </tr>
     <tr>
-      <th>Finland</th>
-      <td>5</td>
-      <td>7.413</td>
-      <td>1.40598</td>
-      <td>1.13464</td>
-      <td>0.81091</td>
-      <td>0.41004</td>
+      <th>RBI</th>
+      <td>0.000000</td>
+      <td>0.000000</td>
+      <td>RBI</td>
     </tr>
     <tr>
-      <th>...</th>
-      <td>...</td>
-      <td>...</td>
-      <td>...</td>
-      <td>...</td>
-      <td>...</td>
-      <td>...</td>
+      <th>Walks</th>
+      <td>47.536983</td>
+      <td>47.536983</td>
+      <td>Walks</td>
     </tr>
     <tr>
-      <th>Benin</th>
-      <td>153</td>
-      <td>3.484</td>
-      <td>0.39499</td>
-      <td>0.10419</td>
-      <td>0.21028</td>
-      <td>0.06681</td>
+      <th>Years</th>
+      <td>0.000000</td>
+      <td>0.000000</td>
+      <td>Years</td>
     </tr>
     <tr>
-      <th>Afghanistan</th>
-      <td>154</td>
-      <td>3.360</td>
-      <td>0.38227</td>
-      <td>0.11037</td>
-      <td>0.17344</td>
-      <td>0.07112</td>
+      <th>CAtBat</th>
+      <td>0.000000</td>
+      <td>0.000000</td>
+      <td>CAtBat</td>
     </tr>
     <tr>
-      <th>Togo</th>
-      <td>155</td>
-      <td>3.303</td>
-      <td>0.28123</td>
-      <td>0.00000</td>
-      <td>0.24811</td>
-      <td>0.11587</td>
+      <th>CHits</th>
+      <td>0.000000</td>
+      <td>0.000000</td>
+      <td>CHits</td>
     </tr>
     <tr>
-      <th>Syria</th>
-      <td>156</td>
-      <td>3.069</td>
-      <td>0.74719</td>
-      <td>0.14866</td>
-      <td>0.62994</td>
-      <td>0.17233</td>
+      <th>CHmRun</th>
+      <td>0.000000</td>
+      <td>0.000000</td>
+      <td>CHmRun</td>
     </tr>
     <tr>
-      <th>Burundi</th>
-      <td>157</td>
-      <td>2.905</td>
-      <td>0.06831</td>
-      <td>0.23442</td>
-      <td>0.15747</td>
-      <td>0.09419</td>
+      <th>CRuns</th>
+      <td>118.358686</td>
+      <td>118.358686</td>
+      <td>CRuns</td>
+    </tr>
+    <tr>
+      <th>CRBI</th>
+      <td>99.717478</td>
+      <td>99.717478</td>
+      <td>CRBI</td>
+    </tr>
+    <tr>
+      <th>CWalks</th>
+      <td>0.000000</td>
+      <td>0.000000</td>
+      <td>CWalks</td>
+    </tr>
+    <tr>
+      <th>PutOuts</th>
+      <td>46.609698</td>
+      <td>46.609698</td>
+      <td>PutOuts</td>
+    </tr>
+    <tr>
+      <th>Assists</th>
+      <td>-0.000000</td>
+      <td>0.000000</td>
+      <td>Assists</td>
+    </tr>
+    <tr>
+      <th>Errors</th>
+      <td>-0.000000</td>
+      <td>0.000000</td>
+      <td>Errors</td>
     </tr>
   </tbody>
 </table>
-<p>157 rows × 6 columns</p>
 </div></div></div>
 </div>
-</div>
-<div class="section" id="data-preprocessing-exploration">
-<h2>Data preprocessing &amp; exploration<a class="headerlink" href="#data-preprocessing-exploration" title="Permalink to this headline">¶</a></h2>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># prepare data for scikit learn models</span>
-<span class="n">feature_names</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;gdp&#39;</span><span class="p">,</span> <span class="s1">&#39;family&#39;</span><span class="p">,</span> <span class="s1">&#39;lifeexpectancy&#39;</span><span class="p">,</span> <span class="s1">&#39;trust&#39;</span><span class="p">]</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">seaborn</span> <span class="k">as</span> <span class="nn">sns</span>
 
-<span class="n">X</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="n">feature_names</span><span class="p">]</span>
-<span class="n">y</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="s1">&#39;happiness&#39;</span><span class="p">]</span>
-</pre></div>
-</div>
-</div>
-</div>
-<ul class="simple">
-<li><p>We split the sample into a train and a test dataset.</p></li>
-<li><p>Only the train dataset will be used in the following exploratory analysis.</p></li>
-<li><p>This is a way to emulate a real situation where predictions are performed on an unknown target, and we don’t want our analysis and decisions to be biased by our knowledge of the test data.</p></li>
-</ul>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">sklearn.model_selection</span> <span class="kn">import</span> <span class="n">train_test_split</span>
-
-<span class="n">X_train</span><span class="p">,</span> <span class="n">X_test</span><span class="p">,</span> <span class="n">y_train</span><span class="p">,</span> <span class="n">y_test</span> <span class="o">=</span> <span class="n">train_test_split</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">random_state</span><span class="o">=</span><span class="mi">10</span><span class="p">)</span>
-</pre></div>
-</div>
-</div>
-</div>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># explore data</span>
-<span class="kn">import</span> <span class="nn">seaborn</span> <span class="k">as</span> <span class="nn">sns</span>
-
-<span class="n">train_dataset</span> <span class="o">=</span> <span class="n">X_train</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
-<span class="n">train_dataset</span><span class="o">.</span><span class="n">insert</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="s2">&quot;happiness&quot;</span><span class="p">,</span> <span class="n">y_train</span><span class="p">)</span>
-
-<span class="n">sns</span><span class="o">.</span><span class="n">pairplot</span><span class="p">(</span><span class="n">train_dataset</span><span class="p">,</span> <span class="n">kind</span><span class="o">=</span><span class="s2">&quot;reg&quot;</span><span class="p">,</span> <span class="n">diag_kind</span><span class="o">=</span><span class="s2">&quot;kde&quot;</span><span class="p">);</span>
+<span class="n">sns</span><span class="o">.</span><span class="n">barplot</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="s1">&#39;feature_importance&#39;</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="s1">&#39;feature_names&#39;</span><span class="p">,</span> <span class="n">data</span><span class="o">=</span><span class="n">df_coef</span><span class="p">);</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/feature-selection_10_0.png" src="../_images/feature-selection_10_0.png" />
-</div>
-</div>
-</div>
-<div class="section" id="model">
-<h2>Model<a class="headerlink" href="#model" title="Permalink to this headline">¶</a></h2>
-<p>We fit a lasso regression with 5-fold cross validation to choose the best regularization parameter based on the mean squared error:</p>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">sklearn.linear_model</span> <span class="kn">import</span> <span class="n">LassoCV</span>
-
-<span class="n">lasso</span> <span class="o">=</span> <span class="n">LassoCV</span><span class="p">(</span><span class="n">cv</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span> <span class="n">random_state</span><span class="o">=</span><span class="mi">10</span><span class="p">)</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X_train</span><span class="p">,</span> <span class="n">y_train</span><span class="p">)</span>
-</pre></div>
-</div>
-</div>
-</div>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># show best alpha parameter</span>
-<span class="n">lasso</span><span class="o">.</span><span class="n">alpha_</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>0.00037115268886039903
-</pre></div>
-</div>
-</div>
-</div>
-<p>Show feature importance plot</p>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
-<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
-
-<span class="n">importance</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">abs</span><span class="p">(</span><span class="n">lasso</span><span class="o">.</span><span class="n">coef_</span><span class="p">)</span>
-<span class="n">feature_names</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">feature_names</span><span class="p">)</span>
-
-<span class="n">plt</span><span class="o">.</span><span class="n">bar</span><span class="p">(</span><span class="n">height</span><span class="o">=</span><span class="n">importance</span><span class="p">,</span> <span class="n">x</span><span class="o">=</span><span class="n">feature_names</span><span class="p">)</span>
-
-<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s2">&quot;Feature importances via coefficients&quot;</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<img alt="../_images/feature-selection_16_0.png" src="../_images/feature-selection_16_0.png" />
+<img alt="../_images/feature-selection_14_0.png" src="../_images/feature-selection_14_0.png" />
 </div>
 </div>
 </div>
 <div class="section" id="id1">
 <h2>Feature selection<a class="headerlink" href="#id1" title="Permalink to this headline">¶</a></h2>
-<div class="section" id="based-on-importance">
-<h3>Based on importance<a class="headerlink" href="#based-on-importance" title="Permalink to this headline">¶</a></h3>
-<p>We want to select the two features which are the most important according to the coefficients. The SelectFromModel is meant just for that. SelectFromModel accepts a threshold parameter and will select the features whose importance (defined by the coefficients) are above this threshold.</p>
-<p>In our case, we want to select only 2 features. Hence, we will set the threshold slightly above the coefficient of the third most important feature.</p>
-<p>We also record the time the algorithm takes to obtain the results.</p>
+<div class="section" id="filter-method">
+<h3>Filter method<a class="headerlink" href="#filter-method" title="Permalink to this headline">¶</a></h3>
+<p>In this example, we use feature importance as a filter to select our features. In particular, we want to select the two features which are the most important according to the coefficients. The function <code class="docutils literal notranslate"><span class="pre">SelectFromModel</span></code> is meant just for that. <code class="docutils literal notranslate"><span class="pre">SelectFromModel</span></code> accepts a threshold parameter and will select the features whose importance (defined by the coefficients) are above this threshold.</p>
+<p>In our case, we want to select only 2 features. Hence, we will set the threshold slightly above the coefficient of the third most important feature. We also record the time the algorithm takes to obtain the results.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">sklearn.feature_selection</span> <span class="kn">import</span> <span class="n">SelectFromModel</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
 <span class="kn">from</span> <span class="nn">time</span> <span class="kn">import</span> <span class="n">time</span>
 
 <span class="c1"># set threshold</span>
-<span class="n">threshold</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sort</span><span class="p">(</span><span class="n">importance</span><span class="p">)[</span><span class="o">-</span><span class="mi">3</span><span class="p">]</span> <span class="o">+</span> <span class="mf">0.01</span>
+<span class="n">threshold</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sort</span><span class="p">(</span><span class="n">df_coef</span><span class="o">.</span><span class="n">feature_importance</span><span class="p">)[</span><span class="o">-</span><span class="mi">3</span><span class="p">]</span> <span class="o">+</span> <span class="mi">1</span>
+<span class="n">feature_names</span> <span class="o">=</span>  <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">df_coef</span><span class="o">.</span><span class="n">feature_names</span><span class="p">)</span>
 
 <span class="c1"># obtain time</span>
 <span class="n">tic</span> <span class="o">=</span> <span class="n">time</span><span class="p">()</span>
 
 <span class="c1"># fit model</span>
-<span class="n">sfm</span> <span class="o">=</span> <span class="n">SelectFromModel</span><span class="p">(</span><span class="n">lasso</span><span class="p">,</span> <span class="n">threshold</span><span class="o">=</span><span class="n">threshold</span><span class="p">)</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">y</span><span class="p">)</span>
+<span class="n">sfm</span> <span class="o">=</span> <span class="n">SelectFromModel</span><span class="p">(</span><span class="n">reg</span><span class="p">,</span> <span class="n">threshold</span><span class="o">=</span><span class="n">threshold</span><span class="p">)</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X_train</span><span class="p">,</span> <span class="n">y_train</span><span class="p">)</span>
 
 <span class="c1"># obtain time</span>
 <span class="n">toc</span> <span class="o">=</span> <span class="n">time</span><span class="p">()</span>
@@ -633,16 +631,16 @@ memory usage: 8.7+ KB
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Features selected by SelectFromModel: [&#39;family&#39; &#39;lifeexpectancy&#39; &#39;trust&#39;]
-Done in 0.033s
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Features selected by SelectFromModel: [&#39;CRuns&#39; &#39;CRBI&#39;]
+Done in 0.110s
 </pre></div>
 </div>
 </div>
 </div>
 </div>
-<div class="section" id="sequential-feature-selection-sfs">
-<h3>Sequential Feature Selection (SFS)<a class="headerlink" href="#sequential-feature-selection-sfs" title="Permalink to this headline">¶</a></h3>
-<p>Another way of selecting features is to use SequentialFeatureSelector (SFS). SFS is a greedy procedure where, at each iteration, we choose the best new feature to add to our selected features based a cross-validation score.</p>
+<div class="section" id="wrapper-method">
+<h3>Wrapper method<a class="headerlink" href="#wrapper-method" title="Permalink to this headline">¶</a></h3>
+<p>Another way of selecting features is to use a (greedy) wrapper method with scikit learn’s <code class="docutils literal notranslate"><span class="pre">SequentialFeatureSelector</span></code> (SFS). SFS is a greedy procedure where, at each iteration, we choose the best new feature to add to our selected features based a cross-validation score:</p>
 <ul class="simple">
 <li><p><code class="docutils literal notranslate"><span class="pre">Forward-Selection</span></code>: That is, we start with 0 features and choose the best single feature with the highest score. The procedure is repeated until we reach the desired number of selected features.</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">Backward</span> <span class="pre">selection</span></code>: We can also go in the reverse direction (backward SFS), i.e. start with all the features and greedily choose features to remove one by one. We illustrate both approaches here.</p></li>
@@ -656,8 +654,8 @@ Done in 0.033s
 <span class="n">tic_fwd</span> <span class="o">=</span> <span class="n">time</span><span class="p">()</span>
 
 <span class="n">sfs_forward</span> <span class="o">=</span> <span class="n">SequentialFeatureSelector</span><span class="p">(</span>
-    <span class="n">lasso</span><span class="p">,</span> <span class="n">n_features_to_select</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">direction</span><span class="o">=</span><span class="s2">&quot;forward&quot;</span>
-<span class="p">)</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">y</span><span class="p">)</span>
+    <span class="n">reg</span><span class="p">,</span> <span class="n">n_features_to_select</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> 
+    <span class="n">direction</span><span class="o">=</span><span class="s2">&quot;forward&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X_train</span><span class="p">,</span> <span class="n">y_train</span><span class="p">)</span>
 
 <span class="n">toc_fwd</span> <span class="o">=</span> <span class="n">time</span><span class="p">()</span>
 </pre></div>
@@ -675,8 +673,8 @@ Done in 0.033s
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Features selected by forward sequential selection: [&#39;gdp&#39; &#39;family&#39;]
-Done in 1.090s
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Features selected by forward sequential selection: [&#39;Hits&#39; &#39;CRBI&#39;]
+Done in 5.069s
 </pre></div>
 </div>
 </div>
@@ -689,8 +687,8 @@ Done in 1.090s
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">tic_bwd</span> <span class="o">=</span> <span class="n">time</span><span class="p">()</span>
 
 <span class="n">sfs_backward</span> <span class="o">=</span> <span class="n">SequentialFeatureSelector</span><span class="p">(</span>
-    <span class="n">lasso</span><span class="p">,</span> <span class="n">n_features_to_select</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">direction</span><span class="o">=</span><span class="s2">&quot;backward&quot;</span>
-<span class="p">)</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">y</span><span class="p">)</span>
+    <span class="n">reg</span><span class="p">,</span> <span class="n">n_features_to_select</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> 
+    <span class="n">direction</span><span class="o">=</span><span class="s2">&quot;backward&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X_train</span><span class="p">,</span> <span class="n">y_train</span><span class="p">)</span>
 
 <span class="n">toc_bwd</span> <span class="o">=</span> <span class="n">time</span><span class="p">()</span>
 </pre></div>
@@ -708,8 +706,8 @@ Done in 1.090s
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Features selected by backward sequential selection: [&#39;family&#39; &#39;lifeexpectancy&#39;]
-Done in 1.086s
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Features selected by backward sequential selection: [&#39;Hits&#39; &#39;CRBI&#39;]
+Done in 34.424s
 </pre></div>
 </div>
 </div>
@@ -721,9 +719,9 @@ Done in 1.086s
 <h2>Discussion<a class="headerlink" href="#discussion" title="Permalink to this headline">¶</a></h2>
 <p>To finish with, we should note that</p>
 <ul class="simple">
-<li><p>SelectFromModel is significantly faster than SFS (SelectFromModel only needs to fit a model once, while SFS needs to cross-validate many different models for each of the iterations)</p></li>
-<li><p>SFS however works with any model, while SelectFromModel requires the underlying estimator to expose a coef_ attribute or a feature_importances_ attribute.</p></li>
-<li><p>The forward SFS is faster than the backward SFS because it only needs to perform n_features_to_select = 2 iterations, while the backward SFS needs to perform n_features - n_features_to_select.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">SelectFromModel</span></code> is significantly faster than SFS since <code class="docutils literal notranslate"><span class="pre">SelectFromModel</span></code> only needs to fit a model once, while SFS needs to cross-validate many different models for each of the iterations.</p></li>
+<li><p>SFS however works with any model, while <code class="docutils literal notranslate"><span class="pre">SelectFromModel</span></code> requires the underlying estimator to expose a <code class="docutils literal notranslate"><span class="pre">coef_</span></code> attribute or a <code class="docutils literal notranslate"><span class="pre">feature_importances_</span></code> attribute.</p></li>
+<li><p>Forward selection is much faster than backward selection because it only needs to perform <code class="docutils literal notranslate"><span class="pre">n_features_to_select</span> <span class="pre">=</span> <span class="pre">2</span></code> iterations, while the backward selection needs to perform <code class="docutils literal notranslate"><span class="pre">n_features</span></code> - <code class="docutils literal notranslate"><span class="pre">n_features_to_select</span></code>.</p></li>
 </ul>
 </div>
 </div>
@@ -751,22 +749,31 @@ Done in 1.086s
               </div>
               
         
-            <!-- Previous / next buttons -->
-<div class='prev-next-area'> 
-    <a class='left-prev' id="prev-link" href="splines.html" title="previous page">
-        <i class="fas fa-angle-left"></i>
-        <div class="prev-next-info">
-            <p class="prev-next-subtitle">previous</p>
-            <p class="prev-next-title">Splines in Python</p>
-        </div>
-    </a>
-    <a class='right-next' id="next-link" href="reference.html" title="next page">
-    <div class="prev-next-info">
-        <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title">Bibliography</p>
+            
+
+
+
+<div class='prev-next-bottom'>
+    
+    <div id="prev">
+        <a class="left-prev" href="splines.html" title="previous page">
+            <i class="prevnext-label fas fa-angle-left"></i>
+            <div class="prevnext-info">
+                <p class="prevnext-label">previous</p>
+                <p class="prevnext-title">Splines</p>
+            </div>
+        </a>
     </div>
-    <i class="fas fa-angle-right"></i>
-    </a>
+     <div id="next">
+        <a class="right-next" href="reference.html" title="next page">
+            <div class="prevnext-info">
+                <p class="prevnext-label">next</p>
+                <p class="prevnext-title">Bibliography</p>
+            </div>
+            <i class="prevnext-label fas fa-angle-right"></i>
+        </a>
+     </div>
+
 </div>
         
         </div>
@@ -775,9 +782,9 @@ Done in 1.086s
     <div class="container">
       <p>
         
-          Durch Jan Kirenz<br/>
+          By Jan Kirenz<br/>
         
-            &copy; Urheberrechte © 2021.<br/>
+            &copy; Copyright 2021.<br/>
       </p>
     </div>
   </footer>
@@ -787,7 +794,8 @@ Done in 1.086s
       </div>
     </div>
   
-  <script src="../_static/js/index.be7d3bbb2ef33a8344ce.js"></script>
+  <script src="../_static/js/index.1c5a1a01449ed65a7b51.js"></script>
 
+  
   </body>
 </html>

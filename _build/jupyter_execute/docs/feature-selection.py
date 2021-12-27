@@ -3,133 +3,136 @@
 
 # # Feature selection
 
-# This content is mainly based on the following scikit learn documentations:
+# The following content is mainly based on scikit learn documentations:
 # 
 # - [Feature selection](https://scikit-learn.org/stable/modules/feature_selection.html)
 # - [Model-based and sequential feature selection](https://scikit-learn.org/stable/auto_examples/feature_selection/plot_select_from_model_diabetes.html#sphx-glr-auto-examples-feature-selection-plot-select-from-model-diabetes-py) from Manoj Kumar, Maria Telenczuk and Nicolas Hug.
 # - [Common pitfalls in the interpretation of coefficients of linear models](https://scikit-learn.org/stable/auto_examples/inspection/plot_linear_model_coefficient_interpretation.html#sphx-glr-auto-examples-inspection-plot-linear-model-coefficient-interpretation-py)
 
-# ## Import data
+# ## Prepara data
+# 
+# We use a data frame of major league baseball players to predict their salaries from some career statistics ([more information about data](https://rdrr.io/cran/ISLR/man/Hitters.html)). Note that the data is already preprocessed. 
+# 
+# *To get an overview about the data preparation, visit [this tutorial](https://kirenz.github.io/regression/docs/lasso.html#data).*
 
-# In[1]:
+# In[91]:
 
 
 import pandas as pd
 
-df = pd.read_csv("https://raw.githubusercontent.com/kirenz/datasets/master/happiness_report.csv")
+# import data
+df = pd.read_csv("https://raw.githubusercontent.com/kirenz/datasets/master/hitters-clean.csv")
 df.info()
 
 
-# In[2]:
+# In[78]:
 
 
-# reset index
-df.set_index('country', inplace=True)
+# create label
+y = df['Salary']
+# create features
+X = df.drop(['Salary'], axis=1).astype(float)
 
 
-# In[3]:
-
-
-# show data
-df
-
-
-# ## Data preprocessing & exploration
-
-# In[4]:
-
-
-# prepare data for scikit learn models
-feature_names = ['gdp', 'family', 'lifeexpectancy', 'trust']
-
-X = df[feature_names]
-y = df['happiness']
-
-
-# - We split the sample into a train and a test dataset. 
-# - Only the train dataset will be used in the following exploratory analysis. 
-# - This is a way to emulate a real situation where predictions are performed on an unknown target, and we don’t want our analysis and decisions to be biased by our knowledge of the test data.
-
-# In[5]:
+# In[79]:
 
 
 from sklearn.model_selection import train_test_split
 
-X_train, X_test, y_train, y_test = train_test_split(X, y, random_state=10)
+# data split
+X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.3, random_state=10)
 
 
-# In[6]:
+# In[80]:
 
 
-# explore data
-import seaborn as sns
+from sklearn.preprocessing import StandardScaler
 
-train_dataset = X_train.copy()
-train_dataset.insert(0, "happiness", y_train)
-
-sns.pairplot(train_dataset, kind="reg", diag_kind="kde");
+# make list of numerical features (League_N, Division_W and NewLeague_N are categorcial) 
+list_numerical = X.drop(['League_N', 'Division_W', 'NewLeague_N'], axis=1).columns
+# standardize numerical features
+scaler = StandardScaler().fit(X_train[list_numerical]) 
+X_train = scaler.transform(X_train[list_numerical])
+X_test = scaler.transform(X_test[list_numerical])
 
 
 # ## Model
 
 # We fit a lasso regression with 5-fold cross validation to choose the best regularization parameter based on the mean squared error:
 
-# In[7]:
+# In[81]:
 
 
 from sklearn.linear_model import LassoCV
 
-lasso = LassoCV(cv=5, random_state=10).fit(X_train, y_train)
+reg = LassoCV(cv=5, random_state=10, max_iter=10000).fit(X_train, y_train)
 
 
-# In[8]:
+# In[82]:
 
 
 # show best alpha parameter
-lasso.alpha_
+reg.alpha_
 
 
-# Show feature importance plot
+# Show feature importance (note that our features 'League_N', 'Division_W' and 'NewLeague_N' are not included in the list).
 
-# In[9]:
+# In[83]:
 
 
-import matplotlib.pyplot as plt
-import numpy as np
+# make list of feature names
+features = X.columns
 
-importance = np.abs(lasso.coef_)
-feature_names = np.array(feature_names)
+print(list(zip(reg.coef_, feature_names)))
 
-plt.bar(height=importance, x=feature_names)
 
-plt.title("Feature importances via coefficients")
-plt.show()
+# In[84]:
+
+
+# make dictionary with coefficients and feature names
+coef_dict = {}
+for coef, feat in zip(reg.coef_, features):
+    coef_dict[feat] = coef
+
+# create dataframe from dictionary
+df_coef = pd.DataFrame.from_dict(coef_dict, orient='index', columns=['coef'])
+df_coef['feature_importance'] = df_.coef.abs()
+df_coef['feature_names'] = df_.index    
+df_coef
+
+
+# In[85]:
+
+
+import seaborn as sns
+
+sns.barplot(x='feature_importance', y='feature_names', data=df_coef);
 
 
 # ## Feature selection
 
-# ### Based on importance
+# ### Filter method 
 # 
-# We want to select the two features which are the most important according to the coefficients. The SelectFromModel is meant just for that. SelectFromModel accepts a threshold parameter and will select the features whose importance (defined by the coefficients) are above this threshold.
+# In this example, we use feature importance as a filter to select our features. In particular, we want to select the two features which are the most important according to the coefficients. The function `SelectFromModel` is meant just for that. `SelectFromModel` accepts a threshold parameter and will select the features whose importance (defined by the coefficients) are above this threshold.
 # 
-# In our case, we want to select only 2 features. Hence, we will set the threshold slightly above the coefficient of the third most important feature. 
-# 
-# We also record the time the algorithm takes to obtain the results.
+# In our case, we want to select only 2 features. Hence, we will set the threshold slightly above the coefficient of the third most important feature. We also record the time the algorithm takes to obtain the results.
 
-# In[10]:
+# In[86]:
 
 
 from sklearn.feature_selection import SelectFromModel
+import numpy as np
 from time import time
 
 # set threshold
-threshold = np.sort(importance)[-3] + 0.01
+threshold = np.sort(df_coef.feature_importance)[-3] + 1
+feature_names =  np.array(df_coef.feature_names)
 
 # obtain time
 tic = time()
 
 # fit model
-sfm = SelectFromModel(lasso, threshold=threshold).fit(X, y)
+sfm = SelectFromModel(reg, threshold=threshold).fit(X_train, y_train)
 
 # obtain time
 toc = time()
@@ -139,19 +142,17 @@ print(f"Features selected by SelectFromModel: {feature_names[sfm.get_support()]}
 print(f"Done in {toc - tic:.3f}s")
 
 
-# ### Sequential Feature Selection (SFS)
+# ### Wrapper method 
 # 
-# Another way of selecting features is to use SequentialFeatureSelector (SFS). SFS is a greedy procedure where, at each iteration, we choose the best new feature to add to our selected features based a cross-validation score. 
+# Another way of selecting features is to use a (greedy) wrapper method with scikit learn's `SequentialFeatureSelector` (SFS). SFS is a greedy procedure where, at each iteration, we choose the best new feature to add to our selected features based a cross-validation score: 
 # 
 # - `Forward-Selection`: That is, we start with 0 features and choose the best single feature with the highest score. The procedure is repeated until we reach the desired number of selected features.
 # 
 # - `Backward selection`: We can also go in the reverse direction (backward SFS), i.e. start with all the features and greedily choose features to remove one by one. We illustrate both approaches here.
-# 
-# 
 
 # #### Forward selection
 
-# In[11]:
+# In[87]:
 
 
 from sklearn.feature_selection import SequentialFeatureSelector
@@ -159,13 +160,13 @@ from sklearn.feature_selection import SequentialFeatureSelector
 tic_fwd = time()
 
 sfs_forward = SequentialFeatureSelector(
-    lasso, n_features_to_select=2, direction="forward"
-).fit(X, y)
+    reg, n_features_to_select=2, 
+    direction="forward").fit(X_train, y_train)
 
 toc_fwd = time()
 
 
-# In[12]:
+# In[72]:
 
 
 print(
@@ -177,19 +178,19 @@ print(f"Done in {toc_fwd - tic_fwd:.3f}s")
 
 # #### Backward selection
 
-# In[13]:
+# In[89]:
 
 
 tic_bwd = time()
 
 sfs_backward = SequentialFeatureSelector(
-    lasso, n_features_to_select=2, direction="backward"
-).fit(X, y)
+    reg, n_features_to_select=2, 
+    direction="backward").fit(X_train, y_train)
 
 toc_bwd = time()
 
 
-# In[14]:
+# In[90]:
 
 
 print(
@@ -203,8 +204,8 @@ print(f"Done in {toc_bwd - tic_bwd:.3f}s")
 # 
 # To finish with, we should note that 
 # 
-# - SelectFromModel is significantly faster than SFS (SelectFromModel only needs to fit a model once, while SFS needs to cross-validate many different models for each of the iterations)
+# - `SelectFromModel` is significantly faster than SFS since `SelectFromModel` only needs to fit a model once, while SFS needs to cross-validate many different models for each of the iterations.
 # 
-# - SFS however works with any model, while SelectFromModel requires the underlying estimator to expose a coef_ attribute or a feature_importances_ attribute. 
+# - SFS however works with any model, while `SelectFromModel` requires the underlying estimator to expose a `coef_` attribute or a `feature_importances_` attribute. 
 # 
-# - The forward SFS is faster than the backward SFS because it only needs to perform n_features_to_select = 2 iterations, while the backward SFS needs to perform n_features - n_features_to_select.
+# - Forward selection is much faster than backward selection because it only needs to perform `n_features_to_select = 2` iterations, while the backward selection needs to perform `n_features` - `n_features_to_select`.

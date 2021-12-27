@@ -17,28 +17,19 @@ Traceback (most recent call last):
     raise CellExecutionError.from_cell_and_msg(cell, exec_reply_content)
 nbclient.exceptions.CellExecutionError: An error occurred while executing the following cell:
 ------------------
-import matplotlib.pyplot as plt
-import numpy as np
+# make list of feature names
+features = X.columns
 
-plt.title("B-spline basis example (degree=3)");
-x = np.linspace(0., 1., 100)
-
-y = dmatrix("bs(x, df=6, degree=3, include_intercept=True) - 1", {"x": x})
-
-b = np.array([1.3, 0.6, 0.9, 0.4, 1.6, 0.7])
-plt.plot(x, y*b);
-plt.plot(x, np.dot(y, b), color='k', linewidth=3);
+print(list(zip(reg.coef_, feature_names)))
 ------------------
 
 [0;31m---------------------------------------------------------------------------[0m
 [0;31mNameError[0m                                 Traceback (most recent call last)
-[0;32m/var/folders/9c/_3s5jt3n60j__flsgl0t72340000gn/T/ipykernel_3680/1238911552.py[0m in [0;36m<module>[0;34m[0m
-[1;32m      5[0m [0mx[0m [0;34m=[0m [0mnp[0m[0;34m.[0m[0mlinspace[0m[0;34m([0m[0;36m0.[0m[0;34m,[0m [0;36m1.[0m[0;34m,[0m [0;36m100[0m[0;34m)[0m[0;34m[0m[0;34m[0m[0m
-[1;32m      6[0m [0;34m[0m[0m
-[0;32m----> 7[0;31m [0my[0m [0;34m=[0m [0mdmatrix[0m[0;34m([0m[0;34m"bs(x, df=6, degree=3, include_intercept=True) - 1"[0m[0;34m,[0m [0;34m{[0m[0;34m"x"[0m[0;34m:[0m [0mx[0m[0;34m}[0m[0;34m)[0m[0;34m[0m[0;34m[0m[0m
-[0m[1;32m      8[0m [0;34m[0m[0m
-[1;32m      9[0m [0mb[0m [0;34m=[0m [0mnp[0m[0;34m.[0m[0marray[0m[0;34m([0m[0;34m[[0m[0;36m1.3[0m[0;34m,[0m [0;36m0.6[0m[0;34m,[0m [0;36m0.9[0m[0;34m,[0m [0;36m0.4[0m[0;34m,[0m [0;36m1.6[0m[0;34m,[0m [0;36m0.7[0m[0;34m][0m[0;34m)[0m[0;34m[0m[0;34m[0m[0m
-
-[0;31mNameError[0m: name 'dmatrix' is not defined
-NameError: name 'dmatrix' is not defined
+[0;32m/var/folders/9c/_3s5jt3n60j__flsgl0t72340000gn/T/ipykernel_3687/2979577196.py[0m in [0;36m<module>[0;34m[0m
+[1;32m      2[0m [0mfeatures[0m [0;34m=[0m [0mX[0m[0;34m.[0m[0mcolumns[0m[0;34m[0m[0;34m[0m[0m
+[1;32m      3[0m [0;34m[0m[0m
+[0;32m----> 4[0;31m [0mprint[0m[0;34m([0m[0mlist[0m[0;34m([0m[0mzip[0m[0;34m([0m[0mreg[0m[0;34m.[0m[0mcoef_[0m[0;34m,[0m [0mfeature_names[0m[0;34m)[0m[0;34m)[0m[0;34m)[0m[0;34m[0m[0;34m[0m[0m
+[0m
+[0;31mNameError[0m: name 'feature_names' is not defined
+NameError: name 'feature_names' is not defined
 
