@@ -15,7 +15,7 @@
 # 
 # *To get an overview about the data preparation, visit [this tutorial](https://kirenz.github.io/regression/docs/lasso.html#data).*
 
-# In[91]:
+# In[27]:
 
 
 import pandas as pd
@@ -25,16 +25,20 @@ df = pd.read_csv("https://raw.githubusercontent.com/kirenz/datasets/master/hitte
 df.info()
 
 
-# In[78]:
+# In[28]:
 
 
 # create label
 y = df['Salary']
+
 # create features
 X = df.drop(['Salary'], axis=1).astype(float)
 
+# create list of feature names
+feature_names =  X.columns
 
-# In[79]:
+
+# In[29]:
 
 
 from sklearn.model_selection import train_test_split
@@ -43,24 +47,25 @@ from sklearn.model_selection import train_test_split
 X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.3, random_state=10)
 
 
-# In[80]:
+# In[30]:
 
 
 from sklearn.preprocessing import StandardScaler
 
 # make list of numerical features (League_N, Division_W and NewLeague_N are categorcial) 
 list_numerical = X.drop(['League_N', 'Division_W', 'NewLeague_N'], axis=1).columns
+
 # standardize numerical features
 scaler = StandardScaler().fit(X_train[list_numerical]) 
-X_train = scaler.transform(X_train[list_numerical])
-X_test = scaler.transform(X_test[list_numerical])
+X_train[list_numerical] = scaler.transform(X_train[list_numerical])
+X_test[list_numerical] = scaler.transform(X_test[list_numerical])
 
 
 # ## Model
 
 # We fit a lasso regression with 5-fold cross validation to choose the best regularization parameter based on the mean squared error:
 
-# In[81]:
+# In[31]:
 
 
 from sklearn.linear_model import LassoCV
@@ -68,45 +73,26 @@ from sklearn.linear_model import LassoCV
 reg = LassoCV(cv=5, random_state=10, max_iter=10000).fit(X_train, y_train)
 
 
-# In[82]:
+# In[32]:
 
 
 # show best alpha parameter
 reg.alpha_
 
 
-# Show feature importance (note that our features 'League_N', 'Division_W' and 'NewLeague_N' are not included in the list).
+# Show feature importance:
 
-# In[83]:
-
-
-# make list of feature names
-features = X.columns
-
-print(list(zip(reg.coef_, feature_names)))
-
-
-# In[84]:
-
-
-# make dictionary with coefficients and feature names
-coef_dict = {}
-for coef, feat in zip(reg.coef_, features):
-    coef_dict[feat] = coef
-
-# create dataframe from dictionary
-df_coef = pd.DataFrame.from_dict(coef_dict, orient='index', columns=['coef'])
-df_coef['feature_importance'] = df_.coef.abs()
-df_coef['feature_names'] = df_.index    
-df_coef
-
-
-# In[85]:
+# In[33]:
 
 
 import seaborn as sns
+import numpy as np
 
-sns.barplot(x='feature_importance', y='feature_names', data=df_coef);
+# get absolute values of coefficients
+importance = np.abs(reg.coef_)
+
+sns.barplot(x=importance, 
+            y=feature_names);
 
 
 # ## Feature selection
@@ -117,16 +103,14 @@ sns.barplot(x='feature_importance', y='feature_names', data=df_coef);
 # 
 # In our case, we want to select only 2 features. Hence, we will set the threshold slightly above the coefficient of the third most important feature. We also record the time the algorithm takes to obtain the results.
 
-# In[86]:
+# In[34]:
 
 
 from sklearn.feature_selection import SelectFromModel
-import numpy as np
 from time import time
 
 # set threshold
-threshold = np.sort(df_coef.feature_importance)[-3] + 1
-feature_names =  np.array(df_coef.feature_names)
+threshold = np.sort(importance)[-3] + 1
 
 # obtain time
 tic = time()
@@ -152,7 +136,7 @@ print(f"Done in {toc - tic:.3f}s")
 
 # #### Forward selection
 
-# In[87]:
+# In[35]:
 
 
 from sklearn.feature_selection import SequentialFeatureSelector
@@ -166,7 +150,7 @@ sfs_forward = SequentialFeatureSelector(
 toc_fwd = time()
 
 
-# In[72]:
+# In[36]:
 
 
 print(
@@ -178,7 +162,7 @@ print(f"Done in {toc_fwd - tic_fwd:.3f}s")
 
 # #### Backward selection
 
-# In[89]:
+# In[37]:
 
 
 tic_bwd = time()
@@ -190,7 +174,7 @@ sfs_backward = SequentialFeatureSelector(
 toc_bwd = time()
 
 
-# In[90]:
+# In[39]:
 
 
 print(
@@ -202,7 +186,7 @@ print(f"Done in {toc_bwd - tic_bwd:.3f}s")
 
 # ## Discussion
 # 
-# To finish with, we should note that 
+# Note that: 
 # 
 # - `SelectFromModel` is significantly faster than SFS since `SelectFromModel` only needs to fit a model once, while SFS needs to cross-validate many different models for each of the iterations.
 # 

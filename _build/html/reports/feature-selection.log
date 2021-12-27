@@ -1,4 +1,15 @@
 Traceback (most recent call last):
+  File "/Users/jankirenz/opt/anaconda3/lib/python3.7/site-packages/nbclient/client.py", line 622, in _async_poll_for_reply
+    msg = await ensure_async(self.kc.shell_channel.get_msg(timeout=new_timeout))
+  File "/Users/jankirenz/opt/anaconda3/lib/python3.7/site-packages/nbclient/util.py", line 85, in ensure_async
+    result = await obj
+  File "/Users/jankirenz/opt/anaconda3/lib/python3.7/site-packages/jupyter_client/channels.py", line 230, in get_msg
+    raise Empty
+_queue.Empty
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
   File "/Users/jankirenz/opt/anaconda3/lib/python3.7/site-packages/jupyter_cache/executors/utils.py", line 56, in single_nb_execution
     record_timing=False,
   File "/Users/jankirenz/opt/anaconda3/lib/python3.7/site-packages/nbclient/client.py", line 1112, in execute
@@ -11,25 +22,22 @@ Traceback (most recent call last):
     return future.result()
   File "/Users/jankirenz/opt/anaconda3/lib/python3.7/site-packages/nbclient/client.py", line 554, in async_execute
     cell, index, execution_count=self.code_cells_executed + 1
-  File "/Users/jankirenz/opt/anaconda3/lib/python3.7/site-packages/nbclient/client.py", line 857, in async_execute_cell
-    self._check_raise_for_error(cell, exec_reply)
-  File "/Users/jankirenz/opt/anaconda3/lib/python3.7/site-packages/nbclient/client.py", line 760, in _check_raise_for_error
-    raise CellExecutionError.from_cell_and_msg(cell, exec_reply_content)
-nbclient.exceptions.CellExecutionError: An error occurred while executing the following cell:
-------------------
-# make list of feature names
-features = X.columns
+  File "/Users/jankirenz/opt/anaconda3/lib/python3.7/site-packages/nbclient/client.py", line 841, in async_execute_cell
+    exec_reply = await self.task_poll_for_reply
+  File "/Users/jankirenz/opt/anaconda3/lib/python3.7/site-packages/nbclient/client.py", line 646, in _async_poll_for_reply
+    await self._async_handle_timeout(timeout, cell)
+  File "/Users/jankirenz/opt/anaconda3/lib/python3.7/site-packages/nbclient/client.py", line 697, in _async_handle_timeout
+    "Cell execution timed out", timeout, cell
+nbclient.exceptions.CellTimeoutError: A cell timed out while it was being executed, after 30 seconds.
+The message was: Cell execution timed out.
+Here is a preview of the cell contents:
+-------------------
+tic_bwd = time()
 
-print(list(zip(reg.coef_, feature_names)))
-------------------
+sfs_backward = SequentialFeatureSelector(
+    reg, n_features_to_select=2, 
+    direction="backward").fit(X_train, y_train)
 
-[0;31m---------------------------------------------------------------------------[0m
-[0;31mNameError[0m                                 Traceback (most recent call last)
-[0;32m/var/folders/35/43bdsj9j64j16410rds5g9vr0000gp/T/ipykernel_24745/2979577196.py[0m in [0;36m<module>[0;34m[0m
-[1;32m      2[0m [0mfeatures[0m [0;34m=[0m [0mX[0m[0;34m.[0m[0mcolumns[0m[0;34m[0m[0;34m[0m[0m
-[1;32m      3[0m [0;34m[0m[0m
-[0;32m----> 4[0;31m [0mprint[0m[0;34m([0m[0mlist[0m[0;34m([0m[0mzip[0m[0;34m([0m[0mreg[0m[0;34m.[0m[0mcoef_[0m[0;34m,[0m [0mfeature_names[0m[0;34m)[0m[0;34m)[0m[0;34m)[0m[0;34m[0m[0;34m[0m[0m
-[0m
-[0;31mNameError[0m: name 'feature_names' is not defined
-NameError: name 'feature_names' is not defined
+toc_bwd = time()
+-------------------
 
