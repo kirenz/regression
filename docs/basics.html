@@ -5,7 +5,7 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Regression basics &#8212; Introduction to Regression Models</title>
+    <title>Linear regression &#8212; Introduction to Regression Models</title>
     
   <link href="../_static/css/theme.css" rel="stylesheet">
   <link href="../_static/css/index.ff1ffe594081f20da1ef19478df9384b.css" rel="stylesheet">
@@ -107,7 +107,7 @@
 <ul class="current nav bd-sidenav">
  <li class="toctree-l1 current active">
   <a class="current reference internal" href="#">
-   Regression basics
+   Linear regression
   </a>
  </li>
 </ul>
@@ -142,6 +142,18 @@
 </ul>
 <p aria-level="2" class="caption" role="heading">
  <span class="caption-text">
+  Decision Trees
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="gradientboosting.html">
+   Gradient Boosting
+  </a>
+ </li>
+</ul>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
   Feature Selection
  </span>
 </p>
@@ -149,6 +161,18 @@
  <li class="toctree-l1">
   <a class="reference internal" href="feature-selection.html">
    Feature selection
+  </a>
+ </li>
+</ul>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  Ensemble
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="ensemble.html">
+   Ensemble meta-estimator
   </a>
  </li>
 </ul>
@@ -399,8 +423,8 @@
         
               <div>
                 
-  <div class="tex2jax_ignore mathjax_ignore section" id="regression-basics">
-<h1>Regression basics<a class="headerlink" href="#regression-basics" title="Permalink to this headline">¶</a></h1>
+  <div class="tex2jax_ignore mathjax_ignore section" id="linear-regression">
+<h1>Linear regression<a class="headerlink" href="#linear-regression" title="Permalink to this headline">¶</a></h1>
 <p><em>The explanations of statistical concepts are partly based on <span id="id1">Field [<a class="reference internal" href="reference.html#id3">2013</a>]</span></em></p>
 <p>One of the simplest models we use in statistics is the <strong>mean</strong>. It is a (simple) model because it represents a summary of data. Therefore, let’s use the mean as a baseline model and compare the quality of fit between the mean and a simple linear regression model with only one predictor.</p>
 <p>We use a small sample of 20 women from whom we obtained their height (this is our outcome variable) and the average height of their parents (this is our feature).</p>
