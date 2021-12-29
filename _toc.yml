@@ -11,9 +11,15 @@ parts:
     chapters:
     - file: docs/lasso.ipynb
     - file: docs/splines.ipynb   
+  - caption: Decision Trees
+    chapters:
+    - file: docs/gradientboosting.ipynb
   - caption: Feature Selection
     chapters:
     - file: docs/feature-selection.ipynb
+  - caption: Ensemble
+    chapters:
+    - file: docs/ensemble.ipynb
   #- caption: Applications
   #  chapters:
   #  - file: docs/case-simulated.ipynb

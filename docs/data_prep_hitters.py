@@ -1,16 +1,18 @@
 # Data preprocessing for hitters data
 import pandas as pd
+import numpy as np
 
 df = pd.read_csv("https://raw.githubusercontent.com/kirenz/datasets/master/Hitters.csv")
 
 df = df.dropna()
 dummies = pd.get_dummies(df[['League', 'Division','NewLeague']])
-y = df[['Salary']]
+y = df['Salary'].to_numpy()
 X_numerical = df.drop(['Salary', 'League', 'Division', 'NewLeague'], axis=1).astype('float64')
 list_numerical = X_numerical.columns
 
 # Create all features
 X = pd.concat([X_numerical, dummies[['League_N', 'Division_W', 'NewLeague_N']]], axis=1)
+feature_names = X.columns
 
 # Train test split
 from sklearn.model_selection import train_test_split

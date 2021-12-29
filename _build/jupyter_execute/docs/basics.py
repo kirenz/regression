@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 # coding: utf-8
 
-# # Regression basics
+# # Linear regression
 
 # *The explanations of statistical concepts are partly based on {cite:t}`Field2013`*
 # 
