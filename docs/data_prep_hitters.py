@@ -5,7 +5,7 @@ df = pd.read_csv("https://raw.githubusercontent.com/kirenz/datasets/master/Hitte
 
 df = df.dropna()
 dummies = pd.get_dummies(df[['League', 'Division','NewLeague']])
-y = df['Salary']
+y = df[['Salary']]
 X_numerical = df.drop(['Salary', 'League', 'Division', 'NewLeague'], axis=1).astype('float64')
 list_numerical = X_numerical.columns
 
