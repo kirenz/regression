@@ -372,8 +372,7 @@
         
               <div>
                 
-  <h1>Table of Contents<span class="tocSkip"></span></h1>
-<div class="toc"><ul class="toc-item"><li><span><a href="#Data" data-toc-modified-id="Data-1"><span class="toc-item-num">1&nbsp;&nbsp;</span>Data</a></span><ul class="toc-item"><li><span><a href="#Import" data-toc-modified-id="Import-1.1"><span class="toc-item-num">1.1&nbsp;&nbsp;</span>Import</a></span></li><li><span><a href="#Missing-values" data-toc-modified-id="Missing-values-1.2"><span class="toc-item-num">1.2&nbsp;&nbsp;</span>Missing values</a></span></li><li><span><a href="#Create-labels-and-features" data-toc-modified-id="Create-labels-and-features-1.3"><span class="toc-item-num">1.3&nbsp;&nbsp;</span>Create labels and features</a></span></li><li><span><a href="#Split-data" data-toc-modified-id="Split-data-1.4"><span class="toc-item-num">1.4&nbsp;&nbsp;</span>Split data</a></span></li><li><span><a href="#Standardization" data-toc-modified-id="Standardization-1.5"><span class="toc-item-num">1.5&nbsp;&nbsp;</span>Standardization</a></span></li></ul></li><li><span><a href="#Lasso-regression" data-toc-modified-id="Lasso-regression-2"><span class="toc-item-num">2&nbsp;&nbsp;</span>Lasso regression</a></span><ul class="toc-item"><li><span><a href="#Model-evaluation" data-toc-modified-id="Model-evaluation-2.1"><span class="toc-item-num">2.1&nbsp;&nbsp;</span>Model evaluation</a></span></li></ul></li><li><span><a href="#Role-of-alpha" data-toc-modified-id="Role-of-alpha-3"><span class="toc-item-num">3&nbsp;&nbsp;</span>Role of alpha</a></span></li><li><span><a href="#Lasso-with-optimal-alpha" data-toc-modified-id="Lasso-with-optimal-alpha-4"><span class="toc-item-num">4&nbsp;&nbsp;</span>Lasso with optimal alpha</a></span><ul class="toc-item"><li><span><a href="#k-fold-cross-validation" data-toc-modified-id="k-fold-cross-validation-4.1"><span class="toc-item-num">4.1&nbsp;&nbsp;</span>k-fold cross validation</a></span></li><li><span><a href="#Best-model" data-toc-modified-id="Best-model-4.2"><span class="toc-item-num">4.2&nbsp;&nbsp;</span>Best model</a></span></li><li><span><a href="#Model-evaluation" data-toc-modified-id="Model-evaluation-4.3"><span class="toc-item-num">4.3&nbsp;&nbsp;</span>Model evaluation</a></span></li></ul></li></ul></div><div class="tex2jax_ignore mathjax_ignore section" id="lasso-regression">
+  <div class="tex2jax_ignore mathjax_ignore section" id="lasso-regression">
 <h1>Lasso regression<a class="headerlink" href="#lasso-regression" title="Permalink to this headline">¶</a></h1>
 <p><em>This tutorial is mainly based on the excellent book <a class="reference external" href="https://www.statlearning.com/">“An Introduction to Statistical Learning”</a> from James et al. (2021), the scikit-learn documentation about <a class="reference external" href="https://scikit-learn.org/stable/modules/classes.html#regressors-with-variable-selection">regressors with variable selection</a> as well as Python code provided by Jordi Warmenhoven in this <a class="reference external" href="https://nbviewer.org/github/JWarmenhoven/ISL-python/blob/master/Notebooks/Chapter%206.ipynb">GitHub repository</a>.</em></p>
 <p>Lasso regression relies upon the linear regression model but additionaly performs a so called <code class="docutils literal notranslate"><span class="pre">L1</span> <span class="pre">regularization</span></code>, which is a process of introducing additional information in order to prevent overfitting. As a consequence, we can fit a model containing all possible predictors and use lasso to perform variable selection by using a technique that regularizes the coefficient estimates (it shrinks the coefficient estimates towards zero). In particular, the minimization objective does not only include the residual sum of squares (RSS) - like in the OLS regression setting - but also the sum of the absolute value of coefficients.</p>
@@ -1514,7 +1513,7 @@ MSE test set 134426.33
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/lasso_39_0.png" src="../_images/lasso_39_0.png" />
+<img alt="../_images/lasso_38_0.png" src="../_images/lasso_38_0.png" />
 </div>
 </div>
 <p>Remember that if alpha = 0, then the lasso gives the least squares fit, and when alpha becomes very large, the lasso gives the null model in which all coefficient estimates equal zero.</p>
@@ -1644,7 +1643,7 @@ R squared test set 35.48
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/lasso_55_0.png" src="../_images/lasso_55_0.png" />
+<img alt="../_images/lasso_54_0.png" src="../_images/lasso_54_0.png" />
 </div>
 </div>
 </div>
