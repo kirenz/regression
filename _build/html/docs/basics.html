@@ -344,7 +344,7 @@
   </a>
   <ul class="nav section-nav flex-column">
    <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#id2">
+    <a class="reference internal nav-link" href="#id3">
      Mean
     </a>
    </li>
@@ -426,6 +426,11 @@
   <div class="tex2jax_ignore mathjax_ignore section" id="linear-regression">
 <h1>Linear regression<a class="headerlink" href="#linear-regression" title="Permalink to this headline">¶</a></h1>
 <p><em>The explanations of statistical concepts are partly based on <span id="id1">Field [<a class="reference internal" href="reference.html#id3">2013</a>]</span></em></p>
+<p>Linear regression is the fundamental starting point for all regression methods and it is still a useful and widely used statistical learning method. Moreover, it serves as a good jumping point for newer approaches. Consequently, the importance of having a good understanding of linear regression before studying more complex learning methods cannot be overstated <span id="id2">[<a class="reference internal" href="reference.html#id7">James <em>et al.</em>, 2021</a>]</span>.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Linear regression is a useful tool for predicting a quantitative response</p>
+</div>
 <p>One of the simplest models we use in statistics is the <strong>mean</strong>. It is a (simple) model because it represents a summary of data. Therefore, let’s use the mean as a baseline model and compare the quality of fit between the mean and a simple linear regression model with only one predictor.</p>
 <p>We use a small sample of 20 women from whom we obtained their height (this is our outcome variable) and the average height of their parents (this is our feature).</p>
 <div class="section" id="python-setup">
@@ -1407,8 +1412,8 @@ the true response value for that observation.</p>
 <p><strong>Adjusted</strong> <span class="math notranslate nohighlight">\(R^2\)</span>:</p>
 <p>Whereas <span class="math notranslate nohighlight">\(R^2\)</span> tells us how much of the variance in Y overlaps with predicted values from the model in our sample, adjusted <span class="math notranslate nohighlight">\(R^2\)</span> tells us how much variance in Y would be accounted for if the model had been derived from the <strong>population</strong> from which the sample was taken (takes degrees of freedom into account). Therefore, the adjusted value indicates the loss of predictive power or shrinkage.</p>
 <p>As a general rule it is preferrable to use the adjusted <span class="math notranslate nohighlight">\(R^2\)</span> instead of the simple <span class="math notranslate nohighlight">\(R^2\)</span>.</p>
-<div class="section" id="id2">
-<h3>Mean<a class="headerlink" href="#id2" title="Permalink to this headline">¶</a></h3>
+<div class="section" id="id3">
+<h3>Mean<a class="headerlink" href="#id3" title="Permalink to this headline">¶</a></h3>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># calculate error (observation - average) and assign it to dataframe</span>

@@ -5,6 +5,13 @@
 
 # *The explanations of statistical concepts are partly based on {cite:t}`Field2013`*
 # 
+# Linear regression is the fundamental starting point for all regression methods and it is still a useful and widely used statistical learning method. Moreover, it serves as a good jumping point for newer approaches. Consequently, the importance of having a good understanding of linear regression before studying more complex learning methods cannot be overstated {cite:p}`James2021`.
+# 
+# :::{note}
+#  Linear regression is a useful tool for predicting a quantitative response
+# :::
+# 
+# 
 # One of the simplest models we use in statistics is the **mean**. It is a (simple) model because it represents a summary of data. Therefore, let's use the mean as a baseline model and compare the quality of fit between the mean and a simple linear regression model with only one predictor. 
 # 
 # We use a small sample of 20 women from whom we obtained their height (this is our outcome variable) and the average height of their parents (this is our feature).
