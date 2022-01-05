@@ -14,6 +14,9 @@ import numpy as np
 import seaborn as sns 
 import matplotlib.pyplot as plt
 
+from statsmodels.stats.outliers_influence import variance_inflation_factor
+from statsmodels.tools.tools import add_constant  
+
 sns.set_theme()
 
 
@@ -87,13 +90,19 @@ print(df.isnull().sum())
 
 
 # Convert data types
-df['type'] = df['type'].astype("category")
-df['heating'] = df['heating'].astype("category")
-df['cooling'] = df['cooling'].astype("category")
-df['parking'] = df['parking'].astype("category")
+categorical_list = ['type', 'heating', 'cooling', 'parking']
+
+for i in categorical_list:
+    df[i] = df[i].astype("category")
 
 
 # In[11]:
+
+
+df.info()
+
+
+# In[12]:
 
 
 # summary statistics for all categorical columns
@@ -104,7 +113,7 @@ df.describe(include=['category']).transpose()
 # 
 # - We will also exclude `heating`and `parking` to keep this example as simple as possible.
 
-# In[12]:
+# In[13]:
 
 
 df = df.drop(['type', 'heating', 'parking'], axis=1)
@@ -113,7 +122,7 @@ df
 
 # ## Data splitting
 
-# In[13]:
+# In[14]:
 
 
 train_dataset = df.sample(frac=0.8, random_state=0)
@@ -124,14 +133,14 @@ train_dataset
 
 # ## Exploratory data analysis
 
-# In[14]:
+# In[15]:
 
 
 # summary statistics for all numerical columns
 round(train_dataset.describe(),2).transpose()
 
 
-# In[15]:
+# In[16]:
 
 
 sns.pairplot(train_dataset);
@@ -139,7 +148,7 @@ sns.pairplot(train_dataset);
 
 # ## Correlation analysis
 
-# In[16]:
+# In[17]:
 
 
 # Create correlation matrix for numerical variables
@@ -147,14 +156,14 @@ corr_matrix = train_dataset.corr()
 corr_matrix
 
 
-# In[17]:
+# In[18]:
 
 
 # Simple heatmap
 heatmap = sns.heatmap(corr_matrix)
 
 
-# In[18]:
+# In[19]:
 
 
 # Make a pretty heatmap
@@ -179,6 +188,31 @@ heatmap = sns.heatmap(corr_matrix,
                       annot = True,
                       annot_kws = {"size": 10})
 
+
+# Instead of inspecting the correlation matrix, a better way to assess **multicollinearity** is to compute the variance inflation factor (VIF). Note that we ignore the intercept in this test.
+# 
+# - The smallest possible value for VIF is 1, which indicates the complete absence of collinearity. 
+# - Typically in practice there is a small amount of collinearity among the predictors. 
+# - As a rule of thumb, a VIF value that exceeds 5 indicates a problematic amount of collinearity and the parameter estimates will have large standard errors because of this. 
+# 
+# Note that the function `variance_inflation_factor` expects the presence of a constant in the matrix of explanatory variables. Therefore, we use `add_constant` from statsmodels to add the required constant to the dataframe before passing its values to the function.
+
+# In[20]:
+
+
+# choose features and add constant
+features = add_constant(df[['bed', 'bath', 'area', 'lot']])
+# create empty DataFrame
+vif = pd.DataFrame()
+# calculate vif
+vif["VIF Factor"] = [variance_inflation_factor(features.values, i) for i in range(features.shape[1])]
+# add feature names
+vif["Feature"] = features.columns
+
+vif.round(2)
+
+
+# We don't have a problematic amount of collinearity in our data.
 
 # ## Modeling
 # 

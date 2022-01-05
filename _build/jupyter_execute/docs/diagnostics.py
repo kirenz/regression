@@ -29,6 +29,7 @@ from statsmodels.compat import lzip
 import statsmodels.api as sm
 from statsmodels.formula.api import ols
 from statsmodels.stats.outliers_influence import variance_inflation_factor
+from statsmodels.tools.tools import add_constant
 
 import matplotlib.pyplot as plt
 import seaborn as sns
@@ -610,16 +611,20 @@ sns.heatmap(corr, mask=mask, cmap=cmap, annot=True,  square=True, annot_kws={"si
 # - The smallest possible value for VIF is 1, which indicates the complete absence of collinearity. 
 # - Typically in practice there is a small amount of collinearity among the predictors. 
 # - As a rule of thumb, a VIF value that exceeds 5 indicates a problematic amount of collinearity and the parameter estimates will have large standard errors because of this. 
+# 
+# Note that the function `variance_inflation_factor` expects the presence of a constant in the matrix of explanatory variables. Therefore, we use `add_constant` from statsmodels to add the required constant to the dataframe before passing its values to the function.
 
 # In[28]:
 
 
-y, X = dmatrices('prestige ~ income + education', df, return_type='dataframe')
-
-# For each X, calculate VIF and save in dataframe
+# choose features and add constant
+features = add_constant(df[['income', 'education']])
+# create empty DataFrame
 vif = pd.DataFrame()
-vif["VIF Factor"] = [variance_inflation_factor(X.values, i) for i in range(X.shape[1])]
-vif["Feature"] = X.columns
+# calculate vif
+vif["VIF Factor"] = [variance_inflation_factor(features.values, i) for i in range(features.shape[1])]
+# add feature names
+vif["Feature"] = features.columns
 
 vif.round(2)
 

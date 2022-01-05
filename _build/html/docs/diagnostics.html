@@ -55,7 +55,7 @@
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
     <link rel="next" title="Lasso regression" href="lasso.html" />
-    <link rel="prev" title="Regression basics" href="basics.html" />
+    <link rel="prev" title="Linear regression" href="basics.html" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="docsearch:language" content="None">
     
@@ -107,7 +107,7 @@
 <ul class="nav bd-sidenav">
  <li class="toctree-l1">
   <a class="reference internal" href="basics.html">
-   Regression basics
+   Linear regression
   </a>
  </li>
 </ul>
@@ -142,6 +142,18 @@
 </ul>
 <p aria-level="2" class="caption" role="heading">
  <span class="caption-text">
+  Decision Trees
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="gradientboosting.html">
+   Gradient Boosting
+  </a>
+ </li>
+</ul>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
   Feature Selection
  </span>
 </p>
@@ -149,6 +161,45 @@
  <li class="toctree-l1">
   <a class="reference internal" href="feature-selection.html">
    Feature selection
+  </a>
+ </li>
+</ul>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  Ensemble
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="ensemble.html">
+   Ensemble meta-estimator
+  </a>
+ </li>
+</ul>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  Case duke
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="case-duke-exploration.html">
+   Data exploration
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="case-duke-statsmodel.html">
+   Statsmodels
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="case-duke-sklearn.html">
+   Scikit-learn
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="case-duke-tensorflow.html">
+   TensorFlow
   </a>
  </li>
 </ul>
@@ -446,6 +497,7 @@
 <span class="kn">import</span> <span class="nn">statsmodels.api</span> <span class="k">as</span> <span class="nn">sm</span>
 <span class="kn">from</span> <span class="nn">statsmodels.formula.api</span> <span class="kn">import</span> <span class="n">ols</span>
 <span class="kn">from</span> <span class="nn">statsmodels.stats.outliers_influence</span> <span class="kn">import</span> <span class="n">variance_inflation_factor</span>
+<span class="kn">from</span> <span class="nn">statsmodels.tools.tools</span> <span class="kn">import</span> <span class="n">add_constant</span>
 
 <span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
 <span class="kn">import</span> <span class="nn">seaborn</span> <span class="k">as</span> <span class="nn">sns</span>
@@ -581,8 +633,8 @@
 Dep. Variable:               prestige   R-squared:                       0.828
 Model:                            OLS   Adj. R-squared:                  0.820
 Method:                 Least Squares   F-statistic:                     101.2
-Date:                Mon, 22 Nov 2021   Prob (F-statistic):           8.65e-17
-Time:                        15:40:07   Log-Likelihood:                -178.98
+Date:                Wed, 05 Jan 2022   Prob (F-statistic):           8.65e-17
+Time:                        22:26:09   Log-Likelihood:                -178.98
 No. Observations:                  45   AIC:                             364.0
 Df Residuals:                      42   BIC:                             369.4
 Df Model:                           2                                         
@@ -857,7 +909,12 @@ points, but you can use them to identify problems and then use <code class="docu
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/diagnostics_41_0.png" src="../_images/diagnostics_41_0.png" />
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>eval_env: 1
+eval_env: 1
+eval_env: 1
+</pre></div>
+</div>
+<img alt="../_images/diagnostics_41_1.png" src="../_images/diagnostics_41_1.png" />
 </div>
 </div>
 <p>We observe a positive relationship between prestige and income as well as between prestige and education. The relationship seems to be linear in both cases.</p>
@@ -875,7 +932,10 @@ points, but you can use them to identify problems and then use <code class="docu
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/diagnostics_43_0.png" src="../_images/diagnostics_43_0.png" />
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>eval_env: 1
+</pre></div>
+</div>
+<img alt="../_images/diagnostics_43_1.png" src="../_images/diagnostics_43_1.png" />
 </div>
 </div>
 <div class="cell docutils container">
@@ -887,7 +947,10 @@ points, but you can use them to identify problems and then use <code class="docu
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/diagnostics_44_0.png" src="../_images/diagnostics_44_0.png" />
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>eval_env: 1
+</pre></div>
+</div>
+<img alt="../_images/diagnostics_44_1.png" src="../_images/diagnostics_44_1.png" />
 </div>
 </div>
 <p>The partial regression plots confirm the influence of <code class="docutils literal notranslate"><span class="pre">conductor</span></code>, <code class="docutils literal notranslate"><span class="pre">minister</span></code> on the partial relationships between prestige and the predictors income and education. The influence of <code class="docutils literal notranslate"><span class="pre">reporter</span></code> is less obvious but since the observation was considered critical according to Cook`s D, we also drop this case.</p>
@@ -936,8 +999,8 @@ points, but you can use them to identify problems and then use <code class="docu
 Dep. Variable:               prestige   R-squared:                       0.897
 Model:                            OLS   Adj. R-squared:                  0.891
 Method:                 Least Squares   F-statistic:                     169.0
-Date:                Mon, 22 Nov 2021   Prob (F-statistic):           6.13e-20
-Time:                        15:40:09   Log-Likelihood:                -157.02
+Date:                Wed, 05 Jan 2022   Prob (F-statistic):           6.13e-20
+Time:                        22:26:11   Log-Likelihood:                -157.02
 No. Observations:                  42   AIC:                             320.0
 Df Residuals:                      39   BIC:                             325.2
 Df Model:                           2                                         
@@ -1083,7 +1146,10 @@ Notes:
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/diagnostics_69_0.png" src="../_images/diagnostics_69_0.png" />
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>eval_env: 1
+</pre></div>
+</div>
+<img alt="../_images/diagnostics_69_1.png" src="../_images/diagnostics_69_1.png" />
 </div>
 </div>
 </div>
@@ -1241,14 +1307,17 @@ Notes:
 <li><p>Typically in practice there is a small amount of collinearity among the predictors.</p></li>
 <li><p>As a rule of thumb, a VIF value that exceeds 5 indicates a problematic amount of collinearity and the parameter estimates will have large standard errors because of this.</p></li>
 </ul>
+<p>Note that the function <code class="docutils literal notranslate"><span class="pre">variance_inflation_factor</span></code> expects the presence of a constant in the matrix of explanatory variables. Therefore, we use <code class="docutils literal notranslate"><span class="pre">add_constant</span></code> from statsmodels to add the required constant to the dataframe before passing its values to the function.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">y</span><span class="p">,</span> <span class="n">X</span> <span class="o">=</span> <span class="n">dmatrices</span><span class="p">(</span><span class="s1">&#39;prestige ~ income + education&#39;</span><span class="p">,</span> <span class="n">df</span><span class="p">,</span> <span class="n">return_type</span><span class="o">=</span><span class="s1">&#39;dataframe&#39;</span><span class="p">)</span>
-
-<span class="c1"># For each X, calculate VIF and save in dataframe</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># choose features and add constant</span>
+<span class="n">features</span> <span class="o">=</span> <span class="n">add_constant</span><span class="p">(</span><span class="n">df</span><span class="p">[[</span><span class="s1">&#39;income&#39;</span><span class="p">,</span> <span class="s1">&#39;education&#39;</span><span class="p">]])</span>
+<span class="c1"># create empty DataFrame</span>
 <span class="n">vif</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">()</span>
-<span class="n">vif</span><span class="p">[</span><span class="s2">&quot;VIF Factor&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="p">[</span><span class="n">variance_inflation_factor</span><span class="p">(</span><span class="n">X</span><span class="o">.</span><span class="n">values</span><span class="p">,</span> <span class="n">i</span><span class="p">)</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">X</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">])]</span>
-<span class="n">vif</span><span class="p">[</span><span class="s2">&quot;Feature&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">X</span><span class="o">.</span><span class="n">columns</span>
+<span class="c1"># calculate vif</span>
+<span class="n">vif</span><span class="p">[</span><span class="s2">&quot;VIF Factor&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="p">[</span><span class="n">variance_inflation_factor</span><span class="p">(</span><span class="n">features</span><span class="o">.</span><span class="n">values</span><span class="p">,</span> <span class="n">i</span><span class="p">)</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">features</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">])]</span>
+<span class="c1"># add feature names</span>
+<span class="n">vif</span><span class="p">[</span><span class="s2">&quot;Feature&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">features</span><span class="o">.</span><span class="n">columns</span>
 
 <span class="n">vif</span><span class="o">.</span><span class="n">round</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>
 </pre></div>
@@ -1281,7 +1350,7 @@ Notes:
     <tr>
       <th>0</th>
       <td>4.59</td>
-      <td>Intercept</td>
+      <td>const</td>
     </tr>
     <tr>
       <th>1</th>
@@ -1337,7 +1406,7 @@ Notes:
         <i class="fas fa-angle-left"></i>
         <div class="prev-next-info">
             <p class="prev-next-subtitle">previous</p>
-            <p class="prev-next-title">Regression basics</p>
+            <p class="prev-next-title">Linear regression</p>
         </div>
     </a>
     <a class='right-next' id="next-link" href="lasso.html" title="next page">
