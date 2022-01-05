@@ -378,6 +378,9 @@
 <span class="kn">import</span> <span class="nn">seaborn</span> <span class="k">as</span> <span class="nn">sns</span> 
 <span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
 
+<span class="kn">from</span> <span class="nn">statsmodels.stats.outliers_influence</span> <span class="kn">import</span> <span class="n">variance_inflation_factor</span>
+<span class="kn">from</span> <span class="nn">statsmodels.tools.tools</span> <span class="kn">import</span> <span class="n">add_constant</span>  
+
 <span class="n">sns</span><span class="o">.</span><span class="n">set_theme</span><span class="p">()</span>
 </pre></div>
 </div>
@@ -738,10 +741,38 @@ dtype: int64
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Convert data types</span>
-<span class="n">df</span><span class="p">[</span><span class="s1">&#39;type&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="s1">&#39;type&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="s2">&quot;category&quot;</span><span class="p">)</span>
-<span class="n">df</span><span class="p">[</span><span class="s1">&#39;heating&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="s1">&#39;heating&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="s2">&quot;category&quot;</span><span class="p">)</span>
-<span class="n">df</span><span class="p">[</span><span class="s1">&#39;cooling&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="s1">&#39;cooling&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="s2">&quot;category&quot;</span><span class="p">)</span>
-<span class="n">df</span><span class="p">[</span><span class="s1">&#39;parking&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="s1">&#39;parking&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="s2">&quot;category&quot;</span><span class="p">)</span>
+<span class="n">categorical_list</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;type&#39;</span><span class="p">,</span> <span class="s1">&#39;heating&#39;</span><span class="p">,</span> <span class="s1">&#39;cooling&#39;</span><span class="p">,</span> <span class="s1">&#39;parking&#39;</span><span class="p">]</span>
+
+<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">categorical_list</span><span class="p">:</span>
+    <span class="n">df</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="s2">&quot;category&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">df</span><span class="o">.</span><span class="n">info</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;class &#39;pandas.core.frame.DataFrame&#39;&gt;
+Int64Index: 97 entries, 0 to 97
+Data columns (total 10 columns):
+ #   Column      Non-Null Count  Dtype   
+---  ------      --------------  -----   
+ 0   price       97 non-null     int64   
+ 1   bed         97 non-null     int64   
+ 2   bath        97 non-null     float64 
+ 3   area        97 non-null     int64   
+ 4   type        97 non-null     category
+ 5   year_built  97 non-null     int64   
+ 6   heating     97 non-null     category
+ 7   cooling     97 non-null     category
+ 8   parking     97 non-null     category
+ 9   lot         97 non-null     float64 
+dtypes: category(4), float64(2), int64(4)
+memory usage: 7.3 KB
 </pre></div>
 </div>
 </div>
@@ -1239,7 +1270,7 @@ dtype: int64
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/case-duke-exploration_22_0.png" src="../_images/case-duke-exploration_22_0.png" />
+<img alt="../_images/case-duke-exploration_23_0.png" src="../_images/case-duke-exploration_23_0.png" />
 </div>
 </div>
 </div>
@@ -1347,7 +1378,7 @@ dtype: int64
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/case-duke-exploration_25_0.png" src="../_images/case-duke-exploration_25_0.png" />
+<img alt="../_images/case-duke-exploration_26_0.png" src="../_images/case-duke-exploration_26_0.png" />
 </div>
 </div>
 <div class="cell docutils container">
@@ -1377,9 +1408,85 @@ dtype: int64
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/case-duke-exploration_26_0.png" src="../_images/case-duke-exploration_26_0.png" />
+<img alt="../_images/case-duke-exploration_27_0.png" src="../_images/case-duke-exploration_27_0.png" />
 </div>
 </div>
+<p>Instead of inspecting the correlation matrix, a better way to assess <strong>multicollinearity</strong> is to compute the variance inflation factor (VIF). Note that we ignore the intercept in this test.</p>
+<ul class="simple">
+<li><p>The smallest possible value for VIF is 1, which indicates the complete absence of collinearity.</p></li>
+<li><p>Typically in practice there is a small amount of collinearity among the predictors.</p></li>
+<li><p>As a rule of thumb, a VIF value that exceeds 5 indicates a problematic amount of collinearity and the parameter estimates will have large standard errors because of this.</p></li>
+</ul>
+<p>Note that the function <code class="docutils literal notranslate"><span class="pre">variance_inflation_factor</span></code> expects the presence of a constant in the matrix of explanatory variables. Therefore, we use <code class="docutils literal notranslate"><span class="pre">add_constant</span></code> from statsmodels to add the required constant to the dataframe before passing its values to the function.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># choose features and add constant</span>
+<span class="n">features</span> <span class="o">=</span> <span class="n">add_constant</span><span class="p">(</span><span class="n">df</span><span class="p">[[</span><span class="s1">&#39;bed&#39;</span><span class="p">,</span> <span class="s1">&#39;bath&#39;</span><span class="p">,</span> <span class="s1">&#39;area&#39;</span><span class="p">,</span> <span class="s1">&#39;lot&#39;</span><span class="p">]])</span>
+<span class="c1"># create empty DataFrame</span>
+<span class="n">vif</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">()</span>
+<span class="c1"># calculate vif</span>
+<span class="n">vif</span><span class="p">[</span><span class="s2">&quot;VIF Factor&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="p">[</span><span class="n">variance_inflation_factor</span><span class="p">(</span><span class="n">features</span><span class="o">.</span><span class="n">values</span><span class="p">,</span> <span class="n">i</span><span class="p">)</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">features</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">])]</span>
+<span class="c1"># add feature names</span>
+<span class="n">vif</span><span class="p">[</span><span class="s2">&quot;Feature&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">features</span><span class="o">.</span><span class="n">columns</span>
+
+<span class="n">vif</span><span class="o">.</span><span class="n">round</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>VIF Factor</th>
+      <th>Feature</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>28.52</td>
+      <td>const</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>1.74</td>
+      <td>bed</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>2.17</td>
+      <td>bath</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>2.14</td>
+      <td>area</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>1.19</td>
+      <td>lot</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+<p>We don’t have a problematic amount of collinearity in our data.</p>
 </div>
 <div class="section" id="modeling">
 <h2>Modeling<a class="headerlink" href="#modeling" title="Permalink to this headline">¶</a></h2>
