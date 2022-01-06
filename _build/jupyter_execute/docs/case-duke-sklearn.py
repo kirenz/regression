@@ -208,11 +208,14 @@ sns.lmplot(x='x', y='y', data=df_train, line_kws={'color': 'darkred'}, ci=False)
 # In[22]:
 
 
+import plotly
 import plotly.express as px
 
 # Plot with Plotly Express
-px.scatter(x=X_train['area'], y=y_train, opacity=0.65, 
+fig_1 = px.scatter(x=X_train['area'], y=y_train, opacity=0.65, 
                 trendline='ols', trendline_color_override='darkred')
+
+plotly.offline.plot(fig_1, filename='../_static/img/fig_1.html')
 
 
 # In[23]:
