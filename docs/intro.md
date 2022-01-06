@@ -1,6 +1,6 @@
 # Welcome
 
-In this book we'll cover some of the most common regression methods. 
+This book covers some data engineering basics.
 
 
 ---
