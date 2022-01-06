@@ -1269,6 +1269,9 @@ Notes:
 <h3>Solution<a class="headerlink" href="#id11" title="Permalink to this headline">¶</a></h3>
 <p>We can get consistent estimates of the standard errors with <a class="reference external" href="https://en.wikipedia.org/wiki/Newey%E2%80%93West_estimator">Newey-West standard errors</a>. See <a class="reference external" href="https://www.statsmodels.org/dev/generated/statsmodels.stats.sandwich_covariance.cov_hac.html">statsmodels documentation</a> for implementation details.</p>
 <p>Furthermore, you can use a <a class="reference external" href="https://www.statsmodels.org/dev/generated/statsmodels.regression.linear_model.GLS.html">generalized least squares (GLS)</a> model instead of the ordinary least squares (OLS).</p>
+<p>In the case of correlated errors, you may also use a multilevel model (also known as hierarchical linear models, linear mixed-effect model, mixed models, nested data models, random coefficient, random-effects models, random parameter models, or split-plot designs).</p>
+<p>Multilevel models are particularly appropriate for research designs where data for participants are organized at more than one level (i.e., nested data). The units of analysis are usually individuals (at a lower level) who are nested within contextual/aggregate units (at a higher level).</p>
+<p>See <a class="reference external" href="https://www.statsmodels.org/stable/mixed_linear.html">statsmodels’ documentation</a> to learn how to implement multilevel models.</p>
 </div>
 </div>
 <div class="section" id="collinearity">
@@ -1370,9 +1373,7 @@ Notes:
 </div>
 <div class="section" id="id12">
 <h3>Solution<a class="headerlink" href="#id12" title="Permalink to this headline">¶</a></h3>
-<p>In the case of correlated errors, you may use a multilevel model (also known as hierarchical linear models, linear mixed-effect model, mixed models, nested data models, random coefficient, random-effects models, random parameter models, or split-plot designs).</p>
-<p>Multilevel models are particularly appropriate for research designs where data for participants are organized at more than one level (i.e., nested data). The units of analysis are usually individuals (at a lower level) who are nested within contextual/aggregate units (at a higher level).</p>
-<p>See <a class="reference external" href="https://www.statsmodels.org/stable/mixed_linear.html">statsmodels’ documentation</a> to learn how to implement multilevel models.</p>
+<p>A simple solution would be to remove some of the highly correlated features. Furthermore, you could manually combine some features (e.g. adding them together) or use a method which automatically combines features, such as principal components analysis or partial least squares regression.</p>
 </div>
 </div>
 </div>

@@ -574,7 +574,11 @@ sm.stats.durbin_watson(lm.resid)
 # 
 # Furthermore, you can use a [generalized least squares (GLS)](https://www.statsmodels.org/dev/generated/statsmodels.regression.linear_model.GLS.html) model instead of the ordinary least squares (OLS).
 # 
+# In the case of correlated errors, you may also use a multilevel model (also known as hierarchical linear models, linear mixed-effect model, mixed models, nested data models, random coefficient, random-effects models, random parameter models, or split-plot designs).
 # 
+# Multilevel models are particularly appropriate for research designs where data for participants are organized at more than one level (i.e., nested data). The units of analysis are usually individuals (at a lower level) who are nested within contextual/aggregate units (at a higher level).
+# 
+# See [statsmodels' documentation](https://www.statsmodels.org/stable/mixed_linear.html) to learn how to implement multilevel models.
 # 
 
 # ## Collinearity
@@ -633,10 +637,4 @@ vif.round(2)
 
 # ### Solution
 # 
-# In the case of correlated errors, you may use a multilevel model (also known as hierarchical linear models, linear mixed-effect model, mixed models, nested data models, random coefficient, random-effects models, random parameter models, or split-plot designs).
-# 
-# Multilevel models are particularly appropriate for research designs where data for participants are organized at more than one level (i.e., nested data). The units of analysis are usually individuals (at a lower level) who are nested within contextual/aggregate units (at a higher level).
-# 
-# See [statsmodels' documentation](https://www.statsmodels.org/stable/mixed_linear.html) to learn how to implement multilevel models.
-# 
-# 
+# A simple solution would be to remove some of the highly correlated features. Furthermore, you could manually combine some features (e.g. adding them together) or use a method which automatically combines features, such as principal components analysis or partial least squares regression.
