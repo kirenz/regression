@@ -25,6 +25,7 @@ from sklearn.compose import ColumnTransformer
 from sklearn.compose import make_column_selector as selector
 from sklearn.pipeline import Pipeline
 from sklearn.impute import SimpleImputer
+from sklearn import set_config
 from sklearn.preprocessing import StandardScaler, OneHotEncoder
 
 
@@ -123,6 +124,8 @@ lm_pipe = Pipeline(steps=[
 # In[12]:
 
 
+# show pipeline
+set_config(display="diagram")
 # Fit model
 lm_pipe.fit(X_train, y_train)
 
@@ -208,14 +211,13 @@ sns.lmplot(x='x', y='y', data=df_train, line_kws={'color': 'darkred'}, ci=False)
 # In[22]:
 
 
-import plotly
+import plotly.io as pio
+import plotly.offline as py
 import plotly.express as px
 
 # Plot with Plotly Express
-fig_1 = px.scatter(x=X_train['area'], y=y_train, opacity=0.65, 
+px.scatter(x=X_train['area'], y=y_train, opacity=0.65, 
                 trendline='ols', trendline_color_override='darkred')
-
-plotly.offline.plot(fig_1, filename='../_static/img/fig_1.html')
 
 
 # In[23]:
@@ -306,25 +308,33 @@ lm_pipe = Pipeline(steps=[
     ('lm', LinearRegression())
                         ])
 
+
+# In[31]:
+
+
+# show pipeline
+set_config(display="diagram")
 # Fit model
 lm_pipe.fit(X_train, y_train)
 
 
-# In[31]:
+# In[32]:
 
 
 # Obtain model coefficients
 lm_pipe.named_steps['lm'].coef_
 
 
-# In[32]:
-
-
-y_pred = lm_pipe.predict(X_train)
-
+# Evaluation with test data:
 
 # In[33]:
 
 
-r2_score(y_train, y_pred)
+y_pred = lm_pipe.predict(X_test)
+
+
+# In[34]:
+
+
+r2_score(y_test, y_pred)
 
