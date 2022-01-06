@@ -11,22 +11,8 @@
 # In[1]:
 
 
-import pandas as pd
-
-ROOT = "https://raw.githubusercontent.com/kirenz/modern-statistics/main/data/"
-DATA = "duke-forest.csv"
-df = pd.read_csv(ROOT + DATA)
-
-# Drop irrelevant features
-df = df.drop(['url', 'address', 'type'], axis=1)
-
-# Convert data types
-df['heating'] = df['heating'].astype("category")
-df['cooling'] = df['cooling'].astype("category")
-df['parking'] = df['parking'].astype("category")
-
-# drop column with too many missing values
-df = df.drop(['hoa'], axis=1)
+# See notebook "Data Exploration" for details about data preprocessing
+from case_duke_data_prep import *
 
 
 # ## Data preprocessing pipeline

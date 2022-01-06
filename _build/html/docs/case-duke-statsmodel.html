@@ -385,25 +385,10 @@
 </div>
 <div class="section" id="data-preparation">
 <h2>Data preparation<a class="headerlink" href="#data-preparation" title="Permalink to this headline">¶</a></h2>
-<p>See notebook <code class="docutils literal notranslate"><span class="pre">10a-application-model-data-exploration.ipynb</span></code> for details about data preprocessing and data exploration.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">ROOT</span> <span class="o">=</span> <span class="s2">&quot;https://raw.githubusercontent.com/kirenz/modern-statistics/main/data/&quot;</span>
-<span class="n">DATA</span> <span class="o">=</span> <span class="s2">&quot;duke-forest.csv&quot;</span>
-<span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="n">ROOT</span> <span class="o">+</span> <span class="n">DATA</span><span class="p">)</span>
-
-<span class="c1"># Drop irrelevant features</span>
-<span class="n">df</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">drop</span><span class="p">([</span><span class="s1">&#39;url&#39;</span><span class="p">,</span> <span class="s1">&#39;address&#39;</span><span class="p">,</span> <span class="s1">&#39;type&#39;</span><span class="p">],</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
-
-<span class="c1"># Convert data types</span>
-<span class="n">df</span><span class="p">[</span><span class="s1">&#39;heating&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="s1">&#39;heating&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="s2">&quot;category&quot;</span><span class="p">)</span>
-<span class="n">df</span><span class="p">[</span><span class="s1">&#39;cooling&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="s1">&#39;cooling&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="s2">&quot;category&quot;</span><span class="p">)</span>
-<span class="n">df</span><span class="p">[</span><span class="s1">&#39;parking&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="s1">&#39;parking&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="s2">&quot;category&quot;</span><span class="p">)</span>
-
-<span class="c1"># drop column with too many missing values</span>
-<span class="n">df</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">drop</span><span class="p">([</span><span class="s1">&#39;hoa&#39;</span><span class="p">],</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
-<span class="c1"># drop remaining row with missing value</span>
-<span class="n">df</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">dropna</span><span class="p">()</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># See notebook &quot;Data Exploration&quot; for details about data preprocessing</span>
+<span class="kn">from</span> <span class="nn">case_duke_data_prep</span> <span class="kn">import</span> <span class="o">*</span>
 </pre></div>
 </div>
 </div>
@@ -472,10 +457,10 @@
   <th>Method:</th>             <td>Least Squares</td>  <th>  F-statistic:       </th> <td>   65.37</td>
 </tr>
 <tr>
-  <th>Date:</th>             <td>Tue, 04 Jan 2022</td> <th>  Prob (F-statistic):</th> <td>7.56e-12</td>
+  <th>Date:</th>             <td>Thu, 06 Jan 2022</td> <th>  Prob (F-statistic):</th> <td>7.56e-12</td>
 </tr>
 <tr>
-  <th>Time:</th>                 <td>22:11:17</td>     <th>  Log-Likelihood:    </th> <td> -1053.3</td>
+  <th>Time:</th>                 <td>10:25:03</td>     <th>  Log-Likelihood:    </th> <td> -1053.3</td>
 </tr>
 <tr>
   <th>No. Observations:</th>      <td>    78</td>      <th>  AIC:               </th> <td>   2111.</td>
@@ -565,7 +550,7 @@
 <div class="cell_output docutils container">
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;class &#39;pandas.core.frame.DataFrame&#39;&gt;
 Int64Index: 78 entries, 26 to 73
-Data columns (total 9 columns):
+Data columns (total 7 columns):
  #   Column      Non-Null Count  Dtype   
 ---  ------      --------------  -----   
  0   price       78 non-null     int64   
@@ -573,12 +558,10 @@ Data columns (total 9 columns):
  2   bath        78 non-null     float64 
  3   area        78 non-null     int64   
  4   year_built  78 non-null     int64   
- 5   heating     78 non-null     category
- 6   cooling     78 non-null     category
- 7   parking     78 non-null     category
- 8   lot         78 non-null     float64 
-dtypes: category(3), float64(2), int64(4)
-memory usage: 6.0 KB
+ 5   cooling     78 non-null     category
+ 6   lot         78 non-null     float64 
+dtypes: category(1), float64(2), int64(4)
+memory usage: 4.5 KB
 </pre></div>
 </div>
 </div>
@@ -695,9 +678,7 @@ memory usage: 6.0 KB
       <th>bath</th>
       <th>area</th>
       <th>year_built</th>
-      <th>heating</th>
       <th>cooling</th>
-      <th>parking</th>
       <th>lot</th>
       <th>y_pred</th>
     </tr>
@@ -710,9 +691,7 @@ memory usage: 6.0 KB
       <td>2.0</td>
       <td>2173</td>
       <td>1964</td>
-      <td>Forced air, Electric, Gas</td>
       <td>other</td>
-      <td>0 spaces</td>
       <td>0.73</td>
       <td>450348.456333</td>
     </tr>
@@ -723,9 +702,7 @@ memory usage: 6.0 KB
       <td>3.0</td>
       <td>2200</td>
       <td>1964</td>
-      <td>Other, Electric, Gas</td>
       <td>central</td>
-      <td>Carport, Covered</td>
       <td>0.51</td>
       <td>454876.375736</td>
     </tr>
@@ -736,9 +713,7 @@ memory usage: 6.0 KB
       <td>4.0</td>
       <td>2300</td>
       <td>1969</td>
-      <td>Other, Gas</td>
       <td>central</td>
-      <td>Garage - Attached, On-street, Covered</td>
       <td>0.47</td>
       <td>471646.447601</td>
     </tr>
@@ -749,9 +724,7 @@ memory usage: 6.0 KB
       <td>4.0</td>
       <td>3487</td>
       <td>1965</td>
-      <td>Other, Gas</td>
       <td>central</td>
-      <td>Garage - Attached, Covered</td>
       <td>0.61</td>
       <td>670707.200633</td>
     </tr>
@@ -762,9 +735,7 @@ memory usage: 6.0 KB
       <td>3.0</td>
       <td>2203</td>
       <td>1954</td>
-      <td>Heat pump, Electric</td>
       <td>other</td>
-      <td>0 spaces</td>
       <td>0.63</td>
       <td>455379.477892</td>
     </tr>
@@ -837,10 +808,10 @@ memory usage: 6.0 KB
   <th>Method:</th>             <td>Least Squares</td>  <th>  F-statistic:       </th> <td>   19.83</td>
 </tr>
 <tr>
-  <th>Date:</th>             <td>Tue, 04 Jan 2022</td> <th>  Prob (F-statistic):</th> <td>1.86e-13</td>
+  <th>Date:</th>             <td>Thu, 06 Jan 2022</td> <th>  Prob (F-statistic):</th> <td>1.86e-13</td>
 </tr>
 <tr>
-  <th>Time:</th>                 <td>22:11:18</td>     <th>  Log-Likelihood:    </th> <td> -1039.1</td>
+  <th>Time:</th>                 <td>10:25:04</td>     <th>  Log-Likelihood:    </th> <td> -1039.1</td>
 </tr>
 <tr>
   <th>No. Observations:</th>      <td>    78</td>      <th>  AIC:               </th> <td>   2092.</td>

@@ -1,6 +1,9 @@
 #!/usr/bin/env python
 # coding: utf-8
 
+# <h1>Table of Contents<span class="tocSkip"></span></h1>
+# <div class="toc"><ul class="toc-item"><li><span><a href="#Setup" data-toc-modified-id="Setup-1"><span class="toc-item-num">1&nbsp;&nbsp;</span>Setup</a></span></li><li><span><a href="#Import-data" data-toc-modified-id="Import-data-2"><span class="toc-item-num">2&nbsp;&nbsp;</span>Import data</a></span></li><li><span><a href="#Data-inspection" data-toc-modified-id="Data-inspection-3"><span class="toc-item-num">3&nbsp;&nbsp;</span>Data inspection</a></span></li><li><span><a href="#Data-transformation" data-toc-modified-id="Data-transformation-4"><span class="toc-item-num">4&nbsp;&nbsp;</span>Data transformation</a></span></li><li><span><a href="#Data-splitting" data-toc-modified-id="Data-splitting-5"><span class="toc-item-num">5&nbsp;&nbsp;</span>Data splitting</a></span></li><li><span><a href="#Exploratory-data-analysis" data-toc-modified-id="Exploratory-data-analysis-6"><span class="toc-item-num">6&nbsp;&nbsp;</span>Exploratory data analysis</a></span></li><li><span><a href="#Correlation-analysis" data-toc-modified-id="Correlation-analysis-7"><span class="toc-item-num">7&nbsp;&nbsp;</span>Correlation analysis</a></span></li><li><span><a href="#Modeling" data-toc-modified-id="Modeling-8"><span class="toc-item-num">8&nbsp;&nbsp;</span>Modeling</a></span></li></ul></div>
+
 # # Data exploration
 
 # ## Setup

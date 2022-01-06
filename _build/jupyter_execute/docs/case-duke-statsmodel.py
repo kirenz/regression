@@ -20,28 +20,12 @@ sns.set_theme(style="ticks", color_codes=True)
 
 
 # ## Data preparation
-# 
-# See notebook `10a-application-model-data-exploration.ipynb` for details about data preprocessing and data exploration. 
 
 # In[2]:
 
 
-ROOT = "https://raw.githubusercontent.com/kirenz/modern-statistics/main/data/"
-DATA = "duke-forest.csv"
-df = pd.read_csv(ROOT + DATA)
-
-# Drop irrelevant features
-df = df.drop(['url', 'address', 'type'], axis=1)
-
-# Convert data types
-df['heating'] = df['heating'].astype("category")
-df['cooling'] = df['cooling'].astype("category")
-df['parking'] = df['parking'].astype("category")
-
-# drop column with too many missing values
-df = df.drop(['hoa'], axis=1)
-# drop remaining row with missing value
-df = df.dropna()
+# See notebook "Data Exploration" for details about data preprocessing
+from case_duke_data_prep import *
 
 
 # ## Data splitting

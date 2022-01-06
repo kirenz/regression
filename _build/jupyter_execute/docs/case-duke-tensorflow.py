@@ -7,7 +7,7 @@
 
 # ## Setup
 
-# In[9]:
+# In[7]:
 
 
 get_ipython().run_line_magic('matplotlib', 'inline')
@@ -28,33 +28,17 @@ sns.set_theme(style="ticks", color_codes=True)
 
 
 # ## Data preparation
-# 
-# See notebook `10a-application-model-data-exploration.ipynb` for details about data preprocessing and data exploration.
 
-# In[10]:
+# In[8]:
 
 
-ROOT = "https://raw.githubusercontent.com/kirenz/modern-statistics/main/data/"
-DATA = "duke-forest.csv"
-df = pd.read_csv(ROOT + DATA)
-
-# Drop irrelevant features
-df = df.drop(['url', 'address', 'type'], axis=1)
-
-# Convert data types
-df['heating'] = df['heating'].astype("category")
-df['cooling'] = df['cooling'].astype("category")
-df['parking'] = df['parking'].astype("category")
-
-# drop column with too many missing values
-df = df.drop(['hoa'], axis=1)
-
-df.columns.tolist()
+# See notebook "Data Exploration" for details about data preprocessing
+from case_duke_data_prep import *
 
 
 # # Simple regression
 
-# In[11]:
+# In[9]:
 
 
 # Select features for simple regression
@@ -70,7 +54,7 @@ y = df["price"]
 
 # ## Data splitting
 
-# In[12]:
+# In[10]:
 
 
 from sklearn.model_selection import train_test_split
@@ -94,7 +78,7 @@ X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_
 
 # Build the sequential model:
 
-# In[13]:
+# In[11]:
 
 
 lm = tf.keras.Sequential([
@@ -108,7 +92,7 @@ lm.summary()
 # 
 # Run the untrained model on the first 10 area values. The output won't be good, but you'll see that it has the expected shape, (10,1):
 
-# In[14]:
+# In[12]:
 
 
 lm.predict(X_train[:10])
@@ -116,7 +100,7 @@ lm.predict(X_train[:10])
 
 # Once the model is built, configure the training procedure using the Model.compile() method. The most important arguments to compile are the loss and the optimizer since these define what will be optimized (mean_absolute_error) and how (using the optimizers.Adam).
 
-# In[15]:
+# In[13]:
 
 
 lm.compile(
@@ -126,19 +110,19 @@ lm.compile(
 
 # Once the training is configured, use Model.fit() to execute the training:
 
-# In[16]:
+# In[14]:
 
 
 get_ipython().run_cell_magic('time', '', 'history = lm.fit(\n    X_train, y_train,\n    epochs=400,\n    # suppress logging\n    verbose=0,\n    # Calculate validation results on 20% of the training data\n    validation_split = 0.1)')
 
 
-# In[17]:
+# In[15]:
 
 
 y_train
 
 
-# In[18]:
+# In[16]:
 
 
 # Calculate R squared
@@ -150,7 +134,7 @@ y_true = y_train.astype(np.int64)
 r2_score(y_train, y_pred)  
 
 
-# In[19]:
+# In[17]:
 
 
 # slope coefficient
@@ -159,7 +143,7 @@ lm.layers[0].kernel
 
 # Visualize the model's training progress using the stats stored in the history object.
 
-# In[20]:
+# In[18]:
 
 
 hist = pd.DataFrame(history.history)
@@ -167,7 +151,7 @@ hist['epoch'] = history.epoch
 hist.tail()
 
 
-# In[21]:
+# In[19]:
 
 
 def plot_loss(history):
@@ -178,7 +162,7 @@ def plot_loss(history):
   plt.grid(True)
 
 
-# In[22]:
+# In[20]:
 
 
 plot_loss(history)
@@ -186,7 +170,7 @@ plot_loss(history)
 
 # Collect the results (mean squared error) on the test set, for later:
 
-# In[23]:
+# In[21]:
 
 
 test_results = {}
@@ -200,7 +184,7 @@ test_results
 
 # Since this is a single variable regression it's easy to look at the model's predictions as a function of the input:
 
-# In[26]:
+# In[22]:
 
 
 x = tf.linspace(0.0, 6200, 6201)
@@ -209,7 +193,7 @@ y = lm.predict(x)
 y
 
 
-# In[27]:
+# In[23]:
 
 
 def plot_area(x, y):
@@ -220,7 +204,7 @@ def plot_area(x, y):
   plt.legend()
 
 
-# In[28]:
+# In[24]:
 
 
 plot_area(x,y)
@@ -228,7 +212,7 @@ plot_area(x,y)
 
 # # Multiple Regression
 
-# In[29]:
+# In[25]:
 
 
 # Select all relevant features
@@ -252,7 +236,7 @@ print("Missing values:",X.isnull().any(axis = 1).sum())
 y = df["price"]
 
 
-# In[30]:
+# In[26]:
 
 
 from sklearn.model_selection import train_test_split
@@ -262,7 +246,7 @@ from sklearn.model_selection import train_test_split
 X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=42)
 
 
-# In[31]:
+# In[27]:
 
 
 lm_2 = tf.keras.Sequential([
@@ -272,7 +256,7 @@ lm_2 = tf.keras.Sequential([
 lm_2.summary()
 
 
-# In[32]:
+# In[28]:
 
 
 lm_2.compile(
@@ -280,13 +264,13 @@ lm_2.compile(
     loss='mean_absolute_error')
 
 
-# In[33]:
+# In[29]:
 
 
 get_ipython().run_cell_magic('time', '', 'history = lm_2.fit(\n    X_train, y_train,\n    epochs=400,\n    # suppress logging\n    verbose=0,\n    # Calculate validation results on 20% of the training data\n    validation_split = 0.1)')
 
 
-# In[34]:
+# In[30]:
 
 
 # Calculate R squared
@@ -298,20 +282,20 @@ y_true = y_train.astype(np.int64)
 r2_score(y_train, y_pred)  
 
 
-# In[35]:
+# In[31]:
 
 
 # slope coefficients
 lm_2.layers[0].kernel
 
 
-# In[36]:
+# In[32]:
 
 
 plot_loss(history)
 
 
-# In[37]:
+# In[33]:
 
 
 test_results['lm_2'] = lm_2.evaluate(
@@ -329,7 +313,7 @@ test_results['lm_2'] = lm_2.evaluate(
 # - Two hidden, nonlinear, Dense layers using the relu nonlinearity.
 # - A linear single-output layer.
 
-# In[38]:
+# In[34]:
 
 
 dnn_model = keras.Sequential([
@@ -343,13 +327,13 @@ dnn_model.compile(loss='mean_absolute_error',
                 optimizer=tf.keras.optimizers.Adam(0.001))
 
 
-# In[39]:
+# In[35]:
 
 
 get_ipython().run_cell_magic('time', '', 'history = dnn_model.fit(\n    X_train, y_train,\n    epochs=100,\n    # suppress logging\n    verbose=0,\n    # Calculate validation results on 20% of the training data\n    validation_split = 0.1)')
 
 
-# In[40]:
+# In[36]:
 
 
 # Calculate R squared
@@ -361,13 +345,13 @@ y_true = y_train.astype(np.int64)
 r2_score(y_train, y_pred)  
 
 
-# In[41]:
+# In[37]:
 
 
 plot_loss(history)
 
 
-# In[42]:
+# In[38]:
 
 
 test_results['dnn_model'] = dnn_model.evaluate(
@@ -376,7 +360,7 @@ test_results['dnn_model'] = dnn_model.evaluate(
 
 # # Performance comparison
 
-# In[43]:
+# In[39]:
 
 
 pd.DataFrame(test_results, index=['Mean absolute error [price]']).T
