@@ -383,22 +383,8 @@
 <h1>Data preparation<a class="headerlink" href="#data-preparation" title="Permalink to this headline">¶</a></h1>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
-
-<span class="n">ROOT</span> <span class="o">=</span> <span class="s2">&quot;https://raw.githubusercontent.com/kirenz/modern-statistics/main/data/&quot;</span>
-<span class="n">DATA</span> <span class="o">=</span> <span class="s2">&quot;duke-forest.csv&quot;</span>
-<span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="n">ROOT</span> <span class="o">+</span> <span class="n">DATA</span><span class="p">)</span>
-
-<span class="c1"># Drop irrelevant features</span>
-<span class="n">df</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">drop</span><span class="p">([</span><span class="s1">&#39;url&#39;</span><span class="p">,</span> <span class="s1">&#39;address&#39;</span><span class="p">,</span> <span class="s1">&#39;type&#39;</span><span class="p">],</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
-
-<span class="c1"># Convert data types</span>
-<span class="n">df</span><span class="p">[</span><span class="s1">&#39;heating&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="s1">&#39;heating&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="s2">&quot;category&quot;</span><span class="p">)</span>
-<span class="n">df</span><span class="p">[</span><span class="s1">&#39;cooling&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="s1">&#39;cooling&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="s2">&quot;category&quot;</span><span class="p">)</span>
-<span class="n">df</span><span class="p">[</span><span class="s1">&#39;parking&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="s1">&#39;parking&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="s2">&quot;category&quot;</span><span class="p">)</span>
-
-<span class="c1"># drop column with too many missing values</span>
-<span class="n">df</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">drop</span><span class="p">([</span><span class="s1">&#39;hoa&#39;</span><span class="p">],</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># See notebook &quot;Data Exploration&quot; for details about data preprocessing</span>
+<span class="kn">from</span> <span class="nn">case_duke_data_prep</span> <span class="kn">import</span> <span class="o">*</span>
 </pre></div>
 </div>
 </div>
@@ -475,13 +461,13 @@
 </div>
 <div class="cell_output docutils container">
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;class &#39;pandas.core.frame.DataFrame&#39;&gt;
-RangeIndex: 98 entries, 0 to 97
+Int64Index: 97 entries, 0 to 97
 Data columns (total 1 columns):
  #   Column  Non-Null Count  Dtype
 ---  ------  --------------  -----
- 0   area    98 non-null     int64
+ 0   area    97 non-null     int64
 dtypes: int64(1)
-memory usage: 912.0 bytes
+memory usage: 1.5 KB
 </pre></div>
 </div>
 </div>
@@ -505,7 +491,7 @@ memory usage: 912.0 bytes
 95     490000
 96     815000
 97     674500
-Name: price, Length: 98, dtype: int64
+Name: price, Length: 97, dtype: int64
 </pre></div>
 </div>
 </div>
@@ -569,14 +555,14 @@ Missing values Y: 0
                                                                    SimpleImputer(strategy=&#39;median&#39;)),
                                                                   (&#39;scaler&#39;,
                                                                    StandardScaler())]),
-                                                  &lt;sklearn.compose._column_transformer.make_column_selector object at 0x7fbd43656ed0&gt;),
+                                                  &lt;sklearn.compose._column_transformer.make_column_selector object at 0x7fb881e205d0&gt;),
                                                  (&#39;cat&#39;,
                                                   Pipeline(steps=[(&#39;imputer&#39;,
                                                                    SimpleImputer(fill_value=&#39;missing&#39;,
                                                                                  strategy=&#39;constant&#39;)),
                                                                   (&#39;onehot&#39;,
                                                                    OneHotEncoder(handle_unknown=&#39;ignore&#39;))]),
-                                                  &lt;sklearn.compose._column_transformer.make_column_selector object at 0x7fbd43656f10&gt;)])),
+                                                  &lt;sklearn.compose._column_transformer.make_column_selector object at 0x7fb881e20610&gt;)])),
                 (&#39;lm&#39;, LinearRegression())])
 </pre></div>
 </div>
@@ -590,7 +576,7 @@ Missing values Y: 0
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([155120.6689059])
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([128046.72300033])
 </pre></div>
 </div>
 </div>
@@ -633,12 +619,12 @@ Missing values Y: 0
       <td>2902</td>
     </tr>
     <tr>
-      <th>70</th>
-      <td>2637</td>
+      <th>71</th>
+      <td>2165</td>
     </tr>
     <tr>
-      <th>68</th>
-      <td>1661</td>
+      <th>69</th>
+      <td>1094</td>
     </tr>
     <tr>
       <th>15</th>
@@ -666,32 +652,32 @@ Missing values Y: 0
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([ 587175.78697063,  539300.9370662 ,  362976.96156915,
-        559715.49570469,  484561.01434529,  481489.79755897,
-        455474.78478072,  771810.11377184,  513105.26447699,
-        636495.91536273,  557908.89759509,  576697.51793494,
-        426930.53464902,  460894.57910952,  415187.64693662,
-        586633.80753775,  260542.84875478, 1179017.32767589,
-        647154.84420938,  613371.45955984,  659078.39173274,
-        576155.53850206,  376165.12776924,  412477.74977222,
-        499013.7992221 ,  650045.40118474,  692861.77638228,
-        265240.00383974,  765487.02038824,  574168.2805815 ,
-        440660.68028199,  592776.24111039,  447164.43347655,
-        771810.11377184,  720502.72745917,  769100.21660744,
-        470469.54909041,  460894.57910952,  534242.46235932,
-        549417.88647997,  743265.86364015,  488174.21056449,
-        504794.91317282,  427111.19445998,  461255.89873144,
-        846061.29607644,  501001.05714266,  573626.30114862,
-        599821.97373783,  443912.55687927,  593498.88035423,
-        591511.62243367,  595666.79808575,  773074.73244856,
-        563509.35173485,  297758.76981256,  768196.91755264,
-        460352.59967664,  482393.09661377,  652574.63853818,
-        451319.60912864,  519247.69804963,  871353.66961085,
-        778675.18658832,  478418.58077265,  378152.3856898 ,
-        566219.24889925,  879483.36110406,  687983.96148636,
-        443731.89706831,  541830.17441964,  422775.35899694,
-        318715.30788393,  697016.95203436,  454029.50629304,
-        635411.95649697,  663233.56738482,  755731.39059639])
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([ 576492.77646789,  471912.55194036,  319937.7616161 ,
+        554923.99203345,  495893.63463392,  493481.33637481,
+        473047.75112112,  626583.44031894,  518313.81845394,
+        477588.54784417,  718676.4738581 ,  568262.58240738,
+        450627.56730111,  477304.74804898,  441404.07395743,
+        576067.07677511,  538889.30360521, 1041356.84098918,
+        623603.54246944,  502137.2301281 ,  632968.93571071,
+        567836.8827146 ,  410753.69607691,  439275.57549351,
+        507245.62644152,  721514.47181   ,  659504.21656098,
+        323627.15895357,  716547.97539418,  566275.98384105,
+        461411.95951833,  580891.67329334,  466520.35583175,
+        721514.47181   ,  463966.15767504,  719385.97334608,
+        625873.94083096,  477304.74804898,  540875.90217154,
+        546835.69787053,  699094.28798999,  498731.63258582,
+        511786.42316456,  450769.46719871,  508806.52531507,
+        779835.32972156,  400395.00355247,  457580.66228327,
+        586425.76929955,  484825.44262151,  581459.27288372,
+        579898.37401017,  583162.07165486,  534916.10647255,
+        557903.88988295,  349169.14052067,  636232.6333554 ,
+        476879.04835619,  859157.37247717,  627860.53939729,
+        469784.05347644,  523138.41497217,  799701.31538486,
+        726906.66791862,  491069.03811569,  412314.59495046,
+        560032.38834687,  655672.91932592,  588979.96745626,
+        806086.81077664,  841419.8852778 ,  365629.52864169,
+        565850.28414827,  597068.26161917,  614380.04912576,
+        553504.9930575 ,  708885.38092405])
 </pre></div>
 </div>
 </div>
@@ -705,7 +691,7 @@ Missing values Y: 0
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>0.5560009346032928
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>0.35694914972541525
 </pre></div>
 </div>
 </div>
@@ -719,7 +705,7 @@ Missing values Y: 0
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>19215242600.426193
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>29537647395.092514
 </pre></div>
 </div>
 </div>
@@ -732,7 +718,7 @@ Missing values Y: 0
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>138619.0556901402
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>171865.20123367765
 </pre></div>
 </div>
 </div>
@@ -804,20 +790,20 @@ Missing values Y: 0
 </div><div class="output text_html"><div>
 
 
-            <div id="e4ad141e-f041-43f3-954a-e2ed0b2c932d" class="plotly-graph-div" style="height:525px; width:100%;"></div>
+            <div id="9d2a72ed-4720-42b9-8611-2d0cf497ec73" class="plotly-graph-div" style="height:525px; width:100%;"></div>
             <script type="text/javascript">
                 require(["plotly"], function(Plotly) {
                     window.PLOTLYENV=window.PLOTLYENV || {};
 
-                if (document.getElementById("e4ad141e-f041-43f3-954a-e2ed0b2c932d")) {
+                if (document.getElementById("9d2a72ed-4720-42b9-8611-2d0cf497ec73")) {
                     Plotly.newPlot(
-                        'e4ad141e-f041-43f3-954a-e2ed0b2c932d',
-                        [{"hovertemplate": "x=%{x}<br>y=%{y}<extra></extra>", "legendgroup": "", "marker": {"color": "#636efa", "opacity": 0.65, "symbol": "circle"}, "mode": "markers", "name": "", "showlegend": false, "type": "scatter", "x": [2902, 2637, 1661, 2750, 2334, 2317, 2173, 3924, 2492, 3175, 2740, 2844, 2015, 2203, 1950, 2899, 1094, 6178, 3234, 3047, 3300, 2841, 1734, 1935, 2414, 3250, 3487, 1120, 3889, 2830, 2091, 2933, 2127, 3924, 3640, 3909, 2256, 2203, 2609, 2693, 3766, 2354, 2446, 2016, 2205, 4335, 2425, 2827, 2972, 2109, 2937, 2926, 2949, 3931, 2771, 1300, 3904, 2200, 2322, 3264, 2150, 2526, 4475, 3962, 2300, 1745, 2786, 4520, 3460, 2108, 2651, 1992, 1416, 3510, 2165, 3169, 3323, 3835], "xaxis": "x", "y": [525000, 520000, 412500, 610000, 535000, 415000, 650000, 1020000, 546000, 609000, 541000, 462000, 305000, 480000, 456000, 812000, 105000, 1250000, 452500, 650000, 600000, 557450, 150000, 342500, 290000, 750000, 603000, 199500, 580000, 689000, 680000, 900000, 465000, 697500, 552500, 1270000, 525000, 615000, 485000, 577000, 674500, 521000, 705000, 339000, 565000, 915000, 475000, 580000, 490000, 550000, 535000, 579000, 416000, 567000, 400000, 265000, 815000, 450000, 559000, 460000, 481000, 801000, 1030000, 863000, 645000, 420000, 652000, 540000, 650000, 285000, 517000, 360000, 270000, 509620, 540000, 631500, 590000, 725000], "yaxis": "y"}, {"hovertemplate": "<b>OLS trendline</b><br>y = 180.66 * x + 62901<br>R<sup>2</sup>=0.556001<br><br>x=%{x}<br>y=%{y} <b>(trend)</b><extra></extra>", "legendgroup": "", "line": {"color": "darkred"}, "marker": {"color": "#636efa", "symbol": "circle"}, "mode": "lines", "name": "", "showlegend": false, "type": "scatter", "x": [1094, 1120, 1300, 1416, 1661, 1734, 1745, 1935, 1950, 1992, 2015, 2016, 2091, 2108, 2109, 2127, 2150, 2165, 2173, 2200, 2203, 2203, 2205, 2256, 2300, 2317, 2322, 2334, 2354, 2414, 2425, 2446, 2492, 2526, 2609, 2637, 2651, 2693, 2740, 2750, 2771, 2786, 2827, 2830, 2841, 2844, 2899, 2902, 2926, 2933, 2937, 2949, 2972, 3047, 3169, 3175, 3234, 3250, 3264, 3300, 3323, 3460, 3487, 3510, 3640, 3766, 3835, 3889, 3904, 3909, 3924, 3924, 3931, 3962, 4335, 4475, 4520, 6178], "xaxis": "x", "y": [260542.84875477798, 265240.00383974036, 297758.7698125571, 318715.30788392783, 362976.96156915056, 376165.1277692373, 378152.38568979834, 412477.74977221596, 415187.6469366174, 422775.35899694124, 426930.5346490234, 427111.1944599835, 440660.68028199044, 443731.89706831204, 443912.5568792721, 447164.43347655376, 451319.6091286359, 454029.5062930373, 455474.78478071804, 460352.5996766406, 460894.5791095208, 460894.5791095208, 461255.898731441, 470469.54909040575, 478418.58077264985, 481489.7975589714, 482393.09661377186, 484561.014345293, 488174.21056449483, 499013.7992221004, 501001.0571426614, 504794.9131728234, 513105.26447698765, 519247.6980496308, 534242.4623593185, 539300.9370662011, 541830.1744196423, 549417.8864799662, 557908.8975950907, 559715.4957046915, 563509.3517348535, 566219.2488992548, 573626.3011486187, 574168.280581499, 576155.53850206, 576697.5179349403, 586633.8075377453, 587175.7869706256, 591511.6224336679, 592776.2411103885, 593498.8803542289, 595666.79808575, 599821.9737378322, 613371.4595598391, 635411.9564969704, 636495.915362731, 647154.8442093764, 650045.4011847379, 652574.6385381792, 659078.3917327425, 663233.5673848246, 687983.9614863574, 692861.7763822799, 697016.952034362, 720502.7274591741, 743265.8636401457, 755731.3905963922, 765487.0203882372, 768196.9175526386, 769100.216607439, 771810.1137718405, 771810.1137718405, 773074.7324485611, 778675.1865883239, 846061.2960764385, 871353.6696108516, 879483.3611040557, 1179017.3276758897], "yaxis": "y"}],
+                        '9d2a72ed-4720-42b9-8611-2d0cf497ec73',
+                        [{"hovertemplate": "x=%{x}<br>y=%{y}<extra></extra>", "legendgroup": "", "marker": {"color": "#636efa", "opacity": 0.65, "symbol": "circle"}, "mode": "markers", "name": "", "showlegend": false, "type": "scatter", "x": [2902, 2165, 1094, 2750, 2334, 2317, 2173, 3255, 2492, 2205, 3904, 2844, 2015, 2203, 1950, 2899, 2637, 6178, 3234, 2378, 3300, 2841, 1734, 1935, 2414, 3924, 3487, 1120, 3889, 2830, 2091, 2933, 2127, 3924, 2109, 3909, 3250, 2203, 2651, 2693, 3766, 2354, 2446, 2016, 2425, 4335, 1661, 2064, 2972, 2256, 2937, 2926, 2949, 2609, 2771, 1300, 3323, 2200, 4894, 3264, 2150, 2526, 4475, 3962, 2300, 1745, 2786, 3460, 2990, 4520, 4769, 1416, 2827, 3047, 3169, 2740, 3835], "xaxis": "x", "y": [525000, 540000, 105000, 610000, 535000, 415000, 650000, 610000, 546000, 565000, 815000, 462000, 305000, 480000, 456000, 812000, 520000, 1250000, 452500, 592000, 600000, 557450, 150000, 342500, 290000, 1020000, 603000, 199500, 580000, 689000, 680000, 900000, 465000, 697500, 550000, 1270000, 750000, 615000, 517000, 577000, 674500, 521000, 705000, 339000, 475000, 915000, 412500, 392000, 490000, 525000, 535000, 579000, 416000, 485000, 400000, 265000, 590000, 450000, 95000, 460000, 481000, 801000, 1030000, 863000, 645000, 420000, 652000, 650000, 640000, 540000, 400000, 270000, 580000, 650000, 631500, 541000, 725000], "yaxis": "y"}, {"hovertemplate": "<b>OLS trendline</b><br>y = 141.9 * x + 164699<br>R<sup>2</sup>=0.356949<br><br>x=%{x}<br>y=%{y} <b>(trend)</b><extra></extra>", "legendgroup": "", "line": {"color": "darkred"}, "marker": {"color": "#636efa", "symbol": "circle"}, "mode": "lines", "name": "", "showlegend": false, "type": "scatter", "x": [1094, 1120, 1300, 1416, 1661, 1734, 1745, 1935, 1950, 2015, 2016, 2064, 2091, 2109, 2127, 2150, 2165, 2173, 2200, 2203, 2203, 2205, 2256, 2300, 2317, 2334, 2354, 2378, 2414, 2425, 2446, 2492, 2526, 2609, 2637, 2651, 2693, 2740, 2750, 2771, 2786, 2827, 2830, 2841, 2844, 2899, 2902, 2926, 2933, 2937, 2949, 2972, 2990, 3047, 3169, 3234, 3250, 3255, 3264, 3300, 3323, 3460, 3487, 3766, 3835, 3889, 3904, 3909, 3924, 3924, 3962, 4335, 4475, 4520, 4769, 4894, 6178], "xaxis": "x", "y": [319937.76161609765, 323627.1589535682, 349169.14052067185, 365629.52864169417, 400395.0035524741, 410753.6960769106, 412314.5949504558, 439275.57549350965, 441404.073957435, 450627.56730111124, 450769.4671987063, 457580.66228326724, 461411.9595183328, 463966.15767504316, 466520.3558317535, 469784.053476439, 471912.5519403643, 473047.7511211244, 476879.04835619, 477304.7480489751, 477304.7480489751, 477588.5478441651, 484825.4426215111, 491069.03811569203, 493481.33637480735, 495893.6346339227, 498731.6325858231, 502137.2301281036, 507245.6264415243, 508806.52531506954, 511786.42316456494, 518313.8184539359, 523138.4149721666, 534916.1064725532, 538889.3036052138, 540875.902171544, 546835.697870535, 553504.9930575009, 554923.9920334511, 557903.8898829466, 560032.3883468718, 565850.2841482677, 566275.9838410527, 567836.882714598, 568262.582407383, 576067.0767751092, 576492.7764678942, 579898.3740101747, 580891.6732933398, 581459.2728837199, 583162.0716548602, 586425.7692995456, 588979.967456256, 597068.2616191721, 614380.0491257645, 623603.542469441, 625873.9408309612, 626583.4403189362, 627860.5393972915, 632968.9357107122, 636232.6333553977, 655672.9193259154, 659504.216560981, 699094.2879899917, 708885.3809240481, 716547.9753941791, 718676.4738581043, 719385.9733460795, 721514.4718100049, 721514.4718100049, 726906.6679186155, 779835.3297215581, 799701.3153848611, 806086.8107766369, 841419.885277797, 859157.3724771745, 1041356.8409891804], "yaxis": "y"}],
                         {"legend": {"tracegroupgap": 0}, "margin": {"t": 60}, "template": {"data": {"bar": [{"error_x": {"color": "#2a3f5f"}, "error_y": {"color": "#2a3f5f"}, "marker": {"line": {"color": "#E5ECF6", "width": 0.5}}, "type": "bar"}], "barpolar": [{"marker": {"line": {"color": "#E5ECF6", "width": 0.5}}, "type": "barpolar"}], "carpet": [{"aaxis": {"endlinecolor": "#2a3f5f", "gridcolor": "white", "linecolor": "white", "minorgridcolor": "white", "startlinecolor": "#2a3f5f"}, "baxis": {"endlinecolor": "#2a3f5f", "gridcolor": "white", "linecolor": "white", "minorgridcolor": "white", "startlinecolor": "#2a3f5f"}, "type": "carpet"}], "choropleth": [{"colorbar": {"outlinewidth": 0, "ticks": ""}, "type": "choropleth"}], "contour": [{"colorbar": {"outlinewidth": 0, "ticks": ""}, "colorscale": [[0.0, "#0d0887"], [0.1111111111111111, "#46039f"], [0.2222222222222222, "#7201a8"], [0.3333333333333333, "#9c179e"], [0.4444444444444444, "#bd3786"], [0.5555555555555556, "#d8576b"], [0.6666666666666666, "#ed7953"], [0.7777777777777778, "#fb9f3a"], [0.8888888888888888, "#fdca26"], [1.0, "#f0f921"]], "type": "contour"}], "contourcarpet": [{"colorbar": {"outlinewidth": 0, "ticks": ""}, "type": "contourcarpet"}], "heatmap": [{"colorbar": {"outlinewidth": 0, "ticks": ""}, "colorscale": [[0.0, "#0d0887"], [0.1111111111111111, "#46039f"], [0.2222222222222222, "#7201a8"], [0.3333333333333333, "#9c179e"], [0.4444444444444444, "#bd3786"], [0.5555555555555556, "#d8576b"], [0.6666666666666666, "#ed7953"], [0.7777777777777778, "#fb9f3a"], [0.8888888888888888, "#fdca26"], [1.0, "#f0f921"]], "type": "heatmap"}], "heatmapgl": [{"colorbar": {"outlinewidth": 0, "ticks": ""}, "colorscale": [[0.0, "#0d0887"], [0.1111111111111111, "#46039f"], [0.2222222222222222, "#7201a8"], [0.3333333333333333, "#9c179e"], [0.4444444444444444, "#bd3786"], [0.5555555555555556, "#d8576b"], [0.6666666666666666, "#ed7953"], [0.7777777777777778, "#fb9f3a"], [0.8888888888888888, "#fdca26"], [1.0, "#f0f921"]], "type": "heatmapgl"}], "histogram": [{"marker": {"colorbar": {"outlinewidth": 0, "ticks": ""}}, "type": "histogram"}], "histogram2d": [{"colorbar": {"outlinewidth": 0, "ticks": ""}, "colorscale": [[0.0, "#0d0887"], [0.1111111111111111, "#46039f"], [0.2222222222222222, "#7201a8"], [0.3333333333333333, "#9c179e"], [0.4444444444444444, "#bd3786"], [0.5555555555555556, "#d8576b"], [0.6666666666666666, "#ed7953"], [0.7777777777777778, "#fb9f3a"], [0.8888888888888888, "#fdca26"], [1.0, "#f0f921"]], "type": "histogram2d"}], "histogram2dcontour": [{"colorbar": {"outlinewidth": 0, "ticks": ""}, "colorscale": [[0.0, "#0d0887"], [0.1111111111111111, "#46039f"], [0.2222222222222222, "#7201a8"], [0.3333333333333333, "#9c179e"], [0.4444444444444444, "#bd3786"], [0.5555555555555556, "#d8576b"], [0.6666666666666666, "#ed7953"], [0.7777777777777778, "#fb9f3a"], [0.8888888888888888, "#fdca26"], [1.0, "#f0f921"]], "type": "histogram2dcontour"}], "mesh3d": [{"colorbar": {"outlinewidth": 0, "ticks": ""}, "type": "mesh3d"}], "parcoords": [{"line": {"colorbar": {"outlinewidth": 0, "ticks": ""}}, "type": "parcoords"}], "pie": [{"automargin": true, "type": "pie"}], "scatter": [{"marker": {"colorbar": {"outlinewidth": 0, "ticks": ""}}, "type": "scatter"}], "scatter3d": [{"line": {"colorbar": {"outlinewidth": 0, "ticks": ""}}, "marker": {"colorbar": {"outlinewidth": 0, "ticks": ""}}, "type": "scatter3d"}], "scattercarpet": [{"marker": {"colorbar": {"outlinewidth": 0, "ticks": ""}}, "type": "scattercarpet"}], "scattergeo": [{"marker": {"colorbar": {"outlinewidth": 0, "ticks": ""}}, "type": "scattergeo"}], "scattergl": [{"marker": {"colorbar": {"outlinewidth": 0, "ticks": ""}}, "type": "scattergl"}], "scattermapbox": [{"marker": {"colorbar": {"outlinewidth": 0, "ticks": ""}}, "type": "scattermapbox"}], "scatterpolar": [{"marker": {"colorbar": {"outlinewidth": 0, "ticks": ""}}, "type": "scatterpolar"}], "scatterpolargl": [{"marker": {"colorbar": {"outlinewidth": 0, "ticks": ""}}, "type": "scatterpolargl"}], "scatterternary": [{"marker": {"colorbar": {"outlinewidth": 0, "ticks": ""}}, "type": "scatterternary"}], "surface": [{"colorbar": {"outlinewidth": 0, "ticks": ""}, "colorscale": [[0.0, "#0d0887"], [0.1111111111111111, "#46039f"], [0.2222222222222222, "#7201a8"], [0.3333333333333333, "#9c179e"], [0.4444444444444444, "#bd3786"], [0.5555555555555556, "#d8576b"], [0.6666666666666666, "#ed7953"], [0.7777777777777778, "#fb9f3a"], [0.8888888888888888, "#fdca26"], [1.0, "#f0f921"]], "type": "surface"}], "table": [{"cells": {"fill": {"color": "#EBF0F8"}, "line": {"color": "white"}}, "header": {"fill": {"color": "#C8D4E3"}, "line": {"color": "white"}}, "type": "table"}]}, "layout": {"annotationdefaults": {"arrowcolor": "#2a3f5f", "arrowhead": 0, "arrowwidth": 1}, "coloraxis": {"colorbar": {"outlinewidth": 0, "ticks": ""}}, "colorscale": {"diverging": [[0, "#8e0152"], [0.1, "#c51b7d"], [0.2, "#de77ae"], [0.3, "#f1b6da"], [0.4, "#fde0ef"], [0.5, "#f7f7f7"], [0.6, "#e6f5d0"], [0.7, "#b8e186"], [0.8, "#7fbc41"], [0.9, "#4d9221"], [1, "#276419"]], "sequential": [[0.0, "#0d0887"], [0.1111111111111111, "#46039f"], [0.2222222222222222, "#7201a8"], [0.3333333333333333, "#9c179e"], [0.4444444444444444, "#bd3786"], [0.5555555555555556, "#d8576b"], [0.6666666666666666, "#ed7953"], [0.7777777777777778, "#fb9f3a"], [0.8888888888888888, "#fdca26"], [1.0, "#f0f921"]], "sequentialminus": [[0.0, "#0d0887"], [0.1111111111111111, "#46039f"], [0.2222222222222222, "#7201a8"], [0.3333333333333333, "#9c179e"], [0.4444444444444444, "#bd3786"], [0.5555555555555556, "#d8576b"], [0.6666666666666666, "#ed7953"], [0.7777777777777778, "#fb9f3a"], [0.8888888888888888, "#fdca26"], [1.0, "#f0f921"]]}, "colorway": ["#636efa", "#EF553B", "#00cc96", "#ab63fa", "#FFA15A", "#19d3f3", "#FF6692", "#B6E880", "#FF97FF", "#FECB52"], "font": {"color": "#2a3f5f"}, "geo": {"bgcolor": "white", "lakecolor": "white", "landcolor": "#E5ECF6", "showlakes": true, "showland": true, "subunitcolor": "white"}, "hoverlabel": {"align": "left"}, "hovermode": "closest", "mapbox": {"style": "light"}, "paper_bgcolor": "white", "plot_bgcolor": "#E5ECF6", "polar": {"angularaxis": {"gridcolor": "white", "linecolor": "white", "ticks": ""}, "bgcolor": "#E5ECF6", "radialaxis": {"gridcolor": "white", "linecolor": "white", "ticks": ""}}, "scene": {"xaxis": {"backgroundcolor": "#E5ECF6", "gridcolor": "white", "gridwidth": 2, "linecolor": "white", "showbackground": true, "ticks": "", "zerolinecolor": "white"}, "yaxis": {"backgroundcolor": "#E5ECF6", "gridcolor": "white", "gridwidth": 2, "linecolor": "white", "showbackground": true, "ticks": "", "zerolinecolor": "white"}, "zaxis": {"backgroundcolor": "#E5ECF6", "gridcolor": "white", "gridwidth": 2, "linecolor": "white", "showbackground": true, "ticks": "", "zerolinecolor": "white"}}, "shapedefaults": {"line": {"color": "#2a3f5f"}}, "ternary": {"aaxis": {"gridcolor": "white", "linecolor": "white", "ticks": ""}, "baxis": {"gridcolor": "white", "linecolor": "white", "ticks": ""}, "bgcolor": "#E5ECF6", "caxis": {"gridcolor": "white", "linecolor": "white", "ticks": ""}}, "title": {"x": 0.05}, "xaxis": {"automargin": true, "gridcolor": "white", "linecolor": "white", "ticks": "", "title": {"standoff": 15}, "zerolinecolor": "white", "zerolinewidth": 2}, "yaxis": {"automargin": true, "gridcolor": "white", "linecolor": "white", "ticks": "", "title": {"standoff": 15}, "zerolinecolor": "white", "zerolinewidth": 2}}}, "xaxis": {"anchor": "y", "domain": [0.0, 1.0], "title": {"text": "x"}}, "yaxis": {"anchor": "x", "domain": [0.0, 1.0], "title": {"text": "y"}}},
                         {"responsive": true}
                     ).then(function(){
 
-var gd = document.getElementById('e4ad141e-f041-43f3-954a-e2ed0b2c932d');
+var gd = document.getElementById('9d2a72ed-4720-42b9-8611-2d0cf497ec73');
 var x = new MutationObserver(function (mutations, observer) {{
         var display = window.getComputedStyle(gd).display;
         if (!display || display === 'none') {{
@@ -874,8 +860,8 @@ if (outputEl) {{
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>MSE: 63888283048.62581
-RMSE: 252761.31636115882
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>MSE: 23209825917.075768
+RMSE: 152347.7138557575
 </pre></div>
 </div>
 </div>
@@ -892,20 +878,20 @@ RMSE: 252761.31636115882
 <div class="output text_html"><div>
 
 
-            <div id="0c654d4f-2e47-452c-8e09-2cd3ccd0826d" class="plotly-graph-div" style="height:525px; width:100%;"></div>
+            <div id="59448055-0554-4e3d-85e5-d7cb31fea13f" class="plotly-graph-div" style="height:525px; width:100%;"></div>
             <script type="text/javascript">
                 require(["plotly"], function(Plotly) {
                     window.PLOTLYENV=window.PLOTLYENV || {};
 
-                if (document.getElementById("0c654d4f-2e47-452c-8e09-2cd3ccd0826d")) {
+                if (document.getElementById("59448055-0554-4e3d-85e5-d7cb31fea13f")) {
                     Plotly.newPlot(
-                        '0c654d4f-2e47-452c-8e09-2cd3ccd0826d',
-                        [{"hovertemplate": "x=%{x}<br>y=%{y}<extra></extra>", "legendgroup": "", "marker": {"color": "#636efa", "opacity": 0.65, "symbol": "circle"}, "mode": "markers", "name": "", "showlegend": false, "type": "scatter", "x": [2064, 1621, 2171, 3831, 3255, 4769, 4894, 2086, 2091, 6040, 2422, 2990, 2514, 1831, 1620, 1772, 1932, 2200, 2081, 2378], "xaxis": "x", "y": [392000, 368000, 473000, 785000, 610000, 400000, 95000, 425000, 540000, 1520000, 475000, 640000, 600000, 385000, 155000, 428500, 525000, 671500, 535000, 592000], "yaxis": "y"}, {"hovertemplate": "<b>OLS trendline</b><br>y = 116.147 * x + 213889<br>R<sup>2</sup>=0.252728<br><br>x=%{x}<br>y=%{y} <b>(trend)</b><extra></extra>", "legendgroup": "", "line": {"color": "darkred"}, "marker": {"color": "#636efa", "symbol": "circle"}, "mode": "lines", "name": "", "showlegend": false, "type": "scatter", "x": [1620, 1621, 1772, 1831, 1932, 2064, 2081, 2086, 2091, 2171, 2200, 2378, 2422, 2514, 2990, 3255, 3831, 4769, 4894, 6040], "xaxis": "x", "y": [402047.4179866018, 402163.5650690072, 419701.7745122191, 426554.4523741363, 438285.3076970794, 453616.72257458913, 455591.2229754805, 456171.9583875074, 456752.6937995343, 466044.4603919644, 469412.72578172036, 490086.9064498774, 495197.37807571405, 505882.9096570087, 561168.920881968, 591947.8977193929, 658848.61718489, 767794.5804811334, 782312.9657818056, 915417.5222183673], "yaxis": "y"}],
+                        '59448055-0554-4e3d-85e5-d7cb31fea13f',
+                        [{"hovertemplate": "x=%{x}<br>y=%{y}<extra></extra>", "legendgroup": "", "marker": {"color": "#636efa", "opacity": 0.65, "symbol": "circle"}, "mode": "markers", "name": "", "showlegend": false, "type": "scatter", "x": [2322, 1621, 2171, 3831, 1992, 3931, 3175, 2086, 2091, 6040, 2422, 3640, 2514, 1831, 1620, 1772, 1932, 2200, 2081, 2108], "xaxis": "x", "y": [559000, 368000, 473000, 785000, 360000, 567000, 609000, 425000, 540000, 1520000, 475000, 552500, 600000, 385000, 155000, 428500, 525000, 671500, 535000, 285000], "yaxis": "y"}, {"hovertemplate": "<b>OLS trendline</b><br>y = 218.121 * x + -19426.7<br>R<sup>2</sup>=0.758514<br><br>x=%{x}<br>y=%{y} <b>(trend)</b><extra></extra>", "legendgroup": "", "line": {"color": "darkred"}, "marker": {"color": "#636efa", "symbol": "circle"}, "mode": "lines", "name": "", "showlegend": false, "type": "scatter", "x": [1620, 1621, 1772, 1831, 1932, 1992, 2081, 2086, 2091, 2108, 2171, 2200, 2322, 2422, 2514, 3175, 3640, 3831, 3931, 6040], "xaxis": "x", "y": [333928.60633012024, 334146.72687139513, 367082.92860390496, 379952.040539124, 401982.21520788886, 415069.4476843828, 434482.17585784884, 435572.7785642234, 436663.38127059786, 440371.43047227117, 454113.02457258984, 460438.5202695619, 487049.2263050996, 508861.2804325895, 528928.3702298803, 673106.0480125889, 774532.0997054172, 816193.1230889228, 838005.1772164127, 1298021.3987651758], "yaxis": "y"}],
                         {"legend": {"tracegroupgap": 0}, "margin": {"t": 60}, "template": {"data": {"bar": [{"error_x": {"color": "#2a3f5f"}, "error_y": {"color": "#2a3f5f"}, "marker": {"line": {"color": "#E5ECF6", "width": 0.5}}, "type": "bar"}], "barpolar": [{"marker": {"line": {"color": "#E5ECF6", "width": 0.5}}, "type": "barpolar"}], "carpet": [{"aaxis": {"endlinecolor": "#2a3f5f", "gridcolor": "white", "linecolor": "white", "minorgridcolor": "white", "startlinecolor": "#2a3f5f"}, "baxis": {"endlinecolor": "#2a3f5f", "gridcolor": "white", "linecolor": "white", "minorgridcolor": "white", "startlinecolor": "#2a3f5f"}, "type": "carpet"}], "choropleth": [{"colorbar": {"outlinewidth": 0, "ticks": ""}, "type": "choropleth"}], "contour": [{"colorbar": {"outlinewidth": 0, "ticks": ""}, "colorscale": [[0.0, "#0d0887"], [0.1111111111111111, "#46039f"], [0.2222222222222222, "#7201a8"], [0.3333333333333333, "#9c179e"], [0.4444444444444444, "#bd3786"], [0.5555555555555556, "#d8576b"], [0.6666666666666666, "#ed7953"], [0.7777777777777778, "#fb9f3a"], [0.8888888888888888, "#fdca26"], [1.0, "#f0f921"]], "type": "contour"}], "contourcarpet": [{"colorbar": {"outlinewidth": 0, "ticks": ""}, "type": "contourcarpet"}], "heatmap": [{"colorbar": {"outlinewidth": 0, "ticks": ""}, "colorscale": [[0.0, "#0d0887"], [0.1111111111111111, "#46039f"], [0.2222222222222222, "#7201a8"], [0.3333333333333333, "#9c179e"], [0.4444444444444444, "#bd3786"], [0.5555555555555556, "#d8576b"], [0.6666666666666666, "#ed7953"], [0.7777777777777778, "#fb9f3a"], [0.8888888888888888, "#fdca26"], [1.0, "#f0f921"]], "type": "heatmap"}], "heatmapgl": [{"colorbar": {"outlinewidth": 0, "ticks": ""}, "colorscale": [[0.0, "#0d0887"], [0.1111111111111111, "#46039f"], [0.2222222222222222, "#7201a8"], [0.3333333333333333, "#9c179e"], [0.4444444444444444, "#bd3786"], [0.5555555555555556, "#d8576b"], [0.6666666666666666, "#ed7953"], [0.7777777777777778, "#fb9f3a"], [0.8888888888888888, "#fdca26"], [1.0, "#f0f921"]], "type": "heatmapgl"}], "histogram": [{"marker": {"colorbar": {"outlinewidth": 0, "ticks": ""}}, "type": "histogram"}], "histogram2d": [{"colorbar": {"outlinewidth": 0, "ticks": ""}, "colorscale": [[0.0, "#0d0887"], [0.1111111111111111, "#46039f"], [0.2222222222222222, "#7201a8"], [0.3333333333333333, "#9c179e"], [0.4444444444444444, "#bd3786"], [0.5555555555555556, "#d8576b"], [0.6666666666666666, "#ed7953"], [0.7777777777777778, "#fb9f3a"], [0.8888888888888888, "#fdca26"], [1.0, "#f0f921"]], "type": "histogram2d"}], "histogram2dcontour": [{"colorbar": {"outlinewidth": 0, "ticks": ""}, "colorscale": [[0.0, "#0d0887"], [0.1111111111111111, "#46039f"], [0.2222222222222222, "#7201a8"], [0.3333333333333333, "#9c179e"], [0.4444444444444444, "#bd3786"], [0.5555555555555556, "#d8576b"], [0.6666666666666666, "#ed7953"], [0.7777777777777778, "#fb9f3a"], [0.8888888888888888, "#fdca26"], [1.0, "#f0f921"]], "type": "histogram2dcontour"}], "mesh3d": [{"colorbar": {"outlinewidth": 0, "ticks": ""}, "type": "mesh3d"}], "parcoords": [{"line": {"colorbar": {"outlinewidth": 0, "ticks": ""}}, "type": "parcoords"}], "pie": [{"automargin": true, "type": "pie"}], "scatter": [{"marker": {"colorbar": {"outlinewidth": 0, "ticks": ""}}, "type": "scatter"}], "scatter3d": [{"line": {"colorbar": {"outlinewidth": 0, "ticks": ""}}, "marker": {"colorbar": {"outlinewidth": 0, "ticks": ""}}, "type": "scatter3d"}], "scattercarpet": [{"marker": {"colorbar": {"outlinewidth": 0, "ticks": ""}}, "type": "scattercarpet"}], "scattergeo": [{"marker": {"colorbar": {"outlinewidth": 0, "ticks": ""}}, "type": "scattergeo"}], "scattergl": [{"marker": {"colorbar": {"outlinewidth": 0, "ticks": ""}}, "type": "scattergl"}], "scattermapbox": [{"marker": {"colorbar": {"outlinewidth": 0, "ticks": ""}}, "type": "scattermapbox"}], "scatterpolar": [{"marker": {"colorbar": {"outlinewidth": 0, "ticks": ""}}, "type": "scatterpolar"}], "scatterpolargl": [{"marker": {"colorbar": {"outlinewidth": 0, "ticks": ""}}, "type": "scatterpolargl"}], "scatterternary": [{"marker": {"colorbar": {"outlinewidth": 0, "ticks": ""}}, "type": "scatterternary"}], "surface": [{"colorbar": {"outlinewidth": 0, "ticks": ""}, "colorscale": [[0.0, "#0d0887"], [0.1111111111111111, "#46039f"], [0.2222222222222222, "#7201a8"], [0.3333333333333333, "#9c179e"], [0.4444444444444444, "#bd3786"], [0.5555555555555556, "#d8576b"], [0.6666666666666666, "#ed7953"], [0.7777777777777778, "#fb9f3a"], [0.8888888888888888, "#fdca26"], [1.0, "#f0f921"]], "type": "surface"}], "table": [{"cells": {"fill": {"color": "#EBF0F8"}, "line": {"color": "white"}}, "header": {"fill": {"color": "#C8D4E3"}, "line": {"color": "white"}}, "type": "table"}]}, "layout": {"annotationdefaults": {"arrowcolor": "#2a3f5f", "arrowhead": 0, "arrowwidth": 1}, "coloraxis": {"colorbar": {"outlinewidth": 0, "ticks": ""}}, "colorscale": {"diverging": [[0, "#8e0152"], [0.1, "#c51b7d"], [0.2, "#de77ae"], [0.3, "#f1b6da"], [0.4, "#fde0ef"], [0.5, "#f7f7f7"], [0.6, "#e6f5d0"], [0.7, "#b8e186"], [0.8, "#7fbc41"], [0.9, "#4d9221"], [1, "#276419"]], "sequential": [[0.0, "#0d0887"], [0.1111111111111111, "#46039f"], [0.2222222222222222, "#7201a8"], [0.3333333333333333, "#9c179e"], [0.4444444444444444, "#bd3786"], [0.5555555555555556, "#d8576b"], [0.6666666666666666, "#ed7953"], [0.7777777777777778, "#fb9f3a"], [0.8888888888888888, "#fdca26"], [1.0, "#f0f921"]], "sequentialminus": [[0.0, "#0d0887"], [0.1111111111111111, "#46039f"], [0.2222222222222222, "#7201a8"], [0.3333333333333333, "#9c179e"], [0.4444444444444444, "#bd3786"], [0.5555555555555556, "#d8576b"], [0.6666666666666666, "#ed7953"], [0.7777777777777778, "#fb9f3a"], [0.8888888888888888, "#fdca26"], [1.0, "#f0f921"]]}, "colorway": ["#636efa", "#EF553B", "#00cc96", "#ab63fa", "#FFA15A", "#19d3f3", "#FF6692", "#B6E880", "#FF97FF", "#FECB52"], "font": {"color": "#2a3f5f"}, "geo": {"bgcolor": "white", "lakecolor": "white", "landcolor": "#E5ECF6", "showlakes": true, "showland": true, "subunitcolor": "white"}, "hoverlabel": {"align": "left"}, "hovermode": "closest", "mapbox": {"style": "light"}, "paper_bgcolor": "white", "plot_bgcolor": "#E5ECF6", "polar": {"angularaxis": {"gridcolor": "white", "linecolor": "white", "ticks": ""}, "bgcolor": "#E5ECF6", "radialaxis": {"gridcolor": "white", "linecolor": "white", "ticks": ""}}, "scene": {"xaxis": {"backgroundcolor": "#E5ECF6", "gridcolor": "white", "gridwidth": 2, "linecolor": "white", "showbackground": true, "ticks": "", "zerolinecolor": "white"}, "yaxis": {"backgroundcolor": "#E5ECF6", "gridcolor": "white", "gridwidth": 2, "linecolor": "white", "showbackground": true, "ticks": "", "zerolinecolor": "white"}, "zaxis": {"backgroundcolor": "#E5ECF6", "gridcolor": "white", "gridwidth": 2, "linecolor": "white", "showbackground": true, "ticks": "", "zerolinecolor": "white"}}, "shapedefaults": {"line": {"color": "#2a3f5f"}}, "ternary": {"aaxis": {"gridcolor": "white", "linecolor": "white", "ticks": ""}, "baxis": {"gridcolor": "white", "linecolor": "white", "ticks": ""}, "bgcolor": "#E5ECF6", "caxis": {"gridcolor": "white", "linecolor": "white", "ticks": ""}}, "title": {"x": 0.05}, "xaxis": {"automargin": true, "gridcolor": "white", "linecolor": "white", "ticks": "", "title": {"standoff": 15}, "zerolinecolor": "white", "zerolinewidth": 2}, "yaxis": {"automargin": true, "gridcolor": "white", "linecolor": "white", "ticks": "", "title": {"standoff": 15}, "zerolinecolor": "white", "zerolinewidth": 2}}}, "xaxis": {"anchor": "y", "domain": [0.0, 1.0], "title": {"text": "x"}}, "yaxis": {"anchor": "x", "domain": [0.0, 1.0], "title": {"text": "y"}}},
                         {"responsive": true}
                     ).then(function(){
 
-var gd = document.getElementById('0c654d4f-2e47-452c-8e09-2cd3ccd0826d');
+var gd = document.getElementById('59448055-0554-4e3d-85e5-d7cb31fea13f');
 var x = new MutationObserver(function (mutations, observer) {{
         var display = window.getComputedStyle(gd).display;
         if (!display || display === 'none') {{
@@ -954,20 +940,20 @@ if (outputEl) {{
 <div class="output text_html"><div>
 
 
-            <div id="7bf93459-9551-45c2-88b4-0e6b7402e46b" class="plotly-graph-div" style="height:525px; width:100%;"></div>
+            <div id="f62f9a59-53d9-42ad-816c-511b450d942a" class="plotly-graph-div" style="height:525px; width:100%;"></div>
             <script type="text/javascript">
                 require(["plotly"], function(Plotly) {
                     window.PLOTLYENV=window.PLOTLYENV || {};
 
-                if (document.getElementById("7bf93459-9551-45c2-88b4-0e6b7402e46b")) {
+                if (document.getElementById("f62f9a59-53d9-42ad-816c-511b450d942a")) {
                     Plotly.newPlot(
-                        '7bf93459-9551-45c2-88b4-0e6b7402e46b',
-                        [{"mode": "markers", "name": "train", "type": "scatter", "x": [2902, 2637, 1661, 2750, 2334, 2317, 2173, 3924, 2492, 3175, 2740, 2844, 2015, 2203, 1950, 2899, 1094, 6178, 3234, 3047, 3300, 2841, 1734, 1935, 2414, 3250, 3487, 1120, 3889, 2830, 2091, 2933, 2127, 3924, 3640, 3909, 2256, 2203, 2609, 2693, 3766, 2354, 2446, 2016, 2205, 4335, 2425, 2827, 2972, 2109, 2937, 2926, 2949, 3931, 2771, 1300, 3904, 2200, 2322, 3264, 2150, 2526, 4475, 3962, 2300, 1745, 2786, 4520, 3460, 2108, 2651, 1992, 1416, 3510, 2165, 3169, 3323, 3835], "y": [525000, 520000, 412500, 610000, 535000, 415000, 650000, 1020000, 546000, 609000, 541000, 462000, 305000, 480000, 456000, 812000, 105000, 1250000, 452500, 650000, 600000, 557450, 150000, 342500, 290000, 750000, 603000, 199500, 580000, 689000, 680000, 900000, 465000, 697500, 552500, 1270000, 525000, 615000, 485000, 577000, 674500, 521000, 705000, 339000, 565000, 915000, 475000, 580000, 490000, 550000, 535000, 579000, 416000, 567000, 400000, 265000, 815000, 450000, 559000, 460000, 481000, 801000, 1030000, 863000, 645000, 420000, 652000, 540000, 650000, 285000, 517000, 360000, 270000, 509620, 540000, 631500, 590000, 725000]}, {"mode": "markers", "name": "test", "type": "scatter", "x": [2064, 1621, 2171, 3831, 3255, 4769, 4894, 2086, 2091, 6040, 2422, 2990, 2514, 1831, 1620, 1772, 1932, 2200, 2081, 2378], "y": [392000, 368000, 473000, 785000, 610000, 400000, 95000, 425000, 540000, 1520000, 475000, 640000, 600000, 385000, 155000, 428500, 525000, 671500, 535000, 592000]}, {"name": "prediction", "type": "scatter", "x": [1094.0, 1145.3535353535353, 1196.7070707070707, 1248.060606060606, 1299.4141414141413, 1350.7676767676767, 1402.121212121212, 1453.4747474747476, 1504.828282828283, 1556.1818181818182, 1607.5353535353536, 1658.888888888889, 1710.2424242424242, 1761.5959595959596, 1812.9494949494951, 1864.3030303030305, 1915.6565656565658, 1967.0101010101012, 2018.3636363636365, 2069.717171717172, 2121.070707070707, 2172.4242424242425, 2223.777777777778, 2275.131313131313, 2326.4848484848485, 2377.838383838384, 2429.191919191919, 2480.545454545455, 2531.8989898989903, 2583.2525252525256, 2634.606060606061, 2685.9595959595963, 2737.3131313131316, 2788.666666666667, 2840.0202020202023, 2891.3737373737376, 2942.727272727273, 2994.0808080808083, 3045.4343434343436, 3096.787878787879, 3148.1414141414143, 3199.4949494949497, 3250.848484848485, 3302.2020202020203, 3353.5555555555557, 3404.909090909091, 3456.2626262626263, 3507.6161616161617, 3558.969696969697, 3610.3232323232323, 3661.6767676767677, 3713.030303030303, 3764.3838383838383, 3815.7373737373737, 3867.0909090909095, 3918.444444444445, 3969.79797979798, 4021.1515151515155, 4072.505050505051, 4123.858585858587, 4175.212121212122, 4226.565656565657, 4277.919191919193, 4329.272727272728, 4380.626262626263, 4431.979797979799, 4483.333333333334, 4534.686868686869, 4586.040404040405, 4637.39393939394, 4688.747474747475, 4740.101010101011, 4791.454545454546, 4842.808080808081, 4894.161616161617, 4945.515151515152, 4996.868686868687, 5048.222222222223, 5099.575757575758, 5150.929292929293, 5202.282828282829, 5253.636363636364, 5304.989898989899, 5356.343434343435, 5407.69696969697, 5459.050505050505, 5510.404040404041, 5561.757575757576, 5613.111111111111, 5664.464646464647, 5715.818181818182, 5767.171717171717, 5818.525252525253, 5869.878787878788, 5921.232323232323, 5972.585858585859, 6023.939393939394, 6075.292929292929, 6126.646464646465, 6178.0], "y": [260542.84875477792, 269820.36874388007, 279097.88873298216, 288375.4087220843, 297652.92871118645, 306930.44870028854, 316207.9686893907, 325485.4886784929, 334763.008667595, 344040.52865669713, 353318.0486457993, 362595.5686349014, 371873.0886240035, 381150.6086131056, 390428.1286022079, 399705.64859130996, 408983.1685804121, 418260.6885695142, 427538.20855861634, 436815.7285477185, 446093.24853682064, 455370.76852592273, 464648.2885150249, 473925.808504127, 483203.3284932291, 492480.84848233126, 501758.3684714334, 511035.8884605356, 520313.40844963776, 529590.9284387399, 538868.448427842, 548145.9684169441, 557423.4884060463, 566701.0083951484, 575978.5283842506, 585256.0483733526, 594533.5683624548, 603811.0883515569, 613088.6083406591, 622366.1283297612, 631643.6483188634, 640921.1683079654, 650198.6882970675, 659476.2082861697, 668753.7282752718, 678031.248264374, 687308.7682534761, 696586.2882425783, 705863.8082316804, 715141.3282207826, 724418.8482098846, 733696.3681989867, 742973.8881880889, 752251.408177191, 761528.9281662932, 770806.4481553953, 780083.9681444975, 789361.4881335996, 798639.0081227018, 807916.5281118039, 817194.0481009061, 826471.5680900082, 835749.0880791104, 845026.6080682125, 854304.1280573145, 863581.6480464167, 872859.1680355188, 882136.688024621, 891414.2080137231, 900691.7280028253, 909969.2479919274, 919246.7679810296, 928524.2879701317, 937801.8079592339, 947079.327948336, 956356.8479374382, 965634.3679265402, 974911.8879156423, 984189.4079047444, 993466.9278938465, 1002744.4478829487, 1012021.9678720508, 1021299.487861153, 1030577.0078502551, 1039854.5278393573, 1049132.0478284594, 1058409.5678175616, 1067687.0878066635, 1076964.6077957659, 1086242.127784868, 1095519.64777397, 1104797.167763072, 1114074.6877521742, 1123352.2077412764, 1132629.7277303785, 1141907.2477194807, 1151184.7677085828, 1160462.287697685, 1169739.807686787, 1179017.3276758892]}],
+                        'f62f9a59-53d9-42ad-816c-511b450d942a',
+                        [{"mode": "markers", "name": "train", "type": "scatter", "x": [2902, 2165, 1094, 2750, 2334, 2317, 2173, 3255, 2492, 2205, 3904, 2844, 2015, 2203, 1950, 2899, 2637, 6178, 3234, 2378, 3300, 2841, 1734, 1935, 2414, 3924, 3487, 1120, 3889, 2830, 2091, 2933, 2127, 3924, 2109, 3909, 3250, 2203, 2651, 2693, 3766, 2354, 2446, 2016, 2425, 4335, 1661, 2064, 2972, 2256, 2937, 2926, 2949, 2609, 2771, 1300, 3323, 2200, 4894, 3264, 2150, 2526, 4475, 3962, 2300, 1745, 2786, 3460, 2990, 4520, 4769, 1416, 2827, 3047, 3169, 2740, 3835], "y": [525000, 540000, 105000, 610000, 535000, 415000, 650000, 610000, 546000, 565000, 815000, 462000, 305000, 480000, 456000, 812000, 520000, 1250000, 452500, 592000, 600000, 557450, 150000, 342500, 290000, 1020000, 603000, 199500, 580000, 689000, 680000, 900000, 465000, 697500, 550000, 1270000, 750000, 615000, 517000, 577000, 674500, 521000, 705000, 339000, 475000, 915000, 412500, 392000, 490000, 525000, 535000, 579000, 416000, 485000, 400000, 265000, 590000, 450000, 95000, 460000, 481000, 801000, 1030000, 863000, 645000, 420000, 652000, 650000, 640000, 540000, 400000, 270000, 580000, 650000, 631500, 541000, 725000]}, {"mode": "markers", "name": "test", "type": "scatter", "x": [2322, 1621, 2171, 3831, 1992, 3931, 3175, 2086, 2091, 6040, 2422, 3640, 2514, 1831, 1620, 1772, 1932, 2200, 2081, 2108], "y": [559000, 368000, 473000, 785000, 360000, 567000, 609000, 425000, 540000, 1520000, 475000, 552500, 600000, 385000, 155000, 428500, 525000, 671500, 535000, 285000]}, {"name": "prediction", "type": "scatter", "x": [1094.0, 1145.3535353535353, 1196.7070707070707, 1248.060606060606, 1299.4141414141413, 1350.7676767676767, 1402.121212121212, 1453.4747474747476, 1504.828282828283, 1556.1818181818182, 1607.5353535353536, 1658.888888888889, 1710.2424242424242, 1761.5959595959596, 1812.9494949494951, 1864.3030303030305, 1915.6565656565658, 1967.0101010101012, 2018.3636363636365, 2069.717171717172, 2121.070707070707, 2172.4242424242425, 2223.777777777778, 2275.131313131313, 2326.4848484848485, 2377.838383838384, 2429.191919191919, 2480.545454545455, 2531.8989898989903, 2583.2525252525256, 2634.606060606061, 2685.9595959595963, 2737.3131313131316, 2788.666666666667, 2840.0202020202023, 2891.3737373737376, 2942.727272727273, 2994.0808080808083, 3045.4343434343436, 3096.787878787879, 3148.1414141414143, 3199.4949494949497, 3250.848484848485, 3302.2020202020203, 3353.5555555555557, 3404.909090909091, 3456.2626262626263, 3507.6161616161617, 3558.969696969697, 3610.3232323232323, 3661.6767676767677, 3713.030303030303, 3764.3838383838383, 3815.7373737373737, 3867.0909090909095, 3918.444444444445, 3969.79797979798, 4021.1515151515155, 4072.505050505051, 4123.858585858587, 4175.212121212122, 4226.565656565657, 4277.919191919193, 4329.272727272728, 4380.626262626263, 4431.979797979799, 4483.333333333334, 4534.686868686869, 4586.040404040405, 4637.39393939394, 4688.747474747475, 4740.101010101011, 4791.454545454546, 4842.808080808081, 4894.161616161617, 4945.515151515152, 4996.868686868687, 5048.222222222223, 5099.575757575758, 5150.929292929293, 5202.282828282829, 5253.636363636364, 5304.989898989899, 5356.343434343435, 5407.69696969697, 5459.050505050505, 5510.404040404041, 5561.757575757576, 5613.111111111111, 5664.464646464647, 5715.818181818182, 5767.171717171717, 5818.525252525253, 5869.878787878788, 5921.232323232323, 5972.585858585859, 6023.939393939394, 6075.292929292929, 6126.646464646465, 6178.0], "y": [319937.76161609776, 327224.8230239067, 334511.8844317156, 341798.9458395245, 349086.0072473334, 356373.06865514227, 363660.1300629512, 370947.19147076015, 378234.25287856907, 385521.314286378, 392808.3756941869, 400095.4371019958, 407382.49850980466, 414669.5599176136, 421956.62132542254, 429243.68273323146, 436530.7441410403, 443817.8055488492, 451104.86695665814, 458391.92836446705, 465678.98977227596, 472966.0511800848, 480253.11258789373, 487540.17399570264, 494827.23540351156, 502114.29681132047, 509401.3582191294, 516688.41962693835, 523975.48103474727, 531262.5424425561, 538549.603850365, 545836.665258174, 553123.7266659829, 560410.7880737918, 567697.8494816007, 574984.9108894096, 582271.9722972185, 589559.0337050274, 596846.0951128363, 604133.1565206453, 611420.2179284542, 618707.2793362631, 625994.340744072, 633281.4021518809, 640568.4635596898, 647855.5249674986, 655142.5863753075, 662429.6477831164, 669716.7091909254, 677003.7705987343, 684290.8320065432, 691577.8934143521, 698864.954822161, 706152.0162299699, 713439.0776377788, 720726.1390455877, 728013.2004533967, 735300.2618612056, 742587.3232690145, 749874.3846768235, 757161.4460846324, 764448.5074924413, 771735.5689002502, 779022.630308059, 786309.691715868, 793596.7531236769, 800883.8145314858, 808170.8759392947, 815457.9373471036, 822744.9987549125, 830032.0601627214, 837319.1215705303, 844606.1829783393, 851893.2443861482, 859180.3057939571, 866467.367201766, 873754.4286095749, 881041.4900173838, 888328.5514251927, 895615.6128330017, 902902.6742408106, 910189.7356486195, 917476.7970564284, 924763.8584642373, 932050.9198720462, 939337.9812798551, 946625.042687664, 953912.104095473, 961199.1655032819, 968486.2269110908, 975773.2883188997, 983060.3497267085, 990347.4111345174, 997634.4725423262, 1004921.5339501351, 1012208.595357944, 1019495.6567657529, 1026782.7181735619, 1034069.7795813708, 1041356.8409891797]}],
                         {"template": {"data": {"bar": [{"error_x": {"color": "#2a3f5f"}, "error_y": {"color": "#2a3f5f"}, "marker": {"line": {"color": "#E5ECF6", "width": 0.5}}, "type": "bar"}], "barpolar": [{"marker": {"line": {"color": "#E5ECF6", "width": 0.5}}, "type": "barpolar"}], "carpet": [{"aaxis": {"endlinecolor": "#2a3f5f", "gridcolor": "white", "linecolor": "white", "minorgridcolor": "white", "startlinecolor": "#2a3f5f"}, "baxis": {"endlinecolor": "#2a3f5f", "gridcolor": "white", "linecolor": "white", "minorgridcolor": "white", "startlinecolor": "#2a3f5f"}, "type": "carpet"}], "choropleth": [{"colorbar": {"outlinewidth": 0, "ticks": ""}, "type": "choropleth"}], "contour": [{"colorbar": {"outlinewidth": 0, "ticks": ""}, "colorscale": [[0.0, "#0d0887"], [0.1111111111111111, "#46039f"], [0.2222222222222222, "#7201a8"], [0.3333333333333333, "#9c179e"], [0.4444444444444444, "#bd3786"], [0.5555555555555556, "#d8576b"], [0.6666666666666666, "#ed7953"], [0.7777777777777778, "#fb9f3a"], [0.8888888888888888, "#fdca26"], [1.0, "#f0f921"]], "type": "contour"}], "contourcarpet": [{"colorbar": {"outlinewidth": 0, "ticks": ""}, "type": "contourcarpet"}], "heatmap": [{"colorbar": {"outlinewidth": 0, "ticks": ""}, "colorscale": [[0.0, "#0d0887"], [0.1111111111111111, "#46039f"], [0.2222222222222222, "#7201a8"], [0.3333333333333333, "#9c179e"], [0.4444444444444444, "#bd3786"], [0.5555555555555556, "#d8576b"], [0.6666666666666666, "#ed7953"], [0.7777777777777778, "#fb9f3a"], [0.8888888888888888, "#fdca26"], [1.0, "#f0f921"]], "type": "heatmap"}], "heatmapgl": [{"colorbar": {"outlinewidth": 0, "ticks": ""}, "colorscale": [[0.0, "#0d0887"], [0.1111111111111111, "#46039f"], [0.2222222222222222, "#7201a8"], [0.3333333333333333, "#9c179e"], [0.4444444444444444, "#bd3786"], [0.5555555555555556, "#d8576b"], [0.6666666666666666, "#ed7953"], [0.7777777777777778, "#fb9f3a"], [0.8888888888888888, "#fdca26"], [1.0, "#f0f921"]], "type": "heatmapgl"}], "histogram": [{"marker": {"colorbar": {"outlinewidth": 0, "ticks": ""}}, "type": "histogram"}], "histogram2d": [{"colorbar": {"outlinewidth": 0, "ticks": ""}, "colorscale": [[0.0, "#0d0887"], [0.1111111111111111, "#46039f"], [0.2222222222222222, "#7201a8"], [0.3333333333333333, "#9c179e"], [0.4444444444444444, "#bd3786"], [0.5555555555555556, "#d8576b"], [0.6666666666666666, "#ed7953"], [0.7777777777777778, "#fb9f3a"], [0.8888888888888888, "#fdca26"], [1.0, "#f0f921"]], "type": "histogram2d"}], "histogram2dcontour": [{"colorbar": {"outlinewidth": 0, "ticks": ""}, "colorscale": [[0.0, "#0d0887"], [0.1111111111111111, "#46039f"], [0.2222222222222222, "#7201a8"], [0.3333333333333333, "#9c179e"], [0.4444444444444444, "#bd3786"], [0.5555555555555556, "#d8576b"], [0.6666666666666666, "#ed7953"], [0.7777777777777778, "#fb9f3a"], [0.8888888888888888, "#fdca26"], [1.0, "#f0f921"]], "type": "histogram2dcontour"}], "mesh3d": [{"colorbar": {"outlinewidth": 0, "ticks": ""}, "type": "mesh3d"}], "parcoords": [{"line": {"colorbar": {"outlinewidth": 0, "ticks": ""}}, "type": "parcoords"}], "pie": [{"automargin": true, "type": "pie"}], "scatter": [{"marker": {"colorbar": {"outlinewidth": 0, "ticks": ""}}, "type": "scatter"}], "scatter3d": [{"line": {"colorbar": {"outlinewidth": 0, "ticks": ""}}, "marker": {"colorbar": {"outlinewidth": 0, "ticks": ""}}, "type": "scatter3d"}], "scattercarpet": [{"marker": {"colorbar": {"outlinewidth": 0, "ticks": ""}}, "type": "scattercarpet"}], "scattergeo": [{"marker": {"colorbar": {"outlinewidth": 0, "ticks": ""}}, "type": "scattergeo"}], "scattergl": [{"marker": {"colorbar": {"outlinewidth": 0, "ticks": ""}}, "type": "scattergl"}], "scattermapbox": [{"marker": {"colorbar": {"outlinewidth": 0, "ticks": ""}}, "type": "scattermapbox"}], "scatterpolar": [{"marker": {"colorbar": {"outlinewidth": 0, "ticks": ""}}, "type": "scatterpolar"}], "scatterpolargl": [{"marker": {"colorbar": {"outlinewidth": 0, "ticks": ""}}, "type": "scatterpolargl"}], "scatterternary": [{"marker": {"colorbar": {"outlinewidth": 0, "ticks": ""}}, "type": "scatterternary"}], "surface": [{"colorbar": {"outlinewidth": 0, "ticks": ""}, "colorscale": [[0.0, "#0d0887"], [0.1111111111111111, "#46039f"], [0.2222222222222222, "#7201a8"], [0.3333333333333333, "#9c179e"], [0.4444444444444444, "#bd3786"], [0.5555555555555556, "#d8576b"], [0.6666666666666666, "#ed7953"], [0.7777777777777778, "#fb9f3a"], [0.8888888888888888, "#fdca26"], [1.0, "#f0f921"]], "type": "surface"}], "table": [{"cells": {"fill": {"color": "#EBF0F8"}, "line": {"color": "white"}}, "header": {"fill": {"color": "#C8D4E3"}, "line": {"color": "white"}}, "type": "table"}]}, "layout": {"annotationdefaults": {"arrowcolor": "#2a3f5f", "arrowhead": 0, "arrowwidth": 1}, "coloraxis": {"colorbar": {"outlinewidth": 0, "ticks": ""}}, "colorscale": {"diverging": [[0, "#8e0152"], [0.1, "#c51b7d"], [0.2, "#de77ae"], [0.3, "#f1b6da"], [0.4, "#fde0ef"], [0.5, "#f7f7f7"], [0.6, "#e6f5d0"], [0.7, "#b8e186"], [0.8, "#7fbc41"], [0.9, "#4d9221"], [1, "#276419"]], "sequential": [[0.0, "#0d0887"], [0.1111111111111111, "#46039f"], [0.2222222222222222, "#7201a8"], [0.3333333333333333, "#9c179e"], [0.4444444444444444, "#bd3786"], [0.5555555555555556, "#d8576b"], [0.6666666666666666, "#ed7953"], [0.7777777777777778, "#fb9f3a"], [0.8888888888888888, "#fdca26"], [1.0, "#f0f921"]], "sequentialminus": [[0.0, "#0d0887"], [0.1111111111111111, "#46039f"], [0.2222222222222222, "#7201a8"], [0.3333333333333333, "#9c179e"], [0.4444444444444444, "#bd3786"], [0.5555555555555556, "#d8576b"], [0.6666666666666666, "#ed7953"], [0.7777777777777778, "#fb9f3a"], [0.8888888888888888, "#fdca26"], [1.0, "#f0f921"]]}, "colorway": ["#636efa", "#EF553B", "#00cc96", "#ab63fa", "#FFA15A", "#19d3f3", "#FF6692", "#B6E880", "#FF97FF", "#FECB52"], "font": {"color": "#2a3f5f"}, "geo": {"bgcolor": "white", "lakecolor": "white", "landcolor": "#E5ECF6", "showlakes": true, "showland": true, "subunitcolor": "white"}, "hoverlabel": {"align": "left"}, "hovermode": "closest", "mapbox": {"style": "light"}, "paper_bgcolor": "white", "plot_bgcolor": "#E5ECF6", "polar": {"angularaxis": {"gridcolor": "white", "linecolor": "white", "ticks": ""}, "bgcolor": "#E5ECF6", "radialaxis": {"gridcolor": "white", "linecolor": "white", "ticks": ""}}, "scene": {"xaxis": {"backgroundcolor": "#E5ECF6", "gridcolor": "white", "gridwidth": 2, "linecolor": "white", "showbackground": true, "ticks": "", "zerolinecolor": "white"}, "yaxis": {"backgroundcolor": "#E5ECF6", "gridcolor": "white", "gridwidth": 2, "linecolor": "white", "showbackground": true, "ticks": "", "zerolinecolor": "white"}, "zaxis": {"backgroundcolor": "#E5ECF6", "gridcolor": "white", "gridwidth": 2, "linecolor": "white", "showbackground": true, "ticks": "", "zerolinecolor": "white"}}, "shapedefaults": {"line": {"color": "#2a3f5f"}}, "ternary": {"aaxis": {"gridcolor": "white", "linecolor": "white", "ticks": ""}, "baxis": {"gridcolor": "white", "linecolor": "white", "ticks": ""}, "bgcolor": "#E5ECF6", "caxis": {"gridcolor": "white", "linecolor": "white", "ticks": ""}}, "title": {"x": 0.05}, "xaxis": {"automargin": true, "gridcolor": "white", "linecolor": "white", "ticks": "", "title": {"standoff": 15}, "zerolinecolor": "white", "zerolinewidth": 2}, "yaxis": {"automargin": true, "gridcolor": "white", "linecolor": "white", "ticks": "", "title": {"standoff": 15}, "zerolinecolor": "white", "zerolinewidth": 2}}}},
                         {"responsive": true}
                     ).then(function(){
 
-var gd = document.getElementById('7bf93459-9551-45c2-88b4-0e6b7402e46b');
+var gd = document.getElementById('f62f9a59-53d9-42ad-816c-511b450d942a');
 var x = new MutationObserver(function (mutations, observer) {{
         var display = window.getComputedStyle(gd).display;
         if (!display || display === 'none') {{
@@ -1022,19 +1008,19 @@ if (outputEl) {{
 </div>
 <div class="cell_output docutils container">
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;class &#39;pandas.core.frame.DataFrame&#39;&gt;
-RangeIndex: 98 entries, 0 to 97
+Int64Index: 97 entries, 0 to 97
 Data columns (total 6 columns):
  #   Column      Non-Null Count  Dtype   
 ---  ------      --------------  -----   
- 0   bed         98 non-null     int64   
- 1   bath        98 non-null     float64 
- 2   area        98 non-null     int64   
- 3   year_built  98 non-null     int64   
- 4   cooling     98 non-null     category
+ 0   bed         97 non-null     int64   
+ 1   bath        97 non-null     float64 
+ 2   area        97 non-null     int64   
+ 3   year_built  97 non-null     int64   
+ 4   cooling     97 non-null     category
  5   lot         97 non-null     float64 
 dtypes: category(1), float64(2), int64(3)
-memory usage: 4.2 KB
-Missing values: 1
+memory usage: 4.8 KB
+Missing values: 0
 </pre></div>
 </div>
 </div>
@@ -1067,14 +1053,14 @@ Missing values: 1
                                                                    SimpleImputer(strategy=&#39;median&#39;)),
                                                                   (&#39;scaler&#39;,
                                                                    StandardScaler())]),
-                                                  &lt;sklearn.compose._column_transformer.make_column_selector object at 0x7fbd43656ed0&gt;),
+                                                  &lt;sklearn.compose._column_transformer.make_column_selector object at 0x7fb881e205d0&gt;),
                                                  (&#39;cat&#39;,
                                                   Pipeline(steps=[(&#39;imputer&#39;,
                                                                    SimpleImputer(fill_value=&#39;missing&#39;,
                                                                                  strategy=&#39;constant&#39;)),
                                                                   (&#39;onehot&#39;,
                                                                    OneHotEncoder(handle_unknown=&#39;ignore&#39;))]),
-                                                  &lt;sklearn.compose._column_transformer.make_column_selector object at 0x7fbd43656f10&gt;)])),
+                                                  &lt;sklearn.compose._column_transformer.make_column_selector object at 0x7fb881e20610&gt;)])),
                 (&#39;lm&#39;, LinearRegression())])
 </pre></div>
 </div>
@@ -1088,8 +1074,8 @@ Missing values: 1
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([  2447.57967471,  50670.93485383,  86499.75206383,  20145.48540648,
-        64856.29369518,  25401.84101108, -25401.84101108])
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([ 37501.22436002,  50280.7007969 ,  30312.97805437,  27994.3520344 ,
+        79024.39994917,  23467.73502737, -23467.73502737])
 </pre></div>
 </div>
 </div>
@@ -1108,7 +1094,7 @@ Missing values: 1
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>0.693677282935018
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>0.5867071144778505
 </pre></div>
 </div>
 </div>

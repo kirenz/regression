@@ -408,7 +408,7 @@
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>2.4.1
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>2.5.0
 </pre></div>
 </div>
 </div>
@@ -416,38 +416,10 @@
 </div>
 <div class="section" id="data-preparation">
 <h2>Data preparation<a class="headerlink" href="#data-preparation" title="Permalink to this headline">¶</a></h2>
-<p>See notebook <code class="docutils literal notranslate"><span class="pre">10a-application-model-data-exploration.ipynb</span></code> for details about data preprocessing and data exploration.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">ROOT</span> <span class="o">=</span> <span class="s2">&quot;https://raw.githubusercontent.com/kirenz/modern-statistics/main/data/&quot;</span>
-<span class="n">DATA</span> <span class="o">=</span> <span class="s2">&quot;duke-forest.csv&quot;</span>
-<span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="n">ROOT</span> <span class="o">+</span> <span class="n">DATA</span><span class="p">)</span>
-
-<span class="c1"># Drop irrelevant features</span>
-<span class="n">df</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">drop</span><span class="p">([</span><span class="s1">&#39;url&#39;</span><span class="p">,</span> <span class="s1">&#39;address&#39;</span><span class="p">,</span> <span class="s1">&#39;type&#39;</span><span class="p">],</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
-
-<span class="c1"># Convert data types</span>
-<span class="n">df</span><span class="p">[</span><span class="s1">&#39;heating&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="s1">&#39;heating&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="s2">&quot;category&quot;</span><span class="p">)</span>
-<span class="n">df</span><span class="p">[</span><span class="s1">&#39;cooling&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="s1">&#39;cooling&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="s2">&quot;category&quot;</span><span class="p">)</span>
-<span class="n">df</span><span class="p">[</span><span class="s1">&#39;parking&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="s1">&#39;parking&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="s2">&quot;category&quot;</span><span class="p">)</span>
-
-<span class="c1"># drop column with too many missing values</span>
-<span class="n">df</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">drop</span><span class="p">([</span><span class="s1">&#39;hoa&#39;</span><span class="p">],</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
-
-<span class="n">df</span><span class="o">.</span><span class="n">columns</span><span class="o">.</span><span class="n">tolist</span><span class="p">()</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[&#39;price&#39;,
- &#39;bed&#39;,
- &#39;bath&#39;,
- &#39;area&#39;,
- &#39;year_built&#39;,
- &#39;heating&#39;,
- &#39;cooling&#39;,
- &#39;parking&#39;,
- &#39;lot&#39;]
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># See notebook &quot;Data Exploration&quot; for details about data preprocessing</span>
+<span class="kn">from</span> <span class="nn">case_duke_data_prep</span> <span class="kn">import</span> <span class="o">*</span>
 </pre></div>
 </div>
 </div>
@@ -472,13 +444,13 @@
 </div>
 <div class="cell_output docutils container">
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;class &#39;pandas.core.frame.DataFrame&#39;&gt;
-RangeIndex: 98 entries, 0 to 97
+Int64Index: 97 entries, 0 to 97
 Data columns (total 1 columns):
  #   Column  Non-Null Count  Dtype
 ---  ------  --------------  -----
- 0   area    98 non-null     int64
+ 0   area    97 non-null     int64
 dtypes: int64(1)
-memory usage: 912.0 bytes
+memory usage: 1.5 KB
 Missing values: 0
 </pre></div>
 </div>
@@ -542,16 +514,16 @@ _________________________________________________________________
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([[-2667.3628],
-       [-2423.789 ],
-       [-1526.7021],
-       [-2527.6526],
-       [-2145.2878],
-       [-2129.6624],
-       [-1997.3052],
-       [-3606.7305],
-       [-2290.513 ],
-       [-2918.2898]], dtype=float32)
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([[304.02682],
+       [226.81532],
+       [114.61245],
+       [288.1026 ],
+       [244.52054],
+       [242.73953],
+       [227.65343],
+       [341.0087 ],
+       [261.07333],
+       [231.0059 ]], dtype=float32)
 </pre></div>
 </div>
 </div>
@@ -581,8 +553,8 @@ _________________________________________________________________
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>CPU times: user 14.5 s, sys: 747 ms, total: 15.3 s
-Wall time: 14.9 s
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>CPU times: user 7.13 s, sys: 497 ms, total: 7.63 s
+Wall time: 7.16 s
 </pre></div>
 </div>
 </div>
@@ -595,17 +567,17 @@ Wall time: 14.9 s
 </div>
 <div class="cell_output docutils container">
 <div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>49    525000
-70    520000
-68    412500
+71    540000
+69    105000
 15    610000
 39    535000
        ...  
-60    509620
-71    540000
+61    580000
+72    650000
 14    631500
-92    590000
+93    541000
 51    725000
-Name: price, Length: 78, dtype: int64
+Name: price, Length: 77, dtype: int64
 </pre></div>
 </div>
 </div>
@@ -623,7 +595,7 @@ Name: price, Length: 78, dtype: int64
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>-0.8072585066424944
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>-0.8431880889376442
 </pre></div>
 </div>
 </div>
@@ -636,7 +608,7 @@ Name: price, Length: 78, dtype: int64
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;tf.Variable &#39;dense_1/kernel:0&#39; shape=(1, 1) dtype=float32, numpy=array([[118.29804]], dtype=float32)&gt;
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;tf.Variable &#39;dense_1/kernel:0&#39; shape=(1, 1) dtype=float32, numpy=array([[117.41098]], dtype=float32)&gt;
 </pre></div>
 </div>
 </div>
@@ -677,32 +649,32 @@ Name: price, Length: 78, dtype: int64
   <tbody>
     <tr>
       <th>395</th>
-      <td>248125.968750</td>
-      <td>194706.562500</td>
+      <td>262393.000000</td>
+      <td>198140.546875</td>
       <td>395</td>
     </tr>
     <tr>
       <th>396</th>
-      <td>247328.968750</td>
-      <td>193920.875000</td>
+      <td>261690.375000</td>
+      <td>197549.062500</td>
       <td>396</td>
     </tr>
     <tr>
       <th>397</th>
-      <td>246563.859375</td>
-      <td>193134.828125</td>
+      <td>260958.375000</td>
+      <td>196958.203125</td>
       <td>397</td>
     </tr>
     <tr>
       <th>398</th>
-      <td>245783.453125</td>
-      <td>192343.437500</td>
+      <td>260241.328125</td>
+      <td>196358.796875</td>
       <td>398</td>
     </tr>
     <tr>
       <th>399</th>
-      <td>244997.031250</td>
-      <td>191549.718750</td>
+      <td>259521.906250</td>
+      <td>195756.375000</td>
       <td>399</td>
     </tr>
   </tbody>
@@ -745,7 +717,7 @@ Name: price, Length: 78, dtype: int64
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>{&#39;lm&#39;: 276413.75}
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>{&#39;lm&#39;: 242710.921875}
 </pre></div>
 </div>
 </div>
@@ -761,13 +733,13 @@ Name: price, Length: 78, dtype: int64
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([[1.1863766e+02],
-       [2.3693570e+02],
-       [3.5523373e+02],
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([[1.1760192e+02],
+       [2.3501291e+02],
+       [3.5242389e+02],
        ...,
-       [7.3332988e+05],
-       [7.3344819e+05],
-       [7.3356650e+05]], dtype=float32)
+       [7.2783088e+05],
+       [7.2794831e+05],
+       [7.2806569e+05]], dtype=float32)
 </pre></div>
 </div>
 </div>
@@ -824,20 +796,20 @@ Name: price, Length: 78, dtype: int64
 </div>
 <div class="cell_output docutils container">
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;class &#39;pandas.core.frame.DataFrame&#39;&gt;
-RangeIndex: 98 entries, 0 to 97
+Int64Index: 97 entries, 0 to 97
 Data columns (total 7 columns):
  #   Column           Non-Null Count  Dtype  
 ---  ------           --------------  -----  
- 0   bed              98 non-null     int64  
- 1   bath             98 non-null     float64
- 2   area             98 non-null     int64  
- 3   year_built       98 non-null     int64  
+ 0   bed              97 non-null     int64  
+ 1   bath             97 non-null     float64
+ 2   area             97 non-null     int64  
+ 3   year_built       97 non-null     int64  
  4   lot              97 non-null     float64
- 5   cooling_central  98 non-null     uint8  
- 6   cooling_other    98 non-null     uint8  
+ 5   cooling_central  97 non-null     uint8  
+ 6   cooling_other    97 non-null     uint8  
 dtypes: float64(2), int64(3), uint8(2)
-memory usage: 4.1 KB
-Missing values: 1
+memory usage: 4.7 KB
+Missing values: 0
 </pre></div>
 </div>
 </div>
@@ -901,8 +873,8 @@ _________________________________________________________________
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>CPU times: user 14.5 s, sys: 739 ms, total: 15.2 s
-Wall time: 14.7 s
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>CPU times: user 6.65 s, sys: 456 ms, total: 7.11 s
+Wall time: 6.8 s
 </pre></div>
 </div>
 </div>
@@ -920,7 +892,7 @@ Wall time: 14.7 s
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>0.28772384550829944
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>0.27924552367791533
 </pre></div>
 </div>
 </div>
@@ -934,13 +906,13 @@ Wall time: 14.7 s
 </div>
 <div class="cell_output docutils container">
 <div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;tf.Variable &#39;dense_2/kernel:0&#39; shape=(7, 1) dtype=float32, numpy=
-array([[105.53154],
-       [108.65832],
-       [105.82798],
-       [104.10174],
-       [108.07097],
-       [104.49152],
-       [ 97.46925]], dtype=float32)&gt;
+array([[106.136635],
+       [108.00873 ],
+       [108.07638 ],
+       [105.12231 ],
+       [109.11853 ],
+       [106.84155 ],
+       [ 96.18095 ]], dtype=float32)&gt;
 </pre></div>
 </div>
 </div>
@@ -1002,8 +974,8 @@ array([[105.53154],
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>CPU times: user 4.05 s, sys: 212 ms, total: 4.26 s
-Wall time: 4.09 s
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>CPU times: user 2.1 s, sys: 140 ms, total: 2.24 s
+Wall time: 2.05 s
 </pre></div>
 </div>
 </div>
@@ -1021,7 +993,7 @@ Wall time: 4.09 s
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>0.4847519024408956
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>0.35466026783372795
 </pre></div>
 </div>
 </div>
@@ -1078,15 +1050,15 @@ Wall time: 4.09 s
   <tbody>
     <tr>
       <th>lm</th>
-      <td>276413.750000</td>
+      <td>242710.921875</td>
     </tr>
     <tr>
       <th>lm_2</th>
-      <td>157647.671875</td>
+      <td>114199.148438</td>
     </tr>
     <tr>
       <th>dnn_model</th>
-      <td>143017.937500</td>
+      <td>108407.125000</td>
     </tr>
   </tbody>
 </table>
@@ -1103,16 +1075,16 @@ Wall time: 4.09 s
         },
         codeMirrorConfig: {
             theme: "abcdef",
-            mode: "conda-env-tf-py"
+            mode: "python"
         },
         kernelOptions: {
-            kernelName: "conda-env-tf-py",
+            kernelName: "python3",
             path: "./docs"
         },
         predefinedOutput: true
     }
     </script>
-    <script>kernelName = 'conda-env-tf-py'</script>
+    <script>kernelName = 'python3'</script>
 
               </div>
               
