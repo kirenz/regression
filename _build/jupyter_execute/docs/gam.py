@@ -3,7 +3,7 @@
 
 # # Generalized Additive Models (GAM)
 # 
-# *The following code tutorial is mainly based on the [statsmodels documentation](https://www.statsmodels.org/v0.10.0/gam.html) about generalized additive models (GAM). To learn more about this method, review ["An Introduction to Statistical Learning"](https://www.statlearning.com/) from James et al. (2021). GAMs were originally developed by Trevor Hastie and Robert Tibshirani (who are two coauthors of {cite}`James2021`) to blend properties of generalized linear models with additive models.*
+# *The following code tutorial is mainly based on the [statsmodels documentation](https://www.statsmodels.org/v0.10.0/gam.html) about generalized additive models (GAM). To learn more about this method, review ["An Introduction to Statistical Learning"](https://www.statlearning.com/) from James et al. (2021). GAMs were originally developed by Trevor Hastie and Robert Tibshirani (who are two coauthors of {cite:t}`James2021`) to blend properties of generalized linear models with additive models.*
 # 
 # Generalized additive models allow us to use regression splinee, smoothing splines and local regression to deal with multiple predictors. In [](splines.ipynb), we discussed regression splines, which we created by specifying a set of knots, producing a sequence of basis functions, and then using least squares to estimate the spline coefficients. 
 # 
