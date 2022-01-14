@@ -4,15 +4,11 @@
 import pandas as pd
 
 df = pd.read_csv("https://raw.githubusercontent.com/kirenz/datasets/master/Hitters.csv")
-
 # drop missing cases
 df = df.dropna()
-
 # ## Create label and features
-
 # Since we will use algorithms from scikit learn, we need to encode our categorical features as one-hot numeric features (dummy variables):
 dummies = pd.get_dummies(df[['League', 'Division','NewLeague']])
-
 # Next, we create our label y:
 y = df['Salary']
 X_numerical = df.drop(['Salary', 'League', 'Division', 'NewLeague'], axis=1).astype('float64')
