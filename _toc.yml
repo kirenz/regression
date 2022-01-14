@@ -9,7 +9,7 @@ parts:
     - file: docs/diagnostics.ipynb
   - caption: Lasso, Splines & GAM
     chapters:
-    - file: docs/hitters-data.ipynb  
+    - file: docs/hitters_data.ipynb  
     - file: docs/lasso.ipynb
     - file: docs/splines.ipynb   
     - file: docs/gam.ipynb   
