@@ -36,7 +36,7 @@ sns.set_theme(style="ticks", color_codes=True)
 
 [0;31m---------------------------------------------------------------------------[0m
 [0;31mModuleNotFoundError[0m                       Traceback (most recent call last)
-[0;32m/var/folders/9c/_3s5jt3n60j__flsgl0t72340000gn/T/ipykernel_2840/1262170889.py[0m in [0;36m<module>[0;34m[0m
+[0;32m/var/folders/9c/_3s5jt3n60j__flsgl0t72340000gn/T/ipykernel_4310/1262170889.py[0m in [0;36m<module>[0;34m[0m
 [1;32m      6[0m [0;32mimport[0m [0mmatplotlib[0m[0;34m.[0m[0mpyplot[0m [0;32mas[0m [0mplt[0m[0;34m[0m[0;34m[0m[0m
 [1;32m      7[0m [0;34m[0m[0m
 [0;32m----> 8[0;31m [0;32mimport[0m [0mtensorflow[0m [0;32mas[0m [0mtf[0m[0;34m[0m[0;34m[0m[0m
