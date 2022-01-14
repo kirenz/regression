@@ -24,3 +24,5 @@ X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.3, random_
 df_train = pd.DataFrame(X_train)
 df_train['Salary'] = pd.DataFrame(y_train)
 
+df_test = pd.DataFrame(X_test)
+df_test['Salary'] = pd.DataFrame(y_test)

@@ -1,14 +1,18 @@
 #!/usr/bin/env python
 # coding: utf-8
 
-# # Splines
+# # Regression splines
 
 # The following code tutorial is mainly based on:
 # 
 # - the [scikit learn documentation](https://scikit-learn.org/stable/auto_examples/linear_model/plot_polynomial_interpolation.html#sphx-glr-auto-examples-linear-model-plot-polynomial-interpolation-py) about splines provided by Mathieu Blondel, Jake Vanderplas, Christian Lorentzen and Malte Londschien. 
 # - code from [Jordi Warmenhoven](https://nbviewer.org/github/JWarmenhoven/ISL-python/blob/master/Notebooks/Chapter%207.ipynb)
 # 
-# To learn more about the spline regression methods, review ["An Introduction to Statistical Learning"](https://www.statlearning.com/) from James et al. (2021).
+# Regression splines involve dividing the range of a feature X into K distinct regions. Within each region, a polynomial function is fit to the data. These polynomials are constrained so that they join smoothly at the region boundaries, or knots. Provided that the interval is divided into enough regions, this can produce an extremely flexibel fit. {cite:p}`James2021`
+# 
+# To understand the advantages of regression splines, we first start with a linear ridge regression model, build a simple polynomial regression and then proceed to splines.
+# 
+# To learn more about the spline regression method, review ["An Introduction to Statistical Learning"](https://www.statlearning.com/) from James et al. (2021).
 
 # ## Data
 
@@ -161,6 +165,8 @@ sns.regplot(x=X_train['age'],
 # ### Splines in Scikit learn
 # 
 # Spline transformers are a new feature in [scikit learn 1.0](https://scikit-learn.org/stable/auto_examples/release_highlights/plot_release_highlights_1_0_0.html). Therefore, make sure to use the latest version of scikit learn. If you use Aanconda, you can update all packages using `conda update --all`  
+# 
+# Note that scikit learn places the knots in a uniform (this is the default) or quantile fashion. We only have to specify the desired number of knots, and then have [SplineTransformer](https://scikit-learn.org/stable/modules/generated/sklearn.preprocessing.SplineTransformer.html) automatically place the corresponding number of knots.
 
 # In[13]:
 
@@ -209,6 +215,8 @@ plt.legend();
 # ### Splines in patsy
 # 
 # Next, we use the module [patsy](https://patsy.readthedocs.io/en/latest/overview.html) to create non-linear transformations of the input data. Additionaly, we use statsmodels to fit 2 models with different number of knots.
+# 
+# When we fit a spline, where should we place the knots? The regression spline is most flexible in regions that contain a lot of knots, because in those regions the polynomial coefficients can change rapidly. Hence, one option is to place more knots in places where we feel the function might vary most rapidly, and to place fewer knots where it seems more stable. While this option can work well, in practice it is common to place knots in a uniform fashion. One way to do this is to specify the desired degrees of freedom, and then have the software automatically place the corresponding number of knots at uniform quantiles of the data.
 
 # In[16]:
 

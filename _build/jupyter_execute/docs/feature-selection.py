@@ -15,7 +15,7 @@
 # 
 # *To get an overview about the data preparation, visit [this tutorial](https://kirenz.github.io/regression/docs/lasso.html#data).*
 
-# In[27]:
+# In[1]:
 
 
 import pandas as pd
@@ -25,7 +25,7 @@ df = pd.read_csv("https://raw.githubusercontent.com/kirenz/datasets/master/hitte
 df.info()
 
 
-# In[28]:
+# In[2]:
 
 
 # create label
@@ -38,7 +38,7 @@ X = df.drop(['Salary'], axis=1).astype(float)
 feature_names =  X.columns
 
 
-# In[29]:
+# In[3]:
 
 
 from sklearn.model_selection import train_test_split
@@ -47,7 +47,7 @@ from sklearn.model_selection import train_test_split
 X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.3, random_state=10)
 
 
-# In[30]:
+# In[4]:
 
 
 from sklearn.preprocessing import StandardScaler
@@ -65,7 +65,7 @@ X_test[list_numerical] = scaler.transform(X_test[list_numerical])
 
 # We fit a lasso regression with 5-fold cross validation to choose the best regularization parameter based on the mean squared error:
 
-# In[31]:
+# In[5]:
 
 
 from sklearn.linear_model import LassoCV
@@ -73,7 +73,7 @@ from sklearn.linear_model import LassoCV
 reg = LassoCV(cv=5, random_state=10, max_iter=10000).fit(X_train, y_train)
 
 
-# In[32]:
+# In[6]:
 
 
 # show best alpha parameter
@@ -82,7 +82,7 @@ reg.alpha_
 
 # Show feature importance:
 
-# In[33]:
+# In[7]:
 
 
 import seaborn as sns
@@ -103,7 +103,7 @@ sns.barplot(x=importance,
 # 
 # In our case, we want to select only 2 features. Hence, we will set the threshold slightly above the coefficient of the third most important feature. We also record the time the algorithm takes to obtain the results.
 
-# In[34]:
+# In[8]:
 
 
 from sklearn.feature_selection import SelectFromModel
@@ -136,7 +136,7 @@ print(f"Done in {toc - tic:.3f}s")
 
 # #### Forward selection
 
-# In[35]:
+# In[9]:
 
 
 from sklearn.feature_selection import SequentialFeatureSelector
@@ -150,7 +150,7 @@ sfs_forward = SequentialFeatureSelector(
 toc_fwd = time()
 
 
-# In[36]:
+# In[10]:
 
 
 print(
@@ -161,8 +161,9 @@ print(f"Done in {toc_fwd - tic_fwd:.3f}s")
 
 
 # #### Backward selection
+# 
 
-# In[37]:
+# In[11]:
 
 
 tic_bwd = time()
@@ -174,7 +175,7 @@ sfs_backward = SequentialFeatureSelector(
 toc_bwd = time()
 
 
-# In[39]:
+# In[12]:
 
 
 print(

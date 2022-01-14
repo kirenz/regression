@@ -12,6 +12,7 @@ parts:
     - file: docs/hitters-data.ipynb  
     - file: docs/lasso.ipynb
     - file: docs/splines.ipynb   
+    - file: docs/gam.ipynb   
   - caption: Decision Trees
     chapters:
     - file: docs/gradientboosting.ipynb

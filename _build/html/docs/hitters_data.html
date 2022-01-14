@@ -1,0 +1,1111 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Hitters data preparation &#8212; Introduction to Regression Models</title>
+    
+  <link href="../_static/css/theme.css" rel="stylesheet" />
+  <link href="../_static/css/index.c5995385ac14fb8791e8eb36b4908be2.css" rel="stylesheet" />
+
+    
+  <link rel="stylesheet"
+    href="../_static/vendor/fontawesome/5.13.0/css/all.min.css">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../_static/vendor/fontawesome/5.13.0/webfonts/fa-solid-900.woff2">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2">
+
+    
+      
+
+    
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-book-theme.css?digest=c3fdc42140077d1ad13ad2f1588a4309" />
+    <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/panels-main.c949a650a448cc0ae9fd3441c0e17fb0.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/panels-variables.06eb56fa6e07937060861dad626602ad.css" />
+    
+  <link rel="preload" as="script" href="../_static/js/index.1c5a1a01449ed65a7b51.js">
+
+    <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+    <script src="../_static/jquery.js"></script>
+    <script src="../_static/underscore.js"></script>
+    <script src="../_static/doctools.js"></script>
+    <script src="../_static/togglebutton.js"></script>
+    <script src="../_static/clipboard.min.js"></script>
+    <script src="../_static/copybutton.js"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
+    <script src="../_static/sphinx-book-theme.12a9622fbb08dcb3a2a40b2c02b83a57.js"></script>
+    <script src="../_static/sphinx-book-theme.js"></script>
+    <script async="async" src="https://unpkg.com/thebe@0.5.1/lib/index.js"></script>
+    <script>
+        const thebe_selector = ".thebe"
+        const thebe_selector_input = "pre"
+        const thebe_selector_output = ".output"
+    </script>
+    <script async="async" src="../_static/sphinx-thebe.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="docsearch:language" content="en" />
+    
+  </head>
+  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="80">
+    
+    <div class="container-fluid" id="banner"></div>
+
+    
+
+    <div class="container-xl">
+      <div class="row">
+          
+<div class="col-12 col-md-3 bd-sidebar site-navigation show" id="site-navigation">
+    
+        <div class="navbar-brand-box">
+    <a class="navbar-brand text-wrap" href="../index.html">
+      
+        <!-- `logo` is deprecated in Sphinx 4.0, so remove this when we stop supporting 3 -->
+        
+      
+      
+      <img src="../_static/logo.png" class="logo" alt="logo">
+      
+      
+      <h1 class="site-logo" id="site-title">Introduction to Regression Models</h1>
+      
+    </a>
+</div><form class="bd-search d-flex align-items-center" action="../search.html" method="get">
+  <i class="icon fas fa-search"></i>
+  <input type="search" class="form-control" name="q" id="search-input" placeholder="Search this book..." aria-label="Search this book..." autocomplete="off" >
+</form><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item active">
+        <ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="intro.html">
+   Welcome
+  </a>
+ </li>
+</ul>
+<p class="caption" role="heading">
+ <span class="caption-text">
+  Basics
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="basics.html">
+   Linear regression
+  </a>
+ </li>
+</ul>
+<p class="caption" role="heading">
+ <span class="caption-text">
+  Diagnostics
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="diagnostics.html">
+   Regression diagnostics
+  </a>
+ </li>
+</ul>
+<p class="caption" role="heading">
+ <span class="caption-text">
+  Lasso, Splines &amp; GAM
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="lasso.html">
+   Lasso regression
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="splines.html">
+   Regression splines
+  </a>
+ </li>
+</ul>
+<p class="caption" role="heading">
+ <span class="caption-text">
+  Decision Trees
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="gradientboosting.html">
+   Gradient Boosting
+  </a>
+ </li>
+</ul>
+<p class="caption" role="heading">
+ <span class="caption-text">
+  Feature Selection
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="feature-selection.html">
+   Feature selection
+  </a>
+ </li>
+</ul>
+<p class="caption" role="heading">
+ <span class="caption-text">
+  Ensemble
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="ensemble.html">
+   Ensemble meta-estimator
+  </a>
+ </li>
+</ul>
+<p class="caption" role="heading">
+ <span class="caption-text">
+  Case duke
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="case-duke-exploration.html">
+   Data exploration
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="case-duke-statsmodel.html">
+   Statsmodels
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="case-duke-sklearn.html">
+   Scikit-learn
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="case-duke-tensorflow.html">
+   TensorFlow
+  </a>
+ </li>
+</ul>
+<p class="caption" role="heading">
+ <span class="caption-text">
+  References
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="reference.html">
+   Bibliography
+  </a>
+ </li>
+</ul>
+
+    </div>
+</nav> <!-- To handle the deprecated key -->
+
+<div class="navbar_extra_footer">
+  Powered by <a href="https://jupyterbook.org">Jupyter Book</a>
+</div>
+
+</div>
+
+
+          
+
+
+          
+<main class="col py-md-3 pl-md-4 bd-content overflow-auto" role="main">
+    
+    <div class="topbar container-xl fixed-top">
+    <div class="topbar-contents row">
+        <div class="col-12 col-md-3 bd-topbar-whitespace site-navigation show"></div>
+        <div class="col pl-md-4 topbar-main">
+            
+            <button id="navbar-toggler" class="navbar-toggler ml-0" type="button" data-toggle="collapse"
+                data-toggle="tooltip" data-placement="bottom" data-target=".site-navigation" aria-controls="navbar-menu"
+                aria-expanded="true" aria-label="Toggle navigation" aria-controls="site-navigation"
+                title="Toggle navigation" data-toggle="tooltip" data-placement="left">
+                <i class="fas fa-bars"></i>
+                <i class="fas fa-arrow-left"></i>
+                <i class="fas fa-arrow-up"></i>
+            </button>
+            
+            
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn" aria-label="Download this page"><i
+            class="fas fa-download"></i></button>
+
+    <div class="dropdown-buttons">
+        <!-- ipynb file if we had a myst markdown file -->
+        
+        <!-- Download raw file -->
+        <a class="dropdown-buttons" href="../_sources/docs/hitters_data.ipynb"><button type="button"
+                class="btn btn-secondary topbarbtn" title="Download source file" data-toggle="tooltip"
+                data-placement="left">.ipynb</button></a>
+        <!-- Download PDF via print -->
+        <button type="button" id="download-print" class="btn btn-secondary topbarbtn" title="Print to PDF"
+            onClick="window.print()" data-toggle="tooltip" data-placement="left">.pdf</button>
+    </div>
+</div>
+
+            <!-- Source interaction buttons -->
+
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn"
+        aria-label="Connect with source repository"><i class="fab fa-github"></i></button>
+    <div class="dropdown-buttons sourcebuttons">
+        <a class="repository-button"
+            href="https://github.com/kirenz/regression"><button type="button" class="btn btn-secondary topbarbtn"
+                data-toggle="tooltip" data-placement="left" title="Source repository"><i
+                    class="fab fa-github"></i>repository</button></a>
+        <a class="issues-button"
+            href="https://github.com/kirenz/regression/issues/new?title=Issue%20on%20page%20%2Fdocs/hitters_data.html&body=Your%20issue%20content%20here."><button
+                type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip" data-placement="left"
+                title="Open an issue"><i class="fas fa-lightbulb"></i>open issue</button></a>
+        
+    </div>
+</div>
+
+            <!-- Full screen (wrap in <a> to have style consistency -->
+
+<a class="full-screen-button"><button type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip"
+        data-placement="bottom" onclick="toggleFullScreen()" aria-label="Fullscreen mode"
+        title="Fullscreen mode"><i
+            class="fas fa-expand"></i></button></a>
+
+            <!-- Launch buttons -->
+
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn"
+        aria-label="Launch interactive content"><i class="fas fa-rocket"></i></button>
+    <div class="dropdown-buttons">
+        
+        
+        
+        <a class="colab-button" href="https://colab.research.google.com/github/kirenz/regression/blob/main/docs/hitters_data.ipynb"><button type="button" class="btn btn-secondary topbarbtn"
+                title="Launch Colab" data-toggle="tooltip" data-placement="left"><img class="colab-button-logo"
+                    src="../_static/images/logo_colab.png"
+                    alt="Interact on Colab">Colab</button></a>
+        
+        
+    </div>
+</div>
+
+        </div>
+
+        <!-- Table of contents -->
+        <div class="d-none d-md-block col-md-2 bd-toc show">
+            
+            <div class="tocsection onthispage pt-5 pb-3">
+                <i class="fas fa-list"></i> Contents
+            </div>
+            <nav id="bd-toc-nav" aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#import">
+   Import
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#missing-values">
+     Missing values
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#create-label-and-features">
+   Create label and features
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#split-data">
+     Split data
+    </a>
+   </li>
+  </ul>
+ </li>
+</ul>
+
+            </nav>
+        </div>
+    </div>
+</div>
+    <div id="main-content" class="row">
+        <div class="col-12 col-md-9 pl-md-3 pr-md-0">
+        
+              <div>
+                
+  <div class="tex2jax_ignore mathjax_ignore section" id="hitters-data-preparation">
+<h1>Hitters data preparation<a class="headerlink" href="#hitters-data-preparation" title="Permalink to this headline">¶</a></h1>
+<p>We illustrate the following regression methods on a data set called “Hitters”, which includes 20 variables and 322 observations of major league baseball players. The goal is to predict a baseball player’s salary on the basis of various features associated with performance in the previous year. We don’t cover the topic of exploratory data analysis in this notebook.</p>
+<ul class="simple">
+<li><p>Visit <a class="reference external" href="https://cran.r-project.org/web/packages/ISLR/ISLR.pdf">this documentation</a> if you want to learn more about the data</p></li>
+</ul>
+<p>Note that scikit-learn provides a <a class="reference external" href="https://kirenz.github.io/ds-python/docs/data.html#pipelines-in-scikit-learn"><strong>pipeline</strong></a> library for data preprocessing and feature engineering, which is considered best practice for data preparation. However, since we use scikit-learn as well as statsmodels in some of our examples, we won’t create a data prerocessing pipeline in this example.</p>
+<div class="section" id="import">
+<h2>Import<a class="headerlink" href="#import" title="Permalink to this headline">¶</a></h2>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+
+<span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s2">&quot;https://raw.githubusercontent.com/kirenz/datasets/master/Hitters.csv&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">df</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>AtBat</th>
+      <th>Hits</th>
+      <th>HmRun</th>
+      <th>Runs</th>
+      <th>RBI</th>
+      <th>Walks</th>
+      <th>Years</th>
+      <th>CAtBat</th>
+      <th>CHits</th>
+      <th>CHmRun</th>
+      <th>CRuns</th>
+      <th>CRBI</th>
+      <th>CWalks</th>
+      <th>League</th>
+      <th>Division</th>
+      <th>PutOuts</th>
+      <th>Assists</th>
+      <th>Errors</th>
+      <th>Salary</th>
+      <th>NewLeague</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>293</td>
+      <td>66</td>
+      <td>1</td>
+      <td>30</td>
+      <td>29</td>
+      <td>14</td>
+      <td>1</td>
+      <td>293</td>
+      <td>66</td>
+      <td>1</td>
+      <td>30</td>
+      <td>29</td>
+      <td>14</td>
+      <td>A</td>
+      <td>E</td>
+      <td>446</td>
+      <td>33</td>
+      <td>20</td>
+      <td>NaN</td>
+      <td>A</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>315</td>
+      <td>81</td>
+      <td>7</td>
+      <td>24</td>
+      <td>38</td>
+      <td>39</td>
+      <td>14</td>
+      <td>3449</td>
+      <td>835</td>
+      <td>69</td>
+      <td>321</td>
+      <td>414</td>
+      <td>375</td>
+      <td>N</td>
+      <td>W</td>
+      <td>632</td>
+      <td>43</td>
+      <td>10</td>
+      <td>475.0</td>
+      <td>N</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>479</td>
+      <td>130</td>
+      <td>18</td>
+      <td>66</td>
+      <td>72</td>
+      <td>76</td>
+      <td>3</td>
+      <td>1624</td>
+      <td>457</td>
+      <td>63</td>
+      <td>224</td>
+      <td>266</td>
+      <td>263</td>
+      <td>A</td>
+      <td>W</td>
+      <td>880</td>
+      <td>82</td>
+      <td>14</td>
+      <td>480.0</td>
+      <td>A</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>496</td>
+      <td>141</td>
+      <td>20</td>
+      <td>65</td>
+      <td>78</td>
+      <td>37</td>
+      <td>11</td>
+      <td>5628</td>
+      <td>1575</td>
+      <td>225</td>
+      <td>828</td>
+      <td>838</td>
+      <td>354</td>
+      <td>N</td>
+      <td>E</td>
+      <td>200</td>
+      <td>11</td>
+      <td>3</td>
+      <td>500.0</td>
+      <td>N</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>321</td>
+      <td>87</td>
+      <td>10</td>
+      <td>39</td>
+      <td>42</td>
+      <td>30</td>
+      <td>2</td>
+      <td>396</td>
+      <td>101</td>
+      <td>12</td>
+      <td>48</td>
+      <td>46</td>
+      <td>33</td>
+      <td>N</td>
+      <td>E</td>
+      <td>805</td>
+      <td>40</td>
+      <td>4</td>
+      <td>91.5</td>
+      <td>N</td>
+    </tr>
+    <tr>
+      <th>...</th>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+    </tr>
+    <tr>
+      <th>317</th>
+      <td>497</td>
+      <td>127</td>
+      <td>7</td>
+      <td>65</td>
+      <td>48</td>
+      <td>37</td>
+      <td>5</td>
+      <td>2703</td>
+      <td>806</td>
+      <td>32</td>
+      <td>379</td>
+      <td>311</td>
+      <td>138</td>
+      <td>N</td>
+      <td>E</td>
+      <td>325</td>
+      <td>9</td>
+      <td>3</td>
+      <td>700.0</td>
+      <td>N</td>
+    </tr>
+    <tr>
+      <th>318</th>
+      <td>492</td>
+      <td>136</td>
+      <td>5</td>
+      <td>76</td>
+      <td>50</td>
+      <td>94</td>
+      <td>12</td>
+      <td>5511</td>
+      <td>1511</td>
+      <td>39</td>
+      <td>897</td>
+      <td>451</td>
+      <td>875</td>
+      <td>A</td>
+      <td>E</td>
+      <td>313</td>
+      <td>381</td>
+      <td>20</td>
+      <td>875.0</td>
+      <td>A</td>
+    </tr>
+    <tr>
+      <th>319</th>
+      <td>475</td>
+      <td>126</td>
+      <td>3</td>
+      <td>61</td>
+      <td>43</td>
+      <td>52</td>
+      <td>6</td>
+      <td>1700</td>
+      <td>433</td>
+      <td>7</td>
+      <td>217</td>
+      <td>93</td>
+      <td>146</td>
+      <td>A</td>
+      <td>W</td>
+      <td>37</td>
+      <td>113</td>
+      <td>7</td>
+      <td>385.0</td>
+      <td>A</td>
+    </tr>
+    <tr>
+      <th>320</th>
+      <td>573</td>
+      <td>144</td>
+      <td>9</td>
+      <td>85</td>
+      <td>60</td>
+      <td>78</td>
+      <td>8</td>
+      <td>3198</td>
+      <td>857</td>
+      <td>97</td>
+      <td>470</td>
+      <td>420</td>
+      <td>332</td>
+      <td>A</td>
+      <td>E</td>
+      <td>1314</td>
+      <td>131</td>
+      <td>12</td>
+      <td>960.0</td>
+      <td>A</td>
+    </tr>
+    <tr>
+      <th>321</th>
+      <td>631</td>
+      <td>170</td>
+      <td>9</td>
+      <td>77</td>
+      <td>44</td>
+      <td>31</td>
+      <td>11</td>
+      <td>4908</td>
+      <td>1457</td>
+      <td>30</td>
+      <td>775</td>
+      <td>357</td>
+      <td>249</td>
+      <td>A</td>
+      <td>W</td>
+      <td>408</td>
+      <td>4</td>
+      <td>3</td>
+      <td>1000.0</td>
+      <td>A</td>
+    </tr>
+  </tbody>
+</table>
+<p>322 rows × 20 columns</p>
+</div></div></div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">df</span><span class="o">.</span><span class="n">info</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;class &#39;pandas.core.frame.DataFrame&#39;&gt;
+RangeIndex: 322 entries, 0 to 321
+Data columns (total 20 columns):
+ #   Column     Non-Null Count  Dtype  
+---  ------     --------------  -----  
+ 0   AtBat      322 non-null    int64  
+ 1   Hits       322 non-null    int64  
+ 2   HmRun      322 non-null    int64  
+ 3   Runs       322 non-null    int64  
+ 4   RBI        322 non-null    int64  
+ 5   Walks      322 non-null    int64  
+ 6   Years      322 non-null    int64  
+ 7   CAtBat     322 non-null    int64  
+ 8   CHits      322 non-null    int64  
+ 9   CHmRun     322 non-null    int64  
+ 10  CRuns      322 non-null    int64  
+ 11  CRBI       322 non-null    int64  
+ 12  CWalks     322 non-null    int64  
+ 13  League     322 non-null    object 
+ 14  Division   322 non-null    object 
+ 15  PutOuts    322 non-null    int64  
+ 16  Assists    322 non-null    int64  
+ 17  Errors     322 non-null    int64  
+ 18  Salary     263 non-null    float64
+ 19  NewLeague  322 non-null    object 
+dtypes: float64(1), int64(16), object(3)
+memory usage: 50.4+ KB
+</pre></div>
+</div>
+</div>
+</div>
+<div class="section" id="missing-values">
+<h3>Missing values<a class="headerlink" href="#missing-values" title="Permalink to this headline">¶</a></h3>
+<p>Note that the salary is missing for some of the players:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="n">df</span><span class="o">.</span><span class="n">isnull</span><span class="p">()</span><span class="o">.</span><span class="n">sum</span><span class="p">())</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>AtBat         0
+Hits          0
+HmRun         0
+Runs          0
+RBI           0
+Walks         0
+Years         0
+CAtBat        0
+CHits         0
+CHmRun        0
+CRuns         0
+CRBI          0
+CWalks        0
+League        0
+Division      0
+PutOuts       0
+Assists       0
+Errors        0
+Salary       59
+NewLeague     0
+dtype: int64
+</pre></div>
+</div>
+</div>
+</div>
+<p>We simply drop the missing cases:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># drop missing cases</span>
+<span class="n">df</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">dropna</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="section" id="create-label-and-features">
+<h2>Create label and features<a class="headerlink" href="#create-label-and-features" title="Permalink to this headline">¶</a></h2>
+<p>Since we will use algorithms from scikit learn, we need to encode our categorical features as one-hot numeric features (dummy variables):</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">dummies</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">get_dummies</span><span class="p">(</span><span class="n">df</span><span class="p">[[</span><span class="s1">&#39;League&#39;</span><span class="p">,</span> <span class="s1">&#39;Division&#39;</span><span class="p">,</span><span class="s1">&#39;NewLeague&#39;</span><span class="p">]])</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">dummies</span><span class="o">.</span><span class="n">info</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;class &#39;pandas.core.frame.DataFrame&#39;&gt;
+Int64Index: 263 entries, 1 to 321
+Data columns (total 6 columns):
+ #   Column       Non-Null Count  Dtype
+---  ------       --------------  -----
+ 0   League_A     263 non-null    uint8
+ 1   League_N     263 non-null    uint8
+ 2   Division_E   263 non-null    uint8
+ 3   Division_W   263 non-null    uint8
+ 4   NewLeague_A  263 non-null    uint8
+ 5   NewLeague_N  263 non-null    uint8
+dtypes: uint8(6)
+memory usage: 3.6 KB
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="n">dummies</span><span class="o">.</span><span class="n">head</span><span class="p">())</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>   League_A  League_N  Division_E  Division_W  NewLeague_A  NewLeague_N
+1         0         1           0           1            0            1
+2         1         0           0           1            1            0
+3         0         1           1           0            0            1
+4         0         1           1           0            0            1
+5         1         0           0           1            1            0
+</pre></div>
+</div>
+</div>
+</div>
+<p>Next, we create our label y:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">y</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="s1">&#39;Salary&#39;</span><span class="p">]</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>We drop the column with the outcome variable (Salary), and categorical columns for which we already created dummy variables:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">X_numerical</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">drop</span><span class="p">([</span><span class="s1">&#39;Salary&#39;</span><span class="p">,</span> <span class="s1">&#39;League&#39;</span><span class="p">,</span> <span class="s1">&#39;Division&#39;</span><span class="p">,</span> <span class="s1">&#39;NewLeague&#39;</span><span class="p">],</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="s1">&#39;float64&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Make a list of all numerical features (we need them later):</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">list_numerical</span> <span class="o">=</span> <span class="n">X_numerical</span><span class="o">.</span><span class="n">columns</span>
+<span class="n">list_numerical</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Index([&#39;AtBat&#39;, &#39;Hits&#39;, &#39;HmRun&#39;, &#39;Runs&#39;, &#39;RBI&#39;, &#39;Walks&#39;, &#39;Years&#39;, &#39;CAtBat&#39;,
+       &#39;CHits&#39;, &#39;CHmRun&#39;, &#39;CRuns&#39;, &#39;CRBI&#39;, &#39;CWalks&#39;, &#39;PutOuts&#39;, &#39;Assists&#39;,
+       &#39;Errors&#39;],
+      dtype=&#39;object&#39;)
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Create all features</span>
+<span class="n">X</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">concat</span><span class="p">([</span><span class="n">X_numerical</span><span class="p">,</span> <span class="n">dummies</span><span class="p">[[</span><span class="s1">&#39;League_N&#39;</span><span class="p">,</span> <span class="s1">&#39;Division_W&#39;</span><span class="p">,</span> <span class="s1">&#39;NewLeague_N&#39;</span><span class="p">]]],</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+<span class="n">X</span><span class="o">.</span><span class="n">info</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;class &#39;pandas.core.frame.DataFrame&#39;&gt;
+Int64Index: 263 entries, 1 to 321
+Data columns (total 19 columns):
+ #   Column       Non-Null Count  Dtype  
+---  ------       --------------  -----  
+ 0   AtBat        263 non-null    float64
+ 1   Hits         263 non-null    float64
+ 2   HmRun        263 non-null    float64
+ 3   Runs         263 non-null    float64
+ 4   RBI          263 non-null    float64
+ 5   Walks        263 non-null    float64
+ 6   Years        263 non-null    float64
+ 7   CAtBat       263 non-null    float64
+ 8   CHits        263 non-null    float64
+ 9   CHmRun       263 non-null    float64
+ 10  CRuns        263 non-null    float64
+ 11  CRBI         263 non-null    float64
+ 12  CWalks       263 non-null    float64
+ 13  PutOuts      263 non-null    float64
+ 14  Assists      263 non-null    float64
+ 15  Errors       263 non-null    float64
+ 16  League_N     263 non-null    uint8  
+ 17  Division_W   263 non-null    uint8  
+ 18  NewLeague_N  263 non-null    uint8  
+dtypes: float64(16), uint8(3)
+memory usage: 35.7 KB
+</pre></div>
+</div>
+</div>
+</div>
+<div class="section" id="split-data">
+<h3>Split data<a class="headerlink" href="#split-data" title="Permalink to this headline">¶</a></h3>
+<p>Split the data set into train and test set with the first 70% of the data for training and the remaining 30% for testing.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">sklearn.model_selection</span> <span class="kn">import</span> <span class="n">train_test_split</span>
+
+<span class="n">X_train</span><span class="p">,</span> <span class="n">X_test</span><span class="p">,</span> <span class="n">y_train</span><span class="p">,</span> <span class="n">y_test</span> <span class="o">=</span> <span class="n">train_test_split</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">test_size</span><span class="o">=</span><span class="mf">0.3</span><span class="p">,</span> <span class="n">random_state</span><span class="o">=</span><span class="mi">10</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">X_train</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>AtBat</th>
+      <th>Hits</th>
+      <th>HmRun</th>
+      <th>Runs</th>
+      <th>RBI</th>
+      <th>Walks</th>
+      <th>Years</th>
+      <th>CAtBat</th>
+      <th>CHits</th>
+      <th>CHmRun</th>
+      <th>CRuns</th>
+      <th>CRBI</th>
+      <th>CWalks</th>
+      <th>PutOuts</th>
+      <th>Assists</th>
+      <th>Errors</th>
+      <th>League_N</th>
+      <th>Division_W</th>
+      <th>NewLeague_N</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>260</th>
+      <td>496.0</td>
+      <td>119.0</td>
+      <td>8.0</td>
+      <td>57.0</td>
+      <td>33.0</td>
+      <td>21.0</td>
+      <td>7.0</td>
+      <td>3358.0</td>
+      <td>882.0</td>
+      <td>36.0</td>
+      <td>365.0</td>
+      <td>280.0</td>
+      <td>165.0</td>
+      <td>155.0</td>
+      <td>371.0</td>
+      <td>29.0</td>
+      <td>1</td>
+      <td>1</td>
+      <td>1</td>
+    </tr>
+    <tr>
+      <th>92</th>
+      <td>317.0</td>
+      <td>78.0</td>
+      <td>7.0</td>
+      <td>35.0</td>
+      <td>35.0</td>
+      <td>32.0</td>
+      <td>1.0</td>
+      <td>317.0</td>
+      <td>78.0</td>
+      <td>7.0</td>
+      <td>35.0</td>
+      <td>35.0</td>
+      <td>32.0</td>
+      <td>45.0</td>
+      <td>122.0</td>
+      <td>26.0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <th>137</th>
+      <td>343.0</td>
+      <td>103.0</td>
+      <td>6.0</td>
+      <td>48.0</td>
+      <td>36.0</td>
+      <td>40.0</td>
+      <td>15.0</td>
+      <td>4338.0</td>
+      <td>1193.0</td>
+      <td>70.0</td>
+      <td>581.0</td>
+      <td>421.0</td>
+      <td>325.0</td>
+      <td>211.0</td>
+      <td>56.0</td>
+      <td>13.0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <th>90</th>
+      <td>314.0</td>
+      <td>83.0</td>
+      <td>13.0</td>
+      <td>39.0</td>
+      <td>46.0</td>
+      <td>16.0</td>
+      <td>5.0</td>
+      <td>1457.0</td>
+      <td>405.0</td>
+      <td>28.0</td>
+      <td>156.0</td>
+      <td>159.0</td>
+      <td>76.0</td>
+      <td>533.0</td>
+      <td>40.0</td>
+      <td>4.0</td>
+      <td>0</td>
+      <td>1</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <th>100</th>
+      <td>495.0</td>
+      <td>151.0</td>
+      <td>17.0</td>
+      <td>61.0</td>
+      <td>84.0</td>
+      <td>78.0</td>
+      <td>10.0</td>
+      <td>5624.0</td>
+      <td>1679.0</td>
+      <td>275.0</td>
+      <td>884.0</td>
+      <td>1015.0</td>
+      <td>709.0</td>
+      <td>1045.0</td>
+      <td>88.0</td>
+      <td>13.0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+</div>
+</div>
+</div>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            kernelName: "python3",
+            path: "./docs"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+              </div>
+              
+        
+            
+
+
+
+<div class='prev-next-bottom'>
+    
+
+</div>
+        
+        </div>
+    </div>
+    <footer class="footer">
+    <div class="container">
+      <p>
+        
+          By Jan Kirenz<br/>
+        
+            &copy; Copyright 2021.<br/>
+      </p>
+    </div>
+  </footer>
+</main>
+
+
+      </div>
+    </div>
+  
+  <script src="../_static/js/index.1c5a1a01449ed65a7b51.js"></script>
+
+  
+  </body>
+</html>
