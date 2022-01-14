@@ -727,15 +727,18 @@
 </ul>
 <p>As an example:</p>
 <ul class="simple">
-<li><p>A cubic spline (degree=3) with 4 knots (K=4) will have <span class="math notranslate nohighlight">\(df=4+3=7\)</span> degrees of freedom. If we use an intercept, we need to add an aditional degree of freedom.</p></li>
-<li><p>A cubic spline (degree=3) with 5 degrees of freedom will have <span class="math notranslate nohighlight">\(𝑘=5−3=2\)</span> knots.</p></li>
+<li><p>A cubic spline (degree=3) with 4 knots (K=4) will have <span class="math notranslate nohighlight">\(df=4+3=7\)</span> degrees of freedom. If we use an intercept, we need to add an additional degree of freedom.</p></li>
+<li><p>A cubic spline (degree=3) with 5 degrees of freedom (df=5) will have <span class="math notranslate nohighlight">\(𝑘=5−3=2\)</span> knots (assuming the spline has no intercept).</p></li>
 </ul>
-<p>In our case, we want to fit a cubic spline (degree=3) with an intercept and three knots (K=3) for both features (we also could use different values). This equals <span class="math notranslate nohighlight">\(df=3+3+1=7\)</span>; these degrees of freedom are used up by an intercept, plus six basis functions.</p>
-<p>The higher the degrees of freedom, the “wigglier” the spline gets because the number of knots is increased.</p>
-<p><em>In the case of natural (restricted) cubic splines: df=𝑘−1 if you specify the knots or 𝑘=df+1 if you specify the degrees of freedom.</em></p>
+<p>In our case, we want to fit a cubic spline (degree=3) with an intercept and three knots (K=3). We use this values for both of our features (we also could use different values for one of the features). This equals <span class="math notranslate nohighlight">\(df=3+3+1=7\)</span> for both of the features. This means that these degrees of freedom are used up by an intercept, plus six basis functions.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>The higher the degrees of freedom, the “wigglier” the spline gets because the number of knots is increased <span id="id1">[<a class="reference internal" href="reference.html#id7">James <em>et al.</em>, 2021</a>]</span>.</p>
+</div>
+<p>In the case of natural splines: <span class="math notranslate nohighlight">\(df=𝑘−1\)</span> if you specify the knots or <span class="math notranslate nohighlight">\(𝑘=df+1\)</span> if you specify the degrees of freedom.</p>
 <p>In the statsmodels function <code class="docutils literal notranslate"><span class="pre">BSplines</span></code>, we need to provide <code class="docutils literal notranslate"><span class="pre">df</span></code> and <code class="docutils literal notranslate"><span class="pre">degree</span></code>:</p>
 <p><code class="docutils literal notranslate"><span class="pre">df</span></code>: number of basis functions or degrees of freedom; should be equal in length to the number of columns of x; may be an integer if x has one column or is 1-D.</p>
-<p><code class="docutils literal notranslate"><span class="pre">degree</span></code>: degree(s) of the spline; the same length and type rules apply as to df</p>
+<p><code class="docutils literal notranslate"><span class="pre">degree</span></code>: degree(s) of the spline; the same length and type rules apply as to df.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">statsmodels.api</span> <span class="k">as</span> <span class="nn">sm</span>
@@ -771,7 +774,7 @@
 </div>
 </div>
 </div>
-<p>Note that optimal penalization weights alpha could be obtained through generalized k-fold cross-validation with <a class="reference external" href="https://www.statsmodels.org/dev/generated/statsmodels.gam.generalized_additive_model.GLMGam.select_penweight_kfold.html">.select_penweight_kfold</a></p>
+<p>Note that optimal penalization weights alpha could be obtained through generalized k-fold cross-validation by using the function <a class="reference external" href="https://www.statsmodels.org/dev/generated/statsmodels.gam.generalized_additive_model.GLMGam.select_penweight_kfold.html">select_penweight_kfold</a>.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># fit model</span>
@@ -791,7 +794,7 @@ Model Family:                Gaussian   Df Model:                        12.00
 Link Function:               identity   Scale:                          90949.
 Method:                         PIRLS   Log-Likelihood:                -1304.8
 Date:                Fri, 14 Jan 2022   Deviance:                   1.5552e+07
-Time:                        19:36:04   Pearson chi2:                 1.56e+07
+Time:                        21:55:33   Pearson chi2:                 1.56e+07
 No. Iterations:                     3   Pseudo R-squ. (CS):             0.7307
 Covariance Type:            nonrobust                                         
 ==============================================================================
