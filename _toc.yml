@@ -1,19 +1,35 @@
-# Table of contents
-# Learn more at https://jupyterbook.org/customize/toc.html
-
 format: jb-book
 root: docs/intro.md
 parts:
-  - caption: Architectures
+  - caption: Basics
     chapters:
-    - file: docs/data-architecture-intro.md
-    - file: docs/data-architecture-basics.md 
-    - file: docs/data-architecture-challenges.md    
-    - file: docs/data-lakehouse.md
-    - file: docs/delta-lake.md
-  - caption: Machine Learning Operations
+    - file: docs/basics.ipynb
+  - caption: Diagnostics
     chapters:
-    - file: docs/mlops-intro.md
+    - file: docs/diagnostics.ipynb
+  - caption: Lasso & Splines
+    chapters:
+    - file: docs/lasso.ipynb
+    - file: docs/splines.ipynb   
+  - caption: Decision Trees
+    chapters:
+    - file: docs/gradientboosting.ipynb
+  - caption: Feature Selection
+    chapters:
+    - file: docs/feature-selection.ipynb
+  - caption: Ensemble
+    chapters:
+    - file: docs/ensemble.ipynb
+  #- caption: Applications
+  #  chapters:
+  #  - file: docs/case-simulated.ipynb
+  #  - file: docs/case-auto.ipynb
+  - caption: Case duke
+    chapters:
+    - file: docs/case-duke-exploration.ipynb
+    - file: docs/case-duke-statsmodel.ipynb
+    - file: docs/case-duke-sklearn.ipynb
+    - file: docs/case-duke-tensorflow.ipynb
   - caption: References
     chapters:
     - file: docs/reference.md
