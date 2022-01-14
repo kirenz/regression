@@ -5,7 +5,7 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Splines &#8212; Introduction to Regression Models</title>
+    <title>Regression splines &#8212; Introduction to Regression Models</title>
     
   <link href="../_static/css/theme.css" rel="stylesheet" />
   <link href="../_static/css/index.c5995385ac14fb8791e8eb36b4908be2.css" rel="stylesheet" />
@@ -121,7 +121,7 @@
 </ul>
 <p class="caption" role="heading">
  <span class="caption-text">
-  Lasso &amp; Splines
+  Lasso, Splines &amp; GAM
  </span>
 </p>
 <ul class="current nav bd-sidenav">
@@ -132,7 +132,7 @@
  </li>
  <li class="toctree-l1 current active">
   <a class="current reference internal" href="#">
-   Splines
+   Regression splines
   </a>
  </li>
 </ul>
@@ -351,7 +351,7 @@
   </a>
  </li>
  <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#id1">
+  <a class="reference internal nav-link" href="#splines">
    Splines
   </a>
   <ul class="nav section-nav flex-column">
@@ -383,14 +383,16 @@
         
               <div>
                 
-  <div class="tex2jax_ignore mathjax_ignore section" id="splines">
-<h1>Splines<a class="headerlink" href="#splines" title="Permalink to this headline">¶</a></h1>
+  <div class="tex2jax_ignore mathjax_ignore section" id="regression-splines">
+<h1>Regression splines<a class="headerlink" href="#regression-splines" title="Permalink to this headline">¶</a></h1>
 <p>The following code tutorial is mainly based on:</p>
 <ul class="simple">
 <li><p>the <a class="reference external" href="https://scikit-learn.org/stable/auto_examples/linear_model/plot_polynomial_interpolation.html#sphx-glr-auto-examples-linear-model-plot-polynomial-interpolation-py">scikit learn documentation</a> about splines provided by Mathieu Blondel, Jake Vanderplas, Christian Lorentzen and Malte Londschien.</p></li>
 <li><p>code from <a class="reference external" href="https://nbviewer.org/github/JWarmenhoven/ISL-python/blob/master/Notebooks/Chapter%207.ipynb">Jordi Warmenhoven</a></p></li>
 </ul>
-<p>To learn more about the spline regression methods, review <a class="reference external" href="https://www.statlearning.com/">“An Introduction to Statistical Learning”</a> from James et al. (2021).</p>
+<p>Regression splines involve dividing the range of a feature X into K distinct regions. Within each region, a polynomial function is fit to the data. These polynomials are constrained so that they join smoothly at the region boundaries, or knots. Provided that the interval is divided into enough regions, this can produce an extremely flexibel fit. <span id="id1">[<a class="reference internal" href="reference.html#id7">James <em>et al.</em>, 2021</a>]</span></p>
+<p>To understand the advantages of regression splines, we first start with a linear ridge regression model, build a simple polynomial regression and then proceed to splines.</p>
+<p>To learn more about the spline regression method, review <a class="reference external" href="https://www.statlearning.com/">“An Introduction to Statistical Learning”</a> from James et al. (2021).</p>
 <div class="section" id="data">
 <h2>Data<a class="headerlink" href="#data" title="Permalink to this headline">¶</a></h2>
 <div class="section" id="import">
@@ -849,11 +851,12 @@
 </div>
 </div>
 </div>
-<div class="section" id="id1">
-<h2>Splines<a class="headerlink" href="#id1" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="splines">
+<h2>Splines<a class="headerlink" href="#splines" title="Permalink to this headline">¶</a></h2>
 <div class="section" id="splines-in-scikit-learn">
 <h3>Splines in Scikit learn<a class="headerlink" href="#splines-in-scikit-learn" title="Permalink to this headline">¶</a></h3>
 <p>Spline transformers are a new feature in <a class="reference external" href="https://scikit-learn.org/stable/auto_examples/release_highlights/plot_release_highlights_1_0_0.html">scikit learn 1.0</a>. Therefore, make sure to use the latest version of scikit learn. If you use Aanconda, you can update all packages using <code class="docutils literal notranslate"><span class="pre">conda</span> <span class="pre">update</span> <span class="pre">--all</span></code></p>
+<p>Note that scikit learn places the knots in a uniform (this is the default) or quantile fashion. We only have to specify the desired number of knots, and then have <a class="reference external" href="https://scikit-learn.org/stable/modules/generated/sklearn.preprocessing.SplineTransformer.html">SplineTransformer</a> automatically place the corresponding number of knots.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">sklearn.preprocessing</span> <span class="kn">import</span> <span class="n">SplineTransformer</span>
@@ -944,6 +947,7 @@
 <div class="section" id="splines-in-patsy">
 <h3>Splines in patsy<a class="headerlink" href="#splines-in-patsy" title="Permalink to this headline">¶</a></h3>
 <p>Next, we use the module <a class="reference external" href="https://patsy.readthedocs.io/en/latest/overview.html">patsy</a> to create non-linear transformations of the input data. Additionaly, we use statsmodels to fit 2 models with different number of knots.</p>
+<p>When we fit a spline, where should we place the knots? The regression spline is most flexible in regions that contain a lot of knots, because in those regions the polynomial coefficients can change rapidly. Hence, one option is to place more knots in places where we feel the function might vary most rapidly, and to place fewer knots where it seems more stable. While this option can work well, in practice it is common to place knots in a uniform fashion. One way to do this is to specify the desired degrees of freedom, and then have the software automatically place the corresponding number of knots at uniform quantiles of the data.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">patsy</span> <span class="kn">import</span> <span class="n">dmatrix</span>
