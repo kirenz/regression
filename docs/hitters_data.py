@@ -16,7 +16,11 @@ X_numerical = df.drop(['Salary', 'League', 'Division', 'NewLeague'], axis=1).ast
 list_numerical = X_numerical.columns
 # Create all features
 X = pd.concat([X_numerical, dummies[['League_N', 'Division_W', 'NewLeague_N']]], axis=1)
-X.info()
 # ### Split data
 from sklearn.model_selection import train_test_split
 X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.3, random_state=10)
+
+
+df_train = pd.DataFrame(X_train)
+df_train['Salary'] = pd.DataFrame(y_train)
+
