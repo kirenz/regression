@@ -7,8 +7,9 @@ parts:
   - caption: Diagnostics
     chapters:
     - file: docs/diagnostics.ipynb
-  - caption: Lasso & Splines
+  - caption: Lasso, Splines & GAM
     chapters:
+    - file: docs/hitters-data.ipynb  
     - file: docs/lasso.ipynb
     - file: docs/splines.ipynb   
   - caption: Decision Trees
