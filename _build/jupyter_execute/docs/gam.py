@@ -20,7 +20,7 @@
 # 
 # This is an example of a GAM. It is called an *additive* model because we calculate a separate $f_j$ for each $X_j$, and then add together all of their contributions.
 # 
-# In particular, generalized additive models allow us to use and combine regression splines, smoothing splines and local regression to deal with multiple predictors in one model. This means you can combine the different methods in your model and are able to decide which method to use for every feature. Note that in most situations, the differences in the GAMs obtained using smoothing splines versus natural splines are small {cite:t}`James2021`).
+# In particular, generalized additive models allow us to use and combine regression splines, smoothing splines and local regression to deal with multiple predictors in one model. This means you can combine the different methods in your model and are able to decide which method to use for every feature. Note that in most situations, the differences in the GAMs obtained using smoothing splines versus natural splines are small {cite:p}`James2021`).
 # 
 # In [](splines.ipynb), we discussed regression splines, which we created by specifying a set of knots, producing a sequence of basis functions, and then using least squares to estimate the spline coefficients. 
 # 
