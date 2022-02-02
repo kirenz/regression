@@ -7,8 +7,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Diagnostics &#8212; Introduction to Regression Models</title>
     
-  <link href="../_static/css/theme.css" rel="stylesheet">
-  <link href="../_static/css/index.ff1ffe594081f20da1ef19478df9384b.css" rel="stylesheet">
+  <link href="../_static/css/theme.css" rel="stylesheet" />
+  <link href="../_static/css/index.c5995385ac14fb8791e8eb36b4908be2.css" rel="stylesheet" />
 
     
   <link rel="stylesheet"
@@ -31,7 +31,7 @@
     <link rel="stylesheet" type="text/css" href="../_static/panels-main.c949a650a448cc0ae9fd3441c0e17fb0.css" />
     <link rel="stylesheet" type="text/css" href="../_static/panels-variables.06eb56fa6e07937060861dad626602ad.css" />
     
-  <link rel="preload" as="script" href="../_static/js/index.be7d3bbb2ef33a8344ce.js">
+  <link rel="preload" as="script" href="../_static/js/index.1c5a1a01449ed65a7b51.js">
 
     <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
     <script src="../_static/jquery.js"></script>
@@ -56,10 +56,7 @@
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <meta name="docsearch:language" content="None">
-    
-
-    <!-- Google Analytics -->
+    <meta name="docsearch:language" content="en" />
     
   </head>
   <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="80">
@@ -98,7 +95,7 @@
   </a>
  </li>
 </ul>
-<p aria-level="2" class="caption" role="heading">
+<p class="caption" role="heading">
  <span class="caption-text">
   Basics
  </span>
@@ -110,7 +107,7 @@
   </a>
  </li>
 </ul>
-<p aria-level="2" class="caption" role="heading">
+<p class="caption" role="heading">
  <span class="caption-text">
   Diagnostics
  </span>
@@ -122,7 +119,7 @@
   </a>
  </li>
 </ul>
-<p aria-level="2" class="caption" role="heading">
+<p class="caption" role="heading">
  <span class="caption-text">
   Lasso, Splines &amp; GAM
  </span>
@@ -149,7 +146,7 @@
   </a>
  </li>
 </ul>
-<p aria-level="2" class="caption" role="heading">
+<p class="caption" role="heading">
  <span class="caption-text">
   Decision Trees
  </span>
@@ -161,7 +158,7 @@
   </a>
  </li>
 </ul>
-<p aria-level="2" class="caption" role="heading">
+<p class="caption" role="heading">
  <span class="caption-text">
   Feature Selection
  </span>
@@ -173,7 +170,7 @@
   </a>
  </li>
 </ul>
-<p aria-level="2" class="caption" role="heading">
+<p class="caption" role="heading">
  <span class="caption-text">
   Ensemble
  </span>
@@ -185,7 +182,7 @@
   </a>
  </li>
 </ul>
-<p aria-level="2" class="caption" role="heading">
+<p class="caption" role="heading">
  <span class="caption-text">
   Case duke
  </span>
@@ -212,7 +209,7 @@
   </a>
  </li>
 </ul>
-<p aria-level="2" class="caption" role="heading">
+<p class="caption" role="heading">
  <span class="caption-text">
   References
  </span>
@@ -509,7 +506,7 @@
 <span class="kn">from</span> <span class="nn">statsmodels.graphics.gofplots</span> <span class="kn">import</span> <span class="n">ProbPlot</span>
 <span class="kn">from</span> <span class="nn">statsmodels.graphics.regressionplots</span> <span class="kn">import</span> <span class="n">plot_leverage_resid2</span>
 <span class="kn">from</span> <span class="nn">statsmodels.stats.outliers_influence</span> <span class="kn">import</span> <span class="n">variance_inflation_factor</span>
-
+<span class="kn">from</span> <span class="nn">statsmodels.tools.tools</span> <span class="kn">import</span> <span class="n">add_constant</span>
 
 <span class="kn">from</span> <span class="nn">patsy</span> <span class="kn">import</span> <span class="n">dmatrices</span>
 
@@ -818,15 +815,12 @@ dtype: int64
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">sns</span><span class="o">.</span><span class="n">pairplot</span><span class="p">(</span><span class="n">data</span><span class="o">=</span><span class="n">df</span><span class="p">)</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">sns</span><span class="o">.</span><span class="n">pairplot</span><span class="p">(</span><span class="n">data</span><span class="o">=</span><span class="n">df</span><span class="p">);</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;seaborn.axisgrid.PairGrid at 0x7ff798c37c10&gt;
-</pre></div>
-</div>
-<img alt="../_images/diagnostics-auto_14_1.png" src="../_images/diagnostics-auto_14_1.png" />
+<img alt="../_images/diagnostics-auto_14_0.png" src="../_images/diagnostics-auto_14_0.png" />
 </div>
 </div>
 </div>
@@ -854,10 +848,10 @@ dtype: int64
   <th>Method:</th>             <td>Least Squares</td>  <th>  F-statistic:       </th> <td>   311.1</td> 
 </tr>
 <tr>
-  <th>Date:</th>             <td>Sat, 13 Nov 2021</td> <th>  Prob (F-statistic):</th> <td>7.48e-103</td>
+  <th>Date:</th>             <td>Wed, 02 Feb 2022</td> <th>  Prob (F-statistic):</th> <td>7.48e-103</td>
 </tr>
 <tr>
-  <th>Time:</th>                 <td>12:29:14</td>     <th>  Log-Likelihood:    </th> <td> -1121.0</td> 
+  <th>Time:</th>                 <td>12:43:44</td>     <th>  Log-Likelihood:    </th> <td> -1121.0</td> 
 </tr>
 <tr>
   <th>No. Observations:</th>      <td>   392</td>      <th>  AIC:               </th> <td>   2250.</td> 
@@ -925,7 +919,10 @@ dtype: int64
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/diagnostics-auto_18_0.png" src="../_images/diagnostics-auto_18_0.png" />
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>eval_env: 1
+</pre></div>
+</div>
+<img alt="../_images/diagnostics-auto_18_1.png" src="../_images/diagnostics-auto_18_1.png" />
 </div>
 </div>
 <p>Let’s take a look at the different plots.</p>
@@ -1072,10 +1069,10 @@ dtype: int64
   <th>Method:</th>             <td>Least Squares</td>  <th>  F-statistic:       </th> <td>   428.0</td>
 </tr>
 <tr>
-  <th>Date:</th>             <td>Sat, 13 Nov 2021</td> <th>  Prob (F-statistic):</th> <td>5.40e-99</td>
+  <th>Date:</th>             <td>Wed, 02 Feb 2022</td> <th>  Prob (F-statistic):</th> <td>5.40e-99</td>
 </tr>
 <tr>
-  <th>Time:</th>                 <td>12:29:15</td>     <th>  Log-Likelihood:    </th> <td> -1133.2</td>
+  <th>Time:</th>                 <td>12:43:45</td>     <th>  Log-Likelihood:    </th> <td> -1133.2</td>
 </tr>
 <tr>
   <th>No. Observations:</th>      <td>   392</td>      <th>  AIC:               </th> <td>   2272.</td>
@@ -1206,11 +1203,7 @@ dtype: int64
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/Users/jankirenz/opt/anaconda3/lib/python3.8/site-packages/statsmodels/graphics/gofplots.py:993: UserWarning: marker is redundantly defined by the &#39;marker&#39; keyword argument and the fmt string &quot;bo&quot; (-&gt; marker=&#39;o&#39;). The keyword argument will take precedence.
-  ax.plot(x, y, fmt, **plot_style)
-</pre></div>
-</div>
-<img alt="../_images/diagnostics-auto_43_1.png" src="../_images/diagnostics-auto_43_1.png" />
+<img alt="../_images/diagnostics-auto_43_0.png" src="../_images/diagnostics-auto_43_0.png" />
 </div>
 </div>
 <p>This plot shows if residuals are normally distributed. If a normal distribution is present, the residuals should (more or less) follow a straight line.
@@ -1222,7 +1215,7 @@ We can observe that only some residuals (in the lower left and the upper right c
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Advanced plot (2)</span>
 <span class="c1"># ProbPlot and its qqplot method from statsmodels graphics API. </span>
 <span class="n">QQ</span> <span class="o">=</span> <span class="n">ProbPlot</span><span class="p">(</span><span class="n">model_norm_residuals</span><span class="p">)</span>
-<span class="n">plot_lm_2</span> <span class="o">=</span> <span class="n">QQ</span><span class="o">.</span><span class="n">qqplot</span><span class="p">(</span><span class="n">line</span><span class="o">=</span><span class="s1">&#39;45&#39;</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.5</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;#4C72B0&#39;</span><span class="p">,</span> <span class="n">lw</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+<span class="n">plot_lm_2</span> <span class="o">=</span> <span class="n">QQ</span><span class="o">.</span><span class="n">qqplot</span><span class="p">(</span><span class="n">line</span><span class="o">=</span><span class="s1">&#39;45&#39;</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.5</span><span class="p">,</span> <span class="n">lw</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
 <span class="c1"># figure size</span>
 <span class="n">plot_lm_2</span><span class="o">.</span><span class="n">set_figheight</span><span class="p">(</span><span class="mi">8</span><span class="p">)</span>
 <span class="n">plot_lm_2</span><span class="o">.</span><span class="n">set_figwidth</span><span class="p">(</span><span class="mi">12</span><span class="p">)</span>
@@ -1242,13 +1235,7 @@ We can observe that only some residuals (in the lower left and the upper right c
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/Users/jankirenz/opt/anaconda3/lib/python3.8/site-packages/statsmodels/graphics/gofplots.py:993: UserWarning: marker is redundantly defined by the &#39;marker&#39; keyword argument and the fmt string &quot;bo&quot; (-&gt; marker=&#39;o&#39;). The keyword argument will take precedence.
-  ax.plot(x, y, fmt, **plot_style)
-/Users/jankirenz/opt/anaconda3/lib/python3.8/site-packages/statsmodels/graphics/gofplots.py:993: UserWarning: color is redundantly defined by the &#39;color&#39; keyword argument and the fmt string &quot;bo&quot; (-&gt; color=&#39;b&#39;). The keyword argument will take precedence.
-  ax.plot(x, y, fmt, **plot_style)
-</pre></div>
-</div>
-<img alt="../_images/diagnostics-auto_46_1.png" src="../_images/diagnostics-auto_46_1.png" />
+<img alt="../_images/diagnostics-auto_46_0.png" src="../_images/diagnostics-auto_46_0.png" />
 </div>
 </div>
 </div>
@@ -1462,24 +1449,10 @@ the errors, or <strong>heteroscedasticity</strong>, from the presence of a funne
 <p>Instead of inspecting the correlation matrix, a better way to assess multicollinearity is to compute the variance inflation factor (VIF). The smallest possible value for VIF is 1, which indicates the complete absence of collinearity. Typically in practice there is a small amount of collinearity among the predictors. As a rule of thumb, a VIF value that exceeds 5 or 10 indicates a problematic amount of collinearity.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">sm</span><span class="o">.</span><span class="n">stats</span><span class="o">.</span><span class="n">outliers_influence</span><span class="o">.</span><span class="n">variance_inflation_factor</span><span class="p">(</span><span class="n">exog</span><span class="p">,</span> <span class="n">exog_idx</span><span class="p">)</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
-<span class="ne">AttributeError</span><span class="g g-Whitespace">                            </span>Traceback (most recent call last)
-<span class="o">/</span><span class="n">var</span><span class="o">/</span><span class="n">folders</span><span class="o">/</span><span class="mi">9</span><span class="n">c</span><span class="o">/</span><span class="n">_3s5jt3n60j__flsgl0t72340000gn</span><span class="o">/</span><span class="n">T</span><span class="o">/</span><span class="n">ipykernel_1367</span><span class="o">/</span><span class="mf">507250405.</span><span class="n">py</span> <span class="ow">in</span> <span class="o">&lt;</span><span class="n">module</span><span class="o">&gt;</span>
-<span class="ne">----&gt; </span><span class="mi">1</span> <span class="n">sm</span><span class="o">.</span><span class="n">stats</span><span class="o">.</span><span class="n">outliers_influence</span><span class="o">.</span><span class="n">variance_inflation_factor</span><span class="p">(</span><span class="n">exog</span><span class="p">,</span> <span class="n">exog_idx</span><span class="p">)</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">X</span> <span class="o">=</span> <span class="n">df</span><span class="p">[[</span><span class="s1">&#39;horsepower&#39;</span><span class="p">,</span> <span class="s1">&#39;cylinders&#39;</span><span class="p">,</span> <span class="s1">&#39;displacement&#39;</span><span class="p">]]</span>
 
-<span class="ne">AttributeError</span>: module &#39;statsmodels.stats.api&#39; has no attribute &#39;outliers_influence&#39;
-</pre></div>
-</div>
-</div>
-</div>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">y</span><span class="p">,</span> <span class="n">X</span> <span class="o">=</span> <span class="n">dmatrices</span><span class="p">(</span><span class="s1">&#39;mpg ~ horsepower+ cylinders + displacement&#39;</span><span class="p">,</span> <span class="n">df</span><span class="p">,</span> <span class="n">return_type</span><span class="o">=</span><span class="s1">&#39;dataframe&#39;</span><span class="p">)</span>
+<span class="c1"># the VIF function needs a constant</span>
+<span class="n">X</span> <span class="o">=</span> <span class="n">add_constant</span><span class="p">(</span><span class="n">X</span><span class="p">)</span>
 
 <span class="c1"># For each X, calculate VIF and save in dataframe</span>
 <span class="n">vif</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">()</span>
@@ -1491,23 +1464,56 @@ the errors, or <strong>heteroscedasticity</strong>, from the presence of a funne
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
-<span class="ne">NameError</span><span class="g g-Whitespace">                                 </span>Traceback (most recent call last)
-<span class="o">/</span><span class="n">var</span><span class="o">/</span><span class="n">folders</span><span class="o">/</span><span class="mi">9</span><span class="n">c</span><span class="o">/</span><span class="n">_3s5jt3n60j__flsgl0t72340000gn</span><span class="o">/</span><span class="n">T</span><span class="o">/</span><span class="n">ipykernel_1367</span><span class="o">/</span><span class="mf">197413710.</span><span class="n">py</span> <span class="ow">in</span> <span class="o">&lt;</span><span class="n">module</span><span class="o">&gt;</span>
-<span class="ne">----&gt; </span><span class="mi">1</span> <span class="n">y</span><span class="p">,</span> <span class="n">X</span> <span class="o">=</span> <span class="n">dmatrices</span><span class="p">(</span><span class="s1">&#39;mpg ~ horsepower+ cylinders + displacement&#39;</span><span class="p">,</span> <span class="n">df</span><span class="p">,</span> <span class="n">return_type</span><span class="o">=</span><span class="s1">&#39;dataframe&#39;</span><span class="p">)</span>
-<span class="g g-Whitespace">      </span><span class="mi">2</span> 
-<span class="g g-Whitespace">      </span><span class="mi">3</span> <span class="c1"># For each X, calculate VIF and save in dataframe</span>
-<span class="g g-Whitespace">      </span><span class="mi">4</span> <span class="n">vif</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">()</span>
-<span class="g g-Whitespace">      </span><span class="mi">5</span> <span class="n">vif</span><span class="p">[</span><span class="s2">&quot;VIF Factor&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="p">[</span><span class="n">variance_inflation_factor</span><span class="p">(</span><span class="n">X</span><span class="o">.</span><span class="n">values</span><span class="p">,</span> <span class="n">i</span><span class="p">)</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">X</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">])]</span>
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
 
-<span class="ne">NameError</span>: name &#39;df&#39; is not defined
-</pre></div>
-</div>
-</div>
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>VIF Factor</th>
+      <th>Feature</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>33.62</td>
+      <td>const</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>5.16</td>
+      <td>horsepower</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>10.48</td>
+      <td>cylinders</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>15.56</td>
+      <td>displacement</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
 </div>
 <p>When faced with the problem of collinearity, there are two simple solutions:</p>
 <p>The first is to drop one of the problematic variables from the regression. This can usually be done without much compromise to the regression fit, since the presence of collinearity implies that the information that this variable provides about the response is redundant in the presence of the other variables.</p>
-<p>The second solution is to combine the collinear variables together into a single predictor. For instance, we might take the average of standardized versions of limit and rating in order to create a new variable that measures credit worthiness.</p>
+<p>The second solution is to combine the collinear variables together into a single predictor.</p>
 </div>
 </div>
 </div>
@@ -1535,8 +1541,13 @@ the errors, or <strong>heteroscedasticity</strong>, from the presence of a funne
               </div>
               
         
-            <!-- Previous / next buttons -->
-<div class='prev-next-area'>
+            
+
+
+
+<div class='prev-next-bottom'>
+    
+
 </div>
         
         </div>
@@ -1557,7 +1568,8 @@ the errors, or <strong>heteroscedasticity</strong>, from the presence of a funne
       </div>
     </div>
   
-  <script src="../_static/js/index.be7d3bbb2ef33a8344ce.js"></script>
+  <script src="../_static/js/index.1c5a1a01449ed65a7b51.js"></script>
 
+  
   </body>
 </html>
