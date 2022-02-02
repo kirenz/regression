@@ -851,7 +851,7 @@ dtype: int64
   <th>Date:</th>             <td>Wed, 02 Feb 2022</td> <th>  Prob (F-statistic):</th> <td>7.48e-103</td>
 </tr>
 <tr>
-  <th>Time:</th>                 <td>12:43:44</td>     <th>  Log-Likelihood:    </th> <td> -1121.0</td> 
+  <th>Time:</th>                 <td>13:36:25</td>     <th>  Log-Likelihood:    </th> <td> -1121.0</td> 
 </tr>
 <tr>
   <th>No. Observations:</th>      <td>   392</td>      <th>  AIC:               </th> <td>   2250.</td> 
@@ -1072,7 +1072,7 @@ dtype: int64
   <th>Date:</th>             <td>Wed, 02 Feb 2022</td> <th>  Prob (F-statistic):</th> <td>5.40e-99</td>
 </tr>
 <tr>
-  <th>Time:</th>                 <td>12:43:45</td>     <th>  Log-Likelihood:    </th> <td> -1133.2</td>
+  <th>Time:</th>                 <td>13:36:26</td>     <th>  Log-Likelihood:    </th> <td> -1133.2</td>
 </tr>
 <tr>
   <th>No. Observations:</th>      <td>   392</td>      <th>  AIC:               </th> <td>   2272.</td>
@@ -1430,22 +1430,8 @@ the errors, or <strong>heteroscedasticity</strong>, from the presence of a funne
 <img alt="../_images/diagnostics-auto_65_0.png" src="../_images/diagnostics-auto_65_0.png" />
 </div>
 </div>
-<p>A simple way to detect collinearity is to look at the <strong>correlation matrix</strong> of the predictors. An element of this matrix that is large in absolute value indicates a pair of highly correlated variables, and therefore a collinearity problem in the data.</p>
+<p>A simple way to detect collinearity is to look at the <strong>correlation matrix</strong> of the predictors. An element of this matrix that is large in absolute value indicates a pair of highly (linear) correlated variables, and therefore a collinearity problem in the data.</p>
 <p>Unfortunately, not all collinearity problems can be detected by inspection of the correlation matrix: it is possible for collinearity to exist between three or more variables even if no pair of variables has a particularly high correlation. We call this situation <strong>multicollinearity</strong>.</p>
-<p>Instead of inspecting the correlation matrix, a better way to assess multicollinearity is to compute the condition number test. If the condition number is above 30, the regression may have significant multicollinearity.</p>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># makes here no sense since we only have one predictor...</span>
-<span class="n">np</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">cond</span><span class="p">(</span><span class="n">lm</span><span class="o">.</span><span class="n">model</span><span class="o">.</span><span class="n">exog</span><span class="p">)</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>34838.06097745096
-</pre></div>
-</div>
-</div>
-</div>
 <p>Instead of inspecting the correlation matrix, a better way to assess multicollinearity is to compute the variance inflation factor (VIF). The smallest possible value for VIF is 1, which indicates the complete absence of collinearity. Typically in practice there is a small amount of collinearity among the predictors. As a rule of thumb, a VIF value that exceeds 5 or 10 indicates a problematic amount of collinearity.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
