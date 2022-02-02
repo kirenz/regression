@@ -28,7 +28,7 @@
 
 # ## Python setup
 
-# In[6]:
+# In[1]:
 
 
 import numpy as np
@@ -40,7 +40,7 @@ from statsmodels.compat import lzip
 from statsmodels.graphics.gofplots import ProbPlot
 from statsmodels.graphics.regressionplots import plot_leverage_resid2
 from statsmodels.stats.outliers_influence import variance_inflation_factor
-
+from statsmodels.tools.tools import add_constant
 
 from patsy import dmatrices
 
@@ -55,7 +55,7 @@ sns.set()
 
 # ## Import data
 
-# In[7]:
+# In[2]:
 
 
 # Load the csv data files into pandas dataframes
@@ -65,14 +65,14 @@ DATA = "Auto.csv"
 df = pd.read_csv(ROOT + DATA)
 
 
-# In[8]:
+# In[3]:
 
 
 # show df
 df
 
 
-# In[9]:
+# In[4]:
 
 
 df.info()
@@ -80,7 +80,7 @@ df.info()
 
 # ## Tidying data
 
-# In[10]:
+# In[5]:
 
 
 # change data type
@@ -91,41 +91,41 @@ df['horsepower'] = pd.to_numeric(df['horsepower'], errors='coerce')
 
 # ### Handle missing values
 
-# In[11]:
+# In[6]:
 
 
 # show missing values (missing values - if present - will be displayed in yellow )
 sns.heatmap(df.isnull(),yticklabels=False,cbar=False,cmap='viridis');
 
 
-# In[12]:
+# In[7]:
 
 
 print(df.isnull().sum())
 
 
-# In[13]:
+# In[8]:
 
 
 # there are only 5 missing values therefore we simply delete the rows
 df = df.dropna()
 
 
-# In[14]:
+# In[9]:
 
 
 print(df.isnull().sum())
 
 
-# In[15]:
+# In[10]:
 
 
-sns.pairplot(data=df)
+sns.pairplot(data=df);
 
 
 # ## Regression model
 
-# In[16]:
+# In[11]:
 
 
 # fit linear model with statsmodels.formula.api (with R-style formulas) 
@@ -146,7 +146,7 @@ lm.summary()
 # 
 # This function can be used for quickly checking modeling assumptions with respect to a single regressor ([see statsmodels documentation](https://www.statsmodels.org/dev/examples/notebooks/generated/regression_plots.html))
 
-# In[17]:
+# In[12]:
 
 
 fig = sm.graphics.plot_regress_exog(lm, "horsepower")
@@ -162,7 +162,7 @@ fig.tight_layout(pad=1.0)
 # 
 # 3. **Partial regression plot**: attempts to show the effect of adding another variable to a model that already has one or more independent variables. 
 
-# In[18]:
+# In[13]:
 
 
 fig = sm.graphics.plot_fit(lm, "horsepower")
@@ -181,7 +181,7 @@ fig.tight_layout(pad=1.0)
 # 
 # A significant result (rejecting the null) occurs when the fit is better with a range restriction (which is what happens if the model is nonlinear).
 
-# In[19]:
+# In[14]:
 
 
 name = ['t value', 'p value']
@@ -195,7 +195,7 @@ lzip(name, test)
 # 
 # Residual plots are also a very useful graphical tool for identifying non-linearity:
 
-# In[20]:
+# In[15]:
 
 
 # fitted values
@@ -224,7 +224,7 @@ plot.set_ylabel('Residuals');
 
 # Advanced Residuals vs fitted plot
 
-# In[21]:
+# In[16]:
 
 
 # Necessary values for our advanced plots:
@@ -241,7 +241,7 @@ model_norm_residuals_abs_sqrt = np.sqrt(np.abs(model_norm_residuals))
 model_abs_resid = np.abs(model_residuals)
 
 
-# In[22]:
+# In[17]:
 
 
 # Advanced plot (1)
@@ -270,7 +270,7 @@ for i in abs_resid_top_3.index:
 
 # We can fit a non-linear function (polynomial regression)
 
-# In[23]:
+# In[18]:
 
 
 
@@ -278,7 +278,7 @@ lm_2 = smf.ols(formula='mpg ~ horsepower + I(horsepower**2)', data=df).fit()
 lm_2.summary()
 
 
-# In[24]:
+# In[19]:
 
 
 # fitted values
@@ -311,7 +311,7 @@ plot.set_ylabel('Residuals');
 # 
 # Samples from a normal distribution have an expected skewness of 0 and an expected excess kurtosis of 0 (which is the same as a kurtosis of 3). As the definition of JB shows, any deviation from this increases the JB statistic.
 
-# In[25]:
+# In[20]:
 
 
 name = ['Jarque-Bera', 'Chi^2 two-tail prob.', 'Skew', 'Kurtosis']
@@ -326,7 +326,7 @@ lzip(name, test)
 # 
 # Our null hypothesis is that the residuals are from a normal distribution.
 
-# In[26]:
+# In[21]:
 
 
 name = ['Chi^2', 'Two-tail probability']
@@ -348,7 +348,7 @@ lzip(name, test)
 # 
 # This plots the standardized (z-score) residuals against the theoretical normal quantiles. Anything quite off the diagonal lines may be a concern for further investigation.
 
-# In[27]:
+# In[22]:
 
 
 # Use standardized residuals
@@ -362,13 +362,13 @@ sm.qqplot(lm.get_influence().resid_studentized_internal);
 
 # **Advanced QQ-Plot**
 
-# In[28]:
+# In[23]:
 
 
 # Advanced plot (2)
 # ProbPlot and its qqplot method from statsmodels graphics API. 
 QQ = ProbPlot(model_norm_residuals)
-plot_lm_2 = QQ.qqplot(line='45', alpha=0.5, color='#4C72B0', lw=1)
+plot_lm_2 = QQ.qqplot(line='45', alpha=0.5, lw=1)
 # figure size
 plot_lm_2.set_figheight(8)
 plot_lm_2.set_figwidth(12)
@@ -402,7 +402,7 @@ for r, i in enumerate(abs_norm_resid_top_3):
 # 
 # As a rough rule of thumb, if Durbin–Watson is less than 1.0, there may be cause for alarm. Small values of d indicate successive error terms are positively correlated. If d > 2, successive error terms are negatively correlated.
 
-# In[29]:
+# In[24]:
 
 
 sm.stats.durbin_watson(lm.resid)
@@ -422,7 +422,7 @@ sm.stats.durbin_watson(lm.resid)
 # 
 # Test assumes homoskedasticity (null hypothesis). If one of the test statistics is significant, then you have evidence of heteroskedasticity. 
 
-# In[30]:
+# In[25]:
 
 
 name = ['Lagrange multiplier statistic', 'p-value', 
@@ -433,7 +433,7 @@ lzip(name, test)
 
 # #### Scale-Location plot
 
-# In[31]:
+# In[26]:
 
 
 # Scale Location plot
@@ -461,7 +461,7 @@ sns.regplot(x=model_fitted_y, y=model_norm_residuals_abs_sqrt,
 # 
 # Once created, an object of class OLSInfluence holds attributes and methods that allow users to assess the influence of each observation. 
 
-# In[32]:
+# In[27]:
 
 
 # obtain statistics
@@ -477,7 +477,7 @@ out_d = lm_cooksd > critical_d
 df.index[out_d],lm_cooksd[out_d]
 
 
-# In[33]:
+# In[28]:
 
 
 # Show summary frame of leverage statistics
@@ -488,7 +488,7 @@ print(infl.summary_frame().filter(["student_resid","dffits","cooks_d"]))
 
 # Plots leverage statistics vs. normalized residuals squared. See [statsmodel documentation](http://www.statsmodels.org/0.6.1/generated/statsmodels.graphics.regressionplots.plot_leverage_resid2.html)
 
-# In[34]:
+# In[29]:
 
 
 fig, ax = plt.subplots(figsize=(8,6))
@@ -501,14 +501,14 @@ fig = plot_leverage_resid2(lm, ax = ax)
 # 
 # The presence of collinearity can pose problems in the regression context, since it can be difficult to separate out the individual effects of collinear variables on the response. 
 
-# In[35]:
+# In[30]:
 
 
 # plot all variables in a scatter matrix
 pd.plotting.scatter_matrix(df, alpha=0.8, figsize=(10, 10), diagonal='kde');
 
 
-# In[36]:
+# In[31]:
 
 
 # Inspect correlation
@@ -529,7 +529,7 @@ sns.heatmap(corr, mask=mask, cmap=cmap, annot=True,  square=True, annot_kws={"si
 # 
 # Instead of inspecting the correlation matrix, a better way to assess multicollinearity is to compute the condition number test. If the condition number is above 30, the regression may have significant multicollinearity.
 
-# In[37]:
+# In[32]:
 
 
 # makes here no sense since we only have one predictor...
@@ -538,16 +538,13 @@ np.linalg.cond(lm.model.exog)
 
 # Instead of inspecting the correlation matrix, a better way to assess multicollinearity is to compute the variance inflation factor (VIF). The smallest possible value for VIF is 1, which indicates the complete absence of collinearity. Typically in practice there is a small amount of collinearity among the predictors. As a rule of thumb, a VIF value that exceeds 5 or 10 indicates a problematic amount of collinearity.
 
-# In[38]:
+# In[33]:
 
 
-sm.stats.outliers_influence.variance_inflation_factor(exog, exog_idx)
+X = df[['horsepower', 'cylinders', 'displacement']]
 
-
-# In[ ]:
-
-
-y, X = dmatrices('mpg ~ horsepower+ cylinders + displacement', df, return_type='dataframe')
+# the VIF function needs a constant
+X = add_constant(X)
 
 # For each X, calculate VIF and save in dataframe
 vif = pd.DataFrame()
@@ -561,4 +558,4 @@ vif.round(2)
 # 
 # The first is to drop one of the problematic variables from the regression. This can usually be done without much compromise to the regression fit, since the presence of collinearity implies that the information that this variable provides about the response is redundant in the presence of the other variables. 
 # 
-# The second solution is to combine the collinear variables together into a single predictor. For instance, we might take the average of standardized versions of limit and rating in order to create a new variable that measures credit worthiness.
+# The second solution is to combine the collinear variables together into a single predictor.
