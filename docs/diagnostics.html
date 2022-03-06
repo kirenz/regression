@@ -7,8 +7,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Regression diagnostics &#8212; Introduction to Regression Models</title>
     
-  <link href="../_static/css/theme.css" rel="stylesheet" />
-  <link href="../_static/css/index.c5995385ac14fb8791e8eb36b4908be2.css" rel="stylesheet" />
+  <link href="../_static/css/theme.css" rel="stylesheet">
+  <link href="../_static/css/index.ff1ffe594081f20da1ef19478df9384b.css" rel="stylesheet">
 
     
   <link rel="stylesheet"
@@ -31,34 +31,38 @@
     <link rel="stylesheet" type="text/css" href="../_static/panels-main.c949a650a448cc0ae9fd3441c0e17fb0.css" />
     <link rel="stylesheet" type="text/css" href="../_static/panels-variables.06eb56fa6e07937060861dad626602ad.css" />
     
-  <link rel="preload" as="script" href="../_static/js/index.1c5a1a01449ed65a7b51.js">
+  <link rel="preload" as="script" href="../_static/js/index.be7d3bbb2ef33a8344ce.js">
 
     <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
     <script src="../_static/jquery.js"></script>
     <script src="../_static/underscore.js"></script>
     <script src="../_static/doctools.js"></script>
-    <script src="../_static/togglebutton.js"></script>
     <script src="../_static/clipboard.min.js"></script>
     <script src="../_static/copybutton.js"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../_static/togglebutton.js"></script>
     <script>var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
-    <script src="../_static/sphinx-book-theme.12a9622fbb08dcb3a2a40b2c02b83a57.js"></script>
-    <script src="../_static/sphinx-book-theme.js"></script>
-    <script async="async" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
-    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
-    <script async="async" src="https://unpkg.com/thebe@0.5.1/lib/index.js"></script>
-    <script>
-        const thebe_selector = ".thebe"
-        const thebe_selector_input = "pre"
-        const thebe_selector_output = ".output"
-    </script>
+    <script src="../_static/sphinx-book-theme.d59cb220de22ca1c485ebbdc042f0030.js"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"
+const thebe_selector = ".thebe,.cell"
+const thebe_selector_input = "pre"
+const thebe_selector_output = ".output, .cell_output"
+</script>
     <script async="async" src="../_static/sphinx-thebe.js"></script>
+    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
     <link rel="next" title="Hitters data preparation" href="hitters_data.html" />
     <link rel="prev" title="Linear regression" href="basics.html" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <meta name="docsearch:language" content="en" />
+    <meta name="docsearch:language" content="None">
+    
+
+    <!-- Google Analytics -->
     
   </head>
   <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="80">
@@ -97,7 +101,7 @@
   </a>
  </li>
 </ul>
-<p class="caption" role="heading">
+<p aria-level="2" class="caption" role="heading">
  <span class="caption-text">
   Basics
  </span>
@@ -109,7 +113,7 @@
   </a>
  </li>
 </ul>
-<p class="caption" role="heading">
+<p aria-level="2" class="caption" role="heading">
  <span class="caption-text">
   Diagnostics
  </span>
@@ -121,7 +125,7 @@
   </a>
  </li>
 </ul>
-<p class="caption" role="heading">
+<p aria-level="2" class="caption" role="heading">
  <span class="caption-text">
   Lasso, Splines &amp; GAM
  </span>
@@ -148,7 +152,7 @@
   </a>
  </li>
 </ul>
-<p class="caption" role="heading">
+<p aria-level="2" class="caption" role="heading">
  <span class="caption-text">
   Decision Trees
  </span>
@@ -160,7 +164,7 @@
   </a>
  </li>
 </ul>
-<p class="caption" role="heading">
+<p aria-level="2" class="caption" role="heading">
  <span class="caption-text">
   Feature Selection
  </span>
@@ -172,7 +176,7 @@
   </a>
  </li>
 </ul>
-<p class="caption" role="heading">
+<p aria-level="2" class="caption" role="heading">
  <span class="caption-text">
   Ensemble
  </span>
@@ -184,7 +188,7 @@
   </a>
  </li>
 </ul>
-<p class="caption" role="heading">
+<p aria-level="2" class="caption" role="heading">
  <span class="caption-text">
   Case duke
  </span>
@@ -211,7 +215,7 @@
   </a>
  </li>
 </ul>
-<p class="caption" role="heading">
+<p aria-level="2" class="caption" role="heading">
  <span class="caption-text">
   References
  </span>
@@ -268,7 +272,7 @@
                 data-placement="left">.ipynb</button></a>
         <!-- Download PDF via print -->
         <button type="button" id="download-print" class="btn btn-secondary topbarbtn" title="Print to PDF"
-            onClick="window.print()" data-toggle="tooltip" data-placement="left">.pdf</button>
+                onclick="printPdf(this)" data-toggle="tooltip" data-placement="left">.pdf</button>
     </div>
 </div>
 
@@ -318,7 +322,7 @@
         </div>
 
         <!-- Table of contents -->
-        <div class="d-none d-md-block col-md-2 bd-toc show">
+        <div class="d-none d-md-block col-md-2 bd-toc show noprint">
             
             <div class="tocsection onthispage pt-5 pb-3">
                 <i class="fas fa-list"></i> Contents
@@ -477,12 +481,174 @@
 </div>
     <div id="main-content" class="row">
         <div class="col-12 col-md-9 pl-md-3 pr-md-0">
-        
+            <!-- Table of contents that is only displayed when printing the page -->
+            <div id="jb-print-docs-body" class="onlyprint">
+                <h1>Regression diagnostics</h1>
+                <!-- Table of contents -->
+                <div id="print-main-content">
+                    <div id="jb-print-toc">
+                        
+                        <div>
+                            <h2> Contents </h2>
+                        </div>
+                        <nav aria-label="Page">
+                            <ul class="visible nav section-nav flex-column">
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#">
+   Regression diagnostics
+  </a>
+  <ul class="visible nav section-nav flex-column">
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#python-setup">
+     Python setup
+    </a>
+   </li>
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#import-data">
+     Import data
+    </a>
+   </li>
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#model">
+     Model
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#id2">
+   Regression diagnostics
+  </a>
+  <ul class="visible nav section-nav flex-column">
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#outliers-and-high-leverage-points">
+     Outliers and high-leverage points
+    </a>
+    <ul class="nav section-nav flex-column">
+     <li class="toc-h3 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#influence-plots">
+       Influence plots
+      </a>
+     </li>
+     <li class="toc-h3 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#solutions">
+       Solutions
+      </a>
+     </li>
+    </ul>
+   </li>
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#non-linearity-and-heteroscedasticity">
+     Non-linearity and heteroscedasticity
+    </a>
+    <ul class="nav section-nav flex-column">
+     <li class="toc-h3 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#partial-regression-plots">
+       Partial Regression Plots
+      </a>
+     </li>
+     <li class="toc-h3 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#ccpr-plots">
+       CCPR plots
+      </a>
+     </li>
+     <li class="toc-h3 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#residuals-vs-fitted-plot">
+       Residuals vs fitted plot
+      </a>
+     </li>
+     <li class="toc-h3 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#breusch-pagan-lagrange-multiplier-test">
+       Breusch-Pagan Lagrange Multiplier test
+      </a>
+     </li>
+     <li class="toc-h3 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#single-variable-regression-diagnostics">
+       Single Variable Regression Diagnostics
+      </a>
+     </li>
+     <li class="toc-h3 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#id5">
+       Solutions
+      </a>
+     </li>
+    </ul>
+   </li>
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#non-normally-distributed-errors">
+     Non-normally distributed errors
+    </a>
+    <ul class="nav section-nav flex-column">
+     <li class="toc-h3 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#jarque-bera-test">
+       Jarque-Bera test
+      </a>
+     </li>
+     <li class="toc-h3 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#omnibus-normtest">
+       Omnibus normtest
+      </a>
+     </li>
+     <li class="toc-h3 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#solution">
+       Solution
+      </a>
+     </li>
+    </ul>
+   </li>
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#correlation-of-error-terms">
+     Correlation of error terms
+    </a>
+    <ul class="nav section-nav flex-column">
+     <li class="toc-h3 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#durbin-watson-test">
+       Durbin-Watson test
+      </a>
+     </li>
+     <li class="toc-h3 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#id11">
+       Solution
+      </a>
+     </li>
+    </ul>
+   </li>
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#collinearity">
+     Collinearity
+    </a>
+    <ul class="nav section-nav flex-column">
+     <li class="toc-h3 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#correlation-matrix">
+       Correlation matrix
+      </a>
+     </li>
+     <li class="toc-h3 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#variance-inflation-factor-vif">
+       Variance inflation factor (VIF)
+      </a>
+     </li>
+     <li class="toc-h3 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#id12">
+       Solution
+      </a>
+     </li>
+    </ul>
+   </li>
+  </ul>
+ </li>
+</ul>
+
+                        </nav>
+                    </div>
+                </div>
+            </div>
+            
               <div>
                 
   <div class="tex2jax_ignore mathjax_ignore section" id="regression-diagnostics">
 <h1>Regression diagnostics<a class="headerlink" href="#regression-diagnostics" title="Permalink to this headline">¶</a></h1>
-<p>When we fit a linear regression model to a particular data set, many problems may occur. Most common among these are the following <span id="id1">[<a class="reference internal" href="reference.html#id7">James <em>et al.</em>, 2021</a>]</span>:</p>
+<p>When we fit a linear regression model to a particular data set, many problems may occur. Most common among these are the following <span id="id1">[<a class="reference internal" href="reference.html#id7" title="Gareth James, Daniela Witten, Trevor Hastie, and Robert Tibshirani. An Introduction to Statistical learning. Springer, 2021. URL: https://www.statlearning.com/.">James <em>et al.</em>, 2021</a>]</span>:</p>
 <ol class="simple">
 <li><p>Outliers and high-leverage points</p></li>
 <li><p>Non-linearity of the response-predictor relationship</p></li>
@@ -641,8 +807,8 @@
 Dep. Variable:               prestige   R-squared:                       0.828
 Model:                            OLS   Adj. R-squared:                  0.820
 Method:                 Least Squares   F-statistic:                     101.2
-Date:                Wed, 05 Jan 2022   Prob (F-statistic):           8.65e-17
-Time:                        22:26:09   Log-Likelihood:                -178.98
+Date:                Mon, 22 Nov 2021   Prob (F-statistic):           8.65e-17
+Time:                        13:16:19   Log-Likelihood:                -178.98
 No. Observations:                  45   AIC:                             364.0
 Df Residuals:                      42   BIC:                             369.4
 Df Model:                           2                                         
@@ -848,7 +1014,7 @@ Index([&#39;minister&#39;, &#39;reporter&#39;, &#39;conductor&#39;], dtype=&#39;
 <p>One crucial assumption of the linear regression model is the linear relationship between the response and the dependent variables. We can identify non-linear relationships in the regression model residuals if the residuals are not equally spread around the horizontal line (where the residuals are zero) but instead show a pattern, then this gives us an indication for a non-linear relationship.</p>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
-<p>We can deal with non-linear relationships via basis expansions (e.g. polynomial regression) or regression splines (<a class="reference external" href="http://www.feat.engineering/numeric-one-to-many.html#numeric-basis-functions">see <span id="id3">Kuhn and Johnson [<a class="reference internal" href="reference.html#id5">2019</a>]</span></a>)</p>
+<p>We can deal with non-linear relationships via basis expansions (e.g. polynomial regression) or regression splines (<a class="reference external" href="http://www.feat.engineering/numeric-one-to-many.html#numeric-basis-functions">see <span id="id3">Kuhn and Johnson [<a class="reference internal" href="reference.html#id5" title="Max Kuhn and Kjell Johnson. Feature engineering and selection: A practical approach for predictive models. CRC Press, 2019. URL: http://www.feat.engineering/.">2019</a>]</span></a>)</p>
 </div>
 <p>Another important assumption is that the error terms have a constant variance (homoscedasticity). For instance, the variances of the error terms may increase with the value of the response. One can identify non-constant variances in the errors, or heteroscedasticity, from the presence of a funnel shape in a residual plot.</p>
 <p>When faced with this problem, one possible solution is to use <a class="reference external" href="https://www.statsmodels.org/dev/examples/notebooks/generated/wls.html">weighted regression</a>. This type of regression assigns a weight to each data point based on the variance of its fitted value. Essentially, this gives small weights to data points that have higher variances, which shrinks their squared residuals. When the proper weights are used, this can eliminate the problem of heteroscedasticity.</p>
@@ -917,12 +1083,7 @@ points, but you can use them to identify problems and then use <code class="docu
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>eval_env: 1
-eval_env: 1
-eval_env: 1
-</pre></div>
-</div>
-<img alt="../_images/diagnostics_41_1.png" src="../_images/diagnostics_41_1.png" />
+<img alt="../_images/diagnostics_41_0.png" src="../_images/diagnostics_41_0.png" />
 </div>
 </div>
 <p>We observe a positive relationship between prestige and income as well as between prestige and education. The relationship seems to be linear in both cases.</p>
@@ -940,10 +1101,7 @@ eval_env: 1
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>eval_env: 1
-</pre></div>
-</div>
-<img alt="../_images/diagnostics_43_1.png" src="../_images/diagnostics_43_1.png" />
+<img alt="../_images/diagnostics_43_0.png" src="../_images/diagnostics_43_0.png" />
 </div>
 </div>
 <div class="cell docutils container">
@@ -955,10 +1113,7 @@ eval_env: 1
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>eval_env: 1
-</pre></div>
-</div>
-<img alt="../_images/diagnostics_44_1.png" src="../_images/diagnostics_44_1.png" />
+<img alt="../_images/diagnostics_44_0.png" src="../_images/diagnostics_44_0.png" />
 </div>
 </div>
 <p>The partial regression plots confirm the influence of <code class="docutils literal notranslate"><span class="pre">conductor</span></code>, <code class="docutils literal notranslate"><span class="pre">minister</span></code> on the partial relationships between prestige and the predictors income and education. The influence of <code class="docutils literal notranslate"><span class="pre">reporter</span></code> is less obvious but since the observation was considered critical according to Cook`s D, we also drop this case.</p>
@@ -1007,8 +1162,8 @@ eval_env: 1
 Dep. Variable:               prestige   R-squared:                       0.897
 Model:                            OLS   Adj. R-squared:                  0.891
 Method:                 Least Squares   F-statistic:                     169.0
-Date:                Wed, 05 Jan 2022   Prob (F-statistic):           6.13e-20
-Time:                        22:26:11   Log-Likelihood:                -157.02
+Date:                Mon, 22 Nov 2021   Prob (F-statistic):           6.13e-20
+Time:                        13:16:21   Log-Likelihood:                -157.02
 No. Observations:                  42   AIC:                             320.0
 Df Residuals:                      39   BIC:                             325.2
 Df Model:                           2                                         
@@ -1115,7 +1270,7 @@ Notes:
 <div><p>The Breusch-Pagan Lagrange Multiplier test can be used to identify heteroscedasticity.</p>
 </div></blockquote>
 <p>The test assumes homoscedasticity (this is the null hypothesis <span class="math notranslate nohighlight">\(H_0\)</span>) which means that the residual variance does not depend on the values of the variables in x.</p>
-<p><em>Note that this test may exaggerate the significance of results in small or moderately large samples <span id="id4">[<a class="reference internal" href="reference.html#id2">Greene, 2000</a>]</span>. In this case the F-statistic is preferable.</em></p>
+<p><em>Note that this test may exaggerate the significance of results in small or moderately large samples <span id="id4">[<a class="reference internal" href="reference.html#id2" title="William H Greene. Econometric analysis 4th edition. International edition, New Jersey: Prentice Hall, pages 201–215, 2000.">Greene, 2000</a>]</span>. In this case the F-statistic is preferable.</em></p>
 <p>If one of the test statistics is significant (i.e., p &lt;= 0.05), then you have indication of heteroscedasticity.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -1154,23 +1309,20 @@ Notes:
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>eval_env: 1
-</pre></div>
-</div>
-<img alt="../_images/diagnostics_69_1.png" src="../_images/diagnostics_69_1.png" />
+<img alt="../_images/diagnostics_69_0.png" src="../_images/diagnostics_69_0.png" />
 </div>
 </div>
 </div>
 <div class="section" id="id5">
 <h3>Solutions<a class="headerlink" href="#id5" title="Permalink to this headline">¶</a></h3>
-<p>If we are faced with non-linear relationships between the dependent and independent variables, we can adjust the linear model via different methods (for more details, <a class="reference external" href="http://www.feat.engineering/numeric-one-to-many.html">see <span id="id6">Kuhn and Johnson [<a class="reference internal" href="reference.html#id5">2019</a>]</span></a>):</p>
+<p>If we are faced with non-linear relationships between the dependent and independent variables, we can adjust the linear model via different methods (for more details, <a class="reference external" href="http://www.feat.engineering/numeric-one-to-many.html">see <span id="id6">Kuhn and Johnson [<a class="reference internal" href="reference.html#id5" title="Max Kuhn and Kjell Johnson. Feature engineering and selection: A practical approach for predictive models. CRC Press, 2019. URL: http://www.feat.engineering/.">2019</a>]</span></a>):</p>
 <ul class="simple">
 <li><p>Basis expansions (polynomial features)</p></li>
 <li><p>Regression splines (especially natural cubic splines)</p></li>
 <li><p>Locally weighted scatterplot smoothing (loess)</p></li>
 <li><p>Generalized additive models (GAMs)</p></li>
 </ul>
-<p>In particular, GAMs extend general linear models to have nonlinear terms for individual predictors. GAM models can adaptively model separate basis functions for different variables and estimate the complexity for each. In other words, different predictors can be modeled with different levels of complexity <span id="id7">[<a class="reference internal" href="reference.html#id5">Kuhn and Johnson, 2019</a>]</span>.</p>
+<p>In particular, GAMs extend general linear models to have nonlinear terms for individual predictors. GAM models can adaptively model separate basis functions for different variables and estimate the complexity for each. In other words, different predictors can be modeled with different levels of complexity <span id="id7">[<a class="reference internal" href="reference.html#id5" title="Max Kuhn and Kjell Johnson. Feature engineering and selection: A practical approach for predictive models. CRC Press, 2019. URL: http://www.feat.engineering/.">Kuhn and Johnson, 2019</a>]</span>.</p>
 <p>In case of heteroscedasticity, you have the following options to get realsitic estimates of the standard errors:</p>
 <ul class="simple">
 <li><p>Use heteroskedasticity-consistent standard error estimators for OLS regression (see <a class="reference external" href="https://www.statsmodels.org/dev/generated/statsmodels.regression.linear_model.OLSResults.get_robustcov_results.html">statsmodels</a></p></li>
@@ -1244,9 +1396,9 @@ Notes:
 </div>
 <div class="section" id="correlation-of-error-terms">
 <h2>Correlation of error terms<a class="headerlink" href="#correlation-of-error-terms" title="Permalink to this headline">¶</a></h2>
-<p>Another important assumption of the linear regression model is that the error terms are uncorrelated. If they are not, then p-values associated with the model will be lower than they should be and confidence intervalls are not reliable <span id="id8">[<a class="reference internal" href="reference.html#id7">James <em>et al.</em>, 2021</a>]</span>.</p>
+<p>Another important assumption of the linear regression model is that the error terms are uncorrelated. If they are not, then p-values associated with the model will be lower than they should be and confidence intervalls are not reliable <span id="id8">[<a class="reference internal" href="reference.html#id7" title="Gareth James, Daniela Witten, Trevor Hastie, and Robert Tibshirani. An Introduction to Statistical learning. Springer, 2021. URL: https://www.statlearning.com/.">James <em>et al.</em>, 2021</a>]</span>.</p>
 <p>Correlated errors occur especially in the context of time series data. In order to determine if this is the case for a given data set, we can plot the residuals from our model as a function of time. If the errors are uncorrelated, then there should be no evident pattern. This means if the errors are uncorrelated, then the fact that <span class="math notranslate nohighlight">\(ϵ_i\)</span> is positive provides little or no information about the sign of <span class="math notranslate nohighlight">\(ϵ_{i+1}\)</span>.</p>
-<p>Correlation among the error terms can also occur outside of time series data. For instance, consider a study in which individuals’ heights are predicted from their weights. The assumption of uncorrelated errors could be violated if some of the individuals in the study are members of the same family, or eat the same diet, or have been exposed to the same environmental factors <span id="id9">[<a class="reference internal" href="reference.html#id3">Field, 2013</a>]</span>.</p>
+<p>Correlation among the error terms can also occur outside of time series data. For instance, consider a study in which individuals’ heights are predicted from their weights. The assumption of uncorrelated errors could be violated if some of the individuals in the study are members of the same family, or eat the same diet, or have been exposed to the same environmental factors <span id="id9">[<a class="reference internal" href="reference.html#id3" title="Andy Field. Discovering statistics using IBM SPSS statistics. sage, 2013.">Field, 2013</a>]</span>.</p>
 <div class="section" id="durbin-watson-test">
 <h3>Durbin-Watson test<a class="headerlink" href="#durbin-watson-test" title="Permalink to this headline">¶</a></h3>
 <p>A test of autocorrelation that is designed to take account of the regression model is the <strong>Durbin-Watson test</strong> (also included in the regression summary). It is used to test the hypothesis that there is no <strong>lag one autocorrelation</strong> in the residuals. This means if there is no lag one autocorrelation, then information about <span class="math notranslate nohighlight">\(ϵ_i\)</span> provides little or no information about $ϵ_{i+1}.</p>
@@ -1254,7 +1406,7 @@ Notes:
 <div><p>A small p-value indicates there is significant autocorrelation remaining in the residuals.</p>
 </div></blockquote>
 <p>If there is no autocorrelation, the Durbin-Watson distribution is symmetric around 2.</p>
-<p>As a rough rule of thumb <span id="id10">[<a class="reference internal" href="reference.html#id3">Field, 2013</a>]</span>:</p>
+<p>As a rough rule of thumb <span id="id10">[<a class="reference internal" href="reference.html#id3" title="Andy Field. Discovering statistics using IBM SPSS statistics. sage, 2013.">Field, 2013</a>]</span>:</p>
 <ul class="simple">
 <li><p>If Durbin–Watson is less than 1.0, there may be cause for concern.</p></li>
 <li><p>Small values of d indicate successive error terms are positively correlated.</p></li>
@@ -1408,54 +1560,42 @@ Notes:
 
               </div>
               
-        
             
-
-
-
-<div class='prev-next-bottom'>
-    
-    <div id="prev">
-        <a class="left-prev" href="basics.html" title="previous page">
-            <i class="prevnext-label fas fa-angle-left"></i>
-            <div class="prevnext-info">
-                <p class="prevnext-label">previous</p>
-                <p class="prevnext-title">Linear regression</p>
-            </div>
-        </a>
+                <!-- Previous / next buttons -->
+<div class='prev-next-area'> 
+    <a class='left-prev' id="prev-link" href="basics.html" title="previous page">
+        <i class="fas fa-angle-left"></i>
+        <div class="prev-next-info">
+            <p class="prev-next-subtitle">previous</p>
+            <p class="prev-next-title">Linear regression</p>
+        </div>
+    </a>
+    <a class='right-next' id="next-link" href="hitters_data.html" title="next page">
+    <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">Hitters data preparation</p>
     </div>
-     <div id="next">
-        <a class="right-next" href="hitters_data.html" title="next page">
-            <div class="prevnext-info">
-                <p class="prevnext-label">next</p>
-                <p class="prevnext-title">Hitters data preparation</p>
-            </div>
-            <i class="prevnext-label fas fa-angle-right"></i>
-        </a>
-     </div>
-
+    <i class="fas fa-angle-right"></i>
+    </a>
 </div>
-        
+            
         </div>
     </div>
     <footer class="footer">
-    <div class="container">
-      <p>
-        
-          By Jan Kirenz<br/>
-        
-            &copy; Copyright 2021.<br/>
-      </p>
-    </div>
-  </footer>
+  <p>
+    
+      By Jan Kirenz<br/>
+    
+        &copy; Copyright 2021.<br/>
+  </p>
+</footer>
 </main>
 
 
       </div>
     </div>
   
-  <script src="../_static/js/index.1c5a1a01449ed65a7b51.js"></script>
+  <script src="../_static/js/index.be7d3bbb2ef33a8344ce.js"></script>
 
-  
   </body>
 </html>

@@ -7,8 +7,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Programming Process &#8212; Introduction to Regression Models</title>
     
-  <link href="../_static/css/theme.css" rel="stylesheet" />
-  <link href="../_static/css/index.c5995385ac14fb8791e8eb36b4908be2.css" rel="stylesheet" />
+  <link href="../_static/css/theme.css" rel="stylesheet">
+  <link href="../_static/css/index.ff1ffe594081f20da1ef19478df9384b.css" rel="stylesheet">
 
     
   <link rel="stylesheet"
@@ -31,30 +31,34 @@
     <link rel="stylesheet" type="text/css" href="../_static/panels-main.c949a650a448cc0ae9fd3441c0e17fb0.css" />
     <link rel="stylesheet" type="text/css" href="../_static/panels-variables.06eb56fa6e07937060861dad626602ad.css" />
     
-  <link rel="preload" as="script" href="../_static/js/index.1c5a1a01449ed65a7b51.js">
+  <link rel="preload" as="script" href="../_static/js/index.be7d3bbb2ef33a8344ce.js">
 
     <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
     <script src="../_static/jquery.js"></script>
     <script src="../_static/underscore.js"></script>
     <script src="../_static/doctools.js"></script>
-    <script src="../_static/togglebutton.js"></script>
     <script src="../_static/clipboard.min.js"></script>
     <script src="../_static/copybutton.js"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../_static/togglebutton.js"></script>
     <script>var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
-    <script src="../_static/sphinx-book-theme.12a9622fbb08dcb3a2a40b2c02b83a57.js"></script>
-    <script src="../_static/sphinx-book-theme.js"></script>
-    <script async="async" src="https://unpkg.com/thebe@0.5.1/lib/index.js"></script>
-    <script>
-        const thebe_selector = ".thebe"
-        const thebe_selector_input = "pre"
-        const thebe_selector_output = ".output"
-    </script>
+    <script src="../_static/sphinx-book-theme.d59cb220de22ca1c485ebbdc042f0030.js"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"
+const thebe_selector = ".thebe,.cell"
+const thebe_selector_input = "pre"
+const thebe_selector_output = ".output, .cell_output"
+</script>
     <script async="async" src="../_static/sphinx-thebe.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <meta name="docsearch:language" content="en" />
+    <meta name="docsearch:language" content="None">
+    
+
+    <!-- Google Analytics -->
     
   </head>
   <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="80">
@@ -93,7 +97,7 @@
   </a>
  </li>
 </ul>
-<p class="caption" role="heading">
+<p aria-level="2" class="caption" role="heading">
  <span class="caption-text">
   Basics
  </span>
@@ -105,7 +109,7 @@
   </a>
  </li>
 </ul>
-<p class="caption" role="heading">
+<p aria-level="2" class="caption" role="heading">
  <span class="caption-text">
   Diagnostics
  </span>
@@ -117,7 +121,7 @@
   </a>
  </li>
 </ul>
-<p class="caption" role="heading">
+<p aria-level="2" class="caption" role="heading">
  <span class="caption-text">
   Lasso, Splines &amp; GAM
  </span>
@@ -144,7 +148,7 @@
   </a>
  </li>
 </ul>
-<p class="caption" role="heading">
+<p aria-level="2" class="caption" role="heading">
  <span class="caption-text">
   Decision Trees
  </span>
@@ -156,7 +160,7 @@
   </a>
  </li>
 </ul>
-<p class="caption" role="heading">
+<p aria-level="2" class="caption" role="heading">
  <span class="caption-text">
   Feature Selection
  </span>
@@ -168,7 +172,7 @@
   </a>
  </li>
 </ul>
-<p class="caption" role="heading">
+<p aria-level="2" class="caption" role="heading">
  <span class="caption-text">
   Ensemble
  </span>
@@ -180,7 +184,7 @@
   </a>
  </li>
 </ul>
-<p class="caption" role="heading">
+<p aria-level="2" class="caption" role="heading">
  <span class="caption-text">
   Case duke
  </span>
@@ -207,7 +211,7 @@
   </a>
  </li>
 </ul>
-<p class="caption" role="heading">
+<p aria-level="2" class="caption" role="heading">
  <span class="caption-text">
   References
  </span>
@@ -264,7 +268,7 @@
                 data-placement="left">.ipynb</button></a>
         <!-- Download PDF via print -->
         <button type="button" id="download-print" class="btn btn-secondary topbarbtn" title="Print to PDF"
-            onClick="window.print()" data-toggle="tooltip" data-placement="left">.pdf</button>
+                onclick="printPdf(this)" data-toggle="tooltip" data-placement="left">.pdf</button>
     </div>
 </div>
 
@@ -314,7 +318,7 @@
         </div>
 
         <!-- Table of contents -->
-        <div class="d-none d-md-block col-md-2 bd-toc show">
+        <div class="d-none d-md-block col-md-2 bd-toc show noprint">
             
             <div class="tocsection onthispage pt-5 pb-3">
                 <i class="fas fa-list"></i> Contents
@@ -366,12 +370,67 @@
 </div>
     <div id="main-content" class="row">
         <div class="col-12 col-md-9 pl-md-3 pr-md-0">
-        
+            <!-- Table of contents that is only displayed when printing the page -->
+            <div id="jb-print-docs-body" class="onlyprint">
+                <h1>Programming Process</h1>
+                <!-- Table of contents -->
+                <div id="print-main-content">
+                    <div id="jb-print-toc">
+                        
+                        <div>
+                            <h2> Contents </h2>
+                        </div>
+                        <nav aria-label="Page">
+                            <ul class="visible nav section-nav flex-column">
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#">
+   Programming Process
+  </a>
+ </li>
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#application">
+   Application
+  </a>
+  <ul class="visible nav section-nav flex-column">
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#import-data">
+     Import data
+    </a>
+   </li>
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#tidying-data">
+     Tidying data
+    </a>
+   </li>
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#transform-data">
+     Transform data
+    </a>
+   </li>
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#visualize-data">
+     Visualize data
+    </a>
+   </li>
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#model">
+     Model
+    </a>
+   </li>
+  </ul>
+ </li>
+</ul>
+
+                        </nav>
+                    </div>
+                </div>
+            </div>
+            
               <div>
                 
   <div class="tex2jax_ignore mathjax_ignore section" id="programming-process">
 <h1>Programming Process<a class="headerlink" href="#programming-process" title="Permalink to this headline">¶</a></h1>
-<p>The goal of this section is to give you a first impression of some important steps and tools in Python when using linear regression models. A typical project looks something like this <span id="id1">[<a class="reference internal" href="reference.html#id9">Wickham and Grolemund, 2016</a>]</span>:</p>
+<p>The goal of this section is to give you a first impression of some important steps and tools in Python when using linear regression models. A typical project looks something like this <span id="id1">[<a class="reference internal" href="reference.html#id9" title="Hadley Wickham and Garrett Grolemund. R for data science: import, tidy, transform, visualize, and model data. O'Reilly Media, Inc., 2016. URL: https://r4ds.had.co.nz.">Wickham and Grolemund, 2016</a>]</span>:</p>
 <a class="bg-primary mb-1 reference internal image-reference" href="../_images/data-science.png"><img alt="datascience" class="bg-primary mb-1 align-center" src="../_images/data-science.png" style="width: 600px;" /></a>
 <p>First you must <strong>import</strong> your data into Python. This typically means that you take data stored in a file, database, or web API, and load it into a DataFrame in Python (using Pandas).</p>
 <p>Once you’ve imported your data, it is a good idea to tidy it.
@@ -575,17 +634,10 @@ transform data. To learn more about pandas, review this <a class="reference exte
   <thead>
     <tr style="text-align: right;">
       <th></th>
-      <th>Unnamed: 0</th>
+      <th>id</th>
       <th>year</th>
       <th>age</th>
-      <th>maritl</th>
-      <th>race</th>
-      <th>education</th>
-      <th>region</th>
-      <th>jobclass</th>
-      <th>health</th>
-      <th>health_ins</th>
-      <th>logwage</th>
+      <th>edu</th>
       <th>wage</th>
     </tr>
   </thead>
@@ -595,14 +647,7 @@ transform data. To learn more about pandas, review this <a class="reference exte
       <td>376816</td>
       <td>2008</td>
       <td>44</td>
-      <td>2. Married</td>
-      <td>1. White</td>
       <td>3. Some College</td>
-      <td>2. Middle Atlantic</td>
-      <td>1. Industrial</td>
-      <td>2. &gt;=Very Good</td>
-      <td>1. Yes</td>
-      <td>5.041393</td>
       <td>154.685293</td>
     </tr>
     <tr>
@@ -610,14 +655,7 @@ transform data. To learn more about pandas, review this <a class="reference exte
       <td>302281</td>
       <td>2007</td>
       <td>30</td>
-      <td>2. Married</td>
-      <td>1. White</td>
       <td>2. HS Grad</td>
-      <td>2. Middle Atlantic</td>
-      <td>1. Industrial</td>
-      <td>2. &gt;=Very Good</td>
-      <td>2. No</td>
-      <td>4.602060</td>
       <td>99.689464</td>
     </tr>
     <tr>
@@ -625,14 +663,7 @@ transform data. To learn more about pandas, review this <a class="reference exte
       <td>10033</td>
       <td>2005</td>
       <td>27</td>
-      <td>2. Married</td>
-      <td>2. Black</td>
       <td>1. &lt; HS Grad</td>
-      <td>2. Middle Atlantic</td>
-      <td>1. Industrial</td>
-      <td>1. &lt;=Good</td>
-      <td>2. No</td>
-      <td>4.193125</td>
       <td>66.229408</td>
     </tr>
     <tr>
@@ -640,14 +671,7 @@ transform data. To learn more about pandas, review this <a class="reference exte
       <td>14375</td>
       <td>2005</td>
       <td>27</td>
-      <td>1. Never Married</td>
-      <td>1. White</td>
       <td>3. Some College</td>
-      <td>2. Middle Atlantic</td>
-      <td>1. Industrial</td>
-      <td>2. &gt;=Very Good</td>
-      <td>1. Yes</td>
-      <td>4.477121</td>
       <td>87.981033</td>
     </tr>
     <tr>
@@ -655,14 +679,7 @@ transform data. To learn more about pandas, review this <a class="reference exte
       <td>453557</td>
       <td>2009</td>
       <td>55</td>
-      <td>5. Separated</td>
-      <td>1. White</td>
       <td>2. HS Grad</td>
-      <td>2. Middle Atlantic</td>
-      <td>1. Industrial</td>
-      <td>1. &lt;=Good</td>
-      <td>1. Yes</td>
-      <td>4.505150</td>
       <td>90.481913</td>
     </tr>
   </tbody>
@@ -1131,7 +1148,7 @@ missing values. In that case, it could be reasonable to only drop the variable (
     </tr>
     <tr>
       <th>top</th>
-      <td>453870</td>
+      <td>7373</td>
       <td>2003</td>
       <td>2. HS Grad</td>
     </tr>
@@ -1278,12 +1295,7 @@ missing values. In that case, it could be reasonable to only drop the variable (
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/Users/jankirenz/opt/anaconda3/lib/python3.7/site-packages/pandas/plotting/_matplotlib/tools.py:331: MatplotlibDeprecationWarning: 
-The is_first_col function was deprecated in Matplotlib 3.4 and will be removed two minor releases later. Use ax.get_subplotspec().is_first_col() instead.
-  if ax.is_first_col():
-</pre></div>
-</div>
-<img alt="../_images/process_46_1.png" src="../_images/process_46_1.png" />
+<img alt="../_images/process_46_0.png" src="../_images/process_46_0.png" />
 </div>
 </div>
 <p>We can also use Seaborne to plot a histogram with a kernel density estimate:</p>
@@ -1384,36 +1396,28 @@ You can see covariation as a pattern in the points. We will cover more options t
 
               </div>
               
-        
             
-
-
-
-<div class='prev-next-bottom'>
-    
-
+                <!-- Previous / next buttons -->
+<div class='prev-next-area'>
 </div>
-        
+            
         </div>
     </div>
     <footer class="footer">
-    <div class="container">
-      <p>
-        
-          By Jan Kirenz<br/>
-        
-            &copy; Copyright 2021.<br/>
-      </p>
-    </div>
-  </footer>
+  <p>
+    
+      By Jan Kirenz<br/>
+    
+        &copy; Copyright 2021.<br/>
+  </p>
+</footer>
 </main>
 
 
       </div>
     </div>
   
-  <script src="../_static/js/index.1c5a1a01449ed65a7b51.js"></script>
+  <script src="../_static/js/index.be7d3bbb2ef33a8344ce.js"></script>
 
-  
   </body>
 </html>
