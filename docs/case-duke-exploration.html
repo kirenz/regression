@@ -5,7 +5,7 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Data exploration &#8212; Introduction to Regression Models</title>
+    <title>Data &#8212; Introduction to Regression Models</title>
     
   <link href="../_static/css/theme.css" rel="stylesheet">
   <link href="../_static/css/index.ff1ffe594081f20da1ef19478df9384b.css" rel="stylesheet">
@@ -55,7 +55,7 @@ const thebe_selector_output = ".output, .cell_output"
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
     <link rel="next" title="Statsmodels" href="case-duke-statsmodel.html" />
-    <link rel="prev" title="Ensemble meta-estimator" href="ensemble.html" />
+    <link rel="prev" title="Case study" href="case-duke.html" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="docsearch:language" content="None">
     
@@ -192,9 +192,14 @@ const thebe_selector_output = ".output, .cell_output"
  </span>
 </p>
 <ul class="current nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="case-duke.html">
+   Case study
+  </a>
+ </li>
  <li class="toctree-l1 current active">
   <a class="current reference internal" href="#">
-   Data exploration
+   Data
   </a>
  </li>
  <li class="toctree-l1">
@@ -377,7 +382,7 @@ const thebe_selector_output = ".output, .cell_output"
         <div class="col-12 col-md-9 pl-md-3 pr-md-0">
             <!-- Table of contents that is only displayed when printing the page -->
             <div id="jb-print-docs-body" class="onlyprint">
-                <h1>Data exploration</h1>
+                <h1>Data</h1>
                 <!-- Table of contents -->
                 <div id="print-main-content">
                     <div id="jb-print-toc">
@@ -436,9 +441,8 @@ const thebe_selector_output = ".output, .cell_output"
             
               <div>
                 
-  <h1>Table of Contents<span class="tocSkip"></span></h1>
-<div class="toc"><ul class="toc-item"><li><span><a href="#Setup" data-toc-modified-id="Setup-1"><span class="toc-item-num">1&nbsp;&nbsp;</span>Setup</a></span></li><li><span><a href="#Import-data" data-toc-modified-id="Import-data-2"><span class="toc-item-num">2&nbsp;&nbsp;</span>Import data</a></span></li><li><span><a href="#Data-inspection" data-toc-modified-id="Data-inspection-3"><span class="toc-item-num">3&nbsp;&nbsp;</span>Data inspection</a></span></li><li><span><a href="#Data-transformation" data-toc-modified-id="Data-transformation-4"><span class="toc-item-num">4&nbsp;&nbsp;</span>Data transformation</a></span></li><li><span><a href="#Data-splitting" data-toc-modified-id="Data-splitting-5"><span class="toc-item-num">5&nbsp;&nbsp;</span>Data splitting</a></span></li><li><span><a href="#Exploratory-data-analysis" data-toc-modified-id="Exploratory-data-analysis-6"><span class="toc-item-num">6&nbsp;&nbsp;</span>Exploratory data analysis</a></span></li><li><span><a href="#Correlation-analysis" data-toc-modified-id="Correlation-analysis-7"><span class="toc-item-num">7&nbsp;&nbsp;</span>Correlation analysis</a></span></li><li><span><a href="#Modeling" data-toc-modified-id="Modeling-8"><span class="toc-item-num">8&nbsp;&nbsp;</span>Modeling</a></span></li></ul></div><div class="tex2jax_ignore mathjax_ignore section" id="data-exploration">
-<h1>Data exploration<a class="headerlink" href="#data-exploration" title="Permalink to this headline">¶</a></h1>
+  <div class="tex2jax_ignore mathjax_ignore section" id="data">
+<h1>Data<a class="headerlink" href="#data" title="Permalink to this headline">¶</a></h1>
 <div class="section" id="setup">
 <h2>Setup<a class="headerlink" href="#setup" title="Permalink to this headline">¶</a></h2>
 <div class="cell docutils container">
@@ -737,7 +741,7 @@ memory usage: 10.1+ KB
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/case-duke-exploration_9_0.png" src="../_images/case-duke-exploration_9_0.png" />
+<img alt="../_images/case-duke-exploration_8_0.png" src="../_images/case-duke-exploration_8_0.png" />
 </div>
 </div>
 <div class="cell docutils container">
@@ -1341,7 +1345,7 @@ memory usage: 7.3 KB
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/case-duke-exploration_24_0.png" src="../_images/case-duke-exploration_24_0.png" />
+<img alt="../_images/case-duke-exploration_23_0.png" src="../_images/case-duke-exploration_23_0.png" />
 </div>
 </div>
 </div>
@@ -1449,7 +1453,7 @@ memory usage: 7.3 KB
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/case-duke-exploration_27_0.png" src="../_images/case-duke-exploration_27_0.png" />
+<img alt="../_images/case-duke-exploration_26_0.png" src="../_images/case-duke-exploration_26_0.png" />
 </div>
 </div>
 <div class="cell docutils container">
@@ -1479,7 +1483,7 @@ memory usage: 7.3 KB
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/case-duke-exploration_28_0.png" src="../_images/case-duke-exploration_28_0.png" />
+<img alt="../_images/case-duke-exploration_27_0.png" src="../_images/case-duke-exploration_27_0.png" />
 </div>
 </div>
 <p>Instead of inspecting the correlation matrix, a better way to assess <strong>multicollinearity</strong> is to compute the variance inflation factor (VIF). Note that we ignore the intercept in this test.</p>
@@ -1590,11 +1594,11 @@ memory usage: 7.3 KB
             
                 <!-- Previous / next buttons -->
 <div class='prev-next-area'> 
-    <a class='left-prev' id="prev-link" href="ensemble.html" title="previous page">
+    <a class='left-prev' id="prev-link" href="case-duke.html" title="previous page">
         <i class="fas fa-angle-left"></i>
         <div class="prev-next-info">
             <p class="prev-next-subtitle">previous</p>
-            <p class="prev-next-title">Ensemble meta-estimator</p>
+            <p class="prev-next-title">Case study</p>
         </div>
     </a>
     <a class='right-next' id="next-link" href="case-duke-statsmodel.html" title="next page">
