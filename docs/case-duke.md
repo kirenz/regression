@@ -1,9 +1,9 @@
 (section-lm-lab)=
-# Case study houses
+# Case study
 
 The goal of this case study is to build a model for predicting the sale price of a house based on a particular home’s characteristics. 
 
-We will start with data exploration and afterwards demonstrate how to build linear regression models with 3 different Python modules:
+We will start with data exploration and afterwards demonstrate how to build regression models with 3 different Python modules:
 
 1. [statsmodels](https://www.statsmodels.org/stable/index.html)
 1. [scikit-learn](https://scikit-learn.org/stable/)
@@ -55,7 +55,6 @@ Linear regression with scikit-learn:
 ## TensorFlow
 
 To use TensorFlow, you first need to install some modules.
-
 
 ```{admonition} Jupyter notebook
 :class: tip
