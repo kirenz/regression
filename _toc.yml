@@ -28,6 +28,7 @@ parts:
   #  - file: docs/case-auto.ipynb
   - caption: Case Duke
     chapters:
+    - file: docs/case-duke.ipynb
     - file: docs/case-duke-exploration.ipynb
     - file: docs/case-duke-statsmodel.ipynb
     - file: docs/case-duke-sklearn.ipynb
