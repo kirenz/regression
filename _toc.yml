@@ -26,12 +26,16 @@ parts:
   #  chapters:
   #  - file: docs/case-simulated.ipynb
   #  - file: docs/case-auto.ipynb
-  - caption: Case duke
+  - caption: Case Duke
     chapters:
     - file: docs/case-duke-exploration.ipynb
     - file: docs/case-duke-statsmodel.ipynb
     - file: docs/case-duke-sklearn.ipynb
     - file: docs/case-duke-tensorflow.ipynb
+  - caption: Case Happy
+    chapters:
+    - file: docs/ds-happy-stats.ipynb
+    - file: docs/ds-happy-scikit.ipynb 
   - caption: References
     chapters:
     - file: docs/reference.md
