@@ -880,8 +880,7 @@ Missing values Y: 0
     <span class="p">{</span> <span class="s2">&quot;y&quot;</span><span class="p">:</span> <span class="n">y_train</span><span class="p">,</span>
       <span class="s2">&quot;y_pred&quot;</span><span class="p">:</span> <span class="n">y_pred</span><span class="p">,</span>
       <span class="s2">&quot;error&quot;</span><span class="p">:</span> <span class="n">y_pred</span> <span class="o">-</span> <span class="n">y_train</span>
-    <span class="p">}</span>
-<span class="p">)</span>
+    <span class="p">})</span>
 
 <span class="c1"># sort by error, select top 10 and get index</span>
 <span class="n">error_index</span> <span class="o">=</span> <span class="n">df_error</span><span class="o">.</span><span class="n">sort_values</span><span class="p">(</span><span class="n">by</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;error&#39;</span><span class="p">])</span><span class="o">.</span><span class="n">nlargest</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="s1">&#39;error&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">index</span>
@@ -891,6 +890,138 @@ Missing values Y: 0
 </pre></div>
 </div>
 </div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>price</th>
+      <th>bed</th>
+      <th>bath</th>
+      <th>area</th>
+      <th>year_built</th>
+      <th>cooling</th>
+      <th>lot</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>65</th>
+      <td>609000</td>
+      <td>5</td>
+      <td>4.0</td>
+      <td>3175</td>
+      <td>2016</td>
+      <td>other</td>
+      <td>0.47</td>
+    </tr>
+    <tr>
+      <th>84</th>
+      <td>567000</td>
+      <td>4</td>
+      <td>4.0</td>
+      <td>3931</td>
+      <td>1982</td>
+      <td>other</td>
+      <td>0.39</td>
+    </tr>
+    <tr>
+      <th>88</th>
+      <td>480000</td>
+      <td>2</td>
+      <td>2.0</td>
+      <td>2203</td>
+      <td>1984</td>
+      <td>other</td>
+      <td>0.42</td>
+    </tr>
+    <tr>
+      <th>55</th>
+      <td>150000</td>
+      <td>3</td>
+      <td>1.0</td>
+      <td>1734</td>
+      <td>1945</td>
+      <td>other</td>
+      <td>0.16</td>
+    </tr>
+    <tr>
+      <th>19</th>
+      <td>290000</td>
+      <td>3</td>
+      <td>2.5</td>
+      <td>2414</td>
+      <td>1956</td>
+      <td>other</td>
+      <td>0.48</td>
+    </tr>
+    <tr>
+      <th>70</th>
+      <td>520000</td>
+      <td>4</td>
+      <td>3.0</td>
+      <td>2637</td>
+      <td>1968</td>
+      <td>other</td>
+      <td>0.65</td>
+    </tr>
+    <tr>
+      <th>16</th>
+      <td>452500</td>
+      <td>3</td>
+      <td>2.5</td>
+      <td>3234</td>
+      <td>1941</td>
+      <td>other</td>
+      <td>0.61</td>
+    </tr>
+    <tr>
+      <th>92</th>
+      <td>590000</td>
+      <td>5</td>
+      <td>3.0</td>
+      <td>3323</td>
+      <td>1980</td>
+      <td>other</td>
+      <td>0.43</td>
+    </tr>
+    <tr>
+      <th>48</th>
+      <td>416000</td>
+      <td>5</td>
+      <td>3.0</td>
+      <td>2949</td>
+      <td>1955</td>
+      <td>other</td>
+      <td>0.55</td>
+    </tr>
+    <tr>
+      <th>57</th>
+      <td>400000</td>
+      <td>4</td>
+      <td>3.0</td>
+      <td>2771</td>
+      <td>1958</td>
+      <td>central</td>
+      <td>0.52</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
 </div>
 </div>
 <div class="section" id="evaluation-with-test-data">
