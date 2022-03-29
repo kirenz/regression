@@ -2,7 +2,6 @@
 # coding: utf-8
 
 import pandas as pd
-import numpy as np
 
 ROOT = "https://raw.githubusercontent.com/kirenz/modern-statistics/main/data/"
 DATA = "duke-forest.csv"
