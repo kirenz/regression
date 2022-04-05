@@ -727,70 +727,6 @@ const thebe_selector_output = ".output, .cell_output"
 </pre></div>
 </div>
 </div>
-<div class="cell_output docutils container">
-<div class="output text_html"><div>
-<style scoped>
-    .dataframe tbody tr th:only-of-type {
-        vertical-align: middle;
-    }
-
-    .dataframe tbody tr th {
-        vertical-align: top;
-    }
-
-    .dataframe thead th {
-        text-align: right;
-    }
-</style>
-<table border="1" class="dataframe">
-  <thead>
-    <tr style="text-align: right;">
-      <th></th>
-      <th>type</th>
-      <th>income</th>
-      <th>education</th>
-      <th>prestige</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <th>accountant</th>
-      <td>prof</td>
-      <td>62</td>
-      <td>86</td>
-      <td>82</td>
-    </tr>
-    <tr>
-      <th>pilot</th>
-      <td>prof</td>
-      <td>72</td>
-      <td>76</td>
-      <td>83</td>
-    </tr>
-    <tr>
-      <th>architect</th>
-      <td>prof</td>
-      <td>75</td>
-      <td>92</td>
-      <td>90</td>
-    </tr>
-    <tr>
-      <th>author</th>
-      <td>prof</td>
-      <td>55</td>
-      <td>90</td>
-      <td>76</td>
-    </tr>
-    <tr>
-      <th>chemist</th>
-      <td>prof</td>
-      <td>64</td>
-      <td>86</td>
-      <td>90</td>
-    </tr>
-  </tbody>
-</table>
-</div></div></div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -798,9 +734,6 @@ const thebe_selector_output = ".output, .cell_output"
 <span class="n">sns</span><span class="o">.</span><span class="n">___</span><span class="p">(</span><span class="n">df</span><span class="p">);</span>
 </pre></div>
 </div>
-</div>
-<div class="cell_output docutils container">
-<img alt="../_images/diagnostics-c_8_0.png" src="../_images/diagnostics-c_8_0.png" />
 </div>
 </div>
 <p>Findings:</p>
@@ -827,36 +760,6 @@ const thebe_selector_output = ".output, .cell_output"
 </pre></div>
 </div>
 </div>
-<div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>                            OLS Regression Results                            
-==============================================================================
-Dep. Variable:               prestige   R-squared:                       0.828
-Model:                            OLS   Adj. R-squared:                  0.820
-Method:                 Least Squares   F-statistic:                     101.2
-Date:                Mon, 22 Nov 2021   Prob (F-statistic):           8.65e-17
-Time:                        13:16:19   Log-Likelihood:                -178.98
-No. Observations:                  45   AIC:                             364.0
-Df Residuals:                      42   BIC:                             369.4
-Df Model:                           2                                         
-Covariance Type:            nonrobust                                         
-==============================================================================
-                 coef    std err          t      P&gt;|t|      [0.025      0.975]
-------------------------------------------------------------------------------
-Intercept     -6.0647      4.272     -1.420      0.163     -14.686       2.556
-income         0.5987      0.120      5.003      0.000       0.357       0.840
-education      0.5458      0.098      5.555      0.000       0.348       0.744
-==============================================================================
-Omnibus:                        1.279   Durbin-Watson:                   1.458
-Prob(Omnibus):                  0.528   Jarque-Bera (JB):                0.520
-Skew:                           0.155   Prob(JB):                        0.771
-Kurtosis:                       3.426   Cond. No.                         163.
-==============================================================================
-
-Notes:
-[1] Standard Errors assume that the covariance matrix of the errors is correctly specified.
-</pre></div>
-</div>
-</div>
 </div>
 </div>
 </div>
@@ -879,9 +782,6 @@ Notes:
 </pre></div>
 </div>
 </div>
-<div class="cell_output docutils container">
-<img alt="../_images/diagnostics-c_16_0.png" src="../_images/diagnostics-c_16_0.png" />
-</div>
 </div>
 <p>We can spot outliers by using graphs like the scatterplot above.</p>
 <div class="cell docutils container">
@@ -889,9 +789,6 @@ Notes:
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">sns</span><span class="o">.</span><span class="n">scatterplot</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="s1">&#39;x&#39;</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="s1">&#39;y&#39;</span><span class="p">,</span> <span class="n">data</span><span class="o">=</span><span class="n">___</span><span class="p">);</span>
 </pre></div>
 </div>
-</div>
-<div class="cell_output docutils container">
-<img alt="../_images/diagnostics-c_18_0.png" src="../_images/diagnostics-c_18_0.png" />
 </div>
 </div>
 <p>We just saw that outliers are observations for which the response <span class="math notranslate nohighlight">\(y_i\)</span> is unusual given the predictor <span class="math notranslate nohighlight">\(x_i\)</span>.</p>
@@ -909,9 +806,6 @@ Notes:
 </pre></div>
 </div>
 </div>
-<div class="cell_output docutils container">
-<img alt="../_images/diagnostics-c_20_0.png" src="../_images/diagnostics-c_20_0.png" />
-</div>
 </div>
 <p>For example, the observation with a value of <span class="math notranslate nohighlight">\(x=20\)</span> has high leverage, in that the predictor value for this observation is large relative to the other observations. The removal of the high leverage observation would have a substantial impact on the regression line. In general, high leverage observations tend to have a sizable impact on the estimated regression line. Therefore, it is important to detect influential observations and to take them into consideration when interpreting the results.</p>
 <p>Again, we could use simple graphs to identify unusual observations.</p>
@@ -921,9 +815,6 @@ Notes:
 </pre></div>
 </div>
 </div>
-<div class="cell_output docutils container">
-<img alt="../_images/diagnostics-c_23_0.png" src="../_images/diagnostics-c_23_0.png" />
-</div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -931,9 +822,6 @@ Notes:
 <span class="n">sns</span><span class="o">.</span><span class="n">___</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="s1">&#39;x&#39;</span><span class="p">,</span> <span class="n">data</span><span class="o">=</span><span class="n">df_leverage</span><span class="p">);</span>
 </pre></div>
 </div>
-</div>
-<div class="cell_output docutils container">
-<img alt="../_images/diagnostics-c_24_0.png" src="../_images/diagnostics-c_24_0.png" />
 </div>
 </div>
 <div class="section" id="influence-plots">
@@ -967,9 +855,6 @@ Notes:
 <span class="n">fig</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">(</span><span class="n">pad</span><span class="o">=</span><span class="mf">1.0</span><span class="p">)</span>
 </pre></div>
 </div>
-</div>
-<div class="cell_output docutils container">
-<img alt="../_images/diagnostics-c_28_0.png" src="../_images/diagnostics-c_28_0.png" />
 </div>
 </div>
 <p>To identify values with high influence, we look for observations with:</p>
@@ -1006,13 +891,6 @@ Notes:
 <span class="c1"># output potential outliers with leverage</span>
 <span class="nb">print</span><span class="p">(</span><span class="n">df</span><span class="o">.</span><span class="n">index</span><span class="p">[</span><span class="n">out_d</span><span class="p">],</span> <span class="s2">&quot;</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">,</span> 
     <span class="n">lm_cooksd</span><span class="p">[</span><span class="n">out_d</span><span class="p">])</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Critical Cooks distance: 0.08888888888888889
-Index([&#39;minister&#39;, &#39;reporter&#39;, &#39;conductor&#39;], dtype=&#39;object&#39;) 
- [0.56637974 0.09898456 0.22364122]
 </pre></div>
 </div>
 </div>
@@ -1111,9 +989,6 @@ points, but you can use them to identify problems and then use <code class="docu
 </pre></div>
 </div>
 </div>
-<div class="cell_output docutils container">
-<img alt="../_images/diagnostics-c_41_0.png" src="../_images/diagnostics-c_41_0.png" />
-</div>
 </div>
 <p>We observe a positive relationship between prestige and income as well as between prestige and education. The relationship seems to be linear in both cases.</p>
 <p>Next, let’s take a closer look at the observations.</p>
@@ -1131,9 +1006,6 @@ points, but you can use them to identify problems and then use <code class="docu
 </pre></div>
 </div>
 </div>
-<div class="cell_output docutils container">
-<img alt="../_images/diagnostics-c_43_0.png" src="../_images/diagnostics-c_43_0.png" />
-</div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -1142,9 +1014,6 @@ points, but you can use them to identify problems and then use <code class="docu
 <span class="n">fig</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">(</span><span class="n">pad</span><span class="o">=</span><span class="mf">1.0</span><span class="p">)</span>
 </pre></div>
 </div>
-</div>
-<div class="cell_output docutils container">
-<img alt="../_images/diagnostics-c_44_0.png" src="../_images/diagnostics-c_44_0.png" />
 </div>
 </div>
 <p>The partial regression plots confirm the influence of <code class="docutils literal notranslate"><span class="pre">conductor</span></code>, <code class="docutils literal notranslate"><span class="pre">minister</span></code> on the partial relationships between prestige and the predictors income and education. The influence of <code class="docutils literal notranslate"><span class="pre">reporter</span></code> is less obvious but since the observation was considered critical according to Cook`s D, we also drop this case.</p>
@@ -1158,25 +1027,6 @@ points, but you can use them to identify problems and then use <code class="docu
 </pre></div>
 </div>
 </div>
-<div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Index([&#39;accountant&#39;, &#39;pilot&#39;, &#39;architect&#39;, &#39;author&#39;, &#39;chemist&#39;, &#39;minister&#39;,
-       &#39;professor&#39;, &#39;dentist&#39;, &#39;reporter&#39;, &#39;engineer&#39;, &#39;undertaker&#39;, &#39;lawyer&#39;,
-       &#39;physician&#39;, &#39;welfare.worker&#39;, &#39;teacher&#39;, &#39;conductor&#39;, &#39;contractor&#39;,
-       &#39;factory.owner&#39;, &#39;store.manager&#39;, &#39;banker&#39;, &#39;bookkeeper&#39;,
-       &#39;mail.carrier&#39;, &#39;insurance.agent&#39;, &#39;store.clerk&#39;, &#39;carpenter&#39;,
-       &#39;electrician&#39;, &#39;RR.engineer&#39;, &#39;machinist&#39;, &#39;auto.repairman&#39;, &#39;plumber&#39;,
-       &#39;gas.stn.attendant&#39;, &#39;coal.miner&#39;, &#39;streetcar.motorman&#39;, &#39;taxi.driver&#39;,
-       &#39;truck.driver&#39;, &#39;machine.operator&#39;, &#39;barber&#39;, &#39;bartender&#39;,
-       &#39;shoe.shiner&#39;, &#39;cook&#39;, &#39;soda.clerk&#39;, &#39;watchman&#39;, &#39;janitor&#39;, &#39;policeman&#39;,
-       &#39;waiter&#39;],
-      dtype=&#39;object&#39;) 
- [ True  True  True  True  True False  True  True False  True  True  True
-  True  True  True False  True  True  True  True  True  True  True  True
-  True  True  True  True  True  True  True  True  True  True  True  True
-  True  True  True  True  True  True  True  True  True]
-</pre></div>
-</div>
-</div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -1184,36 +1034,6 @@ points, but you can use them to identify problems and then use <code class="docu
 <span class="n">lm2</span> <span class="o">=</span> <span class="n">ols</span><span class="p">(</span><span class="s2">&quot;prestige ~ income + education&quot;</span><span class="p">,</span> <span class="n">data</span><span class="o">=</span><span class="n">df</span><span class="p">,</span> <span class="n">subset</span><span class="o">=</span><span class="n">___</span><span class="p">)</span><span class="o">.</span><span class="n">fit</span><span class="p">()</span>
 
 <span class="nb">print</span><span class="p">(</span><span class="n">lm2</span><span class="o">.</span><span class="n">summary</span><span class="p">())</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>                            OLS Regression Results                            
-==============================================================================
-Dep. Variable:               prestige   R-squared:                       0.897
-Model:                            OLS   Adj. R-squared:                  0.891
-Method:                 Least Squares   F-statistic:                     169.0
-Date:                Mon, 22 Nov 2021   Prob (F-statistic):           6.13e-20
-Time:                        13:16:21   Log-Likelihood:                -157.02
-No. Observations:                  42   AIC:                             320.0
-Df Residuals:                      39   BIC:                             325.2
-Df Model:                           2                                         
-Covariance Type:            nonrobust                                         
-==============================================================================
-                 coef    std err          t      P&gt;|t|      [0.025      0.975]
-------------------------------------------------------------------------------
-Intercept     -7.2414      3.391     -2.136      0.039     -14.099      -0.383
-income         0.8773      0.113      7.775      0.000       0.649       1.106
-education      0.3538      0.092      3.861      0.000       0.168       0.539
-==============================================================================
-Omnibus:                        1.483   Durbin-Watson:                   1.577
-Prob(Omnibus):                  0.476   Jarque-Bera (JB):                0.744
-Skew:                          -0.291   Prob(JB):                        0.689
-Kurtosis:                       3.293   Cond. No.                         156.
-==============================================================================
-
-Notes:
-[1] Standard Errors assume that the covariance matrix of the errors is correctly specified.
 </pre></div>
 </div>
 </div>
@@ -1243,9 +1063,6 @@ Notes:
 </pre></div>
 </div>
 </div>
-<div class="cell_output docutils container">
-<img alt="../_images/diagnostics-c_53_0.png" src="../_images/diagnostics-c_53_0.png" />
-</div>
 </div>
 <p>As you can see the relationship between the variation in <span class="math notranslate nohighlight">\(y\)</span> explained by education conditional on income seems to be linear, though you can see there are some observations that are exerting considerable influence on the relationship (see section leverage).</p>
 <p>We can quickly look at more than one variable by using <code class="docutils literal notranslate"><span class="pre">plot_ccpr_grid</span></code>.</p>
@@ -1255,9 +1072,6 @@ Notes:
 <span class="n">fig</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">(</span><span class="n">pad</span><span class="o">=</span><span class="mf">1.0</span><span class="p">)</span>
 </pre></div>
 </div>
-</div>
-<div class="cell_output docutils container">
-<img alt="../_images/diagnostics-c_55_0.png" src="../_images/diagnostics-c_55_0.png" />
 </div>
 </div>
 </div>
@@ -1281,9 +1095,6 @@ Notes:
 <span class="n">plot</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s1">&#39;Residuals&#39;</span><span class="p">);</span>
 </pre></div>
 </div>
-</div>
-<div class="cell_output docutils container">
-<img alt="../_images/diagnostics-c_58_0.png" src="../_images/diagnostics-c_58_0.png" />
 </div>
 </div>
 <p>This plot shows how residuals are spread along the ranges of predictors. It’s a good sign if we observe relatively equal (randomly) spreaded points along the dotted horizontal line where the residuals are zero.</p>
@@ -1316,14 +1127,6 @@ Notes:
 </pre></div>
 </div>
 </div>
-<div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[(&#39;Lagrange multiplier statistic&#39;, 0.5752191351127306),
- (&#39;p-value&#39;, 0.7500543806429694),
- (&#39;f-value&#39;, 0.27191134322318933),
- (&#39;f p-value&#39;, 0.7632527707017838)]
-</pre></div>
-</div>
-</div>
 </div>
 <ul class="simple">
 <li><p>In our case, both p-values are above 0.05,</p></li>
@@ -1347,9 +1150,6 @@ Notes:
 <span class="n">fig</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">(</span><span class="n">pad</span><span class="o">=</span><span class="mf">1.0</span><span class="p">)</span>
 </pre></div>
 </div>
-</div>
-<div class="cell_output docutils container">
-<img alt="../_images/diagnostics-c_69_0.png" src="../_images/diagnostics-c_69_0.png" />
 </div>
 </div>
 </div>
@@ -1401,14 +1201,6 @@ Notes:
 </pre></div>
 </div>
 </div>
-<div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[(&#39;Jarque-Bera&#39;, 0.5195278349686433),
- (&#39;Chi^2 two-tail prob.&#39;, 0.7712336390906139),
- (&#39;Skew&#39;, 0.1549318677987544),
- (&#39;Kurtosis&#39;, 3.425518480614924)]
-</pre></div>
-</div>
-</div>
 </div>
 <ul class="simple">
 <li><p>The p-value is above 0.05 and we can ____ <span class="math notranslate nohighlight">\(H_0\)</span>.</p></li>
@@ -1429,11 +1221,6 @@ Notes:
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">name</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;Chi^2&#39;</span><span class="p">,</span> <span class="s1">&#39;Two-tail probability&#39;</span><span class="p">]</span>
 <span class="n">test</span> <span class="o">=</span> <span class="n">sm</span><span class="o">.</span><span class="n">stats</span><span class="o">.</span><span class="n">omni_normtest</span><span class="p">(</span><span class="n">lm</span><span class="o">.</span><span class="n">resid</span><span class="p">)</span>
 <span class="n">lzip</span><span class="p">(</span><span class="n">name</span><span class="p">,</span> <span class="n">test</span><span class="p">)</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[(&#39;Chi^2&#39;, 1.2788071145675917), (&#39;Two-tail probability&#39;, 0.5276070175778638)]
 </pre></div>
 </div>
 </div>
@@ -1459,10 +1246,12 @@ Notes:
 <div class="section" id="durbin-watson-test">
 <h3>Durbin-Watson test<a class="headerlink" href="#durbin-watson-test" title="Permalink to this headline">¶</a></h3>
 <p>A test of autocorrelation that is designed to take account of the regression model is the <strong>Durbin-Watson test</strong> (also included in the regression summary). It is used to test the hypothesis that there is no <strong>lag one autocorrelation</strong> in the residuals. This means if there is no lag one autocorrelation, then information about <span class="math notranslate nohighlight">\(ϵ_i\)</span> provides little or no information about <span class="math notranslate nohighlight">\(ϵ_{i+1}\)</span>.</p>
-<blockquote>
-<div><p>A small p-value indicates there is significant autocorrelation remaining in the residuals.</p>
-</div></blockquote>
-<p>If there is no autocorrelation, the Durbin-Watson distribution is symmetric around 2.</p>
+<p>If there is no autocorrelation, the test-statistic is around 2.</p>
+<ul class="simple">
+<li><p>This statistic will always be between 0 and 4.</p></li>
+<li><p>The closer to 0 the statistic, the more evidence for positive serial correlation.</p></li>
+<li><p>The closer to 4, the more evidence for negative serial correlation.</p></li>
+</ul>
 <p>As a rough rule of thumb <span id="id10">[<a class="reference internal" href="reference.html#id3" title="Andy Field. Discovering statistics using IBM SPSS statistics. sage, 2013.">Field, 2013</a>]</span>:</p>
 <ul class="simple">
 <li><p>If Durbin–Watson is less than 1.0, there may be cause for concern.</p></li>
@@ -1475,17 +1264,14 @@ Notes:
 </pre></div>
 </div>
 </div>
-<div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>1.458332862235202
-</pre></div>
-</div>
-</div>
 </div>
 </div>
 <div class="section" id="id11">
 <h3>Solution<a class="headerlink" href="#id11" title="Permalink to this headline">¶</a></h3>
-<p>We can get consistent estimates of the standard errors with <a class="reference external" href="https://en.wikipedia.org/wiki/Newey%E2%80%93West_estimator">Newey-West standard errors</a>. See <a class="reference external" href="https://www.statsmodels.org/dev/generated/statsmodels.stats.sandwich_covariance.cov_hac.html">statsmodels documentation</a> for implementation details.</p>
-<p>Furthermore, you can use a <a class="reference external" href="https://www.statsmodels.org/dev/generated/statsmodels.regression.linear_model.GLS.html">generalized least squares (GLS)</a> model instead of the ordinary least squares (OLS).</p>
+<ul class="simple">
+<li><p>We can get consistent estimates of the standard errors with <a class="reference external" href="https://en.wikipedia.org/wiki/Newey%E2%80%93West_estimator">Newey-West standard errors</a>. See <a class="reference external" href="https://www.statsmodels.org/dev/generated/statsmodels.stats.sandwich_covariance.cov_hac.html">statsmodels documentation</a> for implementation details.</p></li>
+<li><p>Furthermore, you can use a <a class="reference external" href="https://www.statsmodels.org/dev/generated/statsmodels.regression.linear_model.GLS.html">generalized least squares (GLS)</a> model instead of the ordinary least squares (OLS).</p></li>
+</ul>
 <p>In the case of correlated errors, you may also use a multilevel model (also known as hierarchical linear models, linear mixed-effect model, mixed models, nested data models, random coefficient, random-effects models, random parameter models, or split-plot designs).</p>
 <p>Multilevel models are particularly appropriate for research designs where data for participants are organized at more than one level (i.e., nested data). The units of analysis are usually individuals (at a lower level) who are nested within contextual/aggregate units (at a higher level).</p>
 <p>See <a class="reference external" href="https://www.statsmodels.org/stable/mixed_linear.html">statsmodels’ documentation</a> to learn how to implement multilevel models.</p>
@@ -1514,28 +1300,34 @@ Notes:
 </pre></div>
 </div>
 </div>
-<div class="cell_output docutils container">
-<img alt="../_images/diagnostics-c_98_0.png" src="../_images/diagnostics-c_98_0.png" />
-</div>
 </div>
 </div>
 <div class="section" id="variance-inflation-factor-vif">
 <h3>Variance inflation factor (VIF)<a class="headerlink" href="#variance-inflation-factor-vif" title="Permalink to this headline">¶</a></h3>
-<p>Instead of inspecting the correlation matrix, a better way to assess <strong>multicollinearity</strong> is to compute the variance inflation factor (VIF). Note that we ignore the intercept in this test.</p>
+<ul class="simple">
+<li><p>Instead of inspecting the correlation matrix, a better way to assess <strong>multicollinearity</strong> is to compute the variance inflation factor (VIF).</p></li>
+<li><p>Note that we ignore the intercept in this test.</p></li>
+</ul>
 <ul class="simple">
 <li><p>The smallest possible value for VIF is 1, which indicates the complete absence of collinearity.</p></li>
 <li><p>Typically in practice there is a small amount of collinearity among the predictors.</p></li>
 <li><p>As a rule of thumb, a VIF value that exceeds 5 indicates a problematic amount of collinearity and the parameter estimates will have large standard errors because of this.</p></li>
 </ul>
-<p>Note that the function <code class="docutils literal notranslate"><span class="pre">variance_inflation_factor</span></code> expects the presence of a constant in the matrix of explanatory variables. Therefore, we use <code class="docutils literal notranslate"><span class="pre">add_constant</span></code> from statsmodels to add the required constant to the dataframe before passing its values to the function.</p>
+<ul class="simple">
+<li><p>Note that the function <code class="docutils literal notranslate"><span class="pre">variance_inflation_factor</span></code> expects the presence of a constant in the matrix of explanatory variables.</p></li>
+<li><p>Therefore, we use <code class="docutils literal notranslate"><span class="pre">add_constant</span></code> from statsmodels to add the required constant to the dataframe before passing its values to the function.</p></li>
+</ul>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># choose features and add constant</span>
-<span class="n">features</span> <span class="o">=</span> <span class="n">add_constant</span><span class="p">(</span><span class="n">df</span><span class="p">[[</span><span class="s1">&#39;income&#39;</span><span class="p">,</span> <span class="s1">&#39;education&#39;</span><span class="p">]])</span>
+<span class="n">features</span> <span class="o">=</span> <span class="n">___</span><span class="p">(</span><span class="n">df</span><span class="p">[[</span><span class="s1">&#39;income&#39;</span><span class="p">,</span> <span class="s1">&#39;education&#39;</span><span class="p">]])</span>
+
 <span class="c1"># create empty DataFrame</span>
 <span class="n">vif</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">()</span>
+
 <span class="c1"># calculate vif</span>
 <span class="n">vif</span><span class="p">[</span><span class="s2">&quot;VIF Factor&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="p">[</span><span class="n">variance_inflation_factor</span><span class="p">(</span><span class="n">features</span><span class="o">.</span><span class="n">values</span><span class="p">,</span> <span class="n">i</span><span class="p">)</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">features</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">])]</span>
+
 <span class="c1"># add feature names</span>
 <span class="n">vif</span><span class="p">[</span><span class="s2">&quot;Feature&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">features</span><span class="o">.</span><span class="n">columns</span>
 
@@ -1543,54 +1335,15 @@ Notes:
 </pre></div>
 </div>
 </div>
-<div class="cell_output docutils container">
-<div class="output text_html"><div>
-<style scoped>
-    .dataframe tbody tr th:only-of-type {
-        vertical-align: middle;
-    }
-
-    .dataframe tbody tr th {
-        vertical-align: top;
-    }
-
-    .dataframe thead th {
-        text-align: right;
-    }
-</style>
-<table border="1" class="dataframe">
-  <thead>
-    <tr style="text-align: right;">
-      <th></th>
-      <th>VIF Factor</th>
-      <th>Feature</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <th>0</th>
-      <td>4.59</td>
-      <td>const</td>
-    </tr>
-    <tr>
-      <th>1</th>
-      <td>2.10</td>
-      <td>income</td>
-    </tr>
-    <tr>
-      <th>2</th>
-      <td>2.10</td>
-      <td>education</td>
-    </tr>
-  </tbody>
-</table>
-</div></div></div>
 </div>
 <p>We don’t have a problematic amount of collinearity in our data.</p>
 </div>
 <div class="section" id="id12">
 <h3>Solution<a class="headerlink" href="#id12" title="Permalink to this headline">¶</a></h3>
-<p>A simple solution would be to remove some of the highly correlated features. Furthermore, you could manually combine some features (e.g. adding them together) or use a method which automatically combines features, such as principal components analysis or partial least squares regression.</p>
+<ul class="simple">
+<li><p>A simple solution would be to remove some of the highly correlated features.</p></li>
+<li><p>Furthermore, you could manually combine some features (e.g. adding them together) or use a method which automatically combines features, such as principal components analysis or partial least squares regression.</p></li>
+</ul>
 </div>
 </div>
 </div>

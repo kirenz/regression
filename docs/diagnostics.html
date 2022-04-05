@@ -834,8 +834,8 @@ const thebe_selector_output = ".output, .cell_output"
 Dep. Variable:               prestige   R-squared:                       0.828
 Model:                            OLS   Adj. R-squared:                  0.820
 Method:                 Least Squares   F-statistic:                     101.2
-Date:                Mon, 22 Nov 2021   Prob (F-statistic):           8.65e-17
-Time:                        13:16:19   Log-Likelihood:                -178.98
+Date:                Tue, 05 Apr 2022   Prob (F-statistic):           8.65e-17
+Time:                        19:18:25   Log-Likelihood:                -178.98
 No. Observations:                  45   AIC:                             364.0
 Df Residuals:                      42   BIC:                             369.4
 Df Model:                           2                                         
@@ -1110,7 +1110,12 @@ points, but you can use them to identify problems and then use <code class="docu
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/diagnostics_41_0.png" src="../_images/diagnostics_41_0.png" />
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>eval_env: 1
+eval_env: 1
+eval_env: 1
+</pre></div>
+</div>
+<img alt="../_images/diagnostics_41_1.png" src="../_images/diagnostics_41_1.png" />
 </div>
 </div>
 <p>We observe a positive relationship between prestige and income as well as between prestige and education. The relationship seems to be linear in both cases.</p>
@@ -1128,7 +1133,10 @@ points, but you can use them to identify problems and then use <code class="docu
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/diagnostics_43_0.png" src="../_images/diagnostics_43_0.png" />
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>eval_env: 1
+</pre></div>
+</div>
+<img alt="../_images/diagnostics_43_1.png" src="../_images/diagnostics_43_1.png" />
 </div>
 </div>
 <div class="cell docutils container">
@@ -1140,7 +1148,10 @@ points, but you can use them to identify problems and then use <code class="docu
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/diagnostics_44_0.png" src="../_images/diagnostics_44_0.png" />
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>eval_env: 1
+</pre></div>
+</div>
+<img alt="../_images/diagnostics_44_1.png" src="../_images/diagnostics_44_1.png" />
 </div>
 </div>
 <p>The partial regression plots confirm the influence of <code class="docutils literal notranslate"><span class="pre">conductor</span></code>, <code class="docutils literal notranslate"><span class="pre">minister</span></code> on the partial relationships between prestige and the predictors income and education. The influence of <code class="docutils literal notranslate"><span class="pre">reporter</span></code> is less obvious but since the observation was considered critical according to Cook`s D, we also drop this case.</p>
@@ -1189,8 +1200,8 @@ points, but you can use them to identify problems and then use <code class="docu
 Dep. Variable:               prestige   R-squared:                       0.897
 Model:                            OLS   Adj. R-squared:                  0.891
 Method:                 Least Squares   F-statistic:                     169.0
-Date:                Mon, 22 Nov 2021   Prob (F-statistic):           6.13e-20
-Time:                        13:16:21   Log-Likelihood:                -157.02
+Date:                Tue, 05 Apr 2022   Prob (F-statistic):           6.13e-20
+Time:                        19:18:31   Log-Likelihood:                -157.02
 No. Observations:                  42   AIC:                             320.0
 Df Residuals:                      39   BIC:                             325.2
 Df Model:                           2                                         
@@ -1336,7 +1347,10 @@ Notes:
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/diagnostics_69_0.png" src="../_images/diagnostics_69_0.png" />
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>eval_env: 1
+</pre></div>
+</div>
+<img alt="../_images/diagnostics_69_1.png" src="../_images/diagnostics_69_1.png" />
 </div>
 </div>
 </div>
@@ -1428,11 +1442,13 @@ Notes:
 <p>Correlation among the error terms can also occur outside of time series data. For instance, consider a study in which individuals’ heights are predicted from their weights. The assumption of uncorrelated errors could be violated if some of the individuals in the study are members of the same family, or eat the same diet, or have been exposed to the same environmental factors <span id="id9">[<a class="reference internal" href="reference.html#id3" title="Andy Field. Discovering statistics using IBM SPSS statistics. sage, 2013.">Field, 2013</a>]</span>.</p>
 <div class="section" id="durbin-watson-test">
 <h3>Durbin-Watson test<a class="headerlink" href="#durbin-watson-test" title="Permalink to this headline">¶</a></h3>
-<p>A test of autocorrelation that is designed to take account of the regression model is the <strong>Durbin-Watson test</strong> (also included in the regression summary). It is used to test the hypothesis that there is no <strong>lag one autocorrelation</strong> in the residuals. This means if there is no lag one autocorrelation, then information about <span class="math notranslate nohighlight">\(ϵ_i\)</span> provides little or no information about $ϵ_{i+1}.</p>
-<blockquote>
-<div><p>A small p-value indicates there is significant autocorrelation remaining in the residuals.</p>
-</div></blockquote>
-<p>If there is no autocorrelation, the Durbin-Watson distribution is symmetric around 2.</p>
+<p>A test of autocorrelation that is designed to take account of the regression model is the <strong>Durbin-Watson test</strong> (also included in the regression summary). It is used to test the hypothesis that there is no <strong>lag one autocorrelation</strong> in the residuals. This means if there is no lag one autocorrelation, then information about <span class="math notranslate nohighlight">\(ϵ_i\)</span> provides little or no information about <span class="math notranslate nohighlight">\(ϵ_{i+1}\)</span>.</p>
+<p>If there is no autocorrelation, the test-statistic is around 2.</p>
+<ul class="simple">
+<li><p>This statistic will always be between 0 and 4.</p></li>
+<li><p>The closer to 0 the statistic, the more evidence for positive serial correlation.</p></li>
+<li><p>The closer to 4, the more evidence for negative serial correlation.</p></li>
+</ul>
 <p>As a rough rule of thumb <span id="id10">[<a class="reference internal" href="reference.html#id3" title="Andy Field. Discovering statistics using IBM SPSS statistics. sage, 2013.">Field, 2013</a>]</span>:</p>
 <ul class="simple">
 <li><p>If Durbin–Watson is less than 1.0, there may be cause for concern.</p></li>
@@ -1485,7 +1501,7 @@ Notes:
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/diagnostics_98_0.png" src="../_images/diagnostics_98_0.png" />
+<img alt="../_images/diagnostics_97_0.png" src="../_images/diagnostics_97_0.png" />
 </div>
 </div>
 </div>
