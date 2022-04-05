@@ -1152,7 +1152,7 @@ points, but you can use them to identify problems and then use <code class="docu
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># make a subset and flag as TRUE if index doesn&#39;t contain ... use ~</span>
-<span class="n">subset</span> <span class="o">=</span> <span class="n">_df</span><span class="o">.</span><span class="n">index</span><span class="o">.</span><span class="n">isin</span><span class="p">([</span><span class="s2">&quot;conductor&quot;</span><span class="p">,</span> <span class="s2">&quot;minister&quot;</span><span class="p">,</span> <span class="s2">&quot;reporter&quot;</span><span class="p">])</span>
+<span class="n">subset</span> <span class="o">=</span> <span class="n">__df</span><span class="o">.</span><span class="n">index</span><span class="o">.</span><span class="n">isin</span><span class="p">([</span><span class="s2">&quot;conductor&quot;</span><span class="p">,</span> <span class="s2">&quot;minister&quot;</span><span class="p">,</span> <span class="s2">&quot;reporter&quot;</span><span class="p">])</span>
 
 <span class="nb">print</span><span class="p">(</span><span class="n">df</span><span class="o">.</span><span class="n">index</span><span class="p">,</span> <span class="s2">&quot;</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">,</span> <span class="n">subset</span><span class="p">)</span>
 </pre></div>
@@ -1300,9 +1300,14 @@ Notes:
 <blockquote>
 <div><p>The Breusch-Pagan Lagrange Multiplier test can be used to identify heteroscedasticity.</p>
 </div></blockquote>
-<p>The test assumes homoscedasticity (this is the null hypothesis <span class="math notranslate nohighlight">\(H_0\)</span>) which means that the residual variance does not depend on the values of the variables in x.</p>
+<ul class="simple">
+<li><p>The test assumes homoscedasticity (this is the null hypothesis <span class="math notranslate nohighlight">\(H_0\)</span>)</p></li>
+<li><p>This means that the residual variance does not depend on the values of the variables in x.</p></li>
+</ul>
 <p><em>Note that this test may exaggerate the significance of results in small or moderately large samples <span id="id4">[<a class="reference internal" href="reference.html#id2" title="William H Greene. Econometric analysis 4th edition. International edition, New Jersey: Prentice Hall, pages 201–215, 2000.">Greene, 2000</a>]</span>. In this case the F-statistic is preferable.</em></p>
-<p>If one of the test statistics is significant (i.e., p &lt;= 0.05), then you have indication of heteroscedasticity.</p>
+<ul class="simple">
+<li><p>If one of the test statistics is significant (i.e., p &lt;= 0.05), then you have indication of heteroscedasticity.</p></li>
+</ul>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">name</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;Lagrange multiplier statistic&#39;</span><span class="p">,</span> <span class="s1">&#39;p-value&#39;</span><span class="p">,</span> <span class="s1">&#39;f-value&#39;</span><span class="p">,</span> <span class="s1">&#39;f p-value&#39;</span><span class="p">]</span>
@@ -1320,7 +1325,11 @@ Notes:
 </div>
 </div>
 </div>
-<p>In our case, both p-values are above 0.05, which means we can accept the null hypothesis. Therefore, we have an indication of homoscedasticity.</p>
+<ul class="simple">
+<li><p>In our case, both p-values are above 0.05,</p></li>
+<li><p>This means we ____ the null hypothesis.</p></li>
+<li><p>Therefore, we have an indication of _______.</p></li>
+</ul>
 </div>
 <div class="section" id="single-variable-regression-diagnostics">
 <h3>Single Variable Regression Diagnostics<a class="headerlink" href="#single-variable-regression-diagnostics" title="Permalink to this headline">¶</a></h3>
@@ -1373,6 +1382,9 @@ Notes:
 <li><p>the skewness being zero and</p></li>
 <li><p>the kurtosis being 3.</p></li>
 </ol>
+<ul class="simple">
+<li><p>This means normal distribution</p></li>
+</ul>
 <p>Samples from a normal distribution have an:</p>
 <ol class="simple">
 <li><p>expected skewness of 0 and</p></li>
@@ -1398,12 +1410,20 @@ Notes:
 </div>
 </div>
 </div>
-<p>The p-value is above 0.05 and we can accept <span class="math notranslate nohighlight">\(H_0\)</span>. Therefore, the test gives us an indication that the errors are normally distributed.</p>
+<ul class="simple">
+<li><p>The p-value is above 0.05 and we can ____ <span class="math notranslate nohighlight">\(H_0\)</span>.</p></li>
+<li><p>Therefore, the test gives us an indication that the errors are ______ distributed.</p></li>
+</ul>
 </div>
 <div class="section" id="omnibus-normtest">
 <h3>Omnibus normtest<a class="headerlink" href="#omnibus-normtest" title="Permalink to this headline">¶</a></h3>
-<p>Another test for normal distribution of residuals is the Omnibus normtest (also included in the regression summary). The test allows us to check whether or not the model residuals follow an approximately normal distribution.</p>
-<p>Our null hypothesis (<span class="math notranslate nohighlight">\(H_0\)</span>) is that the residuals are from a normal distribution.</p>
+<ul class="simple">
+<li><p>Another test for normal distribution of residuals is the Omnibus normtest (also included in the regression summary).</p></li>
+<li><p>The test allows us to check whether or not the model residuals follow an approximately normal distribution.</p></li>
+</ul>
+<ul class="simple">
+<li><p>Our null hypothesis (<span class="math notranslate nohighlight">\(H_0\)</span>) is that the residuals are from a normal distribution.</p></li>
+</ul>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">name</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;Chi^2&#39;</span><span class="p">,</span> <span class="s1">&#39;Two-tail probability&#39;</span><span class="p">]</span>
@@ -1418,11 +1438,17 @@ Notes:
 </div>
 </div>
 </div>
-<p>The p-value is above 0.05 and we can accept <span class="math notranslate nohighlight">\(H_0\)</span>. Therefore, the test gives us an indication that the errors are from a normal distribution.</p>
+<ul class="simple">
+<li><p>The p-value is above 0.05 and we can _____ <span class="math notranslate nohighlight">\(H_0\)</span>.</p></li>
+<li><p>Therefore, the test gives us an indication that the errors are from a _____ distribution.</p></li>
+</ul>
 </div>
 <div class="section" id="solution">
 <h3>Solution<a class="headerlink" href="#solution" title="Permalink to this headline">¶</a></h3>
-<p>Note that the assumption of normality can be (at least partly) relaxed if the sample size N is large enough; the errors need not follow a normal distribution because of the <a class="reference external" href="https://en.wikipedia.org/wiki/Central_limit_theorem">Central Limit Theorem (CLT)</a>. In other words, the assumption of normality is in most of the cases not crucial with large enough N (usually if N ≥ 50).</p>
+<ul class="simple">
+<li><p>Note that the assumption of normality can be (at least partly) relaxed if the sample size N is large enough; the errors need not follow a normal distribution because of the <a class="reference external" href="https://en.wikipedia.org/wiki/Central_limit_theorem">Central Limit Theorem (CLT)</a>.</p></li>
+<li><p>In other words, the assumption of normality is in most of the cases not crucial with large enough N (usually if N ≥ 50).</p></li>
+</ul>
 </div>
 </div>
 <div class="section" id="correlation-of-error-terms">
@@ -1432,7 +1458,7 @@ Notes:
 <p>Correlation among the error terms can also occur outside of time series data. For instance, consider a study in which individuals’ heights are predicted from their weights. The assumption of uncorrelated errors could be violated if some of the individuals in the study are members of the same family, or eat the same diet, or have been exposed to the same environmental factors <span id="id9">[<a class="reference internal" href="reference.html#id3" title="Andy Field. Discovering statistics using IBM SPSS statistics. sage, 2013.">Field, 2013</a>]</span>.</p>
 <div class="section" id="durbin-watson-test">
 <h3>Durbin-Watson test<a class="headerlink" href="#durbin-watson-test" title="Permalink to this headline">¶</a></h3>
-<p>A test of autocorrelation that is designed to take account of the regression model is the <strong>Durbin-Watson test</strong> (also included in the regression summary). It is used to test the hypothesis that there is no <strong>lag one autocorrelation</strong> in the residuals. This means if there is no lag one autocorrelation, then information about <span class="math notranslate nohighlight">\(ϵ_i\)</span> provides little or no information about $ϵ_{i+1}.</p>
+<p>A test of autocorrelation that is designed to take account of the regression model is the <strong>Durbin-Watson test</strong> (also included in the regression summary). It is used to test the hypothesis that there is no <strong>lag one autocorrelation</strong> in the residuals. This means if there is no lag one autocorrelation, then information about <span class="math notranslate nohighlight">\(ϵ_i\)</span> provides little or no information about <span class="math notranslate nohighlight">\(ϵ_{i+1}\)</span>.</p>
 <blockquote>
 <div><p>A small p-value indicates there is significant autocorrelation remaining in the residuals.</p>
 </div></blockquote>
