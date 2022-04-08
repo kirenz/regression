@@ -507,10 +507,12 @@ const thebe_selector_output = ".output, .cell_output"
 <ul class="simple">
 <li><p>the <a class="reference external" href="https://scikit-learn.org/stable/auto_examples/linear_model/plot_polynomial_interpolation.html#sphx-glr-auto-examples-linear-model-plot-polynomial-interpolation-py">scikit learn documentation</a> about splines provided by Mathieu Blondel, Jake Vanderplas, Christian Lorentzen and Malte Londschien.</p></li>
 <li><p>code from <a class="reference external" href="https://nbviewer.org/github/JWarmenhoven/ISL-python/blob/master/Notebooks/Chapter%207.ipynb">Jordi Warmenhoven</a></p></li>
+<li><p>Regression splines involve dividing the range of a feature X into K distinct regions. Within each region, a polynomial function is fit to the data.</p></li>
+<li><p>These polynomials are constrained so that they join smoothly at the region boundaries, or knots.</p></li>
+<li><p>Provided that the interval is divided into enough regions, this can produce an extremely flexibel fit. <span id="id1">[<a class="reference internal" href="reference.html#id7" title="Gareth James, Daniela Witten, Trevor Hastie, and Robert Tibshirani. An Introduction to Statistical learning. Springer, 2021. URL: https://www.statlearning.com/.">James <em>et al.</em>, 2021</a>]</span></p></li>
+<li><p>To understand the advantages of regression splines, we first start with a linear ridge regression model, build a simple polynomial regression and then proceed to splines.</p></li>
+<li><p>To learn more about the spline regression method, review <a class="reference external" href="https://www.statlearning.com/">“An Introduction to Statistical Learning”</a> from James et al. (2021).</p></li>
 </ul>
-<p>Regression splines involve dividing the range of a feature X into K distinct regions. Within each region, a polynomial function is fit to the data. These polynomials are constrained so that they join smoothly at the region boundaries, or knots. Provided that the interval is divided into enough regions, this can produce an extremely flexibel fit. <span id="id1">[<a class="reference internal" href="reference.html#id7" title="Gareth James, Daniela Witten, Trevor Hastie, and Robert Tibshirani. An Introduction to Statistical learning. Springer, 2021. URL: https://www.statlearning.com/.">James <em>et al.</em>, 2021</a>]</span></p>
-<p>To understand the advantages of regression splines, we first start with a linear ridge regression model, build a simple polynomial regression and then proceed to splines.</p>
-<p>To learn more about the spline regression method, review <a class="reference external" href="https://www.statlearning.com/">“An Introduction to Statistical Learning”</a> from James et al. (2021).</p>
 <div class="section" id="data">
 <h2>Data<a class="headerlink" href="#data" title="Permalink to this headline">¶</a></h2>
 <div class="section" id="import">
@@ -731,7 +733,9 @@ const thebe_selector_output = ".output, .cell_output"
 </div>
 <div class="section" id="create-label-and-feature">
 <h3>Create label and feature<a class="headerlink" href="#create-label-and-feature" title="Permalink to this headline">¶</a></h3>
-<p>We only use the feature age to predict wage:</p>
+<ul class="simple">
+<li><p>We only use the feature age to predict wage:</p></li>
+</ul>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">X</span> <span class="o">=</span> <span class="n">df</span><span class="p">[[</span><span class="s1">&#39;age&#39;</span><span class="p">]]</span>
@@ -743,7 +747,9 @@ const thebe_selector_output = ".output, .cell_output"
 </div>
 <div class="section" id="data-split">
 <h3>Data split<a class="headerlink" href="#data-split" title="Permalink to this headline">¶</a></h3>
-<p>Dividing data into train and test datasets</p>
+<ul class="simple">
+<li><p>Dividing data into train and test datasets</p></li>
+</ul>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">sklearn.model_selection</span> <span class="kn">import</span> <span class="n">train_test_split</span>
@@ -756,7 +762,9 @@ const thebe_selector_output = ".output, .cell_output"
 </div>
 <div class="section" id="data-exploration">
 <h3>Data exploration<a class="headerlink" href="#data-exploration" title="Permalink to this headline">¶</a></h3>
-<p>Visualize the relationship between age and wage:</p>
+<ul class="simple">
+<li><p>Visualize the relationship between age and wage:</p></li>
+</ul>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">seaborn</span> <span class="k">as</span> <span class="nn">sns</span>  
@@ -891,7 +899,9 @@ const thebe_selector_output = ".output, .cell_output"
 </div>
 <div class="section" id="polynomial-regression">
 <h2>Polynomial regression<a class="headerlink" href="#polynomial-regression" title="Permalink to this headline">¶</a></h2>
-<p>Next, we use a pipeline to add non-linear features to a ridge regression model:</p>
+<ul class="simple">
+<li><p>Next, we use a pipeline to add non-linear features to a ridge regression model:</p></li>
+</ul>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">sklearn.preprocessing</span> <span class="kn">import</span> <span class="n">PolynomialFeatures</span>
@@ -973,8 +983,15 @@ const thebe_selector_output = ".output, .cell_output"
 <h2>Splines<a class="headerlink" href="#splines" title="Permalink to this headline">¶</a></h2>
 <div class="section" id="splines-in-scikit-learn">
 <h3>Splines in Scikit learn<a class="headerlink" href="#splines-in-scikit-learn" title="Permalink to this headline">¶</a></h3>
-<p>Spline transformers are a new feature in <a class="reference external" href="https://scikit-learn.org/stable/auto_examples/release_highlights/plot_release_highlights_1_0_0.html">scikit learn 1.0</a>. Therefore, make sure to use the latest version of scikit learn. If you use Aanconda, you can update all packages using <code class="docutils literal notranslate"><span class="pre">conda</span> <span class="pre">update</span> <span class="pre">--all</span></code></p>
-<p>Note that scikit learn places the knots in a uniform (this is the default) or quantile fashion. We only have to specify the desired number of knots, and then have <a class="reference external" href="https://scikit-learn.org/stable/modules/generated/sklearn.preprocessing.SplineTransformer.html">SplineTransformer</a> automatically place the corresponding number of knots.</p>
+<ul class="simple">
+<li></li>
+</ul>
+<p>Spline transformers are a new feature in <a class="reference external" href="https://scikit-learn.org/stable/auto_examples/release_highlights/plot_release_highlights_1_0_0.html">scikit learn 1.0</a>.</p>
+<ul class="simple">
+<li><p>Therefore, make sure to use the latest version of scikit learn. If you use Aanconda, you can update all packages using <code class="docutils literal notranslate"><span class="pre">conda</span> <span class="pre">update</span> <span class="pre">--all</span></code></p></li>
+<li><p>Note that scikit learn places the knots in a uniform (this is the default) or quantile fashion.</p></li>
+<li><p>We only have to specify the desired number of knots, and then have <a class="reference external" href="https://scikit-learn.org/stable/modules/generated/sklearn.preprocessing.SplineTransformer.html">SplineTransformer</a> automatically place the corresponding number of knots.</p></li>
+</ul>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">sklearn.preprocessing</span> <span class="kn">import</span> <span class="n">SplineTransformer</span>
@@ -1057,15 +1074,23 @@ const thebe_selector_output = ".output, .cell_output"
 <img alt="../_images/splines_25_1.png" src="../_images/splines_25_1.png" />
 </div>
 </div>
-<p>In some settings, e.g. in time series data with seasonal effects, we expect a periodic continuation of the underlying signal. Such effects can be modelled using periodic splines, which have equal function value and equal derivatives at the first and last knot. Review this notebook to learn more about periodic splines in scikit learn:</p>
 <ul class="simple">
+<li><p>In some settings, e.g. in time series data with seasonal effects, we expect a periodic continuation of the underlying signal.</p></li>
+<li><p>Such effects can be modelled using periodic splines, which have equal function value and equal derivatives at the first and last knot.</p></li>
+<li><p>Review this notebook to learn more about periodic splines in scikit learn:</p></li>
 <li><p><a class="reference external" href="https://scikit-learn.org/stable/auto_examples/linear_model/plot_polynomial_interpolation.html#periodic-splines">periodic splines</a></p></li>
 </ul>
 </div>
 <div class="section" id="splines-in-patsy">
 <h3>Splines in patsy<a class="headerlink" href="#splines-in-patsy" title="Permalink to this headline">¶</a></h3>
-<p>Next, we use the module <a class="reference external" href="https://patsy.readthedocs.io/en/latest/overview.html">patsy</a> to create non-linear transformations of the input data. Additionaly, we use statsmodels to fit 2 models with different number of knots.</p>
-<p>When we fit a spline, where should we place the knots? The regression spline is most flexible in regions that contain a lot of knots, because in those regions the polynomial coefficients can change rapidly. Hence, one option is to place more knots in places where we feel the function might vary most rapidly, and to place fewer knots where it seems more stable. While this option can work well, in practice it is common to place knots in a uniform fashion. One way to do this is to specify the desired degrees of freedom, and then have the software automatically place the corresponding number of knots at uniform quantiles of the data.</p>
+<ul class="simple">
+<li><p>Next, we use the module <a class="reference external" href="https://patsy.readthedocs.io/en/latest/overview.html">patsy</a> to create non-linear transformations of the input data.</p></li>
+<li><p>Additionaly, we use statsmodels to fit 2 models with different number of knots.</p></li>
+<li><p>When we fit a spline, where should we place the knots?</p></li>
+<li><p>The regression spline is most flexible in regions that contain a lot of knots, because in those regions the polynomial coefficients can change rapidly.</p></li>
+<li><p>Hence, one option is to place more knots in places where we feel the function might vary most rapidly, and to place fewer knots where it seems more stable. While this option can work well, in practice it is common to place knots in a uniform fashion.</p></li>
+<li><p>One way to do this is to specify the desired degrees of freedom, and then have the software automatically place the corresponding number of knots at uniform quantiles of the data.</p></li>
+</ul>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">patsy</span> <span class="kn">import</span> <span class="n">dmatrix</span>
@@ -1182,7 +1207,9 @@ const thebe_selector_output = ".output, .cell_output"
 </div>
 <div class="section" id="natural-spline">
 <h2>Natural spline<a class="headerlink" href="#natural-spline" title="Permalink to this headline">¶</a></h2>
-<p>Finally, we fit a natural spline with patsy and statsmodels.</p>
+<ul class="simple">
+<li><p>Finally, we fit a natural spline with patsy and statsmodels.</p></li>
+</ul>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">transformed_x3</span> <span class="o">=</span> <span class="n">dmatrix</span><span class="p">(</span><span class="s2">&quot;cr(train,df = 3)&quot;</span><span class="p">,</span> <span class="p">{</span><span class="s2">&quot;train&quot;</span><span class="p">:</span> <span class="n">X_train</span><span class="p">},</span> <span class="n">return_type</span><span class="o">=</span><span class="s1">&#39;dataframe&#39;</span><span class="p">)</span>
