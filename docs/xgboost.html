@@ -388,18 +388,12 @@ const thebe_selector_output = ".output, .cell_output"
 </div>
 </div>
 </div>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>Mac: `brew install libomp``
-</pre></div>
-</div>
-</div>
-</div>
+<p>Mac: `brew install libomp``</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># read in data</span>
-<span class="n">dtrain</span> <span class="o">=</span> <span class="n">xgb</span><span class="o">.</span><span class="n">DMatrix</span><span class="p">(</span><span class="s1">&#39;https://raw.githubusercontent.com/dmlc/xgboost/master/demo/data/agaricus.txt.train&#39;</span><span class="p">)</span>
-<span class="c1">#dtest = xgb.DMatrix(&#39;demo/data/agaricus.txt.test&#39;)</span>
+<span class="n">dtrain</span> <span class="o">=</span> <span class="n">xgb</span><span class="o">.</span><span class="n">DMatrix</span><span class="p">(</span><span class="s1">&#39;demo/data/agaricus.txt.train&#39;</span><span class="p">)</span>
+<span class="n">dtest</span> <span class="o">=</span> <span class="n">xgb</span><span class="o">.</span><span class="n">DMatrix</span><span class="p">(</span><span class="s1">&#39;demo/data/agaricus.txt.test&#39;</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
