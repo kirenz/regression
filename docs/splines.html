@@ -539,6 +539,209 @@ have continuous first and second derivatives.</p></li>
 </pre></div>
 </div>
 </div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>Unnamed: 0</th>
+      <th>year</th>
+      <th>age</th>
+      <th>maritl</th>
+      <th>race</th>
+      <th>education</th>
+      <th>region</th>
+      <th>jobclass</th>
+      <th>health</th>
+      <th>health_ins</th>
+      <th>logwage</th>
+      <th>wage</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>231655</td>
+      <td>2006</td>
+      <td>18</td>
+      <td>1. Never Married</td>
+      <td>1. White</td>
+      <td>1. &lt; HS Grad</td>
+      <td>2. Middle Atlantic</td>
+      <td>1. Industrial</td>
+      <td>1. &lt;=Good</td>
+      <td>2. No</td>
+      <td>4.318063</td>
+      <td>75.043154</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>86582</td>
+      <td>2004</td>
+      <td>24</td>
+      <td>1. Never Married</td>
+      <td>1. White</td>
+      <td>4. College Grad</td>
+      <td>2. Middle Atlantic</td>
+      <td>2. Information</td>
+      <td>2. &gt;=Very Good</td>
+      <td>2. No</td>
+      <td>4.255273</td>
+      <td>70.476020</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>161300</td>
+      <td>2003</td>
+      <td>45</td>
+      <td>2. Married</td>
+      <td>1. White</td>
+      <td>3. Some College</td>
+      <td>2. Middle Atlantic</td>
+      <td>1. Industrial</td>
+      <td>1. &lt;=Good</td>
+      <td>1. Yes</td>
+      <td>4.875061</td>
+      <td>130.982177</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>155159</td>
+      <td>2003</td>
+      <td>43</td>
+      <td>2. Married</td>
+      <td>3. Asian</td>
+      <td>4. College Grad</td>
+      <td>2. Middle Atlantic</td>
+      <td>2. Information</td>
+      <td>2. &gt;=Very Good</td>
+      <td>1. Yes</td>
+      <td>5.041393</td>
+      <td>154.685293</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>11443</td>
+      <td>2005</td>
+      <td>50</td>
+      <td>4. Divorced</td>
+      <td>1. White</td>
+      <td>2. HS Grad</td>
+      <td>2. Middle Atlantic</td>
+      <td>2. Information</td>
+      <td>1. &lt;=Good</td>
+      <td>1. Yes</td>
+      <td>4.318063</td>
+      <td>75.043154</td>
+    </tr>
+    <tr>
+      <th>...</th>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+    </tr>
+    <tr>
+      <th>2995</th>
+      <td>376816</td>
+      <td>2008</td>
+      <td>44</td>
+      <td>2. Married</td>
+      <td>1. White</td>
+      <td>3. Some College</td>
+      <td>2. Middle Atlantic</td>
+      <td>1. Industrial</td>
+      <td>2. &gt;=Very Good</td>
+      <td>1. Yes</td>
+      <td>5.041393</td>
+      <td>154.685293</td>
+    </tr>
+    <tr>
+      <th>2996</th>
+      <td>302281</td>
+      <td>2007</td>
+      <td>30</td>
+      <td>2. Married</td>
+      <td>1. White</td>
+      <td>2. HS Grad</td>
+      <td>2. Middle Atlantic</td>
+      <td>1. Industrial</td>
+      <td>2. &gt;=Very Good</td>
+      <td>2. No</td>
+      <td>4.602060</td>
+      <td>99.689464</td>
+    </tr>
+    <tr>
+      <th>2997</th>
+      <td>10033</td>
+      <td>2005</td>
+      <td>27</td>
+      <td>2. Married</td>
+      <td>2. Black</td>
+      <td>1. &lt; HS Grad</td>
+      <td>2. Middle Atlantic</td>
+      <td>1. Industrial</td>
+      <td>1. &lt;=Good</td>
+      <td>2. No</td>
+      <td>4.193125</td>
+      <td>66.229408</td>
+    </tr>
+    <tr>
+      <th>2998</th>
+      <td>14375</td>
+      <td>2005</td>
+      <td>27</td>
+      <td>1. Never Married</td>
+      <td>1. White</td>
+      <td>3. Some College</td>
+      <td>2. Middle Atlantic</td>
+      <td>1. Industrial</td>
+      <td>2. &gt;=Very Good</td>
+      <td>1. Yes</td>
+      <td>4.477121</td>
+      <td>87.981033</td>
+    </tr>
+    <tr>
+      <th>2999</th>
+      <td>453557</td>
+      <td>2009</td>
+      <td>55</td>
+      <td>5. Separated</td>
+      <td>1. White</td>
+      <td>2. HS Grad</td>
+      <td>2. Middle Atlantic</td>
+      <td>1. Industrial</td>
+      <td>1. &lt;=Good</td>
+      <td>1. Yes</td>
+      <td>4.505150</td>
+      <td>90.481913</td>
+    </tr>
+  </tbody>
+</table>
+<p>3000 rows × 12 columns</p>
+</div></div></div>
 </div>
 </div>
 <div class="section" id="create-label-and-feature">
@@ -610,10 +813,8 @@ have continuous first and second derivatives.</p></li>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([      0.000001,       0.00001 ,       0.0001  ,       0.001   ,
-             0.01    ,       0.1     ,       1.      ,      10.      ,
-           100.      ,    1000.      ,   10000.      ,  100000.      ,
-       1000000.      ])
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([1.e-06, 1.e-05, 1.e-04, 1.e-03, 1.e-02, 1.e-01, 1.e+00, 1.e+01,
+       1.e+02, 1.e+03, 1.e+04, 1.e+05, 1.e+06])
 </pre></div>
 </div>
 </div>
@@ -759,6 +960,9 @@ have continuous first and second derivatives.</p></li>
 </pre></div>
 </div>
 </div>
+<div class="cell_output docutils container">
+<img alt="../_images/splines_29_0.png" src="../_images/splines_29_0.png" />
+</div>
 </div>
 </div>
 <div class="section" id="polynomial-regression">
@@ -787,6 +991,16 @@ have continuous first and second derivatives.</p></li>
 </pre></div>
 </div>
 </div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Pipeline(steps=[(&#39;polynomialfeatures&#39;, PolynomialFeatures(degree=3)),
+                (&#39;ridgecv&#39;,
+                 RidgeCV(alphas=array([      0.000001,       0.00001 ,       0.0001  ,       0.001   ,
+             0.01    ,       0.1     ,       1.      ,      10.      ,
+           100.      ,    1000.      ,   10000.      ,  100000.      ,
+       1000000.      ])))])
+</pre></div>
+</div>
+</div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -794,6 +1008,40 @@ have continuous first and second derivatives.</p></li>
 </pre></div>
 </div>
 </div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>model</th>
+      <th>rmse_train</th>
+      <th>rmse_test</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>poly_3</td>
+      <td>39.7717</td>
+      <td>40.2513</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -805,6 +1053,9 @@ have continuous first and second derivatives.</p></li>
             <span class="n">line_kws</span><span class="o">=</span><span class="p">{</span><span class="s2">&quot;color&quot;</span><span class="p">:</span> <span class="s2">&quot;orange&quot;</span><span class="p">});</span>
 </pre></div>
 </div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/splines_33_0.png" src="../_images/splines_33_0.png" />
 </div>
 </div>
 </div>
@@ -830,6 +1081,16 @@ have continuous first and second derivatives.</p></li>
 </pre></div>
 </div>
 </div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Pipeline(steps=[(&#39;splinetransformer&#39;, SplineTransformer(n_knots=4)),
+                (&#39;ridgecv&#39;,
+                 RidgeCV(alphas=array([      0.000001,       0.00001 ,       0.0001  ,       0.001   ,
+             0.01    ,       0.1     ,       1.      ,      10.      ,
+           100.      ,    1000.      ,   10000.      ,  100000.      ,
+       1000000.      ])))])
+</pre></div>
+</div>
+</div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -837,6 +1098,40 @@ have continuous first and second derivatives.</p></li>
 </pre></div>
 </div>
 </div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>model</th>
+      <th>rmse_train</th>
+      <th>rmse_test</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>spline</td>
+      <td>39.7456</td>
+      <td>40.2444</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
 </div>
 <ul class="simple">
 <li><p>Obtain knots to show them in the following plot (there are degree number of additional knots each to the left and to the right of the fitted interval. These are there for technical reasons, so we refrain from showing them)</p></li>
@@ -848,6 +1143,11 @@ have continuous first and second derivatives.</p></li>
 <span class="n">knots</span> <span class="o">=</span> <span class="n">splt</span><span class="o">.</span><span class="n">bsplines_</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">t</span>
 
 <span class="n">knots</span><span class="p">[</span><span class="mi">3</span><span class="p">:</span><span class="o">-</span><span class="mi">3</span><span class="p">]</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([18.        , 38.66666667, 59.33333333, 80.        ])
 </pre></div>
 </div>
 </div>
@@ -870,6 +1170,13 @@ have continuous first and second derivatives.</p></li>
 <span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">();</span>
 </pre></div>
 </div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/Users/jankirenz/opt/anaconda3/lib/python3.9/site-packages/sklearn/base.py:450: UserWarning: X does not have valid feature names, but SplineTransformer was fitted with feature names
+  warnings.warn(
+</pre></div>
+</div>
+<img alt="../_images/splines_39_1.png" src="../_images/splines_39_1.png" />
 </div>
 </div>
 <ul class="simple">
@@ -913,6 +1220,12 @@ have continuous first and second derivatives.</p></li>
 </pre></div>
 </div>
 </div>
+<div class="cell_output docutils container">
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/Users/jankirenz/opt/anaconda3/lib/python3.9/site-packages/statsmodels/compat/pandas.py:61: FutureWarning: pandas.Int64Index is deprecated and will be removed from pandas in a future version. Use pandas.Index with the appropriate dtype instead.
+  from pandas import Int64Index as NumericIndex
+</pre></div>
+</div>
+</div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -944,6 +1257,40 @@ have continuous first and second derivatives.</p></li>
 </pre></div>
 </div>
 </div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>model</th>
+      <th>rmse_train</th>
+      <th>rmse_test</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>Cubic spline (cs)</td>
+      <td>39.726084</td>
+      <td>40.267857</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -962,6 +1309,9 @@ have continuous first and second derivatives.</p></li>
 <span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">();</span>
 </pre></div>
 </div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/splines_48_0.png" src="../_images/splines_48_0.png" />
 </div>
 </div>
 </div>
@@ -1002,6 +1352,40 @@ have continuous first and second derivatives.</p></li>
 </pre></div>
 </div>
 </div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>model</th>
+      <th>rmse_train</th>
+      <th>rmse_test</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>Natural spline (ns)</td>
+      <td>39.882574</td>
+      <td>40.325236</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -1014,6 +1398,9 @@ have continuous first and second derivatives.</p></li>
 <span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">();</span>
 </pre></div>
 </div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/splines_52_0.png" src="../_images/splines_52_0.png" />
 </div>
 </div>
 </div>
