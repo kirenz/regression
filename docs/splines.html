@@ -158,7 +158,7 @@ const thebe_selector_output = ".output, .cell_output"
 <ul class="nav bd-sidenav">
  <li class="toctree-l1">
   <a class="reference internal" href="gradientboosting.html">
-   Gradient Boosting
+   Gradient Boosting in scikit-learn
   </a>
  </li>
 </ul>
@@ -406,11 +406,16 @@ const thebe_selector_output = ".output, .cell_output"
      Splines in patsy
     </a>
    </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#natural-spline">
+     Natural spline
+    </a>
+   </li>
   </ul>
  </li>
  <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#natural-spline">
-   Natural spline
+  <a class="reference internal nav-link" href="#models-summary">
+   Models summary
   </a>
  </li>
 </ul>
@@ -485,11 +490,16 @@ const thebe_selector_output = ".output, .cell_output"
      Splines in patsy
     </a>
    </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#natural-spline">
+     Natural spline
+    </a>
+   </li>
   </ul>
  </li>
  <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#natural-spline">
-   Natural spline
+  <a class="reference internal nav-link" href="#models-summary">
+   Models summary
   </a>
  </li>
 </ul>
@@ -807,23 +817,9 @@ have continuous first and second derivatives.</p></li>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="n">np</span><span class="o">.</span><span class="n">set_printoptions</span><span class="p">(</span><span class="n">suppress</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
 
 <span class="n">alphas</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">logspace</span><span class="p">(</span><span class="o">-</span><span class="mi">6</span><span class="p">,</span> <span class="mi">6</span><span class="p">,</span> <span class="mi">13</span><span class="p">)</span>
-<span class="n">alphas</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([1.e-06, 1.e-05, 1.e-04, 1.e-03, 1.e-02, 1.e-01, 1.e+00, 1.e+01,
-       1.e+02, 1.e+03, 1.e+04, 1.e+05, 1.e+06])
-</pre></div>
-</div>
-</div>
-</div>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">np</span><span class="o">.</span><span class="n">set_printoptions</span><span class="p">(</span><span class="n">suppress</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
-
 <span class="n">alphas</span>
 </pre></div>
 </div>
@@ -845,7 +841,6 @@ have continuous first and second derivatives.</p></li>
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">sklearn</span> <span class="kn">import</span> <span class="n">linear_model</span>
 
 <span class="n">reg</span> <span class="o">=</span> <span class="n">linear_model</span><span class="o">.</span><span class="n">RidgeCV</span><span class="p">(</span><span class="n">alphas</span><span class="o">=</span><span class="n">alphas</span><span class="p">)</span>
-
 <span class="n">reg</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X_train</span><span class="p">,</span><span class="n">y_train</span><span class="p">)</span>
 </pre></div>
 </div>
@@ -859,6 +854,9 @@ have continuous first and second derivatives.</p></li>
 </div>
 </div>
 </div>
+<ul class="simple">
+<li><p>Show best alpha</p></li>
+</ul>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">reg</span><span class="o">.</span><span class="n">alpha_</span>
@@ -895,6 +893,8 @@ have continuous first and second derivatives.</p></li>
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">sklearn.metrics</span> <span class="kn">import</span> <span class="n">mean_squared_error</span>
 
+<span class="n">results</span> <span class="o">=</span> <span class="p">[]</span>
+
 <span class="c1"># create function to obtain model rmse</span>
 <span class="k">def</span> <span class="nf">model_results</span><span class="p">(</span><span class="n">model_name</span><span class="p">):</span>
 
@@ -907,11 +907,9 @@ have continuous first and second derivatives.</p></li>
     <span class="n">rmse_test</span> <span class="o">=</span><span class="nb">round</span><span class="p">(</span><span class="n">mean_squared_error</span><span class="p">(</span><span class="n">y_test</span><span class="p">,</span> <span class="n">pred_test</span><span class="p">,</span> <span class="n">squared</span><span class="o">=</span><span class="kc">False</span><span class="p">),</span><span class="mi">4</span><span class="p">)</span>
 
     <span class="c1"># Save model results</span>
-    <span class="n">results</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span>
-        <span class="p">{</span><span class="s2">&quot;model&quot;</span><span class="p">:</span> <span class="n">model_name</span><span class="p">,</span> 
-        <span class="s2">&quot;rmse_train&quot;</span><span class="p">:</span> <span class="p">[</span><span class="n">rmse_train</span><span class="p">],</span> 
-        <span class="s2">&quot;rmse_test&quot;</span><span class="p">:</span> <span class="p">[</span><span class="n">rmse_test</span><span class="p">]}</span>
-        <span class="p">)</span>    
+    <span class="n">new_results</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;model&quot;</span><span class="p">:</span> <span class="n">model_name</span><span class="p">,</span> <span class="s2">&quot;rmse_train&quot;</span><span class="p">:</span> <span class="n">rmse_train</span><span class="p">,</span> <span class="s2">&quot;rmse_test&quot;</span><span class="p">:</span> <span class="n">rmse_test</span><span class="p">}</span>
+    <span class="n">results</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">new_results</span><span class="p">)</span>  
+      
     <span class="k">return</span> <span class="n">results</span><span class="p">;</span>
 </pre></div>
 </div>
@@ -919,44 +917,15 @@ have continuous first and second derivatives.</p></li>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">model_results</span><span class="p">(</span><span class="n">model_name</span><span class="o">=</span><span class="s2">&quot;ridge&quot;</span><span class="p">)</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">model_results</span><span class="p">(</span><span class="n">model_name</span><span class="o">=</span><span class="s2">&quot;Ridge&quot;</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_html"><div>
-<style scoped>
-    .dataframe tbody tr th:only-of-type {
-        vertical-align: middle;
-    }
-
-    .dataframe tbody tr th {
-        vertical-align: top;
-    }
-
-    .dataframe thead th {
-        text-align: right;
-    }
-</style>
-<table border="1" class="dataframe">
-  <thead>
-    <tr style="text-align: right;">
-      <th></th>
-      <th>model</th>
-      <th>rmse_train</th>
-      <th>rmse_test</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <th>0</th>
-      <td>ridge</td>
-      <td>40.7053</td>
-      <td>41.4135</td>
-    </tr>
-  </tbody>
-</table>
-</div></div></div>
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[{&#39;model&#39;: &#39;Ridge&#39;, &#39;rmse_train&#39;: 40.7053, &#39;rmse_test&#39;: 41.4135}]
+</pre></div>
+</div>
+</div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -1011,44 +980,16 @@ have continuous first and second derivatives.</p></li>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">model_results</span><span class="p">(</span><span class="n">model_name</span><span class="o">=</span><span class="s2">&quot;poly_3&quot;</span><span class="p">)</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">model_results</span><span class="p">(</span><span class="n">model_name</span><span class="o">=</span><span class="s2">&quot;Polynomial degree 3&quot;</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_html"><div>
-<style scoped>
-    .dataframe tbody tr th:only-of-type {
-        vertical-align: middle;
-    }
-
-    .dataframe tbody tr th {
-        vertical-align: top;
-    }
-
-    .dataframe thead th {
-        text-align: right;
-    }
-</style>
-<table border="1" class="dataframe">
-  <thead>
-    <tr style="text-align: right;">
-      <th></th>
-      <th>model</th>
-      <th>rmse_train</th>
-      <th>rmse_test</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <th>0</th>
-      <td>poly_3</td>
-      <td>39.7717</td>
-      <td>40.2513</td>
-    </tr>
-  </tbody>
-</table>
-</div></div></div>
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[{&#39;model&#39;: &#39;Ridge&#39;, &#39;rmse_train&#39;: 40.7053, &#39;rmse_test&#39;: 41.4135},
+ {&#39;model&#39;: &#39;Polynomial degree 3&#39;, &#39;rmse_train&#39;: 39.7717, &#39;rmse_test&#39;: 40.2513}]
+</pre></div>
+</div>
+</div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -1101,44 +1042,19 @@ have continuous first and second derivatives.</p></li>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">model_results</span><span class="p">(</span><span class="n">model_name</span> <span class="o">=</span> <span class="s2">&quot;spline&quot;</span><span class="p">)</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">model_results</span><span class="p">(</span><span class="n">model_name</span> <span class="o">=</span> <span class="s2">&quot;Cubic Spline degree 3&quot;</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_html"><div>
-<style scoped>
-    .dataframe tbody tr th:only-of-type {
-        vertical-align: middle;
-    }
-
-    .dataframe tbody tr th {
-        vertical-align: top;
-    }
-
-    .dataframe thead th {
-        text-align: right;
-    }
-</style>
-<table border="1" class="dataframe">
-  <thead>
-    <tr style="text-align: right;">
-      <th></th>
-      <th>model</th>
-      <th>rmse_train</th>
-      <th>rmse_test</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <th>0</th>
-      <td>spline</td>
-      <td>39.7456</td>
-      <td>40.2444</td>
-    </tr>
-  </tbody>
-</table>
-</div></div></div>
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[{&#39;model&#39;: &#39;Ridge&#39;, &#39;rmse_train&#39;: 40.7053, &#39;rmse_test&#39;: 41.4135},
+ {&#39;model&#39;: &#39;Polynomial degree 3&#39;, &#39;rmse_train&#39;: 39.7717, &#39;rmse_test&#39;: 40.2513},
+ {&#39;model&#39;: &#39;Cubic Spline degree 3&#39;,
+  &#39;rmse_train&#39;: 39.7456,
+  &#39;rmse_test&#39;: 40.2444}]
+</pre></div>
+</div>
+</div>
 </div>
 <ul class="simple">
 <li><p>Obtain knots to show them in the following plot (there are degree number of additional knots each to the left and to the right of the fitted interval. These are there for technical reasons, so we refrain from showing them)</p></li>
@@ -1227,12 +1143,6 @@ have continuous first and second derivatives.</p></li>
 </pre></div>
 </div>
 </div>
-<div class="cell_output docutils container">
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/Users/jankirenz/opt/anaconda3/lib/python3.9/site-packages/statsmodels/compat/pandas.py:61: FutureWarning: pandas.Int64Index is deprecated and will be removed from pandas in a future version. Use pandas.Index with the appropriate dtype instead.
-  from pandas import Int64Index as NumericIndex
-</pre></div>
-</div>
-</div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -1246,58 +1156,32 @@ have continuous first and second derivatives.</p></li>
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Training data</span>
 <span class="n">pred_train</span> <span class="o">=</span> <span class="n">reg</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">dmatrix</span><span class="p">(</span><span class="s2">&quot;bs(train, knots=(25,40,60), include_intercept=False)&quot;</span><span class="p">,</span> <span class="p">{</span><span class="s2">&quot;train&quot;</span><span class="p">:</span> <span class="n">X_train</span><span class="p">},</span> <span class="n">return_type</span><span class="o">=</span><span class="s1">&#39;dataframe&#39;</span><span class="p">))</span>
-<span class="n">rmse_train</span> <span class="o">=</span> <span class="n">mean_squared_error</span><span class="p">(</span><span class="n">y_train</span><span class="p">,</span> <span class="n">pred_train</span><span class="p">,</span> <span class="n">squared</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+<span class="n">rmse_train</span> <span class="o">=</span> <span class="nb">round</span><span class="p">(</span><span class="n">mean_squared_error</span><span class="p">(</span><span class="n">y_train</span><span class="p">,</span> <span class="n">pred_train</span><span class="p">,</span> <span class="n">squared</span><span class="o">=</span><span class="kc">False</span><span class="p">),</span><span class="mi">4</span><span class="p">)</span>
 
 <span class="c1"># Test data</span>
 <span class="n">pred_test</span> <span class="o">=</span> <span class="n">reg</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">dmatrix</span><span class="p">(</span><span class="s2">&quot;bs(test, knots=(25,40,60), include_intercept=False)&quot;</span><span class="p">,</span> <span class="p">{</span><span class="s2">&quot;test&quot;</span><span class="p">:</span> <span class="n">X_test</span><span class="p">},</span> <span class="n">return_type</span><span class="o">=</span><span class="s1">&#39;dataframe&#39;</span><span class="p">))</span>
-<span class="n">rmse_test</span> <span class="o">=</span><span class="n">mean_squared_error</span><span class="p">(</span><span class="n">y_test</span><span class="p">,</span> <span class="n">pred_test</span><span class="p">,</span> <span class="n">squared</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+<span class="n">rmse_test</span> <span class="o">=</span><span class="nb">round</span><span class="p">(</span><span class="n">mean_squared_error</span><span class="p">(</span><span class="n">y_test</span><span class="p">,</span> <span class="n">pred_test</span><span class="p">,</span> <span class="n">squared</span><span class="o">=</span><span class="kc">False</span><span class="p">),</span><span class="mi">4</span><span class="p">)</span>
 
 <span class="c1"># Save model results</span>
-<span class="n">model_results</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span>
-    <span class="p">{</span>
-    <span class="s2">&quot;model&quot;</span><span class="p">:</span> <span class="s2">&quot;Cubic spline (cs)&quot;</span><span class="p">,</span>  
-    <span class="s2">&quot;rmse_train&quot;</span><span class="p">:</span> <span class="p">[</span><span class="n">rmse_train</span><span class="p">],</span> 
-    <span class="s2">&quot;rmse_test&quot;</span><span class="p">:</span> <span class="p">[</span><span class="n">rmse_test</span><span class="p">]</span>
-    <span class="p">})</span>
+<span class="n">new_results</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;model&quot;</span><span class="p">:</span> <span class="s2">&quot;Cubic spline (patsy)&quot;</span><span class="p">,</span> <span class="s2">&quot;rmse_train&quot;</span><span class="p">:</span> <span class="n">rmse_train</span><span class="p">,</span> <span class="s2">&quot;rmse_test&quot;</span><span class="p">:</span> <span class="n">rmse_test</span><span class="p">}</span>
+<span class="n">results</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">new_results</span><span class="p">)</span>  
 
-<span class="n">model_results</span>
+<span class="n">results</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_html"><div>
-<style scoped>
-    .dataframe tbody tr th:only-of-type {
-        vertical-align: middle;
-    }
-
-    .dataframe tbody tr th {
-        vertical-align: top;
-    }
-
-    .dataframe thead th {
-        text-align: right;
-    }
-</style>
-<table border="1" class="dataframe">
-  <thead>
-    <tr style="text-align: right;">
-      <th></th>
-      <th>model</th>
-      <th>rmse_train</th>
-      <th>rmse_test</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <th>0</th>
-      <td>Cubic spline (cs)</td>
-      <td>39.726084</td>
-      <td>40.267857</td>
-    </tr>
-  </tbody>
-</table>
-</div></div></div>
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[{&#39;model&#39;: &#39;Ridge&#39;, &#39;rmse_train&#39;: 40.7053, &#39;rmse_test&#39;: 41.4135},
+ {&#39;model&#39;: &#39;Polynomial degree 3&#39;, &#39;rmse_train&#39;: 39.7717, &#39;rmse_test&#39;: 40.2513},
+ {&#39;model&#39;: &#39;Cubic Spline degree 3&#39;,
+  &#39;rmse_train&#39;: 39.7456,
+  &#39;rmse_test&#39;: 40.2444},
+ {&#39;model&#39;: &#39;Cubic spline (patsy)&#39;,
+  &#39;rmse_train&#39;: 39.7261,
+  &#39;rmse_test&#39;: 40.2679}]
+</pre></div>
+</div>
+</div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -1322,9 +1206,8 @@ have continuous first and second derivatives.</p></li>
 </div>
 </div>
 </div>
-</div>
 <div class="section" id="natural-spline">
-<h2>Natural spline<a class="headerlink" href="#natural-spline" title="Permalink to this headline">¶</a></h2>
+<h3>Natural spline<a class="headerlink" href="#natural-spline" title="Permalink to this headline">¶</a></h3>
 <ul class="simple">
 <li><p>Finally, we fit a natural spline with patsy and statsmodels.</p></li>
 </ul>
@@ -1341,21 +1224,60 @@ have continuous first and second derivatives.</p></li>
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Training data</span>
 <span class="n">pred_train</span> <span class="o">=</span> <span class="n">reg</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">dmatrix</span><span class="p">(</span><span class="s2">&quot;cr(train, df=3)&quot;</span><span class="p">,</span> <span class="p">{</span><span class="s2">&quot;train&quot;</span><span class="p">:</span> <span class="n">X_train</span><span class="p">},</span> <span class="n">return_type</span><span class="o">=</span><span class="s1">&#39;dataframe&#39;</span><span class="p">))</span>
-<span class="n">rmse_train</span> <span class="o">=</span> <span class="n">mean_squared_error</span><span class="p">(</span><span class="n">y_train</span><span class="p">,</span> <span class="n">pred_train</span><span class="p">,</span> <span class="n">squared</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+<span class="n">rmse_train</span> <span class="o">=</span> <span class="nb">round</span><span class="p">(</span><span class="n">mean_squared_error</span><span class="p">(</span><span class="n">y_train</span><span class="p">,</span> <span class="n">pred_train</span><span class="p">,</span> <span class="n">squared</span><span class="o">=</span><span class="kc">False</span><span class="p">),</span><span class="mi">4</span><span class="p">)</span>
 
 <span class="c1"># Test data</span>
 <span class="n">pred_test</span> <span class="o">=</span> <span class="n">reg</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">dmatrix</span><span class="p">(</span><span class="s2">&quot;cr(test, df=3)&quot;</span><span class="p">,</span> <span class="p">{</span><span class="s2">&quot;test&quot;</span><span class="p">:</span> <span class="n">X_test</span><span class="p">},</span> <span class="n">return_type</span><span class="o">=</span><span class="s1">&#39;dataframe&#39;</span><span class="p">))</span>
-<span class="n">rmse_test</span> <span class="o">=</span> <span class="n">mean_squared_error</span><span class="p">(</span><span class="n">y_test</span><span class="p">,</span> <span class="n">pred_test</span><span class="p">,</span> <span class="n">squared</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+<span class="n">rmse_test</span> <span class="o">=</span> <span class="nb">round</span><span class="p">(</span><span class="n">mean_squared_error</span><span class="p">(</span><span class="n">y_test</span><span class="p">,</span> <span class="n">pred_test</span><span class="p">,</span> <span class="n">squared</span><span class="o">=</span><span class="kc">False</span><span class="p">),</span><span class="mi">4</span><span class="p">)</span>
 
 <span class="c1"># Save model results</span>
-<span class="n">model_results_ns</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span>
-    <span class="p">{</span>
-    <span class="s2">&quot;model&quot;</span><span class="p">:</span> <span class="s2">&quot;Natural spline (ns)&quot;</span><span class="p">,</span>  
-    <span class="s2">&quot;rmse_train&quot;</span><span class="p">:</span> <span class="p">[</span><span class="n">rmse_train</span><span class="p">],</span> 
-    <span class="s2">&quot;rmse_test&quot;</span><span class="p">:</span> <span class="p">[</span><span class="n">rmse_test</span><span class="p">]</span>
-    <span class="p">})</span>
+<span class="n">new_results</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;model&quot;</span><span class="p">:</span> <span class="s2">&quot;Natural spline (patsy)&quot;</span><span class="p">,</span> <span class="s2">&quot;rmse_train&quot;</span><span class="p">:</span> <span class="n">rmse_train</span><span class="p">,</span> <span class="s2">&quot;rmse_test&quot;</span><span class="p">:</span> <span class="n">rmse_test</span><span class="p">}</span>
+<span class="n">results</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">new_results</span><span class="p">)</span>  
 
-<span class="n">model_results_ns</span>
+<span class="n">results</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[{&#39;model&#39;: &#39;Ridge&#39;, &#39;rmse_train&#39;: 40.7053, &#39;rmse_test&#39;: 41.4135},
+ {&#39;model&#39;: &#39;Polynomial degree 3&#39;, &#39;rmse_train&#39;: 39.7717, &#39;rmse_test&#39;: 40.2513},
+ {&#39;model&#39;: &#39;Cubic Spline degree 3&#39;,
+  &#39;rmse_train&#39;: 39.7456,
+  &#39;rmse_test&#39;: 40.2444},
+ {&#39;model&#39;: &#39;Cubic spline (patsy)&#39;,
+  &#39;rmse_train&#39;: 39.7261,
+  &#39;rmse_test&#39;: 40.2679},
+ {&#39;model&#39;: &#39;Natural spline (patsy)&#39;,
+  &#39;rmse_train&#39;: 39.8826,
+  &#39;rmse_test&#39;: 40.3252}]
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Make predictions</span>
+<span class="n">pred</span> <span class="o">=</span> <span class="n">reg</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">dmatrix</span><span class="p">(</span><span class="s2">&quot;cr(xp, df=3)&quot;</span><span class="p">,</span> <span class="p">{</span><span class="s2">&quot;xp&quot;</span><span class="p">:</span> <span class="n">xp</span><span class="p">},</span> <span class="n">return_type</span><span class="o">=</span><span class="s1">&#39;dataframe&#39;</span><span class="p">))</span>
+
+<span class="c1"># plot</span>
+<span class="n">sns</span><span class="o">.</span><span class="n">scatterplot</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="n">X_train</span><span class="p">[</span><span class="s1">&#39;age&#39;</span><span class="p">],</span> <span class="n">y</span><span class="o">=</span><span class="n">y_train</span><span class="p">[</span><span class="s1">&#39;wage&#39;</span><span class="p">])</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">xp</span><span class="p">,</span> <span class="n">pred</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;orange&#39;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;Natural spline with df=3&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">();</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/splines_54_0.png" src="../_images/splines_54_0.png" />
+</div>
+</div>
+</div>
+</div>
+<div class="section" id="models-summary">
+<h2>Models summary<a class="headerlink" href="#models-summary" title="Permalink to this headline">¶</a></h2>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">df_results</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">results</span><span class="p">)</span> 
+<span class="n">df_results</span>
 </pre></div>
 </div>
 </div>
@@ -1386,29 +1308,37 @@ have continuous first and second derivatives.</p></li>
   <tbody>
     <tr>
       <th>0</th>
-      <td>Natural spline (ns)</td>
-      <td>39.882574</td>
-      <td>40.325236</td>
+      <td>Ridge</td>
+      <td>40.7053</td>
+      <td>41.4135</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>Polynomial degree 3</td>
+      <td>39.7717</td>
+      <td>40.2513</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>Cubic Spline degree 3</td>
+      <td>39.7456</td>
+      <td>40.2444</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>Cubic spline (patsy)</td>
+      <td>39.7261</td>
+      <td>40.2679</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>Natural spline (patsy)</td>
+      <td>39.8826</td>
+      <td>40.3252</td>
     </tr>
   </tbody>
 </table>
 </div></div></div>
-</div>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Make predictions</span>
-<span class="n">pred</span> <span class="o">=</span> <span class="n">reg</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">dmatrix</span><span class="p">(</span><span class="s2">&quot;cr(xp, df=3)&quot;</span><span class="p">,</span> <span class="p">{</span><span class="s2">&quot;xp&quot;</span><span class="p">:</span> <span class="n">xp</span><span class="p">},</span> <span class="n">return_type</span><span class="o">=</span><span class="s1">&#39;dataframe&#39;</span><span class="p">))</span>
-
-<span class="c1"># plot</span>
-<span class="n">sns</span><span class="o">.</span><span class="n">scatterplot</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="n">X_train</span><span class="p">[</span><span class="s1">&#39;age&#39;</span><span class="p">],</span> <span class="n">y</span><span class="o">=</span><span class="n">y_train</span><span class="p">[</span><span class="s1">&#39;wage&#39;</span><span class="p">])</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">xp</span><span class="p">,</span> <span class="n">pred</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;orange&#39;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;Natural spline with df=3&#39;</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">();</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<img alt="../_images/splines_54_0.png" src="../_images/splines_54_0.png" />
-</div>
 </div>
 </div>
 </div>
