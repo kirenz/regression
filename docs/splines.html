@@ -503,15 +503,28 @@ const thebe_selector_output = ".output, .cell_output"
                 
   <div class="tex2jax_ignore mathjax_ignore section" id="regression-splines">
 <h1>Regression splines<a class="headerlink" href="#regression-splines" title="Permalink to this headline">¶</a></h1>
-<p>The following code tutorial is mainly based on:</p>
+<p><em>The following code tutorial is mainly based on the <a class="reference external" href="https://scikit-learn.org/stable/auto_examples/linear_model/plot_polynomial_interpolation.html#sphx-glr-auto-examples-linear-model-plot-polynomial-interpolation-py">scikit learn documentation</a> about splines provided by Mathieu Blondel, Jake Vanderplas, Christian Lorentzen and Malte Londschien and code from <a class="reference external" href="https://nbviewer.org/github/JWarmenhoven/ISL-python/blob/master/Notebooks/Chapter%207.ipynb">Jordi Warmenhoven</a></em>. To learn more about the spline regression method, review <a class="reference external" href="https://www.statlearning.com/">“An Introduction to Statistical Learning”</a> from James et al. (2021).</p>
 <ul class="simple">
-<li><p>the <a class="reference external" href="https://scikit-learn.org/stable/auto_examples/linear_model/plot_polynomial_interpolation.html#sphx-glr-auto-examples-linear-model-plot-polynomial-interpolation-py">scikit learn documentation</a> about splines provided by Mathieu Blondel, Jake Vanderplas, Christian Lorentzen and Malte Londschien.</p></li>
-<li><p>code from <a class="reference external" href="https://nbviewer.org/github/JWarmenhoven/ISL-python/blob/master/Notebooks/Chapter%207.ipynb">Jordi Warmenhoven</a></p></li>
-<li><p>Regression splines involve dividing the range of a feature X into K distinct regions. Within each region, a polynomial function is fit to the data.</p></li>
-<li><p>These polynomials are constrained so that they join smoothly at the region boundaries, or knots.</p></li>
-<li><p>Provided that the interval is divided into enough regions, this can produce an extremely flexibel fit. <span id="id1">[<a class="reference internal" href="reference.html#id7" title="Gareth James, Daniela Witten, Trevor Hastie, and Robert Tibshirani. An Introduction to Statistical learning. Springer, 2021. URL: https://www.statlearning.com/.">James <em>et al.</em>, 2021</a>]</span></p></li>
+<li><p>Regression splines involve dividing the range of a feature X into K distinct regions (by using so called knots). Within each region, a polynomial function is fit to the data.</p></li>
+<li><p>In the following example, various piecewise polynomials are fit to the data, with one knot at age=50(<span id="id1">[<a class="reference internal" href="reference.html#id7" title="Gareth James, Daniela Witten, Trevor Hastie, and Robert Tibshirani. An Introduction to Statistical learning. Springer, 2021. URL: https://www.statlearning.com/.">James <em>et al.</em>, 2021</a>]</span>):</p></li>
+</ul>
+<p><img alt="" src="../_images/splines.png" /></p>
+<p>Figures:</p>
+<ul class="simple">
+<li><p>Top Left: The cubic polynomials are unconstrained.</p></li>
+<li><p>Top Right: The cubic polynomials are constrained to be continuous at age=50.</p></li>
+<li><p>Bottom Left: The cubic polynomials are constrained to be continuous, and to
+have continuous first and second derivatives.</p></li>
+<li><p>Bottom Right: A linear spline is shown, which is constrained to be continuous.</p></li>
+</ul>
+<ul class="simple">
+<li><p>The polynomials are ususally constrained so that they join smoothly at the region boundaries, or knots.</p></li>
+<li><p>Provided that the interval is divided into enough regions, this can produce an extremely flexibel fit <span id="id2">[<a class="reference internal" href="reference.html#id7" title="Gareth James, Daniela Witten, Trevor Hastie, and Robert Tibshirani. An Introduction to Statistical learning. Springer, 2021. URL: https://www.statlearning.com/.">James <em>et al.</em>, 2021</a>]</span>:</p></li>
+</ul>
+<p><img alt="" src="../_images/splines-2.png" /></p>
+<p>Figure: A cubic spline and a natural cubic spline, with three knots. The dashed lines denote the knot locations.</p>
+<ul class="simple">
 <li><p>To understand the advantages of regression splines, we first start with a linear ridge regression model, build a simple polynomial regression and then proceed to splines.</p></li>
-<li><p>To learn more about the spline regression method, review <a class="reference external" href="https://www.statlearning.com/">“An Introduction to Statistical Learning”</a> from James et al. (2021).</p></li>
 </ul>
 <div class="section" id="data">
 <h2>Data<a class="headerlink" href="#data" title="Permalink to this headline">¶</a></h2>
@@ -526,209 +539,6 @@ const thebe_selector_output = ".output, .cell_output"
 </pre></div>
 </div>
 </div>
-<div class="cell_output docutils container">
-<div class="output text_html"><div>
-<style scoped>
-    .dataframe tbody tr th:only-of-type {
-        vertical-align: middle;
-    }
-
-    .dataframe tbody tr th {
-        vertical-align: top;
-    }
-
-    .dataframe thead th {
-        text-align: right;
-    }
-</style>
-<table border="1" class="dataframe">
-  <thead>
-    <tr style="text-align: right;">
-      <th></th>
-      <th>Unnamed: 0</th>
-      <th>year</th>
-      <th>age</th>
-      <th>maritl</th>
-      <th>race</th>
-      <th>education</th>
-      <th>region</th>
-      <th>jobclass</th>
-      <th>health</th>
-      <th>health_ins</th>
-      <th>logwage</th>
-      <th>wage</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <th>0</th>
-      <td>231655</td>
-      <td>2006</td>
-      <td>18</td>
-      <td>1. Never Married</td>
-      <td>1. White</td>
-      <td>1. &lt; HS Grad</td>
-      <td>2. Middle Atlantic</td>
-      <td>1. Industrial</td>
-      <td>1. &lt;=Good</td>
-      <td>2. No</td>
-      <td>4.318063</td>
-      <td>75.043154</td>
-    </tr>
-    <tr>
-      <th>1</th>
-      <td>86582</td>
-      <td>2004</td>
-      <td>24</td>
-      <td>1. Never Married</td>
-      <td>1. White</td>
-      <td>4. College Grad</td>
-      <td>2. Middle Atlantic</td>
-      <td>2. Information</td>
-      <td>2. &gt;=Very Good</td>
-      <td>2. No</td>
-      <td>4.255273</td>
-      <td>70.476020</td>
-    </tr>
-    <tr>
-      <th>2</th>
-      <td>161300</td>
-      <td>2003</td>
-      <td>45</td>
-      <td>2. Married</td>
-      <td>1. White</td>
-      <td>3. Some College</td>
-      <td>2. Middle Atlantic</td>
-      <td>1. Industrial</td>
-      <td>1. &lt;=Good</td>
-      <td>1. Yes</td>
-      <td>4.875061</td>
-      <td>130.982177</td>
-    </tr>
-    <tr>
-      <th>3</th>
-      <td>155159</td>
-      <td>2003</td>
-      <td>43</td>
-      <td>2. Married</td>
-      <td>3. Asian</td>
-      <td>4. College Grad</td>
-      <td>2. Middle Atlantic</td>
-      <td>2. Information</td>
-      <td>2. &gt;=Very Good</td>
-      <td>1. Yes</td>
-      <td>5.041393</td>
-      <td>154.685293</td>
-    </tr>
-    <tr>
-      <th>4</th>
-      <td>11443</td>
-      <td>2005</td>
-      <td>50</td>
-      <td>4. Divorced</td>
-      <td>1. White</td>
-      <td>2. HS Grad</td>
-      <td>2. Middle Atlantic</td>
-      <td>2. Information</td>
-      <td>1. &lt;=Good</td>
-      <td>1. Yes</td>
-      <td>4.318063</td>
-      <td>75.043154</td>
-    </tr>
-    <tr>
-      <th>...</th>
-      <td>...</td>
-      <td>...</td>
-      <td>...</td>
-      <td>...</td>
-      <td>...</td>
-      <td>...</td>
-      <td>...</td>
-      <td>...</td>
-      <td>...</td>
-      <td>...</td>
-      <td>...</td>
-      <td>...</td>
-    </tr>
-    <tr>
-      <th>2995</th>
-      <td>376816</td>
-      <td>2008</td>
-      <td>44</td>
-      <td>2. Married</td>
-      <td>1. White</td>
-      <td>3. Some College</td>
-      <td>2. Middle Atlantic</td>
-      <td>1. Industrial</td>
-      <td>2. &gt;=Very Good</td>
-      <td>1. Yes</td>
-      <td>5.041393</td>
-      <td>154.685293</td>
-    </tr>
-    <tr>
-      <th>2996</th>
-      <td>302281</td>
-      <td>2007</td>
-      <td>30</td>
-      <td>2. Married</td>
-      <td>1. White</td>
-      <td>2. HS Grad</td>
-      <td>2. Middle Atlantic</td>
-      <td>1. Industrial</td>
-      <td>2. &gt;=Very Good</td>
-      <td>2. No</td>
-      <td>4.602060</td>
-      <td>99.689464</td>
-    </tr>
-    <tr>
-      <th>2997</th>
-      <td>10033</td>
-      <td>2005</td>
-      <td>27</td>
-      <td>2. Married</td>
-      <td>2. Black</td>
-      <td>1. &lt; HS Grad</td>
-      <td>2. Middle Atlantic</td>
-      <td>1. Industrial</td>
-      <td>1. &lt;=Good</td>
-      <td>2. No</td>
-      <td>4.193125</td>
-      <td>66.229408</td>
-    </tr>
-    <tr>
-      <th>2998</th>
-      <td>14375</td>
-      <td>2005</td>
-      <td>27</td>
-      <td>1. Never Married</td>
-      <td>1. White</td>
-      <td>3. Some College</td>
-      <td>2. Middle Atlantic</td>
-      <td>1. Industrial</td>
-      <td>2. &gt;=Very Good</td>
-      <td>1. Yes</td>
-      <td>4.477121</td>
-      <td>87.981033</td>
-    </tr>
-    <tr>
-      <th>2999</th>
-      <td>453557</td>
-      <td>2009</td>
-      <td>55</td>
-      <td>5. Separated</td>
-      <td>1. White</td>
-      <td>2. HS Grad</td>
-      <td>2. Middle Atlantic</td>
-      <td>1. Industrial</td>
-      <td>1. &lt;=Good</td>
-      <td>1. Yes</td>
-      <td>4.505150</td>
-      <td>90.481913</td>
-    </tr>
-  </tbody>
-</table>
-<p>3000 rows × 12 columns</p>
-</div></div></div>
 </div>
 </div>
 <div class="section" id="create-label-and-feature">
@@ -779,28 +589,86 @@ const thebe_selector_output = ".output, .cell_output"
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/splines_11_0.png" src="../_images/splines_11_0.png" />
+<img alt="../_images/splines_18_0.png" src="../_images/splines_18_0.png" />
 </div>
 </div>
 </div>
 </div>
 <div class="section" id="ridge-regression">
 <h2>Ridge regression<a class="headerlink" href="#ridge-regression" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li><p>First, we obtain the optimal alpha parameter with cross validation</p></li>
+<li><p>We try different values for alpha:</p></li>
+</ul>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">sklearn.linear_model</span> <span class="kn">import</span> <span class="n">Ridge</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
 
-<span class="n">reg</span> <span class="o">=</span> <span class="n">Ridge</span><span class="p">()</span>
+<span class="n">alphas</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">logspace</span><span class="p">(</span><span class="o">-</span><span class="mi">6</span><span class="p">,</span> <span class="mi">6</span><span class="p">,</span> <span class="mi">13</span><span class="p">)</span>
+<span class="n">alphas</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([      0.000001,       0.00001 ,       0.0001  ,       0.001   ,
+             0.01    ,       0.1     ,       1.      ,      10.      ,
+           100.      ,    1000.      ,   10000.      ,  100000.      ,
+       1000000.      ])
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">np</span><span class="o">.</span><span class="n">set_printoptions</span><span class="p">(</span><span class="n">suppress</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+
+<span class="n">alphas</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([      0.000001,       0.00001 ,       0.0001  ,       0.001   ,
+             0.01    ,       0.1     ,       1.      ,      10.      ,
+           100.      ,    1000.      ,   10000.      ,  100000.      ,
+       1000000.      ])
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">sklearn</span> <span class="kn">import</span> <span class="n">linear_model</span>
+
+<span class="n">reg</span> <span class="o">=</span> <span class="n">linear_model</span><span class="o">.</span><span class="n">RidgeCV</span><span class="p">(</span><span class="n">alphas</span><span class="o">=</span><span class="n">alphas</span><span class="p">)</span>
+
 <span class="n">reg</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X_train</span><span class="p">,</span><span class="n">y_train</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Ridge()
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>RidgeCV(alphas=array([      0.000001,       0.00001 ,       0.0001  ,       0.001   ,
+             0.01    ,       0.1     ,       1.      ,      10.      ,
+           100.      ,    1000.      ,   10000.      ,  100000.      ,
+       1000000.      ]))
 </pre></div>
 </div>
 </div>
 </div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">reg</span><span class="o">.</span><span class="n">alpha_</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>1000.0
+</pre></div>
+</div>
+</div>
+</div>
+<ul class="simple">
+<li><p>Fit model with best alpha</p></li>
+</ul>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="n">reg</span><span class="o">.</span><span class="n">coef_</span><span class="p">)</span>
@@ -809,8 +677,8 @@ const thebe_selector_output = ".output, .cell_output"
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[[0.72106116]]
-[80.58935431]
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[[0.71854335]]
+[80.69608773]
 </pre></div>
 </div>
 </div>
@@ -819,7 +687,7 @@ const thebe_selector_output = ".output, .cell_output"
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">sklearn.metrics</span> <span class="kn">import</span> <span class="n">mean_squared_error</span>
 
-<span class="c1"># create function to obtain model mse</span>
+<span class="c1"># create function to obtain model rmse</span>
 <span class="k">def</span> <span class="nf">model_results</span><span class="p">(</span><span class="n">model_name</span><span class="p">):</span>
 
     <span class="c1"># Training data</span>
@@ -830,14 +698,13 @@ const thebe_selector_output = ".output, .cell_output"
     <span class="n">pred_test</span> <span class="o">=</span> <span class="n">reg</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">X_test</span><span class="p">)</span>
     <span class="n">rmse_test</span> <span class="o">=</span><span class="nb">round</span><span class="p">(</span><span class="n">mean_squared_error</span><span class="p">(</span><span class="n">y_test</span><span class="p">,</span> <span class="n">pred_test</span><span class="p">,</span> <span class="n">squared</span><span class="o">=</span><span class="kc">False</span><span class="p">),</span><span class="mi">4</span><span class="p">)</span>
 
-    <span class="c1"># Print model results</span>
-    <span class="n">result</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span>
+    <span class="c1"># Save model results</span>
+    <span class="n">results</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span>
         <span class="p">{</span><span class="s2">&quot;model&quot;</span><span class="p">:</span> <span class="n">model_name</span><span class="p">,</span> 
         <span class="s2">&quot;rmse_train&quot;</span><span class="p">:</span> <span class="p">[</span><span class="n">rmse_train</span><span class="p">],</span> 
         <span class="s2">&quot;rmse_test&quot;</span><span class="p">:</span> <span class="p">[</span><span class="n">rmse_test</span><span class="p">]}</span>
-        <span class="p">)</span>
-    
-    <span class="k">return</span> <span class="n">result</span><span class="p">;</span>
+        <span class="p">)</span>    
+    <span class="k">return</span> <span class="n">results</span><span class="p">;</span>
 </pre></div>
 </div>
 </div>
@@ -877,7 +744,7 @@ const thebe_selector_output = ".output, .cell_output"
       <th>0</th>
       <td>ridge</td>
       <td>40.7053</td>
-      <td>41.4138</td>
+      <td>41.4135</td>
     </tr>
   </tbody>
 </table>
@@ -892,15 +759,18 @@ const thebe_selector_output = ".output, .cell_output"
 </pre></div>
 </div>
 </div>
-<div class="cell_output docutils container">
-<img alt="../_images/splines_17_0.png" src="../_images/splines_17_0.png" />
-</div>
 </div>
 </div>
 <div class="section" id="polynomial-regression">
 <h2>Polynomial regression<a class="headerlink" href="#polynomial-regression" title="Permalink to this headline">¶</a></h2>
 <ul class="simple">
-<li><p>Next, we use a pipeline to add non-linear features to a ridge regression model:</p></li>
+<li><p>Next, we use a pipeline to add non-linear features to a ridge regression model.</p></li>
+<li><p>We use <a class="reference external" href="https://scikit-learn.org/stable/modules/generated/sklearn.pipeline.make_pipeline.html"><code class="docutils literal notranslate"><span class="pre">make_pipeline</span></code></a> which is a shorthand for the Pipeline constructor</p>
+<ul>
+<li><p>It does not require, and does not permit, naming the estimators.</p></li>
+<li><p>Instead, their names will be set to the lowercase of their types automatically:</p></li>
+</ul>
+</li>
 </ul>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -908,60 +778,22 @@ const thebe_selector_output = ".output, .cell_output"
 <span class="kn">from</span> <span class="nn">sklearn.pipeline</span> <span class="kn">import</span> <span class="n">make_pipeline</span>
 
 <span class="c1"># use polynomial features with degree 3</span>
-<span class="n">reg</span> <span class="o">=</span> <span class="n">make_pipeline</span><span class="p">(</span><span class="n">PolynomialFeatures</span><span class="p">(</span><span class="n">degree</span><span class="o">=</span><span class="mi">2</span><span class="p">),</span> 
-                      <span class="n">Ridge</span><span class="p">())</span>
+<span class="n">reg</span> <span class="o">=</span> <span class="n">make_pipeline</span><span class="p">(</span>
+            <span class="n">PolynomialFeatures</span><span class="p">(</span><span class="n">degree</span><span class="o">=</span><span class="mi">3</span><span class="p">),</span> 
+            <span class="n">linear_model</span><span class="o">.</span><span class="n">RidgeCV</span><span class="p">(</span><span class="n">alphas</span><span class="o">=</span><span class="n">alphas</span><span class="p">)</span>
+            <span class="p">)</span>
 
 <span class="n">reg</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X_train</span><span class="p">,</span> <span class="n">y_train</span><span class="p">)</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Pipeline(steps=[(&#39;polynomialfeatures&#39;, PolynomialFeatures()),
-                (&#39;ridge&#39;, Ridge())])
 </pre></div>
 </div>
 </div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">model_results</span><span class="p">(</span><span class="n">model_name</span><span class="o">=</span><span class="s2">&quot;poly&quot;</span><span class="p">)</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">model_results</span><span class="p">(</span><span class="n">model_name</span><span class="o">=</span><span class="s2">&quot;poly_3&quot;</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
-<div class="cell_output docutils container">
-<div class="output text_html"><div>
-<style scoped>
-    .dataframe tbody tr th:only-of-type {
-        vertical-align: middle;
-    }
-
-    .dataframe tbody tr th {
-        vertical-align: top;
-    }
-
-    .dataframe thead th {
-        text-align: right;
-    }
-</style>
-<table border="1" class="dataframe">
-  <thead>
-    <tr style="text-align: right;">
-      <th></th>
-      <th>model</th>
-      <th>rmse_train</th>
-      <th>rmse_test</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <th>0</th>
-      <td>poly</td>
-      <td>39.8232</td>
-      <td>40.3448</td>
-    </tr>
-  </tbody>
-</table>
-</div></div></div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -969,13 +801,10 @@ const thebe_selector_output = ".output, .cell_output"
 <span class="n">sns</span><span class="o">.</span><span class="n">regplot</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="n">X_train</span><span class="p">[</span><span class="s1">&#39;age&#39;</span><span class="p">],</span> 
             <span class="n">y</span><span class="o">=</span><span class="n">y_train</span><span class="p">[</span><span class="s1">&#39;wage&#39;</span><span class="p">],</span> 
             <span class="n">ci</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> 
-            <span class="n">order</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> 
+            <span class="n">order</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span> 
             <span class="n">line_kws</span><span class="o">=</span><span class="p">{</span><span class="s2">&quot;color&quot;</span><span class="p">:</span> <span class="s2">&quot;orange&quot;</span><span class="p">});</span>
 </pre></div>
 </div>
-</div>
-<div class="cell_output docutils container">
-<img alt="../_images/splines_21_0.png" src="../_images/splines_21_0.png" />
 </div>
 </div>
 </div>
@@ -983,13 +812,9 @@ const thebe_selector_output = ".output, .cell_output"
 <h2>Splines<a class="headerlink" href="#splines" title="Permalink to this headline">¶</a></h2>
 <div class="section" id="splines-in-scikit-learn">
 <h3>Splines in Scikit learn<a class="headerlink" href="#splines-in-scikit-learn" title="Permalink to this headline">¶</a></h3>
+<p><em>Note that spline transformers are a new feature in <a class="reference external" href="https://scikit-learn.org/stable/auto_examples/release_highlights/plot_release_highlights_1_0_0.html">scikit learn 1.0</a>. Therefore, make sure to use the latest version of scikit learn. If you use Aanconda, you can update all packages using <code class="docutils literal notranslate"><span class="pre">conda</span> <span class="pre">update</span> <span class="pre">--all</span></code></em></p>
 <ul class="simple">
-<li></li>
-</ul>
-<p>Spline transformers are a new feature in <a class="reference external" href="https://scikit-learn.org/stable/auto_examples/release_highlights/plot_release_highlights_1_0_0.html">scikit learn 1.0</a>.</p>
-<ul class="simple">
-<li><p>Therefore, make sure to use the latest version of scikit learn. If you use Aanconda, you can update all packages using <code class="docutils literal notranslate"><span class="pre">conda</span> <span class="pre">update</span> <span class="pre">--all</span></code></p></li>
-<li><p>Note that scikit learn places the knots in a uniform (this is the default) or quantile fashion.</p></li>
+<li><p>The function places the knots in a uniform (this is the default) or quantile fashion.</p></li>
 <li><p>We only have to specify the desired number of knots, and then have <a class="reference external" href="https://scikit-learn.org/stable/modules/generated/sklearn.preprocessing.SplineTransformer.html">SplineTransformer</a> automatically place the corresponding number of knots.</p></li>
 </ul>
 <div class="cell docutils container">
@@ -997,12 +822,11 @@ const thebe_selector_output = ".output, .cell_output"
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">sklearn.preprocessing</span> <span class="kn">import</span> <span class="n">SplineTransformer</span>
 
 <span class="c1"># use a spline wit 4 knots and 3 degrees with a ridge regressions</span>
-<span class="n">reg</span> <span class="o">=</span> <span class="n">make_pipeline</span><span class="p">(</span><span class="n">SplineTransformer</span><span class="p">(</span><span class="n">n_knots</span><span class="o">=</span><span class="mi">4</span><span class="p">,</span> <span class="n">degree</span><span class="o">=</span><span class="mi">3</span><span class="p">),</span> 
-                       <span class="n">Ridge</span><span class="p">(</span><span class="n">alpha</span><span class="o">=</span><span class="mi">1</span><span class="p">))</span>
-                     
+<span class="n">reg</span> <span class="o">=</span> <span class="n">make_pipeline</span><span class="p">(</span>
+                    <span class="n">SplineTransformer</span><span class="p">(</span><span class="n">n_knots</span><span class="o">=</span><span class="mi">4</span><span class="p">,</span> <span class="n">degree</span><span class="o">=</span><span class="mi">3</span><span class="p">),</span> 
+                    <span class="n">linear_model</span><span class="o">.</span><span class="n">RidgeCV</span><span class="p">(</span><span class="n">alphas</span><span class="o">=</span><span class="n">alphas</span><span class="p">)</span>
+                    <span class="p">)</span>
 <span class="n">reg</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X_train</span><span class="p">,</span> <span class="n">y_train</span><span class="p">)</span>
-
-<span class="n">y_pred</span> <span class="o">=</span> <span class="n">reg</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">X_train</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -1013,40 +837,20 @@ const thebe_selector_output = ".output, .cell_output"
 </pre></div>
 </div>
 </div>
-<div class="cell_output docutils container">
-<div class="output text_html"><div>
-<style scoped>
-    .dataframe tbody tr th:only-of-type {
-        vertical-align: middle;
-    }
+</div>
+<ul class="simple">
+<li><p>Obtain knots to show them in the following plot (there are degree number of additional knots each to the left and to the right of the fitted interval. These are there for technical reasons, so we refrain from showing them)</p></li>
+</ul>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">splt</span> <span class="o">=</span> <span class="n">SplineTransformer</span><span class="p">(</span><span class="n">n_knots</span><span class="o">=</span><span class="mi">4</span><span class="p">,</span> <span class="n">degree</span><span class="o">=</span><span class="mi">3</span><span class="p">)</span>
+<span class="n">splt</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X_train</span><span class="p">)</span>
+<span class="n">knots</span> <span class="o">=</span> <span class="n">splt</span><span class="o">.</span><span class="n">bsplines_</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">t</span>
 
-    .dataframe tbody tr th {
-        vertical-align: top;
-    }
-
-    .dataframe thead th {
-        text-align: right;
-    }
-</style>
-<table border="1" class="dataframe">
-  <thead>
-    <tr style="text-align: right;">
-      <th></th>
-      <th>model</th>
-      <th>rmse_train</th>
-      <th>rmse_test</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <th>0</th>
-      <td>spline</td>
-      <td>39.8098</td>
-      <td>40.2801</td>
-    </tr>
-  </tbody>
-</table>
-</div></div></div>
+<span class="n">knots</span><span class="p">[</span><span class="mi">3</span><span class="p">:</span><span class="o">-</span><span class="mi">3</span><span class="p">]</span>
+</pre></div>
+</div>
+</div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -1061,17 +865,11 @@ const thebe_selector_output = ".output, .cell_output"
 <span class="c1"># plot</span>
 <span class="n">sns</span><span class="o">.</span><span class="n">scatterplot</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="n">X_train</span><span class="p">[</span><span class="s1">&#39;age&#39;</span><span class="p">],</span> <span class="n">y</span><span class="o">=</span><span class="n">y_train</span><span class="p">[</span><span class="s1">&#39;wage&#39;</span><span class="p">])</span>
 
-<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x_new</span><span class="p">,</span> <span class="n">pred</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;Cubic spline with degree=3&#39;</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;orange&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x_new</span><span class="p">,</span> <span class="n">pred</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;Cubic spline with 4 knots and degree=3&#39;</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;orange&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">vlines</span><span class="p">(</span><span class="n">knots</span><span class="p">[</span><span class="mi">3</span><span class="p">:</span><span class="o">-</span><span class="mi">3</span><span class="p">],</span> <span class="n">ymin</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">ymax</span><span class="o">=</span><span class="mi">300</span><span class="p">,</span> <span class="n">linestyles</span><span class="o">=</span><span class="s2">&quot;dashed&quot;</span><span class="p">)</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">();</span>
 </pre></div>
 </div>
-</div>
-<div class="cell_output docutils container">
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/Users/jankirenz/opt/anaconda3/lib/python3.7/site-packages/sklearn/base.py:446: UserWarning: X does not have valid feature names, but SplineTransformer was fitted with feature names
-  &quot;X does not have valid feature names, but&quot;
-</pre></div>
-</div>
-<img alt="../_images/splines_25_1.png" src="../_images/splines_25_1.png" />
 </div>
 </div>
 <ul class="simple">
@@ -1146,40 +944,6 @@ const thebe_selector_output = ".output, .cell_output"
 </pre></div>
 </div>
 </div>
-<div class="cell_output docutils container">
-<div class="output text_html"><div>
-<style scoped>
-    .dataframe tbody tr th:only-of-type {
-        vertical-align: middle;
-    }
-
-    .dataframe tbody tr th {
-        vertical-align: top;
-    }
-
-    .dataframe thead th {
-        text-align: right;
-    }
-</style>
-<table border="1" class="dataframe">
-  <thead>
-    <tr style="text-align: right;">
-      <th></th>
-      <th>model</th>
-      <th>rmse_train</th>
-      <th>rmse_test</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <th>0</th>
-      <td>Cubic spline (cs)</td>
-      <td>39.726084</td>
-      <td>40.267857</td>
-    </tr>
-  </tbody>
-</table>
-</div></div></div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -1198,9 +962,6 @@ const thebe_selector_output = ".output, .cell_output"
 <span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">();</span>
 </pre></div>
 </div>
-</div>
-<div class="cell_output docutils container">
-<img alt="../_images/splines_34_0.png" src="../_images/splines_34_0.png" />
 </div>
 </div>
 </div>
@@ -1241,40 +1002,6 @@ const thebe_selector_output = ".output, .cell_output"
 </pre></div>
 </div>
 </div>
-<div class="cell_output docutils container">
-<div class="output text_html"><div>
-<style scoped>
-    .dataframe tbody tr th:only-of-type {
-        vertical-align: middle;
-    }
-
-    .dataframe tbody tr th {
-        vertical-align: top;
-    }
-
-    .dataframe thead th {
-        text-align: right;
-    }
-</style>
-<table border="1" class="dataframe">
-  <thead>
-    <tr style="text-align: right;">
-      <th></th>
-      <th>model</th>
-      <th>rmse_train</th>
-      <th>rmse_test</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <th>0</th>
-      <td>Natural spline (ns)</td>
-      <td>39.882574</td>
-      <td>40.325236</td>
-    </tr>
-  </tbody>
-</table>
-</div></div></div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -1287,9 +1014,6 @@ const thebe_selector_output = ".output, .cell_output"
 <span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">();</span>
 </pre></div>
 </div>
-</div>
-<div class="cell_output docutils container">
-<img alt="../_images/splines_38_0.png" src="../_images/splines_38_0.png" />
 </div>
 </div>
 </div>
