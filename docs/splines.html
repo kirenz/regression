@@ -392,20 +392,27 @@ const thebe_selector_output = ".output, .cell_output"
   </a>
  </li>
  <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#splines">
-   Splines
+  <a class="reference internal nav-link" href="#splines-scikit-learn">
+   Splines (scikit-learn)
   </a>
   <ul class="nav section-nav flex-column">
    <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#splines-in-scikit-learn">
-     Splines in Scikit learn
+    <a class="reference internal nav-link" href="#spline-transformer">
+     Spline transformer
     </a>
    </li>
    <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#splines-in-patsy">
-     Splines in patsy
+    <a class="reference internal nav-link" href="#periodic-splines">
+     Periodic splines
     </a>
    </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#splines-patsy">
+   Splines (patsy)
+  </a>
+  <ul class="nav section-nav flex-column">
    <li class="toc-h3 nav-item toc-entry">
     <a class="reference internal nav-link" href="#natural-spline">
      Natural spline
@@ -476,20 +483,27 @@ const thebe_selector_output = ".output, .cell_output"
   </a>
  </li>
  <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#splines">
-   Splines
+  <a class="reference internal nav-link" href="#splines-scikit-learn">
+   Splines (scikit-learn)
   </a>
   <ul class="nav section-nav flex-column">
    <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#splines-in-scikit-learn">
-     Splines in Scikit learn
+    <a class="reference internal nav-link" href="#spline-transformer">
+     Spline transformer
     </a>
    </li>
    <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#splines-in-patsy">
-     Splines in patsy
+    <a class="reference internal nav-link" href="#periodic-splines">
+     Periodic splines
     </a>
    </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#splines-patsy">
+   Splines (patsy)
+  </a>
+  <ul class="nav section-nav flex-column">
    <li class="toc-h3 nav-item toc-entry">
     <a class="reference internal nav-link" href="#natural-spline">
      Natural spline
@@ -513,10 +527,10 @@ const thebe_selector_output = ".output, .cell_output"
                 
   <div class="tex2jax_ignore mathjax_ignore section" id="regression-splines">
 <h1>Regression splines<a class="headerlink" href="#regression-splines" title="Permalink to this headline">¶</a></h1>
-<p><em>The following code tutorial is mainly based on the <a class="reference external" href="https://scikit-learn.org/stable/auto_examples/linear_model/plot_polynomial_interpolation.html#sphx-glr-auto-examples-linear-model-plot-polynomial-interpolation-py">scikit learn documentation</a> about splines provided by Mathieu Blondel, Jake Vanderplas, Christian Lorentzen and Malte Londschien and code from <a class="reference external" href="https://nbviewer.org/github/JWarmenhoven/ISL-python/blob/master/Notebooks/Chapter%207.ipynb">Jordi Warmenhoven</a></em>. To learn more about the spline regression method, review <a class="reference external" href="https://www.statlearning.com/">“An Introduction to Statistical Learning”</a> from James et al. (2021).</p>
+<p><em>The following code tutorial is mainly based on the <a class="reference external" href="https://scikit-learn.org/stable/auto_examples/linear_model/plot_polynomial_interpolation.html#sphx-glr-auto-examples-linear-model-plot-polynomial-interpolation-py">scikit learn documentation</a> about splines provided by Mathieu Blondel, Jake Vanderplas, Christian Lorentzen and Malte Londschien and code from <a class="reference external" href="https://nbviewer.org/github/JWarmenhoven/ISL-python/blob/master/Notebooks/Chapter%207.ipynb">Jordi Warmenhoven</a></em>. To learn more about the spline regression method, review <a class="reference external" href="https://www.statlearning.com/">“An Introduction to Statistical Learning”</a> from <span id="id1">[<a class="reference internal" href="reference.html#id7" title="Gareth James, Daniela Witten, Trevor Hastie, and Robert Tibshirani. An Introduction to Statistical learning. Springer, 2021. URL: https://www.statlearning.com/.">James <em>et al.</em>, 2021</a>]</span>.</p>
 <ul class="simple">
 <li><p>Regression splines involve dividing the range of a feature X into K distinct regions (by using so called knots). Within each region, a polynomial function is fit to the data.</p></li>
-<li><p>In the following example, various piecewise polynomials are fit to the data, with one knot at age=50(<span id="id1">[<a class="reference internal" href="reference.html#id7" title="Gareth James, Daniela Witten, Trevor Hastie, and Robert Tibshirani. An Introduction to Statistical learning. Springer, 2021. URL: https://www.statlearning.com/.">James <em>et al.</em>, 2021</a>]</span>):</p></li>
+<li><p>In the following example, various piecewise polynomials are fit to the data, with one knot at age=50 <span id="id2">[<a class="reference internal" href="reference.html#id7" title="Gareth James, Daniela Witten, Trevor Hastie, and Robert Tibshirani. An Introduction to Statistical learning. Springer, 2021. URL: https://www.statlearning.com/.">James <em>et al.</em>, 2021</a>]</span>:</p></li>
 </ul>
 <p><img alt="" src="../_images/splines.png" /></p>
 <p>Figures:</p>
@@ -529,7 +543,7 @@ have continuous first and second derivatives.</p></li>
 </ul>
 <ul class="simple">
 <li><p>The polynomials are ususally constrained so that they join smoothly at the region boundaries, or knots.</p></li>
-<li><p>Provided that the interval is divided into enough regions, this can produce an extremely flexibel fit <span id="id2">[<a class="reference internal" href="reference.html#id7" title="Gareth James, Daniela Witten, Trevor Hastie, and Robert Tibshirani. An Introduction to Statistical learning. Springer, 2021. URL: https://www.statlearning.com/.">James <em>et al.</em>, 2021</a>]</span>:</p></li>
+<li><p>Provided that the interval is divided into enough regions, this can produce an extremely flexibel fit <span id="id3">[<a class="reference internal" href="reference.html#id7" title="Gareth James, Daniela Witten, Trevor Hastie, and Robert Tibshirani. An Introduction to Statistical learning. Springer, 2021. URL: https://www.statlearning.com/.">James <em>et al.</em>, 2021</a>]</span>:</p></li>
 </ul>
 <p><img alt="" src="../_images/splines-2.png" /></p>
 <p>Figure: A cubic spline and a natural cubic spline, with three knots. The dashed lines denote the knot locations.</p>
@@ -968,6 +982,10 @@ have continuous first and second derivatives.</p></li>
 </div>
 </div>
 <div class="cell_output docutils container">
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/Users/jankirenz/opt/anaconda3/lib/python3.9/site-packages/sklearn/linear_model/_ridge.py:1791: RuntimeWarning: invalid value encountered in reciprocal
+  w = ((singvals_sq + alpha) ** -1) - (alpha ** -1)
+</pre></div>
+</div>
 <div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Pipeline(steps=[(&#39;polynomialfeatures&#39;, PolynomialFeatures(degree=3)),
                 (&#39;ridgecv&#39;,
                  RidgeCV(alphas=array([      0.000001,       0.00001 ,       0.0001  ,       0.001   ,
@@ -980,13 +998,13 @@ have continuous first and second derivatives.</p></li>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">model_results</span><span class="p">(</span><span class="n">model_name</span><span class="o">=</span><span class="s2">&quot;Polynomial degree 3&quot;</span><span class="p">)</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">model_results</span><span class="p">(</span><span class="n">model_name</span><span class="o">=</span><span class="s2">&quot;Polynomial Reg&quot;</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
 <div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[{&#39;model&#39;: &#39;Ridge&#39;, &#39;rmse_train&#39;: 40.7053, &#39;rmse_test&#39;: 41.4135},
- {&#39;model&#39;: &#39;Polynomial degree 3&#39;, &#39;rmse_train&#39;: 39.7717, &#39;rmse_test&#39;: 40.2513}]
+ {&#39;model&#39;: &#39;Polynomial Reg&#39;, &#39;rmse_train&#39;: 39.7717, &#39;rmse_test&#39;: 40.2511}]
 </pre></div>
 </div>
 </div>
@@ -1007,20 +1025,21 @@ have continuous first and second derivatives.</p></li>
 </div>
 </div>
 </div>
-<div class="section" id="splines">
-<h2>Splines<a class="headerlink" href="#splines" title="Permalink to this headline">¶</a></h2>
-<div class="section" id="splines-in-scikit-learn">
-<h3>Splines in Scikit learn<a class="headerlink" href="#splines-in-scikit-learn" title="Permalink to this headline">¶</a></h3>
-<p><em>Note that spline transformers are a new feature in <a class="reference external" href="https://scikit-learn.org/stable/auto_examples/release_highlights/plot_release_highlights_1_0_0.html">scikit learn 1.0</a>. Therefore, make sure to use the latest version of scikit learn. If you use Aanconda, you can update all packages using <code class="docutils literal notranslate"><span class="pre">conda</span> <span class="pre">update</span> <span class="pre">--all</span></code></em></p>
+<div class="section" id="splines-scikit-learn">
+<h2>Splines (scikit-learn)<a class="headerlink" href="#splines-scikit-learn" title="Permalink to this headline">¶</a></h2>
+<p><em>Note that spline transformers are a new feature in <a class="reference external" href="https://scikit-learn.org/stable/auto_examples/release_highlights/plot_release_highlights_1_0_0.html">scikit learn 1.0</a>. Therefore, make sure to use the latest version of scikit learn. Use <code class="docutils literal notranslate"><span class="pre">conda</span> <span class="pre">list</span> <span class="pre">scikit-learn</span></code> to see which scikit-learn version is installed. If you use Anaconda, you can update all packages using <code class="docutils literal notranslate"><span class="pre">conda</span> <span class="pre">update</span> <span class="pre">--all</span></code></em></p>
+<div class="section" id="spline-transformer">
+<h3>Spline transformer<a class="headerlink" href="#spline-transformer" title="Permalink to this headline">¶</a></h3>
 <ul class="simple">
-<li><p>The function places the knots in a uniform (this is the default) or quantile fashion.</p></li>
+<li><p>The following function places the knots in a uniform (this is the default) or quantile fashion.</p></li>
 <li><p>We only have to specify the desired number of knots, and then have <a class="reference external" href="https://scikit-learn.org/stable/modules/generated/sklearn.preprocessing.SplineTransformer.html">SplineTransformer</a> automatically place the corresponding number of knots.</p></li>
 </ul>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">sklearn.preprocessing</span> <span class="kn">import</span> <span class="n">SplineTransformer</span>
 
-<span class="c1"># use a spline wit 4 knots and 3 degrees with a ridge regressions</span>
+<span class="c1"># use a spline wit 4 knots and 3 degrees </span>
+<span class="c1"># we combine the spline with a ridge regressions</span>
 <span class="n">reg</span> <span class="o">=</span> <span class="n">make_pipeline</span><span class="p">(</span>
                     <span class="n">SplineTransformer</span><span class="p">(</span><span class="n">n_knots</span><span class="o">=</span><span class="mi">4</span><span class="p">,</span> <span class="n">degree</span><span class="o">=</span><span class="mi">3</span><span class="p">),</span> 
                     <span class="n">linear_model</span><span class="o">.</span><span class="n">RidgeCV</span><span class="p">(</span><span class="n">alphas</span><span class="o">=</span><span class="n">alphas</span><span class="p">)</span>
@@ -1030,6 +1049,10 @@ have continuous first and second derivatives.</p></li>
 </div>
 </div>
 <div class="cell_output docutils container">
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/Users/jankirenz/opt/anaconda3/lib/python3.9/site-packages/sklearn/linear_model/_ridge.py:1791: RuntimeWarning: invalid value encountered in reciprocal
+  w = ((singvals_sq + alpha) ** -1) - (alpha ** -1)
+</pre></div>
+</div>
 <div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Pipeline(steps=[(&#39;splinetransformer&#39;, SplineTransformer(n_knots=4)),
                 (&#39;ridgecv&#39;,
                  RidgeCV(alphas=array([      0.000001,       0.00001 ,       0.0001  ,       0.001   ,
@@ -1042,16 +1065,14 @@ have continuous first and second derivatives.</p></li>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">model_results</span><span class="p">(</span><span class="n">model_name</span> <span class="o">=</span> <span class="s2">&quot;Cubic Spline degree 3&quot;</span><span class="p">)</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">model_results</span><span class="p">(</span><span class="n">model_name</span> <span class="o">=</span> <span class="s2">&quot;Cubic Spline&quot;</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
 <div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[{&#39;model&#39;: &#39;Ridge&#39;, &#39;rmse_train&#39;: 40.7053, &#39;rmse_test&#39;: 41.4135},
- {&#39;model&#39;: &#39;Polynomial degree 3&#39;, &#39;rmse_train&#39;: 39.7717, &#39;rmse_test&#39;: 40.2513},
- {&#39;model&#39;: &#39;Cubic Spline degree 3&#39;,
-  &#39;rmse_train&#39;: 39.7456,
-  &#39;rmse_test&#39;: 40.2444}]
+ {&#39;model&#39;: &#39;Polynomial Reg&#39;, &#39;rmse_train&#39;: 39.7717, &#39;rmse_test&#39;: 40.2511},
+ {&#39;model&#39;: &#39;Cubic Spline&#39;, &#39;rmse_train&#39;: 39.7456, &#39;rmse_test&#39;: 40.2444}]
 </pre></div>
 </div>
 </div>
@@ -1102,6 +1123,9 @@ have continuous first and second derivatives.</p></li>
 <img alt="../_images/splines_41_1.png" src="../_images/splines_41_1.png" />
 </div>
 </div>
+</div>
+<div class="section" id="periodic-splines">
+<h3>Periodic splines<a class="headerlink" href="#periodic-splines" title="Permalink to this headline">¶</a></h3>
 <ul class="simple">
 <li><p>In some settings, e.g. in time series data with seasonal effects, we expect a periodic continuation of the underlying signal.</p></li>
 <li><p>Such effects can be modelled using periodic splines, which have equal function value and equal derivatives at the first and last knot.</p></li>
@@ -1109,8 +1133,9 @@ have continuous first and second derivatives.</p></li>
 <li><p><a class="reference external" href="https://scikit-learn.org/stable/auto_examples/linear_model/plot_polynomial_interpolation.html#periodic-splines">periodic splines</a></p></li>
 </ul>
 </div>
-<div class="section" id="splines-in-patsy">
-<h3>Splines in patsy<a class="headerlink" href="#splines-in-patsy" title="Permalink to this headline">¶</a></h3>
+</div>
+<div class="section" id="splines-patsy">
+<h2>Splines (patsy)<a class="headerlink" href="#splines-patsy" title="Permalink to this headline">¶</a></h2>
 <ul class="simple">
 <li><p>Next, we use the module <a class="reference external" href="https://patsy.readthedocs.io/en/latest/overview.html">patsy</a> to create non-linear transformations of the input data.</p></li>
 <li><p>Additionaly, we use statsmodels to fit 2 models with different number of knots.</p></li>
@@ -1122,43 +1147,242 @@ have continuous first and second derivatives.</p></li>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">patsy</span> <span class="kn">import</span> <span class="n">dmatrix</span>
+
+<span class="c1"># Generating cubic spline with 3 knots at 25, 40 and 60</span>
+<span class="n">transformed_x</span> <span class="o">=</span> <span class="n">dmatrix</span><span class="p">(</span><span class="s2">&quot;bs(train, knots=(25,40,60), degree=3, include_intercept=False)&quot;</span><span class="p">,</span> <span class="p">{</span><span class="s2">&quot;train&quot;</span><span class="p">:</span> <span class="n">X_train</span><span class="p">},</span> <span class="n">return_type</span><span class="o">=</span><span class="s1">&#39;dataframe&#39;</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Generating cubic spline with 3 knots at 25, 40 and 60</span>
-<span class="n">transformed_x</span> <span class="o">=</span> <span class="n">dmatrix</span><span class="p">(</span>
-            <span class="s2">&quot;bs(train, knots=(25,40,60), degree=3, include_intercept=False)&quot;</span><span class="p">,</span> 
-                <span class="p">{</span><span class="s2">&quot;train&quot;</span><span class="p">:</span> <span class="n">X_train</span><span class="p">},</span><span class="n">return_type</span><span class="o">=</span><span class="s1">&#39;dataframe&#39;</span><span class="p">)</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">transformed_x</span>
 </pre></div>
 </div>
 </div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>Intercept</th>
+      <th>bs(train, knots=(25, 40, 60), degree=3, include_intercept=False)[0]</th>
+      <th>bs(train, knots=(25, 40, 60), degree=3, include_intercept=False)[1]</th>
+      <th>bs(train, knots=(25, 40, 60), degree=3, include_intercept=False)[2]</th>
+      <th>bs(train, knots=(25, 40, 60), degree=3, include_intercept=False)[3]</th>
+      <th>bs(train, knots=(25, 40, 60), degree=3, include_intercept=False)[4]</th>
+      <th>bs(train, knots=(25, 40, 60), degree=3, include_intercept=False)[5]</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>1045</th>
+      <td>1.0</td>
+      <td>0.000000</td>
+      <td>0.114796</td>
+      <td>0.618564</td>
+      <td>0.262733</td>
+      <td>0.003906</td>
+      <td>0.000000</td>
+    </tr>
+    <tr>
+      <th>2717</th>
+      <td>1.0</td>
+      <td>0.000000</td>
+      <td>0.024796</td>
+      <td>0.477428</td>
+      <td>0.456182</td>
+      <td>0.041594</td>
+      <td>0.000000</td>
+    </tr>
+    <tr>
+      <th>2835</th>
+      <td>1.0</td>
+      <td>0.070523</td>
+      <td>0.598567</td>
+      <td>0.319030</td>
+      <td>0.011879</td>
+      <td>0.000000</td>
+      <td>0.000000</td>
+    </tr>
+    <tr>
+      <th>2913</th>
+      <td>1.0</td>
+      <td>0.000000</td>
+      <td>0.000272</td>
+      <td>0.241156</td>
+      <td>0.576321</td>
+      <td>0.182250</td>
+      <td>0.000000</td>
+    </tr>
+    <tr>
+      <th>959</th>
+      <td>1.0</td>
+      <td>0.000000</td>
+      <td>0.034014</td>
+      <td>0.508194</td>
+      <td>0.426542</td>
+      <td>0.031250</td>
+      <td>0.000000</td>
+    </tr>
+    <tr>
+      <th>...</th>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+    </tr>
+    <tr>
+      <th>2763</th>
+      <td>1.0</td>
+      <td>0.000000</td>
+      <td>0.139320</td>
+      <td>0.628472</td>
+      <td>0.230208</td>
+      <td>0.002000</td>
+      <td>0.000000</td>
+    </tr>
+    <tr>
+      <th>905</th>
+      <td>1.0</td>
+      <td>0.000000</td>
+      <td>0.045272</td>
+      <td>0.536725</td>
+      <td>0.395222</td>
+      <td>0.022781</td>
+      <td>0.000000</td>
+    </tr>
+    <tr>
+      <th>1096</th>
+      <td>1.0</td>
+      <td>0.000000</td>
+      <td>0.000000</td>
+      <td>0.155886</td>
+      <td>0.554832</td>
+      <td>0.289156</td>
+      <td>0.000125</td>
+    </tr>
+    <tr>
+      <th>235</th>
+      <td>1.0</td>
+      <td>0.029752</td>
+      <td>0.535344</td>
+      <td>0.409657</td>
+      <td>0.025247</td>
+      <td>0.000000</td>
+      <td>0.000000</td>
+    </tr>
+    <tr>
+      <th>1061</th>
+      <td>1.0</td>
+      <td>0.183333</td>
+      <td>0.628299</td>
+      <td>0.186151</td>
+      <td>0.002216</td>
+      <td>0.000000</td>
+      <td>0.000000</td>
+    </tr>
+  </tbody>
+</table>
+<p>2100 rows × 7 columns</p>
+</div></div></div>
 </div>
 <p>We use statsmodels to estimate a generalized linear model:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">statsmodels.api</span> <span class="k">as</span> <span class="nn">sm</span>
+
+<span class="c1"># Fitting generalised linear model on transformed dataset</span>
+<span class="n">reg</span> <span class="o">=</span> <span class="n">sm</span><span class="o">.</span><span class="n">GLM</span><span class="p">(</span><span class="n">y_train</span><span class="p">,</span> <span class="n">transformed_x</span><span class="p">)</span>
+
+<span class="n">reg</span><span class="o">.</span><span class="n">fit</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;statsmodels.genmod.generalized_linear_model.GLMResultsWrapper at 0x7fba1874e550&gt;
 </pre></div>
 </div>
 </div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Fitting generalised linear model on transformed dataset</span>
-<span class="n">reg</span> <span class="o">=</span> <span class="n">sm</span><span class="o">.</span><span class="n">GLM</span><span class="p">(</span><span class="n">y_train</span><span class="p">,</span> <span class="n">transformed_x</span><span class="p">)</span><span class="o">.</span><span class="n">fit</span><span class="p">()</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">reg</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">transformed_x</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
+<span class="ne">ValueError</span><span class="g g-Whitespace">                                </span>Traceback (most recent call last)
+<span class="nn">/Users/jankirenz/books/regression/docs/splines.ipynb Cell 49&#39;</span> in <span class="ni">&lt;cell line: 1&gt;</span><span class="nt">()</span>
+<span class="o">----&gt;</span> <span class="o">&lt;</span><span class="n">a</span> <span class="n">href</span><span class="o">=</span><span class="s1">&#39;vscode-notebook-cell:/Users/jankirenz/books/regression/docs/splines.ipynb#ch0000062?line=0&#39;</span><span class="o">&gt;</span><span class="mi">1</span><span class="o">&lt;/</span><span class="n">a</span><span class="o">&gt;</span> <span class="n">reg</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">transformed_x</span><span class="p">)</span>
+
+<span class="nn">File ~/opt/anaconda3/lib/python3.9/site-packages/statsmodels/genmod/generalized_linear_model.py:902,</span> in <span class="ni">GLM.predict</span><span class="nt">(self, params, exog, exposure, offset, linear)</span>
+    <span class="o">&lt;</span><span class="n">a</span> <span class="n">href</span><span class="o">=</span><span class="s1">&#39;file:///Users/jankirenz/opt/anaconda3/lib/python3.9/site-packages/statsmodels/genmod/generalized_linear_model.py?line=898&#39;</span><span class="o">&gt;</span><span class="mi">899</span><span class="o">&lt;/</span><span class="n">a</span><span class="o">&gt;</span> <span class="k">if</span> <span class="n">exog</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+    <span class="o">&lt;</span><span class="n">a</span> <span class="n">href</span><span class="o">=</span><span class="s1">&#39;file:///Users/jankirenz/opt/anaconda3/lib/python3.9/site-packages/statsmodels/genmod/generalized_linear_model.py?line=899&#39;</span><span class="o">&gt;</span><span class="mi">900</span><span class="o">&lt;/</span><span class="n">a</span><span class="o">&gt;</span>     <span class="n">exog</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">exog</span>
+<span class="o">--&gt;</span> <span class="o">&lt;</span><span class="n">a</span> <span class="n">href</span><span class="o">=</span><span class="s1">&#39;file:///Users/jankirenz/opt/anaconda3/lib/python3.9/site-packages/statsmodels/genmod/generalized_linear_model.py?line=901&#39;</span><span class="o">&gt;</span><span class="mi">902</span><span class="o">&lt;/</span><span class="n">a</span><span class="o">&gt;</span> <span class="n">linpred</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">exog</span><span class="p">,</span> <span class="n">params</span><span class="p">)</span> <span class="o">+</span> <span class="n">offset</span> <span class="o">+</span> <span class="n">exposure</span>
+    <span class="o">&lt;</span><span class="n">a</span> <span class="n">href</span><span class="o">=</span><span class="s1">&#39;file:///Users/jankirenz/opt/anaconda3/lib/python3.9/site-packages/statsmodels/genmod/generalized_linear_model.py?line=902&#39;</span><span class="o">&gt;</span><span class="mi">903</span><span class="o">&lt;/</span><span class="n">a</span><span class="o">&gt;</span> <span class="k">if</span> <span class="n">linear</span><span class="p">:</span>
+    <span class="o">&lt;</span><span class="n">a</span> <span class="n">href</span><span class="o">=</span><span class="s1">&#39;file:///Users/jankirenz/opt/anaconda3/lib/python3.9/site-packages/statsmodels/genmod/generalized_linear_model.py?line=903&#39;</span><span class="o">&gt;</span><span class="mi">904</span><span class="o">&lt;/</span><span class="n">a</span><span class="o">&gt;</span>     <span class="k">return</span> <span class="n">linpred</span>
+
+<span class="nn">File &lt;__array_function__ internals&gt;:5,</span> in <span class="ni">dot</span><span class="nt">(*args, **kwargs)</span>
+
+<span class="ne">ValueError</span>: shapes (2100,7) and (2100,7) not aligned: 7 (dim 1) != 2100 (dim 0)
 </pre></div>
 </div>
 </div>
 </div>
+<ul class="simple">
+<li><p>Obtain results:</p></li>
+</ul>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Training data</span>
 <span class="n">pred_train</span> <span class="o">=</span> <span class="n">reg</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">dmatrix</span><span class="p">(</span><span class="s2">&quot;bs(train, knots=(25,40,60), include_intercept=False)&quot;</span><span class="p">,</span> <span class="p">{</span><span class="s2">&quot;train&quot;</span><span class="p">:</span> <span class="n">X_train</span><span class="p">},</span> <span class="n">return_type</span><span class="o">=</span><span class="s1">&#39;dataframe&#39;</span><span class="p">))</span>
-<span class="n">rmse_train</span> <span class="o">=</span> <span class="nb">round</span><span class="p">(</span><span class="n">mean_squared_error</span><span class="p">(</span><span class="n">y_train</span><span class="p">,</span> <span class="n">pred_train</span><span class="p">,</span> <span class="n">squared</span><span class="o">=</span><span class="kc">False</span><span class="p">),</span><span class="mi">4</span><span class="p">)</span>
+<span class="c1">#rmse_train = round(mean_squared_error(y_train, pred_train, squared=False),4)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
+<span class="ne">ValueError</span><span class="g g-Whitespace">                                </span>Traceback (most recent call last)
+<span class="nn">/Users/jankirenz/books/regression/docs/splines.ipynb Cell 50&#39;</span> in <span class="ni">&lt;cell line: 2&gt;</span><span class="nt">()</span>
+      <span class="o">&lt;</span><span class="n">a</span> <span class="n">href</span><span class="o">=</span><span class="s1">&#39;vscode-notebook-cell:/Users/jankirenz/books/regression/docs/splines.ipynb#ch0000049?line=0&#39;</span><span class="o">&gt;</span><span class="mi">1</span><span class="o">&lt;/</span><span class="n">a</span><span class="o">&gt;</span> <span class="c1"># Training data</span>
+<span class="o">----&gt;</span> <span class="o">&lt;</span><span class="n">a</span> <span class="n">href</span><span class="o">=</span><span class="s1">&#39;vscode-notebook-cell:/Users/jankirenz/books/regression/docs/splines.ipynb#ch0000049?line=1&#39;</span><span class="o">&gt;</span><span class="mi">2</span><span class="o">&lt;/</span><span class="n">a</span><span class="o">&gt;</span> <span class="n">pred_train</span> <span class="o">=</span> <span class="n">reg</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">dmatrix</span><span class="p">(</span><span class="s2">&quot;bs(train, knots=(25,40,60), include_intercept=False)&quot;</span><span class="p">,</span> <span class="p">{</span><span class="s2">&quot;train&quot;</span><span class="p">:</span> <span class="n">X_train</span><span class="p">},</span> <span class="n">return_type</span><span class="o">=</span><span class="s1">&#39;dataframe&#39;</span><span class="p">))</span>
 
-<span class="c1"># Test data</span>
+<span class="nn">File ~/opt/anaconda3/lib/python3.9/site-packages/statsmodels/genmod/generalized_linear_model.py:902,</span> in <span class="ni">GLM.predict</span><span class="nt">(self, params, exog, exposure, offset, linear)</span>
+    <span class="o">&lt;</span><span class="n">a</span> <span class="n">href</span><span class="o">=</span><span class="s1">&#39;file:///Users/jankirenz/opt/anaconda3/lib/python3.9/site-packages/statsmodels/genmod/generalized_linear_model.py?line=898&#39;</span><span class="o">&gt;</span><span class="mi">899</span><span class="o">&lt;/</span><span class="n">a</span><span class="o">&gt;</span> <span class="k">if</span> <span class="n">exog</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+    <span class="o">&lt;</span><span class="n">a</span> <span class="n">href</span><span class="o">=</span><span class="s1">&#39;file:///Users/jankirenz/opt/anaconda3/lib/python3.9/site-packages/statsmodels/genmod/generalized_linear_model.py?line=899&#39;</span><span class="o">&gt;</span><span class="mi">900</span><span class="o">&lt;/</span><span class="n">a</span><span class="o">&gt;</span>     <span class="n">exog</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">exog</span>
+<span class="o">--&gt;</span> <span class="o">&lt;</span><span class="n">a</span> <span class="n">href</span><span class="o">=</span><span class="s1">&#39;file:///Users/jankirenz/opt/anaconda3/lib/python3.9/site-packages/statsmodels/genmod/generalized_linear_model.py?line=901&#39;</span><span class="o">&gt;</span><span class="mi">902</span><span class="o">&lt;/</span><span class="n">a</span><span class="o">&gt;</span> <span class="n">linpred</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">exog</span><span class="p">,</span> <span class="n">params</span><span class="p">)</span> <span class="o">+</span> <span class="n">offset</span> <span class="o">+</span> <span class="n">exposure</span>
+    <span class="o">&lt;</span><span class="n">a</span> <span class="n">href</span><span class="o">=</span><span class="s1">&#39;file:///Users/jankirenz/opt/anaconda3/lib/python3.9/site-packages/statsmodels/genmod/generalized_linear_model.py?line=902&#39;</span><span class="o">&gt;</span><span class="mi">903</span><span class="o">&lt;/</span><span class="n">a</span><span class="o">&gt;</span> <span class="k">if</span> <span class="n">linear</span><span class="p">:</span>
+    <span class="o">&lt;</span><span class="n">a</span> <span class="n">href</span><span class="o">=</span><span class="s1">&#39;file:///Users/jankirenz/opt/anaconda3/lib/python3.9/site-packages/statsmodels/genmod/generalized_linear_model.py?line=903&#39;</span><span class="o">&gt;</span><span class="mi">904</span><span class="o">&lt;/</span><span class="n">a</span><span class="o">&gt;</span>     <span class="k">return</span> <span class="n">linpred</span>
+
+<span class="nn">File &lt;__array_function__ internals&gt;:5,</span> in <span class="ni">dot</span><span class="nt">(*args, **kwargs)</span>
+
+<span class="ne">ValueError</span>: shapes (2100,7) and (2100,7) not aligned: 7 (dim 1) != 2100 (dim 0)
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Test data</span>
 <span class="n">pred_test</span> <span class="o">=</span> <span class="n">reg</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">dmatrix</span><span class="p">(</span><span class="s2">&quot;bs(test, knots=(25,40,60), include_intercept=False)&quot;</span><span class="p">,</span> <span class="p">{</span><span class="s2">&quot;test&quot;</span><span class="p">:</span> <span class="n">X_test</span><span class="p">},</span> <span class="n">return_type</span><span class="o">=</span><span class="s1">&#39;dataframe&#39;</span><span class="p">))</span>
 <span class="n">rmse_test</span> <span class="o">=</span><span class="nb">round</span><span class="p">(</span><span class="n">mean_squared_error</span><span class="p">(</span><span class="n">y_test</span><span class="p">,</span> <span class="n">pred_test</span><span class="p">,</span> <span class="n">squared</span><span class="o">=</span><span class="kc">False</span><span class="p">),</span><span class="mi">4</span><span class="p">)</span>
 
@@ -1170,23 +1394,13 @@ have continuous first and second derivatives.</p></li>
 </pre></div>
 </div>
 </div>
-<div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[{&#39;model&#39;: &#39;Ridge&#39;, &#39;rmse_train&#39;: 40.7053, &#39;rmse_test&#39;: 41.4135},
- {&#39;model&#39;: &#39;Polynomial degree 3&#39;, &#39;rmse_train&#39;: 39.7717, &#39;rmse_test&#39;: 40.2513},
- {&#39;model&#39;: &#39;Cubic Spline degree 3&#39;,
-  &#39;rmse_train&#39;: 39.7456,
-  &#39;rmse_test&#39;: 40.2444},
- {&#39;model&#39;: &#39;Cubic spline (patsy)&#39;,
-  &#39;rmse_train&#39;: 39.7261,
-  &#39;rmse_test&#39;: 40.2679}]
-</pre></div>
-</div>
-</div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
 <span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+
+<span class="c1">#knots = [25,40,60]</span>
 
 <span class="c1"># Create observations</span>
 <span class="n">xp</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="n">X_test</span><span class="o">.</span><span class="n">min</span><span class="p">(),</span><span class="n">X_test</span><span class="o">.</span><span class="n">max</span><span class="p">(),</span> <span class="mi">100</span><span class="p">)</span>
@@ -1197,12 +1411,10 @@ have continuous first and second derivatives.</p></li>
 <span class="n">sns</span><span class="o">.</span><span class="n">scatterplot</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="n">X_train</span><span class="p">[</span><span class="s1">&#39;age&#39;</span><span class="p">],</span> <span class="n">y</span><span class="o">=</span><span class="n">y_train</span><span class="p">[</span><span class="s1">&#39;wage&#39;</span><span class="p">])</span>
 
 <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">xp</span><span class="p">,</span> <span class="n">pred</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;Cubic spline with degree=3 (3 knots)&#39;</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;orange&#39;</span><span class="p">)</span>
+<span class="c1">#plt.vlines(25, ymin=0, ymax=300, linestyles=&quot;dashed&quot;)</span>
+
 <span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">();</span>
 </pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<img alt="../_images/splines_50_0.png" src="../_images/splines_50_0.png" />
 </div>
 </div>
 </div>
@@ -1238,21 +1450,6 @@ have continuous first and second derivatives.</p></li>
 </pre></div>
 </div>
 </div>
-<div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[{&#39;model&#39;: &#39;Ridge&#39;, &#39;rmse_train&#39;: 40.7053, &#39;rmse_test&#39;: 41.4135},
- {&#39;model&#39;: &#39;Polynomial degree 3&#39;, &#39;rmse_train&#39;: 39.7717, &#39;rmse_test&#39;: 40.2513},
- {&#39;model&#39;: &#39;Cubic Spline degree 3&#39;,
-  &#39;rmse_train&#39;: 39.7456,
-  &#39;rmse_test&#39;: 40.2444},
- {&#39;model&#39;: &#39;Cubic spline (patsy)&#39;,
-  &#39;rmse_train&#39;: 39.7261,
-  &#39;rmse_test&#39;: 40.2679},
- {&#39;model&#39;: &#39;Natural spline (patsy)&#39;,
-  &#39;rmse_train&#39;: 39.8826,
-  &#39;rmse_test&#39;: 40.3252}]
-</pre></div>
-</div>
-</div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -1266,9 +1463,6 @@ have continuous first and second derivatives.</p></li>
 </pre></div>
 </div>
 </div>
-<div class="cell_output docutils container">
-<img alt="../_images/splines_54_0.png" src="../_images/splines_54_0.png" />
-</div>
 </div>
 </div>
 </div>
@@ -1281,64 +1475,6 @@ have continuous first and second derivatives.</p></li>
 </pre></div>
 </div>
 </div>
-<div class="cell_output docutils container">
-<div class="output text_html"><div>
-<style scoped>
-    .dataframe tbody tr th:only-of-type {
-        vertical-align: middle;
-    }
-
-    .dataframe tbody tr th {
-        vertical-align: top;
-    }
-
-    .dataframe thead th {
-        text-align: right;
-    }
-</style>
-<table border="1" class="dataframe">
-  <thead>
-    <tr style="text-align: right;">
-      <th></th>
-      <th>model</th>
-      <th>rmse_train</th>
-      <th>rmse_test</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <th>0</th>
-      <td>Ridge</td>
-      <td>40.7053</td>
-      <td>41.4135</td>
-    </tr>
-    <tr>
-      <th>1</th>
-      <td>Polynomial degree 3</td>
-      <td>39.7717</td>
-      <td>40.2513</td>
-    </tr>
-    <tr>
-      <th>2</th>
-      <td>Cubic Spline degree 3</td>
-      <td>39.7456</td>
-      <td>40.2444</td>
-    </tr>
-    <tr>
-      <th>3</th>
-      <td>Cubic spline (patsy)</td>
-      <td>39.7261</td>
-      <td>40.2679</td>
-    </tr>
-    <tr>
-      <th>4</th>
-      <td>Natural spline (patsy)</td>
-      <td>39.8826</td>
-      <td>40.3252</td>
-    </tr>
-  </tbody>
-</table>
-</div></div></div>
 </div>
 </div>
 </div>
