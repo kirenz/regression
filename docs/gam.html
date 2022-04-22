@@ -810,19 +810,25 @@ const thebe_selector_output = ".output, .cell_output"
 <img alt="../_images/gam_10_0.png" src="../_images/gam_10_0.png" />
 </div>
 </div>
-<p>Now we need to divide the range of X into K distinct regions (for every feature). Within each region, a polynomial function is fit to the data.</p>
-<p>Instead of providing the number of knots, in statsmodels, we have to specify the degrees of freedom (df). <code class="docutils literal notranslate"><span class="pre">df</span></code> defines how many parameters we have to estimate. They have a specific relationship with the number of knots and the degree, which depends on the type of spline (see <a class="reference external" href="https://stats.stackexchange.com/a/517479">Stackoverflow</a>):</p>
-<p>In the case of <strong>B-splines</strong>:</p>
 <ul class="simple">
+<li><p>Now we need to divide the range of X into K distinct regions (for every feature).</p></li>
+<li><p>Within each region, a polynomial function is fit to the data.</p></li>
+<li><p>Instead of providing the number of knots, in statsmodels, we have to specify the degrees of freedom (df).</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">df</span></code> defines how many parameters we have to estimate.</p></li>
+<li><p>They have a specific relationship with the number of knots and the degree, which depends on the type of spline (see <a class="reference external" href="https://stats.stackexchange.com/a/517479">Stackoverflow</a>):</p></li>
+<li><p>In the case of <strong>B-splines</strong>:</p>
+<ul>
 <li><p><span class="math notranslate nohighlight">\(df=𝑘+degree\)</span> if you specify the knots or</p></li>
 <li><p><span class="math notranslate nohighlight">\(𝑘=df−degree\)</span> if you specify the degrees of freedom and the degree.</p></li>
+</ul>
+</li>
 </ul>
 <p>As an example:</p>
 <ul class="simple">
 <li><p>A cubic spline (degree=3) with 4 knots (K=4) will have <span class="math notranslate nohighlight">\(df=4+3=7\)</span> degrees of freedom. If we use an intercept, we need to add an additional degree of freedom.</p></li>
 <li><p>A cubic spline (degree=3) with 5 degrees of freedom (df=5) will have <span class="math notranslate nohighlight">\(𝑘=5−3=2\)</span> knots (assuming the spline has no intercept).</p></li>
+<li><p>In our case, we want to fit a cubic spline (degree=3) with an intercept and three knots (K=3). We use this values for both of our features (we also could use different values for one of the features). This equals <span class="math notranslate nohighlight">\(df=3+3+1=7\)</span> for both of the features. This means that these degrees of freedom are used up by an intercept, plus six basis functions.</p></li>
 </ul>
-<p>In our case, we want to fit a cubic spline (degree=3) with an intercept and three knots (K=3). We use this values for both of our features (we also could use different values for one of the features). This equals <span class="math notranslate nohighlight">\(df=3+3+1=7\)</span> for both of the features. This means that these degrees of freedom are used up by an intercept, plus six basis functions.</p>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
 <p>The higher the degrees of freedom, the “wigglier” the spline gets because the number of knots is increased <span id="id5">[<a class="reference internal" href="reference.html#id7" title="Gareth James, Daniela Witten, Trevor Hastie, and Robert Tibshirani. An Introduction to Statistical learning. Springer, 2021. URL: https://www.statlearning.com/.">James <em>et al.</em>, 2021</a>]</span>.</p>
