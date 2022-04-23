@@ -652,7 +652,7 @@ have continuous first and second derivatives.</p></li>
 <div class="section" id="create-label-and-feature">
 <h3>Create label and feature<a class="headerlink" href="#create-label-and-feature" title="Permalink to this headline">¶</a></h3>
 <ul class="simple">
-<li><p>We only use the feature age to predict wage:</p></li>
+<li><p>We only use the feature age to predict wage (because we only use one predictor, we don’t perform data standardization)</p></li>
 </ul>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -863,10 +863,6 @@ have continuous first and second derivatives.</p></li>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/Users/jankirenz/opt/anaconda3/lib/python3.9/site-packages/sklearn/linear_model/_ridge.py:1791: RuntimeWarning: invalid value encountered in reciprocal
-  w = ((singvals_sq + alpha) ** -1) - (alpha ** -1)
-</pre></div>
-</div>
 <div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Pipeline(steps=[(&#39;polynomialfeatures&#39;, PolynomialFeatures(degree=3)),
                 (&#39;ridgecv&#39;,
                  RidgeCV(alphas=array([      0.000001,       0.00001 ,       0.0001  ,       0.001   ,
@@ -885,7 +881,7 @@ have continuous first and second derivatives.</p></li>
 </div>
 <div class="cell_output docutils container">
 <div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[{&#39;model&#39;: &#39;Ridge&#39;, &#39;rmse_train&#39;: 40.7053, &#39;rmse_test&#39;: 41.4135},
- {&#39;model&#39;: &#39;Polynomial Reg&#39;, &#39;rmse_train&#39;: 39.7717, &#39;rmse_test&#39;: 40.2511}]
+ {&#39;model&#39;: &#39;Polynomial Reg&#39;, &#39;rmse_train&#39;: 39.7717, &#39;rmse_test&#39;: 40.2513}]
 </pre></div>
 </div>
 </div>
@@ -930,10 +926,6 @@ have continuous first and second derivatives.</p></li>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/Users/jankirenz/opt/anaconda3/lib/python3.9/site-packages/sklearn/linear_model/_ridge.py:1791: RuntimeWarning: invalid value encountered in reciprocal
-  w = ((singvals_sq + alpha) ** -1) - (alpha ** -1)
-</pre></div>
-</div>
 <div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Pipeline(steps=[(&#39;splinetransformer&#39;, SplineTransformer(n_knots=4)),
                 (&#39;ridgecv&#39;,
                  RidgeCV(alphas=array([      0.000001,       0.00001 ,       0.0001  ,       0.001   ,
@@ -952,7 +944,7 @@ have continuous first and second derivatives.</p></li>
 </div>
 <div class="cell_output docutils container">
 <div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[{&#39;model&#39;: &#39;Ridge&#39;, &#39;rmse_train&#39;: 40.7053, &#39;rmse_test&#39;: 41.4135},
- {&#39;model&#39;: &#39;Polynomial Reg&#39;, &#39;rmse_train&#39;: 39.7717, &#39;rmse_test&#39;: 40.2511},
+ {&#39;model&#39;: &#39;Polynomial Reg&#39;, &#39;rmse_train&#39;: 39.7717, &#39;rmse_test&#39;: 40.2513},
  {&#39;model&#39;: &#39;Cubic Spline&#39;, &#39;rmse_train&#39;: 39.7456, &#39;rmse_test&#39;: 40.2444}]
 </pre></div>
 </div>
@@ -1138,9 +1130,15 @@ have continuous first and second derivatives.</p></li>
 </pre></div>
 </div>
 </div>
+<div class="cell_output docutils container">
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/Users/jankirenz/opt/anaconda3/lib/python3.9/site-packages/statsmodels/compat/pandas.py:61: FutureWarning: pandas.Int64Index is deprecated and will be removed from pandas in a future version. Use pandas.Index with the appropriate dtype instead.
+  from pandas import Int64Index as NumericIndex
+</pre></div>
+</div>
+</div>
 </div>
 <ul class="simple">
-<li><p>We fit a Generalized Additive Model (GAM)</p></li>
+<li><p>We fit a Generalized Additive Model (GAM). To learn more about GAMs, visit <a class="reference internal" href="gam.html"><span class="doc std std-doc">Generalized Additive Models (GAM)</span></a>.</p></li>
 </ul>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -1163,11 +1161,11 @@ have continuous first and second derivatives.</p></li>
 ==============================================================================
 Dep. Variable:                   wage   No. Observations:                 2100
 Model:                         GLMGam   Df Residuals:                     2093
-Model Family:                Gaussian   Df Model:                         6.00
+Model Family:                Gaussian   Df Model:                            6
 Link Function:               identity   Scale:                          1582.9
 Method:                         PIRLS   Log-Likelihood:                -10712.
-Date:                Fri, 22 Apr 2022   Deviance:                   3.3129e+06
-Time:                        21:58:55   Pearson chi2:                 3.31e+06
+Date:                Sat, 23 Apr 2022   Deviance:                   3.3129e+06
+Time:                        13:19:11   Pearson chi2:                 3.31e+06
 No. Iterations:                     3   Pseudo R-squ. (CS):            0.09038
 Covariance Type:            nonrobust                                         
 ==============================================================================
@@ -1211,7 +1209,7 @@ age_s5       -53.3174     12.324     -4.326      0.000     -77.472     -29.163
 </div>
 <div class="cell_output docutils container">
 <div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[{&#39;model&#39;: &#39;Ridge&#39;, &#39;rmse_train&#39;: 40.7053, &#39;rmse_test&#39;: 41.4135},
- {&#39;model&#39;: &#39;Polynomial Reg&#39;, &#39;rmse_train&#39;: 39.7717, &#39;rmse_test&#39;: 40.2511},
+ {&#39;model&#39;: &#39;Polynomial Reg&#39;, &#39;rmse_train&#39;: 39.7717, &#39;rmse_test&#39;: 40.2513},
  {&#39;model&#39;: &#39;Cubic Spline&#39;, &#39;rmse_train&#39;: 39.7456, &#39;rmse_test&#39;: 40.2444},
  {&#39;model&#39;: &#39;Spline statsmodels&#39;, &#39;rmse_train&#39;: 39.7188, &#39;rmse_test&#39;: 40.2194}]
 </pre></div>
@@ -1280,7 +1278,7 @@ age_s5       -53.3174     12.324     -4.326      0.000     -77.472     -29.163
 </div>
 <div class="cell_output docutils container">
 <div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[{&#39;model&#39;: &#39;Ridge&#39;, &#39;rmse_train&#39;: 40.7053, &#39;rmse_test&#39;: 41.4135},
- {&#39;model&#39;: &#39;Polynomial Reg&#39;, &#39;rmse_train&#39;: 39.7717, &#39;rmse_test&#39;: 40.2511},
+ {&#39;model&#39;: &#39;Polynomial Reg&#39;, &#39;rmse_train&#39;: 39.7717, &#39;rmse_test&#39;: 40.2513},
  {&#39;model&#39;: &#39;Cubic Spline&#39;, &#39;rmse_train&#39;: 39.7456, &#39;rmse_test&#39;: 40.2444},
  {&#39;model&#39;: &#39;Spline statsmodels&#39;, &#39;rmse_train&#39;: 39.7188, &#39;rmse_test&#39;: 40.2194},
  {&#39;model&#39;: &#39;Natural Spline&#39;, &#39;rmse_train&#39;: 39.8826, &#39;rmse_test&#39;: 40.3252}]
@@ -1365,7 +1363,7 @@ age_s5       -53.3174     12.324     -4.326      0.000     -77.472     -29.163
       <th>1</th>
       <td>Polynomial Reg</td>
       <td>39.7717</td>
-      <td>40.2511</td>
+      <td>40.2513</td>
     </tr>
     <tr>
       <th>4</th>

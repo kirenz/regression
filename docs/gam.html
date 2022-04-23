@@ -476,7 +476,15 @@ const thebe_selector_output = ".output, .cell_output"
 <p>In this tutorial, we use a GAM with a reguralized estimation of <a class="reference external" href="https://www.statsmodels.org/stable/generated/statsmodels.gam.smooth_basis.BSplines.html#statsmodels.gam.smooth_basis.BSplines">smooth components using B-Splines</a>. We could also use additive smooth components using <a class="reference external" href="https://www.statsmodels.org/stable/generated/statsmodels.gam.smooth_basis.CyclicCubicSplines.html#statsmodels.gam.smooth_basis.CyclicCubicSplines">cyclic cubic regression splines</a>.</p>
 <div class="section" id="data-preparation">
 <h2>Data preparation<a class="headerlink" href="#data-preparation" title="Permalink to this headline">¶</a></h2>
-<p>See <a class="reference internal" href="hitters_data.html"><span class="doc std std-doc">Hitters data preparation</span></a> for details about data preprocessing.</p>
+<ul class="simple">
+<li><p>See <a class="reference internal" href="hitters_data.html"><span class="doc std std-doc">Hitters data preparation</span></a> for details about the data preprocessing steps.</p></li>
+<li><p>We simply import the preprocessed data by using this <a class="reference external" href="https://github.com/kirenz/regression/blob/main/docs/hitters_data.py">Python script</a> which will yield:</p>
+<ul>
+<li><p>X_train, X_test, y_train, y_test</p></li>
+<li><p>df_train and df_tests</p></li>
+</ul>
+</li>
+</ul>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">hitters_data</span> <span class="kn">import</span> <span class="o">*</span>
@@ -534,22 +542,22 @@ const thebe_selector_output = ".output, .cell_output"
   <tbody>
     <tr>
       <th>260</th>
-      <td>496.0</td>
-      <td>119.0</td>
-      <td>8.0</td>
-      <td>57.0</td>
-      <td>33.0</td>
-      <td>21.0</td>
-      <td>7.0</td>
-      <td>3358.0</td>
-      <td>882.0</td>
-      <td>36.0</td>
-      <td>365.0</td>
-      <td>280.0</td>
-      <td>165.0</td>
-      <td>155.0</td>
-      <td>371.0</td>
-      <td>29.0</td>
+      <td>0.644577</td>
+      <td>0.257439</td>
+      <td>-0.456963</td>
+      <td>0.101010</td>
+      <td>-0.763917</td>
+      <td>-0.975959</td>
+      <td>-0.070553</td>
+      <td>0.298535</td>
+      <td>0.239063</td>
+      <td>-0.407836</td>
+      <td>0.011298</td>
+      <td>-0.163736</td>
+      <td>-0.361084</td>
+      <td>-0.482387</td>
+      <td>1.746229</td>
+      <td>3.022233</td>
       <td>1</td>
       <td>1</td>
       <td>1</td>
@@ -557,22 +565,22 @@ const thebe_selector_output = ".output, .cell_output"
     </tr>
     <tr>
       <th>92</th>
-      <td>317.0</td>
-      <td>78.0</td>
-      <td>7.0</td>
-      <td>35.0</td>
-      <td>35.0</td>
-      <td>32.0</td>
-      <td>1.0</td>
-      <td>317.0</td>
-      <td>78.0</td>
-      <td>7.0</td>
-      <td>35.0</td>
-      <td>35.0</td>
-      <td>32.0</td>
-      <td>45.0</td>
-      <td>122.0</td>
-      <td>26.0</td>
+      <td>-0.592807</td>
+      <td>-0.671359</td>
+      <td>-0.572936</td>
+      <td>-0.778318</td>
+      <td>-0.685806</td>
+      <td>-0.458312</td>
+      <td>-1.306911</td>
+      <td>-1.001403</td>
+      <td>-0.969702</td>
+      <td>-0.746705</td>
+      <td>-0.957639</td>
+      <td>-0.898919</td>
+      <td>-0.844319</td>
+      <td>-0.851547</td>
+      <td>0.022276</td>
+      <td>2.574735</td>
       <td>0</td>
       <td>0</td>
       <td>0</td>
@@ -580,22 +588,22 @@ const thebe_selector_output = ".output, .cell_output"
     </tr>
     <tr>
       <th>137</th>
-      <td>343.0</td>
-      <td>103.0</td>
-      <td>6.0</td>
-      <td>48.0</td>
-      <td>36.0</td>
-      <td>40.0</td>
-      <td>15.0</td>
-      <td>4338.0</td>
-      <td>1193.0</td>
-      <td>70.0</td>
-      <td>581.0</td>
-      <td>421.0</td>
-      <td>325.0</td>
-      <td>211.0</td>
-      <td>56.0</td>
-      <td>13.0</td>
+      <td>-0.413075</td>
+      <td>-0.105019</td>
+      <td>-0.688910</td>
+      <td>-0.258715</td>
+      <td>-0.646751</td>
+      <td>-0.081841</td>
+      <td>1.577925</td>
+      <td>0.717456</td>
+      <td>0.706633</td>
+      <td>-0.010542</td>
+      <td>0.645511</td>
+      <td>0.259369</td>
+      <td>0.220252</td>
+      <td>-0.294452</td>
+      <td>-0.434676</td>
+      <td>0.635577</td>
       <td>0</td>
       <td>0</td>
       <td>0</td>
@@ -603,22 +611,22 @@ const thebe_selector_output = ".output, .cell_output"
     </tr>
     <tr>
       <th>90</th>
-      <td>314.0</td>
-      <td>83.0</td>
-      <td>13.0</td>
-      <td>39.0</td>
-      <td>46.0</td>
-      <td>16.0</td>
-      <td>5.0</td>
-      <td>1457.0</td>
-      <td>405.0</td>
-      <td>28.0</td>
-      <td>156.0</td>
-      <td>159.0</td>
-      <td>76.0</td>
-      <td>533.0</td>
-      <td>40.0</td>
-      <td>4.0</td>
+      <td>-0.613545</td>
+      <td>-0.558091</td>
+      <td>0.122907</td>
+      <td>-0.618440</td>
+      <td>-0.256196</td>
+      <td>-1.211253</td>
+      <td>-0.482672</td>
+      <td>-0.514087</td>
+      <td>-0.478077</td>
+      <td>-0.501317</td>
+      <td>-0.602362</td>
+      <td>-0.526826</td>
+      <td>-0.684451</td>
+      <td>0.786178</td>
+      <td>-0.545452</td>
+      <td>-0.706917</td>
       <td>0</td>
       <td>1</td>
       <td>0</td>
@@ -626,22 +634,22 @@ const thebe_selector_output = ".output, .cell_output"
     </tr>
     <tr>
       <th>100</th>
-      <td>495.0</td>
-      <td>151.0</td>
-      <td>17.0</td>
-      <td>61.0</td>
-      <td>84.0</td>
-      <td>78.0</td>
-      <td>10.0</td>
-      <td>5624.0</td>
-      <td>1679.0</td>
-      <td>275.0</td>
-      <td>884.0</td>
-      <td>1015.0</td>
-      <td>709.0</td>
-      <td>1045.0</td>
-      <td>88.0</td>
-      <td>13.0</td>
+      <td>0.637665</td>
+      <td>0.982354</td>
+      <td>0.586803</td>
+      <td>0.260888</td>
+      <td>1.227914</td>
+      <td>1.706394</td>
+      <td>0.547626</td>
+      <td>1.267183</td>
+      <td>1.437305</td>
+      <td>2.384908</td>
+      <td>1.535171</td>
+      <td>2.041811</td>
+      <td>1.615457</td>
+      <td>2.504446</td>
+      <td>-0.213124</td>
+      <td>0.635577</td>
       <td>0</td>
       <td>0</td>
       <td>0</td>
@@ -672,22 +680,22 @@ const thebe_selector_output = ".output, .cell_output"
     </tr>
     <tr>
       <th>274</th>
-      <td>522.0</td>
-      <td>140.0</td>
-      <td>16.0</td>
-      <td>73.0</td>
-      <td>77.0</td>
-      <td>60.0</td>
-      <td>4.0</td>
-      <td>730.0</td>
-      <td>185.0</td>
-      <td>22.0</td>
-      <td>93.0</td>
-      <td>106.0</td>
-      <td>86.0</td>
-      <td>1320.0</td>
-      <td>166.0</td>
-      <td>17.0</td>
+      <td>0.824309</td>
+      <td>0.733164</td>
+      <td>0.470829</td>
+      <td>0.740521</td>
+      <td>0.954525</td>
+      <td>0.859335</td>
+      <td>-0.688732</td>
+      <td>-0.824858</td>
+      <td>-0.808834</td>
+      <td>-0.571428</td>
+      <td>-0.787341</td>
+      <td>-0.685866</td>
+      <td>-0.648118</td>
+      <td>3.427344</td>
+      <td>0.326910</td>
+      <td>1.232241</td>
       <td>1</td>
       <td>0</td>
       <td>1</td>
@@ -695,22 +703,22 @@ const thebe_selector_output = ".output, .cell_output"
     </tr>
     <tr>
       <th>196</th>
-      <td>464.0</td>
-      <td>128.0</td>
-      <td>28.0</td>
-      <td>67.0</td>
-      <td>94.0</td>
-      <td>52.0</td>
-      <td>13.0</td>
-      <td>5829.0</td>
-      <td>1552.0</td>
-      <td>210.0</td>
-      <td>740.0</td>
-      <td>840.0</td>
-      <td>452.0</td>
-      <td>0.0</td>
-      <td>0.0</td>
-      <td>0.0</td>
+      <td>0.423369</td>
+      <td>0.461321</td>
+      <td>1.862516</td>
+      <td>0.500704</td>
+      <td>1.618469</td>
+      <td>0.482865</td>
+      <td>1.165805</td>
+      <td>1.354814</td>
+      <td>1.246368</td>
+      <td>1.625375</td>
+      <td>1.112362</td>
+      <td>1.516681</td>
+      <td>0.681687</td>
+      <td>-1.002566</td>
+      <td>-0.822392</td>
+      <td>-1.303581</td>
       <td>0</td>
       <td>1</td>
       <td>0</td>
@@ -718,22 +726,22 @@ const thebe_selector_output = ".output, .cell_output"
     </tr>
     <tr>
       <th>159</th>
-      <td>616.0</td>
-      <td>163.0</td>
-      <td>27.0</td>
-      <td>83.0</td>
-      <td>107.0</td>
-      <td>32.0</td>
-      <td>3.0</td>
-      <td>1437.0</td>
-      <td>377.0</td>
-      <td>65.0</td>
-      <td>181.0</td>
-      <td>227.0</td>
-      <td>82.0</td>
-      <td>110.0</td>
-      <td>308.0</td>
-      <td>15.0</td>
+      <td>1.474109</td>
+      <td>1.254197</td>
+      <td>1.746542</td>
+      <td>1.140215</td>
+      <td>2.126191</td>
+      <td>-0.458312</td>
+      <td>-0.894792</td>
+      <td>-0.522636</td>
+      <td>-0.520174</td>
+      <td>-0.068968</td>
+      <td>-0.528958</td>
+      <td>-0.322776</td>
+      <td>-0.662651</td>
+      <td>-0.633407</td>
+      <td>1.310048</td>
+      <td>0.933909</td>
       <td>0</td>
       <td>1</td>
       <td>0</td>
@@ -741,22 +749,22 @@ const thebe_selector_output = ".output, .cell_output"
     </tr>
     <tr>
       <th>17</th>
-      <td>190.0</td>
-      <td>46.0</td>
-      <td>2.0</td>
-      <td>24.0</td>
-      <td>8.0</td>
-      <td>15.0</td>
-      <td>5.0</td>
-      <td>479.0</td>
-      <td>102.0</td>
-      <td>5.0</td>
-      <td>65.0</td>
-      <td>23.0</td>
-      <td>39.0</td>
-      <td>102.0</td>
-      <td>177.0</td>
-      <td>16.0</td>
+      <td>-1.470728</td>
+      <td>-1.396275</td>
+      <td>-1.152806</td>
+      <td>-1.217982</td>
+      <td>-1.740306</td>
+      <td>-1.258312</td>
+      <td>-0.482672</td>
+      <td>-0.932153</td>
+      <td>-0.933620</td>
+      <td>-0.770075</td>
+      <td>-0.869554</td>
+      <td>-0.934928</td>
+      <td>-0.818885</td>
+      <td>-0.660255</td>
+      <td>0.403069</td>
+      <td>1.083075</td>
       <td>0</td>
       <td>1</td>
       <td>0</td>
@@ -764,22 +772,22 @@ const thebe_selector_output = ".output, .cell_output"
     </tr>
     <tr>
       <th>162</th>
-      <td>165.0</td>
-      <td>39.0</td>
-      <td>2.0</td>
-      <td>13.0</td>
-      <td>9.0</td>
-      <td>16.0</td>
-      <td>3.0</td>
-      <td>196.0</td>
-      <td>44.0</td>
-      <td>2.0</td>
-      <td>18.0</td>
-      <td>10.0</td>
-      <td>18.0</td>
-      <td>332.0</td>
-      <td>19.0</td>
-      <td>2.0</td>
+      <td>-1.643547</td>
+      <td>-1.554850</td>
+      <td>-1.152806</td>
+      <td>-1.657646</td>
+      <td>-1.701250</td>
+      <td>-1.211253</td>
+      <td>-0.894792</td>
+      <td>-1.053127</td>
+      <td>-1.020819</td>
+      <td>-0.805130</td>
+      <td>-1.007554</td>
+      <td>-0.973938</td>
+      <td>-0.895185</td>
+      <td>0.111623</td>
+      <td>-0.690846</td>
+      <td>-1.005249</td>
       <td>0</td>
       <td>1</td>
       <td>1</td>
@@ -864,24 +872,28 @@ const thebe_selector_output = ".output, .cell_output"
 </pre></div>
 </div>
 </div>
+<div class="cell_output docutils container">
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/Users/jankirenz/opt/anaconda3/lib/python3.9/site-packages/statsmodels/compat/pandas.py:61: FutureWarning: pandas.Int64Index is deprecated and will be removed from pandas in a future version. Use pandas.Index with the appropriate dtype instead.
+  from pandas import Int64Index as NumericIndex
+</pre></div>
+</div>
+</div>
 </div>
 </div>
 </div>
 <div class="section" id="model">
 <h2>Model<a class="headerlink" href="#model" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li><p>In our model, we use an arbitrary penalization weight of 1 for both features</p></li>
+<li><p>Note that optimal penalization weights alpha could be obtained through generalized k-fold cross-validation by using the function <a class="reference external" href="https://www.statsmodels.org/dev/generated/statsmodels.gam.generalized_additive_model.GLMGam.select_penweight_kfold.html">select_penweight_kfold</a>.</p></li>
+</ul>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">from</span> <span class="nn">statsmodels.gam.api</span> <span class="kn">import</span> <span class="n">GLMGam</span>
 
-<span class="c1"># we use an arbitrary penalization weight of 1 for both features</span>
+<span class="c1"># regularization</span>
 <span class="n">alpha</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">])</span>
-</pre></div>
-</div>
-</div>
-</div>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">statsmodels.gam.api</span> <span class="kn">import</span> <span class="n">GLMGam</span>
 
 <span class="c1"># build model</span>
 <span class="n">gam_bs</span> <span class="o">=</span> <span class="n">GLMGam</span><span class="o">.</span><span class="n">from_formula</span><span class="p">(</span><span class="s1">&#39;Salary ~ CRuns + Hits&#39;</span><span class="p">,</span> 
@@ -892,9 +904,6 @@ const thebe_selector_output = ".output, .cell_output"
 </div>
 </div>
 </div>
-<ul class="simple">
-<li><p>Note that optimal penalization weights alpha could be obtained through generalized k-fold cross-validation by using the function <a class="reference external" href="https://www.statsmodels.org/dev/generated/statsmodels.gam.generalized_additive_model.GLMGam.select_penweight_kfold.html">select_penweight_kfold</a>.</p></li>
-</ul>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># fit model</span>
@@ -909,32 +918,32 @@ const thebe_selector_output = ".output, .cell_output"
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>                 Generalized Linear Model Regression Results                  
 ==============================================================================
 Dep. Variable:                 Salary   No. Observations:                  184
-Model:                         GLMGam   Df Residuals:                   171.00
-Model Family:                Gaussian   Df Model:                        12.00
-Link Function:               identity   Scale:                          90949.
-Method:                         PIRLS   Log-Likelihood:                -1304.8
-Date:                Fri, 22 Apr 2022   Deviance:                   1.5552e+07
-Time:                        22:19:13   Pearson chi2:                 1.56e+07
-No. Iterations:                     3   Pseudo R-squ. (CS):             0.7307
+Model:                         GLMGam   Df Residuals:                   176.93
+Model Family:                Gaussian   Df Model:                         6.07
+Link Function:               identity   Scale:                          92428.
+Method:                         PIRLS   Log-Likelihood:                -1309.4
+Date:                Sat, 23 Apr 2022   Deviance:                   1.6353e+07
+Time:                        13:22:31   Pearson chi2:                 1.64e+07
+No. Iterations:                     3   Pseudo R-squ. (CS):             0.7112
 Covariance Type:            nonrobust                                         
 ==============================================================================
                  coef    std err          z      P&gt;|z|      [0.025      0.975]
 ------------------------------------------------------------------------------
-Intercept    823.4889    303.577      2.713      0.007     228.489    1418.489
-CRuns          0.3242      0.217      1.491      0.136      -0.102       0.750
-Hits          -1.6509      2.588     -0.638      0.524      -6.724       3.422
-CRuns_s0    -313.4954    407.044     -0.770      0.441   -1111.287     484.296
-CRuns_s1    -209.9579    267.716     -0.784      0.433    -734.671     314.755
-CRuns_s2     104.5118    285.073      0.367      0.714    -454.221     663.244
-CRuns_s3     399.2930    324.056      1.232      0.218    -235.844    1034.430
-CRuns_s4     153.7883    417.845      0.368      0.713    -665.173     972.749
-CRuns_s5    -290.1995    252.539     -1.149      0.251    -785.167     204.768
-Hits_s0     -618.2287    496.526     -1.245      0.213   -1591.402     354.944
-Hits_s1     -444.4912    279.007     -1.593      0.111    -991.334     102.352
-Hits_s2     -303.3500    203.266     -1.492      0.136    -701.743      95.043
-Hits_s3       21.6155    175.459      0.123      0.902    -322.279     365.510
-Hits_s4      396.1958    257.028      1.541      0.123    -107.569     899.960
-Hits_s5      -57.6135    232.708     -0.248      0.804    -513.712     398.485
+Intercept    492.8904   2.54e+09   1.94e-07      1.000   -4.99e+09    4.99e+09
+CRuns        156.2041   3.71e+07   4.21e-06      1.000   -7.27e+07    7.27e+07
+Hits          54.6951    1.1e+09   4.97e-08      1.000   -2.16e+09    2.16e+09
+CRuns_s0      29.5958   3.63e+06   8.15e-06      1.000   -7.12e+06    7.12e+06
+CRuns_s1     100.2968   1.23e+07   8.12e-06      1.000   -2.42e+07    2.42e+07
+CRuns_s2     266.6299      3e+07   8.87e-06      1.000   -5.89e+07    5.89e+07
+CRuns_s3     697.9509   1.05e+08   6.65e-06      1.000   -2.06e+08    2.06e+08
+CRuns_s4      71.3693   1.75e+08   4.08e-07      1.000   -3.43e+08    3.43e+08
+CRuns_s5    -297.1170   2.36e+08  -1.26e-06      1.000   -4.62e+08    4.62e+08
+Hits_s0     -151.3181   5.73e+08  -2.64e-07      1.000   -1.12e+09    1.12e+09
+Hits_s1     -312.7937    1.4e+09  -2.24e-07      1.000   -2.74e+09    2.74e+09
+Hits_s2     -252.9985   2.55e+09  -9.94e-08      1.000   -4.99e+09    4.99e+09
+Hits_s3      -33.8293   3.79e+09  -8.92e-09      1.000   -7.43e+09    7.43e+09
+Hits_s4      -12.2909   4.79e+09  -2.57e-09      1.000   -9.39e+09    9.39e+09
+Hits_s5      -49.8901   5.46e+09  -9.14e-09      1.000   -1.07e+10    1.07e+10
 ==============================================================================
 </pre></div>
 </div>
@@ -954,8 +963,8 @@ Hits_s5      -57.6135    232.708     -0.248      0.804    -513.712     398.485
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/gam_20_0.png" src="../_images/gam_20_0.png" />
-<img alt="../_images/gam_20_1.png" src="../_images/gam_20_1.png" />
+<img alt="../_images/gam_19_0.png" src="../_images/gam_19_0.png" />
+<img alt="../_images/gam_19_1.png" src="../_images/gam_19_1.png" />
 </div>
 </div>
 <ul class="simple">
@@ -968,8 +977,8 @@ Hits_s5      -57.6135    232.708     -0.248      0.804    -513.712     398.485
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/gam_22_0.png" src="../_images/gam_22_0.png" />
-<img alt="../_images/gam_22_1.png" src="../_images/gam_22_1.png" />
+<img alt="../_images/gam_21_0.png" src="../_images/gam_21_0.png" />
+<img alt="../_images/gam_21_1.png" src="../_images/gam_21_1.png" />
 </div>
 </div>
 </div>
@@ -993,8 +1002,8 @@ Hits_s5      -57.6135    232.708     -0.248      0.804    -513.712     398.485
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>MSE: 84523.58788752233
-RMSE: 290.72940664391405
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>MSE: 88877.46838916994
+RMSE: 298.12324362446134
 </pre></div>
 </div>
 </div>
