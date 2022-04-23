@@ -22,6 +22,8 @@ list_numerical = X_numerical.columns
 
 # Create all features
 X = pd.concat([X_numerical, dummies[['League_N', 'Division_W', 'NewLeague_N']]], axis=1)
+feature_names = X.columns
+
 
 # Split data
 X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.3, random_state=10)
