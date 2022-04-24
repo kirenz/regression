@@ -17,9 +17,9 @@ parts:
     chapters:
     - file: docs/gradientboosting.ipynb
     - file: docs/gradientboosting-xgboost.ipynb 
-  - caption: Feature Selection
-    chapters:
-    - file: docs/feature-selection.ipynb
+  #- caption: Feature Selection
+  #  chapters:
+ #   - file: docs/feature-selection.ipynb
   - caption: Ensemble
     chapters:
     - file: docs/ensemble.ipynb
