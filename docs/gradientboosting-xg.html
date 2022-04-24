@@ -5,7 +5,7 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Gradient Boosting in scikit-learn &#8212; Introduction to Regression Models</title>
+    <title>Gradient Boosting with XGBoost &#8212; Introduction to Regression Models</title>
     
   <link href="../_static/css/theme.css" rel="stylesheet">
   <link href="../_static/css/index.ff1ffe594081f20da1ef19478df9384b.css" rel="stylesheet">
@@ -403,7 +403,7 @@ const thebe_selector_output = ".output, .cell_output"
         <div class="col-12 col-md-9 pl-md-3 pr-md-0">
             <!-- Table of contents that is only displayed when printing the page -->
             <div id="jb-print-docs-body" class="onlyprint">
-                <h1>Gradient Boosting in scikit-learn</h1>
+                <h1>Gradient Boosting with XGBoost</h1>
                 <!-- Table of contents -->
                 <div id="print-main-content">
                     <div id="jb-print-toc">
@@ -463,13 +463,14 @@ const thebe_selector_output = ".output, .cell_output"
             
               <div>
                 
-  <div class="tex2jax_ignore mathjax_ignore section" id="gradient-boosting-in-scikit-learn">
-<h1>Gradient Boosting in scikit-learn<a class="headerlink" href="#gradient-boosting-in-scikit-learn" title="Permalink to this headline">¶</a></h1>
+  <div class="tex2jax_ignore mathjax_ignore section" id="gradient-boosting-with-xgboost">
+<h1>Gradient Boosting with XGBoost<a class="headerlink" href="#gradient-boosting-with-xgboost" title="Permalink to this headline">¶</a></h1>
 <div class="section" id="setup">
 <h2>Setup<a class="headerlink" href="#setup" title="Permalink to this headline">¶</a></h2>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">ps</span>
 
 <span class="kn">import</span> <span class="nn">xgboost</span> <span class="k">as</span> <span class="nn">xgb</span>
 
@@ -494,7 +495,20 @@ const thebe_selector_output = ".output, .cell_output"
 </ul>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">hitters_data</span> <span class="kn">import</span> <span class="o">*</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">data_prep_hitters</span> <span class="kn">import</span> <span class="o">*</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">dtrain</span> <span class="o">=</span> <span class="n">xgb</span><span class="o">.</span><span class="n">DMatrix</span><span class="p">(</span><span class="n">X_train</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="n">y_train</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/Users/jankirenz/opt/anaconda3/envs/xgboost/lib/python3.9/site-packages/xgboost/data.py:262: FutureWarning: pandas.Int64Index is deprecated and will be removed from pandas in a future version. Use pandas.Index with the appropriate dtype instead.
+  elif isinstance(data.columns, (pd.Int64Index, pd.RangeIndex)):
 </pre></div>
 </div>
 </div>
@@ -505,12 +519,21 @@ const thebe_selector_output = ".output, .cell_output"
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">params</span> <span class="o">=</span> <span class="p">{</span>
-    <span class="s2">&quot;n_estimators&quot;</span><span class="p">:</span> <span class="mi">500</span><span class="p">,</span>
     <span class="s2">&quot;max_depth&quot;</span><span class="p">:</span> <span class="mi">4</span><span class="p">,</span>
     <span class="s2">&quot;eta&quot;</span><span class="p">:</span> <span class="mf">0.01</span>
     <span class="p">}</span>
-
-<span class="n">num_round</span> <span class="o">=</span> <span class="mi">2</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">num_round</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>2
 </pre></div>
 </div>
 </div>
@@ -530,20 +553,154 @@ const thebe_selector_output = ".output, .cell_output"
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">reg</span> <span class="o">=</span> <span class="n">xgb</span><span class="o">.</span><span class="n">train</span><span class="p">(</span><span class="n">params</span><span class="p">,</span> <span class="n">df_train</span><span class="p">,</span> <span class="n">num_round</span><span class="p">)</span>
-
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Use &quot;gpu_hist&quot; for training the model.</span>
+<span class="n">reg</span> <span class="o">=</span> <span class="n">xgb</span><span class="o">.</span><span class="n">XGBRegressor</span><span class="p">()</span>
+<span class="c1"># Fit the model using predictor X and response y.</span>
 <span class="n">reg</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X_train</span><span class="p">,</span> <span class="n">y_train</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
-<span class="ne">NameError</span><span class="g g-Whitespace">                                 </span>Traceback (most recent call last)
-<span class="nn">/Users/jankirenz/books/regression/docs/gradientboosting-xg.ipynb Cell 9&#39;</span> in <span class="ni">&lt;cell line: 1&gt;</span><span class="nt">()</span>
-<span class="o">----&gt;</span> <span class="o">&lt;</span><span class="n">a</span> <span class="n">href</span><span class="o">=</span><span class="s1">&#39;vscode-notebook-cell:/Users/jankirenz/books/regression/docs/gradientboosting-xg.ipynb#ch0000007?line=0&#39;</span><span class="o">&gt;</span><span class="mi">1</span><span class="o">&lt;/</span><span class="n">a</span><span class="o">&gt;</span> <span class="n">reg</span> <span class="o">=</span> <span class="n">xgb</span><span class="o">.</span><span class="n">train</span><span class="p">(</span><span class="n">params</span><span class="p">,</span> <span class="n">df_train</span><span class="p">,</span> <span class="n">num_round</span><span class="p">)</span>
-      <span class="o">&lt;</span><span class="n">a</span> <span class="n">href</span><span class="o">=</span><span class="s1">&#39;vscode-notebook-cell:/Users/jankirenz/books/regression/docs/gradientboosting-xg.ipynb#ch0000007?line=2&#39;</span><span class="o">&gt;</span><span class="mi">3</span><span class="o">&lt;/</span><span class="n">a</span><span class="o">&gt;</span> <span class="n">reg</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X_train</span><span class="p">,</span> <span class="n">y_train</span><span class="p">)</span>
-
-<span class="ne">NameError</span>: name &#39;df_train&#39; is not defined
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>XGBRegressor(base_score=0.5, booster=&#39;gbtree&#39;, colsample_bylevel=1,
+             colsample_bynode=1, colsample_bytree=1, enable_categorical=False,
+             gamma=0, gpu_id=-1, importance_type=None,
+             interaction_constraints=&#39;&#39;, learning_rate=0.300000012,
+             max_delta_step=0, max_depth=6, min_child_weight=1, missing=nan,
+             monotone_constraints=&#39;()&#39;, n_estimators=100, n_jobs=4,
+             num_parallel_tree=1, predictor=&#39;auto&#39;, random_state=0, reg_alpha=0,
+             reg_lambda=1, scale_pos_weight=1, subsample=1, tree_method=&#39;exact&#39;,
+             validate_parameters=1, verbosity=None)
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">y_pred</span> <span class="o">=</span> <span class="n">reg</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">X_train</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/Users/jankirenz/opt/anaconda3/envs/xgboost/lib/python3.9/site-packages/xgboost/data.py:262: FutureWarning: pandas.Int64Index is deprecated and will be removed from pandas in a future version. Use pandas.Index with the appropriate dtype instead.
+  elif isinstance(data.columns, (pd.Int64Index, pd.RangeIndex)):
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Save model into JSON format.</span>
+<span class="n">reg</span><span class="o">.</span><span class="n">save_model</span><span class="p">(</span><span class="s2">&quot;regressor.json&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">y_pred</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([ 874.9965  ,   69.998985,  429.99884 ,  431.49216 , 2460.0007  ,
+        320.00266 ,  145.00325 ,   89.99928 ,  179.99863 ,  134.99495 ,
+         75.002396,  517.139   ,  200.00252 , 1200.0002  ,  275.0018  ,
+        740.0008  ,  699.99585 ,  450.00156 ,  385.0039  ,   75.001854,
+        341.67102 ,  300.00922 ,  250.0015  , 1183.3342  ,  749.99835 ,
+        900.0008  ,  154.99905 ,  899.9998  ,  939.99945 ,  595.00275 ,
+        249.9989  ,  164.9997  ,  129.99976 ,  365.0024  ,  109.9972  ,
+         79.997055,  399.99802 ,  525.0003  ,  120.001465,  624.9852  ,
+        424.99988 ,  171.9961  ,  416.66705 ,   86.500305,  214.99953 ,
+        765.00055 ,  740.00073 ,  875.00104 ,  149.99799 ,  749.9957  ,
+         94.999115,  225.00139 ,  235.00232 ,   97.50122 , 1669.9996  ,
+        474.99823 ,  749.99603 ,  500.0118  ,  474.99304 ,  260.0041  ,
+       1049.999   ,  708.33496 ,  656.9986  ,  325.00113 ,  650.0025  ,
+       1043.331   , 1450.0037  ,  139.99103 ,  733.33655 ,  414.99808 ,
+       1500.0004  ,  530.0039  , 1299.996   ,  849.99994 ,  100.00429 ,
+        874.99744 ,  105.00016 ,  774.99884 ,  209.99997 ,  384.99435 ,
+        215.00146 ,  277.50534 ,  849.99945 ,   91.50419 ,  750.0006  ,
+        299.9991  ,  155.00081 ,  549.99036 ,   90.002014,  749.996   ,
+        662.50397 ,  100.00147 ,  340.00046 , 1259.9957  , 1174.9968  ,
+        286.66965 ,  699.9952  , 1008.3258  ,  550.00116 ,  139.99847 ,
+        900.0033  ,  450.00003 ,  124.98826 ,  189.99857 ,  424.98154 ,
+         90.00059 ,  214.99963 , 1939.9988  ,  165.00072 ,   75.00613 ,
+        580.00104 ,  500.013   ,  249.99974 ,  749.9995  ,  195.00406 ,
+       1349.999   ,  600.00134 ,  919.99817 ,  299.99924 ,  630.0038  ,
+        119.99648 ,  724.9954  ,  190.99919 , 1149.9957  ,  145.00992 ,
+        109.99972 ,  139.9998  ,  959.99896 , 1299.9983  ,  300.0012  ,
+        875.0014  , 1300.0002  ,  737.49585 ,  225.00595 ,  202.49673 ,
+        349.9984  ,  400.00198 ,  114.99903 ,  612.4989  ,  815.0043  ,
+        210.00194 ,   67.49885 ,  110.00159 , 1310.0016  ,  362.50006 ,
+        420.0123  ,   90.00046 ,  155.00648 ,  399.997   ,  737.4935  ,
+       2412.4993  ,  264.99966 ,  239.99905 ,  400.00443 ,  374.99536 ,
+        160.00195 ,  349.99808 ,  799.9979  ,  750.0004  ,  499.99796 ,
+        487.49945 ,  305.00607 , 1900.0021  ,  600.0002  ,   99.99892 ,
+        535.00397 ,  535.0006  , 1799.9993  ,  185.00128 ,  297.5028  ,
+        135.00288 ,  849.99786 ,  700.0001  ,  425.0057  ,  674.9946  ,
+        326.67276 ,  474.9982  , 1861.4595  , 1099.9916  ,  200.0008  ,
+        587.5009  ,  200.00113 ,  174.99988 ,   75.001816], dtype=float32)
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">ypred</span> <span class="o">=</span> <span class="n">reg</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">dtrain</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">ypred</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([ 84.8262  ,  10.00149 ,  50.3132  ,  28.710258, 141.12277 ,
+        36.7513  ,  18.127956,  10.00149 ,  18.127956,  14.075737,
+        10.00149 ,  68.84768 ,  36.7513  ,  84.8262  ,  38.218307,
+        84.8262  ,  50.3132  ,  50.3132  ,  42.987354,  10.00149 ,
+        50.3132  ,  28.710258,  15.515028, 114.21922 ,  68.84768 ,
+        98.2407  ,  18.127956,  51.171577,  84.8262  ,  70.71013 ,
+        18.127956,  18.127956,  10.00149 ,  42.987354,  10.00149 ,
+        18.127956,  38.218307,  61.24646 ,  10.00149 ,  42.987354,
+        42.987354,  18.127956,  49.15157 ,  10.00149 ,  18.127956,
+        78.65379 ,  84.8262  ,  70.71013 ,  14.075737,  70.71013 ,
+        10.00149 ,  18.127956,  37.030136,  10.00149 , 141.12277 ,
+        42.987354,  61.24646 ,  42.987354,  28.710258,  38.218307,
+        61.24646 ,  51.171577,  84.8262  ,  38.218307,  49.15157 ,
+        84.8262  , 111.729744,  14.075737,  70.71013 ,  28.710258,
+       141.12277 ,  84.8262  ,  61.24646 ,  68.84768 ,  10.00149 ,
+        64.53773 ,  18.127956,  95.44114 ,  18.127956,  28.710258,
+        28.710258,  28.710258,  70.71013 ,  10.00149 ,  70.71013 ,
+        18.127956,  14.075737,  42.987354,  10.00149 ,  51.171577,
+        84.8262  ,   5.364542,  28.710258,  84.8262  ,  84.8262  ,
+        18.127956,  40.238316,  84.8262  ,  42.987354,  18.127956,
+        84.8262  ,  49.15157 ,  10.00149 ,  28.710258,  28.710258,
+        10.00149 ,  18.127956, 108.00416 ,  18.127956,  10.00149 ,
+        84.8262  ,  70.71013 ,  18.127956,  68.84768 ,  18.127956,
+       114.21922 ,  70.71013 ,  45.45423 ,  28.710258,  42.987354,
+        10.00149 ,  62.675274,  28.710258,  84.8262  ,  18.127956,
+        10.00149 ,  14.075737, 108.00416 , 114.21922 ,  18.127956,
+       134.9077  , 108.00416 ,  70.71013 ,  28.214014,  18.127956,
+        28.710258,  42.987354,  10.00149 ,  42.987354,  78.65379 ,
+        28.710258,  10.00149 ,  10.00149 , 114.21922 ,  38.218307,
+        92.025635,  10.00149 ,  18.127956,  42.987354,  61.24646 ,
+       141.12277 ,  18.127956,  49.15157 ,  50.3132  ,  28.710258,
+        28.710258,  28.710258,  84.8262  ,  70.71013 ,  51.171577,
+        38.25438 ,  28.710258, 141.12277 ,  61.24646 ,  10.00149 ,
+        64.53773 ,  38.25438 , 141.12277 ,  18.127956,  28.710258,
+        14.075737,  68.84768 ,  68.84768 ,  42.987354,  70.71013 ,
+        42.987354,  49.15157 , 141.12277 , 100.10316 ,  18.127956,
+        68.84768 ,  28.710258,  10.00149 ,  10.00149 ], dtype=float32)
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">reg</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X_train</span><span class="p">,</span> <span class="n">y_train</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -565,33 +722,15 @@ const thebe_selector_output = ".output, .cell_output"
 <p>Source: <a class="reference external" href="https://scikit-learn.org/stable/auto_examples/ensemble/plot_gradient_boosting_regression.html#plot-training-deviance">scikit learn</a>, provided by Peter Prettenhofer, Maria Telenczuk and Katrina Ni:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">test_score</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="n">params</span><span class="p">[</span><span class="s2">&quot;n_estimators&quot;</span><span class="p">],),</span> <span class="n">dtype</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">float64</span><span class="p">)</span>
-
-<span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">y_pred</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">reg</span><span class="o">.</span><span class="n">staged_predict</span><span class="p">(</span><span class="n">X_test</span><span class="p">)):</span>
-    <span class="n">test_score</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">reg</span><span class="o">.</span><span class="n">loss_</span><span class="p">(</span><span class="n">y_test</span><span class="p">,</span> <span class="n">y_pred</span><span class="p">)</span>
-
-<span class="n">fig</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">6</span><span class="p">,</span> <span class="mi">6</span><span class="p">))</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">subplot</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s2">&quot;Deviance&quot;</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span>
-    <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="n">params</span><span class="p">[</span><span class="s2">&quot;n_estimators&quot;</span><span class="p">])</span> <span class="o">+</span> <span class="mi">1</span><span class="p">,</span>
-    <span class="n">reg</span><span class="o">.</span><span class="n">train_score_</span><span class="p">,</span>
-    <span class="s2">&quot;b-&quot;</span><span class="p">,</span>
-    <span class="n">label</span><span class="o">=</span><span class="s2">&quot;Training Set Deviance&quot;</span><span class="p">,</span>
-<span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span>
-    <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="n">params</span><span class="p">[</span><span class="s2">&quot;n_estimators&quot;</span><span class="p">])</span> <span class="o">+</span> <span class="mi">1</span><span class="p">,</span> <span class="n">test_score</span><span class="p">,</span> <span class="s2">&quot;r-&quot;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;Test Set Deviance&quot;</span>
-<span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">(</span><span class="n">loc</span><span class="o">=</span><span class="s2">&quot;upper right&quot;</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s2">&quot;Boosting Iterations&quot;</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s2">&quot;Deviance&quot;</span><span class="p">)</span>
-<span class="n">fig</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">xgb</span><span class="o">.</span><span class="n">plot_importance</span><span class="p">(</span><span class="n">reg</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/gradientboosting-xg_12_0.png" src="../_images/gradientboosting-xg_12_0.png" />
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;AxesSubplot:title={&#39;center&#39;:&#39;Feature importance&#39;}, xlabel=&#39;F score&#39;, ylabel=&#39;Features&#39;&gt;
+</pre></div>
+</div>
+<img alt="../_images/gradientboosting-xg_19_1.png" src="../_images/gradientboosting-xg_19_1.png" />
 </div>
 </div>
 </div>
@@ -614,24 +753,12 @@ const thebe_selector_output = ".output, .cell_output"
 </ul>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># obtain feature importance</span>
-<span class="n">feature_importance</span> <span class="o">=</span> <span class="n">reg</span><span class="o">.</span><span class="n">feature_importances_</span>
-
-<span class="c1"># sort features according to importance</span>
-<span class="n">sorted_idx</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">argsort</span><span class="p">(</span><span class="n">feature_importance</span><span class="p">)</span>
-<span class="n">pos</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="n">sorted_idx</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
-
-<span class="c1"># plot feature importances</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">barh</span><span class="p">(</span><span class="n">pos</span><span class="p">,</span> <span class="n">feature_importance</span><span class="p">[</span><span class="n">sorted_idx</span><span class="p">],</span> <span class="n">align</span><span class="o">=</span><span class="s2">&quot;center&quot;</span><span class="p">)</span>
-
-<span class="n">plt</span><span class="o">.</span><span class="n">yticks</span><span class="p">(</span><span class="n">pos</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">feature_names</span><span class="p">)[</span><span class="n">sorted_idx</span><span class="p">])</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s2">&quot;Feature Importance (MDI)&quot;</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s2">&quot;Mean decrease in impurity&quot;</span><span class="p">);</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">xgb</span><span class="o">.</span><span class="n">plot_importance</span><span class="p">(</span><span class="n">reg</span><span class="p">);</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/gradientboosting-xg_15_0.png" src="../_images/gradientboosting-xg_15_0.png" />
+<img alt="../_images/gradientboosting-xg_22_0.png" src="../_images/gradientboosting-xg_22_0.png" />
 </div>
 </div>
 <div class="section" id="permutation-feature-importance">
@@ -682,7 +809,7 @@ const thebe_selector_output = ".output, .cell_output"
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/gradientboosting-xg_20_0.png" src="../_images/gradientboosting-xg_20_0.png" />
+<img alt="../_images/gradientboosting-xg_27_0.png" src="../_images/gradientboosting-xg_27_0.png" />
 </div>
 </div>
 <ul class="simple">
@@ -703,7 +830,7 @@ const thebe_selector_output = ".output, .cell_output"
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/gradientboosting-xg_22_0.png" src="../_images/gradientboosting-xg_22_0.png" />
+<img alt="../_images/gradientboosting-xg_29_0.png" src="../_images/gradientboosting-xg_29_0.png" />
 </div>
 </div>
 <ul class="simple">
