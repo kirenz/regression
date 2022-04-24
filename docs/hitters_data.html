@@ -1155,6 +1155,84 @@ memory usage: 35.7 KB
 </table>
 </div></div></div>
 </div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">y_train</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>Salary</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>260</th>
+      <td>875.0</td>
+    </tr>
+    <tr>
+      <th>92</th>
+      <td>70.0</td>
+    </tr>
+    <tr>
+      <th>137</th>
+      <td>430.0</td>
+    </tr>
+    <tr>
+      <th>90</th>
+      <td>431.5</td>
+    </tr>
+    <tr>
+      <th>100</th>
+      <td>2460.0</td>
+    </tr>
+    <tr>
+      <th>...</th>
+      <td>...</td>
+    </tr>
+    <tr>
+      <th>274</th>
+      <td>200.0</td>
+    </tr>
+    <tr>
+      <th>196</th>
+      <td>587.5</td>
+    </tr>
+    <tr>
+      <th>159</th>
+      <td>200.0</td>
+    </tr>
+    <tr>
+      <th>17</th>
+      <td>175.0</td>
+    </tr>
+    <tr>
+      <th>162</th>
+      <td>75.0</td>
+    </tr>
+  </tbody>
+</table>
+<p>184 rows × 1 columns</p>
+</div></div></div>
+</div>
 </div>
 <div class="section" id="data-standardization">
 <h3>Data standardization<a class="headerlink" href="#data-standardization" title="Permalink to this headline">¶</a></h3>
@@ -1214,6 +1292,7 @@ memory usage: 35.7 KB
   <thead>
     <tr style="text-align: right;">
       <th></th>
+      <th>Salary</th>
       <th>AtBat</th>
       <th>Hits</th>
       <th>HmRun</th>
@@ -1233,12 +1312,12 @@ memory usage: 35.7 KB
       <th>League_N</th>
       <th>Division_W</th>
       <th>NewLeague_N</th>
-      <th>Salary</th>
     </tr>
   </thead>
   <tbody>
     <tr>
       <th>260</th>
+      <td>875.0</td>
       <td>0.644577</td>
       <td>0.257439</td>
       <td>-0.456963</td>
@@ -1258,10 +1337,10 @@ memory usage: 35.7 KB
       <td>1</td>
       <td>1</td>
       <td>1</td>
-      <td>875.0</td>
     </tr>
     <tr>
       <th>92</th>
+      <td>70.0</td>
       <td>-0.592807</td>
       <td>-0.671359</td>
       <td>-0.572936</td>
@@ -1281,10 +1360,10 @@ memory usage: 35.7 KB
       <td>0</td>
       <td>0</td>
       <td>0</td>
-      <td>70.0</td>
     </tr>
     <tr>
       <th>137</th>
+      <td>430.0</td>
       <td>-0.413075</td>
       <td>-0.105019</td>
       <td>-0.688910</td>
@@ -1304,10 +1383,10 @@ memory usage: 35.7 KB
       <td>0</td>
       <td>0</td>
       <td>0</td>
-      <td>430.0</td>
     </tr>
     <tr>
       <th>90</th>
+      <td>431.5</td>
       <td>-0.613545</td>
       <td>-0.558091</td>
       <td>0.122907</td>
@@ -1327,10 +1406,10 @@ memory usage: 35.7 KB
       <td>0</td>
       <td>1</td>
       <td>0</td>
-      <td>431.5</td>
     </tr>
     <tr>
       <th>100</th>
+      <td>2460.0</td>
       <td>0.637665</td>
       <td>0.982354</td>
       <td>0.586803</td>
@@ -1350,7 +1429,6 @@ memory usage: 35.7 KB
       <td>0</td>
       <td>0</td>
       <td>0</td>
-      <td>2460.0</td>
     </tr>
     <tr>
       <th>...</th>
@@ -1377,6 +1455,7 @@ memory usage: 35.7 KB
     </tr>
     <tr>
       <th>274</th>
+      <td>200.0</td>
       <td>0.824309</td>
       <td>0.733164</td>
       <td>0.470829</td>
@@ -1396,10 +1475,10 @@ memory usage: 35.7 KB
       <td>1</td>
       <td>0</td>
       <td>1</td>
-      <td>200.0</td>
     </tr>
     <tr>
       <th>196</th>
+      <td>587.5</td>
       <td>0.423369</td>
       <td>0.461321</td>
       <td>1.862516</td>
@@ -1419,10 +1498,10 @@ memory usage: 35.7 KB
       <td>0</td>
       <td>1</td>
       <td>0</td>
-      <td>587.5</td>
     </tr>
     <tr>
       <th>159</th>
+      <td>200.0</td>
       <td>1.474109</td>
       <td>1.254197</td>
       <td>1.746542</td>
@@ -1442,10 +1521,10 @@ memory usage: 35.7 KB
       <td>0</td>
       <td>1</td>
       <td>0</td>
-      <td>200.0</td>
     </tr>
     <tr>
       <th>17</th>
+      <td>175.0</td>
       <td>-1.470728</td>
       <td>-1.396275</td>
       <td>-1.152806</td>
@@ -1465,10 +1544,10 @@ memory usage: 35.7 KB
       <td>0</td>
       <td>1</td>
       <td>0</td>
-      <td>175.0</td>
     </tr>
     <tr>
       <th>162</th>
+      <td>75.0</td>
       <td>-1.643547</td>
       <td>-1.554850</td>
       <td>-1.152806</td>
@@ -1488,7 +1567,6 @@ memory usage: 35.7 KB
       <td>0</td>
       <td>1</td>
       <td>1</td>
-      <td>75.0</td>
     </tr>
   </tbody>
 </table>

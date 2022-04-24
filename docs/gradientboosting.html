@@ -495,7 +495,16 @@ const thebe_selector_output = ".output, .cell_output"
 </ul>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">data_prep_hitters</span> <span class="kn">import</span> <span class="o">*</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">hitters_data</span> <span class="kn">import</span> <span class="o">*</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Make contiguous flattened arrays:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">y_train</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">ravel</span><span class="p">(</span><span class="n">y_train</span><span class="p">)</span>
+<span class="n">y_test</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">ravel</span><span class="p">(</span><span class="n">y_test</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -538,7 +547,7 @@ const thebe_selector_output = ".output, .cell_output"
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>91723.33713257297
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>90781.66218036396
 </pre></div>
 </div>
 </div>
@@ -568,13 +577,12 @@ const thebe_selector_output = ".output, .cell_output"
 <span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">(</span><span class="n">loc</span><span class="o">=</span><span class="s2">&quot;upper right&quot;</span><span class="p">)</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s2">&quot;Boosting Iterations&quot;</span><span class="p">)</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s2">&quot;Deviance&quot;</span><span class="p">)</span>
-<span class="n">fig</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/gradientboosting_10_0.png" src="../_images/gradientboosting_10_0.png" />
+<img alt="../_images/gradientboosting_12_0.png" src="../_images/gradientboosting_12_0.png" />
 </div>
 </div>
 </div>
@@ -614,7 +622,7 @@ const thebe_selector_output = ".output, .cell_output"
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/gradientboosting_13_0.png" src="../_images/gradientboosting_13_0.png" />
+<img alt="../_images/gradientboosting_15_0.png" src="../_images/gradientboosting_15_0.png" />
 </div>
 </div>
 <div class="section" id="permutation-feature-importance">
@@ -665,7 +673,7 @@ const thebe_selector_output = ".output, .cell_output"
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/gradientboosting_18_0.png" src="../_images/gradientboosting_18_0.png" />
+<img alt="../_images/gradientboosting_20_0.png" src="../_images/gradientboosting_20_0.png" />
 </div>
 </div>
 <ul class="simple">
@@ -686,7 +694,7 @@ const thebe_selector_output = ".output, .cell_output"
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/gradientboosting_20_0.png" src="../_images/gradientboosting_20_0.png" />
+<img alt="../_images/gradientboosting_22_0.png" src="../_images/gradientboosting_22_0.png" />
 </div>
 </div>
 <ul class="simple">
