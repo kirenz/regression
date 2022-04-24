@@ -16,6 +16,7 @@ parts:
   - caption: Decision Trees
     chapters:
     - file: docs/gradientboosting.ipynb
+    - file: docs/gradientboosting-xgboost.ipynb 
   - caption: Feature Selection
     chapters:
     - file: docs/feature-selection.ipynb
