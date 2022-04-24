@@ -390,13 +390,11 @@ const thebe_selector_output = ".output, .cell_output"
     <a class="reference internal nav-link" href="#mean-decrease-in-impurity-mdi">
      Mean decrease in impurity (MDI)
     </a>
-    <ul class="nav section-nav flex-column">
-     <li class="toc-h4 nav-item toc-entry">
-      <a class="reference internal nav-link" href="#permutation-feature-importance">
-       Permutation feature importance
-      </a>
-     </li>
-    </ul>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#permutation-feature-importance">
+     Permutation feature importance
+    </a>
    </li>
   </ul>
  </li>
@@ -451,13 +449,11 @@ const thebe_selector_output = ".output, .cell_output"
     <a class="reference internal nav-link" href="#mean-decrease-in-impurity-mdi">
      Mean decrease in impurity (MDI)
     </a>
-    <ul class="nav section-nav flex-column">
-     <li class="toc-h4 nav-item toc-entry">
-      <a class="reference internal nav-link" href="#permutation-feature-importance">
-       Permutation feature importance
-      </a>
-     </li>
-    </ul>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#permutation-feature-importance">
+     Permutation feature importance
+    </a>
    </li>
   </ul>
  </li>
@@ -1159,10 +1155,11 @@ const thebe_selector_output = ".output, .cell_output"
 <h3>Mean decrease in impurity (MDI)<a class="headerlink" href="#mean-decrease-in-impurity-mdi" title="Permalink to this headline">¶</a></h3>
 <ul class="simple">
 <li><p>Mean decrease in impurity (MDI) is a measure of feature importance for decision tree models.</p></li>
-<li><p>They are computed as the mean and standard deviation of accumulation of the impurity decrease within each tree.</p></li>
-<li><p>Note that impurity-based importances are computed on training set statistics and therefore do not reflect the ability of feature to be useful to make predictions that generalize to the test set (when the model has enough capacity).</p></li>
-<li><p>Also note that impurity-based importances are biased towards high cardinality features (i.e., features with many unique values). See Permutation feature importance as an alternative below.</p></li>
 </ul>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Visit <a class="reference external" href="https://kirenz.github.io/feature-engineering/docs/mdi.html">this notebook</a> to learn more about MDI</p>
+</div>
 <ul class="simple">
 <li><p>Feature importances are provided by the function <code class="docutils literal notranslate"><span class="pre">plot_importance</span></code></p></li>
 </ul>
@@ -1176,27 +1173,14 @@ const thebe_selector_output = ".output, .cell_output"
 <img alt="../_images/gradientboosting-xgboost_26_0.png" src="../_images/gradientboosting-xgboost_26_0.png" />
 </div>
 </div>
+</div>
 <div class="section" id="permutation-feature-importance">
-<h4>Permutation feature importance<a class="headerlink" href="#permutation-feature-importance" title="Permalink to this headline">¶</a></h4>
-<ul class="simple">
-<li><p>Permutation feature importance overcomes limitations of the impurity-based feature importance (<a class="reference external" href="https://scikit-learn.org/stable/auto_examples/ensemble/plot_forest_importances.html">scikit learn</a>):</p>
-<ul>
-<li><p>they do not have a bias toward high-cardinality features</p></li>
-<li><p>they can be computed on a left-out test set.</p></li>
-</ul>
-</li>
-</ul>
-<p>It is a model inspection technique that can be used for any fitted estimator when the data is tabular (see <a class="reference external" href="https://scikit-learn.org/stable/modules/permutation_importance.html#permutation-importance">scikit learn</a> for more details):</p>
-<ul class="simple">
-<li><p>The permutation feature importance is defined to be the decrease in a model score when a single feature value is randomly shuffled.</p></li>
-<li><p>This procedure breaks the relationship between the feature and the target, thus the drop in the model score is indicative of how much the model depends on the feature.</p></li>
-<li><p>This technique benefits from being model agnostic and can be calculated many times with different permutations of the feature.</p></li>
-<li><p>The permutation importance is calculated on the training set to show how much the model relies on each feature during training.</p></li>
-</ul>
-<ul class="simple">
-<li><p>Features are shuffled n times and the model refitted to estimate the importance of it.</p></li>
-</ul>
-<p>Note however that when two features are correlated and one of the features is permuted, the model will still have access to the feature through its correlated feature. This will result in a lower importance value for both features, where they might actually be important. One way to handle this is to cluster features that are correlated and only keep one feature from each cluster. This strategy is explored in this example: <a class="reference external" href="https://scikit-learn.org/stable/auto_examples/inspection/plot_permutation_importance_multicollinear.html#handling-multicollinear-features">Permutation Importance with Multicollinear or Correlated Features</a>.</p>
+<h3>Permutation feature importance<a class="headerlink" href="#permutation-feature-importance" title="Permalink to this headline">¶</a></h3>
+<p>The permutation feature importance is defined to be the decrease in a model score when a single feature value is randomly shuffled.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Visit <a class="reference external" href="https://kirenz.github.io/feature-engineering/docs/permutation-feature-importance.html">this notebook</a> to learn more about permutation feature importance.</p>
+</div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">result</span> <span class="o">=</span> <span class="n">permutation_importance</span><span class="p">(</span>
@@ -1224,7 +1208,7 @@ const thebe_selector_output = ".output, .cell_output"
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/gradientboosting-xgboost_31_0.png" src="../_images/gradientboosting-xgboost_31_0.png" />
+<img alt="../_images/gradientboosting-xgboost_29_0.png" src="../_images/gradientboosting-xgboost_29_0.png" />
 </div>
 </div>
 <ul class="simple">
@@ -1244,13 +1228,12 @@ const thebe_selector_output = ".output, .cell_output"
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/gradientboosting-xgboost_33_0.png" src="../_images/gradientboosting-xgboost_33_0.png" />
+<img alt="../_images/gradientboosting-xgboost_31_0.png" src="../_images/gradientboosting-xgboost_31_0.png" />
 </div>
 </div>
 <ul class="simple">
 <li><p>We observe that the same features are detected as most important using both methods. Although the relative importances vary (especially for feature <code class="docutils literal notranslate"><span class="pre">Years</span></code>).</p></li>
 </ul>
-</div>
 </div>
 </div>
 </div>
