@@ -466,6 +466,9 @@ const thebe_selector_output = ".output, .cell_output"
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">%</span><span class="k">matplotlib</span> inline
 
+<span class="kn">import</span> <span class="nn">warnings</span>
+<span class="n">warnings</span><span class="o">.</span><span class="n">simplefilter</span><span class="p">(</span><span class="n">action</span><span class="o">=</span><span class="s1">&#39;ignore&#39;</span><span class="p">,</span> <span class="n">category</span><span class="o">=</span><span class="ne">FutureWarning</span><span class="p">)</span>
+
 <span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
 <span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
 
@@ -478,7 +481,7 @@ const thebe_selector_output = ".output, .cell_output"
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>XGB Version: 1.6.0
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>XGB Version: 1.5.2
 </pre></div>
 </div>
 </div>
@@ -543,518 +546,67 @@ const thebe_selector_output = ".output, .cell_output"
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[0]	validation_0-rmse:693.13939	validation_1-rmse:694.51649
-[1]	validation_0-rmse:687.25191	validation_1-rmse:688.37644
-[2]	validation_0-rmse:681.42445	validation_1-rmse:682.31515
-[3]	validation_0-rmse:675.64867	validation_1-rmse:677.35826
-[4]	validation_0-rmse:669.93320	validation_1-rmse:672.46290
-[5]	validation_0-rmse:664.27350	validation_1-rmse:666.60591
-[6]	validation_0-rmse:658.67121	validation_1-rmse:661.82838
-[7]	validation_0-rmse:653.12688	validation_1-rmse:656.90319
-[8]	validation_0-rmse:647.63961	validation_1-rmse:652.24138
-[9]	validation_0-rmse:642.19390	validation_1-rmse:646.64970
-[10]	validation_0-rmse:636.80992	validation_1-rmse:641.92285
-[11]	validation_0-rmse:631.48134	validation_1-rmse:637.27762
-[12]	validation_0-rmse:626.19614	validation_1-rmse:631.90670
-[13]	validation_0-rmse:620.97255	validation_1-rmse:627.37414
-[14]	validation_0-rmse:615.80413	validation_1-rmse:622.82286
-[15]	validation_0-rmse:610.68529	validation_1-rmse:618.45032
-[16]	validation_0-rmse:605.60407	validation_1-rmse:613.33537
-[17]	validation_0-rmse:600.57906	validation_1-rmse:609.34508
-[18]	validation_0-rmse:595.60970	validation_1-rmse:605.29294
-[19]	validation_0-rmse:590.69058	validation_1-rmse:601.35710
-[20]	validation_0-rmse:585.80052	validation_1-rmse:596.47644
-[21]	validation_0-rmse:580.97580	validation_1-rmse:592.68846
-[22]	validation_0-rmse:576.20465	validation_1-rmse:588.83853
-[23]	validation_0-rmse:571.47605	validation_1-rmse:585.00430
-[24]	validation_0-rmse:566.76789	validation_1-rmse:580.46276
-[25]	validation_0-rmse:562.13473	validation_1-rmse:576.72806
-[26]	validation_0-rmse:557.55151	validation_1-rmse:573.04329
-[27]	validation_0-rmse:552.98293	validation_1-rmse:568.56142
-[28]	validation_0-rmse:548.47424	validation_1-rmse:564.78179
-[29]	validation_0-rmse:544.02571	validation_1-rmse:561.24016
-[30]	validation_0-rmse:539.58015	validation_1-rmse:557.70367
-[31]	validation_0-rmse:535.22326	validation_1-rmse:554.25781
-[32]	validation_0-rmse:530.91185	validation_1-rmse:550.87278
-[33]	validation_0-rmse:526.59696	validation_1-rmse:546.80625
-[34]	validation_0-rmse:522.37363	validation_1-rmse:543.51320
-[35]	validation_0-rmse:518.14474	validation_1-rmse:539.55518
-[36]	validation_0-rmse:513.98339	validation_1-rmse:536.03011
-[37]	validation_0-rmse:509.83863	validation_1-rmse:532.21427
-[38]	validation_0-rmse:505.74956	validation_1-rmse:528.81269
-[39]	validation_0-rmse:501.70899	validation_1-rmse:525.42317
-[40]	validation_0-rmse:497.69725	validation_1-rmse:522.18693
-[41]	validation_0-rmse:493.72723	validation_1-rmse:519.00022
-[42]	validation_0-rmse:489.80529	validation_1-rmse:515.74005
-[43]	validation_0-rmse:485.91322	validation_1-rmse:512.64781
-[44]	validation_0-rmse:482.06295	validation_1-rmse:509.52443
-[45]	validation_0-rmse:478.25068	validation_1-rmse:506.52609
-[46]	validation_0-rmse:474.47971	validation_1-rmse:503.42672
-[47]	validation_0-rmse:470.70649	validation_1-rmse:500.40295
-[48]	validation_0-rmse:466.97397	validation_1-rmse:497.36221
-[49]	validation_0-rmse:463.27880	validation_1-rmse:494.61958
-[50]	validation_0-rmse:459.65838	validation_1-rmse:491.68158
-[51]	validation_0-rmse:456.06147	validation_1-rmse:488.72183
-[52]	validation_0-rmse:452.47318	validation_1-rmse:485.84497
-[53]	validation_0-rmse:448.96065	validation_1-rmse:483.02340
-[54]	validation_0-rmse:445.46803	validation_1-rmse:480.26018
-[55]	validation_0-rmse:441.95344	validation_1-rmse:477.30999
-[56]	validation_0-rmse:438.50062	validation_1-rmse:474.73601
-[57]	validation_0-rmse:435.05589	validation_1-rmse:471.86991
-[58]	validation_0-rmse:431.64718	validation_1-rmse:469.04795
-[59]	validation_0-rmse:428.27422	validation_1-rmse:466.28069
-[60]	validation_0-rmse:424.93665	validation_1-rmse:463.54723
-[61]	validation_0-rmse:421.63382	validation_1-rmse:460.81340
-[62]	validation_0-rmse:418.37774	validation_1-rmse:458.46727
-[63]	validation_0-rmse:415.11194	validation_1-rmse:455.81148
-[64]	validation_0-rmse:411.88154	validation_1-rmse:453.19066
-[65]	validation_0-rmse:408.68623	validation_1-rmse:450.60448
-[66]	validation_0-rmse:405.50412	validation_1-rmse:448.06727
-[67]	validation_0-rmse:402.38503	validation_1-rmse:445.78194
-[68]	validation_0-rmse:399.29885	validation_1-rmse:443.54422
-[69]	validation_0-rmse:396.25464	validation_1-rmse:441.37530
-[70]	validation_0-rmse:393.19315	validation_1-rmse:438.95477
-[71]	validation_0-rmse:390.16389	validation_1-rmse:436.96168
-[72]	validation_0-rmse:387.16462	validation_1-rmse:435.01067
-[73]	validation_0-rmse:384.22464	validation_1-rmse:432.93375
-[74]	validation_0-rmse:381.27889	validation_1-rmse:430.63654
-[75]	validation_0-rmse:378.36459	validation_1-rmse:428.77442
-[76]	validation_0-rmse:375.47929	validation_1-rmse:426.93097
-[77]	validation_0-rmse:372.65632	validation_1-rmse:424.99205
-[78]	validation_0-rmse:369.80734	validation_1-rmse:423.03681
-[79]	validation_0-rmse:367.00453	validation_1-rmse:420.98049
-[80]	validation_0-rmse:364.23938	validation_1-rmse:418.95155
-[81]	validation_0-rmse:361.47124	validation_1-rmse:417.09274
-[82]	validation_0-rmse:358.73081	validation_1-rmse:415.27657
-[83]	validation_0-rmse:356.05356	validation_1-rmse:413.35653
-[84]	validation_0-rmse:353.41414	validation_1-rmse:411.60577
-[85]	validation_0-rmse:350.76698	validation_1-rmse:409.71070
-[86]	validation_0-rmse:348.16643	validation_1-rmse:407.88669
-[87]	validation_0-rmse:345.58631	validation_1-rmse:406.07257
-[88]	validation_0-rmse:342.99238	validation_1-rmse:404.39158
-[89]	validation_0-rmse:340.47707	validation_1-rmse:402.79080
-[90]	validation_0-rmse:337.94161	validation_1-rmse:400.98397
-[91]	validation_0-rmse:335.45995	validation_1-rmse:399.25509
-[92]	validation_0-rmse:332.96261	validation_1-rmse:397.68571
-[93]	validation_0-rmse:330.54601	validation_1-rmse:396.18096
-[94]	validation_0-rmse:328.14699	validation_1-rmse:394.57812
-[95]	validation_0-rmse:325.72900	validation_1-rmse:392.90109
-[96]	validation_0-rmse:323.37909	validation_1-rmse:391.50384
-[97]	validation_0-rmse:321.03917	validation_1-rmse:389.93766
-[98]	validation_0-rmse:318.72407	validation_1-rmse:388.40825
-[99]	validation_0-rmse:316.47226	validation_1-rmse:386.86321
-[100]	validation_0-rmse:314.16498	validation_1-rmse:385.52558
-[101]	validation_0-rmse:311.87188	validation_1-rmse:384.18696
-[102]	validation_0-rmse:309.65677	validation_1-rmse:382.91783
-[103]	validation_0-rmse:307.45228	validation_1-rmse:381.50659
-[104]	validation_0-rmse:305.22490	validation_1-rmse:380.23442
-[105]	validation_0-rmse:303.07585	validation_1-rmse:379.02638
-[106]	validation_0-rmse:300.89407	validation_1-rmse:377.61254
-[107]	validation_0-rmse:298.77484	validation_1-rmse:376.28225
-[108]	validation_0-rmse:296.68660	validation_1-rmse:375.00989
-[109]	validation_0-rmse:294.62114	validation_1-rmse:373.88861
-[110]	validation_0-rmse:292.56652	validation_1-rmse:372.64312
-[111]	validation_0-rmse:290.56931	validation_1-rmse:371.35190
-[112]	validation_0-rmse:288.50461	validation_1-rmse:370.25851
-[113]	validation_0-rmse:286.46936	validation_1-rmse:369.20170
-[114]	validation_0-rmse:284.49553	validation_1-rmse:368.04068
-[115]	validation_0-rmse:282.54886	validation_1-rmse:366.98198
-[116]	validation_0-rmse:280.56136	validation_1-rmse:365.77954
-[117]	validation_0-rmse:278.65429	validation_1-rmse:364.74823
-[118]	validation_0-rmse:276.76655	validation_1-rmse:363.74425
-[119]	validation_0-rmse:274.89853	validation_1-rmse:362.78623
-[120]	validation_0-rmse:272.98431	validation_1-rmse:361.65647
-[121]	validation_0-rmse:271.15398	validation_1-rmse:360.73108
-[122]	validation_0-rmse:269.27111	validation_1-rmse:359.64877
-[123]	validation_0-rmse:267.47209	validation_1-rmse:358.74611
-[124]	validation_0-rmse:265.64092	validation_1-rmse:357.85911
-[125]	validation_0-rmse:263.88607	validation_1-rmse:356.99376
-[126]	validation_0-rmse:262.02611	validation_1-rmse:355.85213
-[127]	validation_0-rmse:260.18526	validation_1-rmse:354.73455
-[128]	validation_0-rmse:258.41324	validation_1-rmse:353.70764
-[129]	validation_0-rmse:256.60630	validation_1-rmse:352.63092
-[130]	validation_0-rmse:254.81800	validation_1-rmse:351.57734
-[131]	validation_0-rmse:253.04817	validation_1-rmse:350.54658
-[132]	validation_0-rmse:251.37469	validation_1-rmse:349.47587
-[133]	validation_0-rmse:249.63779	validation_1-rmse:348.48331
-[134]	validation_0-rmse:247.91893	validation_1-rmse:347.51268
-[135]	validation_0-rmse:246.30478	validation_1-rmse:346.85083
-[136]	validation_0-rmse:244.61784	validation_1-rmse:345.85634
-[137]	validation_0-rmse:242.96964	validation_1-rmse:345.00769
-[138]	validation_0-rmse:241.31359	validation_1-rmse:344.11124
-[139]	validation_0-rmse:239.67485	validation_1-rmse:343.23527
-[140]	validation_0-rmse:238.05327	validation_1-rmse:342.37948
-[141]	validation_0-rmse:236.47585	validation_1-rmse:341.60712
-[142]	validation_0-rmse:234.88414	validation_1-rmse:340.78485
-[143]	validation_0-rmse:233.30918	validation_1-rmse:339.98190
-[144]	validation_0-rmse:231.75405	validation_1-rmse:339.21364
-[145]	validation_0-rmse:230.28445	validation_1-rmse:338.34886
-[146]	validation_0-rmse:228.75769	validation_1-rmse:337.60862
-[147]	validation_0-rmse:227.24667	validation_1-rmse:336.89102
-[148]	validation_0-rmse:225.77662	validation_1-rmse:336.30535
-[149]	validation_0-rmse:224.30568	validation_1-rmse:335.63373
-[150]	validation_0-rmse:222.86245	validation_1-rmse:335.03142
-[151]	validation_0-rmse:221.43399	validation_1-rmse:334.48210
-[152]	validation_0-rmse:220.04507	validation_1-rmse:333.97098
-[153]	validation_0-rmse:218.64291	validation_1-rmse:333.41472
-[154]	validation_0-rmse:217.25524	validation_1-rmse:332.91148
-[155]	validation_0-rmse:215.85980	validation_1-rmse:332.30984
-[156]	validation_0-rmse:214.49731	validation_1-rmse:331.79020
-[157]	validation_0-rmse:213.14879	validation_1-rmse:331.31520
-[158]	validation_0-rmse:211.83368	validation_1-rmse:330.87303
-[159]	validation_0-rmse:210.51027	validation_1-rmse:330.39231
-[160]	validation_0-rmse:209.22083	validation_1-rmse:329.98324
-[161]	validation_0-rmse:207.92206	validation_1-rmse:329.56281
-[162]	validation_0-rmse:206.60965	validation_1-rmse:329.03534
-[163]	validation_0-rmse:205.33481	validation_1-rmse:328.60896
-[164]	validation_0-rmse:204.07307	validation_1-rmse:328.20955
-[165]	validation_0-rmse:202.81819	validation_1-rmse:327.83031
-[166]	validation_0-rmse:201.59743	validation_1-rmse:327.48191
-[167]	validation_0-rmse:200.37180	validation_1-rmse:327.11637
-[168]	validation_0-rmse:199.14096	validation_1-rmse:326.71480
-[169]	validation_0-rmse:197.93808	validation_1-rmse:326.36631
-[170]	validation_0-rmse:196.66635	validation_1-rmse:325.77495
-[171]	validation_0-rmse:195.40832	validation_1-rmse:325.20119
-[172]	validation_0-rmse:194.16389	validation_1-rmse:324.64246
-[173]	validation_0-rmse:192.93285	validation_1-rmse:324.09495
-[174]	validation_0-rmse:191.79615	validation_1-rmse:323.81533
-[175]	validation_0-rmse:190.58806	validation_1-rmse:323.29604
-[176]	validation_0-rmse:189.39261	validation_1-rmse:322.79512
-[177]	validation_0-rmse:188.21004	validation_1-rmse:322.30094
-[178]	validation_0-rmse:187.03992	validation_1-rmse:321.82969
-[179]	validation_0-rmse:185.93788	validation_1-rmse:321.60069
-[180]	validation_0-rmse:184.79044	validation_1-rmse:321.13697
-[181]	validation_0-rmse:183.65537	validation_1-rmse:320.70354
-[182]	validation_0-rmse:182.53219	validation_1-rmse:320.24793
-[183]	validation_0-rmse:181.42080	validation_1-rmse:319.83462
-[184]	validation_0-rmse:180.32079	validation_1-rmse:319.40622
-[185]	validation_0-rmse:179.23232	validation_1-rmse:318.99946
-[186]	validation_0-rmse:178.14289	validation_1-rmse:318.71458
-[187]	validation_0-rmse:177.07399	validation_1-rmse:318.32019
-[188]	validation_0-rmse:176.01657	validation_1-rmse:317.94569
-[189]	validation_0-rmse:174.97008	validation_1-rmse:317.58723
-[190]	validation_0-rmse:173.93447	validation_1-rmse:317.22538
-[191]	validation_0-rmse:172.90930	validation_1-rmse:316.86419
-[192]	validation_0-rmse:171.89481	validation_1-rmse:316.53521
-[193]	validation_0-rmse:170.85768	validation_1-rmse:316.30952
-[194]	validation_0-rmse:169.86114	validation_1-rmse:315.98105
-[195]	validation_0-rmse:168.87506	validation_1-rmse:315.66036
-[196]	validation_0-rmse:167.90544	validation_1-rmse:315.34438
-[197]	validation_0-rmse:166.92132	validation_1-rmse:315.10478
-[198]	validation_0-rmse:165.96242	validation_1-rmse:314.81488
-[199]	validation_0-rmse:164.99626	validation_1-rmse:314.53016
-[200]	validation_0-rmse:164.05389	validation_1-rmse:314.40498
-[201]	validation_0-rmse:163.11098	validation_1-rmse:314.11761
-[202]	validation_0-rmse:162.12935	validation_1-rmse:313.92343
-[203]	validation_0-rmse:161.18972	validation_1-rmse:313.62158
-[204]	validation_0-rmse:160.23139	validation_1-rmse:313.44234
-[205]	validation_0-rmse:159.28366	validation_1-rmse:313.23872
-[206]	validation_0-rmse:158.38114	validation_1-rmse:312.98518
-[207]	validation_0-rmse:157.45084	validation_1-rmse:312.82085
-[208]	validation_0-rmse:156.53080	validation_1-rmse:312.63194
-[209]	validation_0-rmse:155.63745	validation_1-rmse:312.36621
-[210]	validation_0-rmse:154.77808	validation_1-rmse:312.24586
-[211]	validation_0-rmse:153.91405	validation_1-rmse:312.01881
-[212]	validation_0-rmse:153.05043	validation_1-rmse:311.84493
-[213]	validation_0-rmse:152.18849	validation_1-rmse:311.60513
-[214]	validation_0-rmse:151.31496	validation_1-rmse:311.51638
-[215]	validation_0-rmse:150.47991	validation_1-rmse:311.36420
-[216]	validation_0-rmse:149.62266	validation_1-rmse:311.25167
-[217]	validation_0-rmse:148.77492	validation_1-rmse:311.12549
-[218]	validation_0-rmse:147.94904	validation_1-rmse:310.91079
-[219]	validation_0-rmse:147.11676	validation_1-rmse:310.80718
-[220]	validation_0-rmse:146.31765	validation_1-rmse:310.67817
-[221]	validation_0-rmse:145.50095	validation_1-rmse:310.60920
-[222]	validation_0-rmse:144.71398	validation_1-rmse:310.45846
-[223]	validation_0-rmse:143.91229	validation_1-rmse:310.36486
-[224]	validation_0-rmse:143.11967	validation_1-rmse:310.23246
-[225]	validation_0-rmse:142.33204	validation_1-rmse:310.13880
-[226]	validation_0-rmse:141.55398	validation_1-rmse:310.05252
-[227]	validation_0-rmse:140.78477	validation_1-rmse:309.96885
-[228]	validation_0-rmse:140.01635	validation_1-rmse:309.88281
-[229]	validation_0-rmse:139.28946	validation_1-rmse:309.79287
-[230]	validation_0-rmse:138.53388	validation_1-rmse:309.71833
-[231]	validation_0-rmse:137.79192	validation_1-rmse:309.60479
-[232]	validation_0-rmse:137.08579	validation_1-rmse:309.52197
-[233]	validation_0-rmse:136.34835	validation_1-rmse:309.45531
-[234]	validation_0-rmse:135.61835	validation_1-rmse:309.39859
-[235]	validation_0-rmse:134.90277	validation_1-rmse:309.33064
-[236]	validation_0-rmse:134.22172	validation_1-rmse:309.25412
-[237]	validation_0-rmse:133.50919	validation_1-rmse:309.19205
-[238]	validation_0-rmse:132.84173	validation_1-rmse:309.10337
-[239]	validation_0-rmse:132.18175	validation_1-rmse:309.01684
-[240]	validation_0-rmse:131.48645	validation_1-rmse:308.96802
-[241]	validation_0-rmse:130.83304	validation_1-rmse:308.89322
-[242]	validation_0-rmse:130.15014	validation_1-rmse:308.85005
-[243]	validation_0-rmse:129.50878	validation_1-rmse:308.77680
-[244]	validation_0-rmse:128.84021	validation_1-rmse:308.72675
-[245]	validation_0-rmse:128.18414	validation_1-rmse:308.63927
-[246]	validation_0-rmse:127.52470	validation_1-rmse:308.59920
-[247]	validation_0-rmse:126.87597	validation_1-rmse:308.55273
-[248]	validation_0-rmse:126.23455	validation_1-rmse:308.49777
-[249]	validation_0-rmse:125.59161	validation_1-rmse:308.46299
-[250]	validation_0-rmse:124.99325	validation_1-rmse:308.41082
-[251]	validation_0-rmse:124.40145	validation_1-rmse:308.34988
-[252]	validation_0-rmse:123.77673	validation_1-rmse:308.32098
-[253]	validation_0-rmse:123.20003	validation_1-rmse:308.26585
-[254]	validation_0-rmse:122.59442	validation_1-rmse:308.27673
-[255]	validation_0-rmse:122.02370	validation_1-rmse:308.23362
-[256]	validation_0-rmse:121.42041	validation_1-rmse:308.19672
-[257]	validation_0-rmse:120.86039	validation_1-rmse:308.15715
-[258]	validation_0-rmse:120.27191	validation_1-rmse:308.17736
-[259]	validation_0-rmse:119.72591	validation_1-rmse:308.12409
-[260]	validation_0-rmse:119.18189	validation_1-rmse:308.08887
-[261]	validation_0-rmse:118.60317	validation_1-rmse:308.08318
-[262]	validation_0-rmse:118.06922	validation_1-rmse:308.03407
-[263]	validation_0-rmse:117.50797	validation_1-rmse:308.05014
-[264]	validation_0-rmse:116.98703	validation_1-rmse:308.04638
-[265]	validation_0-rmse:116.45604	validation_1-rmse:307.88681
-[266]	validation_0-rmse:115.90811	validation_1-rmse:307.92542
-[267]	validation_0-rmse:115.35389	validation_1-rmse:307.92709
-[268]	validation_0-rmse:114.84268	validation_1-rmse:307.85874
-[269]	validation_0-rmse:114.24087	validation_1-rmse:307.86465
-[270]	validation_0-rmse:113.74241	validation_1-rmse:307.86178
-[271]	validation_0-rmse:113.24540	validation_1-rmse:307.79800
-[272]	validation_0-rmse:112.65785	validation_1-rmse:307.82606
-[273]	validation_0-rmse:112.16972	validation_1-rmse:307.75418
-[274]	validation_0-rmse:111.59231	validation_1-rmse:307.77985
-[275]	validation_0-rmse:111.11325	validation_1-rmse:307.71087
-[276]	validation_0-rmse:110.54561	validation_1-rmse:307.75465
-[277]	validation_0-rmse:110.07591	validation_1-rmse:307.74748
-[278]	validation_0-rmse:109.60982	validation_1-rmse:307.69303
-[279]	validation_0-rmse:109.04453	validation_1-rmse:307.71573
-[280]	validation_0-rmse:108.58707	validation_1-rmse:307.65318
-[281]	validation_0-rmse:108.04164	validation_1-rmse:307.69850
-[282]	validation_0-rmse:107.59133	validation_1-rmse:307.70005
-[283]	validation_0-rmse:107.14621	validation_1-rmse:307.64083
-[284]	validation_0-rmse:106.61332	validation_1-rmse:307.67019
-[285]	validation_0-rmse:106.18318	validation_1-rmse:307.58804
-[286]	validation_0-rmse:105.75746	validation_1-rmse:307.50730
-[287]	validation_0-rmse:105.23611	validation_1-rmse:307.51877
-[288]	validation_0-rmse:104.81458	validation_1-rmse:307.49256
-[289]	validation_0-rmse:104.40008	validation_1-rmse:307.41461
-[290]	validation_0-rmse:103.98987	validation_1-rmse:307.33801
-[291]	validation_0-rmse:103.48439	validation_1-rmse:307.36817
-[292]	validation_0-rmse:103.08178	validation_1-rmse:307.29372
-[293]	validation_0-rmse:102.57760	validation_1-rmse:307.26046
-[294]	validation_0-rmse:102.13768	validation_1-rmse:307.29811
-[295]	validation_0-rmse:101.73956	validation_1-rmse:307.27509
-[296]	validation_0-rmse:101.25381	validation_1-rmse:307.30329
-[297]	validation_0-rmse:100.86181	validation_1-rmse:307.27217
-[298]	validation_0-rmse:100.38378	validation_1-rmse:307.27839
-[299]	validation_0-rmse:99.99892	validation_1-rmse:307.24820
-[300]	validation_0-rmse:99.51752	validation_1-rmse:307.19126
-[301]	validation_0-rmse:99.10806	validation_1-rmse:307.12279
-[302]	validation_0-rmse:98.63723	validation_1-rmse:307.17882
-[303]	validation_0-rmse:98.25244	validation_1-rmse:307.12301
-[304]	validation_0-rmse:97.87202	validation_1-rmse:307.08443
-[305]	validation_0-rmse:97.49583	validation_1-rmse:307.04650
-[306]	validation_0-rmse:97.04672	validation_1-rmse:307.08285
-[307]	validation_0-rmse:96.66029	validation_1-rmse:307.05379
-[308]	validation_0-rmse:96.29460	validation_1-rmse:307.01755
-[309]	validation_0-rmse:95.91588	validation_1-rmse:307.00527
-[310]	validation_0-rmse:95.47944	validation_1-rmse:307.01287
-[311]	validation_0-rmse:95.13741	validation_1-rmse:306.99925
-[312]	validation_0-rmse:94.76900	validation_1-rmse:306.96306
-[313]	validation_0-rmse:94.33536	validation_1-rmse:307.01723
-[314]	validation_0-rmse:94.00234	validation_1-rmse:306.96223
-[315]	validation_0-rmse:93.64377	validation_1-rmse:306.95234
-[316]	validation_0-rmse:93.22823	validation_1-rmse:306.97943
-[317]	validation_0-rmse:92.90425	validation_1-rmse:306.92601
-[318]	validation_0-rmse:92.56760	validation_1-rmse:306.92621
-[319]	validation_0-rmse:92.15231	validation_1-rmse:306.98038
-[320]	validation_0-rmse:91.80877	validation_1-rmse:306.94723
-[321]	validation_0-rmse:91.49615	validation_1-rmse:306.91574
-[322]	validation_0-rmse:91.15917	validation_1-rmse:306.90828
-[323]	validation_0-rmse:90.75653	validation_1-rmse:306.96253
-[324]	validation_0-rmse:90.42597	validation_1-rmse:306.93112
-[325]	validation_0-rmse:90.02999	validation_1-rmse:306.96992
-[326]	validation_0-rmse:89.68598	validation_1-rmse:306.91687
-[327]	validation_0-rmse:89.37191	validation_1-rmse:306.91821
-[328]	validation_0-rmse:88.98269	validation_1-rmse:306.98782
-[329]	validation_0-rmse:88.68998	validation_1-rmse:306.93996
-[330]	validation_0-rmse:88.35701	validation_1-rmse:306.88964
-[331]	validation_0-rmse:88.02810	validation_1-rmse:306.84073
-[332]	validation_0-rmse:87.72784	validation_1-rmse:306.84492
-[333]	validation_0-rmse:87.34617	validation_1-rmse:306.92379
-[334]	validation_0-rmse:87.04848	validation_1-rmse:306.98099
-[335]	validation_0-rmse:86.67693	validation_1-rmse:307.07091
-[336]	validation_0-rmse:86.37455	validation_1-rmse:307.04320
-[337]	validation_0-rmse:86.05903	validation_1-rmse:306.99742
-[338]	validation_0-rmse:85.74738	validation_1-rmse:306.95290
-[339]	validation_0-rmse:85.38268	validation_1-rmse:306.99586
-[340]	validation_0-rmse:85.09961	validation_1-rmse:307.05228
-[341]	validation_0-rmse:84.74696	validation_1-rmse:307.03556
-[342]	validation_0-rmse:84.45834	validation_1-rmse:307.00970
-[343]	validation_0-rmse:84.10468	validation_1-rmse:307.06663
-[344]	validation_0-rmse:83.80569	validation_1-rmse:307.02486
-[345]	validation_0-rmse:83.45989	validation_1-rmse:307.05779
-[346]	validation_0-rmse:83.16612	validation_1-rmse:307.01743
-[347]	validation_0-rmse:82.88867	validation_1-rmse:306.99305
-[348]	validation_0-rmse:82.60000	validation_1-rmse:306.95407
-[349]	validation_0-rmse:82.26058	validation_1-rmse:307.02377
-[350]	validation_0-rmse:81.92932	validation_1-rmse:307.00969
-[351]	validation_0-rmse:81.64935	validation_1-rmse:306.94924
-[352]	validation_0-rmse:81.32419	validation_1-rmse:306.93589
-[353]	validation_0-rmse:81.05245	validation_1-rmse:306.87636
-[354]	validation_0-rmse:80.69480	validation_1-rmse:306.83167
-[355]	validation_0-rmse:80.41897	validation_1-rmse:306.79527
-[356]	validation_0-rmse:80.14658	validation_1-rmse:306.75986
-[357]	validation_0-rmse:79.83236	validation_1-rmse:306.74751
-[358]	validation_0-rmse:79.57083	validation_1-rmse:306.69070
-[359]	validation_0-rmse:79.25441	validation_1-rmse:306.73935
-[360]	validation_0-rmse:78.99306	validation_1-rmse:306.68336
-[361]	validation_0-rmse:78.73001	validation_1-rmse:306.64985
-[362]	validation_0-rmse:78.42153	validation_1-rmse:306.73585
-[363]	validation_0-rmse:78.16291	validation_1-rmse:306.70350
-[364]	validation_0-rmse:77.83291	validation_1-rmse:306.68140
-[365]	validation_0-rmse:77.58340	validation_1-rmse:306.62852
-[366]	validation_0-rmse:77.25912	validation_1-rmse:306.57997
-[367]	validation_0-rmse:76.92931	validation_1-rmse:306.53909
-[368]	validation_0-rmse:76.60359	validation_1-rmse:306.49932
-[369]	validation_0-rmse:76.35542	validation_1-rmse:306.46872
-[370]	validation_0-rmse:76.11830	validation_1-rmse:306.41813
-[371]	validation_0-rmse:75.86698	validation_1-rmse:306.38906
-[372]	validation_0-rmse:75.55580	validation_1-rmse:306.38308
-[373]	validation_0-rmse:75.24073	validation_1-rmse:306.34506
-[374]	validation_0-rmse:74.98594	validation_1-rmse:306.36816
-[375]	validation_0-rmse:74.75504	validation_1-rmse:306.31993
-[376]	validation_0-rmse:74.45298	validation_1-rmse:306.27445
-[377]	validation_0-rmse:74.14747	validation_1-rmse:306.23815
-[378]	validation_0-rmse:73.84581	validation_1-rmse:306.20283
-[379]	validation_0-rmse:73.61474	validation_1-rmse:306.17499
-[380]	validation_0-rmse:73.39859	validation_1-rmse:306.21637
-[381]	validation_0-rmse:73.17406	validation_1-rmse:306.26655
-[382]	validation_0-rmse:72.88440	validation_1-rmse:306.22235
-[383]	validation_0-rmse:72.66491	validation_1-rmse:306.23151
-[384]	validation_0-rmse:72.44589	validation_1-rmse:306.28118
-[385]	validation_0-rmse:72.15724	validation_1-rmse:306.24770
-[386]	validation_0-rmse:71.94320	validation_1-rmse:306.25709
-[387]	validation_0-rmse:71.74484	validation_1-rmse:306.27208
-[388]	validation_0-rmse:71.54864	validation_1-rmse:306.27841
-[389]	validation_0-rmse:71.27110	validation_1-rmse:306.23461
-[390]	validation_0-rmse:70.99204	validation_1-rmse:306.19810
-[391]	validation_0-rmse:70.75212	validation_1-rmse:306.23904
-[392]	validation_0-rmse:70.47875	validation_1-rmse:306.20792
-[393]	validation_0-rmse:70.20881	validation_1-rmse:306.17340
-[394]	validation_0-rmse:69.99018	validation_1-rmse:306.14689
-[395]	validation_0-rmse:69.74942	validation_1-rmse:306.19430
-[396]	validation_0-rmse:69.55897	validation_1-rmse:306.20601
-[397]	validation_0-rmse:69.35988	validation_1-rmse:306.25009
-[398]	validation_0-rmse:69.09824	validation_1-rmse:306.20756
-[399]	validation_0-rmse:68.86436	validation_1-rmse:306.24684
-[400]	validation_0-rmse:68.63761	validation_1-rmse:306.27387
-[401]	validation_0-rmse:68.45449	validation_1-rmse:306.29302
-[402]	validation_0-rmse:68.26277	validation_1-rmse:306.33245
-[403]	validation_0-rmse:68.00992	validation_1-rmse:306.30376
-[404]	validation_0-rmse:67.77730	validation_1-rmse:306.29535
-[405]	validation_0-rmse:67.55434	validation_1-rmse:306.32247
-[406]	validation_0-rmse:67.37286	validation_1-rmse:306.35340
-[407]	validation_0-rmse:67.14563	validation_1-rmse:306.34544
-[408]	validation_0-rmse:66.92811	validation_1-rmse:306.37222
-[409]	validation_0-rmse:66.75536	validation_1-rmse:306.37951
-[410]	validation_0-rmse:66.58510	validation_1-rmse:306.39463
-[411]	validation_0-rmse:66.39072	validation_1-rmse:306.39269
-[412]	validation_0-rmse:66.15342	validation_1-rmse:306.36156
-[413]	validation_0-rmse:65.91923	validation_1-rmse:306.33114
-[414]	validation_0-rmse:65.74614	validation_1-rmse:306.30653
-[415]	validation_0-rmse:65.53892	validation_1-rmse:306.33481
-[416]	validation_0-rmse:65.35989	validation_1-rmse:306.31223
-[417]	validation_0-rmse:65.11854	validation_1-rmse:306.30555
-[418]	validation_0-rmse:64.95130	validation_1-rmse:306.34119
-[419]	validation_0-rmse:64.71419	validation_1-rmse:306.33514
-[420]	validation_0-rmse:64.55525	validation_1-rmse:306.33135
-[421]	validation_0-rmse:64.38091	validation_1-rmse:306.34532
-[422]	validation_0-rmse:64.20891	validation_1-rmse:306.35959
-[423]	validation_0-rmse:64.03841	validation_1-rmse:306.33545
-[424]	validation_0-rmse:63.81630	validation_1-rmse:306.30938
-[425]	validation_0-rmse:63.64852	validation_1-rmse:306.32396
-[426]	validation_0-rmse:63.49631	validation_1-rmse:306.33986
-[427]	validation_0-rmse:63.27735	validation_1-rmse:306.29543
-[428]	validation_0-rmse:63.11369	validation_1-rmse:306.31022
-[429]	validation_0-rmse:62.93776	validation_1-rmse:306.33226
-[430]	validation_0-rmse:62.71859	validation_1-rmse:306.27546
-[431]	validation_0-rmse:62.57125	validation_1-rmse:306.29056
-[432]	validation_0-rmse:62.41262	validation_1-rmse:306.30554
-[433]	validation_0-rmse:62.20263	validation_1-rmse:306.23830
-[434]	validation_0-rmse:62.04443	validation_1-rmse:306.19914
-[435]	validation_0-rmse:61.85550	validation_1-rmse:306.21292
-[436]	validation_0-rmse:61.65032	validation_1-rmse:306.20113
-[437]	validation_0-rmse:61.44564	validation_1-rmse:306.17296
-[438]	validation_0-rmse:61.30551	validation_1-rmse:306.15851
-[439]	validation_0-rmse:61.10491	validation_1-rmse:306.14715
-[440]	validation_0-rmse:60.95547	validation_1-rmse:306.10440
-[441]	validation_0-rmse:60.81552	validation_1-rmse:306.08520
-[442]	validation_0-rmse:60.66829	validation_1-rmse:306.10104
-[443]	validation_0-rmse:60.53053	validation_1-rmse:306.08202
-[444]	validation_0-rmse:60.38453	validation_1-rmse:306.02955
-[445]	validation_0-rmse:60.23857	validation_1-rmse:306.01665
-[446]	validation_0-rmse:60.09630	validation_1-rmse:305.97265
-[447]	validation_0-rmse:59.95342	validation_1-rmse:305.98830
-[448]	validation_0-rmse:59.81169	validation_1-rmse:305.98841
-[449]	validation_0-rmse:59.61739	validation_1-rmse:305.93782
-[450]	validation_0-rmse:59.46388	validation_1-rmse:305.86271
-[451]	validation_0-rmse:59.29792	validation_1-rmse:305.88019
-[452]	validation_0-rmse:59.15904	validation_1-rmse:305.84301
-[453]	validation_0-rmse:59.01805	validation_1-rmse:305.83135
-[454]	validation_0-rmse:58.88109	validation_1-rmse:305.84575
-[455]	validation_0-rmse:58.70597	validation_1-rmse:305.83924
-[456]	validation_0-rmse:58.56403	validation_1-rmse:305.78556
-[457]	validation_0-rmse:58.42604	validation_1-rmse:305.77896
-[458]	validation_0-rmse:58.28618	validation_1-rmse:305.74850
-[459]	validation_0-rmse:58.11518	validation_1-rmse:305.78357
-[460]	validation_0-rmse:57.98339	validation_1-rmse:305.79772
-[461]	validation_0-rmse:57.84631	validation_1-rmse:305.75170
-[462]	validation_0-rmse:57.67909	validation_1-rmse:305.78624
-[463]	validation_0-rmse:57.54605	validation_1-rmse:305.77402
-[464]	validation_0-rmse:57.41161	validation_1-rmse:305.72153
-[465]	validation_0-rmse:57.28393	validation_1-rmse:305.73550
-[466]	validation_0-rmse:57.15161	validation_1-rmse:305.70801
-[467]	validation_0-rmse:56.98880	validation_1-rmse:305.74500
-[468]	validation_0-rmse:56.85858	validation_1-rmse:305.70106
-[469]	validation_0-rmse:56.73454	validation_1-rmse:305.71491
-[470]	validation_0-rmse:56.58828	validation_1-rmse:305.73817
-[471]	validation_0-rmse:56.45745	validation_1-rmse:305.74046
-[472]	validation_0-rmse:56.32228	validation_1-rmse:305.75358
-[473]	validation_0-rmse:56.19484	validation_1-rmse:305.74139
-[474]	validation_0-rmse:56.06877	validation_1-rmse:305.71412
-[475]	validation_0-rmse:55.93609	validation_1-rmse:305.72753
-[476]	validation_0-rmse:55.80866	validation_1-rmse:305.67926
-[477]	validation_0-rmse:55.68184	validation_1-rmse:305.68137
-[478]	validation_0-rmse:55.54832	validation_1-rmse:305.64533
-[479]	validation_0-rmse:55.41002	validation_1-rmse:305.61982
-[480]	validation_0-rmse:55.29272	validation_1-rmse:305.63293
-[481]	validation_0-rmse:55.17205	validation_1-rmse:305.60692
-[482]	validation_0-rmse:55.04990	validation_1-rmse:305.59497
-[483]	validation_0-rmse:54.91509	validation_1-rmse:305.57013
-[484]	validation_0-rmse:54.80084	validation_1-rmse:305.58320
-[485]	validation_0-rmse:54.64078	validation_1-rmse:305.57989
-[486]	validation_0-rmse:54.52850	validation_1-rmse:305.59148
-[487]	validation_0-rmse:54.40850	validation_1-rmse:305.54441
-[488]	validation_0-rmse:54.28989	validation_1-rmse:305.49861
-[489]	validation_0-rmse:54.18004	validation_1-rmse:305.51109
-[490]	validation_0-rmse:54.06323	validation_1-rmse:305.46611
-[491]	validation_0-rmse:53.91733	validation_1-rmse:305.49654
-[492]	validation_0-rmse:53.77780	validation_1-rmse:305.44339
-[493]	validation_0-rmse:53.67108	validation_1-rmse:305.45669
-[494]	validation_0-rmse:53.54399	validation_1-rmse:305.43307
-[495]	validation_0-rmse:53.43903	validation_1-rmse:305.45383
-[496]	validation_0-rmse:53.30287	validation_1-rmse:305.40057
-[497]	validation_0-rmse:53.19952	validation_1-rmse:305.39805
-[498]	validation_0-rmse:53.06552	validation_1-rmse:305.34492
-[499]	validation_0-rmse:52.96382	validation_1-rmse:305.34810
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[0]	validation_0-rmse:693.13940	validation_1-rmse:694.51654
+[1]	validation_0-rmse:687.25189	validation_1-rmse:688.37647
+[2]	validation_0-rmse:681.42450	validation_1-rmse:682.31519
+[3]	validation_0-rmse:675.64862	validation_1-rmse:677.35821
+[4]	validation_0-rmse:669.93323	validation_1-rmse:672.46289
+[5]	validation_0-rmse:664.27350	validation_1-rmse:666.60590
+[6]	validation_0-rmse:658.67120	validation_1-rmse:661.82837
+[7]	validation_0-rmse:653.12683	validation_1-rmse:656.90320
+[8]	validation_0-rmse:647.63959	validation_1-rmse:652.24139
+[9]	validation_0-rmse:642.19391	validation_1-rmse:646.64972
+[10]	validation_0-rmse:636.80994	validation_1-rmse:641.92291
+[11]	validation_0-rmse:631.48132	validation_1-rmse:637.27759
+[12]	validation_0-rmse:626.19611	validation_1-rmse:631.90668
+[13]	validation_0-rmse:620.97253	validation_1-rmse:627.37415
+[14]	validation_0-rmse:615.80408	validation_1-rmse:622.82281
+[15]	validation_0-rmse:610.68530	validation_1-rmse:618.45032
+[16]	validation_0-rmse:605.60406	validation_1-rmse:613.33539
+[17]	validation_0-rmse:600.57904	validation_1-rmse:609.34509
+[18]	validation_0-rmse:595.60968	validation_1-rmse:605.29291
+[19]	validation_0-rmse:590.69055	validation_1-rmse:601.35706
+[20]	validation_0-rmse:585.80054	validation_1-rmse:596.47650
+[21]	validation_0-rmse:580.97583	validation_1-rmse:592.68848
+[22]	validation_0-rmse:576.20465	validation_1-rmse:588.83850
+[23]	validation_0-rmse:571.47607	validation_1-rmse:585.00433
+[24]	validation_0-rmse:566.76788	validation_1-rmse:580.46277
+[25]	validation_0-rmse:562.13471	validation_1-rmse:576.72809
+[26]	validation_0-rmse:557.55151	validation_1-rmse:573.04327
+[27]	validation_0-rmse:552.98291	validation_1-rmse:568.56140
+[28]	validation_0-rmse:548.47424	validation_1-rmse:564.78180
+[29]	validation_0-rmse:544.02570	validation_1-rmse:561.24017
+[30]	validation_0-rmse:539.58014	validation_1-rmse:557.70367
+[31]	validation_0-rmse:535.22327	validation_1-rmse:554.25781
+[32]	validation_0-rmse:530.91187	validation_1-rmse:550.87280
+[33]	validation_0-rmse:526.59692	validation_1-rmse:546.80621
+[34]	validation_0-rmse:522.37360	validation_1-rmse:543.51318
+[35]	validation_0-rmse:518.14471	validation_1-rmse:539.55518
+[36]	validation_0-rmse:513.98346	validation_1-rmse:536.03009
+[37]	validation_0-rmse:509.83865	validation_1-rmse:532.21423
+[38]	validation_0-rmse:505.74954	validation_1-rmse:528.81268
+[39]	validation_0-rmse:501.70898	validation_1-rmse:525.42316
+[40]	validation_0-rmse:497.69723	validation_1-rmse:522.18695
+[41]	validation_0-rmse:493.72720	validation_1-rmse:519.00018
+[42]	validation_0-rmse:489.80530	validation_1-rmse:515.74005
+[43]	validation_0-rmse:485.91321	validation_1-rmse:512.64783
+[44]	validation_0-rmse:482.06296	validation_1-rmse:509.52441
+[45]	validation_0-rmse:478.25067	validation_1-rmse:506.52609
+[46]	validation_0-rmse:474.47971	validation_1-rmse:503.42673
+[47]	validation_0-rmse:470.70651	validation_1-rmse:500.40295
+[48]	validation_0-rmse:466.97400	validation_1-rmse:497.36221
+[49]	validation_0-rmse:463.27878	validation_1-rmse:494.61954
 </pre></div>
 </div>
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>XGBRegressor(base_score=0.5, booster=&#39;gbtree&#39;, callbacks=None,
-             colsample_bylevel=1, colsample_bynode=1, colsample_bytree=1,
-             early_stopping_rounds=None, enable_categorical=False,
-             eval_metric=&#39;rmse&#39;, gamma=0, gpu_id=-1, grow_policy=&#39;depthwise&#39;,
-             importance_type=None, interaction_constraints=&#39;&#39;,
-             learning_rate=0.01, max_bin=256, max_cat_to_onehot=4,
-             max_delta_step=0, max_depth=4, max_leaves=0, min_child_weight=1,
-             missing=nan, monotone_constraints=&#39;()&#39;, n_estimators=500, n_jobs=0,
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>XGBRegressor(base_score=0.5, booster=&#39;gbtree&#39;, colsample_bylevel=1,
+             colsample_bynode=1, colsample_bytree=1, enable_categorical=False,
+             eval_metric=&#39;rmse&#39;, gamma=0, gpu_id=-1, importance_type=None,
+             interaction_constraints=&#39;&#39;, learning_rate=0.01, max_delta_step=0,
+             max_depth=4, min_child_weight=1, missing=nan,
+             monotone_constraints=&#39;()&#39;, n_estimators=50, n_jobs=4,
              num_parallel_tree=1, predictor=&#39;auto&#39;, random_state=0, reg_alpha=0,
-             reg_lambda=1, ...)
+             reg_lambda=1, scale_pos_weight=1, subsample=1, tree_method=&#39;exact&#39;,
+             validate_parameters=1, verbosity=None)
 </pre></div>
 </div>
 </div>
@@ -1079,7 +631,7 @@ const thebe_selector_output = ".output, .cell_output"
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>305.34809490903564
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>494.61957203317934
 </pre></div>
 </div>
 </div>
@@ -1174,8 +726,412 @@ const thebe_selector_output = ".output, .cell_output"
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">result</span> <span class="o">=</span> <span class="n">permutation_importance</span><span class="p">(</span>
     <span class="n">reg</span><span class="p">,</span> <span class="n">X_test</span><span class="p">,</span> <span class="n">y_test</span><span class="p">,</span> <span class="n">n_repeats</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span> <span class="n">random_state</span><span class="o">=</span><span class="mi">42</span><span class="p">,</span> <span class="n">n_jobs</span><span class="o">=</span><span class="mi">2</span>
 <span class="p">)</span>
-
-<span class="n">tree_importances</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">Series</span><span class="p">(</span><span class="n">result</span><span class="o">.</span><span class="n">importances_mean</span><span class="p">,</span> <span class="n">index</span><span class="o">=</span><span class="n">feature_names</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/Users/jankirenz/opt/anaconda3/envs/xgboost/lib/python3.9/site-packages/xgboost/data.py:262: FutureWarning: pandas.Int64Index is deprecated and will be removed from pandas in a future version. Use pandas.Index with the appropriate dtype instead.
+  elif isinstance(data.columns, (pd.Int64Index, pd.RangeIndex)):
+/Users/jankirenz/opt/anaconda3/envs/xgboost/lib/python3.9/site-packages/xgboost/data.py:262: FutureWarning: pandas.Int64Index is deprecated and will be removed from pandas in a future version. Use pandas.Index with the appropriate dtype instead.
+  elif isinstance(data.columns, (pd.Int64Index, pd.RangeIndex)):
+/Users/jankirenz/opt/anaconda3/envs/xgboost/lib/python3.9/site-packages/xgboost/data.py:262: FutureWarning: pandas.Int64Index is deprecated and will be removed from pandas in a future version. Use pandas.Index with the appropriate dtype instead.
+  elif isinstance(data.columns, (pd.Int64Index, pd.RangeIndex)):
+/Users/jankirenz/opt/anaconda3/envs/xgboost/lib/python3.9/site-packages/xgboost/data.py:262: FutureWarning: pandas.Int64Index is deprecated and will be removed from pandas in a future version. Use pandas.Index with the appropriate dtype instead.
+  elif isinstance(data.columns, (pd.Int64Index, pd.RangeIndex)):
+/Users/jankirenz/opt/anaconda3/envs/xgboost/lib/python3.9/site-packages/xgboost/data.py:262: FutureWarning: pandas.Int64Index is deprecated and will be removed from pandas in a future version. Use pandas.Index with the appropriate dtype instead.
+  elif isinstance(data.columns, (pd.Int64Index, pd.RangeIndex)):
+/Users/jankirenz/opt/anaconda3/envs/xgboost/lib/python3.9/site-packages/xgboost/data.py:262: FutureWarning: pandas.Int64Index is deprecated and will be removed from pandas in a future version. Use pandas.Index with the appropriate dtype instead.
+  elif isinstance(data.columns, (pd.Int64Index, pd.RangeIndex)):
+/Users/jankirenz/opt/anaconda3/envs/xgboost/lib/python3.9/site-packages/xgboost/data.py:262: FutureWarning: pandas.Int64Index is deprecated and will be removed from pandas in a future version. Use pandas.Index with the appropriate dtype instead.
+  elif isinstance(data.columns, (pd.Int64Index, pd.RangeIndex)):
+/Users/jankirenz/opt/anaconda3/envs/xgboost/lib/python3.9/site-packages/xgboost/data.py:262: FutureWarning: pandas.Int64Index is deprecated and will be removed from pandas in a future version. Use pandas.Index with the appropriate dtype instead.
+  elif isinstance(data.columns, (pd.Int64Index, pd.RangeIndex)):
+/Users/jankirenz/opt/anaconda3/envs/xgboost/lib/python3.9/site-packages/xgboost/data.py:262: FutureWarning: pandas.Int64Index is deprecated and will be removed from pandas in a future version. Use pandas.Index with the appropriate dtype instead.
+  elif isinstance(data.columns, (pd.Int64Index, pd.RangeIndex)):
+/Users/jankirenz/opt/anaconda3/envs/xgboost/lib/python3.9/site-packages/xgboost/data.py:262: FutureWarning: pandas.Int64Index is deprecated and will be removed from pandas in a future version. Use pandas.Index with the appropriate dtype instead.
+  elif isinstance(data.columns, (pd.Int64Index, pd.RangeIndex)):
+/Users/jankirenz/opt/anaconda3/envs/xgboost/lib/python3.9/site-packages/xgboost/data.py:262: FutureWarning: pandas.Int64Index is deprecated and will be removed from pandas in a future version. Use pandas.Index with the appropriate dtype instead.
+  elif isinstance(data.columns, (pd.Int64Index, pd.RangeIndex)):
+/Users/jankirenz/opt/anaconda3/envs/xgboost/lib/python3.9/site-packages/xgboost/data.py:262: FutureWarning: pandas.Int64Index is deprecated and will be removed from pandas in a future version. Use pandas.Index with the appropriate dtype instead.
+  elif isinstance(data.columns, (pd.Int64Index, pd.RangeIndex)):
+/Users/jankirenz/opt/anaconda3/envs/xgboost/lib/python3.9/site-packages/xgboost/data.py:262: FutureWarning: pandas.Int64Index is deprecated and will be removed from pandas in a future version. Use pandas.Index with the appropriate dtype instead.
+  elif isinstance(data.columns, (pd.Int64Index, pd.RangeIndex)):
+/Users/jankirenz/opt/anaconda3/envs/xgboost/lib/python3.9/site-packages/xgboost/data.py:262: FutureWarning: pandas.Int64Index is deprecated and will be removed from pandas in a future version. Use pandas.Index with the appropriate dtype instead.
+  elif isinstance(data.columns, (pd.Int64Index, pd.RangeIndex)):
+/Users/jankirenz/opt/anaconda3/envs/xgboost/lib/python3.9/site-packages/xgboost/data.py:262: FutureWarning: pandas.Int64Index is deprecated and will be removed from pandas in a future version. Use pandas.Index with the appropriate dtype instead.
+  elif isinstance(data.columns, (pd.Int64Index, pd.RangeIndex)):
+/Users/jankirenz/opt/anaconda3/envs/xgboost/lib/python3.9/site-packages/xgboost/data.py:262: FutureWarning: pandas.Int64Index is deprecated and will be removed from pandas in a future version. Use pandas.Index with the appropriate dtype instead.
+  elif isinstance(data.columns, (pd.Int64Index, pd.RangeIndex)):
+/Users/jankirenz/opt/anaconda3/envs/xgboost/lib/python3.9/site-packages/xgboost/data.py:262: FutureWarning: pandas.Int64Index is deprecated and will be removed from pandas in a future version. Use pandas.Index with the appropriate dtype instead.
+  elif isinstance(data.columns, (pd.Int64Index, pd.RangeIndex)):
+/Users/jankirenz/opt/anaconda3/envs/xgboost/lib/python3.9/site-packages/xgboost/data.py:262: FutureWarning: pandas.Int64Index is deprecated and will be removed from pandas in a future version. Use pandas.Index with the appropriate dtype instead.
+  elif isinstance(data.columns, (pd.Int64Index, pd.RangeIndex)):
+/Users/jankirenz/opt/anaconda3/envs/xgboost/lib/python3.9/site-packages/xgboost/data.py:262: FutureWarning: pandas.Int64Index is deprecated and will be removed from pandas in a future version. Use pandas.Index with the appropriate dtype instead.
+  elif isinstance(data.columns, (pd.Int64Index, pd.RangeIndex)):
+/Users/jankirenz/opt/anaconda3/envs/xgboost/lib/python3.9/site-packages/xgboost/data.py:262: FutureWarning: pandas.Int64Index is deprecated and will be removed from pandas in a future version. Use pandas.Index with the appropriate dtype instead.
+  elif isinstance(data.columns, (pd.Int64Index, pd.RangeIndex)):
+/Users/jankirenz/opt/anaconda3/envs/xgboost/lib/python3.9/site-packages/xgboost/data.py:262: FutureWarning: pandas.Int64Index is deprecated and will be removed from pandas in a future version. Use pandas.Index with the appropriate dtype instead.
+  elif isinstance(data.columns, (pd.Int64Index, pd.RangeIndex)):
+/Users/jankirenz/opt/anaconda3/envs/xgboost/lib/python3.9/site-packages/xgboost/data.py:262: FutureWarning: pandas.Int64Index is deprecated and will be removed from pandas in a future version. Use pandas.Index with the appropriate dtype instead.
+  elif isinstance(data.columns, (pd.Int64Index, pd.RangeIndex)):
+/Users/jankirenz/opt/anaconda3/envs/xgboost/lib/python3.9/site-packages/xgboost/data.py:262: FutureWarning: pandas.Int64Index is deprecated and will be removed from pandas in a future version. Use pandas.Index with the appropriate dtype instead.
+  elif isinstance(data.columns, (pd.Int64Index, pd.RangeIndex)):
+/Users/jankirenz/opt/anaconda3/envs/xgboost/lib/python3.9/site-packages/xgboost/data.py:262: FutureWarning: pandas.Int64Index is deprecated and will be removed from pandas in a future version. Use pandas.Index with the appropriate dtype instead.
+  elif isinstance(data.columns, (pd.Int64Index, pd.RangeIndex)):
+/Users/jankirenz/opt/anaconda3/envs/xgboost/lib/python3.9/site-packages/xgboost/data.py:262: FutureWarning: pandas.Int64Index is deprecated and will be removed from pandas in a future version. Use pandas.Index with the appropriate dtype instead.
+  elif isinstance(data.columns, (pd.Int64Index, pd.RangeIndex)):
+/Users/jankirenz/opt/anaconda3/envs/xgboost/lib/python3.9/site-packages/xgboost/data.py:262: FutureWarning: pandas.Int64Index is deprecated and will be removed from pandas in a future version. Use pandas.Index with the appropriate dtype instead.
+  elif isinstance(data.columns, (pd.Int64Index, pd.RangeIndex)):
+/Users/jankirenz/opt/anaconda3/envs/xgboost/lib/python3.9/site-packages/xgboost/data.py:262: FutureWarning: pandas.Int64Index is deprecated and will be removed from pandas in a future version. Use pandas.Index with the appropriate dtype instead.
+  elif isinstance(data.columns, (pd.Int64Index, pd.RangeIndex)):
+/Users/jankirenz/opt/anaconda3/envs/xgboost/lib/python3.9/site-packages/xgboost/data.py:262: FutureWarning: pandas.Int64Index is deprecated and will be removed from pandas in a future version. Use pandas.Index with the appropriate dtype instead.
+  elif isinstance(data.columns, (pd.Int64Index, pd.RangeIndex)):
+/Users/jankirenz/opt/anaconda3/envs/xgboost/lib/python3.9/site-packages/xgboost/data.py:262: FutureWarning: pandas.Int64Index is deprecated and will be removed from pandas in a future version. Use pandas.Index with the appropriate dtype instead.
+  elif isinstance(data.columns, (pd.Int64Index, pd.RangeIndex)):
+/Users/jankirenz/opt/anaconda3/envs/xgboost/lib/python3.9/site-packages/xgboost/data.py:262: FutureWarning: pandas.Int64Index is deprecated and will be removed from pandas in a future version. Use pandas.Index with the appropriate dtype instead.
+  elif isinstance(data.columns, (pd.Int64Index, pd.RangeIndex)):
+/Users/jankirenz/opt/anaconda3/envs/xgboost/lib/python3.9/site-packages/xgboost/data.py:262: FutureWarning: pandas.Int64Index is deprecated and will be removed from pandas in a future version. Use pandas.Index with the appropriate dtype instead.
+  elif isinstance(data.columns, (pd.Int64Index, pd.RangeIndex)):
+/Users/jankirenz/opt/anaconda3/envs/xgboost/lib/python3.9/site-packages/xgboost/data.py:262: FutureWarning: pandas.Int64Index is deprecated and will be removed from pandas in a future version. Use pandas.Index with the appropriate dtype instead.
+  elif isinstance(data.columns, (pd.Int64Index, pd.RangeIndex)):
+/Users/jankirenz/opt/anaconda3/envs/xgboost/lib/python3.9/site-packages/xgboost/data.py:262: FutureWarning: pandas.Int64Index is deprecated and will be removed from pandas in a future version. Use pandas.Index with the appropriate dtype instead.
+  elif isinstance(data.columns, (pd.Int64Index, pd.RangeIndex)):
+/Users/jankirenz/opt/anaconda3/envs/xgboost/lib/python3.9/site-packages/xgboost/data.py:262: FutureWarning: pandas.Int64Index is deprecated and will be removed from pandas in a future version. Use pandas.Index with the appropriate dtype instead.
+  elif isinstance(data.columns, (pd.Int64Index, pd.RangeIndex)):
+/Users/jankirenz/opt/anaconda3/envs/xgboost/lib/python3.9/site-packages/xgboost/data.py:262: FutureWarning: pandas.Int64Index is deprecated and will be removed from pandas in a future version. Use pandas.Index with the appropriate dtype instead.
+  elif isinstance(data.columns, (pd.Int64Index, pd.RangeIndex)):
+/Users/jankirenz/opt/anaconda3/envs/xgboost/lib/python3.9/site-packages/xgboost/data.py:262: FutureWarning: pandas.Int64Index is deprecated and will be removed from pandas in a future version. Use pandas.Index with the appropriate dtype instead.
+  elif isinstance(data.columns, (pd.Int64Index, pd.RangeIndex)):
+/Users/jankirenz/opt/anaconda3/envs/xgboost/lib/python3.9/site-packages/xgboost/data.py:262: FutureWarning: pandas.Int64Index is deprecated and will be removed from pandas in a future version. Use pandas.Index with the appropriate dtype instead.
+  elif isinstance(data.columns, (pd.Int64Index, pd.RangeIndex)):
+/Users/jankirenz/opt/anaconda3/envs/xgboost/lib/python3.9/site-packages/xgboost/data.py:262: FutureWarning: pandas.Int64Index is deprecated and will be removed from pandas in a future version. Use pandas.Index with the appropriate dtype instead.
+  elif isinstance(data.columns, (pd.Int64Index, pd.RangeIndex)):
+/Users/jankirenz/opt/anaconda3/envs/xgboost/lib/python3.9/site-packages/xgboost/data.py:262: FutureWarning: pandas.Int64Index is deprecated and will be removed from pandas in a future version. Use pandas.Index with the appropriate dtype instead.
+  elif isinstance(data.columns, (pd.Int64Index, pd.RangeIndex)):
+/Users/jankirenz/opt/anaconda3/envs/xgboost/lib/python3.9/site-packages/xgboost/data.py:262: FutureWarning: pandas.Int64Index is deprecated and will be removed from pandas in a future version. Use pandas.Index with the appropriate dtype instead.
+  elif isinstance(data.columns, (pd.Int64Index, pd.RangeIndex)):
+/Users/jankirenz/opt/anaconda3/envs/xgboost/lib/python3.9/site-packages/xgboost/data.py:262: FutureWarning: pandas.Int64Index is deprecated and will be removed from pandas in a future version. Use pandas.Index with the appropriate dtype instead.
+  elif isinstance(data.columns, (pd.Int64Index, pd.RangeIndex)):
+/Users/jankirenz/opt/anaconda3/envs/xgboost/lib/python3.9/site-packages/xgboost/data.py:262: FutureWarning: pandas.Int64Index is deprecated and will be removed from pandas in a future version. Use pandas.Index with the appropriate dtype instead.
+  elif isinstance(data.columns, (pd.Int64Index, pd.RangeIndex)):
+/Users/jankirenz/opt/anaconda3/envs/xgboost/lib/python3.9/site-packages/xgboost/data.py:262: FutureWarning: pandas.Int64Index is deprecated and will be removed from pandas in a future version. Use pandas.Index with the appropriate dtype instead.
+  elif isinstance(data.columns, (pd.Int64Index, pd.RangeIndex)):
+/Users/jankirenz/opt/anaconda3/envs/xgboost/lib/python3.9/site-packages/xgboost/data.py:262: FutureWarning: pandas.Int64Index is deprecated and will be removed from pandas in a future version. Use pandas.Index with the appropriate dtype instead.
+  elif isinstance(data.columns, (pd.Int64Index, pd.RangeIndex)):
+/Users/jankirenz/opt/anaconda3/envs/xgboost/lib/python3.9/site-packages/xgboost/data.py:262: FutureWarning: pandas.Int64Index is deprecated and will be removed from pandas in a future version. Use pandas.Index with the appropriate dtype instead.
+  elif isinstance(data.columns, (pd.Int64Index, pd.RangeIndex)):
+/Users/jankirenz/opt/anaconda3/envs/xgboost/lib/python3.9/site-packages/xgboost/data.py:262: FutureWarning: pandas.Int64Index is deprecated and will be removed from pandas in a future version. Use pandas.Index with the appropriate dtype instead.
+  elif isinstance(data.columns, (pd.Int64Index, pd.RangeIndex)):
+/Users/jankirenz/opt/anaconda3/envs/xgboost/lib/python3.9/site-packages/xgboost/data.py:262: FutureWarning: pandas.Int64Index is deprecated and will be removed from pandas in a future version. Use pandas.Index with the appropriate dtype instead.
+  elif isinstance(data.columns, (pd.Int64Index, pd.RangeIndex)):
+/Users/jankirenz/opt/anaconda3/envs/xgboost/lib/python3.9/site-packages/xgboost/data.py:262: FutureWarning: pandas.Int64Index is deprecated and will be removed from pandas in a future version. Use pandas.Index with the appropriate dtype instead.
+  elif isinstance(data.columns, (pd.Int64Index, pd.RangeIndex)):
+/Users/jankirenz/opt/anaconda3/envs/xgboost/lib/python3.9/site-packages/xgboost/data.py:262: FutureWarning: pandas.Int64Index is deprecated and will be removed from pandas in a future version. Use pandas.Index with the appropriate dtype instead.
+  elif isinstance(data.columns, (pd.Int64Index, pd.RangeIndex)):
+/Users/jankirenz/opt/anaconda3/envs/xgboost/lib/python3.9/site-packages/xgboost/data.py:262: FutureWarning: pandas.Int64Index is deprecated and will be removed from pandas in a future version. Use pandas.Index with the appropriate dtype instead.
+  elif isinstance(data.columns, (pd.Int64Index, pd.RangeIndex)):
+/Users/jankirenz/opt/anaconda3/envs/xgboost/lib/python3.9/site-packages/xgboost/data.py:262: FutureWarning: pandas.Int64Index is deprecated and will be removed from pandas in a future version. Use pandas.Index with the appropriate dtype instead.
+  elif isinstance(data.columns, (pd.Int64Index, pd.RangeIndex)):
+/Users/jankirenz/opt/anaconda3/envs/xgboost/lib/python3.9/site-packages/xgboost/data.py:262: FutureWarning: pandas.Int64Index is deprecated and will be removed from pandas in a future version. Use pandas.Index with the appropriate dtype instead.
+  elif isinstance(data.columns, (pd.Int64Index, pd.RangeIndex)):
+/Users/jankirenz/opt/anaconda3/envs/xgboost/lib/python3.9/site-packages/xgboost/data.py:262: FutureWarning: pandas.Int64Index is deprecated and will be removed from pandas in a future version. Use pandas.Index with the appropriate dtype instead.
+  elif isinstance(data.columns, (pd.Int64Index, pd.RangeIndex)):
+/Users/jankirenz/opt/anaconda3/envs/xgboost/lib/python3.9/site-packages/xgboost/data.py:262: FutureWarning: pandas.Int64Index is deprecated and will be removed from pandas in a future version. Use pandas.Index with the appropriate dtype instead.
+  elif isinstance(data.columns, (pd.Int64Index, pd.RangeIndex)):
+/Users/jankirenz/opt/anaconda3/envs/xgboost/lib/python3.9/site-packages/xgboost/data.py:262: FutureWarning: pandas.Int64Index is deprecated and will be removed from pandas in a future version. Use pandas.Index with the appropriate dtype instead.
+  elif isinstance(data.columns, (pd.Int64Index, pd.RangeIndex)):
+/Users/jankirenz/opt/anaconda3/envs/xgboost/lib/python3.9/site-packages/xgboost/data.py:262: FutureWarning: pandas.Int64Index is deprecated and will be removed from pandas in a future version. Use pandas.Index with the appropriate dtype instead.
+  elif isinstance(data.columns, (pd.Int64Index, pd.RangeIndex)):
+/Users/jankirenz/opt/anaconda3/envs/xgboost/lib/python3.9/site-packages/xgboost/data.py:262: FutureWarning: pandas.Int64Index is deprecated and will be removed from pandas in a future version. Use pandas.Index with the appropriate dtype instead.
+  elif isinstance(data.columns, (pd.Int64Index, pd.RangeIndex)):
+/Users/jankirenz/opt/anaconda3/envs/xgboost/lib/python3.9/site-packages/xgboost/data.py:262: FutureWarning: pandas.Int64Index is deprecated and will be removed from pandas in a future version. Use pandas.Index with the appropriate dtype instead.
+  elif isinstance(data.columns, (pd.Int64Index, pd.RangeIndex)):
+/Users/jankirenz/opt/anaconda3/envs/xgboost/lib/python3.9/site-packages/xgboost/data.py:262: FutureWarning: pandas.Int64Index is deprecated and will be removed from pandas in a future version. Use pandas.Index with the appropriate dtype instead.
+  elif isinstance(data.columns, (pd.Int64Index, pd.RangeIndex)):
+/Users/jankirenz/opt/anaconda3/envs/xgboost/lib/python3.9/site-packages/xgboost/data.py:262: FutureWarning: pandas.Int64Index is deprecated and will be removed from pandas in a future version. Use pandas.Index with the appropriate dtype instead.
+  elif isinstance(data.columns, (pd.Int64Index, pd.RangeIndex)):
+/Users/jankirenz/opt/anaconda3/envs/xgboost/lib/python3.9/site-packages/xgboost/data.py:262: FutureWarning: pandas.Int64Index is deprecated and will be removed from pandas in a future version. Use pandas.Index with the appropriate dtype instead.
+  elif isinstance(data.columns, (pd.Int64Index, pd.RangeIndex)):
+/Users/jankirenz/opt/anaconda3/envs/xgboost/lib/python3.9/site-packages/xgboost/data.py:262: FutureWarning: pandas.Int64Index is deprecated and will be removed from pandas in a future version. Use pandas.Index with the appropriate dtype instead.
+  elif isinstance(data.columns, (pd.Int64Index, pd.RangeIndex)):
+/Users/jankirenz/opt/anaconda3/envs/xgboost/lib/python3.9/site-packages/xgboost/data.py:262: FutureWarning: pandas.Int64Index is deprecated and will be removed from pandas in a future version. Use pandas.Index with the appropriate dtype instead.
+  elif isinstance(data.columns, (pd.Int64Index, pd.RangeIndex)):
+/Users/jankirenz/opt/anaconda3/envs/xgboost/lib/python3.9/site-packages/xgboost/data.py:262: FutureWarning: pandas.Int64Index is deprecated and will be removed from pandas in a future version. Use pandas.Index with the appropriate dtype instead.
+  elif isinstance(data.columns, (pd.Int64Index, pd.RangeIndex)):
+/Users/jankirenz/opt/anaconda3/envs/xgboost/lib/python3.9/site-packages/xgboost/data.py:262: FutureWarning: pandas.Int64Index is deprecated and will be removed from pandas in a future version. Use pandas.Index with the appropriate dtype instead.
+  elif isinstance(data.columns, (pd.Int64Index, pd.RangeIndex)):
+/Users/jankirenz/opt/anaconda3/envs/xgboost/lib/python3.9/site-packages/xgboost/data.py:262: FutureWarning: pandas.Int64Index is deprecated and will be removed from pandas in a future version. Use pandas.Index with the appropriate dtype instead.
+  elif isinstance(data.columns, (pd.Int64Index, pd.RangeIndex)):
+/Users/jankirenz/opt/anaconda3/envs/xgboost/lib/python3.9/site-packages/xgboost/data.py:262: FutureWarning: pandas.Int64Index is deprecated and will be removed from pandas in a future version. Use pandas.Index with the appropriate dtype instead.
+  elif isinstance(data.columns, (pd.Int64Index, pd.RangeIndex)):
+/Users/jankirenz/opt/anaconda3/envs/xgboost/lib/python3.9/site-packages/xgboost/data.py:262: FutureWarning: pandas.Int64Index is deprecated and will be removed from pandas in a future version. Use pandas.Index with the appropriate dtype instead.
+  elif isinstance(data.columns, (pd.Int64Index, pd.RangeIndex)):
+/Users/jankirenz/opt/anaconda3/envs/xgboost/lib/python3.9/site-packages/xgboost/data.py:262: FutureWarning: pandas.Int64Index is deprecated and will be removed from pandas in a future version. Use pandas.Index with the appropriate dtype instead.
+  elif isinstance(data.columns, (pd.Int64Index, pd.RangeIndex)):
+/Users/jankirenz/opt/anaconda3/envs/xgboost/lib/python3.9/site-packages/xgboost/data.py:262: FutureWarning: pandas.Int64Index is deprecated and will be removed from pandas in a future version. Use pandas.Index with the appropriate dtype instead.
+  elif isinstance(data.columns, (pd.Int64Index, pd.RangeIndex)):
+/Users/jankirenz/opt/anaconda3/envs/xgboost/lib/python3.9/site-packages/xgboost/data.py:262: FutureWarning: pandas.Int64Index is deprecated and will be removed from pandas in a future version. Use pandas.Index with the appropriate dtype instead.
+  elif isinstance(data.columns, (pd.Int64Index, pd.RangeIndex)):
+/Users/jankirenz/opt/anaconda3/envs/xgboost/lib/python3.9/site-packages/xgboost/data.py:262: FutureWarning: pandas.Int64Index is deprecated and will be removed from pandas in a future version. Use pandas.Index with the appropriate dtype instead.
+  elif isinstance(data.columns, (pd.Int64Index, pd.RangeIndex)):
+/Users/jankirenz/opt/anaconda3/envs/xgboost/lib/python3.9/site-packages/xgboost/data.py:262: FutureWarning: pandas.Int64Index is deprecated and will be removed from pandas in a future version. Use pandas.Index with the appropriate dtype instead.
+  elif isinstance(data.columns, (pd.Int64Index, pd.RangeIndex)):
+/Users/jankirenz/opt/anaconda3/envs/xgboost/lib/python3.9/site-packages/xgboost/data.py:262: FutureWarning: pandas.Int64Index is deprecated and will be removed from pandas in a future version. Use pandas.Index with the appropriate dtype instead.
+  elif isinstance(data.columns, (pd.Int64Index, pd.RangeIndex)):
+/Users/jankirenz/opt/anaconda3/envs/xgboost/lib/python3.9/site-packages/xgboost/data.py:262: FutureWarning: pandas.Int64Index is deprecated and will be removed from pandas in a future version. Use pandas.Index with the appropriate dtype instead.
+  elif isinstance(data.columns, (pd.Int64Index, pd.RangeIndex)):
+/Users/jankirenz/opt/anaconda3/envs/xgboost/lib/python3.9/site-packages/xgboost/data.py:262: FutureWarning: pandas.Int64Index is deprecated and will be removed from pandas in a future version. Use pandas.Index with the appropriate dtype instead.
+  elif isinstance(data.columns, (pd.Int64Index, pd.RangeIndex)):
+/Users/jankirenz/opt/anaconda3/envs/xgboost/lib/python3.9/site-packages/xgboost/data.py:262: FutureWarning: pandas.Int64Index is deprecated and will be removed from pandas in a future version. Use pandas.Index with the appropriate dtype instead.
+  elif isinstance(data.columns, (pd.Int64Index, pd.RangeIndex)):
+/Users/jankirenz/opt/anaconda3/envs/xgboost/lib/python3.9/site-packages/xgboost/data.py:262: FutureWarning: pandas.Int64Index is deprecated and will be removed from pandas in a future version. Use pandas.Index with the appropriate dtype instead.
+  elif isinstance(data.columns, (pd.Int64Index, pd.RangeIndex)):
+/Users/jankirenz/opt/anaconda3/envs/xgboost/lib/python3.9/site-packages/xgboost/data.py:262: FutureWarning: pandas.Int64Index is deprecated and will be removed from pandas in a future version. Use pandas.Index with the appropriate dtype instead.
+  elif isinstance(data.columns, (pd.Int64Index, pd.RangeIndex)):
+/Users/jankirenz/opt/anaconda3/envs/xgboost/lib/python3.9/site-packages/xgboost/data.py:262: FutureWarning: pandas.Int64Index is deprecated and will be removed from pandas in a future version. Use pandas.Index with the appropriate dtype instead.
+  elif isinstance(data.columns, (pd.Int64Index, pd.RangeIndex)):
+/Users/jankirenz/opt/anaconda3/envs/xgboost/lib/python3.9/site-packages/xgboost/data.py:262: FutureWarning: pandas.Int64Index is deprecated and will be removed from pandas in a future version. Use pandas.Index with the appropriate dtype instead.
+  elif isinstance(data.columns, (pd.Int64Index, pd.RangeIndex)):
+/Users/jankirenz/opt/anaconda3/envs/xgboost/lib/python3.9/site-packages/xgboost/data.py:262: FutureWarning: pandas.Int64Index is deprecated and will be removed from pandas in a future version. Use pandas.Index with the appropriate dtype instead.
+  elif isinstance(data.columns, (pd.Int64Index, pd.RangeIndex)):
+/Users/jankirenz/opt/anaconda3/envs/xgboost/lib/python3.9/site-packages/xgboost/data.py:262: FutureWarning: pandas.Int64Index is deprecated and will be removed from pandas in a future version. Use pandas.Index with the appropriate dtype instead.
+  elif isinstance(data.columns, (pd.Int64Index, pd.RangeIndex)):
+/Users/jankirenz/opt/anaconda3/envs/xgboost/lib/python3.9/site-packages/xgboost/data.py:262: FutureWarning: pandas.Int64Index is deprecated and will be removed from pandas in a future version. Use pandas.Index with the appropriate dtype instead.
+  elif isinstance(data.columns, (pd.Int64Index, pd.RangeIndex)):
+/Users/jankirenz/opt/anaconda3/envs/xgboost/lib/python3.9/site-packages/xgboost/data.py:262: FutureWarning: pandas.Int64Index is deprecated and will be removed from pandas in a future version. Use pandas.Index with the appropriate dtype instead.
+  elif isinstance(data.columns, (pd.Int64Index, pd.RangeIndex)):
+/Users/jankirenz/opt/anaconda3/envs/xgboost/lib/python3.9/site-packages/xgboost/data.py:262: FutureWarning: pandas.Int64Index is deprecated and will be removed from pandas in a future version. Use pandas.Index with the appropriate dtype instead.
+  elif isinstance(data.columns, (pd.Int64Index, pd.RangeIndex)):
+/Users/jankirenz/opt/anaconda3/envs/xgboost/lib/python3.9/site-packages/xgboost/data.py:262: FutureWarning: pandas.Int64Index is deprecated and will be removed from pandas in a future version. Use pandas.Index with the appropriate dtype instead.
+  elif isinstance(data.columns, (pd.Int64Index, pd.RangeIndex)):
+/Users/jankirenz/opt/anaconda3/envs/xgboost/lib/python3.9/site-packages/xgboost/data.py:262: FutureWarning: pandas.Int64Index is deprecated and will be removed from pandas in a future version. Use pandas.Index with the appropriate dtype instead.
+  elif isinstance(data.columns, (pd.Int64Index, pd.RangeIndex)):
+/Users/jankirenz/opt/anaconda3/envs/xgboost/lib/python3.9/site-packages/xgboost/data.py:262: FutureWarning: pandas.Int64Index is deprecated and will be removed from pandas in a future version. Use pandas.Index with the appropriate dtype instead.
+  elif isinstance(data.columns, (pd.Int64Index, pd.RangeIndex)):
+/Users/jankirenz/opt/anaconda3/envs/xgboost/lib/python3.9/site-packages/xgboost/data.py:262: FutureWarning: pandas.Int64Index is deprecated and will be removed from pandas in a future version. Use pandas.Index with the appropriate dtype instead.
+  elif isinstance(data.columns, (pd.Int64Index, pd.RangeIndex)):
+/Users/jankirenz/opt/anaconda3/envs/xgboost/lib/python3.9/site-packages/xgboost/data.py:262: FutureWarning: pandas.Int64Index is deprecated and will be removed from pandas in a future version. Use pandas.Index with the appropriate dtype instead.
+  elif isinstance(data.columns, (pd.Int64Index, pd.RangeIndex)):
+/Users/jankirenz/opt/anaconda3/envs/xgboost/lib/python3.9/site-packages/xgboost/data.py:262: FutureWarning: pandas.Int64Index is deprecated and will be removed from pandas in a future version. Use pandas.Index with the appropriate dtype instead.
+  elif isinstance(data.columns, (pd.Int64Index, pd.RangeIndex)):
+/Users/jankirenz/opt/anaconda3/envs/xgboost/lib/python3.9/site-packages/xgboost/data.py:262: FutureWarning: pandas.Int64Index is deprecated and will be removed from pandas in a future version. Use pandas.Index with the appropriate dtype instead.
+  elif isinstance(data.columns, (pd.Int64Index, pd.RangeIndex)):
+/Users/jankirenz/opt/anaconda3/envs/xgboost/lib/python3.9/site-packages/xgboost/data.py:262: FutureWarning: pandas.Int64Index is deprecated and will be removed from pandas in a future version. Use pandas.Index with the appropriate dtype instead.
+  elif isinstance(data.columns, (pd.Int64Index, pd.RangeIndex)):
+/Users/jankirenz/opt/anaconda3/envs/xgboost/lib/python3.9/site-packages/xgboost/data.py:262: FutureWarning: pandas.Int64Index is deprecated and will be removed from pandas in a future version. Use pandas.Index with the appropriate dtype instead.
+  elif isinstance(data.columns, (pd.Int64Index, pd.RangeIndex)):
+/Users/jankirenz/opt/anaconda3/envs/xgboost/lib/python3.9/site-packages/xgboost/data.py:262: FutureWarning: pandas.Int64Index is deprecated and will be removed from pandas in a future version. Use pandas.Index with the appropriate dtype instead.
+  elif isinstance(data.columns, (pd.Int64Index, pd.RangeIndex)):
+/Users/jankirenz/opt/anaconda3/envs/xgboost/lib/python3.9/site-packages/xgboost/data.py:262: FutureWarning: pandas.Int64Index is deprecated and will be removed from pandas in a future version. Use pandas.Index with the appropriate dtype instead.
+  elif isinstance(data.columns, (pd.Int64Index, pd.RangeIndex)):
+/Users/jankirenz/opt/anaconda3/envs/xgboost/lib/python3.9/site-packages/xgboost/data.py:262: FutureWarning: pandas.Int64Index is deprecated and will be removed from pandas in a future version. Use pandas.Index with the appropriate dtype instead.
+  elif isinstance(data.columns, (pd.Int64Index, pd.RangeIndex)):
+/Users/jankirenz/opt/anaconda3/envs/xgboost/lib/python3.9/site-packages/xgboost/data.py:262: FutureWarning: pandas.Int64Index is deprecated and will be removed from pandas in a future version. Use pandas.Index with the appropriate dtype instead.
+  elif isinstance(data.columns, (pd.Int64Index, pd.RangeIndex)):
+/Users/jankirenz/opt/anaconda3/envs/xgboost/lib/python3.9/site-packages/xgboost/data.py:262: FutureWarning: pandas.Int64Index is deprecated and will be removed from pandas in a future version. Use pandas.Index with the appropriate dtype instead.
+  elif isinstance(data.columns, (pd.Int64Index, pd.RangeIndex)):
+/Users/jankirenz/opt/anaconda3/envs/xgboost/lib/python3.9/site-packages/xgboost/data.py:262: FutureWarning: pandas.Int64Index is deprecated and will be removed from pandas in a future version. Use pandas.Index with the appropriate dtype instead.
+  elif isinstance(data.columns, (pd.Int64Index, pd.RangeIndex)):
+/Users/jankirenz/opt/anaconda3/envs/xgboost/lib/python3.9/site-packages/xgboost/data.py:262: FutureWarning: pandas.Int64Index is deprecated and will be removed from pandas in a future version. Use pandas.Index with the appropriate dtype instead.
+  elif isinstance(data.columns, (pd.Int64Index, pd.RangeIndex)):
+/Users/jankirenz/opt/anaconda3/envs/xgboost/lib/python3.9/site-packages/xgboost/data.py:262: FutureWarning: pandas.Int64Index is deprecated and will be removed from pandas in a future version. Use pandas.Index with the appropriate dtype instead.
+  elif isinstance(data.columns, (pd.Int64Index, pd.RangeIndex)):
+/Users/jankirenz/opt/anaconda3/envs/xgboost/lib/python3.9/site-packages/xgboost/data.py:262: FutureWarning: pandas.Int64Index is deprecated and will be removed from pandas in a future version. Use pandas.Index with the appropriate dtype instead.
+  elif isinstance(data.columns, (pd.Int64Index, pd.RangeIndex)):
+/Users/jankirenz/opt/anaconda3/envs/xgboost/lib/python3.9/site-packages/xgboost/data.py:262: FutureWarning: pandas.Int64Index is deprecated and will be removed from pandas in a future version. Use pandas.Index with the appropriate dtype instead.
+  elif isinstance(data.columns, (pd.Int64Index, pd.RangeIndex)):
+/Users/jankirenz/opt/anaconda3/envs/xgboost/lib/python3.9/site-packages/xgboost/data.py:262: FutureWarning: pandas.Int64Index is deprecated and will be removed from pandas in a future version. Use pandas.Index with the appropriate dtype instead.
+  elif isinstance(data.columns, (pd.Int64Index, pd.RangeIndex)):
+/Users/jankirenz/opt/anaconda3/envs/xgboost/lib/python3.9/site-packages/xgboost/data.py:262: FutureWarning: pandas.Int64Index is deprecated and will be removed from pandas in a future version. Use pandas.Index with the appropriate dtype instead.
+  elif isinstance(data.columns, (pd.Int64Index, pd.RangeIndex)):
+/Users/jankirenz/opt/anaconda3/envs/xgboost/lib/python3.9/site-packages/xgboost/data.py:262: FutureWarning: pandas.Int64Index is deprecated and will be removed from pandas in a future version. Use pandas.Index with the appropriate dtype instead.
+  elif isinstance(data.columns, (pd.Int64Index, pd.RangeIndex)):
+/Users/jankirenz/opt/anaconda3/envs/xgboost/lib/python3.9/site-packages/xgboost/data.py:262: FutureWarning: pandas.Int64Index is deprecated and will be removed from pandas in a future version. Use pandas.Index with the appropriate dtype instead.
+  elif isinstance(data.columns, (pd.Int64Index, pd.RangeIndex)):
+/Users/jankirenz/opt/anaconda3/envs/xgboost/lib/python3.9/site-packages/xgboost/data.py:262: FutureWarning: pandas.Int64Index is deprecated and will be removed from pandas in a future version. Use pandas.Index with the appropriate dtype instead.
+  elif isinstance(data.columns, (pd.Int64Index, pd.RangeIndex)):
+/Users/jankirenz/opt/anaconda3/envs/xgboost/lib/python3.9/site-packages/xgboost/data.py:262: FutureWarning: pandas.Int64Index is deprecated and will be removed from pandas in a future version. Use pandas.Index with the appropriate dtype instead.
+  elif isinstance(data.columns, (pd.Int64Index, pd.RangeIndex)):
+/Users/jankirenz/opt/anaconda3/envs/xgboost/lib/python3.9/site-packages/xgboost/data.py:262: FutureWarning: pandas.Int64Index is deprecated and will be removed from pandas in a future version. Use pandas.Index with the appropriate dtype instead.
+  elif isinstance(data.columns, (pd.Int64Index, pd.RangeIndex)):
+/Users/jankirenz/opt/anaconda3/envs/xgboost/lib/python3.9/site-packages/xgboost/data.py:262: FutureWarning: pandas.Int64Index is deprecated and will be removed from pandas in a future version. Use pandas.Index with the appropriate dtype instead.
+  elif isinstance(data.columns, (pd.Int64Index, pd.RangeIndex)):
+/Users/jankirenz/opt/anaconda3/envs/xgboost/lib/python3.9/site-packages/xgboost/data.py:262: FutureWarning: pandas.Int64Index is deprecated and will be removed from pandas in a future version. Use pandas.Index with the appropriate dtype instead.
+  elif isinstance(data.columns, (pd.Int64Index, pd.RangeIndex)):
+/Users/jankirenz/opt/anaconda3/envs/xgboost/lib/python3.9/site-packages/xgboost/data.py:262: FutureWarning: pandas.Int64Index is deprecated and will be removed from pandas in a future version. Use pandas.Index with the appropriate dtype instead.
+  elif isinstance(data.columns, (pd.Int64Index, pd.RangeIndex)):
+/Users/jankirenz/opt/anaconda3/envs/xgboost/lib/python3.9/site-packages/xgboost/data.py:262: FutureWarning: pandas.Int64Index is deprecated and will be removed from pandas in a future version. Use pandas.Index with the appropriate dtype instead.
+  elif isinstance(data.columns, (pd.Int64Index, pd.RangeIndex)):
+/Users/jankirenz/opt/anaconda3/envs/xgboost/lib/python3.9/site-packages/xgboost/data.py:262: FutureWarning: pandas.Int64Index is deprecated and will be removed from pandas in a future version. Use pandas.Index with the appropriate dtype instead.
+  elif isinstance(data.columns, (pd.Int64Index, pd.RangeIndex)):
+/Users/jankirenz/opt/anaconda3/envs/xgboost/lib/python3.9/site-packages/xgboost/data.py:262: FutureWarning: pandas.Int64Index is deprecated and will be removed from pandas in a future version. Use pandas.Index with the appropriate dtype instead.
+  elif isinstance(data.columns, (pd.Int64Index, pd.RangeIndex)):
+/Users/jankirenz/opt/anaconda3/envs/xgboost/lib/python3.9/site-packages/xgboost/data.py:262: FutureWarning: pandas.Int64Index is deprecated and will be removed from pandas in a future version. Use pandas.Index with the appropriate dtype instead.
+  elif isinstance(data.columns, (pd.Int64Index, pd.RangeIndex)):
+/Users/jankirenz/opt/anaconda3/envs/xgboost/lib/python3.9/site-packages/xgboost/data.py:262: FutureWarning: pandas.Int64Index is deprecated and will be removed from pandas in a future version. Use pandas.Index with the appropriate dtype instead.
+  elif isinstance(data.columns, (pd.Int64Index, pd.RangeIndex)):
+/Users/jankirenz/opt/anaconda3/envs/xgboost/lib/python3.9/site-packages/xgboost/data.py:262: FutureWarning: pandas.Int64Index is deprecated and will be removed from pandas in a future version. Use pandas.Index with the appropriate dtype instead.
+  elif isinstance(data.columns, (pd.Int64Index, pd.RangeIndex)):
+/Users/jankirenz/opt/anaconda3/envs/xgboost/lib/python3.9/site-packages/xgboost/data.py:262: FutureWarning: pandas.Int64Index is deprecated and will be removed from pandas in a future version. Use pandas.Index with the appropriate dtype instead.
+  elif isinstance(data.columns, (pd.Int64Index, pd.RangeIndex)):
+/Users/jankirenz/opt/anaconda3/envs/xgboost/lib/python3.9/site-packages/xgboost/data.py:262: FutureWarning: pandas.Int64Index is deprecated and will be removed from pandas in a future version. Use pandas.Index with the appropriate dtype instead.
+  elif isinstance(data.columns, (pd.Int64Index, pd.RangeIndex)):
+/Users/jankirenz/opt/anaconda3/envs/xgboost/lib/python3.9/site-packages/xgboost/data.py:262: FutureWarning: pandas.Int64Index is deprecated and will be removed from pandas in a future version. Use pandas.Index with the appropriate dtype instead.
+  elif isinstance(data.columns, (pd.Int64Index, pd.RangeIndex)):
+/Users/jankirenz/opt/anaconda3/envs/xgboost/lib/python3.9/site-packages/xgboost/data.py:262: FutureWarning: pandas.Int64Index is deprecated and will be removed from pandas in a future version. Use pandas.Index with the appropriate dtype instead.
+  elif isinstance(data.columns, (pd.Int64Index, pd.RangeIndex)):
+/Users/jankirenz/opt/anaconda3/envs/xgboost/lib/python3.9/site-packages/xgboost/data.py:262: FutureWarning: pandas.Int64Index is deprecated and will be removed from pandas in a future version. Use pandas.Index with the appropriate dtype instead.
+  elif isinstance(data.columns, (pd.Int64Index, pd.RangeIndex)):
+/Users/jankirenz/opt/anaconda3/envs/xgboost/lib/python3.9/site-packages/xgboost/data.py:262: FutureWarning: pandas.Int64Index is deprecated and will be removed from pandas in a future version. Use pandas.Index with the appropriate dtype instead.
+  elif isinstance(data.columns, (pd.Int64Index, pd.RangeIndex)):
+/Users/jankirenz/opt/anaconda3/envs/xgboost/lib/python3.9/site-packages/xgboost/data.py:262: FutureWarning: pandas.Int64Index is deprecated and will be removed from pandas in a future version. Use pandas.Index with the appropriate dtype instead.
+  elif isinstance(data.columns, (pd.Int64Index, pd.RangeIndex)):
+/Users/jankirenz/opt/anaconda3/envs/xgboost/lib/python3.9/site-packages/xgboost/data.py:262: FutureWarning: pandas.Int64Index is deprecated and will be removed from pandas in a future version. Use pandas.Index with the appropriate dtype instead.
+  elif isinstance(data.columns, (pd.Int64Index, pd.RangeIndex)):
+/Users/jankirenz/opt/anaconda3/envs/xgboost/lib/python3.9/site-packages/xgboost/data.py:262: FutureWarning: pandas.Int64Index is deprecated and will be removed from pandas in a future version. Use pandas.Index with the appropriate dtype instead.
+  elif isinstance(data.columns, (pd.Int64Index, pd.RangeIndex)):
+/Users/jankirenz/opt/anaconda3/envs/xgboost/lib/python3.9/site-packages/xgboost/data.py:262: FutureWarning: pandas.Int64Index is deprecated and will be removed from pandas in a future version. Use pandas.Index with the appropriate dtype instead.
+  elif isinstance(data.columns, (pd.Int64Index, pd.RangeIndex)):
+/Users/jankirenz/opt/anaconda3/envs/xgboost/lib/python3.9/site-packages/xgboost/data.py:262: FutureWarning: pandas.Int64Index is deprecated and will be removed from pandas in a future version. Use pandas.Index with the appropriate dtype instead.
+  elif isinstance(data.columns, (pd.Int64Index, pd.RangeIndex)):
+/Users/jankirenz/opt/anaconda3/envs/xgboost/lib/python3.9/site-packages/xgboost/data.py:262: FutureWarning: pandas.Int64Index is deprecated and will be removed from pandas in a future version. Use pandas.Index with the appropriate dtype instead.
+  elif isinstance(data.columns, (pd.Int64Index, pd.RangeIndex)):
+/Users/jankirenz/opt/anaconda3/envs/xgboost/lib/python3.9/site-packages/xgboost/data.py:262: FutureWarning: pandas.Int64Index is deprecated and will be removed from pandas in a future version. Use pandas.Index with the appropriate dtype instead.
+  elif isinstance(data.columns, (pd.Int64Index, pd.RangeIndex)):
+/Users/jankirenz/opt/anaconda3/envs/xgboost/lib/python3.9/site-packages/xgboost/data.py:262: FutureWarning: pandas.Int64Index is deprecated and will be removed from pandas in a future version. Use pandas.Index with the appropriate dtype instead.
+  elif isinstance(data.columns, (pd.Int64Index, pd.RangeIndex)):
+/Users/jankirenz/opt/anaconda3/envs/xgboost/lib/python3.9/site-packages/xgboost/data.py:262: FutureWarning: pandas.Int64Index is deprecated and will be removed from pandas in a future version. Use pandas.Index with the appropriate dtype instead.
+  elif isinstance(data.columns, (pd.Int64Index, pd.RangeIndex)):
+/Users/jankirenz/opt/anaconda3/envs/xgboost/lib/python3.9/site-packages/xgboost/data.py:262: FutureWarning: pandas.Int64Index is deprecated and will be removed from pandas in a future version. Use pandas.Index with the appropriate dtype instead.
+  elif isinstance(data.columns, (pd.Int64Index, pd.RangeIndex)):
+/Users/jankirenz/opt/anaconda3/envs/xgboost/lib/python3.9/site-packages/xgboost/data.py:262: FutureWarning: pandas.Int64Index is deprecated and will be removed from pandas in a future version. Use pandas.Index with the appropriate dtype instead.
+  elif isinstance(data.columns, (pd.Int64Index, pd.RangeIndex)):
+/Users/jankirenz/opt/anaconda3/envs/xgboost/lib/python3.9/site-packages/xgboost/data.py:262: FutureWarning: pandas.Int64Index is deprecated and will be removed from pandas in a future version. Use pandas.Index with the appropriate dtype instead.
+  elif isinstance(data.columns, (pd.Int64Index, pd.RangeIndex)):
+/Users/jankirenz/opt/anaconda3/envs/xgboost/lib/python3.9/site-packages/xgboost/data.py:262: FutureWarning: pandas.Int64Index is deprecated and will be removed from pandas in a future version. Use pandas.Index with the appropriate dtype instead.
+  elif isinstance(data.columns, (pd.Int64Index, pd.RangeIndex)):
+/Users/jankirenz/opt/anaconda3/envs/xgboost/lib/python3.9/site-packages/xgboost/data.py:262: FutureWarning: pandas.Int64Index is deprecated and will be removed from pandas in a future version. Use pandas.Index with the appropriate dtype instead.
+  elif isinstance(data.columns, (pd.Int64Index, pd.RangeIndex)):
+/Users/jankirenz/opt/anaconda3/envs/xgboost/lib/python3.9/site-packages/xgboost/data.py:262: FutureWarning: pandas.Int64Index is deprecated and will be removed from pandas in a future version. Use pandas.Index with the appropriate dtype instead.
+  elif isinstance(data.columns, (pd.Int64Index, pd.RangeIndex)):
+/Users/jankirenz/opt/anaconda3/envs/xgboost/lib/python3.9/site-packages/xgboost/data.py:262: FutureWarning: pandas.Int64Index is deprecated and will be removed from pandas in a future version. Use pandas.Index with the appropriate dtype instead.
+  elif isinstance(data.columns, (pd.Int64Index, pd.RangeIndex)):
+/Users/jankirenz/opt/anaconda3/envs/xgboost/lib/python3.9/site-packages/xgboost/data.py:262: FutureWarning: pandas.Int64Index is deprecated and will be removed from pandas in a future version. Use pandas.Index with the appropriate dtype instead.
+  elif isinstance(data.columns, (pd.Int64Index, pd.RangeIndex)):
+/Users/jankirenz/opt/anaconda3/envs/xgboost/lib/python3.9/site-packages/xgboost/data.py:262: FutureWarning: pandas.Int64Index is deprecated and will be removed from pandas in a future version. Use pandas.Index with the appropriate dtype instead.
+  elif isinstance(data.columns, (pd.Int64Index, pd.RangeIndex)):
+/Users/jankirenz/opt/anaconda3/envs/xgboost/lib/python3.9/site-packages/xgboost/data.py:262: FutureWarning: pandas.Int64Index is deprecated and will be removed from pandas in a future version. Use pandas.Index with the appropriate dtype instead.
+  elif isinstance(data.columns, (pd.Int64Index, pd.RangeIndex)):
+/Users/jankirenz/opt/anaconda3/envs/xgboost/lib/python3.9/site-packages/xgboost/data.py:262: FutureWarning: pandas.Int64Index is deprecated and will be removed from pandas in a future version. Use pandas.Index with the appropriate dtype instead.
+  elif isinstance(data.columns, (pd.Int64Index, pd.RangeIndex)):
+/Users/jankirenz/opt/anaconda3/envs/xgboost/lib/python3.9/site-packages/xgboost/data.py:262: FutureWarning: pandas.Int64Index is deprecated and will be removed from pandas in a future version. Use pandas.Index with the appropriate dtype instead.
+  elif isinstance(data.columns, (pd.Int64Index, pd.RangeIndex)):
+/Users/jankirenz/opt/anaconda3/envs/xgboost/lib/python3.9/site-packages/xgboost/data.py:262: FutureWarning: pandas.Int64Index is deprecated and will be removed from pandas in a future version. Use pandas.Index with the appropriate dtype instead.
+  elif isinstance(data.columns, (pd.Int64Index, pd.RangeIndex)):
+/Users/jankirenz/opt/anaconda3/envs/xgboost/lib/python3.9/site-packages/xgboost/data.py:262: FutureWarning: pandas.Int64Index is deprecated and will be removed from pandas in a future version. Use pandas.Index with the appropriate dtype instead.
+  elif isinstance(data.columns, (pd.Int64Index, pd.RangeIndex)):
+/Users/jankirenz/opt/anaconda3/envs/xgboost/lib/python3.9/site-packages/xgboost/data.py:262: FutureWarning: pandas.Int64Index is deprecated and will be removed from pandas in a future version. Use pandas.Index with the appropriate dtype instead.
+  elif isinstance(data.columns, (pd.Int64Index, pd.RangeIndex)):
+/Users/jankirenz/opt/anaconda3/envs/xgboost/lib/python3.9/site-packages/xgboost/data.py:262: FutureWarning: pandas.Int64Index is deprecated and will be removed from pandas in a future version. Use pandas.Index with the appropriate dtype instead.
+  elif isinstance(data.columns, (pd.Int64Index, pd.RangeIndex)):
+/Users/jankirenz/opt/anaconda3/envs/xgboost/lib/python3.9/site-packages/xgboost/data.py:262: FutureWarning: pandas.Int64Index is deprecated and will be removed from pandas in a future version. Use pandas.Index with the appropriate dtype instead.
+  elif isinstance(data.columns, (pd.Int64Index, pd.RangeIndex)):
+/Users/jankirenz/opt/anaconda3/envs/xgboost/lib/python3.9/site-packages/xgboost/data.py:262: FutureWarning: pandas.Int64Index is deprecated and will be removed from pandas in a future version. Use pandas.Index with the appropriate dtype instead.
+  elif isinstance(data.columns, (pd.Int64Index, pd.RangeIndex)):
+/Users/jankirenz/opt/anaconda3/envs/xgboost/lib/python3.9/site-packages/xgboost/data.py:262: FutureWarning: pandas.Int64Index is deprecated and will be removed from pandas in a future version. Use pandas.Index with the appropriate dtype instead.
+  elif isinstance(data.columns, (pd.Int64Index, pd.RangeIndex)):
+/Users/jankirenz/opt/anaconda3/envs/xgboost/lib/python3.9/site-packages/xgboost/data.py:262: FutureWarning: pandas.Int64Index is deprecated and will be removed from pandas in a future version. Use pandas.Index with the appropriate dtype instead.
+  elif isinstance(data.columns, (pd.Int64Index, pd.RangeIndex)):
+/Users/jankirenz/opt/anaconda3/envs/xgboost/lib/python3.9/site-packages/xgboost/data.py:262: FutureWarning: pandas.Int64Index is deprecated and will be removed from pandas in a future version. Use pandas.Index with the appropriate dtype instead.
+  elif isinstance(data.columns, (pd.Int64Index, pd.RangeIndex)):
+/Users/jankirenz/opt/anaconda3/envs/xgboost/lib/python3.9/site-packages/xgboost/data.py:262: FutureWarning: pandas.Int64Index is deprecated and will be removed from pandas in a future version. Use pandas.Index with the appropriate dtype instead.
+  elif isinstance(data.columns, (pd.Int64Index, pd.RangeIndex)):
+/Users/jankirenz/opt/anaconda3/envs/xgboost/lib/python3.9/site-packages/xgboost/data.py:262: FutureWarning: pandas.Int64Index is deprecated and will be removed from pandas in a future version. Use pandas.Index with the appropriate dtype instead.
+  elif isinstance(data.columns, (pd.Int64Index, pd.RangeIndex)):
+/Users/jankirenz/opt/anaconda3/envs/xgboost/lib/python3.9/site-packages/xgboost/data.py:262: FutureWarning: pandas.Int64Index is deprecated and will be removed from pandas in a future version. Use pandas.Index with the appropriate dtype instead.
+  elif isinstance(data.columns, (pd.Int64Index, pd.RangeIndex)):
+/Users/jankirenz/opt/anaconda3/envs/xgboost/lib/python3.9/site-packages/xgboost/data.py:262: FutureWarning: pandas.Int64Index is deprecated and will be removed from pandas in a future version. Use pandas.Index with the appropriate dtype instead.
+  elif isinstance(data.columns, (pd.Int64Index, pd.RangeIndex)):
+/Users/jankirenz/opt/anaconda3/envs/xgboost/lib/python3.9/site-packages/xgboost/data.py:262: FutureWarning: pandas.Int64Index is deprecated and will be removed from pandas in a future version. Use pandas.Index with the appropriate dtype instead.
+  elif isinstance(data.columns, (pd.Int64Index, pd.RangeIndex)):
+/Users/jankirenz/opt/anaconda3/envs/xgboost/lib/python3.9/site-packages/xgboost/data.py:262: FutureWarning: pandas.Int64Index is deprecated and will be removed from pandas in a future version. Use pandas.Index with the appropriate dtype instead.
+  elif isinstance(data.columns, (pd.Int64Index, pd.RangeIndex)):
+/Users/jankirenz/opt/anaconda3/envs/xgboost/lib/python3.9/site-packages/xgboost/data.py:262: FutureWarning: pandas.Int64Index is deprecated and will be removed from pandas in a future version. Use pandas.Index with the appropriate dtype instead.
+  elif isinstance(data.columns, (pd.Int64Index, pd.RangeIndex)):
+/Users/jankirenz/opt/anaconda3/envs/xgboost/lib/python3.9/site-packages/xgboost/data.py:262: FutureWarning: pandas.Int64Index is deprecated and will be removed from pandas in a future version. Use pandas.Index with the appropriate dtype instead.
+  elif isinstance(data.columns, (pd.Int64Index, pd.RangeIndex)):
+/Users/jankirenz/opt/anaconda3/envs/xgboost/lib/python3.9/site-packages/xgboost/data.py:262: FutureWarning: pandas.Int64Index is deprecated and will be removed from pandas in a future version. Use pandas.Index with the appropriate dtype instead.
+  elif isinstance(data.columns, (pd.Int64Index, pd.RangeIndex)):
+/Users/jankirenz/opt/anaconda3/envs/xgboost/lib/python3.9/site-packages/xgboost/data.py:262: FutureWarning: pandas.Int64Index is deprecated and will be removed from pandas in a future version. Use pandas.Index with the appropriate dtype instead.
+  elif isinstance(data.columns, (pd.Int64Index, pd.RangeIndex)):
+/Users/jankirenz/opt/anaconda3/envs/xgboost/lib/python3.9/site-packages/xgboost/data.py:262: FutureWarning: pandas.Int64Index is deprecated and will be removed from pandas in a future version. Use pandas.Index with the appropriate dtype instead.
+  elif isinstance(data.columns, (pd.Int64Index, pd.RangeIndex)):
+/Users/jankirenz/opt/anaconda3/envs/xgboost/lib/python3.9/site-packages/xgboost/data.py:262: FutureWarning: pandas.Int64Index is deprecated and will be removed from pandas in a future version. Use pandas.Index with the appropriate dtype instead.
+  elif isinstance(data.columns, (pd.Int64Index, pd.RangeIndex)):
+/Users/jankirenz/opt/anaconda3/envs/xgboost/lib/python3.9/site-packages/xgboost/data.py:262: FutureWarning: pandas.Int64Index is deprecated and will be removed from pandas in a future version. Use pandas.Index with the appropriate dtype instead.
+  elif isinstance(data.columns, (pd.Int64Index, pd.RangeIndex)):
+/Users/jankirenz/opt/anaconda3/envs/xgboost/lib/python3.9/site-packages/xgboost/data.py:262: FutureWarning: pandas.Int64Index is deprecated and will be removed from pandas in a future version. Use pandas.Index with the appropriate dtype instead.
+  elif isinstance(data.columns, (pd.Int64Index, pd.RangeIndex)):
+/Users/jankirenz/opt/anaconda3/envs/xgboost/lib/python3.9/site-packages/xgboost/data.py:262: FutureWarning: pandas.Int64Index is deprecated and will be removed from pandas in a future version. Use pandas.Index with the appropriate dtype instead.
+  elif isinstance(data.columns, (pd.Int64Index, pd.RangeIndex)):
+/Users/jankirenz/opt/anaconda3/envs/xgboost/lib/python3.9/site-packages/xgboost/data.py:262: FutureWarning: pandas.Int64Index is deprecated and will be removed from pandas in a future version. Use pandas.Index with the appropriate dtype instead.
+  elif isinstance(data.columns, (pd.Int64Index, pd.RangeIndex)):
+/Users/jankirenz/opt/anaconda3/envs/xgboost/lib/python3.9/site-packages/xgboost/data.py:262: FutureWarning: pandas.Int64Index is deprecated and will be removed from pandas in a future version. Use pandas.Index with the appropriate dtype instead.
+  elif isinstance(data.columns, (pd.Int64Index, pd.RangeIndex)):
+/Users/jankirenz/opt/anaconda3/envs/xgboost/lib/python3.9/site-packages/xgboost/data.py:262: FutureWarning: pandas.Int64Index is deprecated and will be removed from pandas in a future version. Use pandas.Index with the appropriate dtype instead.
+  elif isinstance(data.columns, (pd.Int64Index, pd.RangeIndex)):
+/Users/jankirenz/opt/anaconda3/envs/xgboost/lib/python3.9/site-packages/xgboost/data.py:262: FutureWarning: pandas.Int64Index is deprecated and will be removed from pandas in a future version. Use pandas.Index with the appropriate dtype instead.
+  elif isinstance(data.columns, (pd.Int64Index, pd.RangeIndex)):
+/Users/jankirenz/opt/anaconda3/envs/xgboost/lib/python3.9/site-packages/xgboost/data.py:262: FutureWarning: pandas.Int64Index is deprecated and will be removed from pandas in a future version. Use pandas.Index with the appropriate dtype instead.
+  elif isinstance(data.columns, (pd.Int64Index, pd.RangeIndex)):
+/Users/jankirenz/opt/anaconda3/envs/xgboost/lib/python3.9/site-packages/xgboost/data.py:262: FutureWarning: pandas.Int64Index is deprecated and will be removed from pandas in a future version. Use pandas.Index with the appropriate dtype instead.
+  elif isinstance(data.columns, (pd.Int64Index, pd.RangeIndex)):
+/Users/jankirenz/opt/anaconda3/envs/xgboost/lib/python3.9/site-packages/xgboost/data.py:262: FutureWarning: pandas.Int64Index is deprecated and will be removed from pandas in a future version. Use pandas.Index with the appropriate dtype instead.
+  elif isinstance(data.columns, (pd.Int64Index, pd.RangeIndex)):
+/Users/jankirenz/opt/anaconda3/envs/xgboost/lib/python3.9/site-packages/xgboost/data.py:262: FutureWarning: pandas.Int64Index is deprecated and will be removed from pandas in a future version. Use pandas.Index with the appropriate dtype instead.
+  elif isinstance(data.columns, (pd.Int64Index, pd.RangeIndex)):
+/Users/jankirenz/opt/anaconda3/envs/xgboost/lib/python3.9/site-packages/xgboost/data.py:262: FutureWarning: pandas.Int64Index is deprecated and will be removed from pandas in a future version. Use pandas.Index with the appropriate dtype instead.
+  elif isinstance(data.columns, (pd.Int64Index, pd.RangeIndex)):
+/Users/jankirenz/opt/anaconda3/envs/xgboost/lib/python3.9/site-packages/xgboost/data.py:262: FutureWarning: pandas.Int64Index is deprecated and will be removed from pandas in a future version. Use pandas.Index with the appropriate dtype instead.
+  elif isinstance(data.columns, (pd.Int64Index, pd.RangeIndex)):
+/Users/jankirenz/opt/anaconda3/envs/xgboost/lib/python3.9/site-packages/xgboost/data.py:262: FutureWarning: pandas.Int64Index is deprecated and will be removed from pandas in a future version. Use pandas.Index with the appropriate dtype instead.
+  elif isinstance(data.columns, (pd.Int64Index, pd.RangeIndex)):
+/Users/jankirenz/opt/anaconda3/envs/xgboost/lib/python3.9/site-packages/xgboost/data.py:262: FutureWarning: pandas.Int64Index is deprecated and will be removed from pandas in a future version. Use pandas.Index with the appropriate dtype instead.
+  elif isinstance(data.columns, (pd.Int64Index, pd.RangeIndex)):
+/Users/jankirenz/opt/anaconda3/envs/xgboost/lib/python3.9/site-packages/xgboost/data.py:262: FutureWarning: pandas.Int64Index is deprecated and will be removed from pandas in a future version. Use pandas.Index with the appropriate dtype instead.
+  elif isinstance(data.columns, (pd.Int64Index, pd.RangeIndex)):
+/Users/jankirenz/opt/anaconda3/envs/xgboost/lib/python3.9/site-packages/xgboost/data.py:262: FutureWarning: pandas.Int64Index is deprecated and will be removed from pandas in a future version. Use pandas.Index with the appropriate dtype instead.
+  elif isinstance(data.columns, (pd.Int64Index, pd.RangeIndex)):
+/Users/jankirenz/opt/anaconda3/envs/xgboost/lib/python3.9/site-packages/xgboost/data.py:262: FutureWarning: pandas.Int64Index is deprecated and will be removed from pandas in a future version. Use pandas.Index with the appropriate dtype instead.
+  elif isinstance(data.columns, (pd.Int64Index, pd.RangeIndex)):
+/Users/jankirenz/opt/anaconda3/envs/xgboost/lib/python3.9/site-packages/xgboost/data.py:262: FutureWarning: pandas.Int64Index is deprecated and will be removed from pandas in a future version. Use pandas.Index with the appropriate dtype instead.
+  elif isinstance(data.columns, (pd.Int64Index, pd.RangeIndex)):
+/Users/jankirenz/opt/anaconda3/envs/xgboost/lib/python3.9/site-packages/xgboost/data.py:262: FutureWarning: pandas.Int64Index is deprecated and will be removed from pandas in a future version. Use pandas.Index with the appropriate dtype instead.
+  elif isinstance(data.columns, (pd.Int64Index, pd.RangeIndex)):
+/Users/jankirenz/opt/anaconda3/envs/xgboost/lib/python3.9/site-packages/xgboost/data.py:262: FutureWarning: pandas.Int64Index is deprecated and will be removed from pandas in a future version. Use pandas.Index with the appropriate dtype instead.
+  elif isinstance(data.columns, (pd.Int64Index, pd.RangeIndex)):
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">feature_names</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Index([&#39;AtBat&#39;, &#39;Hits&#39;, &#39;HmRun&#39;, &#39;Runs&#39;, &#39;RBI&#39;, &#39;Walks&#39;, &#39;Years&#39;, &#39;CAtBat&#39;,
+       &#39;CHits&#39;, &#39;CHmRun&#39;, &#39;CRuns&#39;, &#39;CRBI&#39;, &#39;CWalks&#39;, &#39;PutOuts&#39;, &#39;Assists&#39;,
+       &#39;Errors&#39;, &#39;League_N&#39;, &#39;Division_W&#39;, &#39;NewLeague_N&#39;],
+      dtype=&#39;object&#39;)
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">tree_importances</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">Series</span><span class="p">(</span><span class="n">result</span><span class="o">.</span><span class="n">importances_mean</span><span class="p">,</span> <span class="n">index</span><span class="o">=</span><span class="n">feature_names</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -1196,7 +1152,7 @@ const thebe_selector_output = ".output, .cell_output"
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/gradientboosting-xgboost_29_0.png" src="../_images/gradientboosting-xgboost_29_0.png" />
+<img alt="../_images/gradientboosting-xgboost_31_0.png" src="../_images/gradientboosting-xgboost_31_0.png" />
 </div>
 </div>
 <ul class="simple">
@@ -1216,7 +1172,7 @@ const thebe_selector_output = ".output, .cell_output"
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/gradientboosting-xgboost_31_0.png" src="../_images/gradientboosting-xgboost_31_0.png" />
+<img alt="../_images/gradientboosting-xgboost_33_0.png" src="../_images/gradientboosting-xgboost_33_0.png" />
 </div>
 </div>
 <ul class="simple">
