@@ -370,8 +370,8 @@ const thebe_selector_output = ".output, .cell_output"
   </a>
   <ul class="nav section-nav flex-column">
    <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#plot-training-deviance">
-     Plot training deviance
+    <a class="reference internal nav-link" href="#plot-training-test-deviance">
+     Plot training test deviance
     </a>
    </li>
   </ul>
@@ -431,8 +431,8 @@ const thebe_selector_output = ".output, .cell_output"
   </a>
   <ul class="nav section-nav flex-column">
    <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#plot-training-deviance">
-     Plot training deviance
+    <a class="reference internal nav-link" href="#plot-training-test-deviance">
+     Plot training test deviance
     </a>
    </li>
   </ul>
@@ -467,6 +467,10 @@ const thebe_selector_output = ".output, .cell_output"
                 
   <div class="tex2jax_ignore mathjax_ignore section" id="gradient-boosting-in-scikit-learn">
 <h1>Gradient Boosting in scikit-learn<a class="headerlink" href="#gradient-boosting-in-scikit-learn" title="Permalink to this headline">¶</a></h1>
+<p>We illustrate the following regression method on a data set called “Hitters”, which includes 20 variables and 322 observations of major league baseball players. The goal is to predict a baseball player’s salary on the basis of various features associated with performance in the previous year. We don’t cover the topic of exploratory data analysis in this notebook.</p>
+<ul class="simple">
+<li><p>Visit <a class="reference external" href="https://cran.r-project.org/web/packages/ISLR/ISLR.pdf">this documentation</a> if you want to learn more about the data</p></li>
+</ul>
 <div class="section" id="setup">
 <h2>Setup<a class="headerlink" href="#setup" title="Permalink to this headline">¶</a></h2>
 <div class="cell docutils container">
@@ -489,7 +493,8 @@ const thebe_selector_output = ".output, .cell_output"
 <li><p>We simply import the preprocessed data by using this <a class="reference external" href="https://github.com/kirenz/regression/blob/main/docs/hitters_data.py">Python script</a> which will yield:</p>
 <ul>
 <li><p>X_train, X_test, y_train, y_test</p></li>
-<li><p>df_train and df_tests</p></li>
+<li><p>df_train and df_test</p></li>
+<li><p>feature_names</p></li>
 </ul>
 </li>
 </ul>
@@ -500,7 +505,9 @@ const thebe_selector_output = ".output, .cell_output"
 </div>
 </div>
 </div>
-<p>Make contiguous flattened arrays:</p>
+<ul class="simple">
+<li><p>Make contiguous flattened arrays (for our scikit-learn GradientBoostingRegressor):</p></li>
+</ul>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">y_train</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">ravel</span><span class="p">(</span><span class="n">y_train</span><span class="p">)</span>
@@ -512,6 +519,9 @@ const thebe_selector_output = ".output, .cell_output"
 </div>
 <div class="section" id="model">
 <h2>Model<a class="headerlink" href="#model" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li><p>Define hyperparameters:</p></li>
+</ul>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">params</span> <span class="o">=</span> <span class="p">{</span>
@@ -525,6 +535,9 @@ const thebe_selector_output = ".output, .cell_output"
 </div>
 </div>
 </div>
+<ul class="simple">
+<li><p>Build and fit model</p></li>
+</ul>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">reg</span> <span class="o">=</span> <span class="n">GradientBoostingRegressor</span><span class="p">(</span><span class="o">**</span><span class="n">params</span><span class="p">)</span>
@@ -540,20 +553,33 @@ const thebe_selector_output = ".output, .cell_output"
 </div>
 </div>
 </div>
+<ul class="simple">
+<li><p>Make predictions</p></li>
+</ul>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">mean_squared_error</span><span class="p">(</span><span class="n">y_test</span><span class="p">,</span> <span class="n">reg</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">X_test</span><span class="p">))</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">y_pred</span> <span class="o">=</span> <span class="n">reg</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">X_test</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<ul class="simple">
+<li><p>Evaluate model with RMSE</p></li>
+</ul>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">mean_squared_error</span><span class="p">(</span><span class="n">y_test</span><span class="p">,</span> <span class="n">y_pred</span><span class="p">,</span> <span class="n">squared</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>90781.66218036396
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>300.7567350504807
 </pre></div>
 </div>
 </div>
 </div>
-<div class="section" id="plot-training-deviance">
-<h3>Plot training deviance<a class="headerlink" href="#plot-training-deviance" title="Permalink to this headline">¶</a></h3>
+<div class="section" id="plot-training-test-deviance">
+<h3>Plot training test deviance<a class="headerlink" href="#plot-training-test-deviance" title="Permalink to this headline">¶</a></h3>
 <p>Source: <a class="reference external" href="https://scikit-learn.org/stable/auto_examples/ensemble/plot_gradient_boosting_regression.html#plot-training-deviance">scikit learn</a>, provided by Peter Prettenhofer, Maria Telenczuk and Katrina Ni:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -582,7 +608,7 @@ const thebe_selector_output = ".output, .cell_output"
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/gradientboosting_12_0.png" src="../_images/gradientboosting_12_0.png" />
+<img alt="../_images/gradientboosting_19_0.png" src="../_images/gradientboosting_19_0.png" />
 </div>
 </div>
 </div>
@@ -622,13 +648,13 @@ const thebe_selector_output = ".output, .cell_output"
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/gradientboosting_15_0.png" src="../_images/gradientboosting_15_0.png" />
+<img alt="../_images/gradientboosting_22_0.png" src="../_images/gradientboosting_22_0.png" />
 </div>
 </div>
 <div class="section" id="permutation-feature-importance">
 <h4>Permutation feature importance<a class="headerlink" href="#permutation-feature-importance" title="Permalink to this headline">¶</a></h4>
 <ul class="simple">
-<li><p>Permutation feature importance overcomes limitations of the impurity-based feature importance (<a class="reference external" href="https://scikit-learn.org/stable/auto_examples/ensemble/plot_forest_importances.html">scikit learn</a>:</p>
+<li><p>Permutation feature importance overcomes limitations of the impurity-based feature importance (<a class="reference external" href="https://scikit-learn.org/stable/auto_examples/ensemble/plot_forest_importances.html">scikit learn</a>):</p>
 <ul>
 <li><p>they do not have a bias toward high-cardinality features</p></li>
 <li><p>they can be computed on a left-out test set.</p></li>
@@ -652,7 +678,7 @@ const thebe_selector_output = ".output, .cell_output"
     <span class="n">reg</span><span class="p">,</span> <span class="n">X_test</span><span class="p">,</span> <span class="n">y_test</span><span class="p">,</span> <span class="n">n_repeats</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span> <span class="n">random_state</span><span class="o">=</span><span class="mi">42</span><span class="p">,</span> <span class="n">n_jobs</span><span class="o">=</span><span class="mi">2</span>
 <span class="p">)</span>
 
-<span class="n">forest_importances</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">Series</span><span class="p">(</span><span class="n">result</span><span class="o">.</span><span class="n">importances_mean</span><span class="p">,</span> <span class="n">index</span><span class="o">=</span><span class="n">feature_names</span><span class="p">)</span>
+<span class="n">tree_importances</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">Series</span><span class="p">(</span><span class="n">result</span><span class="o">.</span><span class="n">importances_mean</span><span class="p">,</span> <span class="n">index</span><span class="o">=</span><span class="n">feature_names</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -660,11 +686,11 @@ const thebe_selector_output = ".output, .cell_output"
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># sort features according to importance</span>
-<span class="n">sorted_idx</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">argsort</span><span class="p">(</span><span class="n">forest_importances</span><span class="p">)</span>
+<span class="n">sorted_idx</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">argsort</span><span class="p">(</span><span class="n">tree_importances</span><span class="p">)</span>
 <span class="n">pos</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="n">sorted_idx</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
 
 <span class="c1"># plot feature importances</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">barh</span><span class="p">(</span><span class="n">pos</span><span class="p">,</span> <span class="n">forest_importances</span><span class="p">[</span><span class="n">sorted_idx</span><span class="p">],</span> <span class="n">align</span><span class="o">=</span><span class="s2">&quot;center&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">barh</span><span class="p">(</span><span class="n">pos</span><span class="p">,</span> <span class="n">tree_importances</span><span class="p">[</span><span class="n">sorted_idx</span><span class="p">],</span> <span class="n">align</span><span class="o">=</span><span class="s2">&quot;center&quot;</span><span class="p">)</span>
 
 <span class="n">plt</span><span class="o">.</span><span class="n">yticks</span><span class="p">(</span><span class="n">pos</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">feature_names</span><span class="p">)[</span><span class="n">sorted_idx</span><span class="p">])</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s2">&quot;Feature Importance (MDI)&quot;</span><span class="p">)</span>
@@ -673,7 +699,7 @@ const thebe_selector_output = ".output, .cell_output"
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/gradientboosting_20_0.png" src="../_images/gradientboosting_20_0.png" />
+<img alt="../_images/gradientboosting_27_0.png" src="../_images/gradientboosting_27_0.png" />
 </div>
 </div>
 <ul class="simple">
@@ -694,7 +720,7 @@ const thebe_selector_output = ".output, .cell_output"
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/gradientboosting_22_0.png" src="../_images/gradientboosting_22_0.png" />
+<img alt="../_images/gradientboosting_29_0.png" src="../_images/gradientboosting_29_0.png" />
 </div>
 </div>
 <ul class="simple">
