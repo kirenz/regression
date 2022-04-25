@@ -527,6 +527,12 @@ const thebe_selector_output = ".output, .cell_output"
 </pre></div>
 </div>
 </div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>RandomForestRegressor(max_depth=4, min_samples_split=5, n_estimators=500,
+                      oob_score=True, random_state=42, warm_start=True)
+</pre></div>
+</div>
+</div>
 </div>
 <ul class="simple">
 <li><p>Make predictions</p></li>
@@ -549,57 +555,6 @@ const thebe_selector_output = ".output, .cell_output"
 </div>
 <div class="cell_output docutils container">
 <div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>296.37036964432764
-</pre></div>
-</div>
-</div>
-</div>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Map a classifier name to a list of (&lt;n_estimators&gt;, &lt;error rate&gt;) pairs.</span>
-<span class="n">error_rate</span> <span class="o">=</span> <span class="n">OrderedDict</span><span class="p">((</span><span class="n">label</span><span class="p">,</span> <span class="p">[])</span> <span class="k">for</span> <span class="n">label</span><span class="p">,</span> <span class="n">_</span> <span class="ow">in</span> <span class="n">model</span><span class="p">)</span>
-
-<span class="c1"># Range of `n_estimators` values to explore.</span>
-<span class="n">min_estimators</span> <span class="o">=</span> <span class="mi">15</span>
-<span class="n">max_estimators</span> <span class="o">=</span> <span class="mi">150</span>
-
-<span class="k">for</span> <span class="n">label</span><span class="p">,</span> <span class="n">clf</span> <span class="ow">in</span> <span class="n">model</span><span class="p">:</span>
-    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">min_estimators</span><span class="p">,</span> <span class="n">max_estimators</span> <span class="o">+</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">5</span><span class="p">):</span>
-        <span class="n">clf</span><span class="o">.</span><span class="n">set_params</span><span class="p">(</span><span class="n">n_estimators</span><span class="o">=</span><span class="n">i</span><span class="p">)</span>
-        <span class="n">clf</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">y</span><span class="p">)</span>
-
-        <span class="c1"># Record the OOB error for each `n_estimators=i` setting.</span>
-        <span class="n">oob_error</span> <span class="o">=</span> <span class="mi">1</span> <span class="o">-</span> <span class="n">clf</span><span class="o">.</span><span class="n">oob_score_</span>
-        <span class="n">error_rate</span><span class="p">[</span><span class="n">label</span><span class="p">]</span><span class="o">.</span><span class="n">append</span><span class="p">((</span><span class="n">i</span><span class="p">,</span> <span class="n">oob_error</span><span class="p">))</span>
-
-<span class="c1"># Generate the &quot;OOB error rate&quot; vs. &quot;n_estimators&quot; plot.</span>
-<span class="k">for</span> <span class="n">label</span><span class="p">,</span> <span class="n">clf_err</span> <span class="ow">in</span> <span class="n">error_rate</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
-    <span class="n">xs</span><span class="p">,</span> <span class="n">ys</span> <span class="o">=</span> <span class="nb">zip</span><span class="p">(</span><span class="o">*</span><span class="n">clf_err</span><span class="p">)</span>
-    <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">xs</span><span class="p">,</span> <span class="n">ys</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="n">label</span><span class="p">)</span>
-
-<span class="n">plt</span><span class="o">.</span><span class="n">xlim</span><span class="p">(</span><span class="n">min_estimators</span><span class="p">,</span> <span class="n">max_estimators</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s2">&quot;n_estimators&quot;</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s2">&quot;OOB error rate&quot;</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">(</span><span class="n">loc</span><span class="o">=</span><span class="s2">&quot;upper right&quot;</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
-<span class="ne">TypeError</span><span class="g g-Whitespace">                                 </span>Traceback (most recent call last)
-<span class="nn">/Users/jankirenz/books/regression/docs/randomforest.ipynb Cell 19&#39;</span> in <span class="ni">&lt;cell line: 2&gt;</span><span class="nt">()</span>
-      <span class="o">&lt;</span><span class="n">a</span> <span class="n">href</span><span class="o">=</span><span class="s1">&#39;vscode-notebook-cell:/Users/jankirenz/books/regression/docs/randomforest.ipynb#ch0000033?line=0&#39;</span><span class="o">&gt;</span><span class="mi">1</span><span class="o">&lt;/</span><span class="n">a</span><span class="o">&gt;</span> <span class="c1"># Map a classifier name to a list of (&lt;n_estimators&gt;, &lt;error rate&gt;) pairs.</span>
-<span class="o">----&gt;</span> <span class="o">&lt;</span><span class="n">a</span> <span class="n">href</span><span class="o">=</span><span class="s1">&#39;vscode-notebook-cell:/Users/jankirenz/books/regression/docs/randomforest.ipynb#ch0000033?line=1&#39;</span><span class="o">&gt;</span><span class="mi">2</span><span class="o">&lt;/</span><span class="n">a</span><span class="o">&gt;</span> <span class="n">error_rate</span> <span class="o">=</span> <span class="n">OrderedDict</span><span class="p">((</span><span class="n">label</span><span class="p">,</span> <span class="p">[])</span> <span class="k">for</span> <span class="n">label</span><span class="p">,</span> <span class="n">_</span> <span class="ow">in</span> <span class="n">model</span><span class="p">)</span>
-      <span class="o">&lt;</span><span class="n">a</span> <span class="n">href</span><span class="o">=</span><span class="s1">&#39;vscode-notebook-cell:/Users/jankirenz/books/regression/docs/randomforest.ipynb#ch0000033?line=3&#39;</span><span class="o">&gt;</span><span class="mi">4</span><span class="o">&lt;/</span><span class="n">a</span><span class="o">&gt;</span> <span class="c1"># Range of `n_estimators` values to explore.</span>
-      <span class="o">&lt;</span><span class="n">a</span> <span class="n">href</span><span class="o">=</span><span class="s1">&#39;vscode-notebook-cell:/Users/jankirenz/books/regression/docs/randomforest.ipynb#ch0000033?line=4&#39;</span><span class="o">&gt;</span><span class="mi">5</span><span class="o">&lt;/</span><span class="n">a</span><span class="o">&gt;</span> <span class="n">min_estimators</span> <span class="o">=</span> <span class="mi">15</span>
-
-<span class="nn">/Users/jankirenz/books/regression/docs/randomforest.ipynb Cell 19&#39;</span> in <span class="ni">&lt;genexpr&gt;</span><span class="nt">(.0)</span>
-      <span class="o">&lt;</span><span class="n">a</span> <span class="n">href</span><span class="o">=</span><span class="s1">&#39;vscode-notebook-cell:/Users/jankirenz/books/regression/docs/randomforest.ipynb#ch0000033?line=0&#39;</span><span class="o">&gt;</span><span class="mi">1</span><span class="o">&lt;/</span><span class="n">a</span><span class="o">&gt;</span> <span class="c1"># Map a classifier name to a list of (&lt;n_estimators&gt;, &lt;error rate&gt;) pairs.</span>
-<span class="o">----&gt;</span> <span class="o">&lt;</span><span class="n">a</span> <span class="n">href</span><span class="o">=</span><span class="s1">&#39;vscode-notebook-cell:/Users/jankirenz/books/regression/docs/randomforest.ipynb#ch0000033?line=1&#39;</span><span class="o">&gt;</span><span class="mi">2</span><span class="o">&lt;/</span><span class="n">a</span><span class="o">&gt;</span> <span class="n">error_rate</span> <span class="o">=</span> <span class="n">OrderedDict</span><span class="p">((</span><span class="n">label</span><span class="p">,</span> <span class="p">[])</span> <span class="k">for</span> <span class="n">label</span><span class="p">,</span> <span class="n">_</span> <span class="ow">in</span> <span class="n">model</span><span class="p">)</span>
-      <span class="o">&lt;</span><span class="n">a</span> <span class="n">href</span><span class="o">=</span><span class="s1">&#39;vscode-notebook-cell:/Users/jankirenz/books/regression/docs/randomforest.ipynb#ch0000033?line=3&#39;</span><span class="o">&gt;</span><span class="mi">4</span><span class="o">&lt;/</span><span class="n">a</span><span class="o">&gt;</span> <span class="c1"># Range of `n_estimators` values to explore.</span>
-      <span class="o">&lt;</span><span class="n">a</span> <span class="n">href</span><span class="o">=</span><span class="s1">&#39;vscode-notebook-cell:/Users/jankirenz/books/regression/docs/randomforest.ipynb#ch0000033?line=4&#39;</span><span class="o">&gt;</span><span class="mi">5</span><span class="o">&lt;/</span><span class="n">a</span><span class="o">&gt;</span> <span class="n">min_estimators</span> <span class="o">=</span> <span class="mi">15</span>
-
-<span class="ne">TypeError</span>: cannot unpack non-iterable DecisionTreeRegressor object
 </pre></div>
 </div>
 </div>
@@ -641,7 +596,7 @@ const thebe_selector_output = ".output, .cell_output"
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/randomforest_21_0.png" src="../_images/randomforest_21_0.png" />
+<img alt="../_images/randomforest_20_0.png" src="../_images/randomforest_20_0.png" />
 </div>
 </div>
 </div>
@@ -679,7 +634,7 @@ const thebe_selector_output = ".output, .cell_output"
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/randomforest_24_0.png" src="../_images/randomforest_24_0.png" />
+<img alt="../_images/randomforest_23_0.png" src="../_images/randomforest_23_0.png" />
 </div>
 </div>
 <ul class="simple">
@@ -701,7 +656,7 @@ const thebe_selector_output = ".output, .cell_output"
 <div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Text(0.5, 1.0, &#39;Permutation Importance (test set)&#39;)
 </pre></div>
 </div>
-<img alt="../_images/randomforest_26_1.png" src="../_images/randomforest_26_1.png" />
+<img alt="../_images/randomforest_25_1.png" src="../_images/randomforest_25_1.png" />
 </div>
 </div>
 <ul class="simple">
