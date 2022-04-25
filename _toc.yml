@@ -15,14 +15,16 @@ parts:
     - file: docs/gam.ipynb   
   - caption: Decision Trees
     chapters:
+    - file: docs/randomforest.ipynb
     - file: docs/gradientboosting.ipynb
     - file: docs/gradientboosting-xgboost.ipynb 
   #- caption: Feature Selection
   #  chapters:
  #   - file: docs/feature-selection.ipynb
-  - caption: Ensemble
+  - caption: Combine predictors
     chapters:
     - file: docs/ensemble.ipynb
+    - file: docs/stacking.ipynb
   #- caption: Applications
   #  chapters:
   #  - file: docs/case-simulated.ipynb
