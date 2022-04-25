@@ -1,11 +1,9 @@
 format: jb-book
 root: docs/intro.md
 parts:
-  - caption: Basics
+  - caption: Linear regression
     chapters:
     - file: docs/basics.ipynb
-  - caption: Diagnostics
-    chapters:
     - file: docs/diagnostics.ipynb
   - caption: Lasso, Splines & GAM
     chapters:
