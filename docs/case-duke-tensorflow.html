@@ -356,11 +356,6 @@ const thebe_selector_output = ".output, .cell_output"
   </a>
   <ul class="visible nav section-nav flex-column">
    <li class="toc-h2 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#case-study-houses-for-sale">
-     Case study: Houses for sale
-    </a>
-   </li>
-   <li class="toc-h2 nav-item toc-entry">
     <a class="reference internal nav-link" href="#setup">
      Setup
     </a>
@@ -430,11 +425,6 @@ const thebe_selector_output = ".output, .cell_output"
   </a>
   <ul class="visible nav section-nav flex-column">
    <li class="toc-h2 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#case-study-houses-for-sale">
-     Case study: Houses for sale
-    </a>
-   </li>
-   <li class="toc-h2 nav-item toc-entry">
     <a class="reference internal nav-link" href="#setup">
      Setup
     </a>
@@ -489,9 +479,7 @@ const thebe_selector_output = ".output, .cell_output"
                 
   <div class="tex2jax_ignore mathjax_ignore section" id="tensorflow">
 <h1>TensorFlow<a class="headerlink" href="#tensorflow" title="Permalink to this headline">¶</a></h1>
-<div class="section" id="case-study-houses-for-sale">
-<h2>Case study: Houses for sale<a class="headerlink" href="#case-study-houses-for-sale" title="Permalink to this headline">¶</a></h2>
-</div>
+<p>Case study: Houses for sale</p>
 <div class="section" id="setup">
 <h2>Setup<a class="headerlink" href="#setup" title="Permalink to this headline">¶</a></h2>
 <div class="cell docutils container">
@@ -508,14 +496,11 @@ const thebe_selector_output = ".output, .cell_output"
 <span class="kn">from</span> <span class="nn">tensorflow.keras</span> <span class="kn">import</span> <span class="n">layers</span>
 <span class="kn">from</span> <span class="nn">tensorflow.keras.layers.experimental</span> <span class="kn">import</span> <span class="n">preprocessing</span>
 
-<span class="nb">print</span><span class="p">(</span><span class="n">tf</span><span class="o">.</span><span class="n">__version__</span><span class="p">)</span>
+<span class="kn">from</span> <span class="nn">sklearn.model_selection</span> <span class="kn">import</span> <span class="n">train_test_split</span>
+<span class="kn">from</span> <span class="nn">sklearn.metrics</span> <span class="kn">import</span> <span class="n">r2_score</span>
 
+<span class="nb">print</span><span class="p">(</span><span class="n">tf</span><span class="o">.</span><span class="n">__version__</span><span class="p">)</span>
 <span class="n">sns</span><span class="o">.</span><span class="n">set_theme</span><span class="p">(</span><span class="n">style</span><span class="o">=</span><span class="s2">&quot;ticks&quot;</span><span class="p">,</span> <span class="n">color_codes</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>2.7.1
 </pre></div>
 </div>
 </div>
@@ -523,10 +508,26 @@ const thebe_selector_output = ".output, .cell_output"
 </div>
 <div class="section" id="data-preparation">
 <h2>Data preparation<a class="headerlink" href="#data-preparation" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li><p>See notebook <a class="reference external" href="https://kirenz.github.io/regression/docs/case-duke-exploration.html">“Data”</a> for details about data preprocessing</p></li>
+</ul>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># See notebook &quot;Data Exploration&quot; for details about data preprocessing</span>
-<span class="kn">from</span> <span class="nn">case_duke_data_prep</span> <span class="kn">import</span> <span class="o">*</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">case_duke_data_prep</span> <span class="kn">import</span> <span class="o">*</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">df</span><span class="o">.</span><span class="n">info</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">df</span>
 </pre></div>
 </div>
 </div>
@@ -535,6 +536,9 @@ const thebe_selector_output = ".output, .cell_output"
 </div>
 <div class="tex2jax_ignore mathjax_ignore section" id="simple-regression">
 <h1>Simple regression<a class="headerlink" href="#simple-regression" title="Permalink to this headline">¶</a></h1>
+<ul class="simple">
+<li><p>We start with a single-variable linear regression, to predict price from area.</p></li>
+</ul>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Select features for simple regression</span>
@@ -549,27 +553,12 @@ const thebe_selector_output = ".output, .cell_output"
 </pre></div>
 </div>
 </div>
-<div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;class &#39;pandas.core.frame.DataFrame&#39;&gt;
-Int64Index: 97 entries, 0 to 97
-Data columns (total 1 columns):
- #   Column  Non-Null Count  Dtype
----  ------  --------------  -----
- 0   area    97 non-null     int64
-dtypes: int64(1)
-memory usage: 1.5 KB
-Missing values: 0
-</pre></div>
-</div>
-</div>
 </div>
 <div class="section" id="data-splitting">
 <h2>Data splitting<a class="headerlink" href="#data-splitting" title="Permalink to this headline">¶</a></h2>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">sklearn.model_selection</span> <span class="kn">import</span> <span class="n">train_test_split</span>
-
-<span class="c1"># Train Test Split</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Train Test Split</span>
 <span class="c1"># Use random_state to make this notebook&#39;s output identical at every run</span>
 <span class="n">X_train</span><span class="p">,</span> <span class="n">X_test</span><span class="p">,</span> <span class="n">y_train</span><span class="p">,</span> <span class="n">y_test</span> <span class="o">=</span> <span class="n">train_test_split</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">test_size</span><span class="o">=</span><span class="mf">0.2</span><span class="p">,</span> <span class="n">random_state</span><span class="o">=</span><span class="mi">42</span><span class="p">)</span>
 </pre></div>
@@ -579,13 +568,17 @@ Missing values: 0
 </div>
 <div class="section" id="linear-regression">
 <h2>Linear regression<a class="headerlink" href="#linear-regression" title="Permalink to this headline">¶</a></h2>
-<p>Start with a single-variable linear regression, to predict price from area.</p>
-<p>Training a model with tf.keras typically starts by defining the model architecture.</p>
-<p>In this case use a keras.Sequential model. This model represents a sequence of steps. In this case there is only one step:</p>
 <ul class="simple">
+<li><p>Training a model with tf.keras typically starts by defining the model architecture.</p></li>
+<li><p>In this case use a keras.Sequential model. This model represents a sequence of steps. In this case there is only one step:</p>
+<ul>
 <li><p>Apply a linear transformation to produce 1 output using layers.Dense.</p></li>
 </ul>
-<p>The number of inputs can either be set by the input_shape argument, or automatically when the model is run for the first time.</p>
+</li>
+</ul>
+<ul class="simple">
+<li><p>The number of inputs can either be set by the input_shape argument, or automatically when the model is run for the first time.</p></li>
+</ul>
 <p>Build the sequential model:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -597,76 +590,35 @@ Missing values: 0
 </pre></div>
 </div>
 </div>
-<div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Model: &quot;sequential&quot;
-_________________________________________________________________
- Layer (type)                Output Shape              Param #   
-=================================================================
- dense (Dense)               (None, 1)                 2         
-                                                                 
-=================================================================
-Total params: 2
-Trainable params: 2
-Non-trainable params: 0
-_________________________________________________________________
-</pre></div>
 </div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>2022-03-06 10:54:45.875208: I tensorflow/core/platform/cpu_feature_guard.cc:151] This TensorFlow binary is optimized with oneAPI Deep Neural Network Library (oneDNN) to use the following CPU instructions in performance-critical operations:  AVX2 FMA
-To enable them in other operations, rebuild TensorFlow with the appropriate compiler flags.
-</pre></div>
-</div>
-</div>
-</div>
-<p>This model will predict price from area.</p>
-<p>Run the untrained model on the first 10 area values. The output won’t be good, but you’ll see that it has the expected shape, (10,1):</p>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">lm</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">X_train</span><span class="p">[:</span><span class="mi">10</span><span class="p">])</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([[-1293.8225 ],
-       [ -965.23975],
-       [ -487.747  ],
-       [-1226.055  ],
-       [-1040.5864 ],
-       [-1033.0071 ],
-       [ -968.80646],
-       [-1451.2034 ],
-       [-1111.0288 ],
-       [ -983.07324]], dtype=float32)
-</pre></div>
-</div>
-</div>
-</div>
-<p>Once the model is built, configure the training procedure using the Model.compile() method. The most important arguments to compile are the loss and the optimizer since these define what will be optimized (mean_absolute_error) and how (using the optimizers.Adam).</p>
+<ul class="simple">
+<li><p>Once the model is built, configure the training procedure using the Model.compile() method.</p></li>
+<li><p>The most important arguments to compile are the loss and the optimizer since these define what will be optimized (mean_absolute_error) and how (using the optimizers.Adam).</p></li>
+</ul>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">lm</span><span class="o">.</span><span class="n">compile</span><span class="p">(</span>
-    <span class="n">optimizer</span><span class="o">=</span><span class="n">tf</span><span class="o">.</span><span class="n">optimizers</span><span class="o">.</span><span class="n">Adam</span><span class="p">(</span><span class="n">learning_rate</span><span class="o">=</span><span class="mf">0.1</span><span class="p">),</span>
-    <span class="n">loss</span><span class="o">=</span><span class="s1">&#39;mean_absolute_error&#39;</span><span class="p">)</span>
+    <span class="n">optimizer</span><span class="o">=</span><span class="n">tf</span><span class="o">.</span><span class="n">optimizers</span><span class="o">.</span><span class="n">Adam</span><span class="p">(),</span>
+    <span class="n">loss</span><span class="o">=</span><span class="s1">&#39;mean_absolute_error&#39;</span>
+<span class="p">)</span>
 </pre></div>
 </div>
 </div>
 </div>
-<p>Once the training is configured, use Model.fit() to execute the training:</p>
+<ul class="simple">
+<li><p>Once the training is configured, use Model.fit() to execute the training:</p></li>
+</ul>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">%%time</span>
+
 <span class="n">history</span> <span class="o">=</span> <span class="n">lm</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span>
     <span class="n">X_train</span><span class="p">,</span> <span class="n">y_train</span><span class="p">,</span>
-    <span class="n">epochs</span><span class="o">=</span><span class="mi">400</span><span class="p">,</span>
+    <span class="n">epochs</span><span class="o">=</span><span class="mi">500</span><span class="p">,</span>
     <span class="c1"># suppress logging</span>
     <span class="n">verbose</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span>
     <span class="c1"># Calculate validation results on 20% of the training data</span>
-    <span class="n">validation_split</span> <span class="o">=</span> <span class="mf">0.1</span><span class="p">)</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>CPU times: user 5.65 s, sys: 372 ms, total: 6.03 s
-Wall time: 5.77 s
+    <span class="n">validation_split</span> <span class="o">=</span> <span class="mf">0.2</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -677,37 +629,13 @@ Wall time: 5.77 s
 </pre></div>
 </div>
 </div>
-<div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>49    525000
-71    540000
-69    105000
-15    610000
-39    535000
-       ...  
-61    580000
-72    650000
-14    631500
-93    541000
-51    725000
-Name: price, Length: 77, dtype: int64
-</pre></div>
-</div>
-</div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Calculate R squared</span>
-<span class="kn">from</span> <span class="nn">sklearn.metrics</span> <span class="kn">import</span> <span class="n">r2_score</span>
-
 <span class="n">y_pred</span> <span class="o">=</span> <span class="n">lm</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">X_train</span><span class="p">)</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">int64</span><span class="p">)</span>
-<span class="n">y_true</span> <span class="o">=</span> <span class="n">y_train</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">int64</span><span class="p">)</span>
 
 <span class="n">r2_score</span><span class="p">(</span><span class="n">y_train</span><span class="p">,</span> <span class="n">y_pred</span><span class="p">)</span>  
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>-0.8717177859911993
 </pre></div>
 </div>
 </div>
@@ -716,11 +644,6 @@ Name: price, Length: 77, dtype: int64
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># slope coefficient</span>
 <span class="n">lm</span><span class="o">.</span><span class="n">layers</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">kernel</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;tf.Variable &#39;dense/kernel:0&#39; shape=(1, 1) dtype=float32, numpy=array([[116.45346]], dtype=float32)&gt;
 </pre></div>
 </div>
 </div>
@@ -734,64 +657,6 @@ Name: price, Length: 77, dtype: int64
 </pre></div>
 </div>
 </div>
-<div class="cell_output docutils container">
-<div class="output text_html"><div>
-<style scoped>
-    .dataframe tbody tr th:only-of-type {
-        vertical-align: middle;
-    }
-
-    .dataframe tbody tr th {
-        vertical-align: top;
-    }
-
-    .dataframe thead th {
-        text-align: right;
-    }
-</style>
-<table border="1" class="dataframe">
-  <thead>
-    <tr style="text-align: right;">
-      <th></th>
-      <th>loss</th>
-      <th>val_loss</th>
-      <th>epoch</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <th>395</th>
-      <td>264975.093750</td>
-      <td>200249.437500</td>
-      <td>395</td>
-    </tr>
-    <tr>
-      <th>396</th>
-      <td>264224.000000</td>
-      <td>199622.093750</td>
-      <td>396</td>
-    </tr>
-    <tr>
-      <th>397</th>
-      <td>263482.812500</td>
-      <td>198994.656250</td>
-      <td>397</td>
-    </tr>
-    <tr>
-      <th>398</th>
-      <td>262706.000000</td>
-      <td>198379.953125</td>
-      <td>398</td>
-    </tr>
-    <tr>
-      <th>399</th>
-      <td>261970.234375</td>
-      <td>197765.250000</td>
-      <td>399</td>
-    </tr>
-  </tbody>
-</table>
-</div></div></div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -811,9 +676,6 @@ Name: price, Length: 77, dtype: int64
 </pre></div>
 </div>
 </div>
-<div class="cell_output docutils container">
-<img alt="../_images/case-duke-tensorflow_25_0.png" src="../_images/case-duke-tensorflow_25_0.png" />
-</div>
 </div>
 <p>Collect the results (mean squared error) on the test set, for later:</p>
 <div class="cell docutils container">
@@ -828,11 +690,6 @@ Name: price, Length: 77, dtype: int64
 </pre></div>
 </div>
 </div>
-<div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>{&#39;lm&#39;: 245015.53125}
-</pre></div>
-</div>
-</div>
 </div>
 <p>Since this is a single variable regression it’s easy to look at the model’s predictions as a function of the input:</p>
 <div class="cell docutils container">
@@ -841,17 +698,6 @@ Name: price, Length: 77, dtype: int64
 <span class="n">y</span> <span class="o">=</span> <span class="n">lm</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
 
 <span class="n">y</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([[1.17784164e+02],
-       [2.34237625e+02],
-       [3.50691101e+02],
-       ...,
-       [7.21896375e+05],
-       [7.22012812e+05],
-       [7.22129250e+05]], dtype=float32)
 </pre></div>
 </div>
 </div>
@@ -873,9 +719,6 @@ Name: price, Length: 77, dtype: int64
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">plot_area</span><span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="n">y</span><span class="p">)</span>
 </pre></div>
 </div>
-</div>
-<div class="cell_output docutils container">
-<img alt="../_images/case-duke-tensorflow_31_0.png" src="../_images/case-duke-tensorflow_31_0.png" />
 </div>
 </div>
 </div>
@@ -906,25 +749,6 @@ Name: price, Length: 77, dtype: int64
 </pre></div>
 </div>
 </div>
-<div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;class &#39;pandas.core.frame.DataFrame&#39;&gt;
-Int64Index: 97 entries, 0 to 97
-Data columns (total 7 columns):
- #   Column           Non-Null Count  Dtype  
----  ------           --------------  -----  
- 0   bed              97 non-null     int64  
- 1   bath             97 non-null     float64
- 2   area             97 non-null     int64  
- 3   year_built       97 non-null     int64  
- 4   lot              97 non-null     float64
- 5   cooling_central  97 non-null     uint8  
- 6   cooling_other    97 non-null     uint8  
-dtypes: float64(2), int64(3), uint8(2)
-memory usage: 4.7 KB
-Missing values: 0
-</pre></div>
-</div>
-</div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -947,27 +771,13 @@ Missing values: 0
 </pre></div>
 </div>
 </div>
-<div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Model: &quot;sequential_1&quot;
-_________________________________________________________________
- Layer (type)                Output Shape              Param #   
-=================================================================
- dense_1 (Dense)             (None, 1)                 8         
-                                                                 
-=================================================================
-Total params: 8
-Trainable params: 8
-Non-trainable params: 0
-_________________________________________________________________
-</pre></div>
-</div>
-</div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">lm_2</span><span class="o">.</span><span class="n">compile</span><span class="p">(</span>
     <span class="n">optimizer</span><span class="o">=</span><span class="n">tf</span><span class="o">.</span><span class="n">optimizers</span><span class="o">.</span><span class="n">Adam</span><span class="p">(</span><span class="n">learning_rate</span><span class="o">=</span><span class="mf">0.1</span><span class="p">),</span>
-    <span class="n">loss</span><span class="o">=</span><span class="s1">&#39;mean_absolute_error&#39;</span><span class="p">)</span>
+    <span class="n">loss</span><span class="o">=</span><span class="s1">&#39;mean_absolute_error&#39;</span>
+<span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -975,19 +785,21 @@ _________________________________________________________________
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">%%time</span>
+
 <span class="n">history</span> <span class="o">=</span> <span class="n">lm_2</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span>
     <span class="n">X_train</span><span class="p">,</span> <span class="n">y_train</span><span class="p">,</span>
-    <span class="n">epochs</span><span class="o">=</span><span class="mi">400</span><span class="p">,</span>
+    <span class="n">epochs</span><span class="o">=</span><span class="mi">500</span><span class="p">,</span>
     <span class="c1"># suppress logging</span>
     <span class="n">verbose</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span>
     <span class="c1"># Calculate validation results on 20% of the training data</span>
-    <span class="n">validation_split</span> <span class="o">=</span> <span class="mf">0.1</span><span class="p">)</span>
+    <span class="n">validation_split</span> <span class="o">=</span> <span class="mf">0.2</span>
+<span class="p">)</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>CPU times: user 5.73 s, sys: 383 ms, total: 6.11 s
-Wall time: 5.58 s
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>CPU times: user 6.7 s, sys: 430 ms, total: 7.13 s
+Wall time: 6.52 s
 </pre></div>
 </div>
 </div>
@@ -995,8 +807,6 @@ Wall time: 5.58 s
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Calculate R squared</span>
-<span class="kn">from</span> <span class="nn">sklearn.metrics</span> <span class="kn">import</span> <span class="n">r2_score</span>
-
 <span class="n">y_pred</span> <span class="o">=</span> <span class="n">lm_2</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">X_train</span><span class="p">)</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">int64</span><span class="p">)</span>
 <span class="n">y_true</span> <span class="o">=</span> <span class="n">y_train</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">int64</span><span class="p">)</span>
 
@@ -1005,7 +815,7 @@ Wall time: 5.58 s
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>0.27548531740536375
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>0.008066631014296388
 </pre></div>
 </div>
 </div>
@@ -1018,14 +828,14 @@ Wall time: 5.58 s
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;tf.Variable &#39;dense_1/kernel:0&#39; shape=(7, 1) dtype=float32, numpy=
-array([[107.66216],
-       [108.91923],
-       [107.36305],
-       [105.50072],
-       [109.64065],
-       [105.73684],
-       [ 99.41921]], dtype=float32)&gt;
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;tf.Variable &#39;dense_14/kernel:0&#39; shape=(7, 1) dtype=float32, numpy=
+array([[93.865845],
+       [95.36067 ],
+       [93.04233 ],
+       [92.90618 ],
+       [95.016266],
+       [96.31462 ],
+       [87.34802 ]], dtype=float32)&gt;
 </pre></div>
 </div>
 </div>
@@ -1037,7 +847,7 @@ array([[107.66216],
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/case-duke-tensorflow_40_0.png" src="../_images/case-duke-tensorflow_40_0.png" />
+<img alt="../_images/case-duke-tensorflow_43_0.png" src="../_images/case-duke-tensorflow_43_0.png" />
 </div>
 </div>
 <div class="cell docutils container">
@@ -1051,9 +861,7 @@ array([[107.66216],
 </div>
 <div class="tex2jax_ignore mathjax_ignore section" id="dnn-regression">
 <h1>DNN regression<a class="headerlink" href="#dnn-regression" title="Permalink to this headline">¶</a></h1>
-<p>The previous section implemented linear models for single and multiple inputs.</p>
-<p>This section implements a multiple-input DNN models. The code is basically the same except the model is expanded to include some “hidden” non-linear layers. The name “hidden” here just means not directly connected to the inputs or outputs.</p>
-<p>These models will contain a few more layers than the linear model:</p>
+<p>This model will contain a few more layers than the previous model:</p>
 <ul class="simple">
 <li><p>Two hidden, nonlinear, Dense layers using the relu nonlinearity.</p></li>
 <li><p>A linear single-output layer.</p></li>
@@ -1076,19 +884,18 @@ array([[107.66216],
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">%%time</span>
+
 <span class="n">history</span> <span class="o">=</span> <span class="n">dnn_model</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span>
     <span class="n">X_train</span><span class="p">,</span> <span class="n">y_train</span><span class="p">,</span>
-    <span class="n">epochs</span><span class="o">=</span><span class="mi">100</span><span class="p">,</span>
-    <span class="c1"># suppress logging</span>
+    <span class="n">epochs</span><span class="o">=</span><span class="mi">500</span><span class="p">,</span>
     <span class="n">verbose</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span>
-    <span class="c1"># Calculate validation results on 20% of the training data</span>
-    <span class="n">validation_split</span> <span class="o">=</span> <span class="mf">0.1</span><span class="p">)</span>
+    <span class="n">validation_split</span> <span class="o">=</span> <span class="mf">0.2</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>CPU times: user 1.78 s, sys: 125 ms, total: 1.9 s
-Wall time: 1.79 s
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>CPU times: user 7.19 s, sys: 494 ms, total: 7.69 s
+Wall time: 6.91 s
 </pre></div>
 </div>
 </div>
@@ -1096,8 +903,6 @@ Wall time: 1.79 s
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Calculate R squared</span>
-<span class="kn">from</span> <span class="nn">sklearn.metrics</span> <span class="kn">import</span> <span class="n">r2_score</span>
-
 <span class="n">y_pred</span> <span class="o">=</span> <span class="n">dnn_model</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">X_train</span><span class="p">)</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">int64</span><span class="p">)</span>
 <span class="n">y_true</span> <span class="o">=</span> <span class="n">y_train</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">int64</span><span class="p">)</span>
 
@@ -1106,7 +911,7 @@ Wall time: 1.79 s
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>-0.7356985340428859
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>0.3319246298888
 </pre></div>
 </div>
 </div>
@@ -1118,7 +923,7 @@ Wall time: 1.79 s
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/case-duke-tensorflow_47_0.png" src="../_images/case-duke-tensorflow_47_0.png" />
+<img alt="../_images/case-duke-tensorflow_50_0.png" src="../_images/case-duke-tensorflow_50_0.png" />
 </div>
 </div>
 <div class="cell docutils container">
@@ -1163,15 +968,15 @@ Wall time: 1.79 s
   <tbody>
     <tr>
       <th>lm</th>
-      <td>245015.53125</td>
+      <td>537925.625000</td>
     </tr>
     <tr>
       <th>lm_2</th>
-      <td>114533.12500</td>
+      <td>145734.390625</td>
     </tr>
     <tr>
       <th>dnn_model</th>
-      <td>236808.75000</td>
+      <td>103795.859375</td>
     </tr>
   </tbody>
 </table>
