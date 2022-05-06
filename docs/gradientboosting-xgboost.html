@@ -384,6 +384,11 @@ const thebe_selector_output = ".output, .cell_output"
    </li>
   </ul>
  </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#hyperparameter-tuning">
+   Hyperparameter Tuning
+  </a>
+ </li>
 </ul>
 
             </nav>
@@ -442,6 +447,11 @@ const thebe_selector_output = ".output, .cell_output"
     </a>
    </li>
   </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#hyperparameter-tuning">
+   Hyperparameter Tuning
+  </a>
  </li>
 </ul>
 
@@ -516,7 +526,8 @@ const thebe_selector_output = ".output, .cell_output"
     <span class="s2">&quot;n_estimators&quot;</span><span class="p">:</span><span class="mi">50</span><span class="p">,</span>
     <span class="s2">&quot;max_depth&quot;</span><span class="p">:</span> <span class="mi">4</span><span class="p">,</span>
     <span class="s2">&quot;learning_rate&quot;</span><span class="p">:</span> <span class="mf">0.01</span><span class="p">,</span>
-    <span class="s2">&quot;eval_metric&quot;</span><span class="p">:</span> <span class="s2">&quot;rmse&quot;</span>
+    <span class="s2">&quot;eval_metric&quot;</span><span class="p">:</span> <span class="s2">&quot;rmse&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;early_stopping_rounds&quot;</span><span class="p">:</span> <span class="mi">5</span><span class="p">,</span>
 <span class="p">}</span>
 </pre></div>
 </div>
@@ -524,6 +535,8 @@ const thebe_selector_output = ".output, .cell_output"
 </div>
 <ul class="simple">
 <li><p>Prepare evaluation data</p></li>
+<li><p>If there’s more than one item in eval_set, the last entry will be used for early stopping.</p></li>
+<li><p>If we want to plot the learning curves for both training and test data, we need to provide both training and test data as eval_set</p></li>
 </ul>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -539,7 +552,10 @@ const thebe_selector_output = ".output, .cell_output"
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">reg</span> <span class="o">=</span> <span class="n">xgb</span><span class="o">.</span><span class="n">XGBRegressor</span><span class="p">(</span><span class="o">**</span><span class="n">params</span><span class="p">)</span>
 
-<span class="n">reg</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X_train</span><span class="p">,</span> <span class="n">y_train</span><span class="p">,</span> <span class="n">eval_set</span><span class="o">=</span><span class="n">eval_set</span><span class="p">)</span>
+<span class="n">reg</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X_train</span><span class="p">,</span> 
+        <span class="n">y_train</span><span class="p">,</span> 
+        <span class="n">verbose</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+        <span class="n">eval_set</span><span class="o">=</span> <span class="n">eval_set</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -598,7 +614,7 @@ const thebe_selector_output = ".output, .cell_output"
 </div>
 <div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>XGBRegressor(base_score=0.5, booster=&#39;gbtree&#39;, callbacks=None,
              colsample_bylevel=1, colsample_bynode=1, colsample_bytree=1,
-             early_stopping_rounds=None, enable_categorical=False,
+             early_stopping_rounds=5, enable_categorical=False,
              eval_metric=&#39;rmse&#39;, gamma=0, gpu_id=-1, grow_policy=&#39;depthwise&#39;,
              importance_type=None, interaction_constraints=&#39;&#39;,
              learning_rate=0.01, max_bin=256, max_cat_to_onehot=4,
@@ -606,6 +622,149 @@ const thebe_selector_output = ".output, .cell_output"
              missing=nan, monotone_constraints=&#39;()&#39;, n_estimators=50, n_jobs=0,
              num_parallel_tree=1, predictor=&#39;auto&#39;, random_state=0, reg_alpha=0,
              reg_lambda=1, ...)
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">reg</span><span class="o">.</span><span class="n">evals_result</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>{&#39;validation_0&#39;: OrderedDict([(&#39;rmse&#39;,
+               [693.1393857817644,
+                687.251910336823,
+                681.4244486825938,
+                675.6486724934836,
+                669.9331957060579,
+                664.2735039780409,
+                658.671209041782,
+                653.1268798100191,
+                647.639606963932,
+                642.1938985362038,
+                636.8099213158795,
+                631.4813365059504,
+                626.1961417611866,
+                620.9725471757737,
+                615.8041338657043,
+                610.6852890748453,
+                605.6040657347364,
+                600.5790575659756,
+                595.6096960389444,
+                590.6905825682088,
+                585.8005198863074,
+                580.9758014008682,
+                576.2046450150377,
+                571.4760470741261,
+                566.767889207885,
+                562.1347310337889,
+                557.5515139366653,
+                552.9829316203304,
+                548.4742444704232,
+                544.0257116458743,
+                539.580154381951,
+                535.223258825213,
+                530.9118515684579,
+                526.5969631915748,
+                522.3736292449992,
+                518.1447439056208,
+                513.98339041067,
+                509.8386269079192,
+                505.74956087337966,
+                501.7089946678633,
+                497.6972510812428,
+                493.72722733765556,
+                489.80528828448985,
+                485.91321877813294,
+                482.0629503106967,
+                478.2506824740748,
+                474.47970550622546,
+                470.7064900045892,
+                466.9739728063445,
+                463.27879631757037])]),
+ &#39;validation_1&#39;: OrderedDict([(&#39;rmse&#39;,
+               [694.5164913542402,
+                688.3764374445906,
+                682.3151532702786,
+                677.3582590211814,
+                672.4628989003214,
+                666.6059087893586,
+                661.828382190362,
+                656.9031869172235,
+                652.2413750710891,
+                646.6496957785371,
+                641.9228547034586,
+                637.2776215615506,
+                631.9067047861197,
+                627.3741448283788,
+                622.8228568933258,
+                618.4503207716183,
+                613.3353736633013,
+                609.3450808941212,
+                605.2929405305549,
+                601.3570998696786,
+                596.476439502,
+                592.6884623416338,
+                588.8385297352924,
+                585.0042993486803,
+                580.4627558767744,
+                576.7280633186635,
+                573.043293650581,
+                568.561421543709,
+                564.7817911843646,
+                561.2401620562998,
+                557.7036728408804,
+                554.2578132311166,
+                550.8727841910988,
+                546.8062486649543,
+                543.5132044476993,
+                539.555182177302,
+                536.0301120486204,
+                532.2142708827711,
+                528.8126933842323,
+                525.4231683723752,
+                522.1869348578584,
+                519.0002165116805,
+                515.7400461083421,
+                512.6478116927028,
+                509.52442998205976,
+                506.52609169547287,
+                503.4267241371655,
+                500.40295281777617,
+                497.3622109130281,
+                494.61957750664214])])}
+</pre></div>
+</div>
+</div>
+</div>
+<ul class="simple">
+<li><p>The best iteration obtained by early stopping. This attribute is 0-based, for instance if the best iteration is the first round, then best_iteration is 0.</p></li>
+</ul>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">reg</span><span class="o">.</span><span class="n">best_iteration</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>49
+</pre></div>
+</div>
+</div>
+</div>
+<ul class="simple">
+<li><p>The best score obtained by early stopping.</p></li>
+</ul>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">reg</span><span class="o">.</span><span class="n">best_score</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>494.61957750664214
 </pre></div>
 </div>
 </div>
@@ -630,13 +789,13 @@ const thebe_selector_output = ".output, .cell_output"
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>494.61957203317934
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>646.6496988230952
 </pre></div>
 </div>
 </div>
 </div>
 <ul class="simple">
-<li><p>Save te model</p></li>
+<li><p>Save the model</p></li>
 </ul>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -680,7 +839,7 @@ const thebe_selector_output = ".output, .cell_output"
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/gradientboosting-xgboost_23_0.png" src="../_images/gradientboosting-xgboost_23_0.png" />
+<img alt="../_images/gradientboosting-xgboost_28_0.png" src="../_images/gradientboosting-xgboost_28_0.png" />
 </div>
 </div>
 </div>
@@ -699,6 +858,36 @@ const thebe_selector_output = ".output, .cell_output"
 <p class="admonition-title">Note</p>
 <p>Visit <a class="reference external" href="https://kirenz.github.io/feature-engineering/docs/mdi.html">this notebook</a> to learn more about MDI</p>
 </div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">reg</span><span class="o">.</span><span class="n">feature_importances_</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([0.02807194, 0.10650408, 0.        , 0.11918869, 0.00033896,
+       0.2395267 , 0.03154753, 0.28353286, 0.        , 0.07748905,
+       0.02259106, 0.07989479, 0.        , 0.        , 0.        ,
+       0.        , 0.01131431, 0.        , 0.        ], dtype=float32)
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">reg</span><span class="o">.</span><span class="n">feature_names_in_</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([&#39;AtBat&#39;, &#39;Hits&#39;, &#39;HmRun&#39;, &#39;Runs&#39;, &#39;RBI&#39;, &#39;Walks&#39;, &#39;Years&#39;,
+       &#39;CAtBat&#39;, &#39;CHits&#39;, &#39;CHmRun&#39;, &#39;CRuns&#39;, &#39;CRBI&#39;, &#39;CWalks&#39;, &#39;PutOuts&#39;,
+       &#39;Assists&#39;, &#39;Errors&#39;, &#39;League_N&#39;, &#39;Division_W&#39;, &#39;NewLeague_N&#39;],
+      dtype=&#39;&lt;U11&#39;)
+</pre></div>
+</div>
+</div>
+</div>
 <ul class="simple">
 <li><p>Feature importances are provided by the function <code class="docutils literal notranslate"><span class="pre">plot_importance</span></code></p></li>
 </ul>
@@ -709,7 +898,7 @@ const thebe_selector_output = ".output, .cell_output"
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/gradientboosting-xgboost_26_0.png" src="../_images/gradientboosting-xgboost_26_0.png" />
+<img alt="../_images/gradientboosting-xgboost_33_0.png" src="../_images/gradientboosting-xgboost_33_0.png" />
 </div>
 </div>
 </div>
@@ -767,7 +956,7 @@ const thebe_selector_output = ".output, .cell_output"
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/gradientboosting-xgboost_31_0.png" src="../_images/gradientboosting-xgboost_31_0.png" />
+<img alt="../_images/gradientboosting-xgboost_38_0.png" src="../_images/gradientboosting-xgboost_38_0.png" />
 </div>
 </div>
 <ul class="simple">
@@ -787,13 +976,16 @@ const thebe_selector_output = ".output, .cell_output"
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/gradientboosting-xgboost_33_0.png" src="../_images/gradientboosting-xgboost_33_0.png" />
+<img alt="../_images/gradientboosting-xgboost_40_0.png" src="../_images/gradientboosting-xgboost_40_0.png" />
 </div>
 </div>
 <ul class="simple">
 <li><p>We observe that the same features are detected as most important using both methods. Although the relative importances vary (especially for feature <code class="docutils literal notranslate"><span class="pre">Years</span></code>).</p></li>
 </ul>
 </div>
+</div>
+<div class="section" id="hyperparameter-tuning">
+<h2>Hyperparameter Tuning<a class="headerlink" href="#hyperparameter-tuning" title="Permalink to this headline">¶</a></h2>
 </div>
 </div>
 
