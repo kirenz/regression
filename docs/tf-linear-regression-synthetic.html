@@ -1,0 +1,986 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Simple Linear Regression with Synthetic Data &#8212; Introduction to Regression Models</title>
+    
+  <link href="../_static/css/theme.css" rel="stylesheet">
+  <link href="../_static/css/index.ff1ffe594081f20da1ef19478df9384b.css" rel="stylesheet">
+
+    
+  <link rel="stylesheet"
+    href="../_static/vendor/fontawesome/5.13.0/css/all.min.css">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../_static/vendor/fontawesome/5.13.0/webfonts/fa-solid-900.woff2">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2">
+
+    
+      
+
+    
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-book-theme.css?digest=c3fdc42140077d1ad13ad2f1588a4309" />
+    <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/panels-main.c949a650a448cc0ae9fd3441c0e17fb0.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/panels-variables.06eb56fa6e07937060861dad626602ad.css" />
+    
+  <link rel="preload" as="script" href="../_static/js/index.be7d3bbb2ef33a8344ce.js">
+
+    <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+    <script src="../_static/jquery.js"></script>
+    <script src="../_static/underscore.js"></script>
+    <script src="../_static/doctools.js"></script>
+    <script src="../_static/clipboard.min.js"></script>
+    <script src="../_static/copybutton.js"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../_static/togglebutton.js"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
+    <script src="../_static/sphinx-book-theme.d59cb220de22ca1c485ebbdc042f0030.js"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"
+const thebe_selector = ".thebe,.cell"
+const thebe_selector_input = "pre"
+const thebe_selector_output = ".output, .cell_output"
+</script>
+    <script async="async" src="../_static/sphinx-thebe.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="docsearch:language" content="None">
+    
+
+    <!-- Google Analytics -->
+    
+  </head>
+  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="80">
+    
+    <div class="container-fluid" id="banner"></div>
+
+    
+
+    <div class="container-xl">
+      <div class="row">
+          
+<div class="col-12 col-md-3 bd-sidebar site-navigation show" id="site-navigation">
+    
+        <div class="navbar-brand-box">
+    <a class="navbar-brand text-wrap" href="../index.html">
+      
+        <!-- `logo` is deprecated in Sphinx 4.0, so remove this when we stop supporting 3 -->
+        
+      
+      
+      <img src="../_static/logo.png" class="logo" alt="logo">
+      
+      
+      <h1 class="site-logo" id="site-title">Introduction to Regression Models</h1>
+      
+    </a>
+</div><form class="bd-search d-flex align-items-center" action="../search.html" method="get">
+  <i class="icon fas fa-search"></i>
+  <input type="search" class="form-control" name="q" id="search-input" placeholder="Search this book..." aria-label="Search this book..." autocomplete="off" >
+</form><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item active">
+        <ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="intro.html">
+   Welcome
+  </a>
+ </li>
+</ul>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  Linear regression
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="basics.html">
+   Linear regression
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="diagnostics.html">
+   Regression diagnostics
+  </a>
+ </li>
+</ul>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  Lasso, Splines &amp; GAM
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="hitters_data.html">
+   Hitters data preparation
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="lasso.html">
+   Lasso regression
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="splines.html">
+   Regression splines
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="gam.html">
+   Generalized Additive Models (GAM)
+  </a>
+ </li>
+</ul>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  Decision Trees
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="randomforest.html">
+   Random forest in scikit-learn
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="gradientboosting.html">
+   Gradient Boosting in scikit-learn
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="gradientboosting-xgboost.html">
+   Gradient Boosting with XGBoost
+  </a>
+ </li>
+</ul>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  Combine predictors
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="ensemble.html">
+   Ensemble meta-estimator
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="stacking.html">
+   Stacking
+  </a>
+ </li>
+</ul>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  Case Duke
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="case-duke.html">
+   Case study
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="case-duke-exploration.html">
+   Data
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="case-duke-data-prep-template.html">
+   Create data prep file
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="case-duke-statsmodel.html">
+   Statsmodels
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="case-duke-sklearn.html">
+   Scikit-learn
+  </a>
+ </li>
+</ul>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  Case Happy
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="ds-happy-stats.html">
+   Simple statsmodels model
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="ds-happy-scikit.html">
+   Simple scikit learn model
+  </a>
+ </li>
+</ul>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  References
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="reference.html">
+   Bibliography
+  </a>
+ </li>
+</ul>
+
+    </div>
+</nav> <!-- To handle the deprecated key -->
+
+<div class="navbar_extra_footer">
+  Powered by <a href="https://jupyterbook.org">Jupyter Book</a>
+</div>
+
+</div>
+
+
+          
+
+
+          
+<main class="col py-md-3 pl-md-4 bd-content overflow-auto" role="main">
+    
+    <div class="topbar container-xl fixed-top">
+    <div class="topbar-contents row">
+        <div class="col-12 col-md-3 bd-topbar-whitespace site-navigation show"></div>
+        <div class="col pl-md-4 topbar-main">
+            
+            <button id="navbar-toggler" class="navbar-toggler ml-0" type="button" data-toggle="collapse"
+                data-toggle="tooltip" data-placement="bottom" data-target=".site-navigation" aria-controls="navbar-menu"
+                aria-expanded="true" aria-label="Toggle navigation" aria-controls="site-navigation"
+                title="Toggle navigation" data-toggle="tooltip" data-placement="left">
+                <i class="fas fa-bars"></i>
+                <i class="fas fa-arrow-left"></i>
+                <i class="fas fa-arrow-up"></i>
+            </button>
+            
+            
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn" aria-label="Download this page"><i
+            class="fas fa-download"></i></button>
+
+    <div class="dropdown-buttons">
+        <!-- ipynb file if we had a myst markdown file -->
+        
+        <!-- Download raw file -->
+        <a class="dropdown-buttons" href="../_sources/docs/tf-linear-regression-synthetic.ipynb"><button type="button"
+                class="btn btn-secondary topbarbtn" title="Download source file" data-toggle="tooltip"
+                data-placement="left">.ipynb</button></a>
+        <!-- Download PDF via print -->
+        <button type="button" id="download-print" class="btn btn-secondary topbarbtn" title="Print to PDF"
+                onclick="printPdf(this)" data-toggle="tooltip" data-placement="left">.pdf</button>
+    </div>
+</div>
+
+            <!-- Source interaction buttons -->
+
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn"
+        aria-label="Connect with source repository"><i class="fab fa-github"></i></button>
+    <div class="dropdown-buttons sourcebuttons">
+        <a class="repository-button"
+            href="https://github.com/kirenz/regression"><button type="button" class="btn btn-secondary topbarbtn"
+                data-toggle="tooltip" data-placement="left" title="Source repository"><i
+                    class="fab fa-github"></i>repository</button></a>
+        <a class="issues-button"
+            href="https://github.com/kirenz/regression/issues/new?title=Issue%20on%20page%20%2Fdocs/tf-linear-regression-synthetic.html&body=Your%20issue%20content%20here."><button
+                type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip" data-placement="left"
+                title="Open an issue"><i class="fas fa-lightbulb"></i>open issue</button></a>
+        
+    </div>
+</div>
+
+            <!-- Full screen (wrap in <a> to have style consistency -->
+
+<a class="full-screen-button"><button type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip"
+        data-placement="bottom" onclick="toggleFullScreen()" aria-label="Fullscreen mode"
+        title="Fullscreen mode"><i
+            class="fas fa-expand"></i></button></a>
+
+            <!-- Launch buttons -->
+
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn"
+        aria-label="Launch interactive content"><i class="fas fa-rocket"></i></button>
+    <div class="dropdown-buttons">
+        
+        
+        
+        <a class="colab-button" href="https://colab.research.google.com/github/kirenz/regression/blob/main/docs/tf-linear-regression-synthetic.ipynb"><button type="button" class="btn btn-secondary topbarbtn"
+                title="Launch Colab" data-toggle="tooltip" data-placement="left"><img class="colab-button-logo"
+                    src="../_static/images/logo_colab.png"
+                    alt="Interact on Colab">Colab</button></a>
+        
+        
+    </div>
+</div>
+
+        </div>
+
+        <!-- Table of contents -->
+        <div class="d-none d-md-block col-md-2 bd-toc show noprint">
+            
+            <div class="tocsection onthispage pt-5 pb-3">
+                <i class="fas fa-list"></i> Contents
+            </div>
+            <nav id="bd-toc-nav" aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#learning-objectives">
+   Learning objectives:
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#setup">
+   Setup
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#define-functions-that-build-and-train-a-model">
+   Define functions that build and train a model
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#define-plotting-functions">
+   Define plotting functions
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#define-the-dataset">
+   Define the dataset
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#specify-the-hyperparameters">
+   Specify the hyperparameters
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#task-1-examine-the-graphs">
+   Task 1: Examine the graphs
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#task-2-increase-the-number-of-epochs">
+   Task 2: Increase the number of epochs
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#task-3-increase-the-learning-rate">
+   Task 3: Increase the learning rate
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#task-4-find-the-ideal-combination-of-epochs-and-learning-rate">
+   Task 4: Find the ideal combination of epochs and learning rate
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#task-5-adjust-the-batch-size">
+   Task 5: Adjust the batch size
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#summary-of-hyperparameter-tuning">
+   Summary of hyperparameter tuning
+  </a>
+ </li>
+</ul>
+
+            </nav>
+        </div>
+    </div>
+</div>
+    <div id="main-content" class="row">
+        <div class="col-12 col-md-9 pl-md-3 pr-md-0">
+            <!-- Table of contents that is only displayed when printing the page -->
+            <div id="jb-print-docs-body" class="onlyprint">
+                <h1>Simple Linear Regression with Synthetic Data</h1>
+                <!-- Table of contents -->
+                <div id="print-main-content">
+                    <div id="jb-print-toc">
+                        
+                        <div>
+                            <h2> Contents </h2>
+                        </div>
+                        <nav aria-label="Page">
+                            <ul class="visible nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#learning-objectives">
+   Learning objectives:
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#setup">
+   Setup
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#define-functions-that-build-and-train-a-model">
+   Define functions that build and train a model
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#define-plotting-functions">
+   Define plotting functions
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#define-the-dataset">
+   Define the dataset
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#specify-the-hyperparameters">
+   Specify the hyperparameters
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#task-1-examine-the-graphs">
+   Task 1: Examine the graphs
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#task-2-increase-the-number-of-epochs">
+   Task 2: Increase the number of epochs
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#task-3-increase-the-learning-rate">
+   Task 3: Increase the learning rate
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#task-4-find-the-ideal-combination-of-epochs-and-learning-rate">
+   Task 4: Find the ideal combination of epochs and learning rate
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#task-5-adjust-the-batch-size">
+   Task 5: Adjust the batch size
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#summary-of-hyperparameter-tuning">
+   Summary of hyperparameter tuning
+  </a>
+ </li>
+</ul>
+
+                        </nav>
+                    </div>
+                </div>
+            </div>
+            
+              <div>
+                
+  <div class="tex2jax_ignore mathjax_ignore section" id="simple-linear-regression-with-synthetic-data">
+<h1>Simple Linear Regression with Synthetic Data<a class="headerlink" href="#simple-linear-regression-with-synthetic-data" title="Permalink to this headline">¶</a></h1>
+<p>In this first Colab, you’ll explore linear regression with a simple database.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1">#@title Copyright 2020 Google LLC. Double-click here for license information.</span>
+<span class="c1"># Licensed under the Apache License, Version 2.0 (the &quot;License&quot;);</span>
+<span class="c1"># you may not use this file except in compliance with the License.</span>
+<span class="c1"># You may obtain a copy of the License at</span>
+<span class="c1">#</span>
+<span class="c1"># https://www.apache.org/licenses/LICENSE-2.0</span>
+<span class="c1">#</span>
+<span class="c1"># Unless required by applicable law or agreed to in writing, software</span>
+<span class="c1"># distributed under the License is distributed on an &quot;AS IS&quot; BASIS,</span>
+<span class="c1"># WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.</span>
+<span class="c1"># See the License for the specific language governing permissions and</span>
+<span class="c1"># limitations under the License.</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="section" id="learning-objectives">
+<h2>Learning objectives:<a class="headerlink" href="#learning-objectives" title="Permalink to this headline">¶</a></h2>
+<p>After doing this exercise, you’ll know how to do the following:</p>
+<ul class="simple">
+<li><p>Tune the following <a class="reference external" href="https://developers.google.com/machine-learning/glossary/#hyperparameter">hyperparameters</a>:</p>
+<ul>
+<li><p><a class="reference external" href="https://developers.google.com/machine-learning/glossary/#learning_rate">learning rate</a></p></li>
+<li><p>number of <a class="reference external" href="https://developers.google.com/machine-learning/glossary/#epoch">epochs</a></p></li>
+<li><p><a class="reference external" href="https://developers.google.com/machine-learning/glossary/#batch_size">batch size</a></p></li>
+</ul>
+</li>
+<li><p>Interpret different kinds of <a class="reference external" href="https://developers.google.com/machine-learning/glossary/#loss_curve">loss curves</a>.</p></li>
+</ul>
+</div>
+<div class="section" id="setup">
+<h2>Setup<a class="headerlink" href="#setup" title="Permalink to this headline">¶</a></h2>
+<p>The following cell imports the packages that the program requires:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+<span class="kn">import</span> <span class="nn">tensorflow</span> <span class="k">as</span> <span class="nn">tf</span>
+<span class="kn">from</span> <span class="nn">matplotlib</span> <span class="kn">import</span> <span class="n">pyplot</span> <span class="k">as</span> <span class="n">plt</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="section" id="define-functions-that-build-and-train-a-model">
+<h2>Define functions that build and train a model<a class="headerlink" href="#define-functions-that-build-and-train-a-model" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">build_model(my_learning_rate)</span></code>, which builds an empty model.</p></li>
+</ul>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1">#@title Define the functions that build and train a model</span>
+<span class="k">def</span> <span class="nf">build_model</span><span class="p">(</span><span class="n">my_learning_rate</span><span class="p">):</span>
+  <span class="sd">&quot;&quot;&quot;Create and compile a simple linear regression model.&quot;&quot;&quot;</span>
+  <span class="c1"># Most simple tf.keras models are sequential. </span>
+  <span class="c1"># A sequential model contains one or more layers.</span>
+  <span class="n">model</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">keras</span><span class="o">.</span><span class="n">models</span><span class="o">.</span><span class="n">Sequential</span><span class="p">()</span>
+
+  <span class="c1"># Describe the topography of the model.</span>
+  <span class="c1"># The topography of a simple linear regression model</span>
+  <span class="c1"># is a single node in a single layer. </span>
+  <span class="n">model</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">tf</span><span class="o">.</span><span class="n">keras</span><span class="o">.</span><span class="n">layers</span><span class="o">.</span><span class="n">Dense</span><span class="p">(</span><span class="n">units</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> 
+                                  <span class="n">input_shape</span><span class="o">=</span><span class="p">(</span><span class="mi">1</span><span class="p">,)))</span>
+
+  <span class="c1"># Compile the model topography into code that </span>
+  <span class="c1"># TensorFlow can efficiently execute. Configure </span>
+  <span class="c1"># training to minimize the model&#39;s mean squared error. </span>
+  <span class="n">model</span><span class="o">.</span><span class="n">compile</span><span class="p">(</span><span class="n">optimizer</span><span class="o">=</span><span class="n">tf</span><span class="o">.</span><span class="n">keras</span><span class="o">.</span><span class="n">optimizers</span><span class="o">.</span><span class="n">RMSprop</span><span class="p">(</span><span class="n">lr</span><span class="o">=</span><span class="n">my_learning_rate</span><span class="p">),</span>
+                <span class="n">loss</span><span class="o">=</span><span class="s2">&quot;mean_squared_error&quot;</span><span class="p">,</span>
+                <span class="n">metrics</span><span class="o">=</span><span class="p">[</span><span class="n">tf</span><span class="o">.</span><span class="n">keras</span><span class="o">.</span><span class="n">metrics</span><span class="o">.</span><span class="n">RootMeanSquaredError</span><span class="p">()])</span>
+
+  <span class="k">return</span> <span class="n">model</span>           
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Defined create_model and train_model
+</pre></div>
+</div>
+</div>
+</div>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">train_model(model,</span> <span class="pre">feature,</span> <span class="pre">label,</span> <span class="pre">epochs)</span></code>, which trains the model from the examples (feature and label) you pass.</p></li>
+</ul>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">train_model</span><span class="p">(</span><span class="n">model</span><span class="p">,</span> <span class="n">feature</span><span class="p">,</span> <span class="n">label</span><span class="p">,</span> <span class="n">epochs</span><span class="p">,</span> <span class="n">batch_size</span><span class="p">):</span>
+  <span class="sd">&quot;&quot;&quot;Train the model by feeding it data.&quot;&quot;&quot;</span>
+
+  <span class="c1"># Feed the feature values and the label values to the </span>
+  <span class="c1"># model. The model will train for the specified number </span>
+  <span class="c1"># of epochs, gradually learning how the feature values</span>
+  <span class="c1"># relate to the label values. </span>
+  <span class="n">history</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="n">feature</span><span class="p">,</span>
+                      <span class="n">y</span><span class="o">=</span><span class="n">label</span><span class="p">,</span>
+                      <span class="n">batch_size</span><span class="o">=</span><span class="n">batch_size</span><span class="p">,</span>
+                      <span class="n">epochs</span><span class="o">=</span><span class="n">epochs</span><span class="p">)</span>
+
+  <span class="c1"># Gather the trained model&#39;s weight and bias.</span>
+  <span class="n">trained_weight</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">get_weights</span><span class="p">()[</span><span class="mi">0</span><span class="p">]</span>
+  <span class="n">trained_bias</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">get_weights</span><span class="p">()[</span><span class="mi">1</span><span class="p">]</span>
+
+  <span class="c1"># The list of epochs is stored separately from the </span>
+  <span class="c1"># rest of history.</span>
+  <span class="n">epochs</span> <span class="o">=</span> <span class="n">history</span><span class="o">.</span><span class="n">epoch</span>
+  
+  <span class="c1"># Gather the history (a snapshot) of each epoch.</span>
+  <span class="n">hist</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">history</span><span class="o">.</span><span class="n">history</span><span class="p">)</span>
+
+  <span class="c1"># Specifically gather the model&#39;s root mean </span>
+  <span class="c1">#squared error at each epoch. </span>
+  <span class="n">rmse</span> <span class="o">=</span> <span class="n">hist</span><span class="p">[</span><span class="s2">&quot;root_mean_squared_error&quot;</span><span class="p">]</span>
+
+  <span class="k">return</span> <span class="n">trained_weight</span><span class="p">,</span> <span class="n">trained_bias</span><span class="p">,</span> <span class="n">epochs</span><span class="p">,</span> <span class="n">rmse</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Defined create_model and train_model&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="section" id="define-plotting-functions">
+<h2>Define plotting functions<a class="headerlink" href="#define-plotting-functions" title="Permalink to this headline">¶</a></h2>
+<p>We’re using a popular Python library called <a class="reference external" href="https://developers.google.com/machine-learning/glossary/#matplotlib">Matplotlib</a> to create the following two plots:</p>
+<ul class="simple">
+<li><p>a plot of the feature values vs. the label values, and a line showing the output of the trained model.</p></li>
+<li><p>a <a class="reference external" href="https://developers.google.com/machine-learning/glossary/#loss_curve">loss curve</a>.</p></li>
+</ul>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1">#@title Define the plotting functions</span>
+<span class="k">def</span> <span class="nf">plot_the_model</span><span class="p">(</span><span class="n">trained_weight</span><span class="p">,</span> <span class="n">trained_bias</span><span class="p">,</span> <span class="n">feature</span><span class="p">,</span> <span class="n">label</span><span class="p">):</span>
+  <span class="sd">&quot;&quot;&quot;Plot the trained model against the training feature and label.&quot;&quot;&quot;</span>
+
+  <span class="c1"># Label the axes.</span>
+  <span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s2">&quot;feature&quot;</span><span class="p">)</span>
+  <span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s2">&quot;label&quot;</span><span class="p">)</span>
+
+  <span class="c1"># Plot the feature values vs. label values.</span>
+  <span class="n">plt</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">feature</span><span class="p">,</span> <span class="n">label</span><span class="p">)</span>
+
+  <span class="c1"># Create a red line representing the model. The red line starts</span>
+  <span class="c1"># at coordinates (x0, y0) and ends at coordinates (x1, y1).</span>
+  <span class="n">x0</span> <span class="o">=</span> <span class="mi">0</span>
+  <span class="n">y0</span> <span class="o">=</span> <span class="n">trained_bias</span>
+  <span class="n">x1</span> <span class="o">=</span> <span class="n">feature</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
+  <span class="n">y1</span> <span class="o">=</span> <span class="n">trained_bias</span> <span class="o">+</span> <span class="p">(</span><span class="n">trained_weight</span> <span class="o">*</span> <span class="n">x1</span><span class="p">)</span>
+  <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">([</span><span class="n">x0</span><span class="p">,</span> <span class="n">x1</span><span class="p">],</span> <span class="p">[</span><span class="n">y0</span><span class="p">,</span> <span class="n">y1</span><span class="p">],</span> <span class="n">c</span><span class="o">=</span><span class="s1">&#39;r&#39;</span><span class="p">)</span>
+
+  <span class="c1"># Render the scatter plot and the red line.</span>
+  <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Defined the plot_the_model and plot_the_loss_curve functions.
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">plot_the_loss_curve</span><span class="p">(</span><span class="n">epochs</span><span class="p">,</span> <span class="n">rmse</span><span class="p">):</span>
+  <span class="sd">&quot;&quot;&quot;Plot the loss curve, which shows loss vs. epoch.&quot;&quot;&quot;</span>
+
+  <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">()</span>
+  <span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s2">&quot;Epoch&quot;</span><span class="p">)</span>
+  <span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s2">&quot;Root Mean Squared Error&quot;</span><span class="p">)</span>
+
+  <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">epochs</span><span class="p">,</span> <span class="n">rmse</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;Loss&quot;</span><span class="p">)</span>
+  <span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
+  <span class="n">plt</span><span class="o">.</span><span class="n">ylim</span><span class="p">([</span><span class="n">rmse</span><span class="o">.</span><span class="n">min</span><span class="p">()</span><span class="o">*</span><span class="mf">0.97</span><span class="p">,</span> <span class="n">rmse</span><span class="o">.</span><span class="n">max</span><span class="p">()])</span>
+  <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Defined the plot_the_model and plot_the_loss_curve functions.&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="section" id="define-the-dataset">
+<h2>Define the dataset<a class="headerlink" href="#define-the-dataset" title="Permalink to this headline">¶</a></h2>
+<p>The dataset consists of 12 <a class="reference external" href="https://developers.google.com/machine-learning/glossary/#example">examples</a>. Each example consists of one <a class="reference external" href="https://developers.google.com/machine-learning/glossary/#feature">feature</a> and one <a class="reference external" href="https://developers.google.com/machine-learning/glossary/#label">label</a>.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">my_feature</span> <span class="o">=</span> <span class="p">([</span><span class="mf">1.0</span><span class="p">,</span> <span class="mf">2.0</span><span class="p">,</span>  <span class="mf">3.0</span><span class="p">,</span>  <span class="mf">4.0</span><span class="p">,</span>  <span class="mf">5.0</span><span class="p">,</span>  <span class="mf">6.0</span><span class="p">,</span>  <span class="mf">7.0</span><span class="p">,</span>  <span class="mf">8.0</span><span class="p">,</span>  <span class="mf">9.0</span><span class="p">,</span> <span class="mf">10.0</span><span class="p">,</span> <span class="mf">11.0</span><span class="p">,</span> <span class="mf">12.0</span><span class="p">])</span>
+<span class="n">my_label</span>   <span class="o">=</span> <span class="p">([</span><span class="mf">5.0</span><span class="p">,</span> <span class="mf">8.8</span><span class="p">,</span>  <span class="mf">9.6</span><span class="p">,</span> <span class="mf">14.2</span><span class="p">,</span> <span class="mf">18.8</span><span class="p">,</span> <span class="mf">19.5</span><span class="p">,</span> <span class="mf">21.4</span><span class="p">,</span> <span class="mf">26.8</span><span class="p">,</span> <span class="mf">28.9</span><span class="p">,</span> <span class="mf">32.0</span><span class="p">,</span> <span class="mf">33.8</span><span class="p">,</span> <span class="mf">38.2</span><span class="p">])</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="section" id="specify-the-hyperparameters">
+<h2>Specify the hyperparameters<a class="headerlink" href="#specify-the-hyperparameters" title="Permalink to this headline">¶</a></h2>
+<p>The hyperparameters in this Colab are as follows:</p>
+<ul class="simple">
+<li><p><a class="reference external" href="https://developers.google.com/machine-learning/glossary/#learning_rate">learning rate</a></p></li>
+<li><p><a class="reference external" href="https://developers.google.com/machine-learning/glossary/#epoch">epochs</a></p></li>
+<li><p><a class="reference external" href="https://developers.google.com/machine-learning/glossary/#batch_size">batch_size</a></p></li>
+</ul>
+<p>The following code cell initializes these hyperparameters and then invokes the functions that build and train the model.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">learning_rate</span><span class="o">=</span><span class="mf">0.01</span>
+<span class="n">epochs</span><span class="o">=</span><span class="mi">5</span>
+<span class="n">my_batch_size</span><span class="o">=</span><span class="mi">12</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">my_model</span> <span class="o">=</span> <span class="n">build_model</span><span class="p">(</span><span class="n">learning_rate</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>2022-05-09 09:20:01.764906: I tensorflow/core/platform/cpu_feature_guard.cc:151] This TensorFlow binary is optimized with oneAPI Deep Neural Network Library (oneDNN) to use the following CPU instructions in performance-critical operations:  AVX2 FMA
+To enable them in other operations, rebuild TensorFlow with the appropriate compiler flags.
+/Users/jankirenz/opt/anaconda3/envs/tf/lib/python3.8/site-packages/keras/optimizer_v2/rmsprop.py:130: UserWarning: The `lr` argument is deprecated, use `learning_rate` instead.
+  super(RMSprop, self).__init__(name, **kwargs)
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">trained_weight</span><span class="p">,</span> <span class="n">trained_bias</span><span class="p">,</span> <span class="n">epochs</span><span class="p">,</span> <span class="n">rmse</span> <span class="o">=</span> <span class="n">train_model</span><span class="p">(</span><span class="n">my_model</span><span class="p">,</span> <span class="n">my_feature</span><span class="p">,</span> 
+                                                         <span class="n">my_label</span><span class="p">,</span> <span class="n">epochs</span><span class="p">,</span>
+                                                         <span class="n">my_batch_size</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Epoch 1/5
+1/1 [==============================] - 0s 491ms/step - loss: 839.8056 - root_mean_squared_error: 28.9794
+Epoch 2/5
+1/1 [==============================] - 0s 2ms/step - loss: 824.7529 - root_mean_squared_error: 28.7185
+Epoch 3/5
+1/1 [==============================] - 0s 2ms/step - loss: 813.9642 - root_mean_squared_error: 28.5301
+Epoch 4/5
+1/1 [==============================] - 0s 2ms/step - loss: 805.0086 - root_mean_squared_error: 28.3727
+Epoch 5/5
+1/1 [==============================] - 0s 2ms/step - loss: 797.1157 - root_mean_squared_error: 28.2332
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">plot_the_model</span><span class="p">(</span><span class="n">trained_weight</span><span class="p">,</span> <span class="n">trained_bias</span><span class="p">,</span> <span class="n">my_feature</span><span class="p">,</span> <span class="n">my_label</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/Users/jankirenz/opt/anaconda3/envs/tf/lib/python3.8/site-packages/numpy/core/shape_base.py:65: VisibleDeprecationWarning: Creating an ndarray from ragged nested sequences (which is a list-or-tuple of lists-or-tuples-or ndarrays with different lengths or shapes) is deprecated. If you meant to do this, you must specify &#39;dtype=object&#39; when creating the ndarray.
+  ary = asanyarray(ary)
+</pre></div>
+</div>
+<img alt="../_images/tf-linear-regression-synthetic_20_1.png" src="../_images/tf-linear-regression-synthetic_20_1.png" />
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">plot_the_loss_curve</span><span class="p">(</span><span class="n">epochs</span><span class="p">,</span> <span class="n">rmse</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/tf-linear-regression-synthetic_21_0.png" src="../_images/tf-linear-regression-synthetic_21_0.png" />
+</div>
+</div>
+</div>
+<div class="section" id="task-1-examine-the-graphs">
+<h2>Task 1: Examine the graphs<a class="headerlink" href="#task-1-examine-the-graphs" title="Permalink to this headline">¶</a></h2>
+<p>Examine the top graph. The blue dots identify the actual data; the red line identifies the output of the trained model. Ideally, the red line should align nicely with the blue dots.  Does it?  Probably not.</p>
+<p>A certain amount of randomness plays into training a model, so you’ll get somewhat different results every time you train.  That said, unless you are an extremely lucky person, the red line probably <em>doesn’t</em> align nicely with the blue dots.</p>
+<p>Examine the bottom graph, which shows the loss curve. Notice that the loss curve decreases but doesn’t flatten out, which is a sign that the model hasn’t trained sufficiently.</p>
+</div>
+<div class="section" id="task-2-increase-the-number-of-epochs">
+<h2>Task 2: Increase the number of epochs<a class="headerlink" href="#task-2-increase-the-number-of-epochs" title="Permalink to this headline">¶</a></h2>
+<p>Training loss should steadily decrease, steeply at first, and then more slowly. Eventually, training loss should eventually stay steady (zero slope or nearly zero slope), which indicates that training has <a class="reference external" href="http://developers.google.com/machine-learning/glossary/#convergence">converged</a>.</p>
+<p>In Task 1, the training loss did not converge. One possible solution is to train for more epochs.  Your task is to increase the number of epochs sufficiently to get the model to converge. However, it is inefficient to train past convergence, so don’t just set the number of epochs to an arbitrarily high value.</p>
+<p>Examine the loss curve. Does the model converge?</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>learning_rate=0.01
+epochs= ?   # Replace ? with an integer.
+my_batch_size=12
+
+my_model = build_model(learning_rate)
+trained_weight, trained_bias, epochs, rmse = train_model(my_model, my_feature, 
+                                                        my_label, epochs,
+                                                        my_batch_size)
+                                                        
+plot_the_model(trained_weight, trained_bias, my_feature, my_label)
+plot_the_loss_curve(epochs, rmse)
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1">#@title Double-click to view a possible solution</span>
+<span class="n">learning_rate</span><span class="o">=</span><span class="mf">0.01</span>
+<span class="n">epochs</span><span class="o">=</span><span class="mi">450</span>
+<span class="n">my_batch_size</span><span class="o">=</span><span class="mi">12</span> 
+
+<span class="n">my_model</span> <span class="o">=</span> <span class="n">build_model</span><span class="p">(</span><span class="n">learning_rate</span><span class="p">)</span>
+<span class="n">trained_weight</span><span class="p">,</span> <span class="n">trained_bias</span><span class="p">,</span> <span class="n">epochs</span><span class="p">,</span> <span class="n">rmse</span> <span class="o">=</span> <span class="n">train_model</span><span class="p">(</span><span class="n">my_model</span><span class="p">,</span> <span class="n">my_feature</span><span class="p">,</span> 
+                                                         <span class="n">my_label</span><span class="p">,</span> <span class="n">epochs</span><span class="p">,</span>
+                                                         <span class="n">my_batch_size</span><span class="p">)</span>
+<span class="n">plot_the_model</span><span class="p">(</span><span class="n">trained_weight</span><span class="p">,</span> <span class="n">trained_bias</span><span class="p">,</span> <span class="n">my_feature</span><span class="p">,</span> <span class="n">my_label</span><span class="p">)</span>
+<span class="n">plot_the_loss_curve</span><span class="p">(</span><span class="n">epochs</span><span class="p">,</span> <span class="n">rmse</span><span class="p">)</span>
+
+<span class="c1"># The loss curve suggests that the model does converge.</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="section" id="task-3-increase-the-learning-rate">
+<h2>Task 3: Increase the learning rate<a class="headerlink" href="#task-3-increase-the-learning-rate" title="Permalink to this headline">¶</a></h2>
+<p>In Task 2, you increased the number of epochs to get the model to converge. Sometimes, you can get the model to converge more quickly by increasing the learning rate. However, setting the learning rate too high often makes it impossible for a model to converge. In Task 3, we’ve intentionally set the learning rate too high. Run the following code cell and see what happens.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Increase the learning rate and decrease the number of epochs.</span>
+<span class="n">learning_rate</span><span class="o">=</span><span class="mi">100</span> 
+<span class="n">epochs</span><span class="o">=</span><span class="mi">500</span> 
+
+<span class="n">my_model</span> <span class="o">=</span> <span class="n">build_model</span><span class="p">(</span><span class="n">learning_rate</span><span class="p">)</span>
+<span class="n">trained_weight</span><span class="p">,</span> <span class="n">trained_bias</span><span class="p">,</span> <span class="n">epochs</span><span class="p">,</span> <span class="n">rmse</span> <span class="o">=</span> <span class="n">train_model</span><span class="p">(</span><span class="n">my_model</span><span class="p">,</span> <span class="n">my_feature</span><span class="p">,</span> 
+                                                         <span class="n">my_label</span><span class="p">,</span> <span class="n">epochs</span><span class="p">,</span>
+                                                         <span class="n">my_batch_size</span><span class="p">)</span>
+<span class="n">plot_the_model</span><span class="p">(</span><span class="n">trained_weight</span><span class="p">,</span> <span class="n">trained_bias</span><span class="p">,</span> <span class="n">my_feature</span><span class="p">,</span> <span class="n">my_label</span><span class="p">)</span>
+<span class="n">plot_the_loss_curve</span><span class="p">(</span><span class="n">epochs</span><span class="p">,</span> <span class="n">rmse</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>The resulting model is terrible; the red line doesn’t align with the blue dots. Furthermore, the loss curve oscillates like a <a class="reference external" href="https://www.wikipedia.org/wiki/Roller_coaster">roller coaster</a>.  An oscillating loss curve strongly suggests that the learning rate is too high.</p>
+</div>
+<div class="section" id="task-4-find-the-ideal-combination-of-epochs-and-learning-rate">
+<h2>Task 4: Find the ideal combination of epochs and learning rate<a class="headerlink" href="#task-4-find-the-ideal-combination-of-epochs-and-learning-rate" title="Permalink to this headline">¶</a></h2>
+<p>Assign values to the following two hyperparameters to make training converge as efficiently as possible:</p>
+<ul class="simple">
+<li><p>learning_rate</p></li>
+<li><p>epochs</p></li>
+</ul>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span># Set the learning rate and number of epochs
+learning_rate= ?  # Replace ? with a floating-point number
+epochs= ?   # Replace ? with an integer
+
+my_model = build_model(learning_rate)
+trained_weight, trained_bias, epochs, rmse = train_model(my_model, my_feature, 
+                                                         my_label, epochs,
+                                                         my_batch_size)
+plot_the_model(trained_weight, trained_bias, my_feature, my_label)
+plot_the_loss_curve(epochs, rmse)
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1">#@title Double-click to view a possible solution</span>
+
+<span class="n">learning_rate</span><span class="o">=</span><span class="mf">0.14</span>
+<span class="n">epochs</span><span class="o">=</span><span class="mi">70</span>
+<span class="n">my_batch_size</span><span class="o">=</span><span class="mi">12</span>
+
+<span class="n">my_model</span> <span class="o">=</span> <span class="n">build_model</span><span class="p">(</span><span class="n">learning_rate</span><span class="p">)</span>
+<span class="n">trained_weight</span><span class="p">,</span> <span class="n">trained_bias</span><span class="p">,</span> <span class="n">epochs</span><span class="p">,</span> <span class="n">rmse</span> <span class="o">=</span> <span class="n">train_model</span><span class="p">(</span><span class="n">my_model</span><span class="p">,</span> <span class="n">my_feature</span><span class="p">,</span> 
+                                                         <span class="n">my_label</span><span class="p">,</span> <span class="n">epochs</span><span class="p">,</span>
+                                                         <span class="n">my_batch_size</span><span class="p">)</span>
+<span class="n">plot_the_model</span><span class="p">(</span><span class="n">trained_weight</span><span class="p">,</span> <span class="n">trained_bias</span><span class="p">,</span> <span class="n">my_feature</span><span class="p">,</span> <span class="n">my_label</span><span class="p">)</span>
+<span class="n">plot_the_loss_curve</span><span class="p">(</span><span class="n">epochs</span><span class="p">,</span> <span class="n">rmse</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="section" id="task-5-adjust-the-batch-size">
+<h2>Task 5: Adjust the batch size<a class="headerlink" href="#task-5-adjust-the-batch-size" title="Permalink to this headline">¶</a></h2>
+<p>The system recalculates the model’s loss value and adjusts the model’s weights and bias after each <strong>iteration</strong>.  Each iteration is the span in which the system processes one batch. For example, if the <strong>batch size</strong> is 6, then the system recalculates the model’s loss value and adjusts the model’s weights and bias after processing every 6 examples.</p>
+<p>One <strong>epoch</strong> spans sufficient iterations to process every example in the dataset. For example, if the batch size is 12, then each epoch lasts one iteration. However, if the batch size is 6, then each epoch consumes two iterations.</p>
+<p>It is tempting to simply set the batch size to the number of examples in the dataset (12, in this case). However, the model might actually train faster on smaller batches. Conversely, very small batches might not contain enough information to help the model converge.</p>
+<p>Experiment with <code class="docutils literal notranslate"><span class="pre">batch_size</span></code> in the following code cell. What’s the smallest integer you can set for <code class="docutils literal notranslate"><span class="pre">batch_size</span></code> and still have the model converge in a hundred epochs?</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>learning_rate=0.05
+epochs=100
+my_batch_size= ?  # Replace ? with an integer.
+
+my_model = build_model(learning_rate)
+trained_weight, trained_bias, epochs, rmse = train_model(my_model, my_feature, 
+                                                        my_label, epochs,
+                                                        my_batch_size)
+plot_the_model(trained_weight, trained_bias, my_feature, my_label)
+plot_the_loss_curve(epochs, rmse)
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1">#@title Double-click to view a possible solution</span>
+
+<span class="n">learning_rate</span><span class="o">=</span><span class="mf">0.05</span>
+<span class="n">epochs</span><span class="o">=</span><span class="mi">125</span>
+<span class="n">my_batch_size</span><span class="o">=</span><span class="mi">1</span> <span class="c1"># Wow, a batch size of 1 works!</span>
+
+<span class="n">my_model</span> <span class="o">=</span> <span class="n">build_model</span><span class="p">(</span><span class="n">learning_rate</span><span class="p">)</span>
+<span class="n">trained_weight</span><span class="p">,</span> <span class="n">trained_bias</span><span class="p">,</span> <span class="n">epochs</span><span class="p">,</span> <span class="n">rmse</span> <span class="o">=</span> <span class="n">train_model</span><span class="p">(</span><span class="n">my_model</span><span class="p">,</span> <span class="n">my_feature</span><span class="p">,</span> 
+                                                         <span class="n">my_label</span><span class="p">,</span> <span class="n">epochs</span><span class="p">,</span>
+                                                         <span class="n">my_batch_size</span><span class="p">)</span>
+<span class="n">plot_the_model</span><span class="p">(</span><span class="n">trained_weight</span><span class="p">,</span> <span class="n">trained_bias</span><span class="p">,</span> <span class="n">my_feature</span><span class="p">,</span> <span class="n">my_label</span><span class="p">)</span>
+<span class="n">plot_the_loss_curve</span><span class="p">(</span><span class="n">epochs</span><span class="p">,</span> <span class="n">rmse</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="section" id="summary-of-hyperparameter-tuning">
+<h2>Summary of hyperparameter tuning<a class="headerlink" href="#summary-of-hyperparameter-tuning" title="Permalink to this headline">¶</a></h2>
+<p>Most machine learning problems require a lot of hyperparameter tuning.  Unfortunately, we can’t provide concrete tuning rules for every model. Lowering the learning rate can help one model converge efficiently but make another model converge much too slowly.  You must experiment to find the best set of hyperparameters for your dataset. That said, here are a few rules of thumb:</p>
+<ul class="simple">
+<li><p>Training loss should steadily decrease, steeply at first, and then more slowly until the slope of the curve reaches or approaches zero.</p></li>
+<li><p>If the training loss does not converge, train for more epochs.</p></li>
+<li><p>If the training loss decreases too slowly, increase the learning rate. Note that setting the learning rate too high may also prevent training loss from converging.</p></li>
+<li><p>If the training loss varies wildly (that is, the training loss jumps around), decrease the learning rate.</p></li>
+<li><p>Lowering the learning rate while increasing the number of epochs or the batch size is often a good combination.</p></li>
+<li><p>Setting the batch size to a <em>very</em> small batch number can also cause instability. First, try large batch size values. Then, decrease the batch size until you see degradation.</p></li>
+<li><p>For real-world datasets consisting of a very large number of examples, the entire dataset might not fit into memory. In such cases, you’ll need to reduce the batch size to enable a batch to fit into memory.</p></li>
+</ul>
+<p>Remember: the ideal combination of hyperparameters is data dependent, so you must always experiment and verify.</p>
+</div>
+</div>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            kernelName: "python3",
+            path: "./docs"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+              </div>
+              
+            
+                <!-- Previous / next buttons -->
+<div class='prev-next-area'>
+</div>
+            
+        </div>
+    </div>
+    <footer class="footer">
+  <p>
+    
+      By Jan Kirenz<br/>
+    
+        &copy; Copyright 2021.<br/>
+  </p>
+</footer>
+</main>
+
+
+      </div>
+    </div>
+  
+  <script src="../_static/js/index.be7d3bbb2ef33a8344ce.js"></script>
+
+  </body>
+</html>
