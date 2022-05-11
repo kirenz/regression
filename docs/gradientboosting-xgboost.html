@@ -504,17 +504,45 @@ const thebe_selector_output = ".output, .cell_output"
 <h2>Data<a class="headerlink" href="#data" title="Permalink to this headline">¶</a></h2>
 <ul class="simple">
 <li><p>See <a class="reference internal" href="hitters_data.html"><span class="doc std std-doc">Hitters data preparation</span></a> for details about the data preprocessing steps.</p></li>
-<li><p>We simply import the preprocessed data by using this <a class="reference external" href="https://github.com/kirenz/regression/blob/main/docs/hitters_data.py">Python script</a> which will yield:</p>
-<ul>
-<li><p>X_train, X_test, y_train, y_test</p></li>
-<li><p>df_train and df_tests</p></li>
-<li><p>feature_names</p></li>
-</ul>
-</li>
 </ul>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">hitters_data</span> <span class="kn">import</span> <span class="o">*</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+<span class="kn">from</span> <span class="nn">sklearn.model_selection</span> <span class="kn">import</span> <span class="n">train_test_split</span>
+<span class="kn">from</span> <span class="nn">sklearn.preprocessing</span> <span class="kn">import</span> <span class="n">StandardScaler</span>
+
+<span class="c1"># Import</span>
+<span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s2">&quot;https://raw.githubusercontent.com/kirenz/datasets/master/Hitters.csv&quot;</span><span class="p">)</span>
+
+<span class="c1"># drop missing cases</span>
+<span class="n">df</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">dropna</span><span class="p">()</span>
+
+<span class="c1"># Create dummies</span>
+<span class="n">dummies</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">get_dummies</span><span class="p">(</span><span class="n">df</span><span class="p">[[</span><span class="s1">&#39;League&#39;</span><span class="p">,</span> <span class="s1">&#39;Division&#39;</span><span class="p">,</span><span class="s1">&#39;NewLeague&#39;</span><span class="p">]])</span>
+
+<span class="c1"># Create our label y:</span>
+<span class="n">y</span> <span class="o">=</span> <span class="n">df</span><span class="p">[[</span><span class="s1">&#39;Salary&#39;</span><span class="p">]]</span>
+<span class="n">X_numerical</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">drop</span><span class="p">([</span><span class="s1">&#39;Salary&#39;</span><span class="p">,</span> <span class="s1">&#39;League&#39;</span><span class="p">,</span> <span class="s1">&#39;Division&#39;</span><span class="p">,</span> <span class="s1">&#39;NewLeague&#39;</span><span class="p">],</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="s1">&#39;float64&#39;</span><span class="p">)</span>
+
+<span class="c1"># Make a list of all numerical features</span>
+<span class="n">list_numerical</span> <span class="o">=</span> <span class="n">X_numerical</span><span class="o">.</span><span class="n">columns</span>
+
+<span class="c1"># Create all features</span>
+<span class="n">X</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">concat</span><span class="p">([</span><span class="n">X_numerical</span><span class="p">,</span> <span class="n">dummies</span><span class="p">[[</span><span class="s1">&#39;League_N&#39;</span><span class="p">,</span> <span class="s1">&#39;Division_W&#39;</span><span class="p">,</span> <span class="s1">&#39;NewLeague_N&#39;</span><span class="p">]]],</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+<span class="n">feature_names</span> <span class="o">=</span> <span class="n">X</span><span class="o">.</span><span class="n">columns</span>
+
+<span class="c1"># Split data</span>
+<span class="n">X_train</span><span class="p">,</span> <span class="n">X_test</span><span class="p">,</span> <span class="n">y_train</span><span class="p">,</span> <span class="n">y_test</span> <span class="o">=</span> <span class="n">train_test_split</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">test_size</span><span class="o">=</span><span class="mf">0.3</span><span class="p">,</span> <span class="n">random_state</span><span class="o">=</span><span class="mi">10</span><span class="p">)</span>
+
+<span class="c1"># Data standardization</span>
+<span class="n">scaler</span> <span class="o">=</span> <span class="n">StandardScaler</span><span class="p">()</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X_train</span><span class="p">[</span><span class="n">list_numerical</span><span class="p">])</span> 
+
+<span class="n">X_train</span><span class="p">[</span><span class="n">list_numerical</span><span class="p">]</span> <span class="o">=</span> <span class="n">scaler</span><span class="o">.</span><span class="n">transform</span><span class="p">(</span><span class="n">X_train</span><span class="p">[</span><span class="n">list_numerical</span><span class="p">])</span>
+<span class="n">X_test</span><span class="p">[</span><span class="n">list_numerical</span><span class="p">]</span> <span class="o">=</span> <span class="n">scaler</span><span class="o">.</span><span class="n">transform</span><span class="p">(</span><span class="n">X_test</span><span class="p">[</span><span class="n">list_numerical</span><span class="p">])</span>
+
+<span class="c1"># Make pandas dataframes</span>
+<span class="n">df_train</span> <span class="o">=</span> <span class="n">y_train</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">X_train</span><span class="p">)</span>
+<span class="n">df_test</span> <span class="o">=</span> <span class="n">y_test</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">X_test</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
