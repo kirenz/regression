@@ -5,7 +5,7 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Gradient Boosting with XGBoost &#8212; Introduction to Regression Models</title>
+    <title>XGBoost regression &#8212; Introduction to Regression Models</title>
     
   <link href="../_static/css/theme.css" rel="stylesheet">
   <link href="../_static/css/index.ff1ffe594081f20da1ef19478df9384b.css" rel="stylesheet">
@@ -54,8 +54,6 @@ const thebe_selector_output = ".output, .cell_output"
     <script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="Ensemble meta-estimator" href="ensemble.html" />
-    <link rel="prev" title="Gradient Boosting in scikit-learn" href="gradientboosting.html" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="docsearch:language" content="None">
     
@@ -148,7 +146,7 @@ const thebe_selector_output = ".output, .cell_output"
   Decision Trees
  </span>
 </p>
-<ul class="current nav bd-sidenav">
+<ul class="nav bd-sidenav">
  <li class="toctree-l1">
   <a class="reference internal" href="randomforest.html">
    Random forest in scikit-learn
@@ -159,8 +157,8 @@ const thebe_selector_output = ".output, .cell_output"
    Gradient Boosting in scikit-learn
   </a>
  </li>
- <li class="toctree-l1 current active">
-  <a class="current reference internal" href="#">
+ <li class="toctree-l1">
+  <a class="reference internal" href="gradientboosting-xgboost.html">
    Gradient Boosting with XGBoost
   </a>
  </li>
@@ -288,7 +286,7 @@ const thebe_selector_output = ".output, .cell_output"
         <!-- ipynb file if we had a myst markdown file -->
         
         <!-- Download raw file -->
-        <a class="dropdown-buttons" href="../_sources/docs/gradientboosting-xgboost.ipynb"><button type="button"
+        <a class="dropdown-buttons" href="../_sources/docs/gradientboosting-xgboost-boston.ipynb"><button type="button"
                 class="btn btn-secondary topbarbtn" title="Download source file" data-toggle="tooltip"
                 data-placement="left">.ipynb</button></a>
         <!-- Download PDF via print -->
@@ -308,7 +306,7 @@ const thebe_selector_output = ".output, .cell_output"
                 data-toggle="tooltip" data-placement="left" title="Source repository"><i
                     class="fab fa-github"></i>repository</button></a>
         <a class="issues-button"
-            href="https://github.com/kirenz/regression/issues/new?title=Issue%20on%20page%20%2Fdocs/gradientboosting-xgboost.html&body=Your%20issue%20content%20here."><button
+            href="https://github.com/kirenz/regression/issues/new?title=Issue%20on%20page%20%2Fdocs/gradientboosting-xgboost-boston.html&body=Your%20issue%20content%20here."><button
                 type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip" data-placement="left"
                 title="Open an issue"><i class="fas fa-lightbulb"></i>open issue</button></a>
         
@@ -331,7 +329,7 @@ const thebe_selector_output = ".output, .cell_output"
         
         
         
-        <a class="colab-button" href="https://colab.research.google.com/github/kirenz/regression/blob/main/docs/gradientboosting-xgboost.ipynb"><button type="button" class="btn btn-secondary topbarbtn"
+        <a class="colab-button" href="https://colab.research.google.com/github/kirenz/regression/blob/main/docs/gradientboosting-xgboost-boston.ipynb"><button type="button" class="btn btn-secondary topbarbtn"
                 title="Launch Colab" data-toggle="tooltip" data-placement="left"><img class="colab-button-logo"
                     src="../_static/images/logo_colab.png"
                     alt="Interact on Colab">Colab</button></a>
@@ -404,7 +402,7 @@ const thebe_selector_output = ".output, .cell_output"
         <div class="col-12 col-md-9 pl-md-3 pr-md-0">
             <!-- Table of contents that is only displayed when printing the page -->
             <div id="jb-print-docs-body" class="onlyprint">
-                <h1>Gradient Boosting with XGBoost</h1>
+                <h1>XGBoost regression</h1>
                 <!-- Table of contents -->
                 <div id="print-main-content">
                     <div id="jb-print-toc">
@@ -467,12 +465,8 @@ const thebe_selector_output = ".output, .cell_output"
             
               <div>
                 
-  <div class="tex2jax_ignore mathjax_ignore section" id="gradient-boosting-with-xgboost">
-<h1>Gradient Boosting with XGBoost<a class="headerlink" href="#gradient-boosting-with-xgboost" title="Permalink to this headline">¶</a></h1>
-<p>We illustrate the following regression method on a data set called “Hitters”, which includes 20 variables and 322 observations of major league baseball players. The goal is to predict a baseball player’s salary on the basis of various features associated with performance in the previous year. We don’t cover the topic of exploratory data analysis in this notebook.</p>
-<ul class="simple">
-<li><p>Visit <a class="reference external" href="https://cran.r-project.org/web/packages/ISLR/ISLR.pdf">this documentation</a> if you want to learn more about the data</p></li>
-</ul>
+  <div class="tex2jax_ignore mathjax_ignore section" id="xgboost-regression">
+<h1>XGBoost regression<a class="headerlink" href="#xgboost-regression" title="Permalink to this headline">¶</a></h1>
 <div class="section" id="setup">
 <h2>Setup<a class="headerlink" href="#setup" title="Permalink to this headline">¶</a></h2>
 <div class="cell docutils container">
@@ -483,18 +477,21 @@ const thebe_selector_output = ".output, .cell_output"
 <span class="n">warnings</span><span class="o">.</span><span class="n">simplefilter</span><span class="p">(</span><span class="n">action</span><span class="o">=</span><span class="s1">&#39;ignore&#39;</span><span class="p">,</span> <span class="n">category</span><span class="o">=</span><span class="ne">FutureWarning</span><span class="p">)</span>
 
 <span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
 <span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
 
 <span class="kn">import</span> <span class="nn">xgboost</span> <span class="k">as</span> <span class="nn">xgb</span>
 <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;XGB Version:&quot;</span><span class="p">,</span> <span class="n">xgb</span><span class="o">.</span><span class="n">__version__</span><span class="p">)</span>
 
+<span class="kn">from</span> <span class="nn">sklearn</span> <span class="kn">import</span> <span class="n">datasets</span>
+<span class="kn">from</span> <span class="nn">sklearn.model_selection</span> <span class="kn">import</span> <span class="n">train_test_split</span>
 <span class="kn">from</span> <span class="nn">sklearn.metrics</span> <span class="kn">import</span> <span class="n">mean_squared_error</span>
 <span class="kn">from</span> <span class="nn">sklearn.inspection</span> <span class="kn">import</span> <span class="n">permutation_importance</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>XGB Version: 1.6.0
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>XGB Version: 1.5.1
 </pre></div>
 </div>
 </div>
@@ -507,42 +504,14 @@ const thebe_selector_output = ".output, .cell_output"
 </ul>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
-<span class="kn">from</span> <span class="nn">sklearn.model_selection</span> <span class="kn">import</span> <span class="n">train_test_split</span>
-<span class="kn">from</span> <span class="nn">sklearn.preprocessing</span> <span class="kn">import</span> <span class="n">StandardScaler</span>
-
-<span class="c1"># Import</span>
-<span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s2">&quot;https://raw.githubusercontent.com/kirenz/datasets/master/Hitters.csv&quot;</span><span class="p">)</span>
-
-<span class="c1"># drop missing cases</span>
-<span class="n">df</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">dropna</span><span class="p">()</span>
-
-<span class="c1"># Create dummies</span>
-<span class="n">dummies</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">get_dummies</span><span class="p">(</span><span class="n">df</span><span class="p">[[</span><span class="s1">&#39;League&#39;</span><span class="p">,</span> <span class="s1">&#39;Division&#39;</span><span class="p">,</span><span class="s1">&#39;NewLeague&#39;</span><span class="p">]])</span>
-
-<span class="c1"># Create our label y:</span>
-<span class="n">y</span> <span class="o">=</span> <span class="n">df</span><span class="p">[[</span><span class="s1">&#39;Salary&#39;</span><span class="p">]]</span>
-<span class="n">X_numerical</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">drop</span><span class="p">([</span><span class="s1">&#39;Salary&#39;</span><span class="p">,</span> <span class="s1">&#39;League&#39;</span><span class="p">,</span> <span class="s1">&#39;Division&#39;</span><span class="p">,</span> <span class="s1">&#39;NewLeague&#39;</span><span class="p">],</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="s1">&#39;float64&#39;</span><span class="p">)</span>
-
-<span class="c1"># Make a list of all numerical features</span>
-<span class="n">list_numerical</span> <span class="o">=</span> <span class="n">X_numerical</span><span class="o">.</span><span class="n">columns</span>
-
-<span class="c1"># Create all features</span>
-<span class="n">X</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">concat</span><span class="p">([</span><span class="n">X_numerical</span><span class="p">,</span> <span class="n">dummies</span><span class="p">[[</span><span class="s1">&#39;League_N&#39;</span><span class="p">,</span> <span class="s1">&#39;Division_W&#39;</span><span class="p">,</span> <span class="s1">&#39;NewLeague_N&#39;</span><span class="p">]]],</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
-<span class="n">feature_names</span> <span class="o">=</span> <span class="n">X</span><span class="o">.</span><span class="n">columns</span>
-
-<span class="c1"># Split data</span>
-<span class="n">X_train</span><span class="p">,</span> <span class="n">X_test</span><span class="p">,</span> <span class="n">y_train</span><span class="p">,</span> <span class="n">y_test</span> <span class="o">=</span> <span class="n">train_test_split</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">test_size</span><span class="o">=</span><span class="mf">0.3</span><span class="p">,</span> <span class="n">random_state</span><span class="o">=</span><span class="mi">10</span><span class="p">)</span>
-
-<span class="c1"># Data standardization</span>
-<span class="n">scaler</span> <span class="o">=</span> <span class="n">StandardScaler</span><span class="p">()</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X_train</span><span class="p">[</span><span class="n">list_numerical</span><span class="p">])</span> 
-
-<span class="n">X_train</span><span class="p">[</span><span class="n">list_numerical</span><span class="p">]</span> <span class="o">=</span> <span class="n">scaler</span><span class="o">.</span><span class="n">transform</span><span class="p">(</span><span class="n">X_train</span><span class="p">[</span><span class="n">list_numerical</span><span class="p">])</span>
-<span class="n">X_test</span><span class="p">[</span><span class="n">list_numerical</span><span class="p">]</span> <span class="o">=</span> <span class="n">scaler</span><span class="o">.</span><span class="n">transform</span><span class="p">(</span><span class="n">X_test</span><span class="p">[</span><span class="n">list_numerical</span><span class="p">])</span>
-
-<span class="c1"># Make pandas dataframes</span>
-<span class="n">df_train</span> <span class="o">=</span> <span class="n">y_train</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">X_train</span><span class="p">)</span>
-<span class="n">df_test</span> <span class="o">=</span> <span class="n">y_test</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">X_test</span><span class="p">)</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">X</span><span class="p">,</span> <span class="n">y</span> <span class="o">=</span> <span class="n">datasets</span><span class="o">.</span><span class="n">fetch_california_housing</span><span class="p">(</span><span class="n">return_X_y</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">as_frame</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span> 
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">X_train</span><span class="p">,</span> <span class="n">X_test</span><span class="p">,</span> <span class="n">y_train</span><span class="p">,</span> <span class="n">y_test</span> <span class="o">=</span> <span class="n">train_test_split</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">test_size</span><span class="o">=</span><span class="mf">0.1</span><span class="p">,</span> <span class="n">random_state</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -593,68 +562,76 @@ const thebe_selector_output = ".output, .cell_output"
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[0]	validation_0-rmse:693.13939	validation_1-rmse:694.51649
-[1]	validation_0-rmse:687.25191	validation_1-rmse:688.37644
-[2]	validation_0-rmse:681.42445	validation_1-rmse:682.31515
-[3]	validation_0-rmse:675.64867	validation_1-rmse:677.35826
-[4]	validation_0-rmse:669.93320	validation_1-rmse:672.46290
-[5]	validation_0-rmse:664.27350	validation_1-rmse:666.60591
-[6]	validation_0-rmse:658.67121	validation_1-rmse:661.82838
-[7]	validation_0-rmse:653.12688	validation_1-rmse:656.90319
-[8]	validation_0-rmse:647.63961	validation_1-rmse:652.24138
-[9]	validation_0-rmse:642.19390	validation_1-rmse:646.64970
-[10]	validation_0-rmse:636.80992	validation_1-rmse:641.92285
-[11]	validation_0-rmse:631.48134	validation_1-rmse:637.27762
-[12]	validation_0-rmse:626.19614	validation_1-rmse:631.90670
-[13]	validation_0-rmse:620.97255	validation_1-rmse:627.37414
-[14]	validation_0-rmse:615.80413	validation_1-rmse:622.82286
-[15]	validation_0-rmse:610.68529	validation_1-rmse:618.45032
-[16]	validation_0-rmse:605.60407	validation_1-rmse:613.33537
-[17]	validation_0-rmse:600.57906	validation_1-rmse:609.34508
-[18]	validation_0-rmse:595.60970	validation_1-rmse:605.29294
-[19]	validation_0-rmse:590.69058	validation_1-rmse:601.35710
-[20]	validation_0-rmse:585.80052	validation_1-rmse:596.47644
-[21]	validation_0-rmse:580.97580	validation_1-rmse:592.68846
-[22]	validation_0-rmse:576.20465	validation_1-rmse:588.83853
-[23]	validation_0-rmse:571.47605	validation_1-rmse:585.00430
-[24]	validation_0-rmse:566.76789	validation_1-rmse:580.46276
-[25]	validation_0-rmse:562.13473	validation_1-rmse:576.72806
-[26]	validation_0-rmse:557.55151	validation_1-rmse:573.04329
-[27]	validation_0-rmse:552.98293	validation_1-rmse:568.56142
-[28]	validation_0-rmse:548.47424	validation_1-rmse:564.78179
-[29]	validation_0-rmse:544.02571	validation_1-rmse:561.24016
-[30]	validation_0-rmse:539.58015	validation_1-rmse:557.70367
-[31]	validation_0-rmse:535.22326	validation_1-rmse:554.25781
-[32]	validation_0-rmse:530.91185	validation_1-rmse:550.87278
-[33]	validation_0-rmse:526.59696	validation_1-rmse:546.80625
-[34]	validation_0-rmse:522.37363	validation_1-rmse:543.51320
-[35]	validation_0-rmse:518.14474	validation_1-rmse:539.55518
-[36]	validation_0-rmse:513.98339	validation_1-rmse:536.03011
-[37]	validation_0-rmse:509.83863	validation_1-rmse:532.21427
-[38]	validation_0-rmse:505.74956	validation_1-rmse:528.81269
-[39]	validation_0-rmse:501.70899	validation_1-rmse:525.42317
-[40]	validation_0-rmse:497.69725	validation_1-rmse:522.18693
-[41]	validation_0-rmse:493.72723	validation_1-rmse:519.00022
-[42]	validation_0-rmse:489.80529	validation_1-rmse:515.74005
-[43]	validation_0-rmse:485.91322	validation_1-rmse:512.64781
-[44]	validation_0-rmse:482.06295	validation_1-rmse:509.52443
-[45]	validation_0-rmse:478.25068	validation_1-rmse:506.52609
-[46]	validation_0-rmse:474.47971	validation_1-rmse:503.42672
-[47]	validation_0-rmse:470.70649	validation_1-rmse:500.40295
-[48]	validation_0-rmse:466.97397	validation_1-rmse:497.36221
-[49]	validation_0-rmse:463.27880	validation_1-rmse:494.61958
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[21:21:24] WARNING: /Users/runner/miniforge3/conda-bld/xgboost-split_1645117948562/work/src/learner.cc:576: 
+Parameters: { &quot;early_stopping_rounds&quot; } might not be used.
+
+  This could be a false alarm, with some parameters getting used by language bindings but
+  then being mistakenly passed down to XGBoost core, or some parameter actually being used
+  but getting flagged wrongly here. Please open an issue if you find any such cases.
+
+
+[0]	validation_0-rmse:1.93036	validation_1-rmse:1.93354
+[1]	validation_0-rmse:1.91394	validation_1-rmse:1.91718
+[2]	validation_0-rmse:1.89770	validation_1-rmse:1.90098
+[3]	validation_0-rmse:1.88164	validation_1-rmse:1.88499
+[4]	validation_0-rmse:1.86577	validation_1-rmse:1.86919
+[5]	validation_0-rmse:1.85008	validation_1-rmse:1.85355
+[6]	validation_0-rmse:1.83458	validation_1-rmse:1.83820
+[7]	validation_0-rmse:1.81924	validation_1-rmse:1.82291
+[8]	validation_0-rmse:1.80407	validation_1-rmse:1.80786
+[9]	validation_0-rmse:1.78907	validation_1-rmse:1.79295
+[10]	validation_0-rmse:1.77425	validation_1-rmse:1.77822
+[11]	validation_0-rmse:1.75960	validation_1-rmse:1.76372
+[12]	validation_0-rmse:1.74510	validation_1-rmse:1.74932
+[13]	validation_0-rmse:1.73076	validation_1-rmse:1.73510
+[14]	validation_0-rmse:1.71660	validation_1-rmse:1.72108
+[15]	validation_0-rmse:1.70256	validation_1-rmse:1.70712
+[16]	validation_0-rmse:1.68871	validation_1-rmse:1.69342
+[17]	validation_0-rmse:1.67500	validation_1-rmse:1.67983
+[18]	validation_0-rmse:1.66144	validation_1-rmse:1.66635
+[19]	validation_0-rmse:1.64798	validation_1-rmse:1.65304
+[20]	validation_0-rmse:1.63468	validation_1-rmse:1.63981
+[21]	validation_0-rmse:1.62159	validation_1-rmse:1.62672
+[22]	validation_0-rmse:1.60867	validation_1-rmse:1.61392
+[23]	validation_0-rmse:1.59582	validation_1-rmse:1.60122
+[24]	validation_0-rmse:1.58318	validation_1-rmse:1.58864
+[25]	validation_0-rmse:1.57062	validation_1-rmse:1.57614
+[26]	validation_0-rmse:1.55826	validation_1-rmse:1.56395
+[27]	validation_0-rmse:1.54605	validation_1-rmse:1.55186
+[28]	validation_0-rmse:1.53394	validation_1-rmse:1.53988
+[29]	validation_0-rmse:1.52197	validation_1-rmse:1.52798
+[30]	validation_0-rmse:1.51015	validation_1-rmse:1.51636
+[31]	validation_0-rmse:1.49846	validation_1-rmse:1.50480
+[32]	validation_0-rmse:1.48694	validation_1-rmse:1.49337
+[33]	validation_0-rmse:1.47551	validation_1-rmse:1.48211
+[34]	validation_0-rmse:1.46422	validation_1-rmse:1.47091
+[35]	validation_0-rmse:1.45308	validation_1-rmse:1.45987
+[36]	validation_0-rmse:1.44207	validation_1-rmse:1.44904
+[37]	validation_0-rmse:1.43117	validation_1-rmse:1.43826
+[38]	validation_0-rmse:1.42040	validation_1-rmse:1.42756
+[39]	validation_0-rmse:1.40979	validation_1-rmse:1.41706
+[40]	validation_0-rmse:1.39927	validation_1-rmse:1.40673
+[41]	validation_0-rmse:1.38892	validation_1-rmse:1.39654
+[42]	validation_0-rmse:1.37865	validation_1-rmse:1.38641
+[43]	validation_0-rmse:1.36850	validation_1-rmse:1.37637
+[44]	validation_0-rmse:1.35850	validation_1-rmse:1.36655
+[45]	validation_0-rmse:1.34858	validation_1-rmse:1.35678
+[46]	validation_0-rmse:1.33876	validation_1-rmse:1.34706
+[47]	validation_0-rmse:1.32909	validation_1-rmse:1.33751
+[48]	validation_0-rmse:1.31950	validation_1-rmse:1.32810
+[49]	validation_0-rmse:1.31007	validation_1-rmse:1.31881
 </pre></div>
 </div>
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>XGBRegressor(base_score=0.5, booster=&#39;gbtree&#39;, callbacks=None,
-             colsample_bylevel=1, colsample_bynode=1, colsample_bytree=1,
-             early_stopping_rounds=5, enable_categorical=False,
-             eval_metric=&#39;rmse&#39;, gamma=0, gpu_id=-1, grow_policy=&#39;depthwise&#39;,
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>XGBRegressor(base_score=0.5, booster=&#39;gbtree&#39;, colsample_bylevel=1,
+             colsample_bynode=1, colsample_bytree=1, early_stopping_rounds=5,
+             enable_categorical=False, eval_metric=&#39;rmse&#39;, gamma=0, gpu_id=-1,
              importance_type=None, interaction_constraints=&#39;&#39;,
-             learning_rate=0.01, max_bin=256, max_cat_to_onehot=4,
-             max_delta_step=0, max_depth=4, max_leaves=0, min_child_weight=1,
-             missing=nan, monotone_constraints=&#39;()&#39;, n_estimators=50, n_jobs=0,
-             num_parallel_tree=1, predictor=&#39;auto&#39;, random_state=0, reg_alpha=0,
-             reg_lambda=1, ...)
+             learning_rate=0.01, max_delta_step=0, max_depth=4,
+             min_child_weight=1, missing=nan, monotone_constraints=&#39;()&#39;,
+             n_estimators=50, n_jobs=10, num_parallel_tree=1, predictor=&#39;auto&#39;,
+             random_state=0, reg_alpha=0, reg_lambda=1, scale_pos_weight=1,
+             subsample=1, tree_method=&#39;exact&#39;, validate_parameters=1,
+             verbosity=None)
 </pre></div>
 </div>
 </div>
@@ -667,107 +644,107 @@ const thebe_selector_output = ".output, .cell_output"
 </div>
 <div class="cell_output docutils container">
 <div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>{&#39;validation_0&#39;: OrderedDict([(&#39;rmse&#39;,
-               [693.1393857817644,
-                687.251910336823,
-                681.4244486825938,
-                675.6486724934836,
-                669.9331957060579,
-                664.2735039780409,
-                658.671209041782,
-                653.1268798100191,
-                647.639606963932,
-                642.1938985362038,
-                636.8099213158795,
-                631.4813365059504,
-                626.1961417611866,
-                620.9725471757737,
-                615.8041338657043,
-                610.6852890748453,
-                605.6040657347364,
-                600.5790575659756,
-                595.6096960389444,
-                590.6905825682088,
-                585.8005198863074,
-                580.9758014008682,
-                576.2046450150377,
-                571.4760470741261,
-                566.767889207885,
-                562.1347310337889,
-                557.5515139366653,
-                552.9829316203304,
-                548.4742444704232,
-                544.0257116458743,
-                539.580154381951,
-                535.223258825213,
-                530.9118515684579,
-                526.5969631915748,
-                522.3736292449992,
-                518.1447439056208,
-                513.98339041067,
-                509.8386269079192,
-                505.74956087337966,
-                501.7089946678633,
-                497.6972510812428,
-                493.72722733765556,
-                489.80528828448985,
-                485.91321877813294,
-                482.0629503106967,
-                478.2506824740748,
-                474.47970550622546,
-                470.7064900045892,
-                466.9739728063445,
-                463.27879631757037])]),
+               [1.93036,
+                1.913936,
+                1.897696,
+                1.881644,
+                1.865773,
+                1.850085,
+                1.834582,
+                1.819236,
+                1.80407,
+                1.789071,
+                1.774255,
+                1.759603,
+                1.745095,
+                1.730761,
+                1.716599,
+                1.70256,
+                1.688709,
+                1.674996,
+                1.661438,
+                1.647982,
+                1.634684,
+                1.621588,
+                1.608669,
+                1.595824,
+                1.583178,
+                1.570625,
+                1.558256,
+                1.546054,
+                1.533939,
+                1.521966,
+                1.510154,
+                1.498459,
+                1.486938,
+                1.475511,
+                1.464224,
+                1.453085,
+                1.442069,
+                1.431173,
+                1.420403,
+                1.409787,
+                1.399267,
+                1.388916,
+                1.378654,
+                1.368496,
+                1.358502,
+                1.348583,
+                1.338761,
+                1.329085,
+                1.319504,
+                1.310071])]),
  &#39;validation_1&#39;: OrderedDict([(&#39;rmse&#39;,
-               [694.5164913542402,
-                688.3764374445906,
-                682.3151532702786,
-                677.3582590211814,
-                672.4628989003214,
-                666.6059087893586,
-                661.828382190362,
-                656.9031869172235,
-                652.2413750710891,
-                646.6496957785371,
-                641.9228547034586,
-                637.2776215615506,
-                631.9067047861197,
-                627.3741448283788,
-                622.8228568933258,
-                618.4503207716183,
-                613.3353736633013,
-                609.3450808941212,
-                605.2929405305549,
-                601.3570998696786,
-                596.476439502,
-                592.6884623416338,
-                588.8385297352924,
-                585.0042993486803,
-                580.4627558767744,
-                576.7280633186635,
-                573.043293650581,
-                568.561421543709,
-                564.7817911843646,
-                561.2401620562998,
-                557.7036728408804,
-                554.2578132311166,
-                550.8727841910988,
-                546.8062486649543,
-                543.5132044476993,
-                539.555182177302,
-                536.0301120486204,
-                532.2142708827711,
-                528.8126933842323,
-                525.4231683723752,
-                522.1869348578584,
-                519.0002165116805,
-                515.7400461083421,
-                512.6478116927028,
-                509.52442998205976,
-                506.52609169547287,
-                503.4267241371655,
-                500.40295281777617,
-                497.3622109130281,
-                494.61957750664214])])}
+               [1.933542,
+                1.917176,
+                1.900983,
+                1.884991,
+                1.869189,
+                1.853547,
+                1.838201,
+                1.822914,
+                1.807856,
+                1.792949,
+                1.778225,
+                1.763721,
+                1.749318,
+                1.735098,
+                1.721079,
+                1.707123,
+                1.693416,
+                1.679829,
+                1.666346,
+                1.65304,
+                1.639814,
+                1.626722,
+                1.613918,
+                1.601224,
+                1.588642,
+                1.576136,
+                1.563955,
+                1.551863,
+                1.539882,
+                1.527975,
+                1.516359,
+                1.504795,
+                1.493372,
+                1.482111,
+                1.470912,
+                1.45987,
+                1.449041,
+                1.43826,
+                1.42756,
+                1.41706,
+                1.406729,
+                1.396541,
+                1.386409,
+                1.37637,
+                1.366547,
+                1.356777,
+                1.347056,
+                1.337506,
+                1.328102,
+                1.318808])])}
 </pre></div>
 </div>
 </div>
@@ -783,21 +760,6 @@ const thebe_selector_output = ".output, .cell_output"
 </div>
 <div class="cell_output docutils container">
 <div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>49
-</pre></div>
-</div>
-</div>
-</div>
-<ul class="simple">
-<li><p>The best score obtained by early stopping.</p></li>
-</ul>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">reg</span><span class="o">.</span><span class="n">best_score</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>494.61957750664214
 </pre></div>
 </div>
 </div>
@@ -822,7 +784,7 @@ const thebe_selector_output = ".output, .cell_output"
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>494.61957203317934
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>1.3188079378718305
 </pre></div>
 </div>
 </div>
@@ -872,7 +834,7 @@ const thebe_selector_output = ".output, .cell_output"
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/gradientboosting-xgboost_28_0.png" src="../_images/gradientboosting-xgboost_28_0.png" />
+<img alt="../_images/gradientboosting-xgboost-boston_26_0.png" src="../_images/gradientboosting-xgboost-boston_26_0.png" />
 </div>
 </div>
 </div>
@@ -898,25 +860,8 @@ const thebe_selector_output = ".output, .cell_output"
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([0.01666715, 0.04953951, 0.00669265, 0.08019663, 0.0286376 ,
-       0.1554871 , 0.02532775, 0.2681985 , 0.23080859, 0.06620175,
-       0.02479422, 0.03500973, 0.00164787, 0.0024867 , 0.        ,
-       0.        , 0.0083043 , 0.        , 0.        ], dtype=float32)
-</pre></div>
-</div>
-</div>
-</div>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">reg</span><span class="o">.</span><span class="n">feature_names_in_</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([&#39;AtBat&#39;, &#39;Hits&#39;, &#39;HmRun&#39;, &#39;Runs&#39;, &#39;RBI&#39;, &#39;Walks&#39;, &#39;Years&#39;,
-       &#39;CAtBat&#39;, &#39;CHits&#39;, &#39;CHmRun&#39;, &#39;CRuns&#39;, &#39;CRBI&#39;, &#39;CWalks&#39;, &#39;PutOuts&#39;,
-       &#39;Assists&#39;, &#39;Errors&#39;, &#39;League_N&#39;, &#39;Division_W&#39;, &#39;NewLeague_N&#39;],
-      dtype=&#39;&lt;U11&#39;)
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([0.5389647 , 0.04911011, 0.10514385, 0.        , 0.01159318,
+       0.17180622, 0.07378276, 0.04959917], dtype=float32)
 </pre></div>
 </div>
 </div>
@@ -931,7 +876,7 @@ const thebe_selector_output = ".output, .cell_output"
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/gradientboosting-xgboost_33_0.png" src="../_images/gradientboosting-xgboost_33_0.png" />
+<img alt="../_images/gradientboosting-xgboost-boston_30_0.png" src="../_images/gradientboosting-xgboost-boston_30_0.png" />
 </div>
 </div>
 </div>
@@ -953,32 +898,46 @@ const thebe_selector_output = ".output, .cell_output"
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">feature_names</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">result</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Index([&#39;AtBat&#39;, &#39;Hits&#39;, &#39;HmRun&#39;, &#39;Runs&#39;, &#39;RBI&#39;, &#39;Walks&#39;, &#39;Years&#39;, &#39;CAtBat&#39;,
-       &#39;CHits&#39;, &#39;CHmRun&#39;, &#39;CRuns&#39;, &#39;CRBI&#39;, &#39;CWalks&#39;, &#39;PutOuts&#39;, &#39;Assists&#39;,
-       &#39;Errors&#39;, &#39;League_N&#39;, &#39;Division_W&#39;, &#39;NewLeague_N&#39;],
-      dtype=&#39;object&#39;)
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>{&#39;importances_mean&#39;: array([0.42380621, 0.01296257, 0.01401125, 0.        , 0.00051886,
+        0.06618216, 0.00650385, 0.00071611]),
+ &#39;importances_std&#39;: array([0.00836628, 0.00211472, 0.00110466, 0.        , 0.00035793,
+        0.0039604 , 0.00101385, 0.00013158]),
+ &#39;importances&#39;: array([[4.13977358e-01, 4.27543189e-01, 4.17442947e-01, 4.16331701e-01,
+         4.34321970e-01, 4.41830028e-01, 4.21468045e-01, 4.26686162e-01,
+         4.20214924e-01, 4.18245811e-01],
+        [1.41752693e-02, 1.48520626e-02, 1.29326333e-02, 1.34002596e-02,
+         1.62666310e-02, 7.98938369e-03, 1.34120866e-02, 1.13797786e-02,
+         1.32721925e-02, 1.19453894e-02],
+        [1.39285213e-02, 1.34339251e-02, 1.34097396e-02, 1.38147796e-02,
+         1.18717642e-02, 1.37149863e-02, 1.36394990e-02, 1.57344377e-02,
+         1.48039360e-02, 1.57608739e-02],
+        [0.00000000e+00, 0.00000000e+00, 0.00000000e+00, 0.00000000e+00,
+         0.00000000e+00, 0.00000000e+00, 0.00000000e+00, 0.00000000e+00,
+         0.00000000e+00, 0.00000000e+00],
+        [0.00000000e+00, 5.46793615e-04, 6.08834627e-04, 9.50120896e-04,
+         8.91410415e-04, 0.00000000e+00, 7.90584276e-04, 6.96437734e-04,
+         0.00000000e+00, 7.04456317e-04],
+        [6.38934510e-02, 7.14004762e-02, 6.69274284e-02, 6.13092732e-02,
+         6.97169736e-02, 6.04855223e-02, 7.25240382e-02, 6.24236987e-02,
+         6.60779391e-02, 6.70627886e-02],
+        [5.77971653e-03, 7.37457385e-03, 6.06607086e-03, 7.20450230e-03,
+         7.70175919e-03, 7.20906794e-03, 4.97455791e-03, 7.71497798e-03,
+         6.04839287e-03, 4.96485211e-03],
+        [8.19306075e-04, 8.23486541e-04, 7.41532888e-04, 7.28411453e-04,
+         6.22548872e-04, 7.89207941e-04, 8.83724057e-04, 4.28268846e-04,
+         7.60586101e-04, 5.63995683e-04]])}
 </pre></div>
 </div>
 </div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">tree_importances</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">Series</span><span class="p">(</span><span class="n">result</span><span class="o">.</span><span class="n">importances_mean</span><span class="p">,</span> <span class="n">index</span><span class="o">=</span><span class="n">feature_names</span><span class="p">)</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
-<span class="ne">NameError</span><span class="g g-Whitespace">                                 </span>Traceback (most recent call last)
-<span class="nn">/Users/jankirenz/books/regression/docs/gradientboosting-xgboost.ipynb Cell 38&#39;</span> in <span class="ni">&lt;cell line: 1&gt;</span><span class="nt">()</span>
-<span class="o">----&gt;</span> <span class="o">&lt;</span><span class="n">a</span> <span class="n">href</span><span class="o">=</span><span class="s1">&#39;vscode-notebook-cell:/Users/jankirenz/books/regression/docs/gradientboosting-xgboost.ipynb#ch0000037?line=0&#39;</span><span class="o">&gt;</span><span class="mi">1</span><span class="o">&lt;/</span><span class="n">a</span><span class="o">&gt;</span> <span class="n">tree_importances</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">Series</span><span class="p">(</span><span class="n">result</span><span class="o">.</span><span class="n">importances_mean</span><span class="p">,</span> <span class="n">index</span><span class="o">=</span><span class="n">feature_names</span><span class="p">)</span>
-
-<span class="ne">NameError</span>: name &#39;pd&#39; is not defined
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">tree_importances</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">Series</span><span class="p">(</span><span class="n">result</span><span class="o">.</span><span class="n">importances_mean</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -992,14 +951,24 @@ const thebe_selector_output = ".output, .cell_output"
 <span class="c1"># plot feature importances</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">barh</span><span class="p">(</span><span class="n">pos</span><span class="p">,</span> <span class="n">tree_importances</span><span class="p">[</span><span class="n">sorted_idx</span><span class="p">],</span> <span class="n">align</span><span class="o">=</span><span class="s2">&quot;center&quot;</span><span class="p">)</span>
 
-<span class="n">plt</span><span class="o">.</span><span class="n">yticks</span><span class="p">(</span><span class="n">pos</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">feature_names</span><span class="p">)[</span><span class="n">sorted_idx</span><span class="p">])</span>
+<span class="c1">#plt.yticks(pos, np.array(feature_names)[sorted_idx])</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s2">&quot;Feature Importance (MDI)&quot;</span><span class="p">)</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s2">&quot;Mean decrease in impurity&quot;</span><span class="p">);</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/gradientboosting-xgboost_38_0.png" src="../_images/gradientboosting-xgboost_38_0.png" />
+<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
+<span class="ne">NameError</span><span class="g g-Whitespace">                                 </span>Traceback (most recent call last)
+<span class="nn">/Users/jankirenz/books/regression/docs/gradientboosting-xgboost-boston.ipynb Cell 36&#39;</span> in <span class="ni">&lt;cell line: 2&gt;</span><span class="nt">()</span>
+      <span class="o">&lt;</span><span class="n">a</span> <span class="n">href</span><span class="o">=</span><span class="s1">&#39;vscode-notebook-cell:/Users/jankirenz/books/regression/docs/gradientboosting-xgboost-boston.ipynb#ch0000038?line=0&#39;</span><span class="o">&gt;</span><span class="mi">1</span><span class="o">&lt;/</span><span class="n">a</span><span class="o">&gt;</span> <span class="c1"># sort features according to importance</span>
+<span class="o">----&gt;</span> <span class="o">&lt;</span><span class="n">a</span> <span class="n">href</span><span class="o">=</span><span class="s1">&#39;vscode-notebook-cell:/Users/jankirenz/books/regression/docs/gradientboosting-xgboost-boston.ipynb#ch0000038?line=1&#39;</span><span class="o">&gt;</span><span class="mi">2</span><span class="o">&lt;/</span><span class="n">a</span><span class="o">&gt;</span> <span class="n">sorted_idx</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">argsort</span><span class="p">(</span><span class="n">tree_importances</span><span class="p">)</span>
+      <span class="o">&lt;</span><span class="n">a</span> <span class="n">href</span><span class="o">=</span><span class="s1">&#39;vscode-notebook-cell:/Users/jankirenz/books/regression/docs/gradientboosting-xgboost-boston.ipynb#ch0000038?line=2&#39;</span><span class="o">&gt;</span><span class="mi">3</span><span class="o">&lt;/</span><span class="n">a</span><span class="o">&gt;</span> <span class="n">pos</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="n">sorted_idx</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+      <span class="o">&lt;</span><span class="n">a</span> <span class="n">href</span><span class="o">=</span><span class="s1">&#39;vscode-notebook-cell:/Users/jankirenz/books/regression/docs/gradientboosting-xgboost-boston.ipynb#ch0000038?line=4&#39;</span><span class="o">&gt;</span><span class="mi">5</span><span class="o">&lt;/</span><span class="n">a</span><span class="o">&gt;</span> <span class="c1"># plot feature importances</span>
+
+<span class="ne">NameError</span>: name &#39;tree_importances&#39; is not defined
+</pre></div>
+</div>
 </div>
 </div>
 <ul class="simple">
@@ -1019,7 +988,7 @@ const thebe_selector_output = ".output, .cell_output"
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/gradientboosting-xgboost_40_0.png" src="../_images/gradientboosting-xgboost_40_0.png" />
+<img alt="../_images/gradientboosting-xgboost-boston_37_0.png" src="../_images/gradientboosting-xgboost-boston_37_0.png" />
 </div>
 </div>
 <ul class="simple">
@@ -1056,21 +1025,7 @@ const thebe_selector_output = ".output, .cell_output"
               
             
                 <!-- Previous / next buttons -->
-<div class='prev-next-area'> 
-    <a class='left-prev' id="prev-link" href="gradientboosting.html" title="previous page">
-        <i class="fas fa-angle-left"></i>
-        <div class="prev-next-info">
-            <p class="prev-next-subtitle">previous</p>
-            <p class="prev-next-title">Gradient Boosting in scikit-learn</p>
-        </div>
-    </a>
-    <a class='right-next' id="next-link" href="ensemble.html" title="next page">
-    <div class="prev-next-info">
-        <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title">Ensemble meta-estimator</p>
-    </div>
-    <i class="fas fa-angle-right"></i>
-    </a>
+<div class='prev-next-area'>
 </div>
             
         </div>
