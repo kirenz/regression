@@ -487,6 +487,7 @@ const thebe_selector_output = ".output, .cell_output"
 <span class="kn">from</span> <span class="nn">sklearn.model_selection</span> <span class="kn">import</span> <span class="n">train_test_split</span>
 <span class="kn">from</span> <span class="nn">sklearn.metrics</span> <span class="kn">import</span> <span class="n">mean_squared_error</span>
 <span class="kn">from</span> <span class="nn">sklearn.inspection</span> <span class="kn">import</span> <span class="n">permutation_importance</span>
+<span class="kn">from</span> <span class="nn">sklearn.model_selection</span> <span class="kn">import</span> <span class="n">GridSearchCV</span>
 </pre></div>
 </div>
 </div>
@@ -499,9 +500,7 @@ const thebe_selector_output = ".output, .cell_output"
 </div>
 <div class="section" id="data">
 <h2>Data<a class="headerlink" href="#data" title="Permalink to this headline">¶</a></h2>
-<ul class="simple">
-<li><p>See <a class="reference internal" href="hitters_data.html"><span class="doc std std-doc">Hitters data preparation</span></a> for details about the data preprocessing steps.</p></li>
-</ul>
+<p>We use data drawn from the 1990 U.S. Census (see this <a class="reference external" href="https://developers.google.com/machine-learning/crash-course/california-housing-data-description">data description</a> for more information).</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">X</span><span class="p">,</span> <span class="n">y</span> <span class="o">=</span> <span class="n">datasets</span><span class="o">.</span><span class="n">fetch_california_housing</span><span class="p">(</span><span class="n">return_X_y</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">as_frame</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span> 
@@ -531,7 +530,6 @@ const thebe_selector_output = ".output, .cell_output"
     <span class="s2">&quot;max_depth&quot;</span><span class="p">:</span> <span class="mi">4</span><span class="p">,</span>
     <span class="s2">&quot;learning_rate&quot;</span><span class="p">:</span> <span class="mf">0.01</span><span class="p">,</span>
     <span class="s2">&quot;eval_metric&quot;</span><span class="p">:</span> <span class="s2">&quot;rmse&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;early_stopping_rounds&quot;</span><span class="p">:</span> <span class="mi">5</span><span class="p">,</span>
 <span class="p">}</span>
 </pre></div>
 </div>
@@ -564,15 +562,7 @@ const thebe_selector_output = ".output, .cell_output"
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[20:27:20] WARNING: /Users/runner/miniforge3/conda-bld/xgboost-split_1645117948562/work/src/learner.cc:576: 
-Parameters: { &quot;early_stopping_rounds&quot; } might not be used.
-
-  This could be a false alarm, with some parameters getting used by language bindings but
-  then being mistakenly passed down to XGBoost core, or some parameter actually being used
-  but getting flagged wrongly here. Please open an issue if you find any such cases.
-
-
-[0]	validation_0-rmse:1.93036	validation_1-rmse:1.93354
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[0]	validation_0-rmse:1.93036	validation_1-rmse:1.93354
 [1]	validation_0-rmse:1.91394	validation_1-rmse:1.91718
 [2]	validation_0-rmse:1.89770	validation_1-rmse:1.90098
 [3]	validation_0-rmse:1.88164	validation_1-rmse:1.88499
@@ -625,15 +615,14 @@ Parameters: { &quot;early_stopping_rounds&quot; } might not be used.
 </pre></div>
 </div>
 <div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>XGBRegressor(base_score=0.5, booster=&#39;gbtree&#39;, colsample_bylevel=1,
-             colsample_bynode=1, colsample_bytree=1, early_stopping_rounds=5,
-             enable_categorical=False, eval_metric=&#39;rmse&#39;, gamma=0, gpu_id=-1,
-             importance_type=None, interaction_constraints=&#39;&#39;,
-             learning_rate=0.01, max_delta_step=0, max_depth=4,
-             min_child_weight=1, missing=nan, monotone_constraints=&#39;()&#39;,
-             n_estimators=50, n_jobs=10, num_parallel_tree=1, predictor=&#39;auto&#39;,
-             random_state=0, reg_alpha=0, reg_lambda=1, scale_pos_weight=1,
-             subsample=1, tree_method=&#39;exact&#39;, validate_parameters=1,
-             verbosity=None)
+             colsample_bynode=1, colsample_bytree=1, enable_categorical=False,
+             eval_metric=&#39;rmse&#39;, gamma=0, gpu_id=-1, importance_type=None,
+             interaction_constraints=&#39;&#39;, learning_rate=0.01, max_delta_step=0,
+             max_depth=4, min_child_weight=1, missing=nan,
+             monotone_constraints=&#39;()&#39;, n_estimators=50, n_jobs=10,
+             num_parallel_tree=1, predictor=&#39;auto&#39;, random_state=0, reg_alpha=0,
+             reg_lambda=1, scale_pos_weight=1, subsample=1, tree_method=&#39;exact&#39;,
+             validate_parameters=1, verbosity=None)
 </pre></div>
 </div>
 </div>
@@ -990,6 +979,81 @@ Parameters: { &quot;early_stopping_rounds&quot; } might not be used.
 </div>
 <div class="section" id="hyperparameter-tuning">
 <h2>Hyperparameter Tuning<a class="headerlink" href="#hyperparameter-tuning" title="Permalink to this headline">¶</a></h2>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">params</span> <span class="o">=</span> <span class="p">{</span> <span class="s1">&#39;max_depth&#39;</span><span class="p">:</span> <span class="p">[</span><span class="mi">3</span><span class="p">,</span><span class="mi">6</span><span class="p">],</span>
+           <span class="s1">&#39;learning_rate&#39;</span><span class="p">:</span> <span class="p">[</span><span class="mf">0.01</span><span class="p">,</span> <span class="mf">0.05</span><span class="p">],</span>
+           <span class="s1">&#39;n_estimators&#39;</span><span class="p">:</span> <span class="p">[</span><span class="mi">10</span><span class="p">,</span> <span class="mi">50</span><span class="p">],</span>
+           <span class="s1">&#39;colsample_bytree&#39;</span><span class="p">:</span> <span class="p">[</span><span class="mf">0.3</span><span class="p">,</span> <span class="mf">0.7</span><span class="p">]}</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">xgbr</span> <span class="o">=</span> <span class="n">xgb</span><span class="o">.</span><span class="n">XGBRegressor</span><span class="p">(</span><span class="n">seed</span> <span class="o">=</span> <span class="mi">20</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">clf</span> <span class="o">=</span> <span class="n">GridSearchCV</span><span class="p">(</span><span class="n">estimator</span><span class="o">=</span><span class="n">xgbr</span><span class="p">,</span> 
+                   <span class="n">param_grid</span><span class="o">=</span><span class="n">params</span><span class="p">,</span>
+                   <span class="n">scoring</span><span class="o">=</span><span class="s1">&#39;neg_mean_squared_error&#39;</span><span class="p">,</span> 
+                   <span class="n">verbose</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">clf</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">y</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Fitting 5 folds for each of 16 candidates, totalling 80 fits
+</pre></div>
+</div>
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>GridSearchCV(estimator=XGBRegressor(base_score=None, booster=None,
+                                    colsample_bylevel=None,
+                                    colsample_bynode=None,
+                                    colsample_bytree=None,
+                                    enable_categorical=False, gamma=None,
+                                    gpu_id=None, importance_type=None,
+                                    interaction_constraints=None,
+                                    learning_rate=None, max_delta_step=None,
+                                    max_depth=None, min_child_weight=None,
+                                    missing=nan, monotone_constraints=None,
+                                    n_esti...=None,
+                                    num_parallel_tree=None, predictor=None,
+                                    random_state=None, reg_alpha=None,
+                                    reg_lambda=None, scale_pos_weight=None,
+                                    seed=20, subsample=None, tree_method=None,
+                                    validate_parameters=None, verbosity=None),
+             param_grid={&#39;colsample_bytree&#39;: [0.3, 0.7],
+                         &#39;learning_rate&#39;: [0.01, 0.05], &#39;max_depth&#39;: [3, 6],
+                         &#39;n_estimators&#39;: [10, 50]},
+             scoring=&#39;neg_mean_squared_error&#39;, verbose=1)
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Best parameters:&quot;</span><span class="p">,</span> <span class="n">clf</span><span class="o">.</span><span class="n">best_params_</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Lowest RMSE: &quot;</span><span class="p">,</span> <span class="p">(</span><span class="o">-</span><span class="n">clf</span><span class="o">.</span><span class="n">best_score_</span><span class="p">)</span><span class="o">**</span><span class="p">(</span><span class="mi">1</span><span class="o">/</span><span class="mf">2.0</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Best parameters: {&#39;colsample_bytree&#39;: 0.7, &#39;learning_rate&#39;: 0.05, &#39;max_depth&#39;: 6, &#39;n_estimators&#39;: 50}
+Lowest RMSE:  0.7115304756489487
+</pre></div>
+</div>
+</div>
+</div>
 </div>
 </div>
 
