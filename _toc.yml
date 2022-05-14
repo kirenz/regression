@@ -15,6 +15,7 @@ parts:
     chapters:
     - file: docs/randomforest.ipynb
     - file: docs/gradientboosting.ipynb
+    - file: docs/xgboost-regression.ipynb
     - file: docs/gradientboosting-xgboost.ipynb 
   #- caption: Feature Selection
   #  chapters:
