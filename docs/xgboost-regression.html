@@ -54,6 +54,8 @@ const thebe_selector_output = ".output, .cell_output"
     <script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Gradient Boosting with XGBoost" href="gradientboosting-xgboost.html" />
+    <link rel="prev" title="Gradient Boosting in scikit-learn" href="gradientboosting.html" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="docsearch:language" content="None">
     
@@ -146,7 +148,7 @@ const thebe_selector_output = ".output, .cell_output"
   Decision Trees
  </span>
 </p>
-<ul class="nav bd-sidenav">
+<ul class="current nav bd-sidenav">
  <li class="toctree-l1">
   <a class="reference internal" href="randomforest.html">
    Random forest in scikit-learn
@@ -155,6 +157,11 @@ const thebe_selector_output = ".output, .cell_output"
  <li class="toctree-l1">
   <a class="reference internal" href="gradientboosting.html">
    Gradient Boosting in scikit-learn
+  </a>
+ </li>
+ <li class="toctree-l1 current active">
+  <a class="current reference internal" href="#">
+   XGBoost regression
   </a>
  </li>
  <li class="toctree-l1">
@@ -286,7 +293,7 @@ const thebe_selector_output = ".output, .cell_output"
         <!-- ipynb file if we had a myst markdown file -->
         
         <!-- Download raw file -->
-        <a class="dropdown-buttons" href="../_sources/docs/gradientboosting-xgboost-ca.ipynb"><button type="button"
+        <a class="dropdown-buttons" href="../_sources/docs/xgboost-regression.ipynb"><button type="button"
                 class="btn btn-secondary topbarbtn" title="Download source file" data-toggle="tooltip"
                 data-placement="left">.ipynb</button></a>
         <!-- Download PDF via print -->
@@ -306,7 +313,7 @@ const thebe_selector_output = ".output, .cell_output"
                 data-toggle="tooltip" data-placement="left" title="Source repository"><i
                     class="fab fa-github"></i>repository</button></a>
         <a class="issues-button"
-            href="https://github.com/kirenz/regression/issues/new?title=Issue%20on%20page%20%2Fdocs/gradientboosting-xgboost-ca.html&body=Your%20issue%20content%20here."><button
+            href="https://github.com/kirenz/regression/issues/new?title=Issue%20on%20page%20%2Fdocs/xgboost-regression.html&body=Your%20issue%20content%20here."><button
                 type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip" data-placement="left"
                 title="Open an issue"><i class="fas fa-lightbulb"></i>open issue</button></a>
         
@@ -329,7 +336,7 @@ const thebe_selector_output = ".output, .cell_output"
         
         
         
-        <a class="colab-button" href="https://colab.research.google.com/github/kirenz/regression/blob/main/docs/gradientboosting-xgboost-ca.ipynb"><button type="button" class="btn btn-secondary topbarbtn"
+        <a class="colab-button" href="https://colab.research.google.com/github/kirenz/regression/blob/main/docs/xgboost-regression.ipynb"><button type="button" class="btn btn-secondary topbarbtn"
                 title="Launch Colab" data-toggle="tooltip" data-placement="left"><img class="colab-button-logo"
                     src="../_static/images/logo_colab.png"
                     alt="Interact on Colab">Colab</button></a>
@@ -357,12 +364,44 @@ const thebe_selector_output = ".output, .cell_output"
   <a class="reference internal nav-link" href="#data">
    Data
   </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#data-import">
+     Data import
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#data-splitting">
+     Data splitting
+    </a>
+   </li>
+  </ul>
  </li>
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#model">
    Model
   </a>
   <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#hyperparameters">
+     Hyperparameters
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#evaluation-set">
+     Evaluation set
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#fit-model">
+     Fit model
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#evaluation">
+     Evaluation
+    </a>
+   </li>
    <li class="toc-h3 nav-item toc-entry">
     <a class="reference internal nav-link" href="#plot-training-test-deviance">
      Plot training test deviance
@@ -385,7 +424,17 @@ const thebe_selector_output = ".output, .cell_output"
      Permutation feature importance
     </a>
    </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#visualize-tree">
+     Visualize tree
+    </a>
+   </li>
   </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#crossvalidation">
+   Crossvalidation
+  </a>
  </li>
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#hyperparameter-tuning">
@@ -421,12 +470,44 @@ const thebe_selector_output = ".output, .cell_output"
   <a class="reference internal nav-link" href="#data">
    Data
   </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#data-import">
+     Data import
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#data-splitting">
+     Data splitting
+    </a>
+   </li>
+  </ul>
  </li>
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#model">
    Model
   </a>
   <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#hyperparameters">
+     Hyperparameters
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#evaluation-set">
+     Evaluation set
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#fit-model">
+     Fit model
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#evaluation">
+     Evaluation
+    </a>
+   </li>
    <li class="toc-h3 nav-item toc-entry">
     <a class="reference internal nav-link" href="#plot-training-test-deviance">
      Plot training test deviance
@@ -449,7 +530,17 @@ const thebe_selector_output = ".output, .cell_output"
      Permutation feature importance
     </a>
    </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#visualize-tree">
+     Visualize tree
+    </a>
+   </li>
   </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#crossvalidation">
+   Crossvalidation
+  </a>
  </li>
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#hyperparameter-tuning">
@@ -467,6 +558,15 @@ const thebe_selector_output = ".output, .cell_output"
                 
   <div class="tex2jax_ignore mathjax_ignore section" id="xgboost-regression">
 <h1>XGBoost regression<a class="headerlink" href="#xgboost-regression" title="Permalink to this headline">¶</a></h1>
+<p>XGBoost stands for “Extreme Gradient Boosting”, where the term “Gradient Boosting” originates from the paper Greedy Function Approximation: A Gradient Boosting Machine, by Friedman. XGBoost is used for supervised learning problems (regression as well as classification), where we use the training data (with multiple features) to predict a target variable.</p>
+<p>In this tutorial we’ll cover how to perform XGBoost regression in Python. We will focus on the following topics:</p>
+<ul class="simple">
+<li><p>XGBoost hyperparameters</p></li>
+<li><p>Fit and evaluate</p></li>
+<li><p>Feature importance</p></li>
+<li><p>Cross validation</p></li>
+<li><p>Hyperparameter tuning</p></li>
+</ul>
 <div class="section" id="setup">
 <h2>Setup<a class="headerlink" href="#setup" title="Permalink to this headline">¶</a></h2>
 <div class="cell docutils container">
@@ -492,7 +592,7 @@ const thebe_selector_output = ".output, .cell_output"
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>XGB Version: 1.5.1
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>XGB Version: 1.5.0
 </pre></div>
 </div>
 </div>
@@ -501,6 +601,8 @@ const thebe_selector_output = ".output, .cell_output"
 <div class="section" id="data">
 <h2>Data<a class="headerlink" href="#data" title="Permalink to this headline">¶</a></h2>
 <p>We use data drawn from the 1990 U.S. Census (see this <a class="reference external" href="https://developers.google.com/machine-learning/crash-course/california-housing-data-description">data description</a> for more information).</p>
+<div class="section" id="data-import">
+<h3>Data import<a class="headerlink" href="#data-import" title="Permalink to this headline">¶</a></h3>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">X</span><span class="p">,</span> <span class="n">y</span> <span class="o">=</span> <span class="n">datasets</span><span class="o">.</span><span class="n">fetch_california_housing</span><span class="p">(</span><span class="n">return_X_y</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">as_frame</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span> 
@@ -512,33 +614,104 @@ const thebe_selector_output = ".output, .cell_output"
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">X</span><span class="o">.</span><span class="n">info</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;class &#39;pandas.core.frame.DataFrame&#39;&gt;
+RangeIndex: 20640 entries, 0 to 20639
+Data columns (total 8 columns):
+ #   Column      Non-Null Count  Dtype  
+---  ------      --------------  -----  
+ 0   MedInc      20640 non-null  float64
+ 1   HouseAge    20640 non-null  float64
+ 2   AveRooms    20640 non-null  float64
+ 3   AveBedrms   20640 non-null  float64
+ 4   Population  20640 non-null  float64
+ 5   AveOccup    20640 non-null  float64
+ 6   Latitude    20640 non-null  float64
+ 7   Longitude   20640 non-null  float64
+dtypes: float64(8)
+memory usage: 1.3 MB
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="section" id="data-splitting">
+<h3>Data splitting<a class="headerlink" href="#data-splitting" title="Permalink to this headline">¶</a></h3>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">X_train</span><span class="p">,</span> <span class="n">X_test</span><span class="p">,</span> <span class="n">y_train</span><span class="p">,</span> <span class="n">y_test</span> <span class="o">=</span> <span class="n">train_test_split</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">test_size</span><span class="o">=</span><span class="mf">0.1</span><span class="p">,</span> <span class="n">random_state</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
 </div>
 </div>
+</div>
 <div class="section" id="model">
 <h2>Model<a class="headerlink" href="#model" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="hyperparameters">
+<h3>Hyperparameters<a class="headerlink" href="#hyperparameters" title="Permalink to this headline">¶</a></h3>
+<p>XGBoost provides many hyperparameters but we will only consider a few of them (see the <a class="reference external" href="https://xgboost.readthedocs.io/en/latest/parameter.html#general-parameters">XGBoost documentation</a> for an complete overview). Note that we will use the <a class="reference external" href="https://xgboost.readthedocs.io/en/latest/python/python_api.html#module-xgboost.sklearn">scikit-learn wrapper interface</a>:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">objective</span></code>: determines the loss function to be used like <code class="docutils literal notranslate"><span class="pre">reg:squarederror</span></code> for regression problems, <code class="docutils literal notranslate"><span class="pre">binary:logistic</span></code> for logistic regression for binary classification or <code class="docutils literal notranslate"><span class="pre">multi:softmax</span></code>  to do multiclass classification using the softmax objectiv (note that there are more options).</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">n_estimators</span></code>: Number of gradient boosted trees. Equivalent to number of boosting rounds.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">max_depth</span></code>: Maximum tree depth for base learners.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">learning_rate</span></code>: Boosting learning rate (xgb’s “eta”). Range is [0,1]</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">subsample</span></code>: Subsample ratio of the training instance. Setting it to 0.5 means that XGBoost would randomly sample half of the training data prior to growing trees.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">colsample_bytree</span></code>: Subsample ratio of columns when constructing each tree. Subsampling occurs once for every tree constructed.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">colsample_bylevel</span></code>: Subsample ratio of columns for each level. Subsampling occurs once for every new depth level reached in a tree. Columns are subsampled from the set of columns chosen for the current tree.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">gamma</span></code>: Minimum loss reduction required to make a further partition on a leaf node of the tree. A higher value leads to fewer splits.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">reg_alpha</span></code>: L1 regularization term on weights (xgb’s alpha). A large value leads to more regularization.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">reg_lambda</span></code>: L2 regularization term on weights (xgb’s lambda).</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">eval_metric</span></code> (default is according to objective). Evaluation metrics for validation data, a default metric will be assigned according to objective (<code class="docutils literal notranslate"><span class="pre">rmse</span></code> for regression, and <code class="docutils literal notranslate"><span class="pre">logloss</span></code> for classificationestimator
+).</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">random_state</span></code>: Random number seed.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">early_stopping_rounds</span></code>: If you have a validation set, you can use early stopping to find the optimal number of boosting rounds. Early stopping requires at least one set in evals. If there’s more than one, it will use the last. Note that we include this parameter in our fit function.</p></li>
+</ul>
 <ul class="simple">
 <li><p>Define hyperparameters</p></li>
 </ul>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">params</span> <span class="o">=</span> <span class="p">{</span>
-    <span class="s2">&quot;n_estimators&quot;</span><span class="p">:</span><span class="mi">50</span><span class="p">,</span>
+    <span class="s2">&quot;objective&quot;</span><span class="p">:</span> <span class="s2">&quot;reg:squarederror&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;n_estimators&quot;</span><span class="p">:</span><span class="mi">100</span><span class="p">,</span>
     <span class="s2">&quot;max_depth&quot;</span><span class="p">:</span> <span class="mi">4</span><span class="p">,</span>
     <span class="s2">&quot;learning_rate&quot;</span><span class="p">:</span> <span class="mf">0.01</span><span class="p">,</span>
+    <span class="s2">&quot;subsample&quot;</span><span class="p">:</span> <span class="mf">0.8</span><span class="p">,</span>
+    <span class="s2">&quot;colsample_bytree&quot;</span><span class="p">:</span> <span class="mf">0.9</span><span class="p">,</span>
+    <span class="s2">&quot;colsample_bylevel&quot;</span><span class="p">:</span> <span class="mf">0.8</span><span class="p">,</span>
+    <span class="s2">&quot;reg_lambda&quot;</span><span class="p">:</span> <span class="mf">0.1</span><span class="p">,</span>
     <span class="s2">&quot;eval_metric&quot;</span><span class="p">:</span> <span class="s2">&quot;rmse&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;random_state&quot;</span><span class="p">:</span> <span class="mi">42</span><span class="p">,</span>
 <span class="p">}</span>
 </pre></div>
 </div>
 </div>
 </div>
+</div>
+<div class="section" id="evaluation-set">
+<h3>Evaluation set<a class="headerlink" href="#evaluation-set" title="Permalink to this headline">¶</a></h3>
+</div>
+<div class="section" id="fit-model">
+<h3>Fit model<a class="headerlink" href="#fit-model" title="Permalink to this headline">¶</a></h3>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">reg</span> <span class="o">=</span> <span class="n">xgb</span><span class="o">.</span><span class="n">XGBRegressor</span><span class="p">(</span><span class="o">**</span><span class="n">params</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
 <ul class="simple">
-<li><p>Prepare evaluation data</p></li>
-<li><p>If there’s more than one item in eval_set, the last entry will be used for early stopping.</p></li>
+<li><p>Prepare evaluation data:</p>
+<ul>
+<li><p>If there’s more than one item in <code class="docutils literal notranslate"><span class="pre">eval_set</span></code>, the last entry will be used for early stopping.</p></li>
 <li><p>If we want to plot the learning curves for both training and test data, we need to provide both training and test data as eval_set</p></li>
+</ul>
+</li>
 </ul>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -547,210 +720,66 @@ const thebe_selector_output = ".output, .cell_output"
 </div>
 </div>
 </div>
-<ul class="simple">
-<li><p>Build and fit model</p></li>
-</ul>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">reg</span> <span class="o">=</span> <span class="n">xgb</span><span class="o">.</span><span class="n">XGBRegressor</span><span class="p">(</span><span class="o">**</span><span class="n">params</span><span class="p">)</span>
-
-<span class="n">reg</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X_train</span><span class="p">,</span> 
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">reg</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X_train</span><span class="p">,</span> 
         <span class="n">y_train</span><span class="p">,</span> 
-        <span class="n">verbose</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
-        <span class="n">eval_set</span><span class="o">=</span> <span class="n">eval_set</span><span class="p">)</span>
+        <span class="n">verbose</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
+        <span class="n">eval_set</span><span class="o">=</span> <span class="n">eval_set</span><span class="p">,</span>
+        <span class="n">early_stopping_rounds</span><span class="o">=</span> <span class="mi">5</span>
+        <span class="p">)</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[0]	validation_0-rmse:1.93036	validation_1-rmse:1.93354
-[1]	validation_0-rmse:1.91394	validation_1-rmse:1.91718
-[2]	validation_0-rmse:1.89770	validation_1-rmse:1.90098
-[3]	validation_0-rmse:1.88164	validation_1-rmse:1.88499
-[4]	validation_0-rmse:1.86577	validation_1-rmse:1.86919
-[5]	validation_0-rmse:1.85008	validation_1-rmse:1.85355
-[6]	validation_0-rmse:1.83458	validation_1-rmse:1.83820
-[7]	validation_0-rmse:1.81924	validation_1-rmse:1.82291
-[8]	validation_0-rmse:1.80407	validation_1-rmse:1.80786
-[9]	validation_0-rmse:1.78907	validation_1-rmse:1.79295
-[10]	validation_0-rmse:1.77425	validation_1-rmse:1.77822
-[11]	validation_0-rmse:1.75960	validation_1-rmse:1.76372
-[12]	validation_0-rmse:1.74510	validation_1-rmse:1.74932
-[13]	validation_0-rmse:1.73076	validation_1-rmse:1.73510
-[14]	validation_0-rmse:1.71660	validation_1-rmse:1.72108
-[15]	validation_0-rmse:1.70256	validation_1-rmse:1.70712
-[16]	validation_0-rmse:1.68871	validation_1-rmse:1.69342
-[17]	validation_0-rmse:1.67500	validation_1-rmse:1.67983
-[18]	validation_0-rmse:1.66144	validation_1-rmse:1.66635
-[19]	validation_0-rmse:1.64798	validation_1-rmse:1.65304
-[20]	validation_0-rmse:1.63468	validation_1-rmse:1.63981
-[21]	validation_0-rmse:1.62159	validation_1-rmse:1.62672
-[22]	validation_0-rmse:1.60867	validation_1-rmse:1.61392
-[23]	validation_0-rmse:1.59582	validation_1-rmse:1.60122
-[24]	validation_0-rmse:1.58318	validation_1-rmse:1.58864
-[25]	validation_0-rmse:1.57062	validation_1-rmse:1.57614
-[26]	validation_0-rmse:1.55826	validation_1-rmse:1.56395
-[27]	validation_0-rmse:1.54605	validation_1-rmse:1.55186
-[28]	validation_0-rmse:1.53394	validation_1-rmse:1.53988
-[29]	validation_0-rmse:1.52197	validation_1-rmse:1.52798
-[30]	validation_0-rmse:1.51015	validation_1-rmse:1.51636
-[31]	validation_0-rmse:1.49846	validation_1-rmse:1.50480
-[32]	validation_0-rmse:1.48694	validation_1-rmse:1.49337
-[33]	validation_0-rmse:1.47551	validation_1-rmse:1.48211
-[34]	validation_0-rmse:1.46422	validation_1-rmse:1.47091
-[35]	validation_0-rmse:1.45308	validation_1-rmse:1.45987
-[36]	validation_0-rmse:1.44207	validation_1-rmse:1.44904
-[37]	validation_0-rmse:1.43117	validation_1-rmse:1.43826
-[38]	validation_0-rmse:1.42040	validation_1-rmse:1.42756
-[39]	validation_0-rmse:1.40979	validation_1-rmse:1.41706
-[40]	validation_0-rmse:1.39927	validation_1-rmse:1.40673
-[41]	validation_0-rmse:1.38892	validation_1-rmse:1.39654
-[42]	validation_0-rmse:1.37865	validation_1-rmse:1.38641
-[43]	validation_0-rmse:1.36850	validation_1-rmse:1.37637
-[44]	validation_0-rmse:1.35850	validation_1-rmse:1.36655
-[45]	validation_0-rmse:1.34858	validation_1-rmse:1.35678
-[46]	validation_0-rmse:1.33876	validation_1-rmse:1.34706
-[47]	validation_0-rmse:1.32909	validation_1-rmse:1.33751
-[48]	validation_0-rmse:1.31950	validation_1-rmse:1.32810
-[49]	validation_0-rmse:1.31007	validation_1-rmse:1.31881
-</pre></div>
-</div>
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>XGBRegressor(base_score=0.5, booster=&#39;gbtree&#39;, colsample_bylevel=1,
-             colsample_bynode=1, colsample_bytree=1, enable_categorical=False,
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>XGBRegressor(base_score=0.5, booster=&#39;gbtree&#39;, colsample_bylevel=0.8,
+             colsample_bynode=1, colsample_bytree=0.9, enable_categorical=False,
              eval_metric=&#39;rmse&#39;, gamma=0, gpu_id=-1, importance_type=None,
              interaction_constraints=&#39;&#39;, learning_rate=0.01, max_delta_step=0,
              max_depth=4, min_child_weight=1, missing=nan,
-             monotone_constraints=&#39;()&#39;, n_estimators=50, n_jobs=10,
-             num_parallel_tree=1, predictor=&#39;auto&#39;, random_state=0, reg_alpha=0,
-             reg_lambda=1, scale_pos_weight=1, subsample=1, tree_method=&#39;exact&#39;,
-             validate_parameters=1, verbosity=None)
+             monotone_constraints=&#39;()&#39;, n_estimators=100, n_jobs=10,
+             num_parallel_tree=1, predictor=&#39;auto&#39;, random_state=42,
+             reg_alpha=0, reg_lambda=0.1, scale_pos_weight=1, subsample=0.8,
+             tree_method=&#39;exact&#39;, validate_parameters=1, verbosity=None)
 </pre></div>
 </div>
 </div>
 </div>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">reg</span><span class="o">.</span><span class="n">evals_result</span><span class="p">()</span>
-</pre></div>
 </div>
-</div>
-<div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>{&#39;validation_0&#39;: OrderedDict([(&#39;rmse&#39;,
-               [1.93036,
-                1.913936,
-                1.897696,
-                1.881644,
-                1.865773,
-                1.850085,
-                1.834582,
-                1.819236,
-                1.80407,
-                1.789071,
-                1.774255,
-                1.759603,
-                1.745095,
-                1.730761,
-                1.716599,
-                1.70256,
-                1.688709,
-                1.674996,
-                1.661438,
-                1.647982,
-                1.634684,
-                1.621588,
-                1.608669,
-                1.595824,
-                1.583178,
-                1.570625,
-                1.558256,
-                1.546054,
-                1.533939,
-                1.521966,
-                1.510154,
-                1.498459,
-                1.486938,
-                1.475511,
-                1.464224,
-                1.453085,
-                1.442069,
-                1.431173,
-                1.420403,
-                1.409787,
-                1.399267,
-                1.388916,
-                1.378654,
-                1.368496,
-                1.358502,
-                1.348583,
-                1.338761,
-                1.329085,
-                1.319504,
-                1.310071])]),
- &#39;validation_1&#39;: OrderedDict([(&#39;rmse&#39;,
-               [1.933542,
-                1.917176,
-                1.900983,
-                1.884991,
-                1.869189,
-                1.853547,
-                1.838201,
-                1.822914,
-                1.807856,
-                1.792949,
-                1.778225,
-                1.763721,
-                1.749318,
-                1.735098,
-                1.721079,
-                1.707123,
-                1.693416,
-                1.679829,
-                1.666346,
-                1.65304,
-                1.639814,
-                1.626722,
-                1.613918,
-                1.601224,
-                1.588642,
-                1.576136,
-                1.563955,
-                1.551863,
-                1.539882,
-                1.527975,
-                1.516359,
-                1.504795,
-                1.493372,
-                1.482111,
-                1.470912,
-                1.45987,
-                1.449041,
-                1.43826,
-                1.42756,
-                1.41706,
-                1.406729,
-                1.396541,
-                1.386409,
-                1.37637,
-                1.366547,
-                1.356777,
-                1.347056,
-                1.337506,
-                1.328102,
-                1.318808])])}
-</pre></div>
-</div>
-</div>
-</div>
+<div class="section" id="evaluation">
+<h3>Evaluation<a class="headerlink" href="#evaluation" title="Permalink to this headline">¶</a></h3>
 <ul class="simple">
-<li><p>The best iteration obtained by early stopping. This attribute is 0-based, for instance if the best iteration is the first round, then best_iteration is 0.</p></li>
+<li><p>First, we obtain our best iteration (this attribute is 0-based, for instance if the best iteration is the 5th round, then best_iteration is 4).</p></li>
 </ul>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">reg</span><span class="o">.</span><span class="n">best_iteration</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">best_iter</span> <span class="o">=</span> <span class="n">reg</span><span class="o">.</span><span class="n">best_iteration</span>
+<span class="n">best_iter</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>49
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>99
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">evals_result</span> <span class="o">=</span> <span class="n">reg</span><span class="o">.</span><span class="n">evals_result</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Show validation result for our best iteration:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">evals_result</span><span class="p">[</span><span class="s1">&#39;validation_1&#39;</span><span class="p">][</span><span class="s1">&#39;rmse&#39;</span><span class="p">][</span><span class="n">best_iter</span><span class="p">]</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>0.978616
 </pre></div>
 </div>
 </div>
@@ -766,7 +795,7 @@ const thebe_selector_output = ".output, .cell_output"
 </div>
 </div>
 <ul class="simple">
-<li><p>Obtain RMSE</p></li>
+<li><p>Obtain RMSE with skicit-learn function mean_squared_error:</p></li>
 </ul>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -775,7 +804,7 @@ const thebe_selector_output = ".output, .cell_output"
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>1.3188079378718305
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>0.9786155477422379
 </pre></div>
 </div>
 </div>
@@ -788,6 +817,7 @@ const thebe_selector_output = ".output, .cell_output"
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Save model into JSON format.</span>
 <span class="n">reg</span><span class="o">.</span><span class="n">save_model</span><span class="p">(</span><span class="s2">&quot;regressor.json&quot;</span><span class="p">)</span>
 </pre></div>
+</div>
 </div>
 </div>
 </div>
@@ -825,7 +855,7 @@ const thebe_selector_output = ".output, .cell_output"
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/gradientboosting-xgboost-ca_26_0.png" src="../_images/gradientboosting-xgboost-ca_26_0.png" />
+<img alt="../_images/xgboost-regression_38_0.png" src="../_images/xgboost-regression_38_0.png" />
 </div>
 </div>
 </div>
@@ -851,8 +881,8 @@ const thebe_selector_output = ".output, .cell_output"
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([0.5389647 , 0.04911011, 0.10514385, 0.        , 0.01159318,
-       0.17180622, 0.07378276, 0.04959917], dtype=float32)
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([0.36361885, 0.06250317, 0.16818316, 0.07790712, 0.01166479,
+       0.15469895, 0.08890022, 0.07252376], dtype=float32)
 </pre></div>
 </div>
 </div>
@@ -867,7 +897,7 @@ const thebe_selector_output = ".output, .cell_output"
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/gradientboosting-xgboost-ca_30_0.png" src="../_images/gradientboosting-xgboost-ca_30_0.png" />
+<img alt="../_images/xgboost-regression_42_0.png" src="../_images/xgboost-regression_42_0.png" />
 </div>
 </div>
 </div>
@@ -886,42 +916,11 @@ const thebe_selector_output = ".output, .cell_output"
 </pre></div>
 </div>
 </div>
-</div>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">result</span>
-</pre></div>
-</div>
-</div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>{&#39;importances_mean&#39;: array([0.42380621, 0.01296257, 0.01401125, 0.        , 0.00051886,
-        0.06618216, 0.00650385, 0.00071611]),
- &#39;importances_std&#39;: array([0.00836628, 0.00211472, 0.00110466, 0.        , 0.00035793,
-        0.0039604 , 0.00101385, 0.00013158]),
- &#39;importances&#39;: array([[4.13977358e-01, 4.27543189e-01, 4.17442947e-01, 4.16331701e-01,
-         4.34321970e-01, 4.41830028e-01, 4.21468045e-01, 4.26686162e-01,
-         4.20214924e-01, 4.18245811e-01],
-        [1.41752693e-02, 1.48520626e-02, 1.29326333e-02, 1.34002596e-02,
-         1.62666310e-02, 7.98938369e-03, 1.34120866e-02, 1.13797786e-02,
-         1.32721925e-02, 1.19453894e-02],
-        [1.39285213e-02, 1.34339251e-02, 1.34097396e-02, 1.38147796e-02,
-         1.18717642e-02, 1.37149863e-02, 1.36394990e-02, 1.57344377e-02,
-         1.48039360e-02, 1.57608739e-02],
-        [0.00000000e+00, 0.00000000e+00, 0.00000000e+00, 0.00000000e+00,
-         0.00000000e+00, 0.00000000e+00, 0.00000000e+00, 0.00000000e+00,
-         0.00000000e+00, 0.00000000e+00],
-        [0.00000000e+00, 5.46793615e-04, 6.08834627e-04, 9.50120896e-04,
-         8.91410415e-04, 0.00000000e+00, 7.90584276e-04, 6.96437734e-04,
-         0.00000000e+00, 7.04456317e-04],
-        [6.38934510e-02, 7.14004762e-02, 6.69274284e-02, 6.13092732e-02,
-         6.97169736e-02, 6.04855223e-02, 7.25240382e-02, 6.24236987e-02,
-         6.60779391e-02, 6.70627886e-02],
-        [5.77971653e-03, 7.37457385e-03, 6.06607086e-03, 7.20450230e-03,
-         7.70175919e-03, 7.20906794e-03, 4.97455791e-03, 7.71497798e-03,
-         6.04839287e-03, 4.96485211e-03],
-        [8.19306075e-04, 8.23486541e-04, 7.41532888e-04, 7.28411453e-04,
-         6.22548872e-04, 7.89207941e-04, 8.83724057e-04, 4.28268846e-04,
-         7.60586101e-04, 5.63995683e-04]])}
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/Users/jankirenz/opt/anaconda3/envs/xgboost/lib/python3.9/site-packages/xgboost/compat.py:36: FutureWarning: pandas.Int64Index is deprecated and will be removed from pandas in a future version. Use pandas.Index with the appropriate dtype instead.
+  from pandas import MultiIndex, Int64Index
+/Users/jankirenz/opt/anaconda3/envs/xgboost/lib/python3.9/site-packages/xgboost/compat.py:36: FutureWarning: pandas.Int64Index is deprecated and will be removed from pandas in a future version. Use pandas.Index with the appropriate dtype instead.
+  from pandas import MultiIndex, Int64Index
 </pre></div>
 </div>
 </div>
@@ -949,7 +948,7 @@ const thebe_selector_output = ".output, .cell_output"
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/gradientboosting-xgboost-ca_35_0.png" src="../_images/gradientboosting-xgboost-ca_35_0.png" />
+<img alt="../_images/xgboost-regression_46_0.png" src="../_images/xgboost-regression_46_0.png" />
 </div>
 </div>
 <ul class="simple">
@@ -969,21 +968,166 @@ const thebe_selector_output = ".output, .cell_output"
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/gradientboosting-xgboost-ca_37_0.png" src="../_images/gradientboosting-xgboost-ca_37_0.png" />
+<img alt="../_images/xgboost-regression_48_0.png" src="../_images/xgboost-regression_48_0.png" />
 </div>
 </div>
-<ul class="simple">
-<li><p>We observe that the same features are detected as most important using both methods. Although the relative importances vary (especially for feature <code class="docutils literal notranslate"><span class="pre">Years</span></code>).</p></li>
-</ul>
+</div>
+<div class="section" id="visualize-tree">
+<h3>Visualize tree<a class="headerlink" href="#visualize-tree" title="Permalink to this headline">¶</a></h3>
+<p>You need to install graphviz to plot the tree (for Anaconda, use <code class="docutils literal notranslate"><span class="pre">conda</span> <span class="pre">install</span> <span class="pre">python-graphviz</span></code>)</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">xgb</span><span class="o">.</span><span class="n">plot_tree</span><span class="p">(</span><span class="n">reg</span> <span class="p">,</span><span class="n">num_trees</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">rcParams</span><span class="p">[</span><span class="s1">&#39;figure.figsize&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="p">[</span><span class="mi">50</span><span class="p">,</span> <span class="mi">10</span><span class="p">]</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/xgboost-regression_51_0.png" src="../_images/xgboost-regression_51_0.png" />
+</div>
+</div>
+</div>
+</div>
+<div class="section" id="crossvalidation">
+<h2>Crossvalidation<a class="headerlink" href="#crossvalidation" title="Permalink to this headline">¶</a></h2>
+<p>Next, we use k-fold cross validation to build even more robust trees.</p>
+<p>First, we will convert the dataset into an optimized data structure called Dmatrix.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">dmatrix</span> <span class="o">=</span> <span class="n">xgb</span><span class="o">.</span><span class="n">DMatrix</span><span class="p">(</span><span class="n">data</span><span class="o">=</span><span class="n">X</span><span class="p">,</span><span class="n">label</span><span class="o">=</span><span class="n">y</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>We use the same hyperparameteras as before. We just drop <code class="docutils literal notranslate"><span class="pre">num_estimators</span></code> and instead use <code class="docutils literal notranslate"><span class="pre">num_boost_round</span></code> in our fit.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">params_cv</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="s2">&quot;objective&quot;</span><span class="p">:</span> <span class="s2">&quot;reg:squarederror&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;max_depth&quot;</span><span class="p">:</span> <span class="mi">4</span><span class="p">,</span>
+    <span class="s2">&quot;learning_rate&quot;</span><span class="p">:</span> <span class="mf">0.01</span><span class="p">,</span>
+    <span class="s2">&quot;subsample&quot;</span><span class="p">:</span> <span class="mf">0.8</span><span class="p">,</span>
+    <span class="s2">&quot;colsample_bytree&quot;</span><span class="p">:</span> <span class="mf">0.9</span><span class="p">,</span>
+    <span class="s2">&quot;colsample_bylevel&quot;</span><span class="p">:</span> <span class="mf">0.8</span><span class="p">,</span>
+    <span class="s2">&quot;reg_lambda&quot;</span><span class="p">:</span> <span class="mf">0.1</span><span class="p">,</span>
+    <span class="s2">&quot;eval_metric&quot;</span><span class="p">:</span> <span class="s2">&quot;rmse&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;random_state&quot;</span><span class="p">:</span> <span class="mi">42</span><span class="p">,</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Perform cross validation:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">reg_cv</span> <span class="o">=</span> <span class="n">xgb</span><span class="o">.</span><span class="n">cv</span><span class="p">(</span><span class="n">dtrain</span><span class="o">=</span><span class="n">dmatrix</span><span class="p">,</span> 
+                <span class="n">nfold</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span>
+                <span class="n">params</span><span class="o">=</span><span class="n">params_cv</span><span class="p">,</span>
+                <span class="n">num_boost_round</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span>
+                <span class="n">early_stopping_rounds</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span>
+                <span class="n">metrics</span><span class="o">=</span><span class="s2">&quot;rmse&quot;</span><span class="p">,</span> 
+                <span class="n">as_pandas</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> 
+                <span class="n">seed</span><span class="o">=</span><span class="mi">123</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">reg_cv</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>train-rmse-mean</th>
+      <th>train-rmse-std</th>
+      <th>test-rmse-mean</th>
+      <th>test-rmse-std</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>1.930837</td>
+      <td>0.008074</td>
+      <td>1.930872</td>
+      <td>0.016105</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>1.914908</td>
+      <td>0.008166</td>
+      <td>1.914989</td>
+      <td>0.015754</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>1.898777</td>
+      <td>0.008120</td>
+      <td>1.898905</td>
+      <td>0.015530</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>1.882705</td>
+      <td>0.008067</td>
+      <td>1.882887</td>
+      <td>0.015337</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>1.866842</td>
+      <td>0.007958</td>
+      <td>1.867077</td>
+      <td>0.015233</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+<p>Extract and print the final boosting round metric.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">((</span><span class="n">reg_cv</span><span class="p">[</span><span class="s2">&quot;test-rmse-mean&quot;</span><span class="p">])</span><span class="o">.</span><span class="n">tail</span><span class="p">(</span><span class="mi">1</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>4    1.867077
+Name: test-rmse-mean, dtype: float64
+</pre></div>
+</div>
+</div>
 </div>
 </div>
 <div class="section" id="hyperparameter-tuning">
 <h2>Hyperparameter Tuning<a class="headerlink" href="#hyperparameter-tuning" title="Permalink to this headline">¶</a></h2>
+<p>Let’s demonstrate hyperparameter tuning for only a few parameters:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">params</span> <span class="o">=</span> <span class="p">{</span> <span class="s1">&#39;max_depth&#39;</span><span class="p">:</span> <span class="p">[</span><span class="mi">3</span><span class="p">,</span><span class="mi">6</span><span class="p">],</span>
            <span class="s1">&#39;learning_rate&#39;</span><span class="p">:</span> <span class="p">[</span><span class="mf">0.01</span><span class="p">,</span> <span class="mf">0.05</span><span class="p">],</span>
-           <span class="s1">&#39;n_estimators&#39;</span><span class="p">:</span> <span class="p">[</span><span class="mi">10</span><span class="p">,</span> <span class="mi">50</span><span class="p">],</span>
+           <span class="s1">&#39;n_estimators&#39;</span><span class="p">:</span> <span class="p">[</span><span class="mi">3</span><span class="p">,</span> <span class="mi">5</span><span class="p">],</span>
            <span class="s1">&#39;colsample_bytree&#39;</span><span class="p">:</span> <span class="p">[</span><span class="mf">0.3</span><span class="p">,</span> <span class="mf">0.7</span><span class="p">]}</span>
 </pre></div>
 </div>
@@ -991,14 +1135,14 @@ const thebe_selector_output = ".output, .cell_output"
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">xgbr</span> <span class="o">=</span> <span class="n">xgb</span><span class="o">.</span><span class="n">XGBRegressor</span><span class="p">(</span><span class="n">seed</span> <span class="o">=</span> <span class="mi">20</span><span class="p">)</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">reg_h</span> <span class="o">=</span> <span class="n">xgb</span><span class="o">.</span><span class="n">XGBRegressor</span><span class="p">(</span><span class="n">seed</span> <span class="o">=</span> <span class="mi">20</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">clf</span> <span class="o">=</span> <span class="n">GridSearchCV</span><span class="p">(</span><span class="n">estimator</span><span class="o">=</span><span class="n">xgbr</span><span class="p">,</span> 
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">reg_hyper</span> <span class="o">=</span> <span class="n">GridSearchCV</span><span class="p">(</span><span class="n">estimator</span><span class="o">=</span><span class="n">reg_h</span><span class="p">,</span> 
                    <span class="n">param_grid</span><span class="o">=</span><span class="n">params</span><span class="p">,</span>
                    <span class="n">scoring</span><span class="o">=</span><span class="s1">&#39;neg_mean_squared_error&#39;</span><span class="p">,</span> 
                    <span class="n">verbose</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
@@ -1008,7 +1152,7 @@ const thebe_selector_output = ".output, .cell_output"
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">clf</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">y</span><span class="p">)</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">reg_hyper</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X_train</span><span class="p">,</span> <span class="n">y_train</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -1026,7 +1170,7 @@ const thebe_selector_output = ".output, .cell_output"
                                     learning_rate=None, max_delta_step=None,
                                     max_depth=None, min_child_weight=None,
                                     missing=nan, monotone_constraints=None,
-                                    n_esti...=None,
+                                    n_esti...bs=None,
                                     num_parallel_tree=None, predictor=None,
                                     random_state=None, reg_alpha=None,
                                     reg_lambda=None, scale_pos_weight=None,
@@ -1034,7 +1178,7 @@ const thebe_selector_output = ".output, .cell_output"
                                     validate_parameters=None, verbosity=None),
              param_grid={&#39;colsample_bytree&#39;: [0.3, 0.7],
                          &#39;learning_rate&#39;: [0.01, 0.05], &#39;max_depth&#39;: [3, 6],
-                         &#39;n_estimators&#39;: [10, 50]},
+                         &#39;n_estimators&#39;: [3, 5]},
              scoring=&#39;neg_mean_squared_error&#39;, verbose=1)
 </pre></div>
 </div>
@@ -1042,14 +1186,14 @@ const thebe_selector_output = ".output, .cell_output"
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Best parameters:&quot;</span><span class="p">,</span> <span class="n">clf</span><span class="o">.</span><span class="n">best_params_</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Lowest RMSE: &quot;</span><span class="p">,</span> <span class="p">(</span><span class="o">-</span><span class="n">clf</span><span class="o">.</span><span class="n">best_score_</span><span class="p">)</span><span class="o">**</span><span class="p">(</span><span class="mi">1</span><span class="o">/</span><span class="mf">2.0</span><span class="p">))</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Best parameters:&quot;</span><span class="p">,</span> <span class="n">reg_hyper</span><span class="o">.</span><span class="n">best_params_</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Lowest MSE: &quot;</span><span class="p">,</span> <span class="p">(</span><span class="o">-</span><span class="n">reg_hyper</span><span class="o">.</span><span class="n">best_score_</span><span class="p">))</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Best parameters: {&#39;colsample_bytree&#39;: 0.7, &#39;learning_rate&#39;: 0.05, &#39;max_depth&#39;: 6, &#39;n_estimators&#39;: 50}
-Lowest RMSE:  0.7115304756489487
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Best parameters: {&#39;colsample_bytree&#39;: 0.7, &#39;learning_rate&#39;: 0.05, &#39;max_depth&#39;: 6, &#39;n_estimators&#39;: 5}
+Lowest MSE:  2.4835107214397
 </pre></div>
 </div>
 </div>
@@ -1081,7 +1225,21 @@ Lowest RMSE:  0.7115304756489487
               
             
                 <!-- Previous / next buttons -->
-<div class='prev-next-area'>
+<div class='prev-next-area'> 
+    <a class='left-prev' id="prev-link" href="gradientboosting.html" title="previous page">
+        <i class="fas fa-angle-left"></i>
+        <div class="prev-next-info">
+            <p class="prev-next-subtitle">previous</p>
+            <p class="prev-next-title">Gradient Boosting in scikit-learn</p>
+        </div>
+    </a>
+    <a class='right-next' id="next-link" href="gradientboosting-xgboost.html" title="next page">
+    <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">Gradient Boosting with XGBoost</p>
+    </div>
+    <i class="fas fa-angle-right"></i>
+    </a>
 </div>
             
         </div>
