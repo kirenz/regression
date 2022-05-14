@@ -388,11 +388,6 @@ const thebe_selector_output = ".output, .cell_output"
     </a>
    </li>
    <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#evaluation-set">
-     Evaluation set
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
     <a class="reference internal nav-link" href="#fit-model">
      Fit model
     </a>
@@ -491,11 +486,6 @@ const thebe_selector_output = ".output, .cell_output"
    <li class="toc-h3 nav-item toc-entry">
     <a class="reference internal nav-link" href="#hyperparameters">
      Hyperparameters
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#evaluation-set">
-     Evaluation set
     </a>
    </li>
    <li class="toc-h3 nav-item toc-entry">
@@ -693,9 +683,6 @@ memory usage: 1.3 MB
 </div>
 </div>
 </div>
-<div class="section" id="evaluation-set">
-<h3>Evaluation set<a class="headerlink" href="#evaluation-set" title="Permalink to this headline">¶</a></h3>
-</div>
 <div class="section" id="fit-model">
 <h3>Fit model<a class="headerlink" href="#fit-model" title="Permalink to this headline">¶</a></h3>
 <div class="cell docutils container">
@@ -720,13 +707,16 @@ memory usage: 1.3 MB
 </div>
 </div>
 </div>
+<p>If you have a validation set, you can use early stopping to find the optimal number of boosting rounds. Early stopping requires at least one set in evals. If there’s more than one, it will use the last.</p>
+<p>The model will train until the validation score stops improving. Validation error needs to decrease at least every <code class="docutils literal notranslate"><span class="pre">early_stopping_rounds</span></code> to continue training.</p>
+<p>If early stopping occurs, the model will have two additional fields: bst.best_score, bst.best_iteration. Note that xgboost will return a model from the last iteration, not the best one.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">reg</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X_train</span><span class="p">,</span> 
         <span class="n">y_train</span><span class="p">,</span> 
         <span class="n">verbose</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
         <span class="n">eval_set</span><span class="o">=</span> <span class="n">eval_set</span><span class="p">,</span>
-        <span class="n">early_stopping_rounds</span><span class="o">=</span> <span class="mi">5</span>
+        <span class="n">early_stopping_rounds</span><span class="o">=</span> <span class="mi">3</span>
         <span class="p">)</span>
 </pre></div>
 </div>
@@ -749,7 +739,7 @@ memory usage: 1.3 MB
 <div class="section" id="evaluation">
 <h3>Evaluation<a class="headerlink" href="#evaluation" title="Permalink to this headline">¶</a></h3>
 <ul class="simple">
-<li><p>First, we obtain our best iteration (this attribute is 0-based, for instance if the best iteration is the 5th round, then best_iteration is 4).</p></li>
+<li><p>First, we obtain our best iteration (this attribute is 0-based, for instance if the best iteration is the 100th round, then best_iteration is 99).</p></li>
 </ul>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -764,17 +754,11 @@ memory usage: 1.3 MB
 </div>
 </div>
 </div>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">evals_result</span> <span class="o">=</span> <span class="n">reg</span><span class="o">.</span><span class="n">evals_result</span><span class="p">()</span>
-</pre></div>
-</div>
-</div>
-</div>
 <p>Show validation result for our best iteration:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">evals_result</span><span class="p">[</span><span class="s1">&#39;validation_1&#39;</span><span class="p">][</span><span class="s1">&#39;rmse&#39;</span><span class="p">][</span><span class="n">best_iter</span><span class="p">]</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">evals_result</span> <span class="o">=</span> <span class="n">reg</span><span class="o">.</span><span class="n">evals_result</span><span class="p">()</span>
+<span class="n">evals_result</span><span class="p">[</span><span class="s1">&#39;validation_1&#39;</span><span class="p">][</span><span class="s1">&#39;rmse&#39;</span><span class="p">][</span><span class="n">best_iter</span><span class="p">]</span>
 </pre></div>
 </div>
 </div>
@@ -855,7 +839,7 @@ memory usage: 1.3 MB
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/xgboost-regression_38_0.png" src="../_images/xgboost-regression_38_0.png" />
+<img alt="../_images/xgboost-regression_37_0.png" src="../_images/xgboost-regression_37_0.png" />
 </div>
 </div>
 </div>
@@ -897,7 +881,7 @@ memory usage: 1.3 MB
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/xgboost-regression_42_0.png" src="../_images/xgboost-regression_42_0.png" />
+<img alt="../_images/xgboost-regression_41_0.png" src="../_images/xgboost-regression_41_0.png" />
 </div>
 </div>
 </div>
@@ -948,7 +932,7 @@ memory usage: 1.3 MB
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/xgboost-regression_46_0.png" src="../_images/xgboost-regression_46_0.png" />
+<img alt="../_images/xgboost-regression_45_0.png" src="../_images/xgboost-regression_45_0.png" />
 </div>
 </div>
 <ul class="simple">
@@ -968,7 +952,7 @@ memory usage: 1.3 MB
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/xgboost-regression_48_0.png" src="../_images/xgboost-regression_48_0.png" />
+<img alt="../_images/xgboost-regression_47_0.png" src="../_images/xgboost-regression_47_0.png" />
 </div>
 </div>
 </div>
@@ -984,10 +968,7 @@ memory usage: 1.3 MB
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;AxesSubplot:&gt;
-</pre></div>
-</div>
-<img alt="../_images/xgboost-regression_51_1.png" src="../_images/xgboost-regression_51_1.png" />
+<img alt="../_images/xgboost-regression_50_0.png" src="../_images/xgboost-regression_50_0.png" />
 </div>
 </div>
 </div>
