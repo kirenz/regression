@@ -5,7 +5,7 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>XGBoost regression &#8212; Introduction to Regression Models</title>
+    <title>XGBoost &#8212; Introduction to Regression Models</title>
     
   <link href="../_static/css/theme.css" rel="stylesheet">
   <link href="../_static/css/index.ff1ffe594081f20da1ef19478df9384b.css" rel="stylesheet">
@@ -51,6 +51,8 @@ const thebe_selector_input = "pre"
 const thebe_selector_output = ".output, .cell_output"
 </script>
     <script async="async" src="../_static/sphinx-thebe.js"></script>
+    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
@@ -161,7 +163,7 @@ const thebe_selector_output = ".output, .cell_output"
  </li>
  <li class="toctree-l1 current active">
   <a class="current reference internal" href="#">
-   XGBoost regression
+   XGBoost
   </a>
  </li>
  <li class="toctree-l1">
@@ -378,8 +380,8 @@ const thebe_selector_output = ".output, .cell_output"
   </ul>
  </li>
  <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#model">
-   Model
+  <a class="reference internal nav-link" href="#model-building">
+   Model building
   </a>
   <ul class="nav section-nav flex-column">
    <li class="toc-h3 nav-item toc-entry">
@@ -393,30 +395,42 @@ const thebe_selector_output = ".output, .cell_output"
     </a>
    </li>
    <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#evaluation">
-     Evaluation
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#plot-training-test-deviance">
-     Plot training test deviance
+    <a class="reference internal nav-link" href="#save-model">
+     Save model
     </a>
    </li>
   </ul>
  </li>
  <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#feature-importance">
-   Feature importance
+  <a class="reference internal nav-link" href="#evaluation">
+   Evaluation
   </a>
   <ul class="nav section-nav flex-column">
    <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#mean-decrease-in-impurity-mdi">
-     Mean decrease in impurity (MDI)
+    <a class="reference internal nav-link" href="#coefficient-of-determination">
+     Coefficient of determination
     </a>
    </li>
    <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#permutation-feature-importance">
-     Permutation feature importance
+    <a class="reference internal nav-link" href="#rmse">
+     RMSE
+    </a>
+    <ul class="nav section-nav flex-column">
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#xgboost-functions">
+       XGBoost functions
+      </a>
+     </li>
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#scikit-learn-functions">
+       Scikit-learn functions
+      </a>
+     </li>
+    </ul>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#train-test-deviance">
+     Train test deviance
     </a>
    </li>
    <li class="toc-h3 nav-item toc-entry">
@@ -427,8 +441,25 @@ const thebe_selector_output = ".output, .cell_output"
   </ul>
  </li>
  <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#crossvalidation">
-   Crossvalidation
+  <a class="reference internal nav-link" href="#feature-importance">
+   Feature importance
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#id1">
+     Feature importance
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#permutation-feature-importance">
+   Permutation feature importance
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#cross-validation">
+   Cross-validation
   </a>
  </li>
  <li class="toc-h2 nav-item toc-entry">
@@ -446,7 +477,7 @@ const thebe_selector_output = ".output, .cell_output"
         <div class="col-12 col-md-9 pl-md-3 pr-md-0">
             <!-- Table of contents that is only displayed when printing the page -->
             <div id="jb-print-docs-body" class="onlyprint">
-                <h1>XGBoost regression</h1>
+                <h1>XGBoost</h1>
                 <!-- Table of contents -->
                 <div id="print-main-content">
                     <div id="jb-print-toc">
@@ -479,8 +510,8 @@ const thebe_selector_output = ".output, .cell_output"
   </ul>
  </li>
  <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#model">
-   Model
+  <a class="reference internal nav-link" href="#model-building">
+   Model building
   </a>
   <ul class="nav section-nav flex-column">
    <li class="toc-h3 nav-item toc-entry">
@@ -494,30 +525,42 @@ const thebe_selector_output = ".output, .cell_output"
     </a>
    </li>
    <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#evaluation">
-     Evaluation
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#plot-training-test-deviance">
-     Plot training test deviance
+    <a class="reference internal nav-link" href="#save-model">
+     Save model
     </a>
    </li>
   </ul>
  </li>
  <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#feature-importance">
-   Feature importance
+  <a class="reference internal nav-link" href="#evaluation">
+   Evaluation
   </a>
   <ul class="nav section-nav flex-column">
    <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#mean-decrease-in-impurity-mdi">
-     Mean decrease in impurity (MDI)
+    <a class="reference internal nav-link" href="#coefficient-of-determination">
+     Coefficient of determination
     </a>
    </li>
    <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#permutation-feature-importance">
-     Permutation feature importance
+    <a class="reference internal nav-link" href="#rmse">
+     RMSE
+    </a>
+    <ul class="nav section-nav flex-column">
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#xgboost-functions">
+       XGBoost functions
+      </a>
+     </li>
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#scikit-learn-functions">
+       Scikit-learn functions
+      </a>
+     </li>
+    </ul>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#train-test-deviance">
+     Train test deviance
     </a>
    </li>
    <li class="toc-h3 nav-item toc-entry">
@@ -528,8 +571,25 @@ const thebe_selector_output = ".output, .cell_output"
   </ul>
  </li>
  <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#crossvalidation">
-   Crossvalidation
+  <a class="reference internal nav-link" href="#feature-importance">
+   Feature importance
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#id1">
+     Feature importance
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#permutation-feature-importance">
+   Permutation feature importance
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#cross-validation">
+   Cross-validation
   </a>
  </li>
  <li class="toc-h2 nav-item toc-entry">
@@ -546,15 +606,15 @@ const thebe_selector_output = ".output, .cell_output"
             
               <div>
                 
-  <div class="tex2jax_ignore mathjax_ignore section" id="xgboost-regression">
-<h1>XGBoost regression<a class="headerlink" href="#xgboost-regression" title="Permalink to this headline">¶</a></h1>
-<p>XGBoost stands for “Extreme Gradient Boosting”, where the term “Gradient Boosting” originates from the paper Greedy Function Approximation: A Gradient Boosting Machine, by Friedman. XGBoost is used for supervised learning problems (regression as well as classification), where we use the training data (with multiple features) to predict a target variable.</p>
+  <div class="tex2jax_ignore mathjax_ignore section" id="xgboost">
+<h1>XGBoost<a class="headerlink" href="#xgboost" title="Permalink to this headline">¶</a></h1>
+<p>XGBoost (eXtreme Gradient Boosting) is a <a class="reference external" href="https://xgboost.readthedocs.io/en/stable/">machine learning library</a> which implements supervised machine learning models under the Gradient <a class="reference external" href="https://en.wikipedia.org/wiki/Boosting_(machine_learning)">Boosting</a> framework.</p>
 <p>In this tutorial we’ll cover how to perform XGBoost regression in Python. We will focus on the following topics:</p>
 <ul class="simple">
-<li><p>XGBoost hyperparameters</p></li>
-<li><p>Fit and evaluate</p></li>
-<li><p>Feature importance</p></li>
-<li><p>Cross validation</p></li>
+<li><p>How to define hyperparameters</p></li>
+<li><p>Model fitting and evaluating</p></li>
+<li><p>Obtain feature importance</p></li>
+<li><p>Perform cross-validation</p></li>
 <li><p>Hyperparameter tuning</p></li>
 </ul>
 <div class="section" id="setup">
@@ -568,6 +628,7 @@ const thebe_selector_output = ".output, .cell_output"
 
 <span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
 <span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+<span class="kn">from</span> <span class="nn">pandas</span> <span class="kn">import</span> <span class="n">MultiIndex</span><span class="p">,</span> <span class="n">Int64Index</span>
 <span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
 
 <span class="kn">import</span> <span class="nn">xgboost</span> <span class="k">as</span> <span class="nn">xgb</span>
@@ -590,7 +651,7 @@ const thebe_selector_output = ".output, .cell_output"
 </div>
 <div class="section" id="data">
 <h2>Data<a class="headerlink" href="#data" title="Permalink to this headline">¶</a></h2>
-<p>We use data drawn from the 1990 U.S. Census (see this <a class="reference external" href="https://developers.google.com/machine-learning/crash-course/california-housing-data-description">data description</a> for more information).</p>
+<p>We use data drawn from the 1990 U.S. Census to predict median house value for households within a block (see this <a class="reference external" href="https://developers.google.com/machine-learning/crash-course/california-housing-data-description">data description</a> for more information).</p>
 <div class="section" id="data-import">
 <h3>Data import<a class="headerlink" href="#data-import" title="Permalink to this headline">¶</a></h3>
 <div class="cell docutils container">
@@ -640,16 +701,17 @@ memory usage: 1.3 MB
 </div>
 </div>
 </div>
-<div class="section" id="model">
-<h2>Model<a class="headerlink" href="#model" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="model-building">
+<h2>Model building<a class="headerlink" href="#model-building" title="Permalink to this headline">¶</a></h2>
 <div class="section" id="hyperparameters">
 <h3>Hyperparameters<a class="headerlink" href="#hyperparameters" title="Permalink to this headline">¶</a></h3>
-<p>XGBoost provides many hyperparameters but we will only consider a few of them (see the <a class="reference external" href="https://xgboost.readthedocs.io/en/latest/parameter.html#general-parameters">XGBoost documentation</a> for an complete overview). Note that we will use the <a class="reference external" href="https://xgboost.readthedocs.io/en/latest/python/python_api.html#module-xgboost.sklearn">scikit-learn wrapper interface</a>:</p>
+<p>XGBoost provides many hyperparameters but we will only consider a few of them (see the <a class="reference external" href="https://xgboost.readthedocs.io/en/latest/parameter.html#general-parameters">XGBoost documentation</a> for an complete overview).</p>
+<p>Note that we will use the <a class="reference external" href="https://xgboost.readthedocs.io/en/latest/python/python_api.html#module-xgboost.sklearn">scikit-learn wrapper interface</a>:</p>
 <ul class="simple">
 <li><p><code class="docutils literal notranslate"><span class="pre">objective</span></code>: determines the loss function to be used like <code class="docutils literal notranslate"><span class="pre">reg:squarederror</span></code> for regression problems, <code class="docutils literal notranslate"><span class="pre">binary:logistic</span></code> for logistic regression for binary classification or <code class="docutils literal notranslate"><span class="pre">multi:softmax</span></code>  to do multiclass classification using the softmax objectiv (note that there are more options).</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">n_estimators</span></code>: Number of gradient boosted trees. Equivalent to number of boosting rounds.</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">max_depth</span></code>: Maximum tree depth for base learners.</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">learning_rate</span></code>: Boosting learning rate (xgb’s “eta”). Range is [0,1]</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">learning_rate</span></code>: Boosting learning rate (xgb’s “eta”). Range is [0,1].</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">subsample</span></code>: Subsample ratio of the training instance. Setting it to 0.5 means that XGBoost would randomly sample half of the training data prior to growing trees.</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">colsample_bytree</span></code>: Subsample ratio of columns when constructing each tree. Subsampling occurs once for every tree constructed.</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">colsample_bylevel</span></code>: Subsample ratio of columns for each level. Subsampling occurs once for every new depth level reached in a tree. Columns are subsampled from the set of columns chosen for the current tree.</p></li>
@@ -662,7 +724,7 @@ memory usage: 1.3 MB
 <li><p><code class="docutils literal notranslate"><span class="pre">early_stopping_rounds</span></code>: If you have a validation set, you can use early stopping to find the optimal number of boosting rounds. Early stopping requires at least one set in evals. If there’s more than one, it will use the last. Note that we include this parameter in our fit function.</p></li>
 </ul>
 <ul class="simple">
-<li><p>Define hyperparameters</p></li>
+<li><p>Define hyperparameters as dictionary:</p></li>
 </ul>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -692,30 +754,26 @@ memory usage: 1.3 MB
 </div>
 </div>
 </div>
+<p>Since we want to plot the learning curves for both training and test data, we need to provide both training and test data as <code class="docutils literal notranslate"><span class="pre">eval_set</span></code>. Furthermore, if you provide a validation set, you can use “early stopping” to find the optimal number of boosting rounds (early stopping requires at least one set in evals. If there’s more than one, it will use the last).</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Early stoping: The model will train until the validation score stops improving. Validation error needs to decrease at least every <code class="docutils literal notranslate"><span class="pre">early_stopping_rounds</span></code> to continue training.</p>
+</div>
+<p>If early stopping occurs, the model will have two additional fields:</p>
 <ul class="simple">
-<li><p>Prepare evaluation data:</p>
-<ul>
-<li><p>If there’s more than one item in <code class="docutils literal notranslate"><span class="pre">eval_set</span></code>, the last entry will be used for early stopping.</p></li>
-<li><p>If we want to plot the learning curves for both training and test data, we need to provide both training and test data as eval_set</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">reg.best_score</span></code>,</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">reg.best_iteration</span></code></p></li>
 </ul>
-</li>
-</ul>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">eval_set</span> <span class="o">=</span> <span class="p">[(</span><span class="n">X_train</span><span class="p">,</span> <span class="n">y_train</span><span class="p">),</span> <span class="p">(</span><span class="n">X_test</span><span class="p">,</span> <span class="n">y_test</span><span class="p">)]</span>
-</pre></div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Xgboost will always return a model from the last iteration, not the best one.</p>
 </div>
-</div>
-</div>
-<p>If you have a validation set, you can use early stopping to find the optimal number of boosting rounds. Early stopping requires at least one set in evals. If there’s more than one, it will use the last.</p>
-<p>The model will train until the validation score stops improving. Validation error needs to decrease at least every <code class="docutils literal notranslate"><span class="pre">early_stopping_rounds</span></code> to continue training.</p>
-<p>If early stopping occurs, the model will have two additional fields: bst.best_score, bst.best_iteration. Note that xgboost will return a model from the last iteration, not the best one.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">reg</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X_train</span><span class="p">,</span> 
         <span class="n">y_train</span><span class="p">,</span> 
         <span class="n">verbose</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
-        <span class="n">eval_set</span><span class="o">=</span> <span class="n">eval_set</span><span class="p">,</span>
+        <span class="n">eval_set</span><span class="o">=</span> <span class="p">[(</span><span class="n">X_train</span><span class="p">,</span> <span class="n">y_train</span><span class="p">),</span> <span class="p">(</span><span class="n">X_test</span><span class="p">,</span> <span class="n">y_test</span><span class="p">)],</span>
         <span class="n">early_stopping_rounds</span><span class="o">=</span> <span class="mi">3</span>
         <span class="p">)</span>
 </pre></div>
@@ -736,10 +794,83 @@ memory usage: 1.3 MB
 </div>
 </div>
 </div>
-<div class="section" id="evaluation">
-<h3>Evaluation<a class="headerlink" href="#evaluation" title="Permalink to this headline">¶</a></h3>
+<div class="section" id="save-model">
+<h3>Save model<a class="headerlink" href="#save-model" title="Permalink to this headline">¶</a></h3>
 <ul class="simple">
-<li><p>First, we obtain our best iteration (this attribute is 0-based, for instance if the best iteration is the 100th round, then best_iteration is 99).</p></li>
+<li><p>Save the model into JSON format:</p></li>
+</ul>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">reg</span><span class="o">.</span><span class="n">save_model</span><span class="p">(</span><span class="s2">&quot;regressor.json&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="section" id="evaluation">
+<h2>Evaluation<a class="headerlink" href="#evaluation" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li><p>Obtain all evaluation results:</p></li>
+</ul>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">results</span> <span class="o">=</span> <span class="n">reg</span><span class="o">.</span><span class="n">evals_result</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="section" id="coefficient-of-determination">
+<h3>Coefficient of determination<a class="headerlink" href="#coefficient-of-determination" title="Permalink to this headline">¶</a></h3>
+<p>Return the coefficient of determination (<span class="math notranslate nohighlight">\(R^2\)</span>) of the prediction:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># for training data</span>
+<span class="n">reg</span><span class="o">.</span><span class="n">score</span><span class="p">(</span><span class="n">X_train</span><span class="p">,</span> <span class="n">y_train</span><span class="p">,</span> <span class="n">sample_weight</span><span class="o">=</span><span class="kc">None</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>0.30197816458883875
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># for test data</span>
+<span class="n">reg</span><span class="o">.</span><span class="n">score</span><span class="p">(</span><span class="n">X_test</span><span class="p">,</span> <span class="n">y_test</span><span class="p">,</span> <span class="n">sample_weight</span><span class="o">=</span><span class="kc">None</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>0.30315081477332295
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="section" id="rmse">
+<h3>RMSE<a class="headerlink" href="#rmse" title="Permalink to this headline">¶</a></h3>
+<div class="section" id="xgboost-functions">
+<h4>XGBoost functions<a class="headerlink" href="#xgboost-functions" title="Permalink to this headline">¶</a></h4>
+<ul class="simple">
+<li><p>Show evaluation result (<code class="docutils literal notranslate"><span class="pre">rmse</span></code>) for our test data (<code class="docutils literal notranslate"><span class="pre">validation_1</span></code>) for the last model in the list (<code class="docutils literal notranslate"><span class="pre">-1</span></code>)</p></li>
+</ul>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">results</span><span class="p">[</span><span class="s1">&#39;validation_1&#39;</span><span class="p">][</span><span class="s1">&#39;rmse&#39;</span><span class="p">][</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>0.978616
+</pre></div>
+</div>
+</div>
+</div>
+<ul class="simple">
+<li><p>Next, we obtain our best iteration (this attribute is 0-based, for instance if the best iteration is the 100th round, then best_iteration is 99).</p></li>
 </ul>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -754,11 +885,12 @@ memory usage: 1.3 MB
 </div>
 </div>
 </div>
-<p>Show validation result for our best iteration:</p>
+<ul class="simple">
+<li><p>Show result for best iteration (in our case, the last iteration and best iteration are identical)</p></li>
+</ul>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">evals_result</span> <span class="o">=</span> <span class="n">reg</span><span class="o">.</span><span class="n">evals_result</span><span class="p">()</span>
-<span class="n">evals_result</span><span class="p">[</span><span class="s1">&#39;validation_1&#39;</span><span class="p">][</span><span class="s1">&#39;rmse&#39;</span><span class="p">][</span><span class="n">best_iter</span><span class="p">]</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">results</span><span class="p">[</span><span class="s1">&#39;validation_1&#39;</span><span class="p">][</span><span class="s1">&#39;rmse&#39;</span><span class="p">][</span><span class="n">best_iter</span><span class="p">]</span>
 </pre></div>
 </div>
 </div>
@@ -768,6 +900,10 @@ memory usage: 1.3 MB
 </div>
 </div>
 </div>
+</div>
+<div class="section" id="scikit-learn-functions">
+<h4>Scikit-learn functions<a class="headerlink" href="#scikit-learn-functions" title="Permalink to this headline">¶</a></h4>
+<p>Next, we use the scikit-learn workflow to obtain our evaluation metrics.</p>
 <ul class="simple">
 <li><p>Make predictions</p></li>
 </ul>
@@ -779,7 +915,7 @@ memory usage: 1.3 MB
 </div>
 </div>
 <ul class="simple">
-<li><p>Obtain RMSE with skicit-learn function mean_squared_error:</p></li>
+<li><p>Obtain RMSE with skicit-learn function <code class="docutils literal notranslate"><span class="pre">mean_squared_error</span></code>:</p></li>
 </ul>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -793,30 +929,10 @@ memory usage: 1.3 MB
 </div>
 </div>
 </div>
-<ul class="simple">
-<li><p>Save the model</p></li>
-</ul>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Save model into JSON format.</span>
-<span class="n">reg</span><span class="o">.</span><span class="n">save_model</span><span class="p">(</span><span class="s2">&quot;regressor.json&quot;</span><span class="p">)</span>
-</pre></div>
 </div>
 </div>
-</div>
-</div>
-<div class="section" id="plot-training-test-deviance">
-<h3>Plot training test deviance<a class="headerlink" href="#plot-training-test-deviance" title="Permalink to this headline">¶</a></h3>
-<ul class="simple">
-<li><p>Obtain evaluation metrics</p></li>
-</ul>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">results</span> <span class="o">=</span> <span class="n">reg</span><span class="o">.</span><span class="n">evals_result</span><span class="p">()</span>
-</pre></div>
-</div>
-</div>
-</div>
+<div class="section" id="train-test-deviance">
+<h3>Train test deviance<a class="headerlink" href="#train-test-deviance" title="Permalink to this headline">¶</a></h3>
 <ul class="simple">
 <li><p>Plot training test deviance</p></li>
 </ul>
@@ -839,25 +955,38 @@ memory usage: 1.3 MB
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/xgboost-regression_37_0.png" src="../_images/xgboost-regression_37_0.png" />
+<img alt="../_images/xgboost-regression_46_0.png" src="../_images/xgboost-regression_46_0.png" />
+</div>
+</div>
+</div>
+<div class="section" id="visualize-tree">
+<h3>Visualize tree<a class="headerlink" href="#visualize-tree" title="Permalink to this headline">¶</a></h3>
+<p>You need to install graphviz to plot the tree (for Anaconda, use <code class="docutils literal notranslate"><span class="pre">conda</span> <span class="pre">install</span> <span class="pre">python-graphviz</span></code>)</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">plt</span><span class="o">.</span><span class="n">rcParams</span><span class="p">[</span><span class="s1">&#39;figure.figsize&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="p">[</span><span class="mi">50</span><span class="p">,</span> <span class="mi">10</span><span class="p">]</span>
+
+<span class="n">xgb</span><span class="o">.</span><span class="n">plot_tree</span><span class="p">(</span><span class="n">reg</span> <span class="p">,</span><span class="n">num_trees</span><span class="o">=</span><span class="mi">0</span><span class="p">);</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/xgboost-regression_49_0.png" src="../_images/xgboost-regression_49_0.png" />
 </div>
 </div>
 </div>
 </div>
 <div class="section" id="feature-importance">
 <h2>Feature importance<a class="headerlink" href="#feature-importance" title="Permalink to this headline">¶</a></h2>
+<p>Next, we take a look at the tree based feature importance and the permutation feature importance.</p>
+<div class="section" id="id1">
+<h3>Feature importance<a class="headerlink" href="#id1" title="Permalink to this headline">¶</a></h3>
+<p>Importance is calculated with either “weight”, “gain”, or “cover”</p>
 <ul class="simple">
-<li><p>Next, we take a look at the tree based feature importance and the permutation importance.</p></li>
+<li><p>”weight” is the number of times a feature appears in a tree</p></li>
+<li><p>”gain” is the average gain of splits which use the feature</p></li>
+<li><p>”cover” is the average coverage of splits which use the feature (where coverage is defined as the number of samples affected by the split)</p></li>
 </ul>
-<div class="section" id="mean-decrease-in-impurity-mdi">
-<h3>Mean decrease in impurity (MDI)<a class="headerlink" href="#mean-decrease-in-impurity-mdi" title="Permalink to this headline">¶</a></h3>
-<ul class="simple">
-<li><p>Mean decrease in impurity (MDI) is a measure of feature importance for decision tree models.</p></li>
-</ul>
-<div class="admonition note">
-<p class="admonition-title">Note</p>
-<p>Visit <a class="reference external" href="https://kirenz.github.io/feature-engineering/docs/mdi.html">this notebook</a> to learn more about MDI</p>
-</div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">reg</span><span class="o">.</span><span class="n">feature_importances_</span>
@@ -876,42 +1005,63 @@ memory usage: 1.3 MB
 </ul>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">xgb</span><span class="o">.</span><span class="n">plot_importance</span><span class="p">(</span><span class="n">reg</span><span class="p">);</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">xgb</span><span class="o">.</span><span class="n">plot_importance</span><span class="p">(</span><span class="n">reg</span><span class="p">,</span> 
+                    <span class="n">importance_type</span><span class="o">=</span><span class="s2">&quot;gain&quot;</span><span class="p">,</span>
+                    <span class="n">show_values</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
+                    <span class="n">xlabel</span><span class="o">=</span><span class="s2">&quot;Gain&quot;</span><span class="p">);</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/xgboost-regression_41_0.png" src="../_images/xgboost-regression_41_0.png" />
+<img alt="../_images/xgboost-regression_56_0.png" src="../_images/xgboost-regression_56_0.png" />
+</div>
+</div>
+<ul class="simple">
+<li><p>Iterate over all options:</p></li>
+</ul>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">feat_importance</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;weight&quot;</span><span class="p">,</span> <span class="s2">&quot;gain&quot;</span><span class="p">,</span> <span class="s2">&quot;cover&quot;</span><span class="p">]</span>
+
+<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">feat_importance</span><span class="p">:</span>
+    <span class="n">xgb</span><span class="o">.</span><span class="n">plot_importance</span><span class="p">(</span><span class="n">reg</span><span class="p">,</span> 
+                    <span class="n">importance_type</span><span class="o">=</span><span class="n">i</span><span class="p">,</span>
+                    <span class="n">show_values</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
+                    <span class="n">xlabel</span><span class="o">=</span><span class="n">i</span><span class="p">);</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/xgboost-regression_58_0.png" src="../_images/xgboost-regression_58_0.png" />
+<img alt="../_images/xgboost-regression_58_1.png" src="../_images/xgboost-regression_58_1.png" />
+<img alt="../_images/xgboost-regression_58_2.png" src="../_images/xgboost-regression_58_2.png" />
+</div>
 </div>
 </div>
 </div>
 <div class="section" id="permutation-feature-importance">
-<h3>Permutation feature importance<a class="headerlink" href="#permutation-feature-importance" title="Permalink to this headline">¶</a></h3>
+<h2>Permutation feature importance<a class="headerlink" href="#permutation-feature-importance" title="Permalink to this headline">¶</a></h2>
 <p>The permutation feature importance is defined to be the decrease in a model score when a single feature value is randomly shuffled.</p>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
 <p>Visit <a class="reference external" href="https://kirenz.github.io/feature-engineering/docs/permutation-feature-importance.html">this notebook</a> to learn more about permutation feature importance.</p>
 </div>
+<ul class="simple">
+<li><p>We will use the scikit-learn function <code class="docutils literal notranslate"><span class="pre">permutation_importance</span></code>:</p></li>
+</ul>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">result</span> <span class="o">=</span> <span class="n">permutation_importance</span><span class="p">(</span>
-    <span class="n">reg</span><span class="p">,</span> <span class="n">X_test</span><span class="p">,</span> <span class="n">y_test</span><span class="p">,</span> <span class="n">n_repeats</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span> <span class="n">random_state</span><span class="o">=</span><span class="mi">42</span><span class="p">,</span> <span class="n">n_jobs</span><span class="o">=</span><span class="mi">2</span>
+    <span class="n">reg</span><span class="p">,</span> <span class="n">X_test</span><span class="p">,</span> <span class="n">y_test</span><span class="p">,</span> <span class="n">n_repeats</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span> <span class="n">random_state</span><span class="o">=</span><span class="mi">42</span>
 <span class="p">)</span>
 </pre></div>
 </div>
 </div>
-<div class="cell_output docutils container">
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/Users/jankirenz/opt/anaconda3/envs/xgboost/lib/python3.9/site-packages/xgboost/compat.py:36: FutureWarning: pandas.Int64Index is deprecated and will be removed from pandas in a future version. Use pandas.Index with the appropriate dtype instead.
-  from pandas import MultiIndex, Int64Index
-/Users/jankirenz/opt/anaconda3/envs/xgboost/lib/python3.9/site-packages/xgboost/compat.py:36: FutureWarning: pandas.Int64Index is deprecated and will be removed from pandas in a future version. Use pandas.Index with the appropriate dtype instead.
-  from pandas import MultiIndex, Int64Index
-</pre></div>
-</div>
-</div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">tree_importances</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">Series</span><span class="p">(</span><span class="n">result</span><span class="o">.</span><span class="n">importances_mean</span><span class="p">,</span> <span class="n">index</span><span class="o">=</span><span class="n">feature_names</span><span class="p">)</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># make a pandas data series </span>
+<span class="n">tree_importances</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">Series</span><span class="p">(</span><span class="n">result</span><span class="o">.</span><span class="n">importances_mean</span><span class="p">,</span> <span class="n">index</span><span class="o">=</span><span class="n">feature_names</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -932,7 +1082,7 @@ memory usage: 1.3 MB
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/xgboost-regression_45_0.png" src="../_images/xgboost-regression_45_0.png" />
+<img alt="../_images/xgboost-regression_64_0.png" src="../_images/xgboost-regression_64_0.png" />
 </div>
 </div>
 <ul class="simple">
@@ -952,29 +1102,12 @@ memory usage: 1.3 MB
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/xgboost-regression_47_0.png" src="../_images/xgboost-regression_47_0.png" />
+<img alt="../_images/xgboost-regression_66_0.png" src="../_images/xgboost-regression_66_0.png" />
 </div>
 </div>
 </div>
-<div class="section" id="visualize-tree">
-<h3>Visualize tree<a class="headerlink" href="#visualize-tree" title="Permalink to this headline">¶</a></h3>
-<p>You need to install graphviz to plot the tree (for Anaconda, use <code class="docutils literal notranslate"><span class="pre">conda</span> <span class="pre">install</span> <span class="pre">python-graphviz</span></code>)</p>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">plt</span><span class="o">.</span><span class="n">rcParams</span><span class="p">[</span><span class="s1">&#39;figure.figsize&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="p">[</span><span class="mi">50</span><span class="p">,</span> <span class="mi">10</span><span class="p">]</span>
-
-<span class="n">xgb</span><span class="o">.</span><span class="n">plot_tree</span><span class="p">(</span><span class="n">reg</span> <span class="p">,</span><span class="n">num_trees</span><span class="o">=</span><span class="mi">0</span><span class="p">);</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<img alt="../_images/xgboost-regression_50_0.png" src="../_images/xgboost-regression_50_0.png" />
-</div>
-</div>
-</div>
-</div>
-<div class="section" id="crossvalidation">
-<h2>Crossvalidation<a class="headerlink" href="#crossvalidation" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="cross-validation">
+<h2>Cross-validation<a class="headerlink" href="#cross-validation" title="Permalink to this headline">¶</a></h2>
 <p>Next, we use k-fold cross validation to build even more robust trees.</p>
 <p>First, we will convert the dataset into an optimized data structure called Dmatrix.</p>
 <div class="cell docutils container">
@@ -984,7 +1117,10 @@ memory usage: 1.3 MB
 </div>
 </div>
 </div>
-<p>We use the same hyperparameteras as before. We just drop <code class="docutils literal notranslate"><span class="pre">num_estimators</span></code> and instead use <code class="docutils literal notranslate"><span class="pre">num_boost_round</span></code> in our fit.</p>
+<ul class="simple">
+<li><p>We use the same hyperparameteras as before.</p></li>
+<li><p>We just drop <code class="docutils literal notranslate"><span class="pre">num_estimators</span></code> and instead use <code class="docutils literal notranslate"><span class="pre">num_boost_round</span></code> in our fit.</p></li>
+</ul>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">params_cv</span> <span class="o">=</span> <span class="p">{</span>
@@ -1002,7 +1138,9 @@ memory usage: 1.3 MB
 </div>
 </div>
 </div>
-<p>Perform cross validation:</p>
+<ul class="simple">
+<li><p>Perform 3-fold-cross-validation:</p></li>
+</ul>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">reg_cv</span> <span class="o">=</span> <span class="n">xgb</span><span class="o">.</span><span class="n">cv</span><span class="p">(</span><span class="n">dtrain</span><span class="o">=</span><span class="n">dmatrix</span><span class="p">,</span> 
@@ -1088,7 +1226,9 @@ memory usage: 1.3 MB
 </table>
 </div></div></div>
 </div>
-<p>Extract and print the final boosting round metric.</p>
+<ul class="simple">
+<li><p>Extract and print the final boosting round metric.</p></li>
+</ul>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">((</span><span class="n">reg_cv</span><span class="p">[</span><span class="s2">&quot;test-rmse-mean&quot;</span><span class="p">])</span><span class="o">.</span><span class="n">tail</span><span class="p">(</span><span class="mi">1</span><span class="p">))</span>
@@ -1105,7 +1245,9 @@ Name: test-rmse-mean, dtype: float64
 </div>
 <div class="section" id="hyperparameter-tuning">
 <h2>Hyperparameter Tuning<a class="headerlink" href="#hyperparameter-tuning" title="Permalink to this headline">¶</a></h2>
-<p>Let’s demonstrate hyperparameter tuning for only a few parameters:</p>
+<ul class="simple">
+<li><p>Let’s demonstrate hyperparameter tuning for some parameters:</p></li>
+</ul>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">params</span> <span class="o">=</span> <span class="p">{</span> <span class="s1">&#39;max_depth&#39;</span><span class="p">:</span> <span class="p">[</span><span class="mi">3</span><span class="p">,</span><span class="mi">6</span><span class="p">],</span>
@@ -1118,7 +1260,7 @@ Name: test-rmse-mean, dtype: float64
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">reg_h</span> <span class="o">=</span> <span class="n">xgb</span><span class="o">.</span><span class="n">XGBRegressor</span><span class="p">(</span><span class="n">seed</span> <span class="o">=</span> <span class="mi">20</span><span class="p">)</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">reg_h</span> <span class="o">=</span> <span class="n">xgb</span><span class="o">.</span><span class="n">XGBRegressor</span><span class="p">(</span><span class="n">seed</span> <span class="o">=</span> <span class="mi">42</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -1157,7 +1299,7 @@ Name: test-rmse-mean, dtype: float64
                                     num_parallel_tree=None, predictor=None,
                                     random_state=None, reg_alpha=None,
                                     reg_lambda=None, scale_pos_weight=None,
-                                    seed=20, subsample=None, tree_method=None,
+                                    seed=42, subsample=None, tree_method=None,
                                     validate_parameters=None, verbosity=None),
              param_grid={&#39;colsample_bytree&#39;: [0.3, 0.7],
                          &#39;learning_rate&#39;: [0.01, 0.05], &#39;max_depth&#39;: [3, 6],
@@ -1170,13 +1312,13 @@ Name: test-rmse-mean, dtype: float64
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Best parameters:&quot;</span><span class="p">,</span> <span class="n">reg_hyper</span><span class="o">.</span><span class="n">best_params_</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Lowest MSE: &quot;</span><span class="p">,</span> <span class="p">(</span><span class="o">-</span><span class="n">reg_hyper</span><span class="o">.</span><span class="n">best_score_</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Lowest RMSE: &quot;</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="o">-</span><span class="n">reg_hyper</span><span class="o">.</span><span class="n">best_score_</span><span class="p">))</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Best parameters: {&#39;colsample_bytree&#39;: 0.7, &#39;learning_rate&#39;: 0.05, &#39;max_depth&#39;: 6, &#39;n_estimators&#39;: 5}
-Lowest MSE:  2.4835107214397
+Lowest RMSE:  1.57744988482794
 </pre></div>
 </div>
 </div>
