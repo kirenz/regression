@@ -41,6 +41,9 @@ parts:
     - file: docs/ds-happy-stats.ipynb
     - file: docs/ds-happy-scikit.ipynb 
     - file: docs/ds-happy-scikit-split.ipynb 
+  - caption: Case California housing
+    chapters:
+    - file: docs/case-ca-housing.ipynb    
   - caption: References
     chapters:
     - file: docs/reference.md
