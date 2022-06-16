@@ -4,11 +4,13 @@
 <html>
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
     <title>Linear regression &#8212; Introduction to Regression Models</title>
     
-  <link href="../_static/css/theme.css" rel="stylesheet">
-  <link href="../_static/css/index.ff1ffe594081f20da1ef19478df9384b.css" rel="stylesheet">
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../_static/styles/theme.css?digest=1999514e3f237ded88cf" rel="stylesheet">
+<link href="../_static/styles/pydata-sphinx-theme.css?digest=1999514e3f237ded88cf" rel="stylesheet">
 
     
   <link rel="stylesheet"
@@ -18,20 +20,16 @@
   <link rel="preload" as="font" type="font/woff2" crossorigin
     href="../_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2">
 
-    
-      
-
-    
     <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
-    <link rel="stylesheet" type="text/css" href="../_static/sphinx-book-theme.css?digest=c3fdc42140077d1ad13ad2f1588a4309" />
+    <link rel="stylesheet" href="../_static/styles/sphinx-book-theme.css?digest=62ba249389abaaa9ffc34bf36a076bdc1d65ee18" type="text/css" />
     <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css" />
     <link rel="stylesheet" type="text/css" href="../_static/copybutton.css" />
     <link rel="stylesheet" type="text/css" href="../_static/mystnb.css" />
     <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css" />
-    <link rel="stylesheet" type="text/css" href="../_static/panels-main.c949a650a448cc0ae9fd3441c0e17fb0.css" />
-    <link rel="stylesheet" type="text/css" href="../_static/panels-variables.06eb56fa6e07937060861dad626602ad.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/design-style.b7bb847fb20b106c3d81b95245e65545.min.css" />
     
-  <link rel="preload" as="script" href="../_static/js/index.be7d3bbb2ef33a8344ce.js">
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=1999514e3f237ded88cf">
 
     <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
     <script src="../_static/jquery.js"></script>
@@ -39,12 +37,14 @@
     <script src="../_static/doctools.js"></script>
     <script src="../_static/clipboard.min.js"></script>
     <script src="../_static/copybutton.js"></script>
+    <script src="../_static/scripts/sphinx-book-theme.js?digest=f31d14ad54b65d19161ba51d4ffff3a77ae00456"></script>
     <script>let toggleHintShow = 'Click to show';</script>
     <script>let toggleHintHide = 'Click to hide';</script>
     <script>let toggleOpenOnPrint = 'true';</script>
     <script src="../_static/togglebutton.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
     <script>var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
-    <script src="../_static/sphinx-book-theme.d59cb220de22ca1c485ebbdc042f0030.js"></script>
+    <script src="../_static/design-tabs.js"></script>
     <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"
 const thebe_selector = ".thebe,.cell"
 const thebe_selector_input = "pre"
@@ -53,7 +53,6 @@ const thebe_selector_output = ".output, .cell_output"
     <script async="async" src="../_static/sphinx-thebe.js"></script>
     <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
     <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
     <link rel="next" title="Regression diagnostics" href="diagnostics.html" />
@@ -65,7 +64,21 @@ const thebe_selector_output = ".output, .cell_output"
     <!-- Google Analytics -->
     
   </head>
-  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="80">
+  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="60">
+<!-- Checkboxes to toggle the left sidebar -->
+<input type="checkbox" class="sidebar-toggle" name="__navigation" id="__navigation" aria-label="Toggle navigation sidebar">
+<label class="overlay overlay-navbar" for="__navigation">
+    <div class="visually-hidden">Toggle navigation sidebar</div>
+</label>
+<!-- Checkboxes to toggle the in-page toc -->
+<input type="checkbox" class="sidebar-toggle" name="__page-toc" id="__page-toc" aria-label="Toggle in-page Table of Contents">
+<label class="overlay overlay-pagetoc" for="__page-toc">
+    <div class="visually-hidden">Toggle in-page Table of Contents</div>
+</label>
+<!-- Headers at the top -->
+<div class="announcement header-item noprint"></div>
+<div class="header header-item noprint"></div>
+
     
     <div class="container-fluid" id="banner"></div>
 
@@ -74,9 +87,10 @@ const thebe_selector_output = ".output, .cell_output"
     <div class="container-xl">
       <div class="row">
           
-<div class="col-12 col-md-3 bd-sidebar site-navigation show" id="site-navigation">
-    
-        <div class="navbar-brand-box">
+<!-- Sidebar -->
+<div class="bd-sidebar noprint" id="site-navigation">
+    <div class="bd-sidebar__content">
+        <div class="bd-sidebar__top"><div class="navbar-brand-box">
     <a class="navbar-brand text-wrap" href="../index.html">
       
         <!-- `logo` is deprecated in Sphinx 4.0, so remove this when we stop supporting 3 -->
@@ -94,14 +108,15 @@ const thebe_selector_output = ".output, .cell_output"
   <input type="search" class="form-control" name="q" id="search-input" placeholder="Search this book..." aria-label="Search this book..." autocomplete="off" >
 </form><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
     <div class="bd-toc-item active">
-        <ul class="nav bd-sidenav">
- <li class="toctree-l1">
-  <a class="reference internal" href="intro.html">
-   Welcome
-  </a>
- </li>
-</ul>
-<p aria-level="2" class="caption" role="heading">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="intro.html">
+                    Welcome
+                </a>
+            </li>
+        </ul>
+        <p aria-level="2" class="caption" role="heading">
  <span class="caption-text">
   Linear regression
  </span>
@@ -245,6 +260,18 @@ const thebe_selector_output = ".output, .cell_output"
 </ul>
 <p aria-level="2" class="caption" role="heading">
  <span class="caption-text">
+  Case California housing
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="case-ca-housing.html">
+   Machine Learning project
+  </a>
+ </li>
+</ul>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
   References
  </span>
 </p>
@@ -257,106 +284,209 @@ const thebe_selector_output = ".output, .cell_output"
 </ul>
 
     </div>
-</nav> <!-- To handle the deprecated key -->
-
-<div class="navbar_extra_footer">
-  Powered by <a href="https://jupyterbook.org">Jupyter Book</a>
-</div>
-
-</div>
-
-
-          
-
-
-          
-<main class="col py-md-3 pl-md-4 bd-content overflow-auto" role="main">
-    
-    <div class="topbar container-xl fixed-top">
-    <div class="topbar-contents row">
-        <div class="col-12 col-md-3 bd-topbar-whitespace site-navigation show"></div>
-        <div class="col pl-md-4 topbar-main">
+</nav></div>
+        <div class="bd-sidebar__bottom">
+             <!-- To handle the deprecated key -->
             
-            <button id="navbar-toggler" class="navbar-toggler ml-0" type="button" data-toggle="collapse"
-                data-toggle="tooltip" data-placement="bottom" data-target=".site-navigation" aria-controls="navbar-menu"
-                aria-expanded="true" aria-label="Toggle navigation" aria-controls="site-navigation"
-                title="Toggle navigation" data-toggle="tooltip" data-placement="left">
-                <i class="fas fa-bars"></i>
-                <i class="fas fa-arrow-left"></i>
-                <i class="fas fa-arrow-up"></i>
-            </button>
-            
-            
-<div class="dropdown-buttons-trigger">
-    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn" aria-label="Download this page"><i
-            class="fas fa-download"></i></button>
-
-    <div class="dropdown-buttons">
-        <!-- ipynb file if we had a myst markdown file -->
-        
-        <!-- Download raw file -->
-        <a class="dropdown-buttons" href="../_sources/docs/basics.ipynb"><button type="button"
-                class="btn btn-secondary topbarbtn" title="Download source file" data-toggle="tooltip"
-                data-placement="left">.ipynb</button></a>
-        <!-- Download PDF via print -->
-        <button type="button" id="download-print" class="btn btn-secondary topbarbtn" title="Print to PDF"
-                onclick="printPdf(this)" data-toggle="tooltip" data-placement="left">.pdf</button>
-    </div>
-</div>
-
-            <!-- Source interaction buttons -->
-
-<div class="dropdown-buttons-trigger">
-    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn"
-        aria-label="Connect with source repository"><i class="fab fa-github"></i></button>
-    <div class="dropdown-buttons sourcebuttons">
-        <a class="repository-button"
-            href="https://github.com/kirenz/regression"><button type="button" class="btn btn-secondary topbarbtn"
-                data-toggle="tooltip" data-placement="left" title="Source repository"><i
-                    class="fab fa-github"></i>repository</button></a>
-        <a class="issues-button"
-            href="https://github.com/kirenz/regression/issues/new?title=Issue%20on%20page%20%2Fdocs/basics.html&body=Your%20issue%20content%20here."><button
-                type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip" data-placement="left"
-                title="Open an issue"><i class="fas fa-lightbulb"></i>open issue</button></a>
-        
-    </div>
-</div>
-
-            <!-- Full screen (wrap in <a> to have style consistency -->
-
-<a class="full-screen-button"><button type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip"
-        data-placement="bottom" onclick="toggleFullScreen()" aria-label="Fullscreen mode"
-        title="Fullscreen mode"><i
-            class="fas fa-expand"></i></button></a>
-
-            <!-- Launch buttons -->
-
-<div class="dropdown-buttons-trigger">
-    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn"
-        aria-label="Launch interactive content"><i class="fas fa-rocket"></i></button>
-    <div class="dropdown-buttons">
-        
-        
-        
-        <a class="colab-button" href="https://colab.research.google.com/github/kirenz/regression/blob/main/docs/basics.ipynb"><button type="button" class="btn btn-secondary topbarbtn"
-                title="Launch Colab" data-toggle="tooltip" data-placement="left"><img class="colab-button-logo"
-                    src="../_static/images/logo_colab.png"
-                    alt="Interact on Colab">Colab</button></a>
-        
-        
-    </div>
-</div>
-
-        </div>
-
-        <!-- Table of contents -->
-        <div class="d-none d-md-block col-md-2 bd-toc show noprint">
-            
-            <div class="tocsection onthispage pt-5 pb-3">
-                <i class="fas fa-list"></i> Contents
+            <div class="navbar_extra_footer">
+            Powered by <a href="https://jupyterbook.org">Jupyter Book</a>
             </div>
-            <nav id="bd-toc-nav" aria-label="Page">
-                <ul class="visible nav section-nav flex-column">
+            
+        </div>
+    </div>
+    <div id="rtd-footer-container"></div>
+</div>
+
+
+          
+
+
+          
+<!-- A tiny helper pixel to detect if we've scrolled -->
+<div class="sbt-scroll-pixel-helper"></div>
+<!-- Main content -->
+<div class="col py-0 content-container">
+    
+    <div class="header-article row sticky-top noprint">
+        
+
+
+
+<div class="col py-1 d-flex header-article-main">
+    <div class="header-article__left">
+        
+        <label for="__navigation"
+  class="headerbtn"
+  data-toggle="tooltip"
+data-placement="right"
+title="Toggle navigation"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-bars"></i>
+  </span>
+
+</label>
+
+        
+    </div>
+    <div class="header-article__right">
+<div class="menu-dropdown menu-dropdown-launch-buttons">
+  <button class="headerbtn menu-dropdown__trigger"
+      aria-label="Launch interactive content">
+      <i class="fas fa-rocket"></i>
+  </button>
+  <div class="menu-dropdown__content">
+    <ul>
+      <li>
+        <a href="https://colab.research.google.com/github/kirenz/regression/blob/main/docs/basics.ipynb"
+   class="headerbtn"
+   data-toggle="tooltip"
+data-placement="left"
+title="Launch on Colab"
+>
+  
+
+<span class="headerbtn__icon-container">
+  
+    <img src="../_static/images/logo_colab.png">
+  </span>
+<span class="headerbtn__text-container">Colab</span>
+</a>
+
+      </li>
+      
+    </ul>
+  </div>
+</div>
+
+<button onclick="toggleFullScreen()"
+  class="headerbtn"
+  data-toggle="tooltip"
+data-placement="bottom"
+title="Fullscreen mode"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+<div class="menu-dropdown menu-dropdown-repository-buttons">
+  <button class="headerbtn menu-dropdown__trigger"
+      aria-label="Source repositories">
+      <i class="fab fa-github"></i>
+  </button>
+  <div class="menu-dropdown__content">
+    <ul>
+      <li>
+        <a href="https://github.com/kirenz/regression"
+   class="headerbtn"
+   data-toggle="tooltip"
+data-placement="left"
+title="Source repository"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+<span class="headerbtn__text-container">repository</span>
+</a>
+
+      </li>
+      
+      <li>
+        <a href="https://github.com/kirenz/regression/issues/new?title=Issue%20on%20page%20%2Fdocs/basics.html&body=Your%20issue%20content%20here."
+   class="headerbtn"
+   data-toggle="tooltip"
+data-placement="left"
+title="Open an issue"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-lightbulb"></i>
+  </span>
+<span class="headerbtn__text-container">open issue</span>
+</a>
+
+      </li>
+      
+    </ul>
+  </div>
+</div>
+
+<div class="menu-dropdown menu-dropdown-download-buttons">
+  <button class="headerbtn menu-dropdown__trigger"
+      aria-label="Download this page">
+      <i class="fas fa-download"></i>
+  </button>
+  <div class="menu-dropdown__content">
+    <ul>
+      <li>
+        <a href="../_sources/docs/basics.ipynb"
+   class="headerbtn"
+   data-toggle="tooltip"
+data-placement="left"
+title="Download source file"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="headerbtn__text-container">.ipynb</span>
+</a>
+
+      </li>
+      
+      <li>
+        
+<button onclick="printPdf(this)"
+  class="headerbtn"
+  data-toggle="tooltip"
+data-placement="left"
+title="Print to PDF"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="headerbtn__text-container">.pdf</span>
+</button>
+
+      </li>
+      
+    </ul>
+  </div>
+</div>
+<label for="__page-toc"
+  class="headerbtn headerbtn-page-toc"
+  
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-list"></i>
+  </span>
+
+</label>
+
+    </div>
+</div>
+
+<!-- Table of contents -->
+<div class="col-md-3 bd-toc show noprint">
+    <div class="tocsection onthispage pt-5 pb-3">
+        <i class="fas fa-list"></i> Contents
+    </div>
+    <nav id="bd-toc-nav" aria-label="Page">
+        <ul class="visible nav section-nav flex-column">
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#python-setup">
    Python setup
@@ -481,12 +611,11 @@ const thebe_selector_output = ".output, .cell_output"
  </li>
 </ul>
 
-            </nav>
-        </div>
-    </div>
+    </nav>
 </div>
-    <div id="main-content" class="row">
-        <div class="col-12 col-md-9 pl-md-3 pr-md-0">
+    </div>
+    <div class="article row">
+        <div class="col pl-md-3 pl-lg-5 content-container">
             <!-- Table of contents that is only displayed when printing the page -->
             <div id="jb-print-docs-body" class="onlyprint">
                 <h1>Linear regression</h1>
@@ -627,11 +756,12 @@ const thebe_selector_output = ".output, .cell_output"
                     </div>
                 </div>
             </div>
-            
+            <main id="main-content" role="main">
+                
               <div>
                 
-  <div class="tex2jax_ignore mathjax_ignore section" id="linear-regression">
-<h1>Linear regression<a class="headerlink" href="#linear-regression" title="Permalink to this headline">¶</a></h1>
+  <section class="tex2jax_ignore mathjax_ignore" id="linear-regression">
+<h1>Linear regression<a class="headerlink" href="#linear-regression" title="Permalink to this headline">#</a></h1>
 <p><em>The explanations of statistical concepts are partly based on <span id="id1">Field [<a class="reference internal" href="reference.html#id3" title="Andy Field. Discovering statistics using IBM SPSS statistics. sage, 2013.">2013</a>]</span></em></p>
 <p>Linear regression is the fundamental starting point for all regression methods and it is still a useful and widely used statistical learning method. Moreover, it serves as a good jumping point for newer approaches. Consequently, the importance of having a good understanding of linear regression before studying more complex learning methods cannot be overstated <span id="id2">[<a class="reference internal" href="reference.html#id7" title="Gareth James, Daniela Witten, Trevor Hastie, and Robert Tibshirani. An Introduction to Statistical learning. Springer, 2021. URL: https://www.statlearning.com/.">James <em>et al.</em>, 2021</a>]</span>.</p>
 <div class="admonition note">
@@ -640,8 +770,8 @@ const thebe_selector_output = ".output, .cell_output"
 </div>
 <p>One of the simplest models we use in statistics is the <strong>mean</strong>. It is a (simple) model because it represents a summary of data. Therefore, let’s use the mean as a baseline model and compare the quality of fit between the mean and a simple linear regression model with only one predictor.</p>
 <p>We use a small sample of 20 women from whom we obtained their height (this is our outcome variable) and the average height of their parents (this is our feature).</p>
-<div class="section" id="python-setup">
-<h2>Python setup<a class="headerlink" href="#python-setup" title="Permalink to this headline">¶</a></h2>
+<section id="python-setup">
+<h2>Python setup<a class="headerlink" href="#python-setup" title="Permalink to this headline">#</a></h2>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
@@ -661,9 +791,9 @@ const thebe_selector_output = ".output, .cell_output"
 </div>
 </div>
 </div>
-</div>
-<div class="section" id="import-data">
-<h2>Import data<a class="headerlink" href="#import-data" title="Permalink to this headline">¶</a></h2>
+</section>
+<section id="import-data">
+<h2>Import data<a class="headerlink" href="#import-data" title="Permalink to this headline">#</a></h2>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># import data</span>
@@ -867,9 +997,9 @@ memory usage: 928.0+ bytes
 </div>
 </div>
 </div>
-</div>
-<div class="section" id="tidying-data">
-<h2>Tidying data<a class="headerlink" href="#tidying-data" title="Permalink to this headline">¶</a></h2>
+</section>
+<section id="tidying-data">
+<h2>Tidying data<a class="headerlink" href="#tidying-data" title="Permalink to this headline">#</a></h2>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># change data type</span>
@@ -914,9 +1044,9 @@ dtype: int64
 </div>
 </div>
 </div>
-</div>
-<div class="section" id="transform-data">
-<h2>Transform data<a class="headerlink" href="#transform-data" title="Permalink to this headline">¶</a></h2>
+</section>
+<section id="transform-data">
+<h2>Transform data<a class="headerlink" href="#transform-data" title="Permalink to this headline">#</a></h2>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># summary statistics for all numerical columns (in transposed view)</span>
@@ -1158,9 +1288,9 @@ dtype: int64
 </table>
 </div></div></div>
 </div>
-</div>
-<div class="section" id="visualize-data">
-<h2>Visualize data<a class="headerlink" href="#visualize-data" title="Permalink to this headline">¶</a></h2>
+</section>
+<section id="visualize-data">
+<h2>Visualize data<a class="headerlink" href="#visualize-data" title="Permalink to this headline">#</a></h2>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># histogram with seaborn</span>
@@ -1217,9 +1347,9 @@ dtype: int64
 </div>
 </div>
 <p>We can observe a strong positive relationship between height and the average height of the parents. Hence, it would make sense to use the variable <code class="docutils literal notranslate"><span class="pre">height_parents</span></code> as a predictor for the outcome variable <code class="docutils literal notranslate"><span class="pre">height</span></code> in a statistical model.</p>
-</div>
-<div class="section" id="model">
-<h2>Model<a class="headerlink" href="#model" title="Permalink to this headline">¶</a></h2>
+</section>
+<section id="model">
+<h2>Model<a class="headerlink" href="#model" title="Permalink to this headline">#</a></h2>
 <p>If we are interested in discovering something about a phenomenon in the real world, we need to collect data to test predictions from our hypotheses about that phenomenon. Testing these hypotheses involves building statistical <strong>models</strong> of the phenomenon of interest.</p>
 <p>It is important that the model accurately represents the real world, otherwise any conclusions we extrapolate to the real-world will be meaningless. Hence, the statistical model should represent the data collected (the observed data) as closely as possible.</p>
 <div class="math notranslate nohighlight">
@@ -1247,9 +1377,9 @@ dtype: int64
 <li><p>In our second model, we use the variable height of parents as predictor in a linear regression model:</p></li>
 </ul>
 <p><span class="math notranslate nohighlight">\(height_i = (b_0 + b_1 \times heightparents_i ) + error_i\)</span></p>
-</div>
-<div class="section" id="mean">
-<h2>Mean<a class="headerlink" href="#mean" title="Permalink to this headline">¶</a></h2>
+</section>
+<section id="mean">
+<h2>Mean<a class="headerlink" href="#mean" title="Permalink to this headline">#</a></h2>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># calculate the mean </span>
@@ -1367,9 +1497,9 @@ dtype: int64
 <img alt="../_images/basics_31_0.png" src="../_images/basics_31_0.png" />
 </div>
 </div>
-</div>
-<div class="section" id="regression-model">
-<h2>Regression model<a class="headerlink" href="#regression-model" title="Permalink to this headline">¶</a></h2>
+</section>
+<section id="regression-model">
+<h2>Regression model<a class="headerlink" href="#regression-model" title="Permalink to this headline">#</a></h2>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># fit linear model with statsmodels.formula.api</span>
@@ -1569,9 +1699,9 @@ dtype: int64
 <img alt="../_images/basics_38_0.png" src="../_images/basics_38_0.png" />
 </div>
 </div>
-</div>
-<div class="section" id="quality-of-fit">
-<h2>Quality of fit<a class="headerlink" href="#quality-of-fit" title="Permalink to this headline">¶</a></h2>
+</section>
+<section id="quality-of-fit">
+<h2>Quality of fit<a class="headerlink" href="#quality-of-fit" title="Permalink to this headline">#</a></h2>
 <p>In order to evaluate the performance of a statistical model on a given data set, we need some way to measure how well its predictions actually match the observed data. That is, we need to quantify the extent to which the predicted response value for a given observation is close to
 the true response value for that observation.</p>
 <p>With most statistical models we can determine whether the model represents the data well by looking at how different the scores we observed in the data are from the values that the model predicts.</p>
@@ -1581,9 +1711,9 @@ the true response value for that observation.</p>
 <div class="math notranslate nohighlight">
 \[error_i = observed_i - model_i\]</div>
 <p>In other words, the error for a particular entity is the score predicted by the model for that entity subtracted from the corresponding observed score.</p>
-</div>
-<div class="section" id="residuals-and-r-2">
-<h2>Residuals and <span class="math notranslate nohighlight">\(R^2\)</span><a class="headerlink" href="#residuals-and-r-2" title="Permalink to this headline">¶</a></h2>
+</section>
+<section id="residuals-and-r-2">
+<h2>Residuals and <span class="math notranslate nohighlight">\(R^2\)</span><a class="headerlink" href="#residuals-and-r-2" title="Permalink to this headline">#</a></h2>
 <p>Note that residuals (errors) would cancel out because some are positive and others negative. Therefore, we square each deviation. If we add these squared deviations we get the <strong>sum of squared residuals (SSR)</strong> (also known as the residual sum of squares (RSS) or the sum of squared estimate of errors (SSE)).</p>
 <p><span class="math notranslate nohighlight">\( SSR = \sum_{i=1}^n (observed_i - model_i)^2\)</span></p>
 <p>Using the <strong>mean</strong> of the outcome as a baseline model, we can calculate the difference between the observed values and the values predicted by the mean. We square these differences to give us the sum of squared differences. This sum of squared differences is known as the <strong>total sum of squares</strong> (denoted by <span class="math notranslate nohighlight">\(TSS\)</span>) and it represents how good the mean is as a model of the observed outcome scores:</p>
@@ -1619,8 +1749,8 @@ the true response value for that observation.</p>
 <p><strong>Adjusted</strong> <span class="math notranslate nohighlight">\(R^2\)</span>:</p>
 <p>Whereas <span class="math notranslate nohighlight">\(R^2\)</span> tells us how much of the variance in Y overlaps with predicted values from the model in our sample, adjusted <span class="math notranslate nohighlight">\(R^2\)</span> tells us how much variance in Y would be accounted for if the model had been derived from the <strong>population</strong> from which the sample was taken (takes degrees of freedom into account). Therefore, the adjusted value indicates the loss of predictive power or shrinkage.</p>
 <p>As a general rule it is preferrable to use the adjusted <span class="math notranslate nohighlight">\(R^2\)</span> instead of the simple <span class="math notranslate nohighlight">\(R^2\)</span>.</p>
-<div class="section" id="id3">
-<h3>Mean<a class="headerlink" href="#id3" title="Permalink to this headline">¶</a></h3>
+<section id="id3">
+<h3>Mean<a class="headerlink" href="#id3" title="Permalink to this headline">#</a></h3>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># calculate error (observation - average) and assign it to dataframe</span>
@@ -1877,9 +2007,9 @@ the true response value for that observation.</p>
 </div>
 </div>
 </div>
-</div>
-<div class="section" id="regression">
-<h3>Regression<a class="headerlink" href="#regression" title="Permalink to this headline">¶</a></h3>
+</section>
+<section id="regression">
+<h3>Regression<a class="headerlink" href="#regression" title="Permalink to this headline">#</a></h3>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">lm</span><span class="o">.</span><span class="n">resid</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span>
@@ -2123,9 +2253,9 @@ the true response value for that observation.</p>
 </div>
 </div>
 </div>
-</div>
-<div class="section" id="pearson-s-correlation-coefficient">
-<h3>Pearson’s correlation coefficient<a class="headerlink" href="#pearson-s-correlation-coefficient" title="Permalink to this headline">¶</a></h3>
+</section>
+<section id="pearson-s-correlation-coefficient">
+<h3>Pearson’s correlation coefficient<a class="headerlink" href="#pearson-s-correlation-coefficient" title="Permalink to this headline">#</a></h3>
 <p>We just saw that <span class="math notranslate nohighlight">\(R^2\)</span> represents the proportion of the variation in the outcome that can be predicted from the model:</p>
 <p><span class="math notranslate nohighlight">\(R^2 = \frac{SSM}{TSS}\)</span></p>
 <p>with</p>
@@ -2172,9 +2302,9 @@ the true response value for that observation.</p>
 </div>
 </div>
 </div>
-</div>
-<div class="section" id="mean-squared-error">
-<h3>Mean squared error<a class="headerlink" href="#mean-squared-error" title="Permalink to this headline">¶</a></h3>
+</section>
+<section id="mean-squared-error">
+<h3>Mean squared error<a class="headerlink" href="#mean-squared-error" title="Permalink to this headline">#</a></h3>
 <p>Although the <strong>sum of squared errors (SS)</strong> is a good measure of the accuracy of our model, it depends upon the quantity of data that has been collected – the more data points, the higher the SS.</p>
 <p>By using the <strong>average error</strong>, rather than the total, we can overcome this problem. This measure is called the “<strong>Mean Squared Error (MSE)</strong>”. In the regression setting, it is the most commonly-used measure to evaluate the performance of a model.</p>
 <p>To compute the average error we divide the sum of squares by the number of values that we used to compute that total. We again come back to the problem that we’re usually interested in the error in the model in the <strong>population</strong> (not the <strong>sample</strong>).</p>
@@ -2182,9 +2312,9 @@ the true response value for that observation.</p>
 <p>Mean squared error of our regression model:</p>
 <div class="math notranslate nohighlight">
 \[ MSE = \frac {SS}{df} = \frac {\sum_{i=1}^n (outcome_i - model_i)^2}{df}\]</div>
-</div>
-<div class="section" id="variance">
-<h3>Variance<a class="headerlink" href="#variance" title="Permalink to this headline">¶</a></h3>
+</section>
+<section id="variance">
+<h3>Variance<a class="headerlink" href="#variance" title="Permalink to this headline">#</a></h3>
 <p>In the case of our mean model, we use the <strong>variance</strong> as a measure of dispersion. Furthermore, the <strong>standard deviation</strong> is the square root of the variance:</p>
 <p>Variance = <span class="math notranslate nohighlight">\(s^2 = \frac {SS}{df} = \frac {\sum_{i=1}^n (outcome_i - model_i)^2}{df}\)</span></p>
 <p>Standard Deviation = <span class="math notranslate nohighlight">\(\sqrt{s^2} = \sqrt{\frac{\sum\limits_{i=1}^{n} \left(x_{i} - \bar{x}\right)^{2}} {df}}\)</span></p>
@@ -2277,9 +2407,9 @@ Mean squared error od residuals (MSE_R): 0.39334802224320636
 </div>
 </div>
 </div>
-</div>
-<div class="section" id="f-statistic">
-<h3>F-Statistic<a class="headerlink" href="#f-statistic" title="Permalink to this headline">¶</a></h3>
+</section>
+<section id="f-statistic">
+<h3>F-Statistic<a class="headerlink" href="#f-statistic" title="Permalink to this headline">#</a></h3>
 <p>A second use of the sums of squares in assessing the model is the <strong>F-test</strong>. Test statistics (like F) are usually the amount of <strong>systematic variance</strong> divided by the amount of <strong>unsystematic variance</strong>, or, put another way, the model compared to the error in the model. This is true here: F is based upon the ratio of the improvement due to the model (<span class="math notranslate nohighlight">\(SS_M\)</span>) and the error in the model (<span class="math notranslate nohighlight">\(SS_R\)</span>).</p>
 <p>Because the sums of squares depend on the number of differences that were added up, the <strong>average sums of squares</strong> (referred to as the <strong>mean squares</strong> or <strong>MS</strong>) are used to compute F.</p>
 <p>The <strong>mean sum of squares</strong> is the sum of squares divided by the associated degrees of freedom (this is comparable to calculating the variance from the sums of squares).</p>
@@ -2349,9 +2479,9 @@ MS_M = 34.919735599622285
 </div>
 </div>
 </div>
-</div>
-<div class="section" id="standard-error">
-<h3>Standard error<a class="headerlink" href="#standard-error" title="Permalink to this headline">¶</a></h3>
+</section>
+<section id="standard-error">
+<h3>Standard error<a class="headerlink" href="#standard-error" title="Permalink to this headline">#</a></h3>
 <p>We just learned that the <strong>standard deviation</strong> tells us about how well the mean represents the sample data. However, if we’re using the <strong>sample mean</strong> to estimate this parameter in the <strong>population</strong> (like we did), then we need to know how well it represents the value in the population, especially because samples from a population differ.</p>
 <p>Imagine that we were interested in the height of <em>all</em> adult women in germany (so adult women in germany are the <strong>population</strong>). We could take a <strong>sample</strong> from this population (like we did with our 20 women), and when we do we are taking one of many possible samples. If we were to take several samples from the same population, then each sample would have its own mean, and some of these sample means will be different.</p>
 <p>Imagine we could obtain the height of all adult women in germany and could compute the mean of their height (which would equal <span class="math notranslate nohighlight">\(\mu\)</span> = 168 cm). Then we would know, as an absolute fact, that the mean of the height is 168 cm (this is the population mean, <strong>µ</strong>, the parameter that we’re trying to estimate).</p>
@@ -2426,9 +2556,9 @@ dtype: float64
 </div>
 </div>
 </div>
-</div>
-<div class="section" id="significance-testing">
-<h3>Significance testing<a class="headerlink" href="#significance-testing" title="Permalink to this headline">¶</a></h3>
+</section>
+<section id="significance-testing">
+<h3>Significance testing<a class="headerlink" href="#significance-testing" title="Permalink to this headline">#</a></h3>
 <p>Next, we perform a statistical hypothesis test to asssess the slope of the model:</p>
 <ul class="simple">
 <li><p><span class="math notranslate nohighlight">\(H_0\)</span>: <span class="math notranslate nohighlight">\(\beta_1 = 0\)</span>. The true linear model has slope zero.</p></li>
@@ -2487,9 +2617,9 @@ t_{N - p} = \frac{{\beta_1} }{SE_{\hat{\beta}}}
 <p>We can use the t distribution to determine this probability. The result P&gt;|t| = 0.000 is the probability of finding a value of the t statistic greater than or equal to our observed value under the assumption of <span class="math notranslate nohighlight">\(H_0\)</span>. We find that p(t &gt; 9.422) = 0.000, which tells us that our observed t statistic value of 9.422 is relatively unlikely if the null hypothesis really is true.</p>
 <p>Since the p-value is below our significance level of 5%, we reject <span class="math notranslate nohighlight">\(H_0\)</span>.</p>
 <p>To learn more about the concept of p-values, review this excellent post series <a class="reference external" href="https://netflixtechblog.com/decision-making-at-netflix-33065fa06481">“Decision Making at Netflix”</a> provided by Netflix Tech Blog.</p>
-</div>
-<div class="section" id="confidence-interval">
-<h3>Confidence interval<a class="headerlink" href="#confidence-interval" title="Permalink to this headline">¶</a></h3>
+</section>
+<section id="confidence-interval">
+<h3>Confidence interval<a class="headerlink" href="#confidence-interval" title="Permalink to this headline">#</a></h3>
 <p>Now let’s cover confidence intervalls. As a brief recap, we usually use a <strong>sample value</strong> as an estimate of a <strong>parameter</strong> (e.g., the mean or any other parameter b) in the <strong>population</strong>. We’ve just seen that the <strong>estimate of a parameter</strong> (e.g., the mean) will differ across samples, and we can use the <strong>standard error</strong> to get some idea of the extent to which these estimates differ across samples. We can also use this information to calculate boundaries within which we believe the population value will fall. Such boundaries are called <strong>confidence intervals</strong>.</p>
 <p>For example, perhaps we might want to know how often, <em>in the long run</em>, an interval contains the true value of the parameter we’re trying to estimate (in the case of model 1, the mean). This is what a <strong>confidence interval</strong> does.</p>
 <p>Typically, we look at 95% confidence intervals, and sometimes 99% confidence intervals, but they all have a similar interpretation: they are limits constructed such that, for a certain percentage of samples (be that 95% or 99%), the true value of the population parameter falls within the limits. So, when you see a 95% confidence interval for a mean, think of it like this:</p>
@@ -2743,9 +2873,9 @@ Upper boundary of CI 165.65161176688028
 <img alt="../_images/basics_113_0.png" src="../_images/basics_113_0.png" />
 </div>
 </div>
-</div>
-<div class="section" id="confidence-intervals-in-small-samples">
-<h3>Confidence intervals in small samples<a class="headerlink" href="#confidence-intervals-in-small-samples" title="Permalink to this headline">¶</a></h3>
+</section>
+<section id="confidence-intervals-in-small-samples">
+<h3>Confidence intervals in small samples<a class="headerlink" href="#confidence-intervals-in-small-samples" title="Permalink to this headline">#</a></h3>
 <p>The procedure we just used is fine when samples are large, because the central limit theorem tells us that the sampling distribution will be normal. However, for small samples, the sampling distribution is not normal – it has a t-distribution. The t-distribution is a family of probability distributions that change shape as the sample size gets bigger (when the sample is very big, it has the shape of a normal distribution).</p>
 <p>To construct a confidence interval in a small sample we use the same principle as before, but instead of using the value for z we use the value for t:</p>
 <p>lower boundary of confidence intervall = <span class="math notranslate nohighlight">\(\bar{X} - (t_{n-1} \times SE)\)</span></p>
@@ -2818,16 +2948,16 @@ Upper boundary of CI (t-statistics) 165.69583627664076
 <img alt="../_images/basics_117_0.png" src="../_images/basics_117_0.png" />
 </div>
 </div>
-</div>
-</div>
-<div class="section" id="additional-measures">
-<h2>Additional measures<a class="headerlink" href="#additional-measures" title="Permalink to this headline">¶</a></h2>
+</section>
+</section>
+<section id="additional-measures">
+<h2>Additional measures<a class="headerlink" href="#additional-measures" title="Permalink to this headline">#</a></h2>
 <p>When fitting models, it is possible to increase the likelihood by adding parameters, but doing so may result in overfitting.</p>
 <p>Both the Bayesian information criterion (<strong>BIC</strong>) (also called the Schwarz criterion SBC or SBIC) and Akaike information criterion (<strong>AIC</strong>) attempt to resolve this problem by introducing a penalty term for the number of parameters in the model; the penalty term is larger in BIC than in AIC.</p>
 <p>Both measures are an estimator of the <strong>relative quality</strong> of statistical models for a given set of data. Hence, they are used to select the best performing model.</p>
 <p>For both measures, <strong>lower</strong> values are better</p>
-<div class="section" id="bayesian-information-criterion-bic">
-<h3>Bayesian information criterion (BIC)<a class="headerlink" href="#bayesian-information-criterion-bic" title="Permalink to this headline">¶</a></h3>
+<section id="bayesian-information-criterion-bic">
+<h3>Bayesian information criterion (BIC)<a class="headerlink" href="#bayesian-information-criterion-bic" title="Permalink to this headline">#</a></h3>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># BIC</span>
@@ -2841,9 +2971,9 @@ Upper boundary of CI (t-statistics) 165.69583627664076
 </div>
 </div>
 </div>
-</div>
-<div class="section" id="akaike-information-criterion-aic">
-<h3>Akaike information criterion (AIC)<a class="headerlink" href="#akaike-information-criterion-aic" title="Permalink to this headline">¶</a></h3>
+</section>
+<section id="akaike-information-criterion-aic">
+<h3>Akaike information criterion (AIC)<a class="headerlink" href="#akaike-information-criterion-aic" title="Permalink to this headline">#</a></h3>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># AIC</span>
@@ -2857,9 +2987,9 @@ Upper boundary of CI (t-statistics) 165.69583627664076
 </div>
 </div>
 </div>
-</div>
-</div>
-</div>
+</section>
+</section>
+</section>
 
     <script type="text/x-thebe-config">
     {
@@ -2883,9 +3013,11 @@ Upper boundary of CI (t-statistics) 165.69583627664076
 
               </div>
               
-            
-                <!-- Previous / next buttons -->
-<div class='prev-next-area'> 
+            </main>
+            <footer class="footer-article noprint">
+                
+    <!-- Previous / next buttons -->
+<div class='prev-next-area'>
     <a class='left-prev' id="prev-link" href="intro.html" title="previous page">
         <i class="fas fa-angle-left"></i>
         <div class="prev-next-info">
@@ -2901,24 +3033,28 @@ Upper boundary of CI (t-statistics) 165.69583627664076
     <i class="fas fa-angle-right"></i>
     </a>
 </div>
-            
+            </footer>
         </div>
     </div>
-    <footer class="footer">
-  <p>
+    <div class="footer-content row">
+        <footer class="col footer"><p>
+  
+    By Jan Kirenz<br/>
+  
+      &copy; Copyright 2022.<br/>
+</p>
+        </footer>
+    </div>
     
-      By Jan Kirenz<br/>
-    
-        &copy; Copyright 2021.<br/>
-  </p>
-</footer>
-</main>
+</div>
 
 
       </div>
     </div>
   
-  <script src="../_static/js/index.be7d3bbb2ef33a8344ce.js"></script>
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../_static/scripts/pydata-sphinx-theme.js?digest=1999514e3f237ded88cf"></script>
+
 
   </body>
 </html>

@@ -4,11 +4,13 @@
 <html>
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
     <title>Diagnostics &#8212; Introduction to Regression Models</title>
     
-  <link href="../_static/css/theme.css" rel="stylesheet">
-  <link href="../_static/css/index.ff1ffe594081f20da1ef19478df9384b.css" rel="stylesheet">
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../_static/styles/theme.css?digest=1999514e3f237ded88cf" rel="stylesheet">
+<link href="../_static/styles/pydata-sphinx-theme.css?digest=1999514e3f237ded88cf" rel="stylesheet">
 
     
   <link rel="stylesheet"
@@ -18,20 +20,16 @@
   <link rel="preload" as="font" type="font/woff2" crossorigin
     href="../_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2">
 
-    
-      
-
-    
     <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
-    <link rel="stylesheet" type="text/css" href="../_static/sphinx-book-theme.css?digest=c3fdc42140077d1ad13ad2f1588a4309" />
+    <link rel="stylesheet" href="../_static/styles/sphinx-book-theme.css?digest=62ba249389abaaa9ffc34bf36a076bdc1d65ee18" type="text/css" />
     <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css" />
     <link rel="stylesheet" type="text/css" href="../_static/copybutton.css" />
     <link rel="stylesheet" type="text/css" href="../_static/mystnb.css" />
     <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css" />
-    <link rel="stylesheet" type="text/css" href="../_static/panels-main.c949a650a448cc0ae9fd3441c0e17fb0.css" />
-    <link rel="stylesheet" type="text/css" href="../_static/panels-variables.06eb56fa6e07937060861dad626602ad.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/design-style.b7bb847fb20b106c3d81b95245e65545.min.css" />
     
-  <link rel="preload" as="script" href="../_static/js/index.be7d3bbb2ef33a8344ce.js">
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=1999514e3f237ded88cf">
 
     <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
     <script src="../_static/jquery.js"></script>
@@ -39,12 +37,14 @@
     <script src="../_static/doctools.js"></script>
     <script src="../_static/clipboard.min.js"></script>
     <script src="../_static/copybutton.js"></script>
+    <script src="../_static/scripts/sphinx-book-theme.js?digest=f31d14ad54b65d19161ba51d4ffff3a77ae00456"></script>
     <script>let toggleHintShow = 'Click to show';</script>
     <script>let toggleHintHide = 'Click to hide';</script>
     <script>let toggleOpenOnPrint = 'true';</script>
     <script src="../_static/togglebutton.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
     <script>var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
-    <script src="../_static/sphinx-book-theme.d59cb220de22ca1c485ebbdc042f0030.js"></script>
+    <script src="../_static/design-tabs.js"></script>
     <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"
 const thebe_selector = ".thebe,.cell"
 const thebe_selector_input = "pre"
@@ -53,7 +53,6 @@ const thebe_selector_output = ".output, .cell_output"
     <script async="async" src="../_static/sphinx-thebe.js"></script>
     <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
     <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -63,7 +62,21 @@ const thebe_selector_output = ".output, .cell_output"
     <!-- Google Analytics -->
     
   </head>
-  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="80">
+  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="60">
+<!-- Checkboxes to toggle the left sidebar -->
+<input type="checkbox" class="sidebar-toggle" name="__navigation" id="__navigation" aria-label="Toggle navigation sidebar">
+<label class="overlay overlay-navbar" for="__navigation">
+    <div class="visually-hidden">Toggle navigation sidebar</div>
+</label>
+<!-- Checkboxes to toggle the in-page toc -->
+<input type="checkbox" class="sidebar-toggle" name="__page-toc" id="__page-toc" aria-label="Toggle in-page Table of Contents">
+<label class="overlay overlay-pagetoc" for="__page-toc">
+    <div class="visually-hidden">Toggle in-page Table of Contents</div>
+</label>
+<!-- Headers at the top -->
+<div class="announcement header-item noprint"></div>
+<div class="header header-item noprint"></div>
+
     
     <div class="container-fluid" id="banner"></div>
 
@@ -72,9 +85,10 @@ const thebe_selector_output = ".output, .cell_output"
     <div class="container-xl">
       <div class="row">
           
-<div class="col-12 col-md-3 bd-sidebar site-navigation show" id="site-navigation">
-    
-        <div class="navbar-brand-box">
+<!-- Sidebar -->
+<div class="bd-sidebar noprint" id="site-navigation">
+    <div class="bd-sidebar__content">
+        <div class="bd-sidebar__top"><div class="navbar-brand-box">
     <a class="navbar-brand text-wrap" href="../index.html">
       
         <!-- `logo` is deprecated in Sphinx 4.0, so remove this when we stop supporting 3 -->
@@ -92,14 +106,15 @@ const thebe_selector_output = ".output, .cell_output"
   <input type="search" class="form-control" name="q" id="search-input" placeholder="Search this book..." aria-label="Search this book..." autocomplete="off" >
 </form><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
     <div class="bd-toc-item active">
-        <ul class="nav bd-sidenav">
- <li class="toctree-l1">
-  <a class="reference internal" href="intro.html">
-   Welcome
-  </a>
- </li>
-</ul>
-<p aria-level="2" class="caption" role="heading">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="intro.html">
+                    Welcome
+                </a>
+            </li>
+        </ul>
+        <p aria-level="2" class="caption" role="heading">
  <span class="caption-text">
   Linear regression
  </span>
@@ -243,6 +258,18 @@ const thebe_selector_output = ".output, .cell_output"
 </ul>
 <p aria-level="2" class="caption" role="heading">
  <span class="caption-text">
+  Case California housing
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="case-ca-housing.html">
+   Machine Learning project
+  </a>
+ </li>
+</ul>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
   References
  </span>
 </p>
@@ -255,106 +282,209 @@ const thebe_selector_output = ".output, .cell_output"
 </ul>
 
     </div>
-</nav> <!-- To handle the deprecated key -->
-
-<div class="navbar_extra_footer">
-  Powered by <a href="https://jupyterbook.org">Jupyter Book</a>
-</div>
-
-</div>
-
-
-          
-
-
-          
-<main class="col py-md-3 pl-md-4 bd-content overflow-auto" role="main">
-    
-    <div class="topbar container-xl fixed-top">
-    <div class="topbar-contents row">
-        <div class="col-12 col-md-3 bd-topbar-whitespace site-navigation show"></div>
-        <div class="col pl-md-4 topbar-main">
+</nav></div>
+        <div class="bd-sidebar__bottom">
+             <!-- To handle the deprecated key -->
             
-            <button id="navbar-toggler" class="navbar-toggler ml-0" type="button" data-toggle="collapse"
-                data-toggle="tooltip" data-placement="bottom" data-target=".site-navigation" aria-controls="navbar-menu"
-                aria-expanded="true" aria-label="Toggle navigation" aria-controls="site-navigation"
-                title="Toggle navigation" data-toggle="tooltip" data-placement="left">
-                <i class="fas fa-bars"></i>
-                <i class="fas fa-arrow-left"></i>
-                <i class="fas fa-arrow-up"></i>
-            </button>
-            
-            
-<div class="dropdown-buttons-trigger">
-    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn" aria-label="Download this page"><i
-            class="fas fa-download"></i></button>
-
-    <div class="dropdown-buttons">
-        <!-- ipynb file if we had a myst markdown file -->
-        
-        <!-- Download raw file -->
-        <a class="dropdown-buttons" href="../_sources/docs/diagnostics-auto.ipynb"><button type="button"
-                class="btn btn-secondary topbarbtn" title="Download source file" data-toggle="tooltip"
-                data-placement="left">.ipynb</button></a>
-        <!-- Download PDF via print -->
-        <button type="button" id="download-print" class="btn btn-secondary topbarbtn" title="Print to PDF"
-                onclick="printPdf(this)" data-toggle="tooltip" data-placement="left">.pdf</button>
-    </div>
-</div>
-
-            <!-- Source interaction buttons -->
-
-<div class="dropdown-buttons-trigger">
-    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn"
-        aria-label="Connect with source repository"><i class="fab fa-github"></i></button>
-    <div class="dropdown-buttons sourcebuttons">
-        <a class="repository-button"
-            href="https://github.com/kirenz/regression"><button type="button" class="btn btn-secondary topbarbtn"
-                data-toggle="tooltip" data-placement="left" title="Source repository"><i
-                    class="fab fa-github"></i>repository</button></a>
-        <a class="issues-button"
-            href="https://github.com/kirenz/regression/issues/new?title=Issue%20on%20page%20%2Fdocs/diagnostics-auto.html&body=Your%20issue%20content%20here."><button
-                type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip" data-placement="left"
-                title="Open an issue"><i class="fas fa-lightbulb"></i>open issue</button></a>
-        
-    </div>
-</div>
-
-            <!-- Full screen (wrap in <a> to have style consistency -->
-
-<a class="full-screen-button"><button type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip"
-        data-placement="bottom" onclick="toggleFullScreen()" aria-label="Fullscreen mode"
-        title="Fullscreen mode"><i
-            class="fas fa-expand"></i></button></a>
-
-            <!-- Launch buttons -->
-
-<div class="dropdown-buttons-trigger">
-    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn"
-        aria-label="Launch interactive content"><i class="fas fa-rocket"></i></button>
-    <div class="dropdown-buttons">
-        
-        
-        
-        <a class="colab-button" href="https://colab.research.google.com/github/kirenz/regression/blob/main/docs/diagnostics-auto.ipynb"><button type="button" class="btn btn-secondary topbarbtn"
-                title="Launch Colab" data-toggle="tooltip" data-placement="left"><img class="colab-button-logo"
-                    src="../_static/images/logo_colab.png"
-                    alt="Interact on Colab">Colab</button></a>
-        
-        
-    </div>
-</div>
-
-        </div>
-
-        <!-- Table of contents -->
-        <div class="d-none d-md-block col-md-2 bd-toc show noprint">
-            
-            <div class="tocsection onthispage pt-5 pb-3">
-                <i class="fas fa-list"></i> Contents
+            <div class="navbar_extra_footer">
+            Powered by <a href="https://jupyterbook.org">Jupyter Book</a>
             </div>
-            <nav id="bd-toc-nav" aria-label="Page">
-                <ul class="visible nav section-nav flex-column">
+            
+        </div>
+    </div>
+    <div id="rtd-footer-container"></div>
+</div>
+
+
+          
+
+
+          
+<!-- A tiny helper pixel to detect if we've scrolled -->
+<div class="sbt-scroll-pixel-helper"></div>
+<!-- Main content -->
+<div class="col py-0 content-container">
+    
+    <div class="header-article row sticky-top noprint">
+        
+
+
+
+<div class="col py-1 d-flex header-article-main">
+    <div class="header-article__left">
+        
+        <label for="__navigation"
+  class="headerbtn"
+  data-toggle="tooltip"
+data-placement="right"
+title="Toggle navigation"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-bars"></i>
+  </span>
+
+</label>
+
+        
+    </div>
+    <div class="header-article__right">
+<div class="menu-dropdown menu-dropdown-launch-buttons">
+  <button class="headerbtn menu-dropdown__trigger"
+      aria-label="Launch interactive content">
+      <i class="fas fa-rocket"></i>
+  </button>
+  <div class="menu-dropdown__content">
+    <ul>
+      <li>
+        <a href="https://colab.research.google.com/github/kirenz/regression/blob/main/docs/diagnostics-auto.ipynb"
+   class="headerbtn"
+   data-toggle="tooltip"
+data-placement="left"
+title="Launch on Colab"
+>
+  
+
+<span class="headerbtn__icon-container">
+  
+    <img src="../_static/images/logo_colab.png">
+  </span>
+<span class="headerbtn__text-container">Colab</span>
+</a>
+
+      </li>
+      
+    </ul>
+  </div>
+</div>
+
+<button onclick="toggleFullScreen()"
+  class="headerbtn"
+  data-toggle="tooltip"
+data-placement="bottom"
+title="Fullscreen mode"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+<div class="menu-dropdown menu-dropdown-repository-buttons">
+  <button class="headerbtn menu-dropdown__trigger"
+      aria-label="Source repositories">
+      <i class="fab fa-github"></i>
+  </button>
+  <div class="menu-dropdown__content">
+    <ul>
+      <li>
+        <a href="https://github.com/kirenz/regression"
+   class="headerbtn"
+   data-toggle="tooltip"
+data-placement="left"
+title="Source repository"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+<span class="headerbtn__text-container">repository</span>
+</a>
+
+      </li>
+      
+      <li>
+        <a href="https://github.com/kirenz/regression/issues/new?title=Issue%20on%20page%20%2Fdocs/diagnostics-auto.html&body=Your%20issue%20content%20here."
+   class="headerbtn"
+   data-toggle="tooltip"
+data-placement="left"
+title="Open an issue"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-lightbulb"></i>
+  </span>
+<span class="headerbtn__text-container">open issue</span>
+</a>
+
+      </li>
+      
+    </ul>
+  </div>
+</div>
+
+<div class="menu-dropdown menu-dropdown-download-buttons">
+  <button class="headerbtn menu-dropdown__trigger"
+      aria-label="Download this page">
+      <i class="fas fa-download"></i>
+  </button>
+  <div class="menu-dropdown__content">
+    <ul>
+      <li>
+        <a href="../_sources/docs/diagnostics-auto.ipynb"
+   class="headerbtn"
+   data-toggle="tooltip"
+data-placement="left"
+title="Download source file"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="headerbtn__text-container">.ipynb</span>
+</a>
+
+      </li>
+      
+      <li>
+        
+<button onclick="printPdf(this)"
+  class="headerbtn"
+  data-toggle="tooltip"
+data-placement="left"
+title="Print to PDF"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="headerbtn__text-container">.pdf</span>
+</button>
+
+      </li>
+      
+    </ul>
+  </div>
+</div>
+<label for="__page-toc"
+  class="headerbtn headerbtn-page-toc"
+  
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-list"></i>
+  </span>
+
+</label>
+
+    </div>
+</div>
+
+<!-- Table of contents -->
+<div class="col-md-3 bd-toc show noprint">
+    <div class="tocsection onthispage pt-5 pb-3">
+        <i class="fas fa-list"></i> Contents
+    </div>
+    <nav id="bd-toc-nav" aria-label="Page">
+        <ul class="visible nav section-nav flex-column">
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#python-setup">
    Python setup
@@ -493,12 +623,11 @@ const thebe_selector_output = ".output, .cell_output"
  </li>
 </ul>
 
-            </nav>
-        </div>
-    </div>
+    </nav>
 </div>
-    <div id="main-content" class="row">
-        <div class="col-12 col-md-9 pl-md-3 pr-md-0">
+    </div>
+    <div class="article row">
+        <div class="col pl-md-3 pl-lg-5 content-container">
             <!-- Table of contents that is only displayed when printing the page -->
             <div id="jb-print-docs-body" class="onlyprint">
                 <h1>Diagnostics</h1>
@@ -653,11 +782,12 @@ const thebe_selector_output = ".output, .cell_output"
                     </div>
                 </div>
             </div>
-            
+            <main id="main-content" role="main">
+                
               <div>
                 
-  <div class="tex2jax_ignore mathjax_ignore section" id="diagnostics">
-<h1>Diagnostics<a class="headerlink" href="#diagnostics" title="Permalink to this headline">¶</a></h1>
+  <section class="tex2jax_ignore mathjax_ignore" id="diagnostics">
+<h1>Diagnostics<a class="headerlink" href="#diagnostics" title="Permalink to this headline">#</a></h1>
 <p>When we fit a linear regression model to a particular data set, many problems may occur. Most common among these are the following:</p>
 <ol class="simple">
 <li><p>Non-linearity of the response-predictor relationships</p></li>
@@ -679,8 +809,8 @@ const thebe_selector_output = ".output, .cell_output"
 <li><p>Statsmodels <a class="reference external" href="https://www.statsmodels.org/stable/diagnostic.html">regression diagnostic page</a></p></li>
 <li><p><a class="reference external" href="https://www.statsmodels.org/dev/examples/notebooks/generated/regression_diagnostics.html">Statsmodel examples with code</a></p></li>
 </ul>
-<div class="section" id="python-setup">
-<h2>Python setup<a class="headerlink" href="#python-setup" title="Permalink to this headline">¶</a></h2>
+<section id="python-setup">
+<h2>Python setup<a class="headerlink" href="#python-setup" title="Permalink to this headline">#</a></h2>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
@@ -707,9 +837,9 @@ const thebe_selector_output = ".output, .cell_output"
 </div>
 </div>
 </div>
-</div>
-<div class="section" id="import-data">
-<h2>Import data<a class="headerlink" href="#import-data" title="Permalink to this headline">¶</a></h2>
+</section>
+<section id="import-data">
+<h2>Import data<a class="headerlink" href="#import-data" title="Permalink to this headline">#</a></h2>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Load the csv data files into pandas dataframes</span>
@@ -923,9 +1053,9 @@ memory usage: 28.0+ KB
 </div>
 </div>
 </div>
-</div>
-<div class="section" id="tidying-data">
-<h2>Tidying data<a class="headerlink" href="#tidying-data" title="Permalink to this headline">¶</a></h2>
+</section>
+<section id="tidying-data">
+<h2>Tidying data<a class="headerlink" href="#tidying-data" title="Permalink to this headline">#</a></h2>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># change data type</span>
@@ -936,8 +1066,8 @@ memory usage: 28.0+ KB
 </div>
 </div>
 </div>
-<div class="section" id="handle-missing-values">
-<h3>Handle missing values<a class="headerlink" href="#handle-missing-values" title="Permalink to this headline">¶</a></h3>
+<section id="handle-missing-values">
+<h3>Handle missing values<a class="headerlink" href="#handle-missing-values" title="Permalink to this headline">#</a></h3>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># show missing values (missing values - if present - will be displayed in yellow )</span>
@@ -1009,10 +1139,10 @@ dtype: int64
 <img alt="../_images/diagnostics-auto_14_0.png" src="../_images/diagnostics-auto_14_0.png" />
 </div>
 </div>
-</div>
-</div>
-<div class="section" id="regression-model">
-<h2>Regression model<a class="headerlink" href="#regression-model" title="Permalink to this headline">¶</a></h2>
+</section>
+</section>
+<section id="regression-model">
+<h2>Regression model<a class="headerlink" href="#regression-model" title="Permalink to this headline">#</a></h2>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># fit linear model with statsmodels.formula.api (with R-style formulas) </span>
@@ -1084,11 +1214,11 @@ dtype: int64
 </tr>
 </table><br/><br/>Notes:<br/>[1] Standard Errors assume that the covariance matrix of the errors is correctly specified.<br/>[2] The condition number is large, 3.48e+04. This might indicate that there are<br/>strong multicollinearity or other numerical problems.</div></div>
 </div>
-</div>
-<div class="section" id="id1">
-<h2>Diagnostics<a class="headerlink" href="#id1" title="Permalink to this headline">¶</a></h2>
-<div class="section" id="plot-regress-exog">
-<h3>plot_regress_exog<a class="headerlink" href="#plot-regress-exog" title="Permalink to this headline">¶</a></h3>
+</section>
+<section id="id1">
+<h2>Diagnostics<a class="headerlink" href="#id1" title="Permalink to this headline">#</a></h2>
+<section id="plot-regress-exog">
+<h3>plot_regress_exog<a class="headerlink" href="#plot-regress-exog" title="Permalink to this headline">#</a></h3>
 <p>The <code class="docutils literal notranslate"><span class="pre">plot_regress_exog</span></code> function is a convenience function that gives a 2x2 plot containing</p>
 <ol class="simple">
 <li><p>the dependent variable and fitted values with confidence intervals vs. the independent variable chosen,</p></li>
@@ -1128,14 +1258,14 @@ dtype: int64
 <img alt="../_images/diagnostics-auto_20_0.png" src="../_images/diagnostics-auto_20_0.png" />
 </div>
 </div>
-<div class="section" id="residuals-vs-horsepower">
-<h4>Residuals vs horsepower<a class="headerlink" href="#residuals-vs-horsepower" title="Permalink to this headline">¶</a></h4>
-</div>
-</div>
-<div class="section" id="non-linearity">
-<h3>Non-linearity<a class="headerlink" href="#non-linearity" title="Permalink to this headline">¶</a></h3>
-<div class="section" id="harvey-collier-multiplier-test">
-<h4>Harvey-Collier multiplier test<a class="headerlink" href="#harvey-collier-multiplier-test" title="Permalink to this headline">¶</a></h4>
+<section id="residuals-vs-horsepower">
+<h4>Residuals vs horsepower<a class="headerlink" href="#residuals-vs-horsepower" title="Permalink to this headline">#</a></h4>
+</section>
+</section>
+<section id="non-linearity">
+<h3>Non-linearity<a class="headerlink" href="#non-linearity" title="Permalink to this headline">#</a></h3>
+<section id="harvey-collier-multiplier-test">
+<h4>Harvey-Collier multiplier test<a class="headerlink" href="#harvey-collier-multiplier-test" title="Permalink to this headline">#</a></h4>
 <p>Harvey-Collier multiplier test for Null hypothesis that the linear specification is correct. This test is a t-test that the mean of the recursive ols residuals is zero.</p>
 <p>A significant result (rejecting the null) occurs when the fit is better with a range restriction (which is what happens if the model is nonlinear).</p>
 <div class="cell docutils container">
@@ -1154,10 +1284,10 @@ dtype: int64
 </div>
 </div>
 </div>
-</div>
-</div>
-<div class="section" id="residuals-vs-fitted-plot">
-<h3>Residuals vs fitted plot<a class="headerlink" href="#residuals-vs-fitted-plot" title="Permalink to this headline">¶</a></h3>
+</section>
+</section>
+<section id="residuals-vs-fitted-plot">
+<h3>Residuals vs fitted plot<a class="headerlink" href="#residuals-vs-fitted-plot" title="Permalink to this headline">#</a></h3>
 <p>Residual plots are also a very useful graphical tool for identifying non-linearity:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -1321,15 +1451,15 @@ dtype: int64
 <img alt="../_images/diagnostics-auto_35_0.png" src="../_images/diagnostics-auto_35_0.png" />
 </div>
 </div>
-</div>
-<div class="section" id="normality">
-<h3>Normality<a class="headerlink" href="#normality" title="Permalink to this headline">¶</a></h3>
+</section>
+<section id="normality">
+<h3>Normality<a class="headerlink" href="#normality" title="Permalink to this headline">#</a></h3>
 <p>It can be helpful if the residuals in the model are random, normally distributed variables with a mean of 0.</p>
 <p>This assumption means that the differences between the predicted and observed data are most frequently zero or very close to zero, and that differences much greater than zero happen only occasionally.</p>
 <p>Some people confuse this assumption with the idea that predictors have to be normally distributed, which they don’t. In small samples a lack of normality invalidates confidence intervals and significance tests, whereas in large samples it will not because of the <strong>central limit theorem</strong>.</p>
 <p>If you are concerned only with estimating the model parameters (and not significance tests and confidence intervals) then this assumption barely matters. If you bootstrap confidence intervals then you can ignore this assumption.</p>
-<div class="section" id="jarque-bera-test">
-<h4>Jarque-Bera test<a class="headerlink" href="#jarque-bera-test" title="Permalink to this headline">¶</a></h4>
+<section id="jarque-bera-test">
+<h4>Jarque-Bera test<a class="headerlink" href="#jarque-bera-test" title="Permalink to this headline">#</a></h4>
 <p>The Jarque–Bera test is a goodness-of-fit test of whether sample data have the skewness and kurtosis matching a normal distribution.</p>
 <p>The null hypothesis is a joint hypothesis of the skewness being zero and the excess kurtosis being zero.</p>
 <p>Samples from a normal distribution have an expected skewness of 0 and an expected excess kurtosis of 0 (which is the same as a kurtosis of 3). As the definition of JB shows, any deviation from this increases the JB statistic.</p>
@@ -1351,9 +1481,9 @@ dtype: int64
 </div>
 </div>
 </div>
-</div>
-<div class="section" id="omnibus-normtest">
-<h4>Omnibus normtest<a class="headerlink" href="#omnibus-normtest" title="Permalink to this headline">¶</a></h4>
+</section>
+<section id="omnibus-normtest">
+<h4>Omnibus normtest<a class="headerlink" href="#omnibus-normtest" title="Permalink to this headline">#</a></h4>
 <p>Test for normal distribution of residuals. In this case, we use the <span class="math notranslate nohighlight">\(Chi^2\)</span>-Test. The Chi-Square Test for normality allows us to check whether or not the model residuals follow an approximately normal distribution.</p>
 <p>Our null hypothesis is that the residuals are from a normal distribution.</p>
 <div class="cell docutils container">
@@ -1370,16 +1500,16 @@ dtype: int64
 </div>
 </div>
 </div>
-</div>
-</div>
-<div class="section" id="outliers">
-<h3>Outliers<a class="headerlink" href="#outliers" title="Permalink to this headline">¶</a></h3>
+</section>
+</section>
+<section id="outliers">
+<h3>Outliers<a class="headerlink" href="#outliers" title="Permalink to this headline">#</a></h3>
 <p>An outlier is a point for which <span class="math notranslate nohighlight">\(y_i\)</span> is far from the value predicted by the model. Outliers can arise for a variety of reasons, such as incorrect recording of an observation during data collection.</p>
 <p>In practice, it can be difficult to decide how large a residual needs to be before we consider the point to be an outlier. To address this problem, instead of plotting the residuals, we can plot the studentized residuals, computed by dividing each residual by its estimated standard error.</p>
 <p>Observations whose studentized residuals are greater than 3 in absolute value are possible outliers.</p>
 <p>If we believe that an outlier has occurred due to an error in data collection or recording, then one solution is to simply remove the observation. However, care should be taken, since an outlier may instead indicate a deficiency with the model, such as a missing predictor.</p>
-<div class="section" id="normal-q-q-plot">
-<h4>Normal Q-Q-Plot<a class="headerlink" href="#normal-q-q-plot" title="Permalink to this headline">¶</a></h4>
+<section id="normal-q-q-plot">
+<h4>Normal Q-Q-Plot<a class="headerlink" href="#normal-q-q-plot" title="Permalink to this headline">#</a></h4>
 <p>This plots the standardized (z-score) residuals against the theoretical normal quantiles. Anything quite off the diagonal lines may be a concern for further investigation.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -1424,10 +1554,10 @@ We can observe that only some residuals (in the lower left and the upper right c
 <img alt="../_images/diagnostics-auto_46_0.png" src="../_images/diagnostics-auto_46_0.png" />
 </div>
 </div>
-</div>
-</div>
-<div class="section" id="correlation">
-<h3>Correlation<a class="headerlink" href="#correlation" title="Permalink to this headline">¶</a></h3>
+</section>
+</section>
+<section id="correlation">
+<h3>Correlation<a class="headerlink" href="#correlation" title="Permalink to this headline">#</a></h3>
 <p>An important assumption of the linear regression model is that the error terms are uncorrelated.</p>
 <p>Such correlations frequently occur in the context of time series data, which consists of observations for which measurements are obtained at discrete points in time. In many cases, observations that are obtained at adjacent time points will have positively correlated errors. In order to determine if this is the case for a given data set, we can plot the residuals from our model as a function of time. If the errors are uncorrelated, then there should be no discernible pattern.</p>
 <p>Correlation among the error terms can also occur outside of time series data. For instance, consider a study in which individuals’ heights are predicted from their weights. The assumption of uncorrelated errors could be violated if some of the individuals in the study are members of the same family, or eat the same diet, or have been exposed to the same environmental factors.</p>
@@ -1447,15 +1577,15 @@ We can observe that only some residuals (in the lower left and the upper right c
 </div>
 </div>
 </div>
-</div>
-<div class="section" id="variance-of-error-terms">
-<h3>Variance of error terms<a class="headerlink" href="#variance-of-error-terms" title="Permalink to this headline">¶</a></h3>
+</section>
+<section id="variance-of-error-terms">
+<h3>Variance of error terms<a class="headerlink" href="#variance-of-error-terms" title="Permalink to this headline">#</a></h3>
 <p>Another important assumption of the linear regression model is that the error terms have a constant variance.</p>
 <p>For instance, the variances of the error terms may increase with the value of the response. One can identify non-constant variances in
 the errors, or <strong>heteroscedasticity</strong>, from the presence of a funnel shape in the residual plot.</p>
 <p>When faced with this problem, one possible solution is to transform the response Y using a concave function such as log Y or √Y . Such a transformation results in a greater amount of shrinkage of the larger responses, leading to a reduction in heteroscedasticity.</p>
-<div class="section" id="breusch-pagan-test">
-<h4>Breusch-Pagan test:<a class="headerlink" href="#breusch-pagan-test" title="Permalink to this headline">¶</a></h4>
+<section id="breusch-pagan-test">
+<h4>Breusch-Pagan test:<a class="headerlink" href="#breusch-pagan-test" title="Permalink to this headline">#</a></h4>
 <p>Test assumes homoskedasticity (null hypothesis). If one of the test statistics is significant, then you have evidence of heteroskedasticity.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -1475,9 +1605,9 @@ the errors, or <strong>heteroscedasticity</strong>, from the presence of a funne
 </div>
 </div>
 </div>
-</div>
-<div class="section" id="scale-location-plot">
-<h4>Scale-Location plot<a class="headerlink" href="#scale-location-plot" title="Permalink to this headline">¶</a></h4>
+</section>
+<section id="scale-location-plot">
+<h4>Scale-Location plot<a class="headerlink" href="#scale-location-plot" title="Permalink to this headline">#</a></h4>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Scale Location plot</span>
@@ -1496,15 +1626,15 @@ the errors, or <strong>heteroscedasticity</strong>, from the presence of a funne
 </div>
 <p>This plot shows if residuals are spread equally along the ranges of predictors. This is how we can check the assumption of equal variance (<strong>homoscedasticity</strong>). It’s good if we observe a horizontal line with equally (randomly) spread points.</p>
 <p>In our model the residuals begin to spread wider along the y-axis as it passes the x value of around 18. Because the residuals spread wider and wider with an increase of x, the red smooth line is not horizontal and shows a positive angle. This is an indication of <strong>heteroskedasticity</strong>.</p>
-</div>
-</div>
-<div class="section" id="leverage">
-<h3>Leverage<a class="headerlink" href="#leverage" title="Permalink to this headline">¶</a></h3>
+</section>
+</section>
+<section id="leverage">
+<h3>Leverage<a class="headerlink" href="#leverage" title="Permalink to this headline">#</a></h3>
 <p>We just saw that outliers are observations for which the response <span class="math notranslate nohighlight">\(y_i\)</span> is unusual given the predictor <span class="math notranslate nohighlight">\(x_i\)</span>. In contrast, observations with high leverage have an unusual value for <span class="math notranslate nohighlight">\(x_i\)</span>.</p>
 <p>In a simple linear regression, high leverage observations are fairly easy to identify, since we can simply look for observations for which the predictor value is outside of the normal range of the observations. But in a multiple linear regression with many predictors, it is possible to have an observation that is well within the range of each individual predictor’s values, but that is unusual in terms of the full set of predictors.</p>
 <p>A general rule of thumb is that observations with a <strong>Cook’s D</strong> over 4/n, where n is the number of observations, is an possible outlier with leverage.</p>
-<div class="section" id="statsmodel-influence">
-<h4>Statsmodel influence<a class="headerlink" href="#statsmodel-influence" title="Permalink to this headline">¶</a></h4>
+<section id="statsmodel-influence">
+<h4>Statsmodel influence<a class="headerlink" href="#statsmodel-influence" title="Permalink to this headline">#</a></h4>
 <p>Once created, an object of class OLSInfluence holds attributes and methods that allow users to assess the influence of each observation.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -1565,9 +1695,9 @@ the errors, or <strong>heteroscedasticity</strong>, from the presence of a funne
 </div>
 </div>
 </div>
-</div>
-<div class="section" id="residuals-vs-leverage">
-<h4>Residuals vs leverage<a class="headerlink" href="#residuals-vs-leverage" title="Permalink to this headline">¶</a></h4>
+</section>
+<section id="residuals-vs-leverage">
+<h4>Residuals vs leverage<a class="headerlink" href="#residuals-vs-leverage" title="Permalink to this headline">#</a></h4>
 <p>Plots leverage statistics vs. normalized residuals squared. See <a class="reference external" href="http://www.statsmodels.org/0.6.1/generated/statsmodels.graphics.regressionplots.plot_leverage_resid2.html">statsmodel documentation</a></p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -1580,10 +1710,10 @@ the errors, or <strong>heteroscedasticity</strong>, from the presence of a funne
 <img alt="../_images/diagnostics-auto_62_0.png" src="../_images/diagnostics-auto_62_0.png" />
 </div>
 </div>
-</div>
-</div>
-<div class="section" id="multicollinearity">
-<h3>Multicollinearity<a class="headerlink" href="#multicollinearity" title="Permalink to this headline">¶</a></h3>
+</section>
+</section>
+<section id="multicollinearity">
+<h3>Multicollinearity<a class="headerlink" href="#multicollinearity" title="Permalink to this headline">#</a></h3>
 <p>Collinearity refers to the situation in which two or more predictor variables collinearity are closely related to one another.</p>
 <p>The presence of collinearity can pose problems in the regression context, since it can be difficult to separate out the individual effects of collinear variables on the response.</p>
 <div class="cell docutils container">
@@ -1686,9 +1816,9 @@ the errors, or <strong>heteroscedasticity</strong>, from the presence of a funne
 <p>When faced with the problem of collinearity, there are two simple solutions:</p>
 <p>The first is to drop one of the problematic variables from the regression. This can usually be done without much compromise to the regression fit, since the presence of collinearity implies that the information that this variable provides about the response is redundant in the presence of the other variables.</p>
 <p>The second solution is to combine the collinear variables together into a single predictor.</p>
-</div>
-</div>
-</div>
+</section>
+</section>
+</section>
 
     <script type="text/x-thebe-config">
     {
@@ -1712,28 +1842,34 @@ the errors, or <strong>heteroscedasticity</strong>, from the presence of a funne
 
               </div>
               
-            
-                <!-- Previous / next buttons -->
+            </main>
+            <footer class="footer-article noprint">
+                
+    <!-- Previous / next buttons -->
 <div class='prev-next-area'>
 </div>
-            
+            </footer>
         </div>
     </div>
-    <footer class="footer">
-  <p>
+    <div class="footer-content row">
+        <footer class="col footer"><p>
+  
+    By Jan Kirenz<br/>
+  
+      &copy; Copyright 2022.<br/>
+</p>
+        </footer>
+    </div>
     
-      By Jan Kirenz<br/>
-    
-        &copy; Copyright 2021.<br/>
-  </p>
-</footer>
-</main>
+</div>
 
 
       </div>
     </div>
   
-  <script src="../_static/js/index.be7d3bbb2ef33a8344ce.js"></script>
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../_static/scripts/pydata-sphinx-theme.js?digest=1999514e3f237ded88cf"></script>
+
 
   </body>
 </html>
