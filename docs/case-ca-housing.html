@@ -530,33 +530,30 @@ title="Print to PDF"
   </ul>
  </li>
  <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#final-data-pipeline">
-   Final Data Pipeline
-  </a>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#transformation-pipelines">
-   Transformation Pipelines
+  <a class="reference internal nav-link" href="#data-pipeline">
+   Data Pipeline
   </a>
  </li>
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#models">
    Models
   </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#linear-regression">
+     Linear Regression
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#decision-tree">
+     Decision Tree
+    </a>
+   </li>
+  </ul>
  </li>
  <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#linear-regression">
-   Linear Regression
-  </a>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#decision-tree">
-   Decision Tree
-  </a>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#evaluation-models-with-cross-validation">
-   Evaluation Models with Cross-Validation
+  <a class="reference internal nav-link" href="#cross-validation">
+   Cross-Validation
   </a>
   <ul class="nav section-nav flex-column">
    <li class="toc-h3 nav-item toc-entry">
@@ -592,20 +589,20 @@ title="Print to PDF"
     </a>
    </li>
    <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#analyze-errors-of-best-model">
-     Analyze Errors of Best Model
+    <a class="reference internal nav-link" href="#analyze-errors">
+     Analyze Errors
     </a>
    </li>
   </ul>
  </li>
  <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#evaluate-your-system-on-the-test-set">
-   Evaluate Your System on the Test Set
+  <a class="reference internal nav-link" href="#evaluate-on-test-set">
+   Evaluate on Test Set
   </a>
  </li>
  <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#model-persistence-using-joblib">
-   Model persistence using joblib
+  <a class="reference internal nav-link" href="#save-model">
+   Save model
   </a>
  </li>
  <li class="toc-h2 nav-item toc-entry">
@@ -694,33 +691,30 @@ title="Print to PDF"
   </ul>
  </li>
  <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#final-data-pipeline">
-   Final Data Pipeline
-  </a>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#transformation-pipelines">
-   Transformation Pipelines
+  <a class="reference internal nav-link" href="#data-pipeline">
+   Data Pipeline
   </a>
  </li>
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#models">
    Models
   </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#linear-regression">
+     Linear Regression
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#decision-tree">
+     Decision Tree
+    </a>
+   </li>
+  </ul>
  </li>
  <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#linear-regression">
-   Linear Regression
-  </a>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#decision-tree">
-   Decision Tree
-  </a>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#evaluation-models-with-cross-validation">
-   Evaluation Models with Cross-Validation
+  <a class="reference internal nav-link" href="#cross-validation">
+   Cross-Validation
   </a>
   <ul class="nav section-nav flex-column">
    <li class="toc-h3 nav-item toc-entry">
@@ -756,20 +750,20 @@ title="Print to PDF"
     </a>
    </li>
    <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#analyze-errors-of-best-model">
-     Analyze Errors of Best Model
+    <a class="reference internal nav-link" href="#analyze-errors">
+     Analyze Errors
     </a>
    </li>
   </ul>
  </li>
  <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#evaluate-your-system-on-the-test-set">
-   Evaluate Your System on the Test Set
+  <a class="reference internal nav-link" href="#evaluate-on-test-set">
+   Evaluate on Test Set
   </a>
  </li>
  <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#model-persistence-using-joblib">
-   Model persistence using joblib
+  <a class="reference internal nav-link" href="#save-model">
+   Save model
   </a>
  </li>
  <li class="toc-h2 nav-item toc-entry">
@@ -827,6 +821,8 @@ title="Print to PDF"
 <span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
 
 <span class="kn">import</span> <span class="nn">sklearn</span>
+<span class="kn">from</span> <span class="nn">sklearn</span> <span class="kn">import</span> <span class="n">set_config</span>
+<span class="n">set_config</span><span class="p">(</span><span class="n">display</span><span class="o">=</span><span class="s1">&#39;diagram&#39;</span><span class="p">)</span>
 
 <span class="n">plt</span><span class="o">.</span><span class="n">rc</span><span class="p">(</span><span class="s1">&#39;font&#39;</span><span class="p">,</span> <span class="n">size</span><span class="o">=</span><span class="mi">14</span><span class="p">)</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">rc</span><span class="p">(</span><span class="s1">&#39;axes&#39;</span><span class="p">,</span> <span class="n">labelsize</span><span class="o">=</span><span class="mi">14</span><span class="p">,</span> <span class="n">titlesize</span><span class="o">=</span><span class="mi">14</span><span class="p">)</span>
@@ -1354,8 +1350,8 @@ Name: median_house_value, dtype: float64
 </div>
 </section>
 </section>
-<section id="final-data-pipeline">
-<h2>Final Data Pipeline<a class="headerlink" href="#final-data-pipeline" title="Permalink to this headline">#</a></h2>
+<section id="data-pipeline">
+<h2>Data Pipeline<a class="headerlink" href="#data-pipeline" title="Permalink to this headline">#</a></h2>
 <p>Let’s revert to the original training set and separate the target (note that <code class="docutils literal notranslate"><span class="pre">strat_train_set.drop()</span></code> creates a copy of <code class="docutils literal notranslate"><span class="pre">strat_train_set</span></code> without the column, it doesn’t actually modify <code class="docutils literal notranslate"><span class="pre">strat_train_set</span></code> itself, unless you pass <code class="docutils literal notranslate"><span class="pre">inplace=True</span></code>):</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -1366,21 +1362,7 @@ Name: median_house_value, dtype: float64
 </div>
 </div>
 </div>
-<p>Custom Transformers</p>
-</section>
-<section id="transformation-pipelines">
-<h2>Transformation Pipelines<a class="headerlink" href="#transformation-pipelines" title="Permalink to this headline">#</a></h2>
 <p>Now let’s build a pipeline to preprocess the attributes:</p>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">sklearn</span> <span class="kn">import</span> <span class="n">set_config</span>
-
-<span class="n">set_config</span><span class="p">(</span><span class="n">display</span><span class="o">=</span><span class="s1">&#39;diagram&#39;</span><span class="p">)</span>
-</pre></div>
-</div>
-</div>
-</div>
-<p>Define pipelines transformations:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">num_attribs</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;longitude&quot;</span><span class="p">,</span> <span class="s2">&quot;latitude&quot;</span><span class="p">,</span> <span class="s2">&quot;housing_median_age&quot;</span><span class="p">,</span> <span class="s2">&quot;total_rooms&quot;</span><span class="p">,</span>
@@ -1534,9 +1516,8 @@ Name: median_house_value, dtype: float64
 </section>
 <section id="models">
 <h2>Models<a class="headerlink" href="#models" title="Permalink to this headline">#</a></h2>
-</section>
 <section id="linear-regression">
-<h2>Linear Regression<a class="headerlink" href="#linear-regression" title="Permalink to this headline">#</a></h2>
+<h3>Linear Regression<a class="headerlink" href="#linear-regression" title="Permalink to this headline">#</a></h3>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">sklearn.linear_model</span> <span class="kn">import</span> <span class="n">LinearRegression</span>
@@ -1681,7 +1662,7 @@ Name: median_house_value, dtype: float64
 </div>
 </section>
 <section id="decision-tree">
-<h2>Decision Tree<a class="headerlink" href="#decision-tree" title="Permalink to this headline">#</a></h2>
+<h3>Decision Tree<a class="headerlink" href="#decision-tree" title="Permalink to this headline">#</a></h3>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">sklearn.tree</span> <span class="kn">import</span> <span class="n">DecisionTreeRegressor</span>
@@ -1776,8 +1757,9 @@ Name: median_house_value, dtype: float64
 </div>
 </div>
 </section>
-<section id="evaluation-models-with-cross-validation">
-<h2>Evaluation Models with Cross-Validation<a class="headerlink" href="#evaluation-models-with-cross-validation" title="Permalink to this headline">#</a></h2>
+</section>
+<section id="cross-validation">
+<h2>Cross-Validation<a class="headerlink" href="#cross-validation" title="Permalink to this headline">#</a></h2>
 <section id="id1">
 <h3>Decision Tree<a class="headerlink" href="#id1" title="Permalink to this headline">#</a></h3>
 <div class="cell docutils container">
@@ -2427,8 +2409,9 @@ dtype: float64
 </div></div></div>
 </div>
 </section>
-<section id="analyze-errors-of-best-model">
-<h3>Analyze Errors of Best Model<a class="headerlink" href="#analyze-errors-of-best-model" title="Permalink to this headline">#</a></h3>
+<section id="analyze-errors">
+<h3>Analyze Errors<a class="headerlink" href="#analyze-errors" title="Permalink to this headline">#</a></h3>
+<p>Analyze Errors of Best Model</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">final_model</span> <span class="o">=</span> <span class="n">rnd_search</span><span class="o">.</span><span class="n">best_estimator_</span>  <span class="c1"># includes preprocessing</span>
@@ -2449,8 +2432,8 @@ dtype: float64
 </div>
 </section>
 </section>
-<section id="evaluate-your-system-on-the-test-set">
-<h2>Evaluate Your System on the Test Set<a class="headerlink" href="#evaluate-your-system-on-the-test-set" title="Permalink to this headline">#</a></h2>
+<section id="evaluate-on-test-set">
+<h2>Evaluate on Test Set<a class="headerlink" href="#evaluate-on-test-set" title="Permalink to this headline">#</a></h2>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">X_test</span> <span class="o">=</span> <span class="n">strat_test_set</span><span class="o">.</span><span class="n">drop</span><span class="p">(</span><span class="s2">&quot;median_house_value&quot;</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
@@ -2501,8 +2484,9 @@ dtype: float64
 </div>
 </div>
 </section>
-<section id="model-persistence-using-joblib">
-<h2>Model persistence using joblib<a class="headerlink" href="#model-persistence-using-joblib" title="Permalink to this headline">#</a></h2>
+<section id="save-model">
+<h2>Save model<a class="headerlink" href="#save-model" title="Permalink to this headline">#</a></h2>
+<p>Model persistence using joblib</p>
 <p>Save the final model:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
