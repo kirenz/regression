@@ -992,11 +992,11 @@ memory usage: 1.6+ MB
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;1H OCEAN     9136
-INLAND        6551
-NEAR OCEAN    2658
-NEAR BAY      2290
-ISLAND           5
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;1H OCEAN     7274
+INLAND        5301
+NEAR OCEAN    2089
+NEAR BAY      1846
+ISLAND           2
 Name: ocean_proximity, dtype: int64
 </pre></div>
 </div>
@@ -1040,102 +1040,91 @@ Name: ocean_proximity, dtype: int64
   <tbody>
     <tr>
       <th>longitude</th>
-      <td>20640.0</td>
-      <td>-119.569704</td>
-      <td>2.003532</td>
+      <td>16512.0</td>
+      <td>-119.573125</td>
+      <td>2.000624</td>
       <td>-124.3500</td>
       <td>-121.8000</td>
-      <td>-118.4900</td>
-      <td>-118.01000</td>
-      <td>-114.3100</td>
+      <td>-118.5100</td>
+      <td>-118.01</td>
+      <td>-114.4900</td>
     </tr>
     <tr>
       <th>latitude</th>
-      <td>20640.0</td>
-      <td>35.631861</td>
-      <td>2.135952</td>
-      <td>32.5400</td>
+      <td>16512.0</td>
+      <td>35.637746</td>
+      <td>2.133294</td>
+      <td>32.5500</td>
       <td>33.9300</td>
       <td>34.2600</td>
-      <td>37.71000</td>
+      <td>37.72</td>
       <td>41.9500</td>
     </tr>
     <tr>
       <th>housing_median_age</th>
-      <td>20640.0</td>
-      <td>28.639486</td>
-      <td>12.585558</td>
+      <td>16512.0</td>
+      <td>28.577156</td>
+      <td>12.585738</td>
       <td>1.0000</td>
       <td>18.0000</td>
       <td>29.0000</td>
-      <td>37.00000</td>
+      <td>37.00</td>
       <td>52.0000</td>
     </tr>
     <tr>
       <th>total_rooms</th>
-      <td>20640.0</td>
-      <td>2635.763081</td>
-      <td>2181.615252</td>
+      <td>16512.0</td>
+      <td>2639.402798</td>
+      <td>2185.287466</td>
       <td>2.0000</td>
-      <td>1447.7500</td>
-      <td>2127.0000</td>
-      <td>3148.00000</td>
+      <td>1447.0000</td>
+      <td>2125.0000</td>
+      <td>3154.00</td>
       <td>39320.0000</td>
     </tr>
     <tr>
       <th>total_bedrooms</th>
-      <td>20433.0</td>
-      <td>537.870553</td>
-      <td>421.385070</td>
+      <td>16344.0</td>
+      <td>538.949094</td>
+      <td>423.862079</td>
       <td>1.0000</td>
       <td>296.0000</td>
-      <td>435.0000</td>
-      <td>647.00000</td>
-      <td>6445.0000</td>
+      <td>434.0000</td>
+      <td>645.00</td>
+      <td>6210.0000</td>
     </tr>
     <tr>
       <th>population</th>
-      <td>20640.0</td>
-      <td>1425.476744</td>
-      <td>1132.462122</td>
+      <td>16512.0</td>
+      <td>1425.513929</td>
+      <td>1094.795467</td>
       <td>3.0000</td>
       <td>787.0000</td>
-      <td>1166.0000</td>
-      <td>1725.00000</td>
-      <td>35682.0000</td>
+      <td>1167.0000</td>
+      <td>1726.00</td>
+      <td>16305.0000</td>
     </tr>
     <tr>
       <th>households</th>
-      <td>20640.0</td>
-      <td>499.539680</td>
-      <td>382.329753</td>
+      <td>16512.0</td>
+      <td>499.990189</td>
+      <td>382.865787</td>
       <td>1.0000</td>
-      <td>280.0000</td>
-      <td>409.0000</td>
-      <td>605.00000</td>
-      <td>6082.0000</td>
+      <td>279.0000</td>
+      <td>408.0000</td>
+      <td>603.00</td>
+      <td>5358.0000</td>
     </tr>
     <tr>
       <th>median_income</th>
-      <td>20640.0</td>
-      <td>3.870671</td>
-      <td>1.899822</td>
+      <td>16512.0</td>
+      <td>3.870428</td>
+      <td>1.891936</td>
       <td>0.4999</td>
-      <td>2.5634</td>
-      <td>3.5348</td>
-      <td>4.74325</td>
+      <td>2.5625</td>
+      <td>3.5385</td>
+      <td>4.75</td>
       <td>15.0001</td>
-    </tr>
-    <tr>
-      <th>median_house_value</th>
-      <td>20640.0</td>
-      <td>206855.816909</td>
-      <td>115395.615874</td>
-      <td>14999.0000</td>
-      <td>119600.0000</td>
-      <td>179700.0000</td>
-      <td>264725.00000</td>
-      <td>500001.0000</td>
     </tr>
   </tbody>
 </table>
@@ -1382,7 +1371,8 @@ Name: median_house_value, dtype: float64
 <span class="c1"># categorical pipeline</span>
 <span class="n">cat_pipeline</span> <span class="o">=</span> <span class="n">make_pipeline</span><span class="p">(</span>
     <span class="n">SimpleImputer</span><span class="p">(</span><span class="n">strategy</span><span class="o">=</span><span class="s2">&quot;most_frequent&quot;</span><span class="p">),</span>
-    <span class="n">OneHotEncoder</span><span class="p">(</span><span class="n">handle_unknown</span><span class="o">=</span><span class="s2">&quot;ignore&quot;</span><span class="p">))</span>
+    <span class="n">OneHotEncoder</span><span class="p">(</span><span class="n">handle_unknown</span><span class="o">=</span><span class="s2">&quot;ignore&quot;</span><span class="p">)</span>
+    <span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -1394,7 +1384,8 @@ Name: median_house_value, dtype: float64
 
 <span class="n">default_num_pipeline</span> <span class="o">=</span> <span class="n">make_pipeline</span><span class="p">(</span>
     <span class="n">SimpleImputer</span><span class="p">(</span><span class="n">strategy</span><span class="o">=</span><span class="s2">&quot;median&quot;</span><span class="p">),</span>
-    <span class="n">StandardScaler</span><span class="p">())</span>
+    <span class="n">StandardScaler</span><span class="p">()</span>
+    <span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -1417,8 +1408,7 @@ Name: median_house_value, dtype: float64
 <span class="k">def</span> <span class="nf">ratio_pipeline</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
     <span class="k">return</span> <span class="n">make_pipeline</span><span class="p">(</span>
         <span class="n">SimpleImputer</span><span class="p">(</span><span class="n">strategy</span><span class="o">=</span><span class="s2">&quot;median&quot;</span><span class="p">),</span>
-        <span class="n">FunctionTransformer</span><span class="p">(</span><span class="n">column_ratio</span><span class="p">,</span>
-                            <span class="n">feature_names_out</span><span class="o">=</span><span class="p">[</span><span class="n">name</span><span class="p">]),</span>
+        <span class="n">FunctionTransformer</span><span class="p">(</span><span class="n">column_ratio</span><span class="p">),</span>
         <span class="n">StandardScaler</span><span class="p">())</span>
 </pre></div>
 </div>
@@ -1507,6 +1497,7 @@ Name: median_house_value, dtype: float64
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">housing_prepared</span> <span class="o">=</span> <span class="n">preprocessing</span><span class="o">.</span><span class="n">fit_transform</span><span class="p">(</span><span class="n">housing</span><span class="p">)</span>
+
 <span class="n">housing_prepared</span><span class="o">.</span><span class="n">shape</span>
 </pre></div>
 </div>
@@ -1526,14 +1517,22 @@ Name: median_house_value, dtype: float64
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">sklearn.linear_model</span> <span class="kn">import</span> <span class="n">LinearRegression</span>
 
-<span class="n">lin_reg</span> <span class="o">=</span> <span class="n">make_pipeline</span><span class="p">(</span><span class="n">preprocessing</span><span class="p">,</span> <span class="n">LinearRegression</span><span class="p">())</span>
-
-<span class="n">lin_reg</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">housing</span><span class="p">,</span> <span class="n">housing_labels</span><span class="p">)</span>
+<span class="n">lin_reg</span> <span class="o">=</span> <span class="n">make_pipeline</span><span class="p">(</span>
+            <span class="n">preprocessing</span><span class="p">,</span> 
+            <span class="n">LinearRegression</span><span class="p">()</span>
+            <span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">lin_reg</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">housing</span><span class="p">,</span> <span class="n">housing_labels</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_html"><style>#sk-container-id-1 {color: black;background-color: white;}#sk-container-id-1 pre{padding: 0;}#sk-container-id-1 div.sk-toggleable {background-color: white;}#sk-container-id-1 label.sk-toggleable__label {cursor: pointer;display: block;width: 100%;margin-bottom: 0;padding: 0.3em;box-sizing: border-box;text-align: center;}#sk-container-id-1 label.sk-toggleable__label-arrow:before {content: "▸";float: left;margin-right: 0.25em;color: #696969;}#sk-container-id-1 label.sk-toggleable__label-arrow:hover:before {color: black;}#sk-container-id-1 div.sk-estimator:hover label.sk-toggleable__label-arrow:before {color: black;}#sk-container-id-1 div.sk-toggleable__content {max-height: 0;max-width: 0;overflow: hidden;text-align: left;background-color: #f0f8ff;}#sk-container-id-1 div.sk-toggleable__content pre {margin: 0.2em;color: black;border-radius: 0.25em;background-color: #f0f8ff;}#sk-container-id-1 input.sk-toggleable__control:checked~div.sk-toggleable__content {max-height: 200px;max-width: 100%;overflow: auto;}#sk-container-id-1 input.sk-toggleable__control:checked~label.sk-toggleable__label-arrow:before {content: "▾";}#sk-container-id-1 div.sk-estimator input.sk-toggleable__control:checked~label.sk-toggleable__label {background-color: #d4ebff;}#sk-container-id-1 div.sk-label input.sk-toggleable__control:checked~label.sk-toggleable__label {background-color: #d4ebff;}#sk-container-id-1 input.sk-hidden--visually {border: 0;clip: rect(1px 1px 1px 1px);clip: rect(1px, 1px, 1px, 1px);height: 1px;margin: -1px;overflow: hidden;padding: 0;position: absolute;width: 1px;}#sk-container-id-1 div.sk-estimator {font-family: monospace;background-color: #f0f8ff;border: 1px dotted black;border-radius: 0.25em;box-sizing: border-box;margin-bottom: 0.5em;}#sk-container-id-1 div.sk-estimator:hover {background-color: #d4ebff;}#sk-container-id-1 div.sk-parallel-item::after {content: "";width: 100%;border-bottom: 1px solid gray;flex-grow: 1;}#sk-container-id-1 div.sk-label:hover label.sk-toggleable__label {background-color: #d4ebff;}#sk-container-id-1 div.sk-serial::before {content: "";position: absolute;border-left: 1px solid gray;box-sizing: border-box;top: 0;bottom: 0;left: 50%;z-index: 0;}#sk-container-id-1 div.sk-serial {display: flex;flex-direction: column;align-items: center;background-color: white;padding-right: 0.2em;padding-left: 0.2em;position: relative;}#sk-container-id-1 div.sk-item {position: relative;z-index: 1;}#sk-container-id-1 div.sk-parallel {display: flex;align-items: stretch;justify-content: center;background-color: white;position: relative;}#sk-container-id-1 div.sk-item::before, #sk-container-id-1 div.sk-parallel-item::before {content: "";position: absolute;border-left: 1px solid gray;box-sizing: border-box;top: 0;bottom: 0;left: 50%;z-index: -1;}#sk-container-id-1 div.sk-parallel-item {display: flex;flex-direction: column;z-index: 1;position: relative;background-color: white;}#sk-container-id-1 div.sk-parallel-item:first-child::after {align-self: flex-end;width: 50%;}#sk-container-id-1 div.sk-parallel-item:last-child::after {align-self: flex-start;width: 50%;}#sk-container-id-1 div.sk-parallel-item:only-child::after {width: 0;}#sk-container-id-1 div.sk-dashed-wrapped {border: 1px dashed gray;margin: 0 0.4em 0.5em 0.4em;box-sizing: border-box;padding-bottom: 0.4em;background-color: white;}#sk-container-id-1 div.sk-label label {font-family: monospace;font-weight: bold;display: inline-block;line-height: 1.2em;}#sk-container-id-1 div.sk-label-container {text-align: center;}#sk-container-id-1 div.sk-container {/* jupyter's `normalize.less` sets `[hidden] { display: none; }` but bootstrap.min.css set `[hidden] { display: none !important; }` so we also need the `!important` here to be able to override the default hidden behavior on the sphinx rendered scikit-learn.org. See: https://github.com/scikit-learn/scikit-learn/issues/21755 */display: inline-block !important;position: relative;}#sk-container-id-1 div.sk-text-repr-fallback {display: none;}</style><div id="sk-container-id-1" class="sk-top-container"><div class="sk-text-repr-fallback"><pre>Pipeline(steps=[(&#x27;columntransformer&#x27;,
+<div class="output text_html"><style>#sk-ed37a0bc-674a-4748-945a-08dbc3e2ae1b {color: black;background-color: white;}#sk-ed37a0bc-674a-4748-945a-08dbc3e2ae1b pre{padding: 0;}#sk-ed37a0bc-674a-4748-945a-08dbc3e2ae1b div.sk-toggleable {background-color: white;}#sk-ed37a0bc-674a-4748-945a-08dbc3e2ae1b label.sk-toggleable__label {cursor: pointer;display: block;width: 100%;margin-bottom: 0;padding: 0.3em;box-sizing: border-box;text-align: center;}#sk-ed37a0bc-674a-4748-945a-08dbc3e2ae1b label.sk-toggleable__label-arrow:before {content: "▸";float: left;margin-right: 0.25em;color: #696969;}#sk-ed37a0bc-674a-4748-945a-08dbc3e2ae1b label.sk-toggleable__label-arrow:hover:before {color: black;}#sk-ed37a0bc-674a-4748-945a-08dbc3e2ae1b div.sk-estimator:hover label.sk-toggleable__label-arrow:before {color: black;}#sk-ed37a0bc-674a-4748-945a-08dbc3e2ae1b div.sk-toggleable__content {max-height: 0;max-width: 0;overflow: hidden;text-align: left;background-color: #f0f8ff;}#sk-ed37a0bc-674a-4748-945a-08dbc3e2ae1b div.sk-toggleable__content pre {margin: 0.2em;color: black;border-radius: 0.25em;background-color: #f0f8ff;}#sk-ed37a0bc-674a-4748-945a-08dbc3e2ae1b input.sk-toggleable__control:checked~div.sk-toggleable__content {max-height: 200px;max-width: 100%;overflow: auto;}#sk-ed37a0bc-674a-4748-945a-08dbc3e2ae1b input.sk-toggleable__control:checked~label.sk-toggleable__label-arrow:before {content: "▾";}#sk-ed37a0bc-674a-4748-945a-08dbc3e2ae1b div.sk-estimator input.sk-toggleable__control:checked~label.sk-toggleable__label {background-color: #d4ebff;}#sk-ed37a0bc-674a-4748-945a-08dbc3e2ae1b div.sk-label input.sk-toggleable__control:checked~label.sk-toggleable__label {background-color: #d4ebff;}#sk-ed37a0bc-674a-4748-945a-08dbc3e2ae1b input.sk-hidden--visually {border: 0;clip: rect(1px 1px 1px 1px);clip: rect(1px, 1px, 1px, 1px);height: 1px;margin: -1px;overflow: hidden;padding: 0;position: absolute;width: 1px;}#sk-ed37a0bc-674a-4748-945a-08dbc3e2ae1b div.sk-estimator {font-family: monospace;background-color: #f0f8ff;border: 1px dotted black;border-radius: 0.25em;box-sizing: border-box;margin-bottom: 0.5em;}#sk-ed37a0bc-674a-4748-945a-08dbc3e2ae1b div.sk-estimator:hover {background-color: #d4ebff;}#sk-ed37a0bc-674a-4748-945a-08dbc3e2ae1b div.sk-parallel-item::after {content: "";width: 100%;border-bottom: 1px solid gray;flex-grow: 1;}#sk-ed37a0bc-674a-4748-945a-08dbc3e2ae1b div.sk-label:hover label.sk-toggleable__label {background-color: #d4ebff;}#sk-ed37a0bc-674a-4748-945a-08dbc3e2ae1b div.sk-serial::before {content: "";position: absolute;border-left: 1px solid gray;box-sizing: border-box;top: 2em;bottom: 0;left: 50%;}#sk-ed37a0bc-674a-4748-945a-08dbc3e2ae1b div.sk-serial {display: flex;flex-direction: column;align-items: center;background-color: white;padding-right: 0.2em;padding-left: 0.2em;}#sk-ed37a0bc-674a-4748-945a-08dbc3e2ae1b div.sk-item {z-index: 1;}#sk-ed37a0bc-674a-4748-945a-08dbc3e2ae1b div.sk-parallel {display: flex;align-items: stretch;justify-content: center;background-color: white;}#sk-ed37a0bc-674a-4748-945a-08dbc3e2ae1b div.sk-parallel::before {content: "";position: absolute;border-left: 1px solid gray;box-sizing: border-box;top: 2em;bottom: 0;left: 50%;}#sk-ed37a0bc-674a-4748-945a-08dbc3e2ae1b div.sk-parallel-item {display: flex;flex-direction: column;position: relative;background-color: white;}#sk-ed37a0bc-674a-4748-945a-08dbc3e2ae1b div.sk-parallel-item:first-child::after {align-self: flex-end;width: 50%;}#sk-ed37a0bc-674a-4748-945a-08dbc3e2ae1b div.sk-parallel-item:last-child::after {align-self: flex-start;width: 50%;}#sk-ed37a0bc-674a-4748-945a-08dbc3e2ae1b div.sk-parallel-item:only-child::after {width: 0;}#sk-ed37a0bc-674a-4748-945a-08dbc3e2ae1b div.sk-dashed-wrapped {border: 1px dashed gray;margin: 0 0.4em 0.5em 0.4em;box-sizing: border-box;padding-bottom: 0.4em;background-color: white;position: relative;}#sk-ed37a0bc-674a-4748-945a-08dbc3e2ae1b div.sk-label label {font-family: monospace;font-weight: bold;background-color: white;display: inline-block;line-height: 1.2em;}#sk-ed37a0bc-674a-4748-945a-08dbc3e2ae1b div.sk-label-container {position: relative;z-index: 2;text-align: center;}#sk-ed37a0bc-674a-4748-945a-08dbc3e2ae1b div.sk-container {/* jupyter's `normalize.less` sets `[hidden] { display: none; }` but bootstrap.min.css set `[hidden] { display: none !important; }` so we also need the `!important` here to be able to override the default hidden behavior on the sphinx rendered scikit-learn.org. See: https://github.com/scikit-learn/scikit-learn/issues/21755 */display: inline-block !important;position: relative;}#sk-ed37a0bc-674a-4748-945a-08dbc3e2ae1b div.sk-text-repr-fallback {display: none;}</style><div id="sk-ed37a0bc-674a-4748-945a-08dbc3e2ae1b" class="sk-top-container"><div class="sk-text-repr-fallback"><pre>Pipeline(steps=[(&#x27;columntransformer&#x27;,
                  ColumnTransformer(remainder=Pipeline(steps=[(&#x27;simpleimputer&#x27;,
                                                               SimpleImputer(strategy=&#x27;median&#x27;)),
                                                              (&#x27;standardscaler&#x27;,
@@ -1542,9 +1541,7 @@ Name: median_house_value, dtype: float64
                                                   Pipeline(steps=[(&#x27;simpleimputer&#x27;,
                                                                    SimpleImputer(strategy=&#x27;median&#x27;)),
                                                                   (&#x27;functiontransformer&#x27;,
-                                                                   FunctionTransformer(feature_names_out=[&#x27;bedrooms_ratio&#x27;],
-                                                                                       f...
-                                                   &#x27;households&#x27;,
+                                                                   FunctionTransformer(func=&lt;function column_ratio at 0x7fe110c0...
                                                    &#x27;median_income&#x27;]),
                                                  (&#x27;geo&#x27;,
                                                   ClusterSimilarity(random_state=42),
@@ -1554,8 +1551,8 @@ Name: median_house_value, dtype: float64
                                                                    SimpleImputer(strategy=&#x27;most_frequent&#x27;)),
                                                                   (&#x27;onehotencoder&#x27;,
                                                                    OneHotEncoder(handle_unknown=&#x27;ignore&#x27;))]),
-                                                  &lt;sklearn.compose._column_transformer.make_column_selector object at 0x14869da30&gt;)])),
-                (&#x27;linearregression&#x27;, LinearRegression())])</pre><b>In a Jupyter environment, please rerun this cell to show the HTML representation or trust the notebook. <br />On GitHub, the HTML representation is unable to render, please try loading this page with nbviewer.org.</b></div><div class="sk-container" hidden><div class="sk-item sk-dashed-wrapped"><div class="sk-label-container"><div class="sk-label sk-toggleable"><input class="sk-toggleable__control sk-hidden--visually" id="sk-estimator-id-1" type="checkbox" ><label for="sk-estimator-id-1" class="sk-toggleable__label sk-toggleable__label-arrow">Pipeline</label><div class="sk-toggleable__content"><pre>Pipeline(steps=[(&#x27;columntransformer&#x27;,
+                                                  &lt;sklearn.compose._column_transformer.make_column_selector object at 0x7fe102252550&gt;)])),
+                (&#x27;linearregression&#x27;, LinearRegression())])</pre><b>Please rerun this cell to show the HTML repr or trust the notebook.</b></div><div class="sk-container" hidden><div class="sk-item sk-dashed-wrapped"><div class="sk-label-container"><div class="sk-label sk-toggleable"><input class="sk-toggleable__control sk-hidden--visually" id="15b1b662-7115-4163-9eb8-9fc24feeec44" type="checkbox" ><label for="15b1b662-7115-4163-9eb8-9fc24feeec44" class="sk-toggleable__label sk-toggleable__label-arrow">Pipeline</label><div class="sk-toggleable__content"><pre>Pipeline(steps=[(&#x27;columntransformer&#x27;,
                  ColumnTransformer(remainder=Pipeline(steps=[(&#x27;simpleimputer&#x27;,
                                                               SimpleImputer(strategy=&#x27;median&#x27;)),
                                                              (&#x27;standardscaler&#x27;,
@@ -1564,9 +1561,7 @@ Name: median_house_value, dtype: float64
                                                   Pipeline(steps=[(&#x27;simpleimputer&#x27;,
                                                                    SimpleImputer(strategy=&#x27;median&#x27;)),
                                                                   (&#x27;functiontransformer&#x27;,
-                                                                   FunctionTransformer(feature_names_out=[&#x27;bedrooms_ratio&#x27;],
-                                                                                       f...
-                                                   &#x27;households&#x27;,
+                                                                   FunctionTransformer(func=&lt;function column_ratio at 0x7fe110c0...
                                                    &#x27;median_income&#x27;]),
                                                  (&#x27;geo&#x27;,
                                                   ClusterSimilarity(random_state=42),
@@ -1576,8 +1571,8 @@ Name: median_house_value, dtype: float64
                                                                    SimpleImputer(strategy=&#x27;most_frequent&#x27;)),
                                                                   (&#x27;onehotencoder&#x27;,
                                                                    OneHotEncoder(handle_unknown=&#x27;ignore&#x27;))]),
-                                                  &lt;sklearn.compose._column_transformer.make_column_selector object at 0x14869da30&gt;)])),
-                (&#x27;linearregression&#x27;, LinearRegression())])</pre></div></div></div><div class="sk-serial"><div class="sk-item sk-dashed-wrapped"><div class="sk-label-container"><div class="sk-label sk-toggleable"><input class="sk-toggleable__control sk-hidden--visually" id="sk-estimator-id-2" type="checkbox" ><label for="sk-estimator-id-2" class="sk-toggleable__label sk-toggleable__label-arrow">columntransformer: ColumnTransformer</label><div class="sk-toggleable__content"><pre>ColumnTransformer(remainder=Pipeline(steps=[(&#x27;simpleimputer&#x27;,
+                                                  &lt;sklearn.compose._column_transformer.make_column_selector object at 0x7fe102252550&gt;)])),
+                (&#x27;linearregression&#x27;, LinearRegression())])</pre></div></div></div><div class="sk-serial"><div class="sk-item sk-dashed-wrapped"><div class="sk-label-container"><div class="sk-label sk-toggleable"><input class="sk-toggleable__control sk-hidden--visually" id="d8e249d6-d4d6-4caf-8964-c713d9af8cd6" type="checkbox" ><label for="d8e249d6-d4d6-4caf-8964-c713d9af8cd6" class="sk-toggleable__label sk-toggleable__label-arrow">columntransformer: ColumnTransformer</label><div class="sk-toggleable__content"><pre>ColumnTransformer(remainder=Pipeline(steps=[(&#x27;simpleimputer&#x27;,
                                              SimpleImputer(strategy=&#x27;median&#x27;)),
                                             (&#x27;standardscaler&#x27;,
                                              StandardScaler())]),
@@ -1585,8 +1580,9 @@ Name: median_house_value, dtype: float64
                                  Pipeline(steps=[(&#x27;simpleimputer&#x27;,
                                                   SimpleImputer(strategy=&#x27;median&#x27;)),
                                                  (&#x27;functiontransformer&#x27;,
-                                                  FunctionTransformer(feature_names_out=[&#x27;bedrooms_ratio&#x27;],
-                                                                      func=&lt;function column_ratio at 0x1490f967...
+                                                  FunctionTransformer(func=&lt;function column_ratio at 0x7fe110c04ee0&gt;)),
+                                                 (&#x27;standardscaler&#x27;,
+                                                  StandardSca...
                                  [&#x27;total_bedrooms&#x27;, &#x27;total_rooms&#x27;, &#x27;population&#x27;,
                                   &#x27;households&#x27;, &#x27;median_income&#x27;]),
                                 (&#x27;geo&#x27;, ClusterSimilarity(random_state=42),
@@ -1596,10 +1592,7 @@ Name: median_house_value, dtype: float64
                                                   SimpleImputer(strategy=&#x27;most_frequent&#x27;)),
                                                  (&#x27;onehotencoder&#x27;,
                                                   OneHotEncoder(handle_unknown=&#x27;ignore&#x27;))]),
-                                 &lt;sklearn.compose._column_transformer.make_column_selector object at 0x14869da30&gt;)])</pre></div></div></div><div class="sk-parallel"><div class="sk-parallel-item"><div class="sk-item"><div class="sk-label-container"><div class="sk-label sk-toggleable"><input class="sk-toggleable__control sk-hidden--visually" id="sk-estimator-id-3" type="checkbox" ><label for="sk-estimator-id-3" class="sk-toggleable__label sk-toggleable__label-arrow">bedrooms_ratio</label><div class="sk-toggleable__content"><pre>[&#x27;total_bedrooms&#x27;, &#x27;total_rooms&#x27;]</pre></div></div></div><div class="sk-serial"><div class="sk-item"><div class="sk-serial"><div class="sk-item"><div class="sk-estimator sk-toggleable"><input class="sk-toggleable__control sk-hidden--visually" id="sk-estimator-id-4" type="checkbox" ><label for="sk-estimator-id-4" class="sk-toggleable__label sk-toggleable__label-arrow">SimpleImputer</label><div class="sk-toggleable__content"><pre>SimpleImputer(strategy=&#x27;median&#x27;)</pre></div></div></div><div class="sk-item"><div class="sk-estimator sk-toggleable"><input class="sk-toggleable__control sk-hidden--visually" id="sk-estimator-id-5" type="checkbox" ><label for="sk-estimator-id-5" class="sk-toggleable__label sk-toggleable__label-arrow">FunctionTransformer</label><div class="sk-toggleable__content"><pre>FunctionTransformer(feature_names_out=[&#x27;bedrooms_ratio&#x27;],
-                    func=&lt;function column_ratio at 0x1490f9670&gt;)</pre></div></div></div><div class="sk-item"><div class="sk-estimator sk-toggleable"><input class="sk-toggleable__control sk-hidden--visually" id="sk-estimator-id-6" type="checkbox" ><label for="sk-estimator-id-6" class="sk-toggleable__label sk-toggleable__label-arrow">StandardScaler</label><div class="sk-toggleable__content"><pre>StandardScaler()</pre></div></div></div></div></div></div></div></div><div class="sk-parallel-item"><div class="sk-item"><div class="sk-label-container"><div class="sk-label sk-toggleable"><input class="sk-toggleable__control sk-hidden--visually" id="sk-estimator-id-7" type="checkbox" ><label for="sk-estimator-id-7" class="sk-toggleable__label sk-toggleable__label-arrow">rooms_per_house</label><div class="sk-toggleable__content"><pre>[&#x27;total_rooms&#x27;, &#x27;households&#x27;]</pre></div></div></div><div class="sk-serial"><div class="sk-item"><div class="sk-serial"><div class="sk-item"><div class="sk-estimator sk-toggleable"><input class="sk-toggleable__control sk-hidden--visually" id="sk-estimator-id-8" type="checkbox" ><label for="sk-estimator-id-8" class="sk-toggleable__label sk-toggleable__label-arrow">SimpleImputer</label><div class="sk-toggleable__content"><pre>SimpleImputer(strategy=&#x27;median&#x27;)</pre></div></div></div><div class="sk-item"><div class="sk-estimator sk-toggleable"><input class="sk-toggleable__control sk-hidden--visually" id="sk-estimator-id-9" type="checkbox" ><label for="sk-estimator-id-9" class="sk-toggleable__label sk-toggleable__label-arrow">FunctionTransformer</label><div class="sk-toggleable__content"><pre>FunctionTransformer(feature_names_out=[&#x27;rooms_per_house&#x27;],
-                    func=&lt;function column_ratio at 0x1490f9670&gt;)</pre></div></div></div><div class="sk-item"><div class="sk-estimator sk-toggleable"><input class="sk-toggleable__control sk-hidden--visually" id="sk-estimator-id-10" type="checkbox" ><label for="sk-estimator-id-10" class="sk-toggleable__label sk-toggleable__label-arrow">StandardScaler</label><div class="sk-toggleable__content"><pre>StandardScaler()</pre></div></div></div></div></div></div></div></div><div class="sk-parallel-item"><div class="sk-item"><div class="sk-label-container"><div class="sk-label sk-toggleable"><input class="sk-toggleable__control sk-hidden--visually" id="sk-estimator-id-11" type="checkbox" ><label for="sk-estimator-id-11" class="sk-toggleable__label sk-toggleable__label-arrow">people_per_house</label><div class="sk-toggleable__content"><pre>[&#x27;population&#x27;, &#x27;households&#x27;]</pre></div></div></div><div class="sk-serial"><div class="sk-item"><div class="sk-serial"><div class="sk-item"><div class="sk-estimator sk-toggleable"><input class="sk-toggleable__control sk-hidden--visually" id="sk-estimator-id-12" type="checkbox" ><label for="sk-estimator-id-12" class="sk-toggleable__label sk-toggleable__label-arrow">SimpleImputer</label><div class="sk-toggleable__content"><pre>SimpleImputer(strategy=&#x27;median&#x27;)</pre></div></div></div><div class="sk-item"><div class="sk-estimator sk-toggleable"><input class="sk-toggleable__control sk-hidden--visually" id="sk-estimator-id-13" type="checkbox" ><label for="sk-estimator-id-13" class="sk-toggleable__label sk-toggleable__label-arrow">FunctionTransformer</label><div class="sk-toggleable__content"><pre>FunctionTransformer(feature_names_out=[&#x27;people_per_house&#x27;],
-                    func=&lt;function column_ratio at 0x1490f9670&gt;)</pre></div></div></div><div class="sk-item"><div class="sk-estimator sk-toggleable"><input class="sk-toggleable__control sk-hidden--visually" id="sk-estimator-id-14" type="checkbox" ><label for="sk-estimator-id-14" class="sk-toggleable__label sk-toggleable__label-arrow">StandardScaler</label><div class="sk-toggleable__content"><pre>StandardScaler()</pre></div></div></div></div></div></div></div></div><div class="sk-parallel-item"><div class="sk-item"><div class="sk-label-container"><div class="sk-label sk-toggleable"><input class="sk-toggleable__control sk-hidden--visually" id="sk-estimator-id-15" type="checkbox" ><label for="sk-estimator-id-15" class="sk-toggleable__label sk-toggleable__label-arrow">log</label><div class="sk-toggleable__content"><pre>[&#x27;total_bedrooms&#x27;, &#x27;total_rooms&#x27;, &#x27;population&#x27;, &#x27;households&#x27;, &#x27;median_income&#x27;]</pre></div></div></div><div class="sk-serial"><div class="sk-item"><div class="sk-serial"><div class="sk-item"><div class="sk-estimator sk-toggleable"><input class="sk-toggleable__control sk-hidden--visually" id="sk-estimator-id-16" type="checkbox" ><label for="sk-estimator-id-16" class="sk-toggleable__label sk-toggleable__label-arrow">SimpleImputer</label><div class="sk-toggleable__content"><pre>SimpleImputer(strategy=&#x27;median&#x27;)</pre></div></div></div><div class="sk-item"><div class="sk-estimator sk-toggleable"><input class="sk-toggleable__control sk-hidden--visually" id="sk-estimator-id-17" type="checkbox" ><label for="sk-estimator-id-17" class="sk-toggleable__label sk-toggleable__label-arrow">FunctionTransformer</label><div class="sk-toggleable__content"><pre>FunctionTransformer(func=&lt;ufunc &#x27;log&#x27;&gt;)</pre></div></div></div><div class="sk-item"><div class="sk-estimator sk-toggleable"><input class="sk-toggleable__control sk-hidden--visually" id="sk-estimator-id-18" type="checkbox" ><label for="sk-estimator-id-18" class="sk-toggleable__label sk-toggleable__label-arrow">StandardScaler</label><div class="sk-toggleable__content"><pre>StandardScaler()</pre></div></div></div></div></div></div></div></div><div class="sk-parallel-item"><div class="sk-item"><div class="sk-label-container"><div class="sk-label sk-toggleable"><input class="sk-toggleable__control sk-hidden--visually" id="sk-estimator-id-19" type="checkbox" ><label for="sk-estimator-id-19" class="sk-toggleable__label sk-toggleable__label-arrow">geo</label><div class="sk-toggleable__content"><pre>[&#x27;latitude&#x27;, &#x27;longitude&#x27;]</pre></div></div></div><div class="sk-serial"><div class="sk-item"><div class="sk-estimator sk-toggleable"><input class="sk-toggleable__control sk-hidden--visually" id="sk-estimator-id-20" type="checkbox" ><label for="sk-estimator-id-20" class="sk-toggleable__label sk-toggleable__label-arrow">ClusterSimilarity</label><div class="sk-toggleable__content"><pre>ClusterSimilarity(random_state=42)</pre></div></div></div></div></div></div><div class="sk-parallel-item"><div class="sk-item"><div class="sk-label-container"><div class="sk-label sk-toggleable"><input class="sk-toggleable__control sk-hidden--visually" id="sk-estimator-id-21" type="checkbox" ><label for="sk-estimator-id-21" class="sk-toggleable__label sk-toggleable__label-arrow">cat</label><div class="sk-toggleable__content"><pre>&lt;sklearn.compose._column_transformer.make_column_selector object at 0x14869da30&gt;</pre></div></div></div><div class="sk-serial"><div class="sk-item"><div class="sk-serial"><div class="sk-item"><div class="sk-estimator sk-toggleable"><input class="sk-toggleable__control sk-hidden--visually" id="sk-estimator-id-22" type="checkbox" ><label for="sk-estimator-id-22" class="sk-toggleable__label sk-toggleable__label-arrow">SimpleImputer</label><div class="sk-toggleable__content"><pre>SimpleImputer(strategy=&#x27;most_frequent&#x27;)</pre></div></div></div><div class="sk-item"><div class="sk-estimator sk-toggleable"><input class="sk-toggleable__control sk-hidden--visually" id="sk-estimator-id-23" type="checkbox" ><label for="sk-estimator-id-23" class="sk-toggleable__label sk-toggleable__label-arrow">OneHotEncoder</label><div class="sk-toggleable__content"><pre>OneHotEncoder(handle_unknown=&#x27;ignore&#x27;)</pre></div></div></div></div></div></div></div></div><div class="sk-parallel-item"><div class="sk-item"><div class="sk-label-container"><div class="sk-label sk-toggleable"><input class="sk-toggleable__control sk-hidden--visually" id="sk-estimator-id-24" type="checkbox" ><label for="sk-estimator-id-24" class="sk-toggleable__label sk-toggleable__label-arrow">remainder</label><div class="sk-toggleable__content"><pre>[&#x27;housing_median_age&#x27;]</pre></div></div></div><div class="sk-serial"><div class="sk-item"><div class="sk-serial"><div class="sk-item"><div class="sk-estimator sk-toggleable"><input class="sk-toggleable__control sk-hidden--visually" id="sk-estimator-id-25" type="checkbox" ><label for="sk-estimator-id-25" class="sk-toggleable__label sk-toggleable__label-arrow">SimpleImputer</label><div class="sk-toggleable__content"><pre>SimpleImputer(strategy=&#x27;median&#x27;)</pre></div></div></div><div class="sk-item"><div class="sk-estimator sk-toggleable"><input class="sk-toggleable__control sk-hidden--visually" id="sk-estimator-id-26" type="checkbox" ><label for="sk-estimator-id-26" class="sk-toggleable__label sk-toggleable__label-arrow">StandardScaler</label><div class="sk-toggleable__content"><pre>StandardScaler()</pre></div></div></div></div></div></div></div></div></div></div><div class="sk-item"><div class="sk-estimator sk-toggleable"><input class="sk-toggleable__control sk-hidden--visually" id="sk-estimator-id-27" type="checkbox" ><label for="sk-estimator-id-27" class="sk-toggleable__label sk-toggleable__label-arrow">LinearRegression</label><div class="sk-toggleable__content"><pre>LinearRegression()</pre></div></div></div></div></div></div></div></div></div>
+                                 &lt;sklearn.compose._column_transformer.make_column_selector object at 0x7fe102252550&gt;)])</pre></div></div></div><div class="sk-parallel"><div class="sk-parallel-item"><div class="sk-item"><div class="sk-label-container"><div class="sk-label sk-toggleable"><input class="sk-toggleable__control sk-hidden--visually" id="8a91fd1a-464c-42e5-8e67-deaa6b251057" type="checkbox" ><label for="8a91fd1a-464c-42e5-8e67-deaa6b251057" class="sk-toggleable__label sk-toggleable__label-arrow">bedrooms_ratio</label><div class="sk-toggleable__content"><pre>[&#x27;total_bedrooms&#x27;, &#x27;total_rooms&#x27;]</pre></div></div></div><div class="sk-serial"><div class="sk-item"><div class="sk-serial"><div class="sk-item"><div class="sk-estimator sk-toggleable"><input class="sk-toggleable__control sk-hidden--visually" id="c13100e3-2ea2-4715-a8ee-92cb11f61c53" type="checkbox" ><label for="c13100e3-2ea2-4715-a8ee-92cb11f61c53" class="sk-toggleable__label sk-toggleable__label-arrow">SimpleImputer</label><div class="sk-toggleable__content"><pre>SimpleImputer(strategy=&#x27;median&#x27;)</pre></div></div></div><div class="sk-item"><div class="sk-estimator sk-toggleable"><input class="sk-toggleable__control sk-hidden--visually" id="4caa8be2-d1d9-404c-87f9-e4169216459d" type="checkbox" ><label for="4caa8be2-d1d9-404c-87f9-e4169216459d" class="sk-toggleable__label sk-toggleable__label-arrow">FunctionTransformer</label><div class="sk-toggleable__content"><pre>FunctionTransformer(func=&lt;function column_ratio at 0x7fe110c04ee0&gt;)</pre></div></div></div><div class="sk-item"><div class="sk-estimator sk-toggleable"><input class="sk-toggleable__control sk-hidden--visually" id="29ab7c13-eb63-404b-9d88-3e23e3ea3837" type="checkbox" ><label for="29ab7c13-eb63-404b-9d88-3e23e3ea3837" class="sk-toggleable__label sk-toggleable__label-arrow">StandardScaler</label><div class="sk-toggleable__content"><pre>StandardScaler()</pre></div></div></div></div></div></div></div></div><div class="sk-parallel-item"><div class="sk-item"><div class="sk-label-container"><div class="sk-label sk-toggleable"><input class="sk-toggleable__control sk-hidden--visually" id="723a82b2-d972-40ff-86aa-ccdfa73f1bc7" type="checkbox" ><label for="723a82b2-d972-40ff-86aa-ccdfa73f1bc7" class="sk-toggleable__label sk-toggleable__label-arrow">rooms_per_house</label><div class="sk-toggleable__content"><pre>[&#x27;total_rooms&#x27;, &#x27;households&#x27;]</pre></div></div></div><div class="sk-serial"><div class="sk-item"><div class="sk-serial"><div class="sk-item"><div class="sk-estimator sk-toggleable"><input class="sk-toggleable__control sk-hidden--visually" id="83e74e58-42c8-4519-8118-999e5679ebb9" type="checkbox" ><label for="83e74e58-42c8-4519-8118-999e5679ebb9" class="sk-toggleable__label sk-toggleable__label-arrow">SimpleImputer</label><div class="sk-toggleable__content"><pre>SimpleImputer(strategy=&#x27;median&#x27;)</pre></div></div></div><div class="sk-item"><div class="sk-estimator sk-toggleable"><input class="sk-toggleable__control sk-hidden--visually" id="663cda20-af1b-48a5-bb88-728730ac8b68" type="checkbox" ><label for="663cda20-af1b-48a5-bb88-728730ac8b68" class="sk-toggleable__label sk-toggleable__label-arrow">FunctionTransformer</label><div class="sk-toggleable__content"><pre>FunctionTransformer(func=&lt;function column_ratio at 0x7fe110c04ee0&gt;)</pre></div></div></div><div class="sk-item"><div class="sk-estimator sk-toggleable"><input class="sk-toggleable__control sk-hidden--visually" id="ea260bc4-3380-42e9-b729-231df43bff37" type="checkbox" ><label for="ea260bc4-3380-42e9-b729-231df43bff37" class="sk-toggleable__label sk-toggleable__label-arrow">StandardScaler</label><div class="sk-toggleable__content"><pre>StandardScaler()</pre></div></div></div></div></div></div></div></div><div class="sk-parallel-item"><div class="sk-item"><div class="sk-label-container"><div class="sk-label sk-toggleable"><input class="sk-toggleable__control sk-hidden--visually" id="65f24303-c774-4a52-9ec1-4c7ca757ded8" type="checkbox" ><label for="65f24303-c774-4a52-9ec1-4c7ca757ded8" class="sk-toggleable__label sk-toggleable__label-arrow">people_per_house</label><div class="sk-toggleable__content"><pre>[&#x27;population&#x27;, &#x27;households&#x27;]</pre></div></div></div><div class="sk-serial"><div class="sk-item"><div class="sk-serial"><div class="sk-item"><div class="sk-estimator sk-toggleable"><input class="sk-toggleable__control sk-hidden--visually" id="a2f1d903-4bfa-42d8-a649-db5895269759" type="checkbox" ><label for="a2f1d903-4bfa-42d8-a649-db5895269759" class="sk-toggleable__label sk-toggleable__label-arrow">SimpleImputer</label><div class="sk-toggleable__content"><pre>SimpleImputer(strategy=&#x27;median&#x27;)</pre></div></div></div><div class="sk-item"><div class="sk-estimator sk-toggleable"><input class="sk-toggleable__control sk-hidden--visually" id="0657720c-62ef-4561-8e00-ecee2536e7cb" type="checkbox" ><label for="0657720c-62ef-4561-8e00-ecee2536e7cb" class="sk-toggleable__label sk-toggleable__label-arrow">FunctionTransformer</label><div class="sk-toggleable__content"><pre>FunctionTransformer(func=&lt;function column_ratio at 0x7fe110c04ee0&gt;)</pre></div></div></div><div class="sk-item"><div class="sk-estimator sk-toggleable"><input class="sk-toggleable__control sk-hidden--visually" id="3ae42b5c-a284-453d-8f0b-f98ca189da60" type="checkbox" ><label for="3ae42b5c-a284-453d-8f0b-f98ca189da60" class="sk-toggleable__label sk-toggleable__label-arrow">StandardScaler</label><div class="sk-toggleable__content"><pre>StandardScaler()</pre></div></div></div></div></div></div></div></div><div class="sk-parallel-item"><div class="sk-item"><div class="sk-label-container"><div class="sk-label sk-toggleable"><input class="sk-toggleable__control sk-hidden--visually" id="dddef832-40b4-4ce9-be84-e8a5b810a956" type="checkbox" ><label for="dddef832-40b4-4ce9-be84-e8a5b810a956" class="sk-toggleable__label sk-toggleable__label-arrow">log</label><div class="sk-toggleable__content"><pre>[&#x27;total_bedrooms&#x27;, &#x27;total_rooms&#x27;, &#x27;population&#x27;, &#x27;households&#x27;, &#x27;median_income&#x27;]</pre></div></div></div><div class="sk-serial"><div class="sk-item"><div class="sk-serial"><div class="sk-item"><div class="sk-estimator sk-toggleable"><input class="sk-toggleable__control sk-hidden--visually" id="af9d997f-b5ab-497f-bc1b-947825420b04" type="checkbox" ><label for="af9d997f-b5ab-497f-bc1b-947825420b04" class="sk-toggleable__label sk-toggleable__label-arrow">SimpleImputer</label><div class="sk-toggleable__content"><pre>SimpleImputer(strategy=&#x27;median&#x27;)</pre></div></div></div><div class="sk-item"><div class="sk-estimator sk-toggleable"><input class="sk-toggleable__control sk-hidden--visually" id="b1c78137-3f4e-47a4-980e-3c88b7521fa0" type="checkbox" ><label for="b1c78137-3f4e-47a4-980e-3c88b7521fa0" class="sk-toggleable__label sk-toggleable__label-arrow">FunctionTransformer</label><div class="sk-toggleable__content"><pre>FunctionTransformer(func=&lt;ufunc &#x27;log&#x27;&gt;)</pre></div></div></div><div class="sk-item"><div class="sk-estimator sk-toggleable"><input class="sk-toggleable__control sk-hidden--visually" id="d4b050fb-2af1-4f8a-9b1a-4c8ebf7962be" type="checkbox" ><label for="d4b050fb-2af1-4f8a-9b1a-4c8ebf7962be" class="sk-toggleable__label sk-toggleable__label-arrow">StandardScaler</label><div class="sk-toggleable__content"><pre>StandardScaler()</pre></div></div></div></div></div></div></div></div><div class="sk-parallel-item"><div class="sk-item"><div class="sk-label-container"><div class="sk-label sk-toggleable"><input class="sk-toggleable__control sk-hidden--visually" id="dd6758a9-7bde-4303-8fb2-240a1c3b85bf" type="checkbox" ><label for="dd6758a9-7bde-4303-8fb2-240a1c3b85bf" class="sk-toggleable__label sk-toggleable__label-arrow">geo</label><div class="sk-toggleable__content"><pre>[&#x27;latitude&#x27;, &#x27;longitude&#x27;]</pre></div></div></div><div class="sk-serial"><div class="sk-item"><div class="sk-estimator sk-toggleable"><input class="sk-toggleable__control sk-hidden--visually" id="39414bb4-e3df-4b4a-aac8-815d8bf68295" type="checkbox" ><label for="39414bb4-e3df-4b4a-aac8-815d8bf68295" class="sk-toggleable__label sk-toggleable__label-arrow">ClusterSimilarity</label><div class="sk-toggleable__content"><pre>ClusterSimilarity(random_state=42)</pre></div></div></div></div></div></div><div class="sk-parallel-item"><div class="sk-item"><div class="sk-label-container"><div class="sk-label sk-toggleable"><input class="sk-toggleable__control sk-hidden--visually" id="159d2d21-a96c-487d-9847-3111b0411930" type="checkbox" ><label for="159d2d21-a96c-487d-9847-3111b0411930" class="sk-toggleable__label sk-toggleable__label-arrow">cat</label><div class="sk-toggleable__content"><pre>&lt;sklearn.compose._column_transformer.make_column_selector object at 0x7fe102252550&gt;</pre></div></div></div><div class="sk-serial"><div class="sk-item"><div class="sk-serial"><div class="sk-item"><div class="sk-estimator sk-toggleable"><input class="sk-toggleable__control sk-hidden--visually" id="0665ccd1-3803-4ac0-90ee-c55e84484459" type="checkbox" ><label for="0665ccd1-3803-4ac0-90ee-c55e84484459" class="sk-toggleable__label sk-toggleable__label-arrow">SimpleImputer</label><div class="sk-toggleable__content"><pre>SimpleImputer(strategy=&#x27;most_frequent&#x27;)</pre></div></div></div><div class="sk-item"><div class="sk-estimator sk-toggleable"><input class="sk-toggleable__control sk-hidden--visually" id="b3f986b8-5ab8-4c9f-959b-3bf696a3e5fd" type="checkbox" ><label for="b3f986b8-5ab8-4c9f-959b-3bf696a3e5fd" class="sk-toggleable__label sk-toggleable__label-arrow">OneHotEncoder</label><div class="sk-toggleable__content"><pre>OneHotEncoder(handle_unknown=&#x27;ignore&#x27;)</pre></div></div></div></div></div></div></div></div><div class="sk-parallel-item"><div class="sk-item"><div class="sk-label-container"><div class="sk-label sk-toggleable"><input class="sk-toggleable__control sk-hidden--visually" id="9e8c78b3-0a85-4bbb-92ff-40b0fdc20559" type="checkbox" ><label for="9e8c78b3-0a85-4bbb-92ff-40b0fdc20559" class="sk-toggleable__label sk-toggleable__label-arrow">remainder</label><div class="sk-toggleable__content"><pre>[&#x27;housing_median_age&#x27;]</pre></div></div></div><div class="sk-serial"><div class="sk-item"><div class="sk-serial"><div class="sk-item"><div class="sk-estimator sk-toggleable"><input class="sk-toggleable__control sk-hidden--visually" id="7ff6434b-2ce5-429b-b655-58afa0f63b9d" type="checkbox" ><label for="7ff6434b-2ce5-429b-b655-58afa0f63b9d" class="sk-toggleable__label sk-toggleable__label-arrow">SimpleImputer</label><div class="sk-toggleable__content"><pre>SimpleImputer(strategy=&#x27;median&#x27;)</pre></div></div></div><div class="sk-item"><div class="sk-estimator sk-toggleable"><input class="sk-toggleable__control sk-hidden--visually" id="35cbc826-4e0c-4a69-a843-b5870074fcab" type="checkbox" ><label for="35cbc826-4e0c-4a69-a843-b5870074fcab" class="sk-toggleable__label sk-toggleable__label-arrow">StandardScaler</label><div class="sk-toggleable__content"><pre>StandardScaler()</pre></div></div></div></div></div></div></div></div></div></div><div class="sk-item"><div class="sk-estimator sk-toggleable"><input class="sk-toggleable__control sk-hidden--visually" id="2c397e91-597d-49e9-be37-864cdef71c15" type="checkbox" ><label for="2c397e91-597d-49e9-be37-864cdef71c15" class="sk-toggleable__label sk-toggleable__label-arrow">LinearRegression</label><div class="sk-toggleable__content"><pre>LinearRegression()</pre></div></div></div></div></div></div></div></div></div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -1619,7 +1612,7 @@ Name: median_house_value, dtype: float64
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>68687.89176590032
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>68687.89176590106
 </pre></div>
 </div>
 </div>
@@ -1671,7 +1664,10 @@ Name: median_house_value, dtype: float64
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">sklearn.tree</span> <span class="kn">import</span> <span class="n">DecisionTreeRegressor</span>
 
-<span class="n">tree_reg</span> <span class="o">=</span> <span class="n">make_pipeline</span><span class="p">(</span><span class="n">preprocessing</span><span class="p">,</span> <span class="n">DecisionTreeRegressor</span><span class="p">(</span><span class="n">random_state</span><span class="o">=</span><span class="mi">42</span><span class="p">))</span>
+<span class="n">tree_reg</span> <span class="o">=</span> <span class="n">make_pipeline</span><span class="p">(</span>
+    <span class="n">preprocessing</span><span class="p">,</span> 
+    <span class="n">DecisionTreeRegressor</span><span class="p">(</span><span class="n">random_state</span><span class="o">=</span><span class="mi">42</span><span class="p">)</span>
+    <span class="p">)</span>
 
 <span class="n">tree_reg</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">housing</span><span class="p">,</span> <span class="n">housing_labels</span><span class="p">)</span>
 </pre></div>
