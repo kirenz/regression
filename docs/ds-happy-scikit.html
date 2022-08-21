@@ -21,7 +21,7 @@
     href="../_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2">
 
     <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
-    <link rel="stylesheet" href="../_static/styles/sphinx-book-theme.css?digest=62ba249389abaaa9ffc34bf36a076bdc1d65ee18" type="text/css" />
+    <link rel="stylesheet" href="../_static/styles/sphinx-book-theme.css?digest=5115cc725059bd94278eecd172e13a965bf8f5a9" type="text/css" />
     <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css" />
     <link rel="stylesheet" type="text/css" href="../_static/copybutton.css" />
     <link rel="stylesheet" type="text/css" href="../_static/mystnb.css" />
@@ -37,7 +37,7 @@
     <script src="../_static/doctools.js"></script>
     <script src="../_static/clipboard.min.js"></script>
     <script src="../_static/copybutton.js"></script>
-    <script src="../_static/scripts/sphinx-book-theme.js?digest=f31d14ad54b65d19161ba51d4ffff3a77ae00456"></script>
+    <script src="../_static/scripts/sphinx-book-theme.js?digest=9c920249402e914e316237a7dbc6769907cce411"></script>
     <script>let toggleHintShow = 'Click to show';</script>
     <script>let toggleHintHide = 'Click to hide';</script>
     <script>let toggleOpenOnPrint = 'true';</script>
@@ -485,24 +485,61 @@ title="Print to PDF"
     </div>
     <nav id="bd-toc-nav" aria-label="Page">
         <ul class="visible nav section-nav flex-column">
- <li class="toc-h1 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#">
-   Simple scikit learn model
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#data">
+   Data
   </a>
-  <ul class="visible nav section-nav flex-column">
-   <li class="toc-h2 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#data-preparation">
-     Data preparation
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#import-data">
+     Import data
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#data-structure">
+     Data structure
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#data-corrections">
+     Data corrections
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#variable-lists">
+     Variable lists
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#data-exploration">
+     Data exploration
     </a>
    </li>
   </ul>
  </li>
- <li class="toc-h1 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#simple-linear-regression-model">
-   Simple linear regression model
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#linear-regression-model">
+   Linear regression model
   </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#training">
+     Training
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#prediction">
+     Prediction
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#evaluation">
+     Evaluation
+    </a>
+   </li>
+  </ul>
  </li>
- <li class="toc-h1 nav-item toc-entry">
+ <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#k-nearest-neighbor-model">
    K-Nearest Neighbor Model
   </a>
@@ -526,24 +563,61 @@ title="Print to PDF"
                         </div>
                         <nav aria-label="Page">
                             <ul class="visible nav section-nav flex-column">
- <li class="toc-h1 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#">
-   Simple scikit learn model
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#data">
+   Data
   </a>
-  <ul class="visible nav section-nav flex-column">
-   <li class="toc-h2 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#data-preparation">
-     Data preparation
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#import-data">
+     Import data
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#data-structure">
+     Data structure
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#data-corrections">
+     Data corrections
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#variable-lists">
+     Variable lists
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#data-exploration">
+     Data exploration
     </a>
    </li>
   </ul>
  </li>
- <li class="toc-h1 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#simple-linear-regression-model">
-   Simple linear regression model
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#linear-regression-model">
+   Linear regression model
   </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#training">
+     Training
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#prediction">
+     Prediction
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#evaluation">
+     Evaluation
+    </a>
+   </li>
+  </ul>
  </li>
- <li class="toc-h1 nav-item toc-entry">
+ <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#k-nearest-neighbor-model">
    K-Nearest Neighbor Model
   </a>
@@ -561,8 +635,10 @@ title="Print to PDF"
   <section class="tex2jax_ignore mathjax_ignore" id="simple-scikit-learn-model">
 <h1>Simple scikit learn model<a class="headerlink" href="#simple-scikit-learn-model" title="Permalink to this headline">#</a></h1>
 <p>Does money make people happier? Simple version without data splitting.</p>
-<section id="data-preparation">
-<h2>Data preparation<a class="headerlink" href="#data-preparation" title="Permalink to this headline">#</a></h2>
+<section id="data">
+<h2>Data<a class="headerlink" href="#data" title="Permalink to this headline">#</a></h2>
+<section id="import-data">
+<h3>Import data<a class="headerlink" href="#import-data" title="Permalink to this headline">#</a></h3>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
@@ -574,9 +650,12 @@ title="Print to PDF"
 </div>
 </div>
 </div>
+</section>
+<section id="data-structure">
+<h3>Data structure<a class="headerlink" href="#data-structure" title="Permalink to this headline">#</a></h3>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">df</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">df</span>
 </pre></div>
 </div>
 </div>
@@ -635,41 +714,120 @@ title="Print to PDF"
       <td>15991.736</td>
       <td>6.1</td>
     </tr>
-  </tbody>
-</table>
-</div></div></div>
-</div>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">df</span><span class="o">.</span><span class="n">tail</span><span class="p">()</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output text_html"><div>
-<style scoped>
-    .dataframe tbody tr th:only-of-type {
-        vertical-align: middle;
-    }
-
-    .dataframe tbody tr th {
-        vertical-align: top;
-    }
-
-    .dataframe thead th {
-        text-align: right;
-    }
-</style>
-<table border="1" class="dataframe">
-  <thead>
-    <tr style="text-align: right;">
-      <th></th>
-      <th>Country</th>
-      <th>GDP per capita</th>
-      <th>Life satisfaction</th>
+    <tr>
+      <th>5</th>
+      <td>Estonia</td>
+      <td>17288.083</td>
+      <td>5.6</td>
     </tr>
-  </thead>
-  <tbody>
+    <tr>
+      <th>6</th>
+      <td>Greece</td>
+      <td>18064.288</td>
+      <td>4.8</td>
+    </tr>
+    <tr>
+      <th>7</th>
+      <td>Portugal</td>
+      <td>19121.592</td>
+      <td>5.1</td>
+    </tr>
+    <tr>
+      <th>8</th>
+      <td>Slovenia</td>
+      <td>20732.482</td>
+      <td>5.7</td>
+    </tr>
+    <tr>
+      <th>9</th>
+      <td>Spain</td>
+      <td>25864.721</td>
+      <td>6.5</td>
+    </tr>
+    <tr>
+      <th>10</th>
+      <td>Korea</td>
+      <td>27195.197</td>
+      <td>5.8</td>
+    </tr>
+    <tr>
+      <th>11</th>
+      <td>Italy</td>
+      <td>29866.581</td>
+      <td>6.0</td>
+    </tr>
+    <tr>
+      <th>12</th>
+      <td>Japan</td>
+      <td>32485.545</td>
+      <td>5.9</td>
+    </tr>
+    <tr>
+      <th>13</th>
+      <td>Israel</td>
+      <td>35343.336</td>
+      <td>7.4</td>
+    </tr>
+    <tr>
+      <th>14</th>
+      <td>New Zealand</td>
+      <td>37044.891</td>
+      <td>7.3</td>
+    </tr>
+    <tr>
+      <th>15</th>
+      <td>France</td>
+      <td>37675.006</td>
+      <td>6.5</td>
+    </tr>
+    <tr>
+      <th>16</th>
+      <td>Belgium</td>
+      <td>40106.632</td>
+      <td>6.9</td>
+    </tr>
+    <tr>
+      <th>17</th>
+      <td>Germany</td>
+      <td>40996.511</td>
+      <td>7.0</td>
+    </tr>
+    <tr>
+      <th>18</th>
+      <td>Finland</td>
+      <td>41973.988</td>
+      <td>7.4</td>
+    </tr>
+    <tr>
+      <th>19</th>
+      <td>Canada</td>
+      <td>43331.961</td>
+      <td>7.3</td>
+    </tr>
+    <tr>
+      <th>20</th>
+      <td>Netherlands</td>
+      <td>43603.115</td>
+      <td>7.3</td>
+    </tr>
+    <tr>
+      <th>21</th>
+      <td>Austria</td>
+      <td>43724.031</td>
+      <td>6.9</td>
+    </tr>
+    <tr>
+      <th>22</th>
+      <td>United Kingdom</td>
+      <td>43770.688</td>
+      <td>6.8</td>
+    </tr>
+    <tr>
+      <th>23</th>
+      <td>Sweden</td>
+      <td>49866.266</td>
+      <td>7.2</td>
+    </tr>
     <tr>
       <th>24</th>
       <td>Iceland</td>
@@ -725,11 +883,15 @@ memory usage: 824.0+ bytes
 </div>
 </div>
 </div>
+</section>
+<section id="data-corrections">
+<h3>Data corrections<a class="headerlink" href="#data-corrections" title="Permalink to this headline">#</a></h3>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Change column names </span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Change column names (lower case and spaces to underscore)</span>
 <span class="n">df</span><span class="o">.</span><span class="n">columns</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">columns</span><span class="o">.</span><span class="n">str</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span><span class="o">.</span><span class="n">str</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s1">&#39; &#39;</span><span class="p">,</span> <span class="s1">&#39;_&#39;</span><span class="p">)</span>
 
+<span class="c1"># show the first 5 rows</span>
 <span class="n">df</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
 </pre></div>
 </div>
@@ -793,135 +955,303 @@ memory usage: 824.0+ bytes
 </table>
 </div></div></div>
 </div>
+</section>
+<section id="variable-lists">
+<h3>Variable lists<a class="headerlink" href="#variable-lists" title="Permalink to this headline">#</a></h3>
+<p>Prepare the data for later use</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># define outcome variable as y_label</span>
+<span class="n">y_label</span> <span class="o">=</span> <span class="s1">&#39;life_satisfaction&#39;</span>
+
+<span class="c1"># select features</span>
+<span class="n">X</span> <span class="o">=</span> <span class="n">df</span><span class="p">[[</span><span class="s2">&quot;gdp_per_capita&quot;</span><span class="p">]]</span>
+
+<span class="c1"># create response</span>
+<span class="n">y</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="n">y_label</span><span class="p">]</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="data-exploration">
+<h3>Data exploration<a class="headerlink" href="#data-exploration" title="Permalink to this headline">#</a></h3>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">%</span><span class="k">matplotlib</span> inline
-<span class="kn">import</span> <span class="nn">seaborn</span> <span class="k">as</span> <span class="nn">sns</span>
+<span class="kn">import</span> <span class="nn">altair</span> <span class="k">as</span> <span class="nn">alt</span>
 
 <span class="c1"># Visualize the data</span>
-<span class="n">sns</span><span class="o">.</span><span class="n">relplot</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="s2">&quot;gdp_per_capita&quot;</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="s1">&#39;life_satisfaction&#39;</span><span class="p">,</span> <span class="n">hue</span><span class="o">=</span><span class="s1">&#39;country&#39;</span><span class="p">,</span> <span class="n">data</span><span class="o">=</span><span class="n">df</span><span class="p">);</span>
+<span class="n">alt</span><span class="o">.</span><span class="n">Chart</span><span class="p">(</span><span class="n">df</span><span class="p">)</span><span class="o">.</span><span class="n">mark_circle</span><span class="p">(</span><span class="n">size</span><span class="o">=</span><span class="mi">100</span><span class="p">)</span><span class="o">.</span><span class="n">encode</span><span class="p">(</span>
+    <span class="n">x</span><span class="o">=</span><span class="s1">&#39;gdp_per_capita:Q&#39;</span><span class="p">,</span>
+    <span class="n">y</span><span class="o">=</span><span class="s1">&#39;life_satisfaction:Q&#39;</span><span class="p">,</span>
+    <span class="n">color</span><span class="o">=</span><span class="n">alt</span><span class="o">.</span><span class="n">Color</span><span class="p">(</span><span class="s1">&#39;country&#39;</span><span class="p">,</span> <span class="n">legend</span><span class="o">=</span><span class="kc">None</span><span class="p">),</span>
+    <span class="n">tooltip</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;country&#39;</span><span class="p">,</span> <span class="s1">&#39;gdp_per_capita&#39;</span><span class="p">,</span> <span class="s1">&#39;life_satisfaction&#39;</span><span class="p">]</span>
+
+<span class="p">)</span><span class="o">.</span><span class="n">interactive</span><span class="p">()</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/ds-happy-scikit_7_0.png" src="../_images/ds-happy-scikit_7_0.png" />
-</div>
+<div class="output text_html">
+<div id="altair-viz-5416be82b35f4875a1b4c51b5b2de269"></div>
+<script type="text/javascript">
+  var VEGA_DEBUG = (typeof VEGA_DEBUG == "undefined") ? {} : VEGA_DEBUG;
+  (function(spec, embedOpt){
+    let outputDiv = document.currentScript.previousElementSibling;
+    if (outputDiv.id !== "altair-viz-5416be82b35f4875a1b4c51b5b2de269") {
+      outputDiv = document.getElementById("altair-viz-5416be82b35f4875a1b4c51b5b2de269");
+    }
+    const paths = {
+      "vega": "https://cdn.jsdelivr.net/npm//vega@5?noext",
+      "vega-lib": "https://cdn.jsdelivr.net/npm//vega-lib?noext",
+      "vega-lite": "https://cdn.jsdelivr.net/npm//vega-lite@4.17.0?noext",
+      "vega-embed": "https://cdn.jsdelivr.net/npm//vega-embed@6?noext",
+    };
+
+    function maybeLoadScript(lib, version) {
+      var key = `${lib.replace("-", "")}_version`;
+      return (VEGA_DEBUG[key] == version) ?
+        Promise.resolve(paths[lib]) :
+        new Promise(function(resolve, reject) {
+          var s = document.createElement('script');
+          document.getElementsByTagName("head")[0].appendChild(s);
+          s.async = true;
+          s.onload = () => {
+            VEGA_DEBUG[key] = version;
+            return resolve(paths[lib]);
+          };
+          s.onerror = () => reject(`Error loading script: ${paths[lib]}`);
+          s.src = paths[lib];
+        });
+    }
+
+    function showError(err) {
+      outputDiv.innerHTML = `<div class="error" style="color:red;">${err}</div>`;
+      throw err;
+    }
+
+    function displayChart(vegaEmbed) {
+      vegaEmbed(outputDiv, spec, embedOpt)
+        .catch(err => showError(`Javascript Error: ${err.message}<br>This usually means there's a typo in your chart specification. See the javascript console for the full traceback.`));
+    }
+
+    if(typeof define === "function" && define.amd) {
+      requirejs.config({paths});
+      require(["vega-embed"], displayChart, err => showError(`Error loading script: ${err.message}`));
+    } else {
+      maybeLoadScript("vega", "5")
+        .then(() => maybeLoadScript("vega-lite", "4.17.0"))
+        .then(() => maybeLoadScript("vega-embed", "6"))
+        .catch(showError)
+        .then(() => displayChart(vegaEmbed));
+    }
+  })({"config": {"view": {"continuousWidth": 400, "continuousHeight": 300}}, "data": {"name": "data-335af487471029756d5845529594153a"}, "mark": {"type": "circle", "size": 100}, "encoding": {"color": {"field": "country", "legend": null, "type": "nominal"}, "tooltip": [{"field": "country", "type": "nominal"}, {"field": "gdp_per_capita", "type": "quantitative"}, {"field": "life_satisfaction", "type": "quantitative"}], "x": {"field": "gdp_per_capita", "type": "quantitative"}, "y": {"field": "life_satisfaction", "type": "quantitative"}}, "selection": {"selector008": {"type": "interval", "bind": "scales", "encodings": ["x", "y"]}}, "$schema": "https://vega.github.io/schema/vega-lite/v4.17.0.json", "datasets": {"data-335af487471029756d5845529594153a": [{"country": "Russia", "gdp_per_capita": 9054.914, "life_satisfaction": 6.0}, {"country": "Turkey", "gdp_per_capita": 9437.372, "life_satisfaction": 5.6}, {"country": "Hungary", "gdp_per_capita": 12239.893999999998, "life_satisfaction": 4.9}, {"country": "Poland", "gdp_per_capita": 12495.334, "life_satisfaction": 5.8}, {"country": "Slovak Republic", "gdp_per_capita": 15991.736, "life_satisfaction": 6.1}, {"country": "Estonia", "gdp_per_capita": 17288.083, "life_satisfaction": 5.6}, {"country": "Greece", "gdp_per_capita": 18064.288, "life_satisfaction": 4.8}, {"country": "Portugal", "gdp_per_capita": 19121.592, "life_satisfaction": 5.1}, {"country": "Slovenia", "gdp_per_capita": 20732.482, "life_satisfaction": 5.7}, {"country": "Spain", "gdp_per_capita": 25864.721, "life_satisfaction": 6.5}, {"country": "Korea", "gdp_per_capita": 27195.197, "life_satisfaction": 5.8}, {"country": "Italy", "gdp_per_capita": 29866.581, "life_satisfaction": 6.0}, {"country": "Japan", "gdp_per_capita": 32485.545, "life_satisfaction": 5.9}, {"country": "Israel", "gdp_per_capita": 35343.336, "life_satisfaction": 7.4}, {"country": "New Zealand", "gdp_per_capita": 37044.891, "life_satisfaction": 7.3}, {"country": "France", "gdp_per_capita": 37675.006, "life_satisfaction": 6.5}, {"country": "Belgium", "gdp_per_capita": 40106.632000000005, "life_satisfaction": 6.9}, {"country": "Germany", "gdp_per_capita": 40996.511, "life_satisfaction": 7.0}, {"country": "Finland", "gdp_per_capita": 41973.988, "life_satisfaction": 7.4}, {"country": "Canada", "gdp_per_capita": 43331.961, "life_satisfaction": 7.3}, {"country": "Netherlands", "gdp_per_capita": 43603.115, "life_satisfaction": 7.3}, {"country": "Austria", "gdp_per_capita": 43724.031, "life_satisfaction": 6.9}, {"country": "United Kingdom", "gdp_per_capita": 43770.688, "life_satisfaction": 6.8}, {"country": "Sweden", "gdp_per_capita": 49866.266, "life_satisfaction": 7.2}, {"country": "Iceland", "gdp_per_capita": 50854.583, "life_satisfaction": 7.5}, {"country": "Australia", "gdp_per_capita": 50961.865, "life_satisfaction": 7.3}, {"country": "Ireland", "gdp_per_capita": 51350.744000000006, "life_satisfaction": 7.0}, {"country": "Denmark", "gdp_per_capita": 52114.165, "life_satisfaction": 7.5}, {"country": "United States", "gdp_per_capita": 55805.204000000005, "life_satisfaction": 7.2}]}}, {"mode": "vega-lite"});
+</script></div></div>
 </div>
 </section>
 </section>
-<section class="tex2jax_ignore mathjax_ignore" id="simple-linear-regression-model">
-<h1>Simple linear regression model<a class="headerlink" href="#simple-linear-regression-model" title="Permalink to this headline">#</a></h1>
+<section id="linear-regression-model">
+<h2>Linear regression model<a class="headerlink" href="#linear-regression-model" title="Permalink to this headline">#</a></h2>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Prepare the data</span>
-<span class="n">X</span> <span class="o">=</span> <span class="n">df</span><span class="p">[[</span><span class="s2">&quot;gdp_per_capita&quot;</span><span class="p">]]</span>
-<span class="n">y</span> <span class="o">=</span> <span class="n">df</span><span class="p">[[</span><span class="s2">&quot;life_satisfaction&quot;</span><span class="p">]]</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">sklearn.linear_model</span> <span class="kn">import</span> <span class="n">LinearRegression</span>
 </pre></div>
 </div>
 </div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">sklearn.linear_model</span>
-
-<span class="c1"># Select a linear regression model</span>
-<span class="n">lm_mod</span> <span class="o">=</span> <span class="n">sklearn</span><span class="o">.</span><span class="n">linear_model</span><span class="o">.</span><span class="n">LinearRegression</span><span class="p">()</span>
-
-<span class="c1"># Train the model</span>
-<span class="n">lm_mod</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">y</span><span class="p">)</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Select a linear regression model</span>
+<span class="n">reg</span> <span class="o">=</span> <span class="n">LinearRegression</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+</div>
+<section id="training">
+<h3>Training<a class="headerlink" href="#training" title="Permalink to this headline">#</a></h3>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Fit the model</span>
+<span class="n">reg</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">y</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>LinearRegression()
-</pre></div>
-</div>
-</div>
+<div class="output text_html"><style>#sk-container-id-1 {color: black;background-color: white;}#sk-container-id-1 pre{padding: 0;}#sk-container-id-1 div.sk-toggleable {background-color: white;}#sk-container-id-1 label.sk-toggleable__label {cursor: pointer;display: block;width: 100%;margin-bottom: 0;padding: 0.3em;box-sizing: border-box;text-align: center;}#sk-container-id-1 label.sk-toggleable__label-arrow:before {content: "▸";float: left;margin-right: 0.25em;color: #696969;}#sk-container-id-1 label.sk-toggleable__label-arrow:hover:before {color: black;}#sk-container-id-1 div.sk-estimator:hover label.sk-toggleable__label-arrow:before {color: black;}#sk-container-id-1 div.sk-toggleable__content {max-height: 0;max-width: 0;overflow: hidden;text-align: left;background-color: #f0f8ff;}#sk-container-id-1 div.sk-toggleable__content pre {margin: 0.2em;color: black;border-radius: 0.25em;background-color: #f0f8ff;}#sk-container-id-1 input.sk-toggleable__control:checked~div.sk-toggleable__content {max-height: 200px;max-width: 100%;overflow: auto;}#sk-container-id-1 input.sk-toggleable__control:checked~label.sk-toggleable__label-arrow:before {content: "▾";}#sk-container-id-1 div.sk-estimator input.sk-toggleable__control:checked~label.sk-toggleable__label {background-color: #d4ebff;}#sk-container-id-1 div.sk-label input.sk-toggleable__control:checked~label.sk-toggleable__label {background-color: #d4ebff;}#sk-container-id-1 input.sk-hidden--visually {border: 0;clip: rect(1px 1px 1px 1px);clip: rect(1px, 1px, 1px, 1px);height: 1px;margin: -1px;overflow: hidden;padding: 0;position: absolute;width: 1px;}#sk-container-id-1 div.sk-estimator {font-family: monospace;background-color: #f0f8ff;border: 1px dotted black;border-radius: 0.25em;box-sizing: border-box;margin-bottom: 0.5em;}#sk-container-id-1 div.sk-estimator:hover {background-color: #d4ebff;}#sk-container-id-1 div.sk-parallel-item::after {content: "";width: 100%;border-bottom: 1px solid gray;flex-grow: 1;}#sk-container-id-1 div.sk-label:hover label.sk-toggleable__label {background-color: #d4ebff;}#sk-container-id-1 div.sk-serial::before {content: "";position: absolute;border-left: 1px solid gray;box-sizing: border-box;top: 0;bottom: 0;left: 50%;z-index: 0;}#sk-container-id-1 div.sk-serial {display: flex;flex-direction: column;align-items: center;background-color: white;padding-right: 0.2em;padding-left: 0.2em;position: relative;}#sk-container-id-1 div.sk-item {position: relative;z-index: 1;}#sk-container-id-1 div.sk-parallel {display: flex;align-items: stretch;justify-content: center;background-color: white;position: relative;}#sk-container-id-1 div.sk-item::before, #sk-container-id-1 div.sk-parallel-item::before {content: "";position: absolute;border-left: 1px solid gray;box-sizing: border-box;top: 0;bottom: 0;left: 50%;z-index: -1;}#sk-container-id-1 div.sk-parallel-item {display: flex;flex-direction: column;z-index: 1;position: relative;background-color: white;}#sk-container-id-1 div.sk-parallel-item:first-child::after {align-self: flex-end;width: 50%;}#sk-container-id-1 div.sk-parallel-item:last-child::after {align-self: flex-start;width: 50%;}#sk-container-id-1 div.sk-parallel-item:only-child::after {width: 0;}#sk-container-id-1 div.sk-dashed-wrapped {border: 1px dashed gray;margin: 0 0.4em 0.5em 0.4em;box-sizing: border-box;padding-bottom: 0.4em;background-color: white;}#sk-container-id-1 div.sk-label label {font-family: monospace;font-weight: bold;display: inline-block;line-height: 1.2em;}#sk-container-id-1 div.sk-label-container {text-align: center;}#sk-container-id-1 div.sk-container {/* jupyter's `normalize.less` sets `[hidden] { display: none; }` but bootstrap.min.css set `[hidden] { display: none !important; }` so we also need the `!important` here to be able to override the default hidden behavior on the sphinx rendered scikit-learn.org. See: https://github.com/scikit-learn/scikit-learn/issues/21755 */display: inline-block !important;position: relative;}#sk-container-id-1 div.sk-text-repr-fallback {display: none;}</style><div id="sk-container-id-1" class="sk-top-container"><div class="sk-text-repr-fallback"><pre>LinearRegression()</pre><b>In a Jupyter environment, please rerun this cell to show the HTML representation or trust the notebook. <br />On GitHub, the HTML representation is unable to render, please try loading this page with nbviewer.org.</b></div><div class="sk-container" hidden><div class="sk-item"><div class="sk-estimator sk-toggleable"><input class="sk-toggleable__control sk-hidden--visually" id="sk-estimator-id-1" type="checkbox" checked><label for="sk-estimator-id-1" class="sk-toggleable__label sk-toggleable__label-arrow">LinearRegression</label><div class="sk-toggleable__content"><pre>LinearRegression()</pre></div></div></div></div></div></div></div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Model coefficients</span>
-<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Coefficients: </span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">,</span> <span class="s2">&quot;Intercept:&quot;</span><span class="p">,</span> <span class="n">lm_mod</span><span class="o">.</span><span class="n">intercept_</span><span class="p">,</span> <span class="s2">&quot;</span><span class="se">\n</span><span class="s2"> Coefficient:&quot;</span><span class="p">,</span> <span class="n">lm_mod</span><span class="o">.</span><span class="n">coef_</span><span class="p">)</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Model intercept</span>
+<span class="n">reg</span><span class="o">.</span><span class="n">intercept_</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Coefficients: 
- Intercept: [4.8530528] 
- Coefficient: [[4.91154459e-05]]
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>4.853052800266436
 </pre></div>
 </div>
 </div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Prediction</span>
-<span class="n">lm_mod_pred</span> <span class="o">=</span> <span class="n">lm_mod</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">X</span><span class="p">)</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Model coefficient</span>
+<span class="n">reg</span><span class="o">.</span><span class="n">coef_</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([4.91154459e-05])
 </pre></div>
 </div>
 </div>
 </div>
+</section>
+<section id="prediction">
+<h3>Prediction<a class="headerlink" href="#prediction" title="Permalink to this headline">#</a></h3>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Prediction for our data</span>
+<span class="n">y_pred</span> <span class="o">=</span> <span class="n">reg</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">X</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Make a prediction for a specific GDP value</span>
+<span class="n">X_new</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">({</span><span class="s1">&#39;gdp_per_capita&#39;</span><span class="p">:</span> <span class="p">[</span><span class="mi">50000</span><span class="p">]})</span>
+
+<span class="n">reg</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">X_new</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([7.30882509])
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="evaluation">
+<h3>Evaluation<a class="headerlink" href="#evaluation" title="Permalink to this headline">#</a></h3>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">sklearn.metrics</span> <span class="kn">import</span> <span class="n">mean_squared_error</span>
-<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
-
-<span class="c1"># Performance measures</span>
-
-<span class="c1"># Mean squared error</span>
-<span class="n">lm_mod_mse</span> <span class="o">=</span> <span class="n">mean_squared_error</span><span class="p">(</span><span class="n">y</span><span class="p">,</span> <span class="n">lm_mod_pred</span><span class="p">)</span>
-
-<span class="c1"># Root mean squared error</span>
-<span class="n">lm_mod_rmse</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">lm_mod_mse</span><span class="p">)</span>
-
-<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;RMSE: </span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">,</span> <span class="n">lm_mod_rmse</span><span class="p">)</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>RMSE: 
- 0.4251474297915388
+<span class="kn">from</span> <span class="nn">sklearn.metrics</span> <span class="kn">import</span> <span class="n">mean_absolute_error</span>
 </pre></div>
 </div>
 </div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Make a prediction for a new GDP value</span>
-<span class="n">X_new</span> <span class="o">=</span> <span class="p">[[</span><span class="mi">50000</span><span class="p">]]</span>  <span class="c1"># new GDP per capita</span>
-
-<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Prediction: </span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">,</span> <span class="n">lm_mod</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">X_new</span><span class="p">))</span> 
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Mean squared error</span>
+<span class="n">mean_squared_error</span><span class="p">(</span><span class="n">y</span><span class="p">,</span> <span class="n">y_pred</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Prediction: 
- [[7.30882509]]
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>0.18075033705835142
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Root mean squared error</span>
+<span class="n">mean_squared_error</span><span class="p">(</span><span class="n">y</span><span class="p">,</span> <span class="n">y_pred</span><span class="p">,</span> <span class="n">squared</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>0.4251474297915388
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">mean_absolute_error</span><span class="p">(</span><span class="n">y</span><span class="p">,</span> <span class="n">y_pred</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>0.35530429427921734
 </pre></div>
 </div>
 </div>
 </div>
 </section>
-<section class="tex2jax_ignore mathjax_ignore" id="k-nearest-neighbor-model">
-<h1>K-Nearest Neighbor Model<a class="headerlink" href="#k-nearest-neighbor-model" title="Permalink to this headline">#</a></h1>
+</section>
+<section id="k-nearest-neighbor-model">
+<h2>K-Nearest Neighbor Model<a class="headerlink" href="#k-nearest-neighbor-model" title="Permalink to this headline">#</a></h2>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">sklearn.neighbors</span>
-
-<span class="n">knn_mod</span> <span class="o">=</span> <span class="n">sklearn</span><span class="o">.</span><span class="n">neighbors</span><span class="o">.</span><span class="n">KNeighborsRegressor</span><span class="p">(</span><span class="n">n_neighbors</span><span class="o">=</span><span class="mi">3</span><span class="p">)</span>
-
-<span class="n">knn_mod</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X</span><span class="p">,</span><span class="n">y</span><span class="p">)</span>
-
-<span class="nb">print</span><span class="p">(</span><span class="n">knn_mod</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">X_new</span><span class="p">))</span> 
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">sklearn.neighbors</span> <span class="kn">import</span> <span class="n">KNeighborsRegressor</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">reg2</span> <span class="o">=</span> <span class="n">KNeighborsRegressor</span><span class="p">(</span><span class="n">n_neighbors</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">reg2</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">y</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[[7.33333333]]
+<div class="output text_html"><style>#sk-container-id-3 {color: black;background-color: white;}#sk-container-id-3 pre{padding: 0;}#sk-container-id-3 div.sk-toggleable {background-color: white;}#sk-container-id-3 label.sk-toggleable__label {cursor: pointer;display: block;width: 100%;margin-bottom: 0;padding: 0.3em;box-sizing: border-box;text-align: center;}#sk-container-id-3 label.sk-toggleable__label-arrow:before {content: "▸";float: left;margin-right: 0.25em;color: #696969;}#sk-container-id-3 label.sk-toggleable__label-arrow:hover:before {color: black;}#sk-container-id-3 div.sk-estimator:hover label.sk-toggleable__label-arrow:before {color: black;}#sk-container-id-3 div.sk-toggleable__content {max-height: 0;max-width: 0;overflow: hidden;text-align: left;background-color: #f0f8ff;}#sk-container-id-3 div.sk-toggleable__content pre {margin: 0.2em;color: black;border-radius: 0.25em;background-color: #f0f8ff;}#sk-container-id-3 input.sk-toggleable__control:checked~div.sk-toggleable__content {max-height: 200px;max-width: 100%;overflow: auto;}#sk-container-id-3 input.sk-toggleable__control:checked~label.sk-toggleable__label-arrow:before {content: "▾";}#sk-container-id-3 div.sk-estimator input.sk-toggleable__control:checked~label.sk-toggleable__label {background-color: #d4ebff;}#sk-container-id-3 div.sk-label input.sk-toggleable__control:checked~label.sk-toggleable__label {background-color: #d4ebff;}#sk-container-id-3 input.sk-hidden--visually {border: 0;clip: rect(1px 1px 1px 1px);clip: rect(1px, 1px, 1px, 1px);height: 1px;margin: -1px;overflow: hidden;padding: 0;position: absolute;width: 1px;}#sk-container-id-3 div.sk-estimator {font-family: monospace;background-color: #f0f8ff;border: 1px dotted black;border-radius: 0.25em;box-sizing: border-box;margin-bottom: 0.5em;}#sk-container-id-3 div.sk-estimator:hover {background-color: #d4ebff;}#sk-container-id-3 div.sk-parallel-item::after {content: "";width: 100%;border-bottom: 1px solid gray;flex-grow: 1;}#sk-container-id-3 div.sk-label:hover label.sk-toggleable__label {background-color: #d4ebff;}#sk-container-id-3 div.sk-serial::before {content: "";position: absolute;border-left: 1px solid gray;box-sizing: border-box;top: 0;bottom: 0;left: 50%;z-index: 0;}#sk-container-id-3 div.sk-serial {display: flex;flex-direction: column;align-items: center;background-color: white;padding-right: 0.2em;padding-left: 0.2em;position: relative;}#sk-container-id-3 div.sk-item {position: relative;z-index: 1;}#sk-container-id-3 div.sk-parallel {display: flex;align-items: stretch;justify-content: center;background-color: white;position: relative;}#sk-container-id-3 div.sk-item::before, #sk-container-id-3 div.sk-parallel-item::before {content: "";position: absolute;border-left: 1px solid gray;box-sizing: border-box;top: 0;bottom: 0;left: 50%;z-index: -1;}#sk-container-id-3 div.sk-parallel-item {display: flex;flex-direction: column;z-index: 1;position: relative;background-color: white;}#sk-container-id-3 div.sk-parallel-item:first-child::after {align-self: flex-end;width: 50%;}#sk-container-id-3 div.sk-parallel-item:last-child::after {align-self: flex-start;width: 50%;}#sk-container-id-3 div.sk-parallel-item:only-child::after {width: 0;}#sk-container-id-3 div.sk-dashed-wrapped {border: 1px dashed gray;margin: 0 0.4em 0.5em 0.4em;box-sizing: border-box;padding-bottom: 0.4em;background-color: white;}#sk-container-id-3 div.sk-label label {font-family: monospace;font-weight: bold;display: inline-block;line-height: 1.2em;}#sk-container-id-3 div.sk-label-container {text-align: center;}#sk-container-id-3 div.sk-container {/* jupyter's `normalize.less` sets `[hidden] { display: none; }` but bootstrap.min.css set `[hidden] { display: none !important; }` so we also need the `!important` here to be able to override the default hidden behavior on the sphinx rendered scikit-learn.org. See: https://github.com/scikit-learn/scikit-learn/issues/21755 */display: inline-block !important;position: relative;}#sk-container-id-3 div.sk-text-repr-fallback {display: none;}</style><div id="sk-container-id-3" class="sk-top-container"><div class="sk-text-repr-fallback"><pre>KNeighborsRegressor(n_neighbors=2)</pre><b>In a Jupyter environment, please rerun this cell to show the HTML representation or trust the notebook. <br />On GitHub, the HTML representation is unable to render, please try loading this page with nbviewer.org.</b></div><div class="sk-container" hidden><div class="sk-item"><div class="sk-estimator sk-toggleable"><input class="sk-toggleable__control sk-hidden--visually" id="sk-estimator-id-3" type="checkbox" checked><label for="sk-estimator-id-3" class="sk-toggleable__label sk-toggleable__label-arrow">KNeighborsRegressor</label><div class="sk-toggleable__content"><pre>KNeighborsRegressor(n_neighbors=2)</pre></div></div></div></div></div></div></div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">y_pred2</span> <span class="o">=</span> <span class="n">reg2</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">X</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
 </div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">reg2</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">X_new</span><span class="p">)</span> 
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([7.35])
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">mean_squared_error</span><span class="p">(</span><span class="n">y</span><span class="p">,</span> <span class="n">y_pred2</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>0.06181034482758619
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">mean_absolute_error</span><span class="p">(</span><span class="n">y</span><span class="p">,</span> <span class="n">y_pred2</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>0.20517241379310344
+</pre></div>
+</div>
+</div>
+</div>
+</section>
 </section>
 
     <script type="text/x-thebe-config">
