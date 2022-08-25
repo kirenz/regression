@@ -533,6 +533,11 @@ title="Print to PDF"
     </a>
    </li>
    <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#tuning">
+     Tuning
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
     <a class="reference internal nav-link" href="#final-training">
      Final training
     </a>
@@ -610,6 +615,11 @@ title="Print to PDF"
    <li class="toc-h3 nav-item toc-entry">
     <a class="reference internal nav-link" href="#training-validation">
      Training &amp; validation
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#tuning">
+     Tuning
     </a>
    </li>
    <li class="toc-h3 nav-item toc-entry">
@@ -1067,7 +1077,7 @@ memory usage: 824.0+ bytes
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># crossvalidation with 5 folds</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># cross-validation with 5 folds</span>
 <span class="n">scores</span> <span class="o">=</span> <span class="n">cross_val_score</span><span class="p">(</span><span class="n">reg</span><span class="p">,</span> <span class="n">X_train</span><span class="p">,</span> <span class="n">y_train</span><span class="p">,</span> <span class="n">cv</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span> <span class="n">scoring</span><span class="o">=</span><span class="s1">&#39;neg_mean_squared_error&#39;</span><span class="p">)</span> <span class="o">*-</span><span class="mi">1</span>
 
 <span class="n">scores2</span> <span class="o">=</span> <span class="n">cross_val_score</span><span class="p">(</span><span class="n">reg2</span><span class="p">,</span> <span class="n">X_train</span><span class="p">,</span> <span class="n">y_train</span><span class="p">,</span> <span class="n">cv</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span> <span class="n">scoring</span><span class="o">=</span><span class="s1">&#39;neg_mean_squared_error&#39;</span><span class="p">)</span> <span class="o">*-</span><span class="mi">1</span>
@@ -1077,7 +1087,7 @@ memory usage: 824.0+ bytes
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Crossvalidation scores for linear regression</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># cross-validation scores for linear regression</span>
 <span class="n">scores</span>
 </pre></div>
 </div>
@@ -1118,9 +1128,13 @@ KNN: The mean score is 0.24 with a standard deviation of 0.09
 </div>
 <p>The performance difference between the two models is relatively small. Let’s assume we are interested in the parameters of the linear regression and therefore choose the linear regression.</p>
 </section>
+<section id="tuning">
+<h3>Tuning<a class="headerlink" href="#tuning" title="Permalink to this headline">#</a></h3>
+<p>We will cover model tuning (hyperparameter tuning) in another notebook and skip this part.</p>
+</section>
 <section id="final-training">
 <h3>Final training<a class="headerlink" href="#final-training" title="Permalink to this headline">#</a></h3>
-<p>Train your choosen model with the complete training data (without crossvalidation).</p>
+<p>Train your best model with the complete training data (without cross-validation).</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Fit the model</span>
@@ -1147,6 +1161,7 @@ KNN: The mean score is 0.24 with a standard deviation of 0.09
 </section>
 <section id="test-error">
 <h3>Test error<a class="headerlink" href="#test-error" title="Permalink to this headline">#</a></h3>
+<p>Evaluate the final model on the test set.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Prediction for our test data</span>
