@@ -40,7 +40,7 @@ parts:
     chapters:
     - file: docs/ds-happy-stats.ipynb
     - file: docs/ds-happy-scikit.ipynb 
-    - file: docs/ds-happy-scikit-split.ipynb 
+    - file: docs/ds-happy-scikit-splitting.ipynb 
   - caption: Case California housing
     chapters:
     - file: docs/case-ca-housing.ipynb    
